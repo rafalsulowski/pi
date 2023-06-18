@@ -1,0 +1,17 @@
+C:\Users\01159502\Desktop\pi\TripPlanner\TripPlanner.Services\bin\Debug\net7.0\TripPlanner.Services.deps.json
+C:\Users\01159502\Desktop\pi\TripPlanner\TripPlanner.Services\bin\Debug\net7.0\TripPlanner.Services.dll
+C:\Users\01159502\Desktop\pi\TripPlanner\TripPlanner.Services\bin\Debug\net7.0\TripPlanner.Services.pdb
+C:\Users\01159502\Desktop\pi\TripPlanner\TripPlanner.Services\bin\Debug\net7.0\TripPlanner.DataAccess.dll
+C:\Users\01159502\Desktop\pi\TripPlanner\TripPlanner.Services\bin\Debug\net7.0\TripPlanner.Models.dll
+C:\Users\01159502\Desktop\pi\TripPlanner\TripPlanner.Services\bin\Debug\net7.0\TripPlanner.DataAccess.pdb
+C:\Users\01159502\Desktop\pi\TripPlanner\TripPlanner.Services\bin\Debug\net7.0\TripPlanner.Models.pdb
+C:\Users\01159502\Desktop\pi\TripPlanner\TripPlanner.Services\obj\Debug\net7.0\TripPlanner.Services.csproj.AssemblyReference.cache
+C:\Users\01159502\Desktop\pi\TripPlanner\TripPlanner.Services\obj\Debug\net7.0\TripPlanner.Services.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\01159502\Desktop\pi\TripPlanner\TripPlanner.Services\obj\Debug\net7.0\TripPlanner.Services.AssemblyInfoInputs.cache
+C:\Users\01159502\Desktop\pi\TripPlanner\TripPlanner.Services\obj\Debug\net7.0\TripPlanner.Services.AssemblyInfo.cs
+C:\Users\01159502\Desktop\pi\TripPlanner\TripPlanner.Services\obj\Debug\net7.0\TripPlanner.Services.csproj.CoreCompileInputs.cache
+C:\Users\01159502\Desktop\pi\TripPlanner\TripPlanner.Services\obj\Debug\net7.0\TripPlanner.Services.csproj.CopyComplete
+C:\Users\01159502\Desktop\pi\TripPlanner\TripPlanner.Services\obj\Debug\net7.0\TripPlanner.Services.dll
+C:\Users\01159502\Desktop\pi\TripPlanner\TripPlanner.Services\obj\Debug\net7.0\refint\TripPlanner.Services.dll
+C:\Users\01159502\Desktop\pi\TripPlanner\TripPlanner.Services\obj\Debug\net7.0\TripPlanner.Services.pdb
+C:\Users\01159502\Desktop\pi\TripPlanner\TripPlanner.Services\obj\Debug\net7.0\ref\TripPlanner.Services.dll

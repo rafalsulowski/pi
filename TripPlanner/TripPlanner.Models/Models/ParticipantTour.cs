@@ -13,7 +13,5 @@ namespace TripPlanner.Models.Models
 
         public Tour Tour { get; set; } = null!;
         public int TourId { get; set; }
-
-        public bool IsOrganizer { get; set; }
     }
 }

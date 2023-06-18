@@ -8,18 +8,16 @@ namespace TripPlanner.Models.Models
 {
     public class Bill
     {
-
         public int Id { get; set; }
 
-
         public Tour Tour { get; set; } = null!;
-        public int TourID { get; set; }
+        public int TourId { get; set; }
         public User User { get; set; } = null!;
-        public int UserID { get; set; }
+        public int UserId { get; set; }
         public ICollection<ParticipantBill> Participants { get; } = new List<ParticipantBill>();
         public ICollection<BillPicture> Pictures { get; } = new List<BillPicture>();
         
-        public string Name { get; set; }
+        public string Name { get; set; } = string.Empty;
         public decimal Ammount { get; set; }
     }
 }

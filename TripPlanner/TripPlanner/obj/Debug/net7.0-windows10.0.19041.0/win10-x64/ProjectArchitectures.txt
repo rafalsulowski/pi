@@ -1,0 +1,1 @@
+C:\Users\01159502\Desktop\pi\TripPlanner\TripPlanner\TripPlanner.App.csproj;x64

@@ -11,8 +11,8 @@ namespace TripPlanner.Models.Models
         public int Id { get; set; }
 
         public Bill Bill { get; set; } = null!;
-        public int BillID { get; set; }
+        public int BillId { get; set; }
 
-        public byte[] Bytes { get; set; }
+        public byte[] Bytes { get; set; } = new byte[0];
     }
 }

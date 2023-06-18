@@ -10,7 +10,6 @@ namespace TripPlanner.Models.Models
     {
         public User User { get; set; } = null!;
         public int UserId { get; set; }
-
         public Budget Budget { get; set; } = null!;
         public int BudgetId { get; set; }
 

@@ -11,11 +11,11 @@ namespace TripPlanner.Models.Models
         public int Id { get; set; }
 
         public User User { get; set; } = null!;
-        public int UserID { get; set; }
+        public int UserId { get; set; }
         public Tour Tour { get; set; } = null!;
-        public int TourID { get; set; }
+        public int TourId { get; set; }
         public Chat Chat { get; set; } = null!;
-        public int ChatID { get; set; }
+        public int ChatId { get; set; }
         public ICollection<QuestionnaireAnswer> Answers { get; } = new List<QuestionnaireAnswer>();
 
         public string Question { get; set; } = string.Empty;

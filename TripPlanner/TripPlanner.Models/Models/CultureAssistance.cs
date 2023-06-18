@@ -11,7 +11,7 @@ namespace TripPlanner.Models.Models
         public Tour Tour { get; set; } = null!;
         public int TourId { get; set; }
         public Culture Culture { get; set; } = null!;
-        public int CultureID { get; set; }
+        public int CultureId { get; set; }
 
         public bool IsPrincipal { get; set; }
     }

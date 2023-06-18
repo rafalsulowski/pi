@@ -8,12 +8,12 @@ namespace TripPlanner.Models.Models
 {
     public class Message
     {
-        public string Id { get; set; }
+        public int Id { get; set; }
         
         public User User { get; set; } = null!;
-        public int UserID { get; set; }
+        public int UserId { get; set; }
         public Chat Chat { get; set; } = null!;
-        public int ChatID { get; set; }
+        public int ChatId { get; set; }
 
         public string Content { get; set; } = string.Empty;
         public DateTime Date { get; set; }

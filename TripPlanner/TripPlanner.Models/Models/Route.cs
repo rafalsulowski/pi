@@ -11,10 +11,10 @@ namespace TripPlanner.Models.Models
         public int Id { get; set; }
 
         public Tour Tour { get; set; } = null!;
-        public int TourID { get; set; }
+        public int TourId { get; set; }
         public User User { get; set; } = null!;
-        public int UserID { get; set; }
-        ICollection<Stopover> Stopovers { get; } = new List<Stopover>();
+        public int UserId { get; set; }
+        public ICollection<Stopover> Stopovers { get; } = new List<Stopover>();
 
         public string Name { get; set; } = string.Empty;
         public string StartLocation{ get; set; } = string.Empty;

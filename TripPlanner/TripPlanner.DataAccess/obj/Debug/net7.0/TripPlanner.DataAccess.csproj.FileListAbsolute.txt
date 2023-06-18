@@ -1,0 +1,17 @@
+C:\Users\01159502\Desktop\pi\TripPlanner\TripPlanner.DataAccess\bin\Debug\net7.0\TripPlanner.DataAccess.deps.json
+C:\Users\01159502\Desktop\pi\TripPlanner\TripPlanner.DataAccess\bin\Debug\net7.0\TripPlanner.DataAccess.runtimeconfig.json
+C:\Users\01159502\Desktop\pi\TripPlanner\TripPlanner.DataAccess\bin\Debug\net7.0\TripPlanner.DataAccess.dll
+C:\Users\01159502\Desktop\pi\TripPlanner\TripPlanner.DataAccess\bin\Debug\net7.0\TripPlanner.DataAccess.pdb
+C:\Users\01159502\Desktop\pi\TripPlanner\TripPlanner.DataAccess\bin\Debug\net7.0\TripPlanner.Models.dll
+C:\Users\01159502\Desktop\pi\TripPlanner\TripPlanner.DataAccess\bin\Debug\net7.0\TripPlanner.Models.pdb
+C:\Users\01159502\Desktop\pi\TripPlanner\TripPlanner.DataAccess\obj\Debug\net7.0\TripPlanner.DataAccess.csproj.AssemblyReference.cache
+C:\Users\01159502\Desktop\pi\TripPlanner\TripPlanner.DataAccess\obj\Debug\net7.0\TripPlanner.DataAccess.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\01159502\Desktop\pi\TripPlanner\TripPlanner.DataAccess\obj\Debug\net7.0\TripPlanner.DataAccess.AssemblyInfoInputs.cache
+C:\Users\01159502\Desktop\pi\TripPlanner\TripPlanner.DataAccess\obj\Debug\net7.0\TripPlanner.DataAccess.AssemblyInfo.cs
+C:\Users\01159502\Desktop\pi\TripPlanner\TripPlanner.DataAccess\obj\Debug\net7.0\TripPlanner.DataAccess.csproj.CoreCompileInputs.cache
+C:\Users\01159502\Desktop\pi\TripPlanner\TripPlanner.DataAccess\obj\Debug\net7.0\TripPlanner.DataAccess.csproj.CopyComplete
+C:\Users\01159502\Desktop\pi\TripPlanner\TripPlanner.DataAccess\obj\Debug\net7.0\TripPlanner.DataAccess.dll
+C:\Users\01159502\Desktop\pi\TripPlanner\TripPlanner.DataAccess\obj\Debug\net7.0\refint\TripPlanner.DataAccess.dll
+C:\Users\01159502\Desktop\pi\TripPlanner\TripPlanner.DataAccess\obj\Debug\net7.0\TripPlanner.DataAccess.pdb
+C:\Users\01159502\Desktop\pi\TripPlanner\TripPlanner.DataAccess\obj\Debug\net7.0\TripPlanner.DataAccess.genruntimeconfig.cache
+C:\Users\01159502\Desktop\pi\TripPlanner\TripPlanner.DataAccess\obj\Debug\net7.0\ref\TripPlanner.DataAccess.dll

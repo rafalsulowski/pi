@@ -11,7 +11,7 @@ namespace TripPlanner.Models.Models
         public int Id { get; set; }
         
         public ICollection<CheckList> CheckLists { get; } = new List<CheckList>();
-        public ICollection<ParticipantTour> OrganizerTours { get; } = new List<ParticipantTour>();
+        public ICollection<OrganizeTour> OrganizerTours { get; } = new List<OrganizeTour>();
         public ICollection<ParticipantTour> ParticipantTours { get; } = new List<ParticipantTour>();
         public ICollection<ContributesBudget> ParticipantBudgets { get; } = new List<ContributesBudget>();
         public ICollection<Questionnaire> Questionnaires { get; } = new List<Questionnaire>();

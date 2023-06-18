@@ -13,7 +13,7 @@ namespace TripPlanner.Models.Models
         public Tour Tour { get; set; } = null!;
         public int TourId { get; set; }
         public ICollection<ContributesBudget> Contributes { get; } = new List<ContributesBudget>();
-        public ICollection<BugetExpenditure> Expenditures { get; } = new List<BugetExpenditure>();
+        public ICollection<BudgetExpenditure> Expenditures { get; } = new List<BudgetExpenditure>();
 
         public decimal Capital { get; set; }
         public decimal ActualPeyments { get; set; }

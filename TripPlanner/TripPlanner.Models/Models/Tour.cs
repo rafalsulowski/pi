@@ -10,8 +10,8 @@ namespace TripPlanner.Models.Models
     {
         public int Id { get; set; }
 
+        public ICollection<OrganizeTour> Organizers { get; } = new List<OrganizeTour>();
         public ICollection<ParticipantTour> Participants { get; } = new List<ParticipantTour>();
-        public ICollection<ParticipantTour> Organizers { get; } = new List<ParticipantTour>();
         public ICollection<CheckList> CheckLists { get; } = new List<CheckList>();
         public ICollection<Questionnaire> Questionnaires { get; } = new List<Questionnaire>();
         public ICollection<Group> Groups { get; } = new List<Group>();
@@ -20,13 +20,10 @@ namespace TripPlanner.Models.Models
         public ICollection<CultureAssistance> CultureAssistances { get; } = new List<CultureAssistance>();
         public Budget? Budget { get; set; }
 
-
         public string Title { get; set; } = string.Empty;
         public string TargetCountry { get; set; } = string.Empty;
         public int MaxParticipant { get; set; }
         public DateTime StartDate { get; set; }
-        public DateTime EndDate { get; set; }
-
-        
+        public DateTime EndDate { get; set; }        
     }
 }
