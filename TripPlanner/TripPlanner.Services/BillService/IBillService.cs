@@ -11,5 +11,6 @@ namespace TripPlanner.Services.BillService
         Task<RepositoryResponse<bool>> UpdateBill(Bill Bill);
         Task<RepositoryResponse<bool>> DeleteBill(Bill Bill);
         Task<RepositoryResponse<bool>> AddParticipantToBill(ParticipantBill participant);
+        Task<RepositoryResponse<bool>> DeleteParticipantFromBill(ParticipantBill participant);
     }
 }

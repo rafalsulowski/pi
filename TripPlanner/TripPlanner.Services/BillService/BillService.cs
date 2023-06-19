@@ -54,5 +54,11 @@ namespace TripPlanner.Services.BillService
             await _BillRepository.AddParticipantToBill(participant);
             return await _BillRepository.SaveChangesAsync();
         }
+
+        public async Task<RepositoryResponse<bool>> DeleteParticipantFromBill(ParticipantBill participant)
+        {
+            await _BillRepository.DeleteParticipantFromBill(participant);
+            return await _BillRepository.SaveChangesAsync();
+        }
     }
 }

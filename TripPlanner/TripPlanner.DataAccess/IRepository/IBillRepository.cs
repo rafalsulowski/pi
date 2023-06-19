@@ -6,5 +6,6 @@ namespace TripPlanner.DataAccess.IRepository
     {
         Task<RepositoryResponse<bool>> Update(Bill post);
         Task<RepositoryResponse<bool>> AddParticipantToBill(ParticipantBill participant);
+        Task<RepositoryResponse<bool>> DeleteParticipantFromBill(ParticipantBill participant);
     }
 }

@@ -1,0 +1,79 @@
+﻿Bill:
+- dodawania zdjecia
+- usuwanie zdjecia
+- usuwanie
+- modyfikowanie
+
+Budget:
+- tworzenie
+- usuwanie
+- modyfikowanie
+- dodawanie uzytkownika
+- usuwanie uzytkownika
+- dodawanie wydatku
+- usuwanie wydatku
+
+Route:
+- tworzenie
+- usuwanie
+- modyfikowanie
+- dodawanie postoju
+- usuwanie postoju
+- generowanie url do google maps calej wycieczki
+- generowanie ulr do google maps odcinak pomiedzy postojami
+
+Culture:
+- tworzenie
+- usuwanie
+- modyfikowanie
+
+Group:
+- tworzenie
+- usuwanie
+- modyfikowanie
+- dodawanie uzytkownika
+- usuwanie uzytkownika
+
+Chat:
+- tworzenie
+- usuwanie
+- dodawanie ankiety
+- usuwanie ankiety
+- dodawanie wiadomosci
+- usuwanie wiadomosci
+
+CheckList:
+- tworzenie
+- usuwanie
+- dodawanie pola
+- usuwanie pola
+- modyfikowanie
+
+Questionnaire:
+- tworzenie
+- usuwanie
+- dodawanie odpowiedzi
+- usuwanie odpowiedzi
+- glosowanie za jakąś odpowiedzią
+- usuwanie głosu za jakąś odpowiedzią
+
+Tour:
+- tworzenie (przy tworzeniu nowej wycieczki utworzyc rowniez podstawowy budzet, grupe, organizatora, uczestnikow)
+- usuwanie
+- modyfikowanie
+- dodanie i usuniecie organizatora
+- dodanie i usuniecie uczestnika
+- dodanie i usuniecie budzetu
+- dodanie i usuniecie Ankiety
+- dodanie i usuniecie Checkisty
+- dodanie i usuniecie Pomocy kulturowej
+- dodanie i usuniecie Grupy
+- dodanie i usuniecie Trasy
+- dodanie i usuniecie Rachunku
+
+User:
+- pobieranie danych o kazdej encji oddzielnie
+- 
+
+
+

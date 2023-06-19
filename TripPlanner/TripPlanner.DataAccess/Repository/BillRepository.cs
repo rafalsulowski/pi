@@ -44,5 +44,15 @@ namespace TripPlanner.DataAccess.Repository
             }
             return new RepositoryResponse<bool> { Data = true };
         }
+
+        public async Task<RepositoryResponse<bool>> DeleteParticipantFromBill(ParticipantBill participant)
+        {
+            var res = _context.ParticipantBills.FirstOrDefault(u => u.UserId == participant.UserId && u.BillId == participant.BillId);
+            if (res != null)
+            {
+                _context.ParticipantBills.Remove(res);
+            }
+            return new RepositoryResponse<bool> { Data = true };
+        }
     }
 }
