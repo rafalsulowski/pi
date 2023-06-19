@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TripPlanner.Models.DTO
 {
-    public class ContributesBudgetDTO
+    public class ContributeBudgetDTO
     {
         public int UserId { get; set; }
         public int BudgetId { get; set; }

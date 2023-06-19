@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TripPlanner.Models.DTO;
 
 namespace TripPlanner.Models.Models
 {
@@ -19,5 +20,19 @@ namespace TripPlanner.Models.Models
         
         public string Name { get; set; } = string.Empty;
         public decimal Ammount { get; set; }
+
+        public BillDTO MapToDTO()
+        {
+            return new BillDTO 
+            {
+                Id = Id,
+                Name= Name,
+                Ammount= Ammount,
+                TourID= TourId,
+                UserID= UserId,
+                Participants = Participants.Select(u => u.MapToDTO()).ToList(),
+                Pictures = Pictures.Select(u => u.MapToDTO()).ToList(),
+            };
+        }
     }
 }

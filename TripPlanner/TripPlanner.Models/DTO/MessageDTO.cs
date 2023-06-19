@@ -8,10 +8,10 @@ namespace TripPlanner.Models.DTO
 {
     public class MessageDTO
     {
-        public string Id { get; set; }
+        public int Id { get; set; }
 
-        public int UserID { get; set; }
-        public int ChatID { get; set; }
+        public int UserId { get; set; }
+        public int ChatId { get; set; }
 
         public string Content { get; set; } = string.Empty;
         public DateTime Date { get; set; }

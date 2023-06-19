@@ -11,17 +11,17 @@ namespace TripPlanner.Models.DTO
     {
         public int Id { get; set; }
         
-        public ICollection<CheckListDTO> CheckLists { get; } = new List<CheckListDTO>();
-        public ICollection<ParticipantTourDTO> OrganizerTours { get; } = new List<ParticipantTourDTO>();
-        public ICollection<ParticipantTourDTO> ParticipantTours { get; } = new List<ParticipantTourDTO>();
-        public ICollection<ContributesBudgetDTO> ParticipantBudgets { get; } = new List<ContributesBudgetDTO>();
-        public ICollection<QuestionnaireDTO> Questionnaires { get; } = new List<QuestionnaireDTO>();
-        public ICollection<QuestionnaireVoteDTO> QuestionnaireVotes { get; } = new List<QuestionnaireVoteDTO>();
-        public ICollection<ParticipantGroupDTO> ParticipantGroups { get; } = new List<ParticipantGroupDTO>();
-        public ICollection<MessageDTO> Messages { get; } = new List<MessageDTO>();
-        public ICollection<RouteDTO> Routes { get; } = new List<RouteDTO>();
-        public ICollection<BillDTO> Bills { get; } = new List<BillDTO>();
-        public ICollection<ParticipantBillDTO> BillSettle { get; } = new List<ParticipantBillDTO>();
+        public ICollection<CheckListDTO> CheckLists { get; set; } = new List<CheckListDTO>();
+        public ICollection<OrganizeTourDTO> OrganizerTours { get; set; } = new List<OrganizeTourDTO>();
+        public ICollection<ParticipantTourDTO> ParticipantTours { get; set; } = new List<ParticipantTourDTO>();
+        public ICollection<ContributeBudgetDTO> ParticipantBudgets { get; set; } = new List<ContributeBudgetDTO>();
+        public ICollection<QuestionnaireDTO> Questionnaires { get; set; } = new List<QuestionnaireDTO>();
+        public ICollection<QuestionnaireVoteDTO> QuestionnaireVotes { get; set; } = new List<QuestionnaireVoteDTO>();
+        public ICollection<ParticipantGroupDTO> ParticipantGroups { get; set; } = new List<ParticipantGroupDTO>();
+        public ICollection<MessageDTO> Messages { get; set; } = new List<MessageDTO>();
+        public ICollection<RouteDTO> Routes { get; set; } = new List<RouteDTO>();
+        public ICollection<BillDTO> Bills { get; set; } = new List<BillDTO>();
+        public ICollection<ParticipantBillDTO> BillSettle { get; set; } = new List<ParticipantBillDTO>();
 
         public string Email { get; set; } = string.Empty;
         public string Username { get; set; } = string.Empty;

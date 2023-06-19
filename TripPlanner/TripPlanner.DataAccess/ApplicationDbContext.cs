@@ -18,7 +18,7 @@ namespace TripPlanner.DataAccess
         public DbSet<Chat> Chats { get; set; }
         public DbSet<CheckList> CheckLists { get; set; }
         public DbSet<CheckListField> CheckListFields { get; set; }
-        public DbSet<ContributesBudget> ContributesBudgets { get; set; }
+        public DbSet<ContributeBudget> ContributeBudgets { get; set; }
         public DbSet<Culture> Cultures { get; set; }
         public DbSet<CultureAssistance> CultureAssistances { get; set; }
         public DbSet<Group> Groups { get; set; }
@@ -26,6 +26,7 @@ namespace TripPlanner.DataAccess
         public DbSet<ParticipantBill> ParticipantBills { get; set; }
         public DbSet<ParticipantGroup> ParticipantGroups { get; set; }
         public DbSet<ParticipantTour> ParticipantTours { get; set; }
+        public DbSet<OrganizeTour> OrganizeTours { get; set; }
         public DbSet<Questionnaire> Questionnaires { get; set; }
         public DbSet<QuestionnaireAnswer> QuestionnaireAnswers { get; set; }
         public DbSet<QuestionnaireVote> QuestionnaireVotes { get; set; }
@@ -422,10 +423,10 @@ namespace TripPlanner.DataAccess
             #endregion
 
             #region ContributesBudget
-            modelBuilder.Entity<ContributesBudget>().HasKey(sc => new { sc.BudgetId, sc.UserId});
+            modelBuilder.Entity<ContributeBudget>().HasKey(sc => new { sc.BudgetId, sc.UserId});
 
             //relacje
-            modelBuilder.Entity<ContributesBudget>()
+            modelBuilder.Entity<ContributeBudget>()
                .HasOne(u => u.User)
                .WithMany(u => u.ParticipantBudgets)
                .HasForeignKey(u => u.UserId)
@@ -433,12 +434,12 @@ namespace TripPlanner.DataAccess
                .IsRequired();
             //koniec relacji
 
-            modelBuilder.Entity<ContributesBudget>()
+            modelBuilder.Entity<ContributeBudget>()
                 .Property(s => s.Payment)
                 .HasColumnType("decimal(6,2)")
                 .IsRequired();
 
-            modelBuilder.Entity<ContributesBudget>()
+            modelBuilder.Entity<ContributeBudget>()
                 .Property(s => s.Debt)
                 .HasColumnType("decimal(6,2)")
                 .IsRequired();

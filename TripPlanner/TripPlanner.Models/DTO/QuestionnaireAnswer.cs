@@ -11,7 +11,7 @@ namespace TripPlanner.Models.DTO
         public int Id { get; set; }
 
         public int QuestionnaireId { get; set; }
-        public ICollection<QuestionnaireVoteDTO> Votes { get; } = new List<QuestionnaireVoteDTO>();
+        public ICollection<QuestionnaireVoteDTO> Votes { get; set; } = new List<QuestionnaireVoteDTO>();
 
 
         public string Answer { get; set; } = string.Empty;

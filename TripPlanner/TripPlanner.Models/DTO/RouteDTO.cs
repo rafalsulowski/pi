@@ -10,9 +10,9 @@ namespace TripPlanner.Models.DTO
     {
         public int Id { get; set; }
 
-        public int TourID { get; set; }
-        public int UserID { get; set; }
-        ICollection<StopoverDTO> Stopovers { get; } = new List<StopoverDTO>();
+        public int TourId { get; set; }
+        public int UserId { get; set; }
+        public ICollection<StopoverDTO> Stopovers { get; set; } = new List<StopoverDTO>();
 
         public string Name { get; set; } = string.Empty;
         public string StartLocation{ get; set; } = string.Empty;

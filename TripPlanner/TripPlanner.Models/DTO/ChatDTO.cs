@@ -10,7 +10,7 @@ namespace TripPlanner.Models.DTO
     {
         public int Id { get; set; }
         public int GroupId { get; set; }
-        public ICollection<QuestionnaireDTO> Questionnaires { get; } = new List<QuestionnaireDTO>();
-        public ICollection<MessageDTO> Messages { get; } = new List<MessageDTO>();
+        public ICollection<QuestionnaireDTO> Questionnaires { get; set; } = new List<QuestionnaireDTO>();
+        public ICollection<MessageDTO> Messages { get; set; } = new List<MessageDTO>();
     }
 }

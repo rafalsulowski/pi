@@ -8,8 +8,8 @@ namespace TripPlanner.Models.DTO
 {
     public class ParticipantBillDTO
     {
-        public int BillID { get; set; }
-        public int UserID { get; set; }
+        public int BillId { get; set; }
+        public int UserId { get; set; }
 
         public decimal Payment { get; set; }
         public decimal Debt { get; set; }

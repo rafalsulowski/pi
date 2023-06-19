@@ -12,7 +12,7 @@ namespace TripPlanner.Models.DTO
 
         public int TourId { get; set; }
         public ChatDTO? Chat { get; set; }
-        public ICollection<ParticipantGroupDTO> Participant { get; } = new List<ParticipantGroupDTO>();
+        public ICollection<ParticipantGroupDTO> Participant { get; set; } = new List<ParticipantGroupDTO>();
 
         public string Name { get; set; } = string.Empty;
         public int Volume { get; set; }

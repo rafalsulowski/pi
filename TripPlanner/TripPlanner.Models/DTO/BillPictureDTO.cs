@@ -9,7 +9,7 @@ namespace TripPlanner.Models.DTO
     public class BillPictureDTO
     {
         public int Id { get; set; }
-        public int BillID { get; set; }
+        public int BillId { get; set; }
         public byte[] Bytes { get; set; } = new byte[0];
     }
 }

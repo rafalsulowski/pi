@@ -10,9 +10,9 @@ namespace TripPlanner.Models.DTO
     {
         public int Id { get; set; }
         
-        public int UserID { get; set; }
-        public int TourID { get; set; }
-        public ICollection<CheckListFieldDTO> Fields { get; } = new List<CheckListFieldDTO>();
+        public int UserId { get; set; }
+        public int TourId { get; set; }
+        public ICollection<CheckListFieldDTO> Fields { get; set; } = new List<CheckListFieldDTO>();
 
 
         public string Name { get; set; } = string.Empty;

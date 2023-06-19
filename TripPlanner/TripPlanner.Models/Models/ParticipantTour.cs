@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TripPlanner.Models.DTO;
 
 namespace TripPlanner.Models.Models
 {
@@ -13,5 +14,14 @@ namespace TripPlanner.Models.Models
 
         public Tour Tour { get; set; } = null!;
         public int TourId { get; set; }
+
+        public ParticipantTourDTO MapToDTO()
+        {
+            return new ParticipantTourDTO
+            {
+                UserId = UserId,
+                TourId = TourId
+            };
+        }
     }
 }

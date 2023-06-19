@@ -10,14 +10,14 @@ namespace TripPlanner.Models.DTO
     {
         public int Id { get; set; }
 
-        public ICollection<ParticipantTourDTO> Participants { get; } = new List<ParticipantTourDTO>();
-        public ICollection<ParticipantTourDTO> Organizers { get; } = new List<ParticipantTourDTO>();
-        public ICollection<CheckListDTO> CheckLists { get; } = new List<CheckListDTO>();
-        public ICollection<QuestionnaireDTO> Questionnaires { get; } = new List<QuestionnaireDTO>();
-        public ICollection<GroupDTO> Groups { get; } = new List<GroupDTO>();
-        public ICollection<RouteDTO> Routes { get; } = new List<RouteDTO>();
-        public ICollection<BillDTO> Bills { get; } = new List<BillDTO>();
-        public ICollection<CultureAssistanceDTO> CultureAssistances { get; } = new List<CultureAssistanceDTO>();
+        public ICollection<OrganizeTourDTO> Organizers { get; set; } = new List<OrganizeTourDTO>();
+        public ICollection<ParticipantTourDTO> Participants { get; set; } = new List<ParticipantTourDTO>();
+        public ICollection<CheckListDTO> CheckLists { get; set; } = new List<CheckListDTO>();
+        public ICollection<QuestionnaireDTO> Questionnaires { get; set; } = new List<QuestionnaireDTO>();
+        public ICollection<GroupDTO> Groups { get; set;} = new List<GroupDTO>();
+        public ICollection<RouteDTO> Routes { get; set; } = new List<RouteDTO>();
+        public ICollection<BillDTO> Bills { get; set; } = new List<BillDTO>();
+        public ICollection<CultureAssistanceDTO> CultureAssistances { get; set; } = new List<CultureAssistanceDTO>();
         public BudgetDTO? Budget { get; set; }
 
         public string Title { get; set; } = string.Empty;

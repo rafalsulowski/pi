@@ -10,10 +10,9 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 using TripPlanner.WebAPI;
+using TripPlanner.Services.BillService;
 
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-
-namespace ProjektZespolowy.WebAPI.Controllers
+namespace TripPlanner.WebAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
@@ -21,12 +20,14 @@ namespace ProjektZespolowy.WebAPI.Controllers
     {
 
         private readonly IUserService _userService;
+        private readonly IBillService _BillService;
         private readonly IPasswordHasher<User> _passwordHasher;
 
-        public UserController(IUserService userService, IPasswordHasher<User> passwordHasher)
+        public UserController(IUserService userService, IPasswordHasher<User> passwordHasher, IBillService billService)
         {
             _userService = userService;
             _passwordHasher = passwordHasher;
+            _BillService = billService;
         }
 
         // GET: api/<ValuesController>
@@ -68,6 +69,20 @@ namespace ProjektZespolowy.WebAPI.Controllers
             }
         }
 
+        // GET api/<ValuesController>/5
+        [HttpGet("GetPlaceWithCommentsAndLikes/{id}")]
+        public async Task<ActionResult<RepositoryResponse<UserDTO>>> GetWithBillSettle(int id)
+        {
+            var response = await _userService.GetUserAsync(u => u.Id == id, "BillSettle");
+            if (response.Success)
+            {
+                return Ok(response.Data.MapToDTO());
+            }
+            else
+            {
+                return BadRequest(response.Data);
+            }
+        }
 
         // POST api/<ValuesController>
         [HttpPost]
@@ -87,7 +102,9 @@ namespace ProjektZespolowy.WebAPI.Controllers
             User newUser = new User
             {
                 Email = user.Email,
-                Username = user.Username
+                Username = user.Username,
+                Address = user.Address,
+                DateOfBirth = user.DateOfBirth
             };
             var hashed = _passwordHasher.HashPassword(newUser, user.PasswordHash);
             newUser.PasswordHash = hashed;
@@ -152,24 +169,5 @@ namespace ProjektZespolowy.WebAPI.Controllers
             string tokenString = tokenHandler.WriteToken(token);
             return Ok(tokenString);
         }
-        [Authorize]
-        [HttpGet("UserDataFromToken")]
-        public async Task<ActionResult> UserDataFromToken()
-        {
-            string? userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-            if (userId == null)
-                return Forbid("User must be logged in!");
-            var response = await _userService.GetUserAsync(u => u.Id == int.Parse(userId));
-            if (response.Success)
-            {
-                return Ok(response.Data);
-            }
-            else
-            {
-                return BadRequest(response.Data);
-            }
-        }
-            
-
     }
 }

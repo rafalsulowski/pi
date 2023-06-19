@@ -11,8 +11,8 @@ namespace TripPlanner.Models.DTO
         public int Id { get; set; }
 
         public int TourId { get; set; }
-        public ICollection<ContributesBudgetDTO> Contributes { get; } = new List<ContributesBudgetDTO>();
-        public ICollection<BudgetExpenditureDTO> Expenditures { get; } = new List<BudgetExpenditureDTO>();
+        public ICollection<ContributeBudgetDTO> Contributes { get; set; } = new List<ContributeBudgetDTO>();
+        public ICollection<BudgetExpenditureDTO> Expenditures { get; set; } = new List<BudgetExpenditureDTO>();
 
         public decimal Capital { get; set; }
         public decimal ActualPeyments { get; set; }
