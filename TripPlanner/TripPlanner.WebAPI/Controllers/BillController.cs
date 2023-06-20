@@ -64,7 +64,7 @@ namespace TripPlanner.WebAPI.Controllers
             return Ok(response.Data);
         }
 
-        [HttpPost("AddParticipantToBill")]
+        [HttpPost("AddParticipant")]
         public async Task<ActionResult<RepositoryResponse<Bill>>> AddParticipant([FromBody] ParticipantBillDTO Bill)
         {
             var resp = await _UserService.GetUserAsync(u => u.Id == Bill.UserId);
@@ -89,8 +89,8 @@ namespace TripPlanner.WebAPI.Controllers
             return Ok(response.Data);
         }
 
-        [HttpDelete("DeleteParticipantFromBill")]
-        public async Task<ActionResult<RepositoryResponse<Bill>>> DeleteParticipantFromBill(int billId, int userId)
+        [HttpDelete("DeleteParticipant")]
+        public async Task<ActionResult<RepositoryResponse<Bill>>> DeleteParticipant(int billId, int userId)
         {
             var resp = await _UserService.GetUserAsync(u => u.Id == userId);
             if (resp.Data == null)
@@ -116,7 +116,56 @@ namespace TripPlanner.WebAPI.Controllers
             return Ok(response.Data);
         }
 
+        [HttpPost("AddPicture")]
+        public async Task<ActionResult<RepositoryResponse<Bill>>> AddPicture([FromBody] BillPictureDTO BillPicture)
+        {
+            var resp = await _BillService.GetBillAsync(u => u.Id == BillPicture.BillId);
+            if (resp.Data == null)
+            {
+                return new RepositoryResponse<Bill> { Success = false, Message = $"Brak rachunku o id = {BillPicture.BillId}" };
+            }
 
+            //string? userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            //if (userId == null)
+            //    return Forbid("User must be loged in to add place to trip!");
+
+            var elem = new BillPicture
+            {
+                BillId = BillPicture.BillId,
+                Bytes = BillPicture.Bytes
+
+            };
+
+            var response = await _BillService.AddParticipantToBill(elem);
+            return Ok(response.Data);
+        }
+
+        [HttpDelete("DeletePicture")]
+        public async Task<ActionResult<RepositoryResponse<Bill>>> DeletePicture(int billId, int userId)
+        {
+            var resp = await _UserService.GetUserAsync(u => u.Id == userId);
+            if (resp.Data == null)
+            {
+                return new RepositoryResponse<Bill> { Success = false, Message = $"Brak użytkownika o id = {userId}" };
+            }
+            var resp2 = await _BillService.GetBillAsync(u => u.Id == billId);
+            if (resp2.Data == null)
+            {
+                return new RepositoryResponse<Bill> { Success = false, Message = $"Brak rachunku o id = {billId}" };
+            }
+            //string? userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            //if (userId == null)
+            //    return Forbid("User must be loged in to add place to trip!");
+
+            var elem = new ParticipantBill
+            {
+                UserId = userId,
+                BillId = billId
+            };
+
+            var response = await _BillService.DeleteParticipantFromBill(elem);
+            return Ok(response.Data);
+        }
 
         // PUT api/<ValuesController>/5
         [HttpPut("{id}")]

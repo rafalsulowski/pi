@@ -73,7 +73,3 @@ Tour:
 
 User:
 - pobieranie danych o kazdej encji oddzielnie
-- 
-
-
-
