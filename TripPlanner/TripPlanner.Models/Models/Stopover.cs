@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using TripPlanner.Models.DTO;
+﻿using TripPlanner.Models.DTO;
 
-namespace TripPlanner.Models.Models
+namespace TripPlanner.Models
 {
     public class Stopover
     {
@@ -19,16 +14,20 @@ namespace TripPlanner.Models.Models
         public string Location { get; set; } = string.Empty;
         public int BreakTime { get; set; }
 
-        public StopoverDTO MapToDTO()
+
+        public static implicit operator StopoverDTO(Stopover data)
         {
+            if (data == null)
+                return null;
+
             return new StopoverDTO
             {
-                Id = Id,
-                RouteId = RouteId,
-                Name = Name,
-                Description = Description,
-                Location = Location,
-                BreakTime = BreakTime,
+                Id = data.Id,
+                RouteId = data.RouteId,
+                Name = data.Name,
+                Description = data.Description,
+                Location = data.Location,
+                BreakTime = data.BreakTime
             };
         }
     }

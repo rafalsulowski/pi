@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using TripPlanner.DataAccess.IRepository;
 using TripPlanner.DataAccess.Repository;
-using TripPlanner.Models.Models;
+using TripPlanner.Models;
 
 namespace TripPlanner.DataAccess.Repository
 {
@@ -45,12 +45,54 @@ namespace TripPlanner.DataAccess.Repository
             return new RepositoryResponse<bool> { Data = true };
         }
 
+        public async Task<RepositoryResponse<bool>> UpdateParticipantBill(ParticipantBill participant)
+        {
+            var participantDB = _context.ParticipantBills.FirstOrDefault(u => u.BillId == participant.BillId && u.UserId == participant.UserId);
+            if (participantDB == null)
+            {
+                return new RepositoryResponse<bool>
+                {
+                    Success = false,
+                    Data = false,
+                    Message = "Nie istnieje taki członek rachunku"
+                };
+            }
+            _context.ParticipantBills.Attach(participant);
+            _context.Entry(participant).State = EntityState.Modified;
+            return new RepositoryResponse<bool> { Data = true };
+        }
+
         public async Task<RepositoryResponse<bool>> DeleteParticipantFromBill(ParticipantBill participant)
         {
             var res = _context.ParticipantBills.FirstOrDefault(u => u.UserId == participant.UserId && u.BillId == participant.BillId);
             if (res != null)
             {
                 _context.ParticipantBills.Remove(res);
+            }
+            return new RepositoryResponse<bool> { Data = true };
+        }
+
+        public async Task<RepositoryResponse<bool>> AddPictureToBill(BillPicture Picture)
+        {
+            var PictureDB = _context.BillPictures.FirstOrDefault(u => u.Id == Picture.Id && u.BillId == Picture.BillId);
+            if (PictureDB == null)
+            {
+                _context.BillPictures.Add(Picture);
+            }
+            else
+            {
+                _context.BillPictures.Attach(Picture);
+                _context.Entry(Picture).State = EntityState.Modified;
+            }
+            return new RepositoryResponse<bool> { Data = true };
+        }
+
+        public async Task<RepositoryResponse<bool>> DeletePictureFromBill(BillPicture Picture)
+        {
+            var res = _context.BillPictures.FirstOrDefault(u => u.Id == Picture.Id && u.BillId == Picture.BillId);
+            if (res != null)
+            {
+                _context.BillPictures.Remove(res);
             }
             return new RepositoryResponse<bool> { Data = true };
         }

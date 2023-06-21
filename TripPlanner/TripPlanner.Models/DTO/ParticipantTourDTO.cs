@@ -1,14 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿
 namespace TripPlanner.Models.DTO
 {
-    public class OrganizeTourDTO
+    public class ParticipantTourDTO
     {
         public int UserId { get; set; }
         public int TourId { get; set; }
+
+
+        public static implicit operator ParticipantTour(ParticipantTourDTO data)
+        {
+            if (data == null)
+                return null;
+
+            return new ParticipantTour
+            {
+                UserId = data.UserId,
+                TourId = data.TourId
+            };
+        }
     }
 }

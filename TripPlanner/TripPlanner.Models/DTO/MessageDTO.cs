@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿
 namespace TripPlanner.Models.DTO
 {
     public class MessageDTO
@@ -15,5 +10,21 @@ namespace TripPlanner.Models.DTO
 
         public string Content { get; set; } = string.Empty;
         public DateTime Date { get; set; }
+
+
+        public static implicit operator Message(MessageDTO data)
+        {
+            if (data == null)
+                return null;
+
+            return new Message
+            {
+                Id = data.Id,
+                UserId = data.UserId,
+                ChatId = data.ChatId,
+                Content = data.Content,
+                Date = data.Date
+            };
+        }
     }
 }

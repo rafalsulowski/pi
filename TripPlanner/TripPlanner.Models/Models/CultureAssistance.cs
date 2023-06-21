@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using TripPlanner.Models.DTO;
+﻿using TripPlanner.Models.DTO;
 
-namespace TripPlanner.Models.Models
+namespace TripPlanner.Models
 {
     public class CultureAssistance
     {
@@ -16,13 +11,17 @@ namespace TripPlanner.Models.Models
 
         public bool IsPrincipal { get; set; }
 
-        public CultureAssistanceDTO MapToDTO()
+
+        public static implicit operator CultureAssistanceDTO(CultureAssistance data)
         {
+            if (data == null)
+                return null;
+
             return new CultureAssistanceDTO
             {
-                TourId = TourId,
-                CultureID = CultureId,
-                IsPrincipal = IsPrincipal
+                TourId = data.TourId,
+                CultureId = data.CultureId,
+                IsPrincipal = data.IsPrincipal
             };
         }
     }

@@ -1,11 +1,12 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using TripPlanner.Models.Models;
+using TripPlanner.Models;
 using TripPlanner.Models.DTO;
 using TripPlanner.Services.ChatService;
 namespace TripPlanner.WebAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [ApiExplorerSettings(IgnoreApi = ProjectConfiguration.HideContorller)]
     public class ChatController : ControllerBase
     {
         private readonly IChatService _ChatService;

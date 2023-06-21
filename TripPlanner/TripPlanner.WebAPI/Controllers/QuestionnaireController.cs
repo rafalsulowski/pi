@@ -1,11 +1,12 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using TripPlanner.Models.Models;
+using TripPlanner.Models;
 using TripPlanner.Models.DTO;
 using TripPlanner.Services.QuestionnaireService;
 namespace TripPlanner.WebAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [ApiExplorerSettings(IgnoreApi = ProjectConfiguration.HideContorller)]
     public class QuestionnaireController : ControllerBase
     {
         private readonly IQuestionnaireService _QuestionnaireService;

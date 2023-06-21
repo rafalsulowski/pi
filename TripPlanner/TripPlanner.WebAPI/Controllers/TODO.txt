@@ -5,9 +5,9 @@
 - modyfikowanie
 
 Budget:
-- tworzenie
-- usuwanie
-- modyfikowanie
+- tworzenie (podczas tworzenia wycieczki towrzymy również budzet)
+- usuwanie (NIEAKTYWNY, tylko przy uzuwaniu wycieczki)
+- modyfikowanie	(ważne)
 - dodawanie uzytkownika
 - usuwanie uzytkownika
 - dodawanie wydatku

@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿
 namespace TripPlanner.Models.DTO
 {
     public class QuestionnaireDTO
@@ -17,5 +12,23 @@ namespace TripPlanner.Models.DTO
 
         public string Question { get; set; } = string.Empty;
         public DateTime Date { get; set; }
+
+
+        public static implicit operator Questionnaire(QuestionnaireDTO data)
+        {
+            if (data == null)
+                return null;
+
+            return new Questionnaire
+            {
+                Id = data.Id,
+                UserId = data.UserId,
+                TourId = data.TourId,
+                ChatId = data.ChatId,
+                Answers = data.Answers.Select(u => (QuestionnaireAnswer)u).ToList(),
+                Question = data.Question,
+                Date = data.Date
+            };
+        }
     }
 }

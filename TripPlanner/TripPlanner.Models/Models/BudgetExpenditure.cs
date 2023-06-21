@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using TripPlanner.Models.DTO;
+﻿using TripPlanner.Models.DTO.BudgetDTOs;
 
-namespace TripPlanner.Models.Models
+namespace TripPlanner.Models
 {
     public class BudgetExpenditure
     {
@@ -18,15 +13,19 @@ namespace TripPlanner.Models.Models
         public string Description { get; set; } = string.Empty;
         public decimal Cost { get; set; }
 
-        public BudgetExpenditureDTO MapToDTO()
+
+        public static implicit operator BudgetExpenditureDTO(BudgetExpenditure data)
         {
+            if (data == null)
+                return null;
+
             return new BudgetExpenditureDTO
             {
-                Id = Id,
-                Name = Name,
-                Description = Description,
-                Cost = Cost,
-                BudgetId = BudgetId,
+                Id = data.Id,
+                Name = data.Name,
+                Description = data.Description,
+                Cost = data.Cost,
+                BudgetId = data.BudgetId
             };
         }
     }

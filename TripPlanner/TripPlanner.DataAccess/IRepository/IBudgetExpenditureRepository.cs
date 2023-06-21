@@ -1,4 +1,4 @@
-﻿using TripPlanner.Models.Models;
+﻿using TripPlanner.Models;
 
 namespace TripPlanner.DataAccess.IRepository
 {

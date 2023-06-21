@@ -19,5 +19,25 @@ namespace TripPlanner.Models.DTO
         public string ArriveLocation{ get; set; } = string.Empty;
         public DateTime StartDate{ get; set; }
         public DateTime ArriveDate{ get; set; }
+
+
+        public static implicit operator Route(RouteDTO data)
+        {
+            if (data == null)
+                return null;
+
+            return new Route
+            {
+                Id = data.Id,
+                UserId = data.UserId,
+                TourId = data.TourId,
+                Stopovers = data.Stopovers.Select(u => (Stopover)u).ToList(),
+                Name = data.Name,
+                StartLocation = data.StartLocation,
+                StartDate = data.StartDate,
+                ArriveDate = data.ArriveDate,
+                ArriveLocation = data.ArriveLocation
+            };
+        }
     }
 }

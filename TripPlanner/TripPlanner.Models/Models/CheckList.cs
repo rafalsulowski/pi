@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using TripPlanner.Models.DTO;
+﻿using TripPlanner.Models.DTO;
 
-namespace TripPlanner.Models.Models
+namespace TripPlanner.Models
 {
     public class CheckList
     {
@@ -15,22 +10,26 @@ namespace TripPlanner.Models.Models
         public int UserId { get; set; }
         public Tour Tour { get; set; } = null!;
         public int TourId { get; set; }
-        public ICollection<CheckListField> Fields { get; } = new List<CheckListField>();
+        public ICollection<CheckListField> Fields { get; set; } = new List<CheckListField>();
 
 
         public string Name { get; set; } = string.Empty;
         public bool IsPublic { get; set; }
 
-        public CheckListDTO MapToDTO()
+
+        public static implicit operator CheckListDTO(CheckList data)
         {
+            if (data == null)
+                return null;
+
             return new CheckListDTO
             {
-                Id = Id,
-                UserId = UserId,
-                TourId = TourId,
-                Fields = Fields.Select(u => u.MapToDTO()).ToList(),
-                Name = Name,
-                IsPublic = IsPublic
+                Id = data.Id,
+                UserId = data.UserId,
+                TourId = data.TourId,
+                Fields = data.Fields.Select(u => (CheckListFieldDTO)u).ToList(),
+                Name = data.Name,
+                IsPublic = data.IsPublic
             };
         }
     }

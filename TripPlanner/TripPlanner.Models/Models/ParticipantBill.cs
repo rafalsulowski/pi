@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using TripPlanner.Models.DTO;
+﻿using TripPlanner.Models.DTO;
 
-namespace TripPlanner.Models.Models
+namespace TripPlanner.Models
 {
     public class ParticipantBill
     {
@@ -17,14 +12,18 @@ namespace TripPlanner.Models.Models
         public decimal Payment { get; set; }
         public decimal Debt { get; set; }
 
-        public ParticipantBillDTO MapToDTO()
+
+        public static implicit operator ParticipantBillDTO(ParticipantBill data)
         {
+            if (data == null)
+                return new ParticipantBillDTO();
+
             return new ParticipantBillDTO
             {
-                BillId = BillId,
-                UserId = UserId,
-                Payment = Payment,
-                Debt = Debt
+                BillId = data.BillId,
+                UserId = data.UserId,
+                Payment = data.Payment,
+                Debt = data.Debt
             };
         }
     }

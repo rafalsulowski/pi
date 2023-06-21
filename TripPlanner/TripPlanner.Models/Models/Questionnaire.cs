@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using TripPlanner.Models.DTO;
+﻿using TripPlanner.Models.DTO;
 
-namespace TripPlanner.Models.Models
+namespace TripPlanner.Models
 {
     public class Questionnaire
     {
@@ -17,22 +12,26 @@ namespace TripPlanner.Models.Models
         public int TourId { get; set; }
         public Chat Chat { get; set; } = null!;
         public int ChatId { get; set; }
-        public ICollection<QuestionnaireAnswer> Answers { get; } = new List<QuestionnaireAnswer>();
+        public ICollection<QuestionnaireAnswer> Answers { get; set; } = new List<QuestionnaireAnswer>();
 
         public string Question { get; set; } = string.Empty;
         public DateTime Date { get; set; }
 
-        public QuestionnaireDTO MapToDTO()
+
+        public static implicit operator QuestionnaireDTO(Questionnaire data)
         {
+            if (data == null)
+                return null;
+
             return new QuestionnaireDTO
             {
-                Id = Id,
-                UserId = UserId,
-                TourId = TourId,
-                ChatId = ChatId,
-                Answers = Answers.Select(u => u.MapToDTO()).ToList(),
-                Question = Question,
-                Date = Date
+                Id = data.Id,
+                UserId = data.UserId,
+                TourId = data.TourId,
+                ChatId = data.ChatId,
+                Answers = data.Answers.Select(u => (QuestionnaireAnswerDTO)u).ToList(),
+                Question = data.Question,
+                Date = data.Date
             };
         }
     }

@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿
 namespace TripPlanner.Models.DTO
 {
     public class ContributeBudgetDTO
@@ -12,5 +7,20 @@ namespace TripPlanner.Models.DTO
         public int BudgetId { get; set; }
         public decimal Payment { get; set; }
         public decimal Debt { get; set; }
+
+
+        public static implicit operator ContributeBudget(ContributeBudgetDTO data)
+        {
+            if (data == null)
+                return null;
+
+            return new ContributeBudget
+            {
+                UserId = data.UserId,
+                BudgetId = data.BudgetId,
+                Payment = data.Payment,
+                Debt = data.Debt
+            };
+        }
     }
 }

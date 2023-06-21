@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "W/vVW2EVoHIg8fGt6uuoNfc/3zxqrGhublRC4P6kM9Nfn1WAX0Lhj0Otq5LuIKAKjvQ9MjIJgl1mcmkK70oaGA==",
+  "dgSpecHash": "JY4utSIRuhcjveU/ESBPi5kKQi6xaVms97sXqCzr4sBJdT+YMs5bbu+UV+fVVlDvme2SGgMRdfRIJ7Qn1+daiA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\01159502\\Desktop\\pi\\TripPlanner\\TripPlanner.WebAPI\\TripPlanner.WebAPI.csproj",
+  "projectFilePath": "C:\\Users\\01159502\\Desktop\\TripPlanner\\pi\\TripPlanner\\TripPlanner.WebAPI\\TripPlanner.WebAPI.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\01159502\\.nuget\\packages\\azure.core\\1.24.0\\azure.core.1.24.0.nupkg.sha512",
     "C:\\Users\\01159502\\.nuget\\packages\\azure.identity\\1.6.0\\azure.identity.1.6.0.nupkg.sha512",

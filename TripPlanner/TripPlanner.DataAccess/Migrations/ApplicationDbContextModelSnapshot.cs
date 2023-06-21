@@ -22,7 +22,7 @@ namespace TripPlanner.DataAccess.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("TripPlanner.Models.Models.Bill", b =>
+            modelBuilder.Entity("TripPlanner.Models.Bill", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -52,7 +52,7 @@ namespace TripPlanner.DataAccess.Migrations
                     b.ToTable("Bills");
                 });
 
-            modelBuilder.Entity("TripPlanner.Models.Models.BillPicture", b =>
+            modelBuilder.Entity("TripPlanner.Models.BillPicture", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -63,9 +63,9 @@ namespace TripPlanner.DataAccess.Migrations
                     b.Property<int>("BillId")
                         .HasColumnType("int");
 
-                    b.Property<byte[]>("Bytes")
+                    b.Property<string>("FilePath")
                         .IsRequired()
-                        .HasColumnType("varbinary(max)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -74,7 +74,7 @@ namespace TripPlanner.DataAccess.Migrations
                     b.ToTable("BillPictures");
                 });
 
-            modelBuilder.Entity("TripPlanner.Models.Models.Budget", b =>
+            modelBuilder.Entity("TripPlanner.Models.Budget", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -114,7 +114,7 @@ namespace TripPlanner.DataAccess.Migrations
                     b.ToTable("Budgets");
                 });
 
-            modelBuilder.Entity("TripPlanner.Models.Models.BudgetExpenditure", b =>
+            modelBuilder.Entity("TripPlanner.Models.BudgetExpenditure", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -143,7 +143,7 @@ namespace TripPlanner.DataAccess.Migrations
                     b.ToTable("BudgetExpenditures");
                 });
 
-            modelBuilder.Entity("TripPlanner.Models.Models.Chat", b =>
+            modelBuilder.Entity("TripPlanner.Models.Chat", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -162,7 +162,7 @@ namespace TripPlanner.DataAccess.Migrations
                     b.ToTable("Chats");
                 });
 
-            modelBuilder.Entity("TripPlanner.Models.Models.CheckList", b =>
+            modelBuilder.Entity("TripPlanner.Models.CheckList", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -192,7 +192,7 @@ namespace TripPlanner.DataAccess.Migrations
                     b.ToTable("CheckLists");
                 });
 
-            modelBuilder.Entity("TripPlanner.Models.Models.CheckListField", b =>
+            modelBuilder.Entity("TripPlanner.Models.CheckListField", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -220,7 +220,7 @@ namespace TripPlanner.DataAccess.Migrations
                     b.ToTable("CheckListFields");
                 });
 
-            modelBuilder.Entity("TripPlanner.Models.Models.ContributesBudget", b =>
+            modelBuilder.Entity("TripPlanner.Models.ContributeBudget", b =>
                 {
                     b.Property<int>("BudgetId")
                         .HasColumnType("int");
@@ -238,10 +238,10 @@ namespace TripPlanner.DataAccess.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("ContributesBudgets");
+                    b.ToTable("ContributeBudgets");
                 });
 
-            modelBuilder.Entity("TripPlanner.Models.Models.Culture", b =>
+            modelBuilder.Entity("TripPlanner.Models.Culture", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -290,7 +290,7 @@ namespace TripPlanner.DataAccess.Migrations
                     b.ToTable("Cultures");
                 });
 
-            modelBuilder.Entity("TripPlanner.Models.Models.CultureAssistance", b =>
+            modelBuilder.Entity("TripPlanner.Models.CultureAssistance", b =>
                 {
                     b.Property<int>("CultureId")
                         .HasColumnType("int");
@@ -308,7 +308,7 @@ namespace TripPlanner.DataAccess.Migrations
                     b.ToTable("CultureAssistances");
                 });
 
-            modelBuilder.Entity("TripPlanner.Models.Models.Group", b =>
+            modelBuilder.Entity("TripPlanner.Models.Group", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -333,7 +333,7 @@ namespace TripPlanner.DataAccess.Migrations
                     b.ToTable("Groups");
                 });
 
-            modelBuilder.Entity("TripPlanner.Models.Models.Message", b =>
+            modelBuilder.Entity("TripPlanner.Models.Message", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -363,7 +363,7 @@ namespace TripPlanner.DataAccess.Migrations
                     b.ToTable("Messages");
                 });
 
-            modelBuilder.Entity("TripPlanner.Models.Models.OrganizeTour", b =>
+            modelBuilder.Entity("TripPlanner.Models.OrganizeTour", b =>
                 {
                     b.Property<int>("UserId")
                         .HasColumnType("int");
@@ -375,10 +375,10 @@ namespace TripPlanner.DataAccess.Migrations
 
                     b.HasIndex("TourId");
 
-                    b.ToTable("OrganizeTour");
+                    b.ToTable("OrganizeTours");
                 });
 
-            modelBuilder.Entity("TripPlanner.Models.Models.ParticipantBill", b =>
+            modelBuilder.Entity("TripPlanner.Models.ParticipantBill", b =>
                 {
                     b.Property<int>("UserId")
                         .HasColumnType("int");
@@ -399,7 +399,7 @@ namespace TripPlanner.DataAccess.Migrations
                     b.ToTable("ParticipantBills");
                 });
 
-            modelBuilder.Entity("TripPlanner.Models.Models.ParticipantGroup", b =>
+            modelBuilder.Entity("TripPlanner.Models.ParticipantGroup", b =>
                 {
                     b.Property<int>("UserId")
                         .HasColumnType("int");
@@ -417,7 +417,7 @@ namespace TripPlanner.DataAccess.Migrations
                     b.ToTable("ParticipantGroups");
                 });
 
-            modelBuilder.Entity("TripPlanner.Models.Models.ParticipantTour", b =>
+            modelBuilder.Entity("TripPlanner.Models.ParticipantTour", b =>
                 {
                     b.Property<int>("UserId")
                         .HasColumnType("int");
@@ -432,7 +432,7 @@ namespace TripPlanner.DataAccess.Migrations
                     b.ToTable("ParticipantTours");
                 });
 
-            modelBuilder.Entity("TripPlanner.Models.Models.Questionnaire", b =>
+            modelBuilder.Entity("TripPlanner.Models.Questionnaire", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -467,7 +467,7 @@ namespace TripPlanner.DataAccess.Migrations
                     b.ToTable("Questionnaires");
                 });
 
-            modelBuilder.Entity("TripPlanner.Models.Models.QuestionnaireAnswer", b =>
+            modelBuilder.Entity("TripPlanner.Models.QuestionnaireAnswer", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -489,7 +489,7 @@ namespace TripPlanner.DataAccess.Migrations
                     b.ToTable("QuestionnaireAnswers");
                 });
 
-            modelBuilder.Entity("TripPlanner.Models.Models.QuestionnaireVote", b =>
+            modelBuilder.Entity("TripPlanner.Models.QuestionnaireVote", b =>
                 {
                     b.Property<int>("UserId")
                         .HasColumnType("int");
@@ -504,7 +504,7 @@ namespace TripPlanner.DataAccess.Migrations
                     b.ToTable("QuestionnaireVotes");
                 });
 
-            modelBuilder.Entity("TripPlanner.Models.Models.Route", b =>
+            modelBuilder.Entity("TripPlanner.Models.Route", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -545,7 +545,7 @@ namespace TripPlanner.DataAccess.Migrations
                     b.ToTable("Routes");
                 });
 
-            modelBuilder.Entity("TripPlanner.Models.Models.Stopover", b =>
+            modelBuilder.Entity("TripPlanner.Models.Stopover", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -578,7 +578,7 @@ namespace TripPlanner.DataAccess.Migrations
                     b.ToTable("Stopovers");
                 });
 
-            modelBuilder.Entity("TripPlanner.Models.Models.Tour", b =>
+            modelBuilder.Entity("TripPlanner.Models.Tour", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -608,7 +608,7 @@ namespace TripPlanner.DataAccess.Migrations
                     b.ToTable("Tours");
                 });
 
-            modelBuilder.Entity("TripPlanner.Models.Models.User", b =>
+            modelBuilder.Entity("TripPlanner.Models.User", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -627,11 +627,15 @@ namespace TripPlanner.DataAccess.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("PasswordHash")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Username")
+                    b.Property<string>("Surname")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -640,15 +644,15 @@ namespace TripPlanner.DataAccess.Migrations
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("TripPlanner.Models.Models.Bill", b =>
+            modelBuilder.Entity("TripPlanner.Models.Bill", b =>
                 {
-                    b.HasOne("TripPlanner.Models.Models.Tour", "Tour")
+                    b.HasOne("TripPlanner.Models.Tour", "Tour")
                         .WithMany("Bills")
                         .HasForeignKey("TourId")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
-                    b.HasOne("TripPlanner.Models.Models.User", "User")
+                    b.HasOne("TripPlanner.Models.User", "User")
                         .WithMany("Bills")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.NoAction)
@@ -659,9 +663,9 @@ namespace TripPlanner.DataAccess.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("TripPlanner.Models.Models.BillPicture", b =>
+            modelBuilder.Entity("TripPlanner.Models.BillPicture", b =>
                 {
-                    b.HasOne("TripPlanner.Models.Models.Bill", "Bill")
+                    b.HasOne("TripPlanner.Models.Bill", "Bill")
                         .WithMany("Pictures")
                         .HasForeignKey("BillId")
                         .OnDelete(DeleteBehavior.NoAction)
@@ -670,20 +674,20 @@ namespace TripPlanner.DataAccess.Migrations
                     b.Navigation("Bill");
                 });
 
-            modelBuilder.Entity("TripPlanner.Models.Models.Budget", b =>
+            modelBuilder.Entity("TripPlanner.Models.Budget", b =>
                 {
-                    b.HasOne("TripPlanner.Models.Models.Tour", "Tour")
+                    b.HasOne("TripPlanner.Models.Tour", "Tour")
                         .WithOne("Budget")
-                        .HasForeignKey("TripPlanner.Models.Models.Budget", "TourId")
+                        .HasForeignKey("TripPlanner.Models.Budget", "TourId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Tour");
                 });
 
-            modelBuilder.Entity("TripPlanner.Models.Models.BudgetExpenditure", b =>
+            modelBuilder.Entity("TripPlanner.Models.BudgetExpenditure", b =>
                 {
-                    b.HasOne("TripPlanner.Models.Models.Budget", "Budget")
+                    b.HasOne("TripPlanner.Models.Budget", "Budget")
                         .WithMany("Expenditures")
                         .HasForeignKey("BudgetId")
                         .OnDelete(DeleteBehavior.NoAction)
@@ -692,26 +696,26 @@ namespace TripPlanner.DataAccess.Migrations
                     b.Navigation("Budget");
                 });
 
-            modelBuilder.Entity("TripPlanner.Models.Models.Chat", b =>
+            modelBuilder.Entity("TripPlanner.Models.Chat", b =>
                 {
-                    b.HasOne("TripPlanner.Models.Models.Group", "Group")
+                    b.HasOne("TripPlanner.Models.Group", "Group")
                         .WithOne("Chat")
-                        .HasForeignKey("TripPlanner.Models.Models.Chat", "GroupId")
+                        .HasForeignKey("TripPlanner.Models.Chat", "GroupId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Group");
                 });
 
-            modelBuilder.Entity("TripPlanner.Models.Models.CheckList", b =>
+            modelBuilder.Entity("TripPlanner.Models.CheckList", b =>
                 {
-                    b.HasOne("TripPlanner.Models.Models.Tour", "Tour")
+                    b.HasOne("TripPlanner.Models.Tour", "Tour")
                         .WithMany("CheckLists")
                         .HasForeignKey("TourId")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
-                    b.HasOne("TripPlanner.Models.Models.User", "User")
+                    b.HasOne("TripPlanner.Models.User", "User")
                         .WithMany("CheckLists")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.NoAction)
@@ -722,9 +726,9 @@ namespace TripPlanner.DataAccess.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("TripPlanner.Models.Models.CheckListField", b =>
+            modelBuilder.Entity("TripPlanner.Models.CheckListField", b =>
                 {
-                    b.HasOne("TripPlanner.Models.Models.CheckList", "CheckList")
+                    b.HasOne("TripPlanner.Models.CheckList", "CheckList")
                         .WithMany("Fields")
                         .HasForeignKey("CheckListId")
                         .OnDelete(DeleteBehavior.NoAction)
@@ -733,15 +737,15 @@ namespace TripPlanner.DataAccess.Migrations
                     b.Navigation("CheckList");
                 });
 
-            modelBuilder.Entity("TripPlanner.Models.Models.ContributesBudget", b =>
+            modelBuilder.Entity("TripPlanner.Models.ContributeBudget", b =>
                 {
-                    b.HasOne("TripPlanner.Models.Models.Budget", "Budget")
+                    b.HasOne("TripPlanner.Models.Budget", "Budget")
                         .WithMany("Contributes")
                         .HasForeignKey("BudgetId")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
-                    b.HasOne("TripPlanner.Models.Models.User", "User")
+                    b.HasOne("TripPlanner.Models.User", "User")
                         .WithMany("ParticipantBudgets")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.NoAction)
@@ -752,15 +756,15 @@ namespace TripPlanner.DataAccess.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("TripPlanner.Models.Models.CultureAssistance", b =>
+            modelBuilder.Entity("TripPlanner.Models.CultureAssistance", b =>
                 {
-                    b.HasOne("TripPlanner.Models.Models.Culture", "Culture")
+                    b.HasOne("TripPlanner.Models.Culture", "Culture")
                         .WithMany("Tours")
                         .HasForeignKey("CultureId")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
-                    b.HasOne("TripPlanner.Models.Models.Tour", "Tour")
+                    b.HasOne("TripPlanner.Models.Tour", "Tour")
                         .WithMany("CultureAssistances")
                         .HasForeignKey("TourId")
                         .OnDelete(DeleteBehavior.NoAction)
@@ -771,9 +775,9 @@ namespace TripPlanner.DataAccess.Migrations
                     b.Navigation("Tour");
                 });
 
-            modelBuilder.Entity("TripPlanner.Models.Models.Group", b =>
+            modelBuilder.Entity("TripPlanner.Models.Group", b =>
                 {
-                    b.HasOne("TripPlanner.Models.Models.Tour", "Tour")
+                    b.HasOne("TripPlanner.Models.Tour", "Tour")
                         .WithMany("Groups")
                         .HasForeignKey("TourId")
                         .OnDelete(DeleteBehavior.NoAction)
@@ -782,15 +786,15 @@ namespace TripPlanner.DataAccess.Migrations
                     b.Navigation("Tour");
                 });
 
-            modelBuilder.Entity("TripPlanner.Models.Models.Message", b =>
+            modelBuilder.Entity("TripPlanner.Models.Message", b =>
                 {
-                    b.HasOne("TripPlanner.Models.Models.Chat", "Chat")
+                    b.HasOne("TripPlanner.Models.Chat", "Chat")
                         .WithMany("Messages")
                         .HasForeignKey("ChatId")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
-                    b.HasOne("TripPlanner.Models.Models.User", "User")
+                    b.HasOne("TripPlanner.Models.User", "User")
                         .WithMany("Messages")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.NoAction)
@@ -801,15 +805,15 @@ namespace TripPlanner.DataAccess.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("TripPlanner.Models.Models.OrganizeTour", b =>
+            modelBuilder.Entity("TripPlanner.Models.OrganizeTour", b =>
                 {
-                    b.HasOne("TripPlanner.Models.Models.Tour", "Tour")
+                    b.HasOne("TripPlanner.Models.Tour", "Tour")
                         .WithMany("Organizers")
                         .HasForeignKey("TourId")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
-                    b.HasOne("TripPlanner.Models.Models.User", "User")
+                    b.HasOne("TripPlanner.Models.User", "User")
                         .WithMany("OrganizerTours")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.NoAction)
@@ -820,15 +824,15 @@ namespace TripPlanner.DataAccess.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("TripPlanner.Models.Models.ParticipantBill", b =>
+            modelBuilder.Entity("TripPlanner.Models.ParticipantBill", b =>
                 {
-                    b.HasOne("TripPlanner.Models.Models.Bill", "Bill")
+                    b.HasOne("TripPlanner.Models.Bill", "Bill")
                         .WithMany("Participants")
                         .HasForeignKey("BillId")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
-                    b.HasOne("TripPlanner.Models.Models.User", "User")
+                    b.HasOne("TripPlanner.Models.User", "User")
                         .WithMany("BillSettle")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.NoAction)
@@ -839,15 +843,15 @@ namespace TripPlanner.DataAccess.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("TripPlanner.Models.Models.ParticipantGroup", b =>
+            modelBuilder.Entity("TripPlanner.Models.ParticipantGroup", b =>
                 {
-                    b.HasOne("TripPlanner.Models.Models.Group", "Group")
+                    b.HasOne("TripPlanner.Models.Group", "Group")
                         .WithMany("Participant")
                         .HasForeignKey("GroupId")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
-                    b.HasOne("TripPlanner.Models.Models.User", "User")
+                    b.HasOne("TripPlanner.Models.User", "User")
                         .WithMany("ParticipantGroups")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.NoAction)
@@ -858,15 +862,15 @@ namespace TripPlanner.DataAccess.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("TripPlanner.Models.Models.ParticipantTour", b =>
+            modelBuilder.Entity("TripPlanner.Models.ParticipantTour", b =>
                 {
-                    b.HasOne("TripPlanner.Models.Models.Tour", "Tour")
+                    b.HasOne("TripPlanner.Models.Tour", "Tour")
                         .WithMany("Participants")
                         .HasForeignKey("TourId")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
-                    b.HasOne("TripPlanner.Models.Models.User", "User")
+                    b.HasOne("TripPlanner.Models.User", "User")
                         .WithMany("ParticipantTours")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.NoAction)
@@ -877,21 +881,21 @@ namespace TripPlanner.DataAccess.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("TripPlanner.Models.Models.Questionnaire", b =>
+            modelBuilder.Entity("TripPlanner.Models.Questionnaire", b =>
                 {
-                    b.HasOne("TripPlanner.Models.Models.Chat", "Chat")
+                    b.HasOne("TripPlanner.Models.Chat", "Chat")
                         .WithMany("Questionnaires")
                         .HasForeignKey("ChatId")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
-                    b.HasOne("TripPlanner.Models.Models.Tour", "Tour")
+                    b.HasOne("TripPlanner.Models.Tour", "Tour")
                         .WithMany("Questionnaires")
                         .HasForeignKey("TourId")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
-                    b.HasOne("TripPlanner.Models.Models.User", "User")
+                    b.HasOne("TripPlanner.Models.User", "User")
                         .WithMany("Questionnaires")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.NoAction)
@@ -904,9 +908,9 @@ namespace TripPlanner.DataAccess.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("TripPlanner.Models.Models.QuestionnaireAnswer", b =>
+            modelBuilder.Entity("TripPlanner.Models.QuestionnaireAnswer", b =>
                 {
-                    b.HasOne("TripPlanner.Models.Models.Questionnaire", "Questionnaire")
+                    b.HasOne("TripPlanner.Models.Questionnaire", "Questionnaire")
                         .WithMany("Answers")
                         .HasForeignKey("QuestionnaireId")
                         .OnDelete(DeleteBehavior.NoAction)
@@ -915,15 +919,15 @@ namespace TripPlanner.DataAccess.Migrations
                     b.Navigation("Questionnaire");
                 });
 
-            modelBuilder.Entity("TripPlanner.Models.Models.QuestionnaireVote", b =>
+            modelBuilder.Entity("TripPlanner.Models.QuestionnaireVote", b =>
                 {
-                    b.HasOne("TripPlanner.Models.Models.QuestionnaireAnswer", "QuestionnaireAnswer")
+                    b.HasOne("TripPlanner.Models.QuestionnaireAnswer", "QuestionnaireAnswer")
                         .WithMany("Votes")
                         .HasForeignKey("QuestionnaireAnswerId")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
-                    b.HasOne("TripPlanner.Models.Models.User", "User")
+                    b.HasOne("TripPlanner.Models.User", "User")
                         .WithMany("QuestionnaireVotes")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.NoAction)
@@ -934,15 +938,15 @@ namespace TripPlanner.DataAccess.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("TripPlanner.Models.Models.Route", b =>
+            modelBuilder.Entity("TripPlanner.Models.Route", b =>
                 {
-                    b.HasOne("TripPlanner.Models.Models.Tour", "Tour")
+                    b.HasOne("TripPlanner.Models.Tour", "Tour")
                         .WithMany("Routes")
                         .HasForeignKey("TourId")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
-                    b.HasOne("TripPlanner.Models.Models.User", "User")
+                    b.HasOne("TripPlanner.Models.User", "User")
                         .WithMany("Routes")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.NoAction)
@@ -953,9 +957,9 @@ namespace TripPlanner.DataAccess.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("TripPlanner.Models.Models.Stopover", b =>
+            modelBuilder.Entity("TripPlanner.Models.Stopover", b =>
                 {
-                    b.HasOne("TripPlanner.Models.Models.Route", "Route")
+                    b.HasOne("TripPlanner.Models.Route", "Route")
                         .WithMany("Stopovers")
                         .HasForeignKey("RouteId")
                         .OnDelete(DeleteBehavior.NoAction)
@@ -964,60 +968,60 @@ namespace TripPlanner.DataAccess.Migrations
                     b.Navigation("Route");
                 });
 
-            modelBuilder.Entity("TripPlanner.Models.Models.Bill", b =>
+            modelBuilder.Entity("TripPlanner.Models.Bill", b =>
                 {
                     b.Navigation("Participants");
 
                     b.Navigation("Pictures");
                 });
 
-            modelBuilder.Entity("TripPlanner.Models.Models.Budget", b =>
+            modelBuilder.Entity("TripPlanner.Models.Budget", b =>
                 {
                     b.Navigation("Contributes");
 
                     b.Navigation("Expenditures");
                 });
 
-            modelBuilder.Entity("TripPlanner.Models.Models.Chat", b =>
+            modelBuilder.Entity("TripPlanner.Models.Chat", b =>
                 {
                     b.Navigation("Messages");
 
                     b.Navigation("Questionnaires");
                 });
 
-            modelBuilder.Entity("TripPlanner.Models.Models.CheckList", b =>
+            modelBuilder.Entity("TripPlanner.Models.CheckList", b =>
                 {
                     b.Navigation("Fields");
                 });
 
-            modelBuilder.Entity("TripPlanner.Models.Models.Culture", b =>
+            modelBuilder.Entity("TripPlanner.Models.Culture", b =>
                 {
                     b.Navigation("Tours");
                 });
 
-            modelBuilder.Entity("TripPlanner.Models.Models.Group", b =>
+            modelBuilder.Entity("TripPlanner.Models.Group", b =>
                 {
                     b.Navigation("Chat");
 
                     b.Navigation("Participant");
                 });
 
-            modelBuilder.Entity("TripPlanner.Models.Models.Questionnaire", b =>
+            modelBuilder.Entity("TripPlanner.Models.Questionnaire", b =>
                 {
                     b.Navigation("Answers");
                 });
 
-            modelBuilder.Entity("TripPlanner.Models.Models.QuestionnaireAnswer", b =>
+            modelBuilder.Entity("TripPlanner.Models.QuestionnaireAnswer", b =>
                 {
                     b.Navigation("Votes");
                 });
 
-            modelBuilder.Entity("TripPlanner.Models.Models.Route", b =>
+            modelBuilder.Entity("TripPlanner.Models.Route", b =>
                 {
                     b.Navigation("Stopovers");
                 });
 
-            modelBuilder.Entity("TripPlanner.Models.Models.Tour", b =>
+            modelBuilder.Entity("TripPlanner.Models.Tour", b =>
                 {
                     b.Navigation("Bills");
 
@@ -1038,7 +1042,7 @@ namespace TripPlanner.DataAccess.Migrations
                     b.Navigation("Routes");
                 });
 
-            modelBuilder.Entity("TripPlanner.Models.Models.User", b =>
+            modelBuilder.Entity("TripPlanner.Models.User", b =>
                 {
                     b.Navigation("BillSettle");
 

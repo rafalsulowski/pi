@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using TripPlanner.Models.DTO;
+﻿using TripPlanner.Models.DTO;
 
-namespace TripPlanner.Models.Models
+namespace TripPlanner.Models
 {
     public class QuestionnaireVote
     {
@@ -14,12 +9,16 @@ namespace TripPlanner.Models.Models
         public QuestionnaireAnswer QuestionnaireAnswer { get; set; } = null!;
         public int QuestionnaireAnswerId { get; set; }
 
-        public QuestionnaireVoteDTO MapToDTO()
+        
+        public static implicit operator QuestionnaireVoteDTO(QuestionnaireVote data)
         {
+            if (data == null)
+                return null;
+
             return new QuestionnaireVoteDTO
             {
-                UserId = UserId,
-                QuestionnaireAnswerId = QuestionnaireAnswerId
+                UserId = data.UserId,
+                QuestionnaireAnswerId = data.QuestionnaireAnswerId
             };
         }
     }

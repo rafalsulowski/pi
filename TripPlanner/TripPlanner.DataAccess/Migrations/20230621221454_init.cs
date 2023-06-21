@@ -56,7 +56,8 @@ namespace TripPlanner.DataAccess.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Username = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Surname = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     PasswordHash = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Address = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     DateOfBirth = table.Column<DateTime>(type: "datetime2", nullable: false)
@@ -187,7 +188,7 @@ namespace TripPlanner.DataAccess.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "OrganizeTour",
+                name: "OrganizeTours",
                 columns: table => new
                 {
                     UserId = table.Column<int>(type: "int", nullable: false),
@@ -195,14 +196,14 @@ namespace TripPlanner.DataAccess.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_OrganizeTour", x => new { x.UserId, x.TourId });
+                    table.PrimaryKey("PK_OrganizeTours", x => new { x.UserId, x.TourId });
                     table.ForeignKey(
-                        name: "FK_OrganizeTour_Tours_TourId",
+                        name: "FK_OrganizeTours_Tours_TourId",
                         column: x => x.TourId,
                         principalTable: "Tours",
                         principalColumn: "Id");
                     table.ForeignKey(
-                        name: "FK_OrganizeTour_Users_UserId",
+                        name: "FK_OrganizeTours_Users_UserId",
                         column: x => x.UserId,
                         principalTable: "Users",
                         principalColumn: "Id");
@@ -281,7 +282,7 @@ namespace TripPlanner.DataAccess.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "ContributesBudgets",
+                name: "ContributeBudgets",
                 columns: table => new
                 {
                     UserId = table.Column<int>(type: "int", nullable: false),
@@ -291,14 +292,14 @@ namespace TripPlanner.DataAccess.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ContributesBudgets", x => new { x.BudgetId, x.UserId });
+                    table.PrimaryKey("PK_ContributeBudgets", x => new { x.BudgetId, x.UserId });
                     table.ForeignKey(
-                        name: "FK_ContributesBudgets_Budgets_BudgetId",
+                        name: "FK_ContributeBudgets_Budgets_BudgetId",
                         column: x => x.BudgetId,
                         principalTable: "Budgets",
                         principalColumn: "Id");
                     table.ForeignKey(
-                        name: "FK_ContributesBudgets_Users_UserId",
+                        name: "FK_ContributeBudgets_Users_UserId",
                         column: x => x.UserId,
                         principalTable: "Users",
                         principalColumn: "Id");
@@ -353,7 +354,7 @@ namespace TripPlanner.DataAccess.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     BillId = table.Column<int>(type: "int", nullable: false),
-                    Bytes = table.Column<byte[]>(type: "varbinary(max)", nullable: false)
+                    FilePath = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -579,8 +580,8 @@ namespace TripPlanner.DataAccess.Migrations
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ContributesBudgets_UserId",
-                table: "ContributesBudgets",
+                name: "IX_ContributeBudgets_UserId",
+                table: "ContributeBudgets",
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
@@ -604,8 +605,8 @@ namespace TripPlanner.DataAccess.Migrations
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_OrganizeTour_TourId",
-                table: "OrganizeTour",
+                name: "IX_OrganizeTours_TourId",
+                table: "OrganizeTours",
                 column: "TourId");
 
             migrationBuilder.CreateIndex(
@@ -677,7 +678,7 @@ namespace TripPlanner.DataAccess.Migrations
                 name: "CheckListFields");
 
             migrationBuilder.DropTable(
-                name: "ContributesBudgets");
+                name: "ContributeBudgets");
 
             migrationBuilder.DropTable(
                 name: "CultureAssistances");
@@ -686,7 +687,7 @@ namespace TripPlanner.DataAccess.Migrations
                 name: "Messages");
 
             migrationBuilder.DropTable(
-                name: "OrganizeTour");
+                name: "OrganizeTours");
 
             migrationBuilder.DropTable(
                 name: "ParticipantBills");

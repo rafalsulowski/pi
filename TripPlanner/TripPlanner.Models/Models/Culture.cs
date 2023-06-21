@@ -1,17 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using TripPlanner.Models.DTO;
+﻿using TripPlanner.Models.DTO;
 
-namespace TripPlanner.Models.Models
+namespace TripPlanner.Models
 {
     public class Culture
     {
         public int Id { get; set; }
 
-        public ICollection<CultureAssistance> Tours { get; } = new List<CultureAssistance>();
+        public ICollection<CultureAssistance> Tours { get; set; } = new List<CultureAssistance>();
 
         public string Name { get; set; } = string.Empty;
         public string Description { get; set; } = string.Empty;
@@ -23,21 +18,25 @@ namespace TripPlanner.Models.Models
         public string LanguageAssistance { get; set; } = string.Empty;
         public string ProperBehaviour { get; set; } = string.Empty;
 
-        public CultureDTO MapToDTO()
+
+        public static implicit operator CultureDTO(Culture data)
         {
-            return new CultureDTO 
-            { 
-                Id = Id, 
-                Tours = Tours.Select(u => u.MapToDTO()).ToList(),
-                Name = Name, 
-                Description = Description, 
-                Country = Country, 
-                Religion = Religion,
-                Goverment = Goverment,
-                GeograpInformation = GeograpInformation,
-                Manners = Manners,
-                LanguageAssistance = LanguageAssistance,
-                ProperBehaviour = ProperBehaviour
+            if (data == null)
+                return null;
+
+            return new CultureDTO
+            {
+                Id = data.Id,
+                Tours = data.Tours.Select(u => (CultureAssistanceDTO)u).ToList(),
+                Name = data.Name,
+                Description = data.Description,
+                Country = data.Country,
+                Religion = data.Religion,
+                Goverment = data.Goverment,
+                GeograpInformation = data.GeograpInformation,
+                Manners = data.Manners,
+                LanguageAssistance = data.LanguageAssistance,
+                ProperBehaviour = data.ProperBehaviour
             };
         }
     }

@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using TripPlanner.Models.DTO;
+﻿using TripPlanner.Models.DTO;
 
-namespace TripPlanner.Models.Models
+namespace TripPlanner.Models
 {
     public class Chat
     {
@@ -13,17 +8,21 @@ namespace TripPlanner.Models.Models
 
         public Group Group { get; set; } = null!;
         public int GroupId { get; set; }
-        public ICollection<Questionnaire> Questionnaires { get; } = new List<Questionnaire>();
-        public ICollection<Message> Messages { get; } = new List<Message>();
+        public ICollection<Questionnaire> Questionnaires { get; set; } = new List<Questionnaire>();
+        public ICollection<Message> Messages { get; set; } = new List<Message>();
 
-        public ChatDTO MapToDTO()
+
+        public static implicit operator ChatDTO(Chat data)
         {
+            if (data == null)
+                return null;
+
             return new ChatDTO
             {
-                Id = Id,
-                GroupId = GroupId,
-                Questionnaires = Questionnaires.Select(u => u.MapToDTO()).ToList(),
-                Messages = Messages.Select(u => u.MapToDTO()).ToList()
+                Id = data.Id,
+                GroupId = data.GroupId,
+                Questionnaires = data.Questionnaires.Select(u => (QuestionnaireDTO)u).ToList(),
+                Messages = data.Messages.Select(u => (MessageDTO)u).ToList(),
             };
         }
     }

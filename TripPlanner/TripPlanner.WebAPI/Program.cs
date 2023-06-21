@@ -5,7 +5,7 @@ using TripPlanner.DataAccess.Repository;
 using TripPlanner.DataAccess;
 using TripPlanner.Services.UserService;
 using Microsoft.AspNetCore.Identity;
-using TripPlanner.Models.Models;
+using TripPlanner.Models;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using TripPlanner.Services.BillService;
@@ -59,14 +59,23 @@ namespace TripPlanner.WebAPI
             });
             builder.Services.AddAuthorization();
 
-
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
-            builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(
-            builder.Configuration.GetConnectionString("SqlConnectionString")));
+            if(System.Environment.MachineName == "RMSULOWSKR")
+            {
+                builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(
+                builder.Configuration.GetConnectionString("SqlConnectionString")));
+            }
+            else
+            {
+                builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(
+                builder.Configuration.GetConnectionString("SqlConnectionStringACERRS")));
+            }
+
+
 
             builder.Services.AddScoped<IUserRepository, UserRepository>();
             builder.Services.AddScoped<IBillRepository, BillRepository>();
@@ -130,7 +139,6 @@ namespace TripPlanner.WebAPI
             app.UseHttpsRedirection();
 
             app.UseAuthorization();
-
 
             app.MapControllers();
 

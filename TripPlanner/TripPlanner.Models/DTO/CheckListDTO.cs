@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿
 namespace TripPlanner.Models.DTO
 {
     public class CheckListDTO
@@ -17,5 +12,22 @@ namespace TripPlanner.Models.DTO
 
         public string Name { get; set; } = string.Empty;
         public bool IsPublic { get; set; }
+
+
+        public static implicit operator CheckList(CheckListDTO data)
+        {
+            if (data == null)
+                return null;
+
+            return new CheckList
+            {
+                Id = data.Id,
+                UserId = data.UserId,
+                TourId = data.TourId,
+                Fields = data.Fields.Select(u => (CheckListField)u).ToList(),
+                Name = data.Name,
+                IsPublic = data.IsPublic
+            };
+        }
     }
 }

@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using TripPlanner.Models.DTO;
+﻿using TripPlanner.Models.DTO;
 
-namespace TripPlanner.Models.Models
+namespace TripPlanner.Models
 {
     public class ParticipantGroup
     {
@@ -16,13 +11,17 @@ namespace TripPlanner.Models.Models
 
         public bool IsOrganizer { get; set; }
 
-        public ParticipantGroupDTO MapToDTO()
+
+        public static implicit operator ParticipantGroupDTO(ParticipantGroup data)
         {
+            if (data == null)
+                return null;
+
             return new ParticipantGroupDTO
             {
-                UserId = UserId,
-                GroupId = GroupId,
-                IsOrganizer = IsOrganizer
+                UserId = data.UserId,
+                GroupId = data.GroupId,
+                IsOrganizer = data.IsOrganizer,
             };
         }
     }

@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using TripPlanner.Models.DTO;
+﻿using TripPlanner.Models.DTO;
 
-namespace TripPlanner.Models.Models
+namespace TripPlanner.Models
 {
     public class BillPicture
     {
@@ -13,16 +8,19 @@ namespace TripPlanner.Models.Models
 
         public Bill Bill { get; set; } = null!;
         public int BillId { get; set; }
+        public string FilePath { get; set; } = string.Empty;
 
-        public byte[] Bytes { get; set; } = new byte[0];
 
-        public BillPictureDTO MapToDTO()
+        public static implicit operator BillPictureDTO(BillPicture data)
         {
+            if (data == null)
+                return null;
+
             return new BillPictureDTO
             {
-                Id = Id,
-                Bytes = Bytes,
-                BillId = BillId,
+                BillId = data.BillId,
+                Id = data.Id,
+                FilePath = data.FilePath
             };
         }
     }

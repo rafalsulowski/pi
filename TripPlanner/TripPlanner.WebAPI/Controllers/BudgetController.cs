@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using TripPlanner.Models.Models;
-using TripPlanner.Models.DTO;
+using TripPlanner.Models;
+using TripPlanner.Models.DTO.BudgetDTOs;
 using TripPlanner.Services.BudgetService;
 namespace TripPlanner.WebAPI.Controllers
 {
@@ -40,13 +40,9 @@ namespace TripPlanner.WebAPI.Controllers
 
         // POST api/<ValuesController>
         [HttpPost]
-        public async Task<ActionResult<RepositoryResponse<Budget>>> Post([FromBody] BudgetDTO Budget)
+        public async Task<ActionResult<RepositoryResponse<Budget>>> Post([FromBody] CreateBudgetDTO Budget)
         {
-            
-            Budget newBudget = new Budget
-            {
-                
-            };
+            Budget newBudget = Budget;
 
             var response = await _BudgetService.CreateBudget(newBudget);
             return Ok(response.Data);

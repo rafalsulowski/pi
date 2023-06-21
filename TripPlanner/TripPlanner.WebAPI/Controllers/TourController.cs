@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using TripPlanner.Models.Models;
-using TripPlanner.Models.DTO;
+using TripPlanner.Models;
+using TripPlanner.Models.DTO.TourDTOs;
 using TripPlanner.Services.TourService;
 
 namespace TripPlanner.WebAPI.Controllers
@@ -41,7 +41,7 @@ namespace TripPlanner.WebAPI.Controllers
 
         // POST api/<ValuesController>
         [HttpPost]
-        public async Task<ActionResult<RepositoryResponse<Tour>>> Post([FromBody] TourDTO Tour)
+        public async Task<ActionResult<RepositoryResponse<Tour>>> Create([FromBody] CreateTourDTO Tour)
         {
             //sprawdzenie czy uzytkownik nie stworzyl juz takiej wycieczki
 

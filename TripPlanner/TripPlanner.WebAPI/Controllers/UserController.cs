@@ -1,16 +1,13 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.IdentityModel.Tokens;
-using TripPlanner.Models.Models;
-using TripPlanner.Models.DTO;
-using TripPlanner.Services;
+﻿using Microsoft.IdentityModel.Tokens;
+using TripPlanner.Models;
 using TripPlanner.Services.UserService;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
-using TripPlanner.WebAPI;
 using TripPlanner.Services.BillService;
+using TripPlanner.Models.DTO.UserDTOs;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Identity;
 
 namespace TripPlanner.WebAPI.Controllers
 {
@@ -32,95 +29,66 @@ namespace TripPlanner.WebAPI.Controllers
 
         // GET: api/<ValuesController>
         [HttpGet]
-        public async Task<ActionResult<RepositoryResponse<List<User>>>> Get()
+        public async Task<ActionResult<RepositoryResponse<List<UserDTO>>>> Get()
         {
             var response = await _userService.GetUsersAsync();
-            return Ok(response.Data);
+            List<UserDTO> res = response.Data.Select(u => (UserDTO)u).ToList();
+            return Ok(res);
         }
 
 
         // GET api/<ValuesController>/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<RepositoryResponse<User>>> Get(int id)
+        public async Task<ActionResult<RepositoryResponse<UserDTO>>> Get(int id)
         {
             var response = await _userService.GetUserAsync(u => u.Id == id);
-            if (response.Success)
-            {
-                return Ok(response.Data);
-            }
-            else
-            {
-                return BadRequest(response.Data);
-            }
+            UserDTO res = response.Data;
+            return Ok(res);
         }
 
         // GET api/<ValuesController>/xyz@wp.pl
         [HttpGet("email")]
-        public async Task<ActionResult<RepositoryResponse<User>>> Get(string email)
+        public async Task<ActionResult<RepositoryResponse<UserDTO>>> Get(string email)
         {
             var response = await _userService.GetUserAsync(u => u.Email == email);
-            if (response.Success)
-            {
-                return Ok(response.Data);
-            }
-            else
-            {
-                return BadRequest(response.Data);
-            }
+            UserDTO res = response.Data;
+            return Ok(res);
         }
 
         // GET api/<ValuesController>/5
-        [HttpGet("GetPlaceWithCommentsAndLikes/{id}")]
+        [HttpGet("GetUserWithBillSettle/{id}")]
         public async Task<ActionResult<RepositoryResponse<UserDTO>>> GetWithBillSettle(int id)
         {
             var response = await _userService.GetUserAsync(u => u.Id == id, "BillSettle");
-            if (response.Success)
-            {
-                return Ok(response.Data.MapToDTO());
-            }
-            else
-            {
-                return BadRequest(response.Data);
-            }
+            UserDTO res = response.Data;
+            return Ok(res);
         }
 
-        // POST api/<ValuesController>
         [HttpPost]
-        public async Task<ActionResult<RepositoryResponse<User>>> Post([FromBody] UserDTO user)
+        public async Task<ActionResult<RepositoryResponse<bool>>> Create([FromBody] CreateUserDTO user)
         {
             var userResponse = await _userService.GetUserAsync(u => u.Email == user.Email);
             if (userResponse.Data != null)
             {
-                return new RepositoryResponse<User> { Success = false, Message = "User with this email already exists" };
-            }
-            userResponse = await _userService.GetUserAsync(u => u.Username == user.Username);
-            if (userResponse.Data != null)
-            {
-                return new RepositoryResponse<User> { Success = false, Message = "User with this username already exists" };
+                return new RepositoryResponse<bool> { Success = false, Message = "Użytkownik z tym e-mail'em istnieje" };
             }
 
-            User newUser = new User
-            {
-                Email = user.Email,
-                Username = user.Username,
-                Address = user.Address,
-                DateOfBirth = user.DateOfBirth
-            };
+            User newUser = user;
+
             var hashed = _passwordHasher.HashPassword(newUser, user.PasswordHash);
             newUser.PasswordHash = hashed;
             var response = await _userService.CreateUser(newUser);
             return Ok(response.Data);
         }
 
-        // PUT api/<ValuesController>/5
         [HttpPut("{id}")]
-        public async Task<ActionResult<RepositoryResponse<User>>> Put([FromBody] User user)
+        public async Task<ActionResult<RepositoryResponse<bool>>> Put([FromBody] UserDTO user)
         {
-            var response = await _userService.UpdateUser(user);
+            User newUser = user;
+            var response = await _userService.UpdateUser(newUser);
             return Ok(response.Data);
         }
 
-        // DELETE api/<ValuesController>/5
         [HttpDelete("{id}")]
         public async Task<ActionResult<RepositoryResponse<bool>>> Delete(int id)
         {
@@ -151,7 +119,8 @@ namespace TripPlanner.WebAPI.Controllers
 
             var claims = new List<Claim>()
             {
-                new Claim(ClaimTypes.Name, user.Username.ToString()),
+                new Claim(ClaimTypes.Name, user.Name.ToString()),
+                new Claim(ClaimTypes.Surname, user.Surname.ToString()),
                 new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
                 new Claim(ClaimTypes.Email, user.Email.ToString())
             };

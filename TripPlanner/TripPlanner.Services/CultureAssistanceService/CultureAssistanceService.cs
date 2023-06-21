@@ -1,6 +1,6 @@
 ﻿using System.Linq.Expressions;
 using TripPlanner.DataAccess.IRepository;
-using TripPlanner.Models.Models;
+using TripPlanner.Models;
 
 namespace TripPlanner.Services.CultureAssistanceService
 {

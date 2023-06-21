@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using TripPlanner.Models.DTO;
+﻿using TripPlanner.Models.DTO;
 
-namespace TripPlanner.Models.Models
+namespace TripPlanner.Models
 {
     public class CheckListField
     {
@@ -18,15 +13,19 @@ namespace TripPlanner.Models.Models
         public int Multiplicity { get; set; }
         public bool IsChecked{ get; set; }
         
-        public CheckListFieldDTO MapToDTO()
+
+        public static implicit operator CheckListFieldDTO(CheckListField data)
         {
+            if (data == null)
+                return null;
+
             return new CheckListFieldDTO
             {
-                Id = Id,
-                CheckListId = CheckListId,
-                Name = Name,
-                Multiplicity = Multiplicity,    
-                IsChecked = IsChecked
+                Id = data.Id,
+                CheckListId = data.CheckListId,
+                Name = data.Name,
+                Multiplicity = data.Multiplicity,
+                IsChecked = data.IsChecked
             };
         }
     }

@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System.Reflection.Metadata;
-using TripPlanner.Models.Models;
+using TripPlanner.Models;
 
 namespace TripPlanner.DataAccess
 {
@@ -121,7 +121,11 @@ namespace TripPlanner.DataAccess
             // koniec realcji
 
             modelBuilder.Entity<User>()
-                .Property(s => s.Username)
+                .Property(s => s.Name)
+                .IsRequired();
+
+            modelBuilder.Entity<User>()
+                .Property(s => s.Surname)
                 .IsRequired();
 
             modelBuilder.Entity<User>()
@@ -279,7 +283,7 @@ namespace TripPlanner.DataAccess
                 .HasKey(e => e.Id);
 
             modelBuilder.Entity<BillPicture>()
-                .Property(s => s.Bytes)
+                .Property(s => s.FilePath)
                 .IsRequired();
             #endregion
 

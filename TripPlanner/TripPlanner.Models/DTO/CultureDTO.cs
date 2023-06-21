@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿
 namespace TripPlanner.Models.DTO
 {
     public class CultureDTO
@@ -19,5 +14,27 @@ namespace TripPlanner.Models.DTO
         public string Manners { get; set; } = string.Empty;
         public string LanguageAssistance { get; set; } = string.Empty;
         public string ProperBehaviour { get; set; } = string.Empty;
+
+
+        public static implicit operator Culture(CultureDTO data)
+        {
+            if (data == null)
+                return null;
+
+            return new Culture
+            {
+                Id = data.Id,
+                Tours = data.Tours.Select(u => (CultureAssistance)u).ToList(),
+                Name = data.Name,
+                Description = data.Description,
+                Country = data.Country,
+                Religion = data.Religion,
+                Goverment = data.Goverment,
+                GeograpInformation = data.GeograpInformation,
+                Manners = data.Manners,
+                LanguageAssistance = data.LanguageAssistance,
+                ProperBehaviour = data.ProperBehaviour
+            };
+        }
     }
 }
