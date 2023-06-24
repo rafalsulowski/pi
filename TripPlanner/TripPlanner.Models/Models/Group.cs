@@ -1,4 +1,4 @@
-﻿using TripPlanner.Models.DTO;
+﻿using TripPlanner.Models.DTO.GroupDTOs;
 
 namespace TripPlanner.Models
 {
@@ -9,7 +9,7 @@ namespace TripPlanner.Models
         public Tour Tour { get; set; } = null!;
         public int TourId { get; set; }
         public Chat? Chat { get; set; }
-        public ICollection<ParticipantGroup> Participant { get; set; } = new List<ParticipantGroup>();
+        public ICollection<ParticipantGroup> Participants { get; set; } = new List<ParticipantGroup>();
 
         public string Name { get; set; } = string.Empty;
         public int Volume { get; set; }
@@ -25,7 +25,7 @@ namespace TripPlanner.Models
                 Id = data.Id,
                 TourId = data.TourId,
                 Chat = data.Chat,
-                Participant = data.Participant.Select(u => (ParticipantGroupDTO)u).ToList(),
+                Participants = data.Participants.Select(u => (ParticipantGroupDTO)u).ToList(),
                 Name = data.Name,
                 Volume = data.Volume
             };

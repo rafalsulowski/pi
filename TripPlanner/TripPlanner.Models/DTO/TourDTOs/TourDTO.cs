@@ -1,6 +1,11 @@
 ﻿
 using TripPlanner.Models.DTO.BillDTOs;
 using TripPlanner.Models.DTO.BudgetDTOs;
+using TripPlanner.Models.DTO.CheckListDTOs;
+using TripPlanner.Models.DTO.CultureDTOs;
+using TripPlanner.Models.DTO.GroupDTOs;
+using TripPlanner.Models.DTO.QuestionnaireDTOs;
+using TripPlanner.Models.DTO.RouteDTOs;
 
 namespace TripPlanner.Models.DTO.TourDTOs
 {

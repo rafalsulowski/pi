@@ -12,8 +12,13 @@ namespace TripPlanner.Services.RouteService
     {
         Task<RepositoryResponse<List<Route>>> GetRoutesAsync(Expression<Func<Route, bool>>? filter = null, string? includeProperties = null);
         Task<RepositoryResponse<Route>> GetRouteAsync(Expression<Func<Route, bool>> filter, string? includeProperties = null);
+        Task<RepositoryResponse<List<Stopover>>> GetStopoversAsync(Expression<Func<Stopover, bool>>? filter = null, string? includeProperties = null);
+        Task<RepositoryResponse<Stopover>> GetStopoverAsync(Expression<Func<Stopover, bool>> filter, string? includeProperties = null);
         Task<RepositoryResponse<bool>> CreateRoute(Route Bill);
         Task<RepositoryResponse<bool>> UpdateRoute(Route Bill);
         Task<RepositoryResponse<bool>> DeleteRoute(Route Bill);
+        Task<RepositoryResponse<bool>> AddStopoverToRoute(Stopover Stopover);
+        Task<RepositoryResponse<bool>> UpdateStopover(Stopover Stopover);
+        Task<RepositoryResponse<bool>> DeleteStopoverFromRoute(Stopover Stopover);
     }
 }

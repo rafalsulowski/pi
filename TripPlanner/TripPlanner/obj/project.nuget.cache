@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "QFPhp4Hb6z7a6dt5LsxDbARnRjzO1dyJfxPP/HtunaFATqPJa48uDDfJow/f8kvrm1cdgY17xlrkVsmxgynomg==",
+  "dgSpecHash": "arFc0J8W1YN+S2OHJQ9W6TDzorGw2cgQEIVncJ0AM4W8WS4Yly0aPH1xoqYImBseVCCj4ZSzNkcupSga0g30KQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\01159502\\Desktop\\TripPlanner\\pi\\TripPlanner\\TripPlanner\\TripPlanner.App.csproj",
+  "projectFilePath": "C:\\Users\\01159502\\Desktop\\TripPlanner\\TripPlanner\\TripPlanner\\TripPlanner.App.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\01159502\\.nuget\\packages\\googlegson\\2.9.1.1\\googlegson.2.9.1.1.nupkg.sha512",
     "C:\\Users\\01159502\\.nuget\\packages\\microsoft.entityframeworkcore\\7.0.7\\microsoft.entityframeworkcore.7.0.7.nupkg.sha512",

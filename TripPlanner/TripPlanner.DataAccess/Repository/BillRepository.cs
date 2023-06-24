@@ -22,7 +22,7 @@ namespace TripPlanner.DataAccess.Repository
                 {
                     Success = false,
                     Data = false,
-                    Message = "Bill with this Id was not found."
+                    Message = $"Nie istnije rachunek z id = {post.Id}."
                 };
             }
             _context.Bills.Attach(post);
@@ -47,7 +47,7 @@ namespace TripPlanner.DataAccess.Repository
 
         public async Task<RepositoryResponse<bool>> UpdateParticipantBill(ParticipantBill participant)
         {
-            var participantDB = _context.ParticipantBills.FirstOrDefault(u => u.BillId == participant.BillId && u.UserId == participant.UserId);
+            var participantDB = _context.ParticipantBills.AsNoTracking().FirstOrDefault(u => u.BillId == participant.BillId && u.UserId == participant.UserId);
             if (participantDB == null)
             {
                 return new RepositoryResponse<bool>

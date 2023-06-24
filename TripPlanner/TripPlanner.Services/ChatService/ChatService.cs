@@ -1,5 +1,6 @@
 ﻿using System.Linq.Expressions;
 using TripPlanner.DataAccess.IRepository;
+using TripPlanner.DataAccess.Repository;
 using TripPlanner.Models;
 
 namespace TripPlanner.Services.ChatService
@@ -7,9 +8,11 @@ namespace TripPlanner.Services.ChatService
     public class ChatService : IChatService
     {
         private readonly IChatRepository _ChatRepository;
-        public ChatService(IChatRepository ChatRepository)
+        private readonly IMessageRepository _MessageRepository;
+        public ChatService(IChatRepository ChatRepository, IMessageRepository messageRepository)
         {
             _ChatRepository = ChatRepository;
+            _MessageRepository = messageRepository;
         }
 
         public async Task<RepositoryResponse<bool>> CreateChat(Chat Chat)
@@ -38,15 +41,28 @@ namespace TripPlanner.Services.ChatService
             return response;
         }
 
-        public async Task<RepositoryResponse<bool>> UpdateChat(Chat Chat)
+        public async Task<RepositoryResponse<Message>> GetMessageAsync(Expression<Func<Message, bool>> filter, string? includeProperties = null)
         {
-            var response = await _ChatRepository.Update(Chat);
-            if(response.Success==false)
-            {
-                return response;
-            }
-            response = await _ChatRepository.SaveChangesAsync();
+            var response = await _MessageRepository.GetFirstOrDefault(filter, includeProperties);
             return response;
+        }
+
+        public async Task<RepositoryResponse<List<Message>>> GetMessagesAsync(Expression<Func<Message, bool>>? filter = null, string? includeProperties = null)
+        {
+            var response = await _MessageRepository.GetAll(filter, includeProperties);
+            return response;
+        }
+
+        public async Task<RepositoryResponse<bool>> AddMessageToChat(Message Message)
+        {
+            await _ChatRepository.AddMessageToChat(Message);
+            return await _ChatRepository.SaveChangesAsync();
+        }
+
+        public async Task<RepositoryResponse<bool>> DeleteMessageFromChat(Message Message)
+        {
+            await _ChatRepository.DeleteMessageFromChat(Message);
+            return await _ChatRepository.SaveChangesAsync();
         }
     }
 }

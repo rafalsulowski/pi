@@ -16,7 +16,7 @@ namespace TripPlanner.Models
         public static implicit operator ParticipantBillDTO(ParticipantBill data)
         {
             if (data == null)
-                return new ParticipantBillDTO();
+                return null;
 
             return new ParticipantBillDTO
             {

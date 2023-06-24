@@ -10,6 +10,7 @@ namespace TripPlanner.WebAPI.Controllers
 {
     [Route("[controller]/")]
     [ApiController]
+    [ApiExplorerSettings(IgnoreApi = ProjectConfiguration.HideContorller)]
     public class BillController : ControllerBase
     {
         private readonly IBillService _BillService;
@@ -32,10 +33,26 @@ namespace TripPlanner.WebAPI.Controllers
         }
 
         [HttpGet("GetWithParticipants/{id}")]
-        public async Task<ActionResult<RepositoryResponse<List<BillDTO>>>> GetWithParticipants(int id)
+        public async Task<ActionResult<RepositoryResponse<BillDTO>>> GetWithParticipants(int id)
         {
-            var response = await _BillService.GetBillsAsync(u => u.Id == id, "Participants");
-            List<BillDTO> res = response.Data.Select(u => (BillDTO)u).ToList();
+            var response = await _BillService.GetBillAsync(u => u.Id == id, "Participants");
+            BillDTO res = response.Data;
+            return Ok(res);
+        }
+
+        [HttpGet("GetWithPicture/{id}")]
+        public async Task<ActionResult<RepositoryResponse<BillDTO>>> GetWithPicture(int id)
+        {
+            var response = await _BillService.GetBillAsync(u => u.Id == id, "Pictures");
+            BillDTO res = response.Data;
+            return Ok(res);
+        }
+
+        [HttpGet("GetWithParticipantAndPicture/{id}")]
+        public async Task<ActionResult<RepositoryResponse<BillDTO>>> GetWithParticipantAndPicture(int id)
+        {
+            var response = await _BillService.GetBillAsync(u => u.Id == id, "Participants,Pictures");
+            BillDTO res = response.Data;
             return Ok(res);
         }
 
@@ -50,22 +67,20 @@ namespace TripPlanner.WebAPI.Controllers
         [HttpPost]
         public async Task<ActionResult<RepositoryResponse<bool>>> Create([FromBody] CreateBillDTO Bill)
         {
-            var resp = await _BillService.GetBillAsync(u => u.Name == Bill.Name);
-            if (resp.Data != null)
+            var resp3 = await _TourService.GetTourAsync(u => u.Id == Bill.TourId, "Bills");
+            if (resp3.Data == null)
             {
-                return new RepositoryResponse<bool> { Success = false, Message = $"Istnieje rachunek o nazwie {Bill.Name}" };
+                return new RepositoryResponse<bool> { Success = false, Message = $"Nie istnieje wycieczka o id = {Bill.TourId}" };
+            }
+            if(resp3.Data.Bills.FirstOrDefault(u => u.Name == Bill.Name) != null)
+            {
+                return new RepositoryResponse<bool> { Success = false, Message = $"W tej wycieczce istnieje rachunek o nazwie = {Bill.Name}" };
             }
             var resp2 = await _UserService.GetUserAsync(u => u.Id == Bill.UserId);
             if (resp2.Data == null)
             {
                 return new RepositoryResponse<bool> { Success = false, Message = $"Nie istnieje użytkownik o id = {Bill.UserId}" };
             }
-            var resp3 = await _TourService.GetTourAsync(u => u.Id == Bill.TourId);
-            if (resp3.Data == null)
-            {
-                return new RepositoryResponse<bool> { Success = false, Message = $"Nie istnieje wycieczka o id = {Bill.TourId}" };
-            }
-
             Bill newBill = Bill;
 
             var response = await _BillService.CreateBill(newBill);
@@ -75,7 +90,7 @@ namespace TripPlanner.WebAPI.Controllers
         [HttpGet("{billId}/participants")]
         public async Task<ActionResult<RepositoryResponse<List<ParticipantBillDTO>>>> GetParticipant(int billId)
         {
-            var response = await _BillService.GetParticipantsBillAsync();
+            var response = await _BillService.GetParticipantsBillAsync(u => u.BillId == billId);
             List<ParticipantBillDTO> res = response.Data.Select(u => (ParticipantBillDTO)u).ToList();
             return Ok(res);
         }
@@ -126,7 +141,7 @@ namespace TripPlanner.WebAPI.Controllers
             var resp2 = await _BillService.GetBillAsync(u => u.Id == billId);
             if (resp2.Data == null)
             {
-                return NotFound(new RepositoryResponse<bool> { Success = false, Message = $"Nie istnieje rachunek o id = {billId}" });
+                return new RepositoryResponse<bool> { Success = false, Message = $"Nie istnieje rachunek o id = {billId}" };
             }
 
             ParticipantBill newParticipantBill = Bill;
@@ -167,7 +182,7 @@ namespace TripPlanner.WebAPI.Controllers
             var resp = await _BillService.GetBillAsync(u => u.Id == BillPicture.BillId);
             if (resp.Data == null)
             {
-                return NotFound(new RepositoryResponse<bool> { Success = false, Message = $"Nie istnieje rachunek o id = {BillPicture.BillId}" });
+                return new RepositoryResponse<bool> { Success = false, Message = $"Nie istnieje rachunek o id = {BillPicture.BillId}" };
             }
 
             return Ok();
@@ -176,7 +191,7 @@ namespace TripPlanner.WebAPI.Controllers
         [HttpGet("{billId}/pictures")]
         public async Task<ActionResult<RepositoryResponse<List<BillPictureDTO>>>> GetPicture(int billId)
         {
-            var response = await _BillService.GetBillPicturesAsync();
+            var response = await _BillService.GetBillPicturesAsync(u => u.BillId == billId);
             List<BillPictureDTO> res = response.Data.Select(u => (BillPictureDTO)u).ToList();
             return Ok(res);
         }
@@ -195,35 +210,44 @@ namespace TripPlanner.WebAPI.Controllers
             var resp = await _BillService.GetBillPictureAsync(u => u.Id == pictureId);
             if (resp.Data == null)
             {
-                return NotFound(new RepositoryResponse<bool> { Success = false, Message = $"Nie istnieje zdjęcie rachunku o id = {pictureId}" });
+                return new RepositoryResponse<bool> { Success = false, Message = $"Nie istnieje zdjęcie rachunku o id = {pictureId}" };
             }
             var resp2 = await _BillService.GetBillAsync(u => u.Id == billId);
             if (resp2.Data == null)
             {
-                return NotFound(new RepositoryResponse<bool> { Success = false, Message = $"Nie istnieje rachunek o id = {billId}" });
+                return new RepositoryResponse<bool> { Success = false, Message = $"Nie istnieje rachunek o id = {billId}" };
             }
 
-            BillPicture elem = new BillPicture
-            {
-                Id = pictureId,
-                BillId = billId
-            };
+            BillPicture elem = resp.Data;
+            elem.Id = pictureId;
+            elem.BillId = billId;
 
             var response = await _BillService.DeletePictureFromBill(elem);
             return Ok(response.Data);
         }
 
-        [HttpPut("{id}")]
-        public async Task<ActionResult<RepositoryResponse<bool>>> Edit(int billId, [FromBody] BillDTO Bill)
+        [HttpPut("{billId}")]
+        public async Task<ActionResult<RepositoryResponse<bool>>> Edit(int billId, [FromBody] EditBillDTO Bill)
         {
             var resp2 = await _BillService.GetBillAsync(u => u.Id == billId);
             if (resp2.Data == null)
             {
-                return NotFound(new RepositoryResponse<bool> { Success = false, Message = $"Nie istnieje rachunek o id = {billId}" });
+                return new RepositoryResponse<bool> { Success = false, Message = $"Nie istnieje rachunek o id = {billId}" };
+            }
+            var resp3 = await _TourService.GetTourAsync(u => u.Id == resp2.Data.TourId, "Bills");
+            if (resp3.Data == null)
+            {
+                return new RepositoryResponse<bool> { Success = false, Message = $"Nie istnieje wycieczka o id = {resp2.Data.TourId}" };
+            }
+            if (resp3.Data.Bills.FirstOrDefault(u => u.Name == Bill.Name) != null)
+            {
+                return new RepositoryResponse<bool> { Success = false, Message = $"W tej wycieczce istnieje rachunek o nazwie = {Bill.Name}" };
             }
 
-            Bill elem = Bill;
+            Bill elem = resp2.Data;
             elem.Id = billId;
+            elem.Name = Bill.Name;
+            elem.Ammount = Bill.Ammount;
 
             var response = await _BillService.UpdateBill(elem);
             return Ok(response.Data);

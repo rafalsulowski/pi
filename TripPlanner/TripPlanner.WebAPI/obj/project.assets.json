@@ -3974,11 +3974,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\01159502\\Desktop\\TripPlanner\\pi\\TripPlanner\\TripPlanner.WebAPI\\TripPlanner.WebAPI.csproj",
+      "projectUniqueName": "C:\\Users\\01159502\\Desktop\\TripPlanner\\TripPlanner\\TripPlanner.WebAPI\\TripPlanner.WebAPI.csproj",
       "projectName": "TripPlanner.WebAPI",
-      "projectPath": "C:\\Users\\01159502\\Desktop\\TripPlanner\\pi\\TripPlanner\\TripPlanner.WebAPI\\TripPlanner.WebAPI.csproj",
+      "projectPath": "C:\\Users\\01159502\\Desktop\\TripPlanner\\TripPlanner\\TripPlanner.WebAPI\\TripPlanner.WebAPI.csproj",
       "packagesPath": "C:\\Users\\01159502\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\01159502\\Desktop\\TripPlanner\\pi\\TripPlanner\\TripPlanner.WebAPI\\obj\\",
+      "outputPath": "C:\\Users\\01159502\\Desktop\\TripPlanner\\TripPlanner\\TripPlanner.WebAPI\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
@@ -4003,11 +4003,11 @@
         "net7.0": {
           "targetAlias": "net7.0",
           "projectReferences": {
-            "C:\\Users\\01159502\\Desktop\\TripPlanner\\pi\\TripPlanner\\TripPlanner.Models\\TripPlanner.Models.csproj": {
-              "projectPath": "C:\\Users\\01159502\\Desktop\\TripPlanner\\pi\\TripPlanner\\TripPlanner.Models\\TripPlanner.Models.csproj"
+            "C:\\Users\\01159502\\Desktop\\TripPlanner\\TripPlanner\\TripPlanner.Models\\TripPlanner.Models.csproj": {
+              "projectPath": "C:\\Users\\01159502\\Desktop\\TripPlanner\\TripPlanner\\TripPlanner.Models\\TripPlanner.Models.csproj"
             },
-            "C:\\Users\\01159502\\Desktop\\TripPlanner\\pi\\TripPlanner\\TripPlanner.Services\\TripPlanner.Services.csproj": {
-              "projectPath": "C:\\Users\\01159502\\Desktop\\TripPlanner\\pi\\TripPlanner\\TripPlanner.Services\\TripPlanner.Services.csproj"
+            "C:\\Users\\01159502\\Desktop\\TripPlanner\\TripPlanner\\TripPlanner.Services\\TripPlanner.Services.csproj": {
+              "projectPath": "C:\\Users\\01159502\\Desktop\\TripPlanner\\TripPlanner\\TripPlanner.Services\\TripPlanner.Services.csproj"
             }
           }
         }

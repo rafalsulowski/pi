@@ -440,7 +440,7 @@ namespace TripPlanner.DataAccess.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("ChatId")
+                    b.Property<int?>("ChatId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("Date")
@@ -846,7 +846,7 @@ namespace TripPlanner.DataAccess.Migrations
             modelBuilder.Entity("TripPlanner.Models.ParticipantGroup", b =>
                 {
                     b.HasOne("TripPlanner.Models.Group", "Group")
-                        .WithMany("Participant")
+                        .WithMany("Participants")
                         .HasForeignKey("GroupId")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
@@ -886,8 +886,7 @@ namespace TripPlanner.DataAccess.Migrations
                     b.HasOne("TripPlanner.Models.Chat", "Chat")
                         .WithMany("Questionnaires")
                         .HasForeignKey("ChatId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.NoAction);
 
                     b.HasOne("TripPlanner.Models.Tour", "Tour")
                         .WithMany("Questionnaires")
@@ -1003,7 +1002,7 @@ namespace TripPlanner.DataAccess.Migrations
                 {
                     b.Navigation("Chat");
 
-                    b.Navigation("Participant");
+                    b.Navigation("Participants");
                 });
 
             modelBuilder.Entity("TripPlanner.Models.Questionnaire", b =>

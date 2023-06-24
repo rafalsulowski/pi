@@ -16,15 +16,18 @@ namespace TripPlanner.DataAccess.Repository
         public async Task<RepositoryResponse<bool>> Update(Culture post)
         {
             var postDB = await GetFirstOrDefault(u => u.Id == post.Id);
-            if (postDB == null)
+            var res = postDB.Data;
+            if (postDB.Data == null)
             {
                 return new RepositoryResponse<bool>
                 {
                     Success = false,
                     Data = false,
-                    Message = "Culture with this Id was not found."
+                    Message = $"Nie instnieje nota kulturowa o id = {post.Id}"
                 };
             }
+            
+            _context.Entry(res).State = EntityState.Detached;
             _context.Cultures.Attach(post);
             _context.Entry(post).State = EntityState.Modified;
             return new RepositoryResponse<bool> { Data = true };

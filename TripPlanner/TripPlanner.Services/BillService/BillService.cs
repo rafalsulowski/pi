@@ -25,7 +25,20 @@ namespace TripPlanner.Services.BillService
 
         public async Task<RepositoryResponse<bool>> DeleteBill(Bill Bill)
         {
-            _BillRepository.Remove(Bill);
+            var resp = await _BillRepository.GetFirstOrDefault(u => u.Id == Bill.Id, "Participants,Pictures");
+            if (resp.Data == null)
+                return new RepositoryResponse<bool> { Data = true, Message = "Rachunek zostal usuniety", Success = true };
+            
+            //removing participants
+            Bill billDB = resp.Data;
+            foreach (var participant in billDB.Participants)
+                _ParticipantBillRepository.Remove(participant);
+
+            //removing pictures
+            foreach (var picture in billDB.Pictures)
+                _BillPictureRepository.Remove(picture);
+
+            _BillRepository.Remove(billDB);
             var response = await _BillRepository.SaveChangesAsync();
             return response;
         }

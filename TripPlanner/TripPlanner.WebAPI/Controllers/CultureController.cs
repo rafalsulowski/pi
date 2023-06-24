@@ -1,67 +1,81 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using TripPlanner.Models;
-using TripPlanner.Models.DTO;
 using TripPlanner.Services.CultureService;
+using TripPlanner.Services.UserService;
+using TripPlanner.Services.TourService;
+using TripPlanner.Models.DTO.CultureDTOs;
+
 namespace TripPlanner.WebAPI.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("[controller]/")]
     [ApiController]
     [ApiExplorerSettings(IgnoreApi = ProjectConfiguration.HideContorller)]
     public class CultureController : ControllerBase
     {
         private readonly ICultureService _CultureService;
+        private readonly IUserService _UserService;
+        private readonly ITourService _TourService;
 
-        public CultureController(ICultureService CultureService)
+        public CultureController(ICultureService CultureService, IUserService userService, ITourService tourService)
         {
             _CultureService = CultureService;
+            _UserService = userService;
+            _TourService = tourService;
         }
 
-        // GET: api/<ValuesController>
         [HttpGet]
-        public async Task<ActionResult<RepositoryResponse<List<Culture>>>> Get()
+        public async Task<ActionResult<RepositoryResponse<List<CultureDTO>>>> Get()
         {
             var response = await _CultureService.GetCulturesAsync();
-            return Ok(response.Data);
+            List<CultureDTO> res = response.Data.Select(u => (CultureDTO)u).ToList();
+            return Ok(res);
         }
 
-        // GET api/<ValuesController>/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<RepositoryResponse<Culture>>> Get(int id)
+        public async Task<ActionResult<RepositoryResponse<CultureDTO>>> GetById(int id)
         {
             var response = await _CultureService.GetCultureAsync(u => u.Id == id);
-            if (response.Success)
-            {
-                return Ok(response.Data);
-            }
-            else
-            {
-                return BadRequest(response.Data);
-            }
+            CultureDTO res = response.Data;
+            return Ok(res);
         }
 
-        // POST api/<ValuesController>
         [HttpPost]
-        public async Task<ActionResult<RepositoryResponse<Culture>>> Post([FromBody] CultureDTO Culture)
+        public async Task<ActionResult<RepositoryResponse<bool>>> Create([FromBody] CreateCultureDTO Culture)
         {
-            
-            Culture newCulture = new Culture
+            var resp = await _CultureService.GetCultureAsync(u => u.Name == Culture.Name);
+            if (resp.Data != null)
             {
-                
-            };
+                return new RepositoryResponse<bool> { Success = false, Message = $"Istnieje już taka nota kulturowa o nazwie = {Culture.Name}" };
+            }
+
+            Culture newCulture = Culture;
 
             var response = await _CultureService.CreateCulture(newCulture);
             return Ok(response.Data);
         }
 
-        // PUT api/<ValuesController>/5
-        [HttpPut("{id}")]
-        public async Task<ActionResult<RepositoryResponse<Culture>>> Put([FromBody] Culture Culture)
+        [HttpPut("{CultureId}")]
+        public async Task<ActionResult<RepositoryResponse<bool>>> Edit(int CultureId, [FromBody] CreateCultureDTO Culture)
         {
-            var response = await _CultureService.UpdateCulture(Culture);
+            var resp2 = await _CultureService.GetCultureAsync(u => u.Id == CultureId);
+            if (resp2.Data == null)
+            {
+                return new RepositoryResponse<bool> { Success = false, Message = $"Nie istnieje taka nota kulturowa o id = {CultureId}" };
+            }
+            var resp = await _CultureService.GetCultureAsync(u => u.Name == Culture.Name && u.Id != CultureId);
+            if (resp.Data != null)
+            {
+                return new RepositoryResponse<bool> { Success = false, Message = $"Istnieje już taka nota kulturowa o nazwie = {Culture.Name}" };
+            }
+
+            Culture elem = Culture;
+            elem.Id = CultureId;
+            elem.Tours = resp2.Data.Tours;
+
+            var response = await _CultureService.UpdateCulture(elem);
             return Ok(response.Data);
         }
 
-        // DELETE api/<ValuesController>/5
         [HttpDelete("{id}")]
         public async Task<ActionResult<RepositoryResponse<bool>>> Delete(int id)
         {
@@ -72,7 +86,7 @@ namespace TripPlanner.WebAPI.Controllers
             }
             else
             {
-                return BadRequest(response.Data);
+                return NotFound(response.Data);
             }
         }
     }

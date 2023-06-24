@@ -1,4 +1,4 @@
-﻿using TripPlanner.Models.DTO;
+﻿using TripPlanner.Models.DTO.CheckListDTOs;
 
 namespace TripPlanner.Models
 {
@@ -11,7 +11,6 @@ namespace TripPlanner.Models
         public Tour Tour { get; set; } = null!;
         public int TourId { get; set; }
         public ICollection<CheckListField> Fields { get; set; } = new List<CheckListField>();
-
 
         public string Name { get; set; } = string.Empty;
         public bool IsPublic { get; set; }

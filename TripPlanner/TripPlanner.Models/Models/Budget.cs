@@ -1,5 +1,4 @@
-﻿using TripPlanner.Models.DTO;
-using TripPlanner.Models.DTO.BudgetDTOs;
+﻿using TripPlanner.Models.DTO.BudgetDTOs;
 
 namespace TripPlanner.Models
 {

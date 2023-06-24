@@ -1,4 +1,4 @@
-﻿using TripPlanner.Models.DTO;
+﻿using TripPlanner.Models.DTO.CultureDTOs;
 
 namespace TripPlanner.Models
 {

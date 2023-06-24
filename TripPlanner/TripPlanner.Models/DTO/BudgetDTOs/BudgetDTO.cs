@@ -1,5 +1,4 @@
-﻿
-namespace TripPlanner.Models.DTO.BudgetDTOs
+﻿namespace TripPlanner.Models.DTO.BudgetDTOs
 {
     public class BudgetDTO
     {

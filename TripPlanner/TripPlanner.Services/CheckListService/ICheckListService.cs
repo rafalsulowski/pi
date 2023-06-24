@@ -12,8 +12,13 @@ namespace TripPlanner.Services.CheckListService
     {
         Task<RepositoryResponse<List<CheckList>>> GetCheckListsAsync(Expression<Func<CheckList, bool>>? filter = null, string? includeProperties = null);
         Task<RepositoryResponse<CheckList>> GetCheckListAsync(Expression<Func<CheckList, bool>> filter, string? includeProperties = null);
+        Task<RepositoryResponse<List<CheckListField>>> GetCheckListFieldsAsync(Expression<Func<CheckListField, bool>>? filter = null, string? includeProperties = null);
+        Task<RepositoryResponse<CheckListField>> GetCheckListFieldAsync(Expression<Func<CheckListField, bool>> filter, string? includeProperties = null);
         Task<RepositoryResponse<bool>> CreateCheckList(CheckList Bill);
         Task<RepositoryResponse<bool>> UpdateCheckList(CheckList Bill);
         Task<RepositoryResponse<bool>> DeleteCheckList(CheckList Bill);
+        Task<RepositoryResponse<bool>> AddFieldToCheckList(CheckListField CheckListField);
+        Task<RepositoryResponse<bool>> UpdateCheckListField(CheckListField CheckListField);
+        Task<RepositoryResponse<bool>> DeleteFieldFromCheckList(CheckListField CheckListField);
     }
 }

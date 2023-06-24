@@ -1,61 +1,64 @@
 ﻿Bill:
-- dodawania zdjecia
-- usuwanie zdjecia
-- usuwanie
-- modyfikowanie
+- DONE ZAŚLEPKA Na póżniej dodawania zdjecia
+- DONE ZAŚLEPKA Na póżniej usuwanie zdjecia
+- DONE usuwanie
+- DONE modyfikowanie
 
 Budget:
-- tworzenie (podczas tworzenia wycieczki towrzymy również budzet)
-- usuwanie (NIEAKTYWNY, tylko przy uzuwaniu wycieczki)
-- modyfikowanie	(ważne)
-- dodawanie uzytkownika
-- usuwanie uzytkownika
-- dodawanie wydatku
-- usuwanie wydatku
-
-Route:
-- tworzenie
-- usuwanie
-- modyfikowanie
-- dodawanie postoju
-- usuwanie postoju
-- generowanie url do google maps calej wycieczki
-- generowanie ulr do google maps odcinak pomiedzy postojami
+- DONE tworzenie (podczas tworzenia wycieczki tworzymy również budżet, czyli utworzenie rdzenia potem dodanie użytkowników)
+- DONE usuwanie (NIEAKTYWNY, tylko przy uzuwaniu wycieczki)
+- DONE modyfikowanie	(ważne)
+- DONE dodawanie uzytkownika
+- DONE modyfikowanie uzytkownika (ważne)
+- DONE usuwanie uzytkownika
+- DONE dodawanie wydatku
+- DONE modyfikowanie wydatku (ważne)
+- DONE usuwanie wydatku
 
 Culture:
-- tworzenie
-- usuwanie
-- modyfikowanie
+- DONE tworzenie
+- DONE usuwanie
+- DONE modyfikowanie
 
 Group:
-- tworzenie
-- usuwanie
-- modyfikowanie
-- dodawanie uzytkownika
-- usuwanie uzytkownika
+- DONE tworzenie
+- DONE usuwanie
+- DONE modyfikowanie
+- DONE dodawanie uzytkownika
+- DONE usuwanie uzytkownika
 
 Chat:
-- tworzenie
-- usuwanie
-- dodawanie ankiety
-- usuwanie ankiety
-- dodawanie wiadomosci
-- usuwanie wiadomosci
+- DONE tworzenie
+- DONE usuwanie
+- DONE dodawanie wiadomosci
+- DONE usuwanie wiadomosci
 
 CheckList:
-- tworzenie
-- usuwanie
-- dodawanie pola
-- usuwanie pola
-- modyfikowanie
+- DONE tworzenie
+- DONE usuwanie
+- DONE modyfikowanie
+- DONE dodawanie pola
+- DONE usuwanie pola
 
 Questionnaire:
 - tworzenie
 - usuwanie
 - dodawanie odpowiedzi
+- modyfikacja odpowiedzi
 - usuwanie odpowiedzi
 - glosowanie za jakąś odpowiedzią
 - usuwanie głosu za jakąś odpowiedzią
+
+Route:
+- DONE tworzenie
+- DONE usuwanie
+- DONE modyfikowanie
+- DONE dodawanie postoju
+- DONE edycja postoju
+- DONE usuwanie postoju
+- DONE ZAŚLEKPA generowanie url do google maps calej wycieczki
+- DONE ZAŚLEKPA generowanie ulr do google maps odcinak pomiedzy postojami
+
 
 Tour:
 - tworzenie (przy tworzeniu nowej wycieczki utworzyc rowniez podstawowy budzet, grupe, organizatora, uczestnikow)

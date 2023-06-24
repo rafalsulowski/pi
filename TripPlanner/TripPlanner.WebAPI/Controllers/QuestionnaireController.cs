@@ -1,67 +1,256 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using TripPlanner.Models;
-using TripPlanner.Models.DTO;
 using TripPlanner.Services.QuestionnaireService;
+using TripPlanner.Services.UserService;
+using TripPlanner.Services.TourService;
+using TripPlanner.Models.DTO.QuestionnaireDTOs;
+
 namespace TripPlanner.WebAPI.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("[controller]/")]
     [ApiController]
-    [ApiExplorerSettings(IgnoreApi = ProjectConfiguration.HideContorller)]
+    //[ApiExplorerSettings(IgnoreApi = ProjectConfiguration.HideContorller)]
     public class QuestionnaireController : ControllerBase
     {
         private readonly IQuestionnaireService _QuestionnaireService;
+        private readonly IUserService _UserService;
+        private readonly ITourService _TourService;
 
-        public QuestionnaireController(IQuestionnaireService QuestionnaireService)
+        public QuestionnaireController(IQuestionnaireService QuestionnaireService, IUserService userService, ITourService tourService)
         {
             _QuestionnaireService = QuestionnaireService;
+            _UserService = userService;
+            _TourService = tourService;
         }
 
-        // GET: api/<ValuesController>
         [HttpGet]
-        public async Task<ActionResult<RepositoryResponse<List<Questionnaire>>>> Get()
+        public async Task<ActionResult<RepositoryResponse<List<QuestionnaireDTO>>>> Get()
         {
             var response = await _QuestionnaireService.GetQuestionnairesAsync();
-            return Ok(response.Data);
+            List<QuestionnaireDTO> res = response.Data.Select(u => (QuestionnaireDTO)u).ToList();
+            return Ok(res);
         }
 
-        // GET api/<ValuesController>/5
+        [HttpGet("GetWithAnswer/{id}")]
+        public async Task<ActionResult<RepositoryResponse<QuestionnaireDTO>>> GetWithContributes(int id)
+        {
+            var response = await _QuestionnaireService.GetQuestionnaireAsync(u => u.Id == id, "Answer");
+            QuestionnaireDTO res = response.Data;
+            return Ok(res);
+        }
+
+        [HttpGet("GetWithAnswerAndVote/{id}")]
+        public async Task<ActionResult<RepositoryResponse<QuestionnaireDTO>>> GetWithAnswerAndVote(int id)
+        {
+            var response = await _QuestionnaireService.GetQuestionnaireAsync(u => u.Id == id, "Answer.Votes");
+            QuestionnaireDTO res = response.Data;
+            return Ok(res);
+        }
+
         [HttpGet("{id}")]
-        public async Task<ActionResult<RepositoryResponse<Questionnaire>>> Get(int id)
+        public async Task<ActionResult<RepositoryResponse<QuestionnaireDTO>>> GetById(int id)
         {
             var response = await _QuestionnaireService.GetQuestionnaireAsync(u => u.Id == id);
-            if (response.Success)
-            {
-                return Ok(response.Data);
-            }
-            else
-            {
-                return BadRequest(response.Data);
-            }
+            QuestionnaireDTO res = response.Data;
+            return Ok(res);
         }
 
-        // POST api/<ValuesController>
         [HttpPost]
-        public async Task<ActionResult<RepositoryResponse<Questionnaire>>> Post([FromBody] QuestionnaireDTO Questionnaire)
+        public async Task<ActionResult<RepositoryResponse<bool>>> Create([FromBody] CreateQuestionnaireDTO Questionnaire)
         {
-            
-            Questionnaire newQuestionnaire = new Questionnaire
+            var resp = await _TourService.GetTourAsync(u => u.Id == Questionnaire.TourId, "Questionnaires");
+            if (resp.Data == null)
             {
-                
-            };
+                return new RepositoryResponse<bool> { Success = false, Message = $"Nie istnieje wycieczka o id = {Questionnaire.TourId}" };
+            }
+            var resp2 = await _UserService.GetUserAsync(u => u.Id == Questionnaire.UserId);
+            if (resp2.Data == null)
+            {
+                return new RepositoryResponse<bool> { Success = false, Message = $"Nie istnieje użytkownik o id = {Questionnaire.UserId}" };
+            }
+            var res = resp.Data.Questionnaires.FirstOrDefault(u => u.Question == Questionnaire.Question);
+            if (res != null)
+            {
+                return new RepositoryResponse<bool> { Success = false, Message = $"Dana wycieczka posiada już ankiete z pytaniem = {Questionnaire.Question}" };
+            }
+
+            Questionnaire newQuestionnaire = Questionnaire;
+            newQuestionnaire.Date = DateTime.Now;
 
             var response = await _QuestionnaireService.CreateQuestionnaire(newQuestionnaire);
             return Ok(response.Data);
         }
 
-        // PUT api/<ValuesController>/5
-        [HttpPut("{id}")]
-        public async Task<ActionResult<RepositoryResponse<Questionnaire>>> Put([FromBody] Questionnaire Questionnaire)
+        [HttpGet("{QuestionnaireId}/Answers")]
+        public async Task<ActionResult<RepositoryResponse<List<QuestionnaireAnswerDTO>>>> GetAnswers(int QuestionnaireId)
         {
-            var response = await _QuestionnaireService.UpdateQuestionnaire(Questionnaire);
+            var response = await _QuestionnaireService.GetAnswersAsync(u => u.QuestionnaireId == QuestionnaireId);
+            List<QuestionnaireAnswerDTO> res = response.Data.Select(u => (QuestionnaireAnswerDTO)u).ToList();
+            return Ok(res);
+        }
+
+        [HttpGet("{QuestionnaireId}/Answer/{answerId}")]
+        public async Task<ActionResult<RepositoryResponse<QuestionnaireAnswerDTO>>> GetAnswerById(int QuestionnaireId, int answerId)
+        {
+            var response = await _QuestionnaireService.GetAnswerAsync(u => u.QuestionnaireId == QuestionnaireId && u.Id == answerId);
+            QuestionnaireAnswerDTO res = response.Data;
+            return Ok(res);
+        }
+
+        [HttpPost("addAnswer")]
+        public async Task<ActionResult<RepositoryResponse<bool>>> AddAnswer([FromBody] CreateQuestionnaireAnswerDTO Questionnaire)
+        {
+            var resp2 = await _QuestionnaireService.GetQuestionnaireAsync(u => u.Id == Questionnaire.QuestionnaireId, "Answers");
+            if (resp2.Data == null)
+            {
+                return new RepositoryResponse<bool> { Success = false, Message = $"Nie istnieje Ankieta o id = {Questionnaire.QuestionnaireId}" };
+            }
+            var res = resp2.Data.Answers.FirstOrDefault(u => u.Answer == Questionnaire.Answer);
+            if (res != null)
+            {
+                return new RepositoryResponse<bool> { Success = false, Message = $"Ankieta zawiera już odpowiedz o tresci = {Questionnaire.Answer}" };
+            }
+
+            QuestionnaireAnswer elem = Questionnaire;
+
+            var response = await _QuestionnaireService.AddAnswerToQuestionnaire(elem);
             return Ok(response.Data);
         }
 
-        // DELETE api/<ValuesController>/5
+        [HttpPut("{QuestionnaireId}/editAnswer/{AnswerId}")]
+        public async Task<ActionResult<RepositoryResponse<bool>>> Edit(int QuestionnaireId, int AnswerId, [FromBody] EditQuestionnaireAnswerDTO Questionnaire)
+        {
+            var resp3 = await _QuestionnaireService.GetAnswerAsync(u => u.Id == AnswerId);
+            if (resp3.Data == null)
+            {
+                return new RepositoryResponse<bool> { Success = false, Message = $"Nie istnieje odpowiedz o id = {AnswerId}" };
+            }
+            var resp2 = await _QuestionnaireService.GetQuestionnaireAsync(u => u.Id == QuestionnaireId, "Answers");
+            if (resp2.Data == null)
+            {
+                return new RepositoryResponse<bool> { Success = false, Message = $"Nie istnieje Ankieta o id = {QuestionnaireId}" };
+            }
+            var res = resp2.Data.Answers.FirstOrDefault(u => u.Answer == Questionnaire.Answer && u.Id != AnswerId);
+            if (res != null)
+            {
+                return new RepositoryResponse<bool> { Success = false, Message = $"Ankieta zawiera już odpowiedz o tresci = {Questionnaire.Answer}" };
+            }
+
+            QuestionnaireAnswer newQuestionnaireAnswer = Questionnaire;
+            newQuestionnaireAnswer.QuestionnaireId = QuestionnaireId;
+            newQuestionnaireAnswer.Id = AnswerId;
+
+            var response = await _QuestionnaireService.UpdateAnswer(newQuestionnaireAnswer);
+            return Ok(response.Data);
+        }
+
+        [HttpDelete("{QuestionnaireId}/deleteAnswer/{answerId}")]
+        public async Task<ActionResult<RepositoryResponse<bool>>> DeleteAnswer(int QuestionnaireId, int answerId)
+        {
+            var resp3 = await _QuestionnaireService.GetAnswerAsync(u => u.Id == answerId);
+            if (resp3.Data == null)
+            {
+                return new RepositoryResponse<bool> { Success = false, Message = $"Nie istnieje odpowiedz o id = {answerId}" };
+            }
+            var resp2 = await _QuestionnaireService.GetQuestionnaireAsync(u => u.Id == QuestionnaireId);
+            if (resp2.Data == null)
+            {
+                return new RepositoryResponse<bool> { Success = false, Message = $"Nie istnieje Ankieta o id = {QuestionnaireId}" };
+            }
+
+            QuestionnaireAnswer elem = resp3.Data;
+            elem.Id = answerId;
+            elem.QuestionnaireId = QuestionnaireId;
+            
+            var response = await _QuestionnaireService.DeleteAnswerFromQuestionnaire(elem);
+            return Ok(response.Data);
+        }
+
+        [HttpPost("addVote")]
+        public async Task<ActionResult<RepositoryResponse<bool>>> AddVote([FromBody] QuestionnaireVoteDTO QuestionnaireVote)
+        {
+            var resp = await _QuestionnaireService.GetQuestionnaireAsync(u => u.Id == QuestionnaireVote.QuestionnaireAnswerId);
+            if (resp.Data == null)
+            {
+                return new RepositoryResponse<bool> { Success = false, Message = $"Nie istnieje odpowiedz o id = {QuestionnaireVote.QuestionnaireAnswerId}" };
+            }
+            var resp2 = await _UserService.GetUserAsync(u => u.Id == QuestionnaireVote.UserId);
+            if (resp2.Data == null)
+            {
+                return new RepositoryResponse<bool> { Success = false, Message = $"Nie istnieje użytkownik o id = {QuestionnaireVote.UserId}" };
+            }
+
+            QuestionnaireVote res = QuestionnaireVote;
+
+            var response = await _QuestionnaireService.AddVoteToAnswer(res);
+            return Ok(response.Data);
+        }
+
+        [HttpGet("{QuestionnaireAnswerId}/Votes")]
+        public async Task<ActionResult<RepositoryResponse<List<QuestionnaireVoteDTO>>>> GetVote(int QuestionnaireAnswerId)
+        {
+            var response = await _QuestionnaireService.GetVotesAsync(u => u.QuestionnaireAnswerId == QuestionnaireAnswerId);
+            List<QuestionnaireVoteDTO> res = response.Data.Select(u => (QuestionnaireVoteDTO)u).ToList();
+            return Ok(res);
+        }
+
+        [HttpGet("{QuestionnaireAnswerId}/Vote/{UserId}")]
+        public async Task<ActionResult<RepositoryResponse<QuestionnaireVoteDTO>>> GetVoteById(int QuestionnaireAnswerId, int UserId)
+        {
+            var response = await _QuestionnaireService.GetVoteAsync(u => u.QuestionnaireAnswerId == QuestionnaireAnswerId && u.UserId == UserId);
+            QuestionnaireVoteDTO res = response.Data;
+            return Ok(res);
+        }
+
+        [HttpDelete("{QuestionnaireAnswerId}/deleteVote/{UserId}")]
+        public async Task<ActionResult<RepositoryResponse<bool>>> DeleteVote(int QuestionnaireAnswerId, int UserId)
+        {
+            var resp = await _QuestionnaireService.GetVoteAsync(u => u.UserId == UserId && u.QuestionnaireAnswerId == QuestionnaireAnswerId);
+            if (resp.Data == null)
+            {
+                return new RepositoryResponse<bool> { Success = false, Message = $"Nie istnieje glos o id = {UserId}" };
+            }
+            var resp2 = await _QuestionnaireService.GetAnswerAsync(u => u.Id == QuestionnaireAnswerId);
+            if (resp2.Data == null)
+            {
+                return new RepositoryResponse<bool> { Success = false, Message = $"Nie istnieje odpowiedz o id = {QuestionnaireAnswerId}" };
+            }
+
+            QuestionnaireVote elem = resp.Data;
+            elem.UserId = UserId;
+            elem.QuestionnaireAnswerId = QuestionnaireAnswerId;
+
+            var response = await _QuestionnaireService.DeleteVoteFromAnswer(elem);
+            return Ok(response.Data);
+        }
+
+        [HttpPut("{QuestionnaireId}")]
+        public async Task<ActionResult<RepositoryResponse<bool>>> Edit(int QuestionnaireId, [FromBody] EditQuestionnaireDTO Questionnaire)
+        {
+            var resp2 = await _QuestionnaireService.GetQuestionnaireAsync(u => u.Id == QuestionnaireId);
+            if (resp2.Data == null)
+            {
+                return new RepositoryResponse<bool> { Success = false, Message = $"Nie istnieje ankieta o id = {QuestionnaireId}" };
+            }
+            var resp = await _TourService.GetTourAsync(u => u.Id == resp2.Data.TourId, "Questionnaires");
+            if (resp.Data == null)
+            {
+                return new RepositoryResponse<bool> { Success = false, Message = $"Nie istnieje wycieczka o id = {resp2.Data.TourId}" };
+            }
+            var res = resp.Data.Questionnaires.FirstOrDefault(u => u.Question == Questionnaire.Question);
+            if (res != null)
+            {
+                return new RepositoryResponse<bool> { Success = false, Message = $"Dana wycieczka posiada już ankiete z pytaniem = {Questionnaire.Question}" };
+            }
+
+            Questionnaire elem = resp2.Data;
+            elem.Id = QuestionnaireId;
+            elem.Question = Questionnaire.Question;
+
+            var response = await _QuestionnaireService.UpdateQuestionnaire(elem);
+            return Ok(response.Data);
+        }
+
         [HttpDelete("{id}")]
         public async Task<ActionResult<RepositoryResponse<bool>>> Delete(int id)
         {
@@ -72,7 +261,7 @@ namespace TripPlanner.WebAPI.Controllers
             }
             else
             {
-                return BadRequest(response.Data);
+                return NotFound(response.Data);
             }
         }
     }

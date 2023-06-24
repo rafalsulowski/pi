@@ -1,4 +1,4 @@
-﻿using TripPlanner.Models.DTO;
+﻿using TripPlanner.Models.DTO.QuestionnaireDTOs;
 
 namespace TripPlanner.Models
 {
@@ -10,8 +10,8 @@ namespace TripPlanner.Models
         public int UserId { get; set; }
         public Tour Tour { get; set; } = null!;
         public int TourId { get; set; }
-        public Chat Chat { get; set; } = null!;
-        public int ChatId { get; set; }
+        public Chat? Chat { get; set; }
+        public int? ChatId { get; set; }
         public ICollection<QuestionnaireAnswer> Answers { get; set; } = new List<QuestionnaireAnswer>();
 
         public string Question { get; set; } = string.Empty;

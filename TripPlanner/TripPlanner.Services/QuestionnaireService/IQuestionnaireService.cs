@@ -12,8 +12,17 @@ namespace TripPlanner.Services.QuestionnaireService
     {
         Task<RepositoryResponse<List<Questionnaire>>> GetQuestionnairesAsync(Expression<Func<Questionnaire, bool>>? filter = null, string? includeProperties = null);
         Task<RepositoryResponse<Questionnaire>> GetQuestionnaireAsync(Expression<Func<Questionnaire, bool>> filter, string? includeProperties = null);
-        Task<RepositoryResponse<bool>> CreateQuestionnaire(Questionnaire Bill);
-        Task<RepositoryResponse<bool>> UpdateQuestionnaire(Questionnaire Bill);
-        Task<RepositoryResponse<bool>> DeleteQuestionnaire(Questionnaire Bill);
+        Task<RepositoryResponse<List<QuestionnaireAnswer>>> GetAnswersAsync(Expression<Func<QuestionnaireAnswer, bool>>? filter = null, string? includeProperties = null);
+        Task<RepositoryResponse<QuestionnaireAnswer>> GetAnswerAsync(Expression<Func<QuestionnaireAnswer, bool>> filter, string? includeProperties = null);
+        Task<RepositoryResponse<List<QuestionnaireVote>>> GetVotesAsync(Expression<Func<QuestionnaireVote, bool>>? filter = null, string? includeProperties = null);
+        Task<RepositoryResponse<QuestionnaireVote>> GetVoteAsync(Expression<Func<QuestionnaireVote, bool>> filter, string? includeProperties = null);
+        Task<RepositoryResponse<bool>> CreateQuestionnaire(Questionnaire Questionnaire);
+        Task<RepositoryResponse<bool>> UpdateQuestionnaire(Questionnaire Questionnaire);
+        Task<RepositoryResponse<bool>> DeleteQuestionnaire(Questionnaire Questionnaire);
+        Task<RepositoryResponse<bool>> AddAnswerToQuestionnaire(QuestionnaireAnswer Answer);
+        Task<RepositoryResponse<bool>> UpdateAnswer(QuestionnaireAnswer Answer);
+        Task<RepositoryResponse<bool>> DeleteAnswerFromQuestionnaire(QuestionnaireAnswer Answer);
+        Task<RepositoryResponse<bool>> AddVoteToAnswer(QuestionnaireVote Expenditure);
+        Task<RepositoryResponse<bool>> DeleteVoteFromAnswer(QuestionnaireVote Expenditure);
     }
 }

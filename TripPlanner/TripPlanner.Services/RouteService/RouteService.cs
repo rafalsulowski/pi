@@ -1,5 +1,6 @@
 ﻿using System.Linq.Expressions;
 using TripPlanner.DataAccess.IRepository;
+using TripPlanner.DataAccess.Repository;
 using TripPlanner.Models;
 
 namespace TripPlanner.Services.RouteService
@@ -7,9 +8,11 @@ namespace TripPlanner.Services.RouteService
     public class RouteService : IRouteService
     {
         private readonly IRouteRepository _RouteRepository;
-        public RouteService(IRouteRepository RouteRepository)
+        private readonly IStopoverRepository _StopoverRepository;
+        public RouteService(IRouteRepository RouteRepository, IStopoverRepository stopoverRepository)
         {
             _RouteRepository = RouteRepository;
+            _StopoverRepository = stopoverRepository;
         }
 
         public async Task<RepositoryResponse<bool>> CreateRoute(Route Route)
@@ -21,6 +24,15 @@ namespace TripPlanner.Services.RouteService
 
         public async Task<RepositoryResponse<bool>> DeleteRoute(Route Route)
         {
+            var resp = await GetStopoversAsync(u => u.RouteId == Route.Id);
+            if (resp.Data != null)
+            {
+                //removing Stopovers
+                List<Stopover> Stopovers = resp.Data;
+                foreach (var stopover in Stopovers)
+                    _StopoverRepository.Remove(stopover);
+            }
+
             _RouteRepository.Remove(Route);
             var response = await _RouteRepository.SaveChangesAsync();
             return response;
@@ -37,6 +49,17 @@ namespace TripPlanner.Services.RouteService
             var response = await _RouteRepository.GetAll(filter, includeProperties);
             return response;
         }
+        public async Task<RepositoryResponse<Stopover>> GetStopoverAsync(Expression<Func<Stopover, bool>> filter, string? includeProperties = null)
+        {
+            var response = await _StopoverRepository.GetFirstOrDefault(filter, includeProperties);
+            return response;
+        }
+
+        public async Task<RepositoryResponse<List<Stopover>>> GetStopoversAsync(Expression<Func<Stopover, bool>>? filter = null, string? includeProperties = null)
+        {
+            var response = await _StopoverRepository.GetAll(filter, includeProperties);
+            return response;
+        }
 
         public async Task<RepositoryResponse<bool>> UpdateRoute(Route Route)
         {
@@ -47,6 +70,29 @@ namespace TripPlanner.Services.RouteService
             }
             response = await _RouteRepository.SaveChangesAsync();
             return response;
+        }
+
+        public async Task<RepositoryResponse<bool>> AddStopoverToRoute(Stopover Stopover)
+        {
+            await _RouteRepository.AddStopoverToRoute(Stopover);
+            return await _RouteRepository.SaveChangesAsync();
+        }
+
+        public async Task<RepositoryResponse<bool>> UpdateStopover(Stopover Stopover)
+        {
+            var response = await _RouteRepository.UpdateStopover(Stopover);
+            if (response.Success == false)
+            {
+                return response;
+            }
+            response = await _RouteRepository.SaveChangesAsync();
+            return response;
+        }
+
+        public async Task<RepositoryResponse<bool>> DeleteStopoverFromRoute(Stopover Stopover)
+        {
+            await _RouteRepository.DeleteStopoverFromRoute(Stopover);
+            return await _RouteRepository.SaveChangesAsync();
         }
     }
 }

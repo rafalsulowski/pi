@@ -362,7 +362,7 @@ namespace TripPlanner.DataAccess
                 .WithOne(s => s.Chat)
                 .OnDelete(DeleteBehavior.NoAction)
                 .HasForeignKey(sc => sc.ChatId)
-                .IsRequired();
+                .IsRequired(false);
 
             modelBuilder.Entity<Chat>()
                 .HasMany(sc => sc.Messages)
@@ -513,7 +513,7 @@ namespace TripPlanner.DataAccess
 
             //relacje
             modelBuilder.Entity<Group>()
-                .HasMany(sc => sc.Participant)
+                .HasMany(sc => sc.Participants)
                 .WithOne(s => s.Group)
                 .OnDelete(DeleteBehavior.NoAction)
                 .HasForeignKey(sc => sc.GroupId)

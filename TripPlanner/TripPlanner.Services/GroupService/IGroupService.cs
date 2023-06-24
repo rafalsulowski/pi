@@ -12,8 +12,13 @@ namespace TripPlanner.Services.GroupService
     {
         Task<RepositoryResponse<List<Group>>> GetGroupsAsync(Expression<Func<Group, bool>>? filter = null, string? includeProperties = null);
         Task<RepositoryResponse<Group>> GetGroupAsync(Expression<Func<Group, bool>> filter, string? includeProperties = null);
-        Task<RepositoryResponse<bool>> CreateGroup(Group Bill);
-        Task<RepositoryResponse<bool>> UpdateGroup(Group Bill);
-        Task<RepositoryResponse<bool>> DeleteGroup(Group Bill);
+        Task<RepositoryResponse<List<ParticipantGroup>>> GetParticipantsGroupAsync(Expression<Func<ParticipantGroup, bool>>? filter = null, string? includeProperties = null);
+        Task<RepositoryResponse<ParticipantGroup>> GetParticipantGroupAsync(Expression<Func<ParticipantGroup, bool>> filter, string? includeProperties = null);
+        Task<RepositoryResponse<bool>> CreateGroup(Group Group);
+        Task<RepositoryResponse<bool>> UpdateGroup(Group Group);
+        Task<RepositoryResponse<bool>> DeleteGroup(Group Group);
+        Task<RepositoryResponse<bool>> AddParticipantToGroup(ParticipantGroup participant);
+        Task<RepositoryResponse<bool>> UpdateParticipantGroup(ParticipantGroup participant);
+        Task<RepositoryResponse<bool>> DeleteParticipantFromGroup(ParticipantGroup participant);
     }
 }
