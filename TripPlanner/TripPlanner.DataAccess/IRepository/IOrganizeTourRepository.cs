@@ -2,8 +2,8 @@
 
 namespace TripPlanner.DataAccess.IRepository
 {
-    public interface IOrganizeTourRepository : IRepository<OrganizeTour>
+    public interface IOrganizerTourRepository : IRepository<OrganizerTour>
     {
-        Task<RepositoryResponse<bool>> Update(OrganizeTour post);
+        Task<RepositoryResponse<bool>> Update(OrganizerTour post);
     }
 }

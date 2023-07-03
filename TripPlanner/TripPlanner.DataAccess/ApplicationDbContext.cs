@@ -26,7 +26,7 @@ namespace TripPlanner.DataAccess
         public DbSet<ParticipantBill> ParticipantBills { get; set; }
         public DbSet<ParticipantGroup> ParticipantGroups { get; set; }
         public DbSet<ParticipantTour> ParticipantTours { get; set; }
-        public DbSet<OrganizeTour> OrganizeTours { get; set; }
+        public DbSet<OrganizerTour> OrganizerTours { get; set; }
         public DbSet<Questionnaire> Questionnaires { get; set; }
         public DbSet<QuestionnaireAnswer> QuestionnaireAnswers { get; set; }
         public DbSet<QuestionnaireVote> QuestionnaireVotes { get; set; }
@@ -564,11 +564,11 @@ namespace TripPlanner.DataAccess
                 .IsRequired();
             #endregion
 
-            #region OrganizeTour
-            modelBuilder.Entity<OrganizeTour>().HasKey(sc => new { sc.UserId, sc.TourId });
+            #region OrganizerTour
+            modelBuilder.Entity<OrganizerTour>().HasKey(sc => new { sc.UserId, sc.TourId });
             
             //relacje
-            modelBuilder.Entity<OrganizeTour>()
+            modelBuilder.Entity<OrganizerTour>()
                .HasOne(u => u.Tour)
                .WithMany(u => u.Organizers)
                .HasForeignKey(u => u.TourId)

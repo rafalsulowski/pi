@@ -6,14 +6,14 @@ using System.Text;
 using System.Threading.Tasks;
 using TripPlanner.Models;
 
-namespace TripPlanner.Services.OrganizeTourService
+namespace TripPlanner.Services.OrganizerTourService
 {
-    public interface IOrganizeTourService
+    public interface IOrganizerTourService
     {
-        Task<RepositoryResponse<List<OrganizeTour>>> GetOrganizeToursAsync(Expression<Func<OrganizeTour, bool>>? filter = null, string? includeProperties = null);
-        Task<RepositoryResponse<OrganizeTour>> GetOrganizeTourAsync(Expression<Func<OrganizeTour, bool>> filter, string? includeProperties = null);
-        Task<RepositoryResponse<bool>> CreateOrganizeTour(OrganizeTour Bill);
-        Task<RepositoryResponse<bool>> UpdateOrganizeTour(OrganizeTour Bill);
-        Task<RepositoryResponse<bool>> DeleteOrganizeTour(OrganizeTour Bill);
+        Task<RepositoryResponse<List<OrganizerTour>>> GetOrganizerToursAsync(Expression<Func<OrganizerTour, bool>>? filter = null, string? includeProperties = null);
+        Task<RepositoryResponse<OrganizerTour>> GetOrganizerTourAsync(Expression<Func<OrganizerTour, bool>> filter, string? includeProperties = null);
+        Task<RepositoryResponse<bool>> CreateOrganizerTour(OrganizerTour Bill);
+        Task<RepositoryResponse<bool>> UpdateOrganizerTour(OrganizerTour Bill);
+        Task<RepositoryResponse<bool>> DeleteOrganizerTour(OrganizerTour Bill);
     }
 }

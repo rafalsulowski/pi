@@ -5,15 +5,15 @@ using TripPlanner.Models;
 
 namespace TripPlanner.DataAccess.Repository
 {
-    public class OrganizeTourRepository : Repository<OrganizeTour>, IOrganizeTourRepository
+    public class OrganizerTourRepository : Repository<OrganizerTour>, IOrganizerTourRepository
     {
         private ApplicationDbContext _context;
-        public OrganizeTourRepository(ApplicationDbContext context) : base(context)
+        public OrganizerTourRepository(ApplicationDbContext context) : base(context)
         {
             _context = context;
         }
 
-        public async Task<RepositoryResponse<bool>> Update(OrganizeTour post)
+        public async Task<RepositoryResponse<bool>> Update(OrganizerTour post)
         {
             var postDB = await GetFirstOrDefault(u => u.TourId == post.TourId && u.UserId == post.UserId);
             if (postDB == null)
@@ -22,10 +22,10 @@ namespace TripPlanner.DataAccess.Repository
                 {
                     Success = false,
                     Data = false,
-                    Message = "OrganizeTour with this Id was not found."
+                    Message = "OrganizerTour with this Id was not found."
                 };
             }
-            _context.OrganizeTours.Attach(post);
+            _context.OrganizerTours.Attach(post);
             _context.Entry(post).State = EntityState.Modified;
             return new RepositoryResponse<bool> { Data = true };
         }

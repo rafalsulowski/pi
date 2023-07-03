@@ -9,7 +9,7 @@ namespace TripPlanner.WebAPI.Controllers
 {
     [Route("[controller]/")]
     [ApiController]
-    [ApiExplorerSettings(IgnoreApi = ProjectConfiguration.HideContorller)]
+    //[ApiExplorerSettings(IgnoreApi = ProjectConfiguration.HideContorller)]
     public class CultureController : ControllerBase
     {
         private readonly ICultureService _CultureService;

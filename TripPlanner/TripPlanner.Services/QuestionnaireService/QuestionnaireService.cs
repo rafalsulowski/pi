@@ -102,9 +102,9 @@ namespace TripPlanner.Services.QuestionnaireService
             return await _QuestionnaireRepository.SaveChangesAsync();
         }
 
-        public async Task<RepositoryResponse<bool>> UpdateAnswerQuestionnaire(QuestionnaireAnswer Answer)
+        public async Task<RepositoryResponse<bool>> UpdateAnswer(QuestionnaireAnswer Answer)
         {
-            var response = await _QuestionnaireRepository.UpdateAnswerQuestionnaire(Answer);
+            var response = await _QuestionnaireRepository.UpdateAnswer(Answer);
             if (response.Success == false)
             {
                 return response;

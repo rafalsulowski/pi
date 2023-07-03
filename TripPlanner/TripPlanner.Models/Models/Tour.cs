@@ -12,7 +12,7 @@ namespace TripPlanner.Models
     {
         public int Id { get; set; }
 
-        public ICollection<OrganizeTour> Organizers { get; set; } = new List<OrganizeTour>();
+        public ICollection<OrganizerTour> Organizers { get; set; } = new List<OrganizerTour>();
         public ICollection<ParticipantTour> Participants { get; set; } = new List<ParticipantTour>();
         public ICollection<CheckList> CheckLists { get; set; } = new List<CheckList>();
         public ICollection<Questionnaire> Questionnaires { get; set; } = new List<Questionnaire>();
@@ -37,7 +37,7 @@ namespace TripPlanner.Models
             return new TourDTO
             {
                 Id = data.Id,
-                Organizers = data.Organizers.Select(u => (OrganizeTourDTO)u).ToList(),
+                Organizers = data.Organizers.Select(u => (OrganizerTourDTO)u).ToList(),
                 Participants = data.Participants.Select(u => (ParticipantTourDTO)u).ToList(),
                 CheckLists = data.CheckLists.Select(u => (CheckListDTO)u).ToList(),
                 Questionnaires = data.Questionnaires.Select(u => (QuestionnaireDTO)u).ToList(),

@@ -12,7 +12,7 @@ using TripPlanner.DataAccess;
 namespace TripPlanner.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230622114604_init")]
+    [Migration("20230625133250_init")]
     partial class init
     {
         /// <inheritdoc />
@@ -366,7 +366,7 @@ namespace TripPlanner.DataAccess.Migrations
                     b.ToTable("Messages");
                 });
 
-            modelBuilder.Entity("TripPlanner.Models.OrganizeTour", b =>
+            modelBuilder.Entity("TripPlanner.Models.OrganizerTour", b =>
                 {
                     b.Property<int>("UserId")
                         .HasColumnType("int");
@@ -378,7 +378,7 @@ namespace TripPlanner.DataAccess.Migrations
 
                     b.HasIndex("TourId");
 
-                    b.ToTable("OrganizeTours");
+                    b.ToTable("OrganizerTours");
                 });
 
             modelBuilder.Entity("TripPlanner.Models.ParticipantBill", b =>
@@ -808,7 +808,7 @@ namespace TripPlanner.DataAccess.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("TripPlanner.Models.OrganizeTour", b =>
+            modelBuilder.Entity("TripPlanner.Models.OrganizerTour", b =>
                 {
                     b.HasOne("TripPlanner.Models.Tour", "Tour")
                         .WithMany("Organizers")

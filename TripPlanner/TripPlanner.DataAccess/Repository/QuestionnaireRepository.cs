@@ -30,25 +30,25 @@ namespace TripPlanner.DataAccess.Repository
             return new RepositoryResponse<bool> { Data = true };
         }
 
-        public async Task<RepositoryResponse<bool>> AddContributeToBudget(ContributeBudget Contribute)
+        public async Task<RepositoryResponse<bool>> AddAnswerToQuestionnaire(QuestionnaireAnswer Answer)
         {
-            var ContributeDB = _context.ContributeBudgets.FirstOrDefault(u => u.BudgetId == Contribute.BudgetId && u.UserId == Contribute.UserId);
-            if (ContributeDB == null)
+            var AnswerDB = _context.QuestionnaireAnswers.FirstOrDefault(u => u.QuestionnaireId == Answer.QuestionnaireId && u.Id == Answer.Id);
+            if (AnswerDB == null)
             {
-                _context.ContributeBudgets.Add(Contribute);
+                _context.QuestionnaireAnswers.Add(Answer);
             }
             else
             {
-                _context.ContributeBudgets.Attach(Contribute);
-                _context.Entry(Contribute).State = EntityState.Modified;
+                _context.QuestionnaireAnswers.Attach(Answer);
+                _context.Entry(Answer).State = EntityState.Modified;
             }
             return new RepositoryResponse<bool> { Data = true };
         }
 
-        public async Task<RepositoryResponse<bool>> UpdateContributeBudget(ContributeBudget Contribute)
+        public async Task<RepositoryResponse<bool>> UpdateAnswer(QuestionnaireAnswer Answer)
         {
-            var ContributeDB = _context.ContributeBudgets.AsNoTracking().FirstOrDefault(u => u.BudgetId == Contribute.BudgetId && u.UserId == Contribute.UserId);
-            if (ContributeDB == null)
+            var AnswerDB = _context.QuestionnaireAnswers.FirstOrDefault(u => u.QuestionnaireId == Answer.QuestionnaireId);
+            if (AnswerDB == null)
             {
                 return new RepositoryResponse<bool>
                 {
@@ -57,62 +57,44 @@ namespace TripPlanner.DataAccess.Repository
                     Message = "Nie istnieje taki członek budzetu"
                 };
             }
-            _context.ContributeBudgets.Attach(Contribute);
-            _context.Entry(Contribute).State = EntityState.Modified;
+            _context.Entry(AnswerDB).State = EntityState.Detached;
+            _context.QuestionnaireAnswers.Attach(Answer);
+            _context.Entry(Answer).State = EntityState.Modified;
             return new RepositoryResponse<bool> { Data = true };
         }
 
-        public async Task<RepositoryResponse<bool>> DeleteContributeFromBudget(ContributeBudget Contribute)
+        public async Task<RepositoryResponse<bool>> DeleteAnswerFromQuestionnaire(QuestionnaireAnswer Answer)
         {
-            var res = _context.ContributeBudgets.FirstOrDefault(u => u.UserId == Contribute.UserId && u.BudgetId == Contribute.BudgetId);
+            var res = _context.QuestionnaireAnswers.FirstOrDefault(u => u.QuestionnaireId == Answer.QuestionnaireId);
             if (res != null)
             {
-                _context.ContributeBudgets.Remove(res);
+                _context.QuestionnaireAnswers.Remove(res);
             }
             return new RepositoryResponse<bool> { Data = true };
         }
 
-        public async Task<RepositoryResponse<bool>> AddExpenditureToBudget(BudgetExpenditure Expenditure)
+        public async Task<RepositoryResponse<bool>> AddVoteToAnswer(QuestionnaireVote Vote)
         {
-            var ExpenditureDB = _context.BudgetExpenditures.AsNoTracking().FirstOrDefault(u => u.Id == Expenditure.Id && u.BudgetId == Expenditure.BudgetId);
-            if (ExpenditureDB == null)
+            var VoteDB = _context.QuestionnaireVotes.AsNoTracking().FirstOrDefault(u => u.UserId == Vote.UserId && u.QuestionnaireAnswerId == Vote.QuestionnaireAnswerId);
+            if (VoteDB == null)
             {
-                _context.BudgetExpenditures.Add(Expenditure);
+                _context.QuestionnaireVotes.Add(Vote);
             }
             else
             {
-                _context.BudgetExpenditures.Attach(Expenditure);
-                _context.Entry(Expenditure).State = EntityState.Modified;
+                _context.QuestionnaireVotes.Attach(Vote);
+                _context.Entry(Vote).State = EntityState.Modified;
             }
             return new RepositoryResponse<bool> { Data = true };
         }
 
-        public async Task<RepositoryResponse<bool>> DeleteExpenditureFromBudget(BudgetExpenditure Expenditure)
+        public async Task<RepositoryResponse<bool>> DeleteVoteFromAnswer(QuestionnaireVote Vote)
         {
-            var res = _context.BudgetExpenditures.FirstOrDefault(u => u.Id == Expenditure.Id && u.BudgetId == Expenditure.BudgetId);
+            var res = _context.QuestionnaireVotes.FirstOrDefault(u => u.UserId == Vote.UserId && u.QuestionnaireAnswerId == Vote.QuestionnaireAnswerId);
             if (res != null)
             {
-                _context.BudgetExpenditures.Remove(res);
+                _context.QuestionnaireVotes.Remove(res);
             }
-            return new RepositoryResponse<bool> { Data = true };
-        }
-
-        public async Task<RepositoryResponse<bool>> UpdateExpenditureBudget(BudgetExpenditure Expenditure)
-        {
-            var ExpenditureDB = _context.BudgetExpenditures.FirstOrDefault(u => u.BudgetId == Expenditure.BudgetId && u.Id == Expenditure.Id);
-            if (ExpenditureDB == null)
-            {
-                return new RepositoryResponse<bool>
-                {
-                    Success = false,
-                    Data = false,
-                    Message = "Nie istnieje taki element budzetu"
-                };
-            }
-
-            _context.Entry(ExpenditureDB).State = EntityState.Detached;
-            _context.BudgetExpenditures.Attach(Expenditure);
-            _context.Entry(Expenditure).State = EntityState.Modified;
             return new RepositoryResponse<bool> { Data = true };
         }
     }

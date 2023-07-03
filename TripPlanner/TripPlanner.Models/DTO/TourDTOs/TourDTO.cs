@@ -13,7 +13,7 @@ namespace TripPlanner.Models.DTO.TourDTOs
     {
         public int Id { get; set; }
 
-        public ICollection<OrganizeTourDTO> Organizers { get; set; } = new List<OrganizeTourDTO>();
+        public ICollection<OrganizerTourDTO> Organizers { get; set; } = new List<OrganizerTourDTO>();
         public ICollection<ParticipantTourDTO> Participants { get; set; } = new List<ParticipantTourDTO>();
         public ICollection<CheckListDTO> CheckLists { get; set; } = new List<CheckListDTO>();
         public ICollection<QuestionnaireDTO> Questionnaires { get; set; } = new List<QuestionnaireDTO>();
@@ -38,7 +38,7 @@ namespace TripPlanner.Models.DTO.TourDTOs
             return new Tour
             {
                 Id = data.Id,
-                Organizers = data.Organizers.Select(u => (OrganizeTour)u).ToList(),
+                Organizers = data.Organizers.Select(u => (OrganizerTour)u).ToList(),
                 Participants = data.Participants.Select(u => (ParticipantTour)u).ToList(),
                 CheckLists = data.CheckLists.Select(u => (CheckList)u).ToList(),
                 Questionnaires = data.Questionnaires.Select(u => (Questionnaire)u).ToList(),

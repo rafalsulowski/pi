@@ -274,7 +274,6 @@ C:\Users\01159502\Desktop\pi\TripPlanner\TripPlanner\bin\Debug\net7.0-ios\iossim
 C:\Users\01159502\Desktop\pi\TripPlanner\TripPlanner\bin\Debug\net7.0-ios\iossimulator-x64\Microsoft.EntityFrameworkCore.Relational.dll
 C:\Users\01159502\Desktop\pi\TripPlanner\TripPlanner\bin\Debug\net7.0-ios\iossimulator-x64\Microsoft.Extensions.Caching.Abstractions.dll
 C:\Users\01159502\Desktop\pi\TripPlanner\TripPlanner\bin\Debug\net7.0-ios\iossimulator-x64\Microsoft.Extensions.Caching.Memory.dll
-C:\Users\01159502\Desktop\pi\TripPlanner\TripPlanner\obj\Debug\net7.0-ios\iossimulator-x64\build-signature\signature
 C:\Users\01159502\Desktop\TripPlanner\pi\TripPlanner\TripPlanner\bin\Debug\net7.0-ios\iossimulator-x64\TripPlanner.App.runtimeconfig.json
 C:\Users\01159502\Desktop\TripPlanner\pi\TripPlanner\TripPlanner\bin\Debug\net7.0-ios\iossimulator-x64\TripPlanner.App.dll
 C:\Users\01159502\Desktop\TripPlanner\pi\TripPlanner\TripPlanner\bin\Debug\net7.0-ios\iossimulator-x64\TripPlanner.App.pdb

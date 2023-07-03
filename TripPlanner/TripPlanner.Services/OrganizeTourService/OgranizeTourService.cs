@@ -2,50 +2,50 @@
 using TripPlanner.DataAccess.IRepository;
 using TripPlanner.Models;
 
-namespace TripPlanner.Services.OrganizeTourService
+namespace TripPlanner.Services.OrganizerTourService
 {
-    public class OrganizeTourService : IOrganizeTourService
+    public class OrganizerTourService : IOrganizerTourService
     {
-        private readonly IOrganizeTourRepository _OrganizeTourRepository;
-        public OrganizeTourService(IOrganizeTourRepository OrganizeTourRepository)
+        private readonly IOrganizerTourRepository _OrganizerTourRepository;
+        public OrganizerTourService(IOrganizerTourRepository OrganizerTourRepository)
         {
-            _OrganizeTourRepository = OrganizeTourRepository;
+            _OrganizerTourRepository = OrganizerTourRepository;
         }
 
-        public async Task<RepositoryResponse<bool>> CreateOrganizeTour(OrganizeTour OrganizeTour)
+        public async Task<RepositoryResponse<bool>> CreateOrganizerTour(OrganizerTour OrganizerTour)
         {
-            _OrganizeTourRepository.Add(OrganizeTour);
-            var response = await _OrganizeTourRepository.SaveChangesAsync();
+            _OrganizerTourRepository.Add(OrganizerTour);
+            var response = await _OrganizerTourRepository.SaveChangesAsync();
             return response;
         }
 
-        public async Task<RepositoryResponse<bool>> DeleteOrganizeTour(OrganizeTour OrganizeTour)
+        public async Task<RepositoryResponse<bool>> DeleteOrganizerTour(OrganizerTour OrganizerTour)
         {
-            _OrganizeTourRepository.Remove(OrganizeTour);
-            var response = await _OrganizeTourRepository.SaveChangesAsync();
+            _OrganizerTourRepository.Remove(OrganizerTour);
+            var response = await _OrganizerTourRepository.SaveChangesAsync();
             return response;
         }
 
-        public async Task<RepositoryResponse<OrganizeTour>> GetOrganizeTourAsync(Expression<Func<OrganizeTour, bool>> filter, string? includeProperties = null)
+        public async Task<RepositoryResponse<OrganizerTour>> GetOrganizerTourAsync(Expression<Func<OrganizerTour, bool>> filter, string? includeProperties = null)
         {
-            var response = await _OrganizeTourRepository.GetFirstOrDefault(filter, includeProperties);
+            var response = await _OrganizerTourRepository.GetFirstOrDefault(filter, includeProperties);
             return response;
         }
 
-        public async Task<RepositoryResponse<List<OrganizeTour>>> GetOrganizeToursAsync(Expression<Func<OrganizeTour, bool>>? filter = null, string? includeProperties = null)
+        public async Task<RepositoryResponse<List<OrganizerTour>>> GetOrganizerToursAsync(Expression<Func<OrganizerTour, bool>>? filter = null, string? includeProperties = null)
         {
-            var response = await _OrganizeTourRepository.GetAll(filter, includeProperties);
+            var response = await _OrganizerTourRepository.GetAll(filter, includeProperties);
             return response;
         }
 
-        public async Task<RepositoryResponse<bool>> UpdateOrganizeTour(OrganizeTour OrganizeTour)
+        public async Task<RepositoryResponse<bool>> UpdateOrganizerTour(OrganizerTour OrganizerTour)
         {
-            var response = await _OrganizeTourRepository.Update(OrganizeTour);
+            var response = await _OrganizerTourRepository.Update(OrganizerTour);
             if(response.Success==false)
             {
                 return response;
             }
-            response = await _OrganizeTourRepository.SaveChangesAsync();
+            response = await _OrganizerTourRepository.SaveChangesAsync();
             return response;
         }
     }

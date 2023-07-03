@@ -188,7 +188,7 @@ namespace TripPlanner.DataAccess.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "OrganizeTours",
+                name: "OrganizerTours",
                 columns: table => new
                 {
                     UserId = table.Column<int>(type: "int", nullable: false),
@@ -196,14 +196,14 @@ namespace TripPlanner.DataAccess.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_OrganizeTours", x => new { x.UserId, x.TourId });
+                    table.PrimaryKey("PK_OrganizerTours", x => new { x.UserId, x.TourId });
                     table.ForeignKey(
-                        name: "FK_OrganizeTours_Tours_TourId",
+                        name: "FK_OrganizerTours_Tours_TourId",
                         column: x => x.TourId,
                         principalTable: "Tours",
                         principalColumn: "Id");
                     table.ForeignKey(
-                        name: "FK_OrganizeTours_Users_UserId",
+                        name: "FK_OrganizerTours_Users_UserId",
                         column: x => x.UserId,
                         principalTable: "Users",
                         principalColumn: "Id");
@@ -605,8 +605,8 @@ namespace TripPlanner.DataAccess.Migrations
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_OrganizeTours_TourId",
-                table: "OrganizeTours",
+                name: "IX_OrganizerTours_TourId",
+                table: "OrganizerTours",
                 column: "TourId");
 
             migrationBuilder.CreateIndex(
@@ -687,7 +687,7 @@ namespace TripPlanner.DataAccess.Migrations
                 name: "Messages");
 
             migrationBuilder.DropTable(
-                name: "OrganizeTours");
+                name: "OrganizerTours");
 
             migrationBuilder.DropTable(
                 name: "ParticipantBills");

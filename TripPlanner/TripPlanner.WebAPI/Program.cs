@@ -20,7 +20,7 @@ using TripPlanner.Services.CultureService;
 using TripPlanner.Services.CultureAssistanceService;
 using TripPlanner.Services.GroupService;
 using TripPlanner.Services.MessageService;
-using TripPlanner.Services.OrganizeTourService;
+using TripPlanner.Services.OrganizerTourService;
 using TripPlanner.Services.ParticipantBillService;
 using TripPlanner.Services.ParticipantGroupService;
 using TripPlanner.Services.ParticipantTourService;
@@ -90,7 +90,7 @@ namespace TripPlanner.WebAPI
             builder.Services.AddScoped<ICultureAssistanceRepository, CultureAssistanceRepository>();
             builder.Services.AddScoped<IGroupRepository, GroupRepository>();
             builder.Services.AddScoped<IMessageRepository, MessageRepository>();
-            builder.Services.AddScoped<IOrganizeTourRepository, OrganizeTourRepository>();
+            builder.Services.AddScoped<IOrganizerTourRepository, OrganizerTourRepository>();
             builder.Services.AddScoped<IParticipantBillRepository, ParticipantBillRepository>();
             builder.Services.AddScoped<IParticipantGroupRepository, ParticipantGroupRepository>();
             builder.Services.AddScoped<IParticipantTourRepository, ParticipantTourRepository>();
@@ -115,7 +115,7 @@ namespace TripPlanner.WebAPI
             builder.Services.AddScoped<ICultureAssistanceService, CultureAssistanceService>();
             builder.Services.AddScoped<IGroupService, GroupService>();
             builder.Services.AddScoped<IMessageService, MessageService>();
-            builder.Services.AddScoped<IOrganizeTourService, OrganizeTourService>();
+            builder.Services.AddScoped<IOrganizerTourService, OrganizerTourService>();
             builder.Services.AddScoped<IParticipantBillService, ParticipantBillService>();
             builder.Services.AddScoped<IParticipantGroupService, ParticipantGroupService>();
             builder.Services.AddScoped<IParticipantTourService, ParticipantTourService>();

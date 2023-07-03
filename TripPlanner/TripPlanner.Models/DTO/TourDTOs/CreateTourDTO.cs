@@ -3,6 +3,7 @@ namespace TripPlanner.Models.DTO.TourDTOs
 {
     public class CreateTourDTO
     {
+        public int UserId { get; set; }
         public string Title { get; set; } = string.Empty;
         public string TargetCountry { get; set; } = string.Empty;
         public int MaxParticipant { get; set; }

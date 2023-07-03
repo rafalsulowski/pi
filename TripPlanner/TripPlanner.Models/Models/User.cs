@@ -16,7 +16,7 @@ namespace TripPlanner.Models
         public int Id { get; set; }
         
         public ICollection<CheckList> CheckLists { get; set; } = new List<CheckList>();
-        public ICollection<OrganizeTour> OrganizerTours { get; set; } = new List<OrganizeTour>();
+        public ICollection<OrganizerTour> OrganizerTours { get; set; } = new List<OrganizerTour>();
         public ICollection<ParticipantTour> ParticipantTours { get; set; } = new List<ParticipantTour>();
         public ICollection<ContributeBudget> ParticipantBudgets { get; set; } = new List<ContributeBudget>();
         public ICollection<Questionnaire> Questionnaires { get; set; } = new List<Questionnaire>();
@@ -44,7 +44,7 @@ namespace TripPlanner.Models
             {
                 Id = User.Id,
                 CheckLists = User.CheckLists.Select(u => (CheckListDTO)u).ToList(),
-                OrganizerTours = User.OrganizerTours.Select(u => (OrganizeTourDTO)u).ToList(),
+                OrganizerTours = User.OrganizerTours.Select(u => (OrganizerTourDTO)u).ToList(),
                 ParticipantTours = User.ParticipantTours.Select(u => (ParticipantTourDTO)u).ToList(),
                 ParticipantBudgets = User.ParticipantBudgets.Select(u => (ContributeBudgetDTO)u).ToList(),
                 Questionnaires = User.Questionnaires.Select(u => (QuestionnaireDTO)u).ToList(),

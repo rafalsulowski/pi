@@ -1,4 +1,18 @@
-﻿Bill:
+﻿Spis rzeczy do zrobienia w WebAPI:
+
+
+Do zrobienia:
+1. Połączenie z api facebooka do czatu (sprawdzenie czy to wgl się da zrobić)
+2. Połączenie z api facebooka do logowania
+3. PayU API
+4. Api pogodowe
+4. Logowanie za pomocą googla (do zastanowenia się czy będzie to potrzebne)
+5. Połączenie kont googla i TripPlanner (do zastanowenia się czy będzie to potrzebne)
+
+
+Zrobione:
+Kontrolery:
+Bill:
 - DONE ZAŚLEPKA Na póżniej dodawania zdjecia
 - DONE ZAŚLEPKA Na póżniej usuwanie zdjecia
 - DONE usuwanie
@@ -41,13 +55,13 @@ CheckList:
 - DONE usuwanie pola
 
 Questionnaire:
-- tworzenie
-- usuwanie
-- dodawanie odpowiedzi
-- modyfikacja odpowiedzi
-- usuwanie odpowiedzi
-- glosowanie za jakąś odpowiedzią
-- usuwanie głosu za jakąś odpowiedzią
+- DONE tworzenie
+- DONE usuwanie
+- DONE dodawanie odpowiedzi
+- DONE modyfikacja odpowiedzi
+- DONE usuwanie odpowiedzi
+- DONE glosowanie za jakąś odpowiedzią
+- DONE usuwanie głosu za jakąś odpowiedzią
 
 Route:
 - DONE tworzenie
@@ -59,20 +73,15 @@ Route:
 - DONE ZAŚLEKPA generowanie url do google maps calej wycieczki
 - DONE ZAŚLEKPA generowanie ulr do google maps odcinak pomiedzy postojami
 
-
 Tour:
-- tworzenie (przy tworzeniu nowej wycieczki utworzyc rowniez podstawowy budzet, grupe, organizatora, uczestnikow)
-- usuwanie
-- modyfikowanie
-- dodanie i usuniecie organizatora
-- dodanie i usuniecie uczestnika
-- dodanie i usuniecie budzetu
-- dodanie i usuniecie Ankiety
-- dodanie i usuniecie Checkisty
-- dodanie i usuniecie Pomocy kulturowej
-- dodanie i usuniecie Grupy
-- dodanie i usuniecie Trasy
-- dodanie i usuniecie Rachunku
+- DONE tworzenie (przy tworzeniu nowej wycieczki utworzyc rowniez podstawowy budzet, grupe, organizatora, uczestnikow)
+- DONE usuwanie
+- DONE modyfikowanie
+- DONE wypisywanie dodanie i usuniecie organizatora
+- DONE wypisywanie dodanie i usuniecie uczestnika
+- DONE wypisywanie dodanie i usuniecie Pomocy kulturowej
 
 User:
-- pobieranie danych o kazdej encji oddzielnie
+- DONE pobieranie danych o kazdej encji oddzielnie
+- DONE usuwanie
+- DONE modyfikowanie
