@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "PzLgjsskNh2QWbHP6w5jcCkJU4MqWuK3kvgQnNx+7HcYND8aTxy0A29cUF1RXs7fYMjBRARx0SS9WEZ4izWaSQ==",
+  "dgSpecHash": "tr37faSqDyaWO+AiddI7jiTU/2sfN6yqcOE+gnnwrBklp9xOGAS7iOEcLPegdmRaNbhqS5bUMOOvgb4OJ80lSw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\01159502\\Desktop\\pi\\TripPlanner\\TripPlanner.Services\\TripPlanner.Services.csproj",
+  "projectFilePath": "C:\\Users\\01159502\\Desktop\\TripPlanner\\TripPlanner\\TripPlanner.Services\\TripPlanner.Services.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\01159502\\.nuget\\packages\\azure.core\\1.24.0\\azure.core.1.24.0.nupkg.sha512",
     "C:\\Users\\01159502\\.nuget\\packages\\azure.identity\\1.6.0\\azure.identity.1.6.0.nupkg.sha512",

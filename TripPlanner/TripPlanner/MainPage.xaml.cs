@@ -1,4 +1,6 @@
-﻿namespace TripPlanner;
+﻿using TripPlanner.Models;
+
+namespace TripPlanner;
 
 public partial class MainPage : ContentPage
 {
@@ -19,6 +21,16 @@ public partial class MainPage : ContentPage
 			CounterBtn.Text = $"Clicked {count} times";
 
 		SemanticScreenReader.Announce(CounterBtn.Text);
+	}
+
+    private async void OnCounter2Clicked(object sender, EventArgs e)
+    {
+		bool res = await DisplayAlert("Allert", "Przejście do nowej karty!", "Yes", "No");
+
+		if (res)
+		{
+			await Shell.Current.GoToAsync(nameof(HomePage));
+		}	
 	}
 }
 

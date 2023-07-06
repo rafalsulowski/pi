@@ -19,6 +19,10 @@ public static class MauiProgram
 		builder.Logging.AddDebug();
 #endif
 
+		builder.Services.AddScoped<MainPage>();
+		builder.Services.AddScoped<HomePage>();
+
+
 		return builder.Build();
 	}
 }

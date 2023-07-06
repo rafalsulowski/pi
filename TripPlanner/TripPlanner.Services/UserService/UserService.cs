@@ -73,47 +73,47 @@ namespace TripPlanner.Services.UserService
             //removing OrganizerTours
             User UserDB = resp.Data;
             foreach (var Organizers in UserDB.OrganizerTours)
-                _OrganizerTourService.DeleteOrganizerTour(Organizers);
+                await _OrganizerTourService.DeleteOrganizerTour(Organizers);
 
             //removing ParticipantTours
             foreach (var Participants in UserDB.ParticipantTours)
-                _ParticipantTourService.DeleteParticipantTour(Participants);
+                await _ParticipantTourService.DeleteParticipantTour(Participants);
 
             //removing ParticipantBudgets
             foreach (var CultureAssistances in UserDB.ParticipantBudgets)
-                _ContributeBudgetService.DeleteContributeBudget(CultureAssistances);
+                await _ContributeBudgetService.DeleteContributeBudget(CultureAssistances);
 
             //removing CheckLists
             foreach (var CheckLists in UserDB.CheckLists)
-                _CheckListService.DeleteCheckList(CheckLists);
+                await _CheckListService.DeleteCheckList(CheckLists);
 
             //removing Questionnaires
             foreach (var Questionnaires in UserDB.Questionnaires)
-                _QuestionnaireService.DeleteQuestionnaire(Questionnaires);
+                await _QuestionnaireService.DeleteQuestionnaire(Questionnaires);
 
             //removing QuestionnaireVotes
             foreach (var Questionnaires in UserDB.QuestionnaireVotes)
-                _QuestionnaireVoteService.DeleteQuestionnaireVote(Questionnaires);
+                await _QuestionnaireVoteService.DeleteQuestionnaireVote(Questionnaires);
 
             //removing ParticipantGroups
             foreach (var Groups in UserDB.ParticipantGroups)
-                _ParticipantGroupService.DeleteParticipantGroup(Groups);
+                await _ParticipantGroupService.DeleteParticipantGroup(Groups);
 
             //removing Routes
             foreach (var Routes in UserDB.Routes)
-                _RouteService.DeleteRoute(Routes);
+                await _RouteService.DeleteRoute(Routes);
 
             //removing BillSettle
             foreach (var Bills in UserDB.BillSettle)
-                _ParticipantBillService.DeleteParticipantBill(Bills);
+                await _ParticipantBillService.DeleteParticipantBill(Bills);
 
             //removing Bills
             foreach (var Bills in UserDB.Bills)
-                _BillService.DeleteBill(Bills);
+                await _BillService.DeleteBill(Bills);
 
             //removing Bills
             foreach (var Bills in UserDB.Messages)
-                _MessageService.DeleteMessage(Bills);
+                await _MessageService.DeleteMessage(Bills);
 
 
             _UserRepository.Remove(UserDB);

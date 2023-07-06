@@ -68,25 +68,25 @@ namespace TripPlanner.Services.TourService
 
             //removing CheckLists
             foreach (var CheckLists in TourDB.CheckLists)
-                _CheckListService.DeleteCheckList(CheckLists);
+                await _CheckListService.DeleteCheckList(CheckLists);
 
             //removing Questionnaires
             foreach (var Questionnaires in TourDB.Questionnaires)
-                _QuestionnaireService.DeleteQuestionnaire(Questionnaires);
+                await _QuestionnaireService.DeleteQuestionnaire(Questionnaires);
 
             //removing Groups
             foreach (var Groups in TourDB.Groups)
-                _GroupService.DeleteGroup(Groups);
+                await _GroupService.DeleteGroup(Groups);
 
             //removing Routes
             foreach (var Routes in TourDB.Routes)
-                _RouteService.DeleteRoute(Routes);
+                await _RouteService.DeleteRoute(Routes);
 
             //removing Bills
             foreach (var Bills in TourDB.Bills)
-                _BillService.DeleteBill(Bills);
+                await _BillService.DeleteBill(Bills);
 
-            _BudgetService.DeleteBudget(TourDB.Budget);
+            await _BudgetService.DeleteBudget(TourDB.Budget);
 
             _TourRepository.Remove(TourDB);
             var response = await _TourRepository.SaveChangesAsync();
