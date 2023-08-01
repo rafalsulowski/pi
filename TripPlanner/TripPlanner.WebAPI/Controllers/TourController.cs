@@ -32,6 +32,22 @@ namespace TripPlanner.WebAPI.Controllers
             return Ok(response.Data);
         }
 
+        [HttpGet("GetNearestTour/{userId}")]
+        public async Task<ActionResult<RepositoryResponse<List<TourDTO>>>> GetNearestTour(int userId)
+        {
+            var response = await _TourService.GetTourAsync(u => u.Id == userId);
+            TourDTO res = response.Data;
+            return Ok(res);
+        }
+
+        //[HttpGet("GetUserTours/{userId}")]
+        //public async Task<ActionResult<RepositoryResponse<List<TourDTO>>>> GetUserTours(int userId)
+        //{
+        //    var response = await _TourService.GetUserToursAsync(userId);
+        //    List<TourDTO> res = response.Data.Select(u => (TourDTO)u).ToList();
+        //    return Ok(res);
+        //}
+
         [HttpGet("{tourId}/GetWithOrganizers")]
         public async Task<ActionResult<RepositoryResponse<TourDTO>>> GetWithOrganizers(int tourId)
         {
@@ -361,6 +377,7 @@ namespace TripPlanner.WebAPI.Controllers
             tour.MaxParticipant = Tour.MaxParticipant;
             tour.StartDate = Tour.StartDate;
             tour.EndDate = Tour.EndDate;
+            tour.CreateDate = Tour.CreateDate;
             tour.TargetCountry = Tour.TargetCountry;
             tour.Title = Tour.Title;
             tour.Id = id;

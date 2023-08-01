@@ -4,5 +4,159 @@
         <name>TripPlanner.App</name>
     </assembly>
     <members>
+        <member name="M:TripPlanner.Services.DialogService.ShowAlert(System.String,System.String,System.String)">
+            <summary>
+            "Fire and forget". Method returns BEFORE showing alert.
+            </summary>
+        </member>
+        <member name="M:TripPlanner.Services.DialogService.ShowConfirmation(System.String,System.String,System.Action{System.Boolean},System.String,System.String)">
+            <summary>
+            "Fire and forget". Method returns BEFORE showing alert.
+            </summary>
+            <param name="callback">Action to perform afterwards.</param>
+        </member>
+        <member name="M:TripPlanner.Services.IDialogService.ShowConfirmation(System.String,System.String,System.Action{System.Boolean},System.String,System.String)">
+            <param name="callback">Action to perform afterwards.</param>
+        </member>
+        <member name="T:TripPlanner.ViewModels.CreateTourViewModel">
+            <inheritdoc/>
+            <inheritdoc/>
+            <inheritdoc/>
+            <inheritdoc/>
+        </member>
+        <member name="P:TripPlanner.ViewModels.CreateTourViewModel.DateTerm">
+            <inheritdoc cref="F:TripPlanner.ViewModels.CreateTourViewModel.dateTerm"/>
+        </member>
+        <member name="P:TripPlanner.ViewModels.CreateTourViewModel.ParticipantMax">
+            <inheritdoc cref="F:TripPlanner.ViewModels.CreateTourViewModel.participantMax"/>
+        </member>
+        <member name="P:TripPlanner.ViewModels.CreateTourViewModel.BudgetSize">
+            <inheritdoc cref="F:TripPlanner.ViewModels.CreateTourViewModel.budgetSize"/>
+        </member>
+        <member name="P:TripPlanner.ViewModels.CreateTourViewModel.Current">
+            <inheritdoc cref="F:TripPlanner.ViewModels.CreateTourViewModel.current"/>
+        </member>
+        <member name="P:TripPlanner.ViewModels.CreateTourViewModel.AccountNumber">
+            <inheritdoc cref="F:TripPlanner.ViewModels.CreateTourViewModel.accountNumber"/>
+        </member>
+        <member name="P:TripPlanner.ViewModels.CreateTourViewModel.BlikAccept">
+            <inheritdoc cref="F:TripPlanner.ViewModels.CreateTourViewModel.blikAccept"/>
+        </member>
+        <member name="P:TripPlanner.ViewModels.CreateTourViewModel.NumberPhoneToBLik">
+            <inheritdoc cref="F:TripPlanner.ViewModels.CreateTourViewModel.numberPhoneToBLik"/>
+        </member>
+        <member name="P:TripPlanner.ViewModels.CreateTourViewModel.TargetCountry">
+            <inheritdoc cref="F:TripPlanner.ViewModels.CreateTourViewModel.targetCountry"/>
+        </member>
+        <member name="P:TripPlanner.ViewModels.CreateTourViewModel.Title">
+            <inheritdoc cref="F:TripPlanner.ViewModels.CreateTourViewModel.title"/>
+        </member>
+        <member name="F:TripPlanner.ViewModels.CreateTourViewModel.goBackCommand">
+            <summary>The backing field for <see cref="P:TripPlanner.ViewModels.CreateTourViewModel.GoBackCommand"/>.</summary>
+        </member>
+        <member name="P:TripPlanner.ViewModels.CreateTourViewModel.GoBackCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:TripPlanner.ViewModels.CreateTourViewModel.GoBack"/>.</summary>
+        </member>
+        <member name="F:TripPlanner.ViewModels.CreateTourViewModel.goNextCommand">
+            <summary>The backing field for <see cref="P:TripPlanner.ViewModels.CreateTourViewModel.GoNextCommand"/>.</summary>
+        </member>
+        <member name="P:TripPlanner.ViewModels.CreateTourViewModel.GoNextCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:TripPlanner.ViewModels.CreateTourViewModel.GoNext"/>.</summary>
+        </member>
+        <member name="F:TripPlanner.ViewModels.CreateTourViewModel.showInfoAboutBudgetCommand">
+            <summary>The backing field for <see cref="P:TripPlanner.ViewModels.CreateTourViewModel.ShowInfoAboutBudgetCommand"/>.</summary>
+        </member>
+        <member name="P:TripPlanner.ViewModels.CreateTourViewModel.ShowInfoAboutBudgetCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:TripPlanner.ViewModels.CreateTourViewModel.ShowInfoAboutBudget"/>.</summary>
+        </member>
+        <member name="T:TripPlanner.ViewModels.HomeViewModel">
+            <inheritdoc/>
+            <inheritdoc/>
+            <inheritdoc/>
+        </member>
+        <member name="F:TripPlanner.ViewModels.HomeViewModel.openCalendarCommand">
+            <summary>The backing field for <see cref="P:TripPlanner.ViewModels.HomeViewModel.OpenCalendarCommand"/>.</summary>
+        </member>
+        <member name="P:TripPlanner.ViewModels.HomeViewModel.OpenCalendarCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:TripPlanner.ViewModels.HomeViewModel.OpenCalendar"/>.</summary>
+        </member>
+        <member name="F:TripPlanner.ViewModels.HomeViewModel.createTripCommand">
+            <summary>The backing field for <see cref="P:TripPlanner.ViewModels.HomeViewModel.CreateTripCommand"/>.</summary>
+        </member>
+        <member name="P:TripPlanner.ViewModels.HomeViewModel.CreateTripCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:TripPlanner.ViewModels.HomeViewModel.CreateTrip"/>.</summary>
+        </member>
+        <member name="F:TripPlanner.ViewModels.HomeViewModel.showNotificationCommand">
+            <summary>The backing field for <see cref="P:TripPlanner.ViewModels.HomeViewModel.ShowNotificationCommand"/>.</summary>
+        </member>
+        <member name="P:TripPlanner.ViewModels.HomeViewModel.ShowNotificationCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:TripPlanner.ViewModels.HomeViewModel.ShowNotification"/>.</summary>
+        </member>
+        <member name="T:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs">
+            <summary>
+            A helper type providing cached, reusable <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instances
+            for all properties generated with <see cref="T:CommunityToolkit.Mvvm.ComponentModel.ObservablePropertyAttribute"/>.
+            </summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.DateTerm">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "DateTerm" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.ParticipantMax">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "ParticipantMax" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.BudgetSize">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "BudgetSize" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.Current">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "Current" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.AccountNumber">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "AccountNumber" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.BlikAccept">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "BlikAccept" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.NumberPhoneToBLik">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "NumberPhoneToBLik" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.TargetCountry">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "TargetCountry" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.Title">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "Title" generated properties.</summary>
+        </member>
+        <member name="T:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs">
+            <summary>
+            A helper type providing cached, reusable <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instances
+            for all properties generated with <see cref="T:CommunityToolkit.Mvvm.ComponentModel.ObservablePropertyAttribute"/>.
+            </summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.DateTerm">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "DateTerm" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.ParticipantMax">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "ParticipantMax" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.BudgetSize">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "BudgetSize" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.Current">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "Current" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.AccountNumber">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "AccountNumber" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.BlikAccept">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "BlikAccept" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.NumberPhoneToBLik">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "NumberPhoneToBLik" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.TargetCountry">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "TargetCountry" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.Title">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "Title" generated properties.</summary>
+        </member>
     </members>
 </doc>

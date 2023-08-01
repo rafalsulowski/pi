@@ -28,6 +28,7 @@ namespace TripPlanner.Models.DTO.TourDTOs
         public int MaxParticipant { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
+        public DateTime CreateDate { get; set; }
 
 
         public static implicit operator Tour(TourDTO data)
@@ -51,7 +52,8 @@ namespace TripPlanner.Models.DTO.TourDTOs
                 TargetCountry = data.TargetCountry,
                 MaxParticipant = data.MaxParticipant,
                 StartDate = data.StartDate,
-                EndDate = data.EndDate
+                EndDate = data.EndDate,
+                CreateDate = data.CreateDate,
             };
         }
     }

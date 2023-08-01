@@ -49,6 +49,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <None Remove="Platforms\Android\Resources\xml\network_security_config.xml" />
 	  <None Remove="Resources\Fonts\LICENSE.txt" />
 	  <None Remove="Resources\Fonts\Roboto-Black.ttf" />
 	  <None Remove="Resources\Fonts\Roboto-BlackItalic.ttf" />
@@ -63,9 +64,16 @@
 	  <None Remove="Resources\Fonts\Roboto-Thin.ttf" />
 	  <None Remove="Resources\Fonts\Roboto-ThinItalic.ttf" />
 	  <None Remove="Resources\Images\arrow_Back.svg" />
+	  <None Remove="Resources\Images\bell.svg" />
+	  <None Remove="Resources\Images\calendar3.svg" />
+	  <None Remove="Resources\Images\calendar_date.svg" />
+	  <None Remove="Resources\Images\info_circle.svg" />
+	  <None Remove="Resources\Images\plus_circle.svg" />
+	  <None Remove="Resources\Images\star.svg" />
 	</ItemGroup>
 
 	<ItemGroup>
+		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.1" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="7.0.0" />
 	</ItemGroup>
 
@@ -74,9 +82,30 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <MauiXaml Update="HomePage.xaml">
+	  <MauiXaml Update="Pages\HomePages\HomeChooseMenu.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Pages\HomePages\HomePage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\HomePages\HomePageWithoutTours.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\TourPages\CreateTour1.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="Pages\BudgetPages\" />
+	  <Folder Include="Pages\ChatPages\" />
+	  <Folder Include="Pages\HarmonogramPages\" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Compile Update="Pages\TourPages\CreateTour1.xaml.cs">
+	    <DependentUpon>CreateTour1.xaml</DependentUpon>
+	  </Compile>
 	</ItemGroup>
 
 </Project>

@@ -11,6 +11,7 @@ namespace TripPlanner.DataAccess.Repository
         {
             _context = context;
         }
+
         public async Task<RepositoryResponse<bool>> Update(Tour post)
         {
             var postDB = await GetFirstOrDefault(u => u.Id == post.Id);

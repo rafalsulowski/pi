@@ -17,14 +17,12 @@ namespace TripPlanner.WebAPI.Controllers
     {
 
         private readonly IUserService _UserService;
-        private readonly IBillService _BillService;
         private readonly IPasswordHasher<User> _passwordHasher;
 
-        public UserController(IUserService userService, IPasswordHasher<User> passwordHasher, IBillService billService)
+        public UserController(IUserService userService, IPasswordHasher<User> passwordHasher)
         {
             _UserService = userService;
             _passwordHasher = passwordHasher;
-            _BillService = billService;
         }
 
         // GET: api/<ValuesController>

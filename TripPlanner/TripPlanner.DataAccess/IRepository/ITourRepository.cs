@@ -4,6 +4,7 @@ namespace TripPlanner.DataAccess.IRepository
 {
     public interface ITourRepository : IRepository<Tour>
     {
+        //Task<RepositoryResponse<List<Tour>>> GetUserToursAsync(int userId);
         Task<RepositoryResponse<bool>> Update(Tour post);
         Task<RepositoryResponse<bool>> AddParticipantToTour(ParticipantTour Contribute);
         Task<RepositoryResponse<bool>> DeleteParticipantFromTour(ParticipantTour Contribute);

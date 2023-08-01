@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewmodel="clr-namespace:TripPlanner.ViewModels"
+             xmlns:models="clr-namespace:TripPlanner.Models.DTO.TourDTOs;assembly=TripPlanner.Models"
+             xmlns:drawables="clr-namespace:TripPlanner.Drawables"
+             x:DataType="viewmodel:HomeViewModel"
+             x:Class="TripPlanner.HomeChooseMenu"
+             Shell.NavBarIsVisible="False"
+             BackgroundColor="#EBEBEB">
+
+    <ScrollView>
+        <AbsoluteLayout>
+            <Rectangle 
+                AbsoluteLayout.LayoutBounds="0,0,1,1" 
+                AbsoluteLayout.LayoutFlags="SizeProportional"
+                BackgroundColor="#52AB98" Opacity="0.76">
+                
+                
+            </Rectangle>
+            
+            <Rectangle AbsoluteLayout.LayoutBounds="0,0,1,50" AbsoluteLayout.LayoutFlags="WidthProportional" BackgroundColor="White"/>
+
+            <ImageButton
+                HorizontalOptions="Start"
+                AbsoluteLayout.LayoutFlags="WidthProportional"
+                AbsoluteLayout.LayoutBounds="5,10,1,30"
+                Source="calendar3.png"
+                Command="{Binding OpenCalendarCommand}"/>
+
+            <Label
+                HorizontalOptions="Center"
+                FontSize="20"
+                AbsoluteLayout.LayoutBounds="0,0,1,38"
+                AbsoluteLayout.LayoutFlags="WidthProportional"
+                VerticalOptions="End" Text="TripPlanner"/>
+
+            <ImageButton
+                HorizontalOptions="End"
+                AbsoluteLayout.LayoutBounds="0,10,.98,30"
+                AbsoluteLayout.LayoutFlags="WidthProportional"
+                Source="plus_circle.png"
+                Command="{Binding CreateTripCommand}"/>
+
+
+            <Border StrokeShape="RoundRectangle 10,10,10,10" HorizontalOptions="Center" AbsoluteLayout.LayoutBounds="0,55,1,300" AbsoluteLayout.LayoutFlags="WidthProportional">
+                <Rectangle BackgroundColor="White"/>
+            </Border>
+
+            <StackLayout AbsoluteLayout.LayoutFlags="WidthProportional" AbsoluteLayout.LayoutBounds="0,30,1,300">
+                <Border
+			        BackgroundColor="White"
+			        StrokeShape="Rectangle"
+                    WidthRequest="206"
+                    HeightRequest="206"
+                    HorizontalOptions="CenterAndExpand"
+				    VerticalOptions="CenterAndExpand"
+                    StrokeThickness="0">
+                    <GraphicsView
+                        x:Name="chart"
+                        AbsoluteLayout.LayoutFlags="WidthProportional"
+				        HorizontalOptions="CenterAndExpand"
+				        VerticalOptions="CenterAndExpand"
+				        Drawable="{StaticResource chartDrawables}"/>
+                </Border>
+            </StackLayout>
+
+            <ImageButton
+                HorizontalOptions="Start"
+                AbsoluteLayout.LayoutBounds="5,70,1,30"
+                AbsoluteLayout.LayoutFlags="WidthProportional"
+                Source="bell.png"
+                Command="{Binding ShowNotificationCommand}"/>
+
+            <Label HorizontalOptions="Center" FontSize="16" Text="Pozostało do:" AbsoluteLayout.LayoutFlags="WidthProportional" AbsoluteLayout.LayoutBounds="0,135,1,25"/>
+            <Label HorizontalOptions="Center" FontSize="14" Text="Wyjazd na narty 2023" LineBreakMode="CharacterWrap" MaximumWidthRequest="145"
+                   AbsoluteLayout.LayoutFlags="WidthProportional" AbsoluteLayout.LayoutBounds="0,165,1,40"/>
+            <Label HorizontalOptions="Center" FontSize="24" Text="13dni" AbsoluteLayout.LayoutFlags="WidthProportional" AbsoluteLayout.LayoutBounds="0,205,1,30"/>
+
+            <HorizontalStackLayout HorizontalOptions="Center" AbsoluteLayout.LayoutBounds="0,295,1,25" AbsoluteLayout.LayoutFlags="WidthProportional" Spacing="30">
+                <VerticalStackLayout>
+                    <Label TextColor="#C5C5C5" Text="Rozpoczecie" AbsoluteLayout.LayoutFlags="WidthProportional" HorizontalOptions="Center" FontAttributes="Bold" AbsoluteLayout.LayoutBounds="10,285,0.9,25"/>
+                    <Label Text="Pn. 13.02.2023r." AbsoluteLayout.LayoutFlags="WidthProportional" HorizontalOptions="Center" AbsoluteLayout.LayoutBounds="0,320,1,25"/>
+                </VerticalStackLayout>
+                <VerticalStackLayout>
+                    <Label TextColor="#C5C5C5" Text="Zakończenie" AbsoluteLayout.LayoutFlags="WidthProportional" HorizontalOptions="Center" FontAttributes="Bold" AbsoluteLayout.LayoutBounds="0,285,0.8,25"/>
+                    <Label Text="Pn. 19.02.2023r." AbsoluteLayout.LayoutFlags="WidthProportional" HorizontalOptions="Center" AbsoluteLayout.LayoutBounds="90,320,1,25"/>
+                </VerticalStackLayout>
+            </HorizontalStackLayout>
+
+            <Border StrokeShape="RoundRectangle 10,10,10,10" HorizontalOptions="Center" AbsoluteLayout.LayoutBounds="0,358,1,480" AbsoluteLayout.LayoutFlags="WidthProportional">
+                <Rectangle BackgroundColor="White"/>
+            </Border>
+
+            <Label HorizontalOptions="Start" FontSize="15" Text="Natchodzące" FontAttributes="Bold" AbsoluteLayout.LayoutFlags="WidthProportional" AbsoluteLayout.LayoutBounds="18,380,1,25"/>
+
+            <CollectionView ItemsSource="{Binding m_vTour}" SelectionMode="None" AbsoluteLayout.LayoutFlags="WidthProportional" AbsoluteLayout.LayoutBounds="0,420,1,400">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="models:TourDTO">
+                        <AbsoluteLayout Margin="0,0,0,12">
+                            <Border StrokeShape="RoundRectangle 10,10,10,10" ZIndex="1" AbsoluteLayout.LayoutFlags="WidthProportional" AbsoluteLayout.LayoutBounds="0,0,1,100">
+                                <Image Source="pic1.jpg" Aspect="Fill"/>
+                            </Border>
+                            <Border StrokeShape="RoundRectangle 10,10,10,10" AbsoluteLayout.LayoutFlags="WidthProportional" AbsoluteLayout.LayoutBounds="0,0,1,130" ZIndex="0">
+                                <Rectangle BackgroundColor="#F1F1F1"/>
+                            </Border>
+                            <HorizontalStackLayout Spacing="20" AbsoluteLayout.LayoutFlags="WidthProportional" AbsoluteLayout.LayoutBounds="0,105,1,20" HorizontalOptions="Center">
+                                <HorizontalStackLayout>
+                                    <Label FontSize="13" FontAttributes="Bold"  TextColor="#52AB98" Text="{Binding Path=Title}" LineBreakMode="TailTruncation" WidthRequest="140"></Label>
+                                </HorizontalStackLayout>
+                                <HorizontalStackLayout Spacing="2">
+                                    <Label FontSize="13" FontAttributes="Bold" TextColor="#52AB98" Text="{Binding Path=StartDate, StringFormat='{0:dd.MM.yyyy} -'}"/>
+                                    <Label FontSize="13" FontAttributes="Bold" TextColor="#52AB98" Text="{Binding Path=StartDate, StringFormat='{0:dd.MM.yyyy}'}"/>
+                                </HorizontalStackLayout>
+                            </HorizontalStackLayout>
+                        </AbsoluteLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </AbsoluteLayout>
+    </ScrollView>
+</ContentPage>

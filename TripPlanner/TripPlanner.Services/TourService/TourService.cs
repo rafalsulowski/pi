@@ -99,6 +99,12 @@ namespace TripPlanner.Services.TourService
             return response;
         }
 
+        //public async Task<RepositoryResponse<List<Tour>>> GetUserToursAsync(int userId)
+        //{
+        //    var response = await _TourRepository.GetUserToursAsync(userId);
+        //    return response;
+        //}
+
         public async Task<RepositoryResponse<List<Tour>>> GetToursAsync(Expression<Func<Tour, bool>>? filter = null, string? includeProperties = null)
         {
             var response = await _TourRepository.GetAll(filter, includeProperties);

@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>TripPlanner.App</name>
+    </assembly>
+    <members>
+        <member name="T:TripPlanner.ViewModels.HomeViewModel">
+            <inheritdoc/>
+            <inheritdoc/>
+            <inheritdoc/>
+        </member>
+        <member name="F:TripPlanner.ViewModels.HomeViewModel.openCalendarCommand">
+            <summary>The backing field for <see cref="P:TripPlanner.ViewModels.HomeViewModel.OpenCalendarCommand"/>.</summary>
+        </member>
+        <member name="P:TripPlanner.ViewModels.HomeViewModel.OpenCalendarCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:TripPlanner.ViewModels.HomeViewModel.OpenCalendar"/>.</summary>
+        </member>
+        <member name="F:TripPlanner.ViewModels.HomeViewModel.createTripCommand">
+            <summary>The backing field for <see cref="P:TripPlanner.ViewModels.HomeViewModel.CreateTripCommand"/>.</summary>
+        </member>
+        <member name="P:TripPlanner.ViewModels.HomeViewModel.CreateTripCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:TripPlanner.ViewModels.HomeViewModel.CreateTrip"/>.</summary>
+        </member>
+        <member name="F:TripPlanner.ViewModels.HomeViewModel.showNotificationCommand">
+            <summary>The backing field for <see cref="P:TripPlanner.ViewModels.HomeViewModel.ShowNotificationCommand"/>.</summary>
+        </member>
+        <member name="P:TripPlanner.ViewModels.HomeViewModel.ShowNotificationCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:TripPlanner.ViewModels.HomeViewModel.ShowNotification"/>.</summary>
+        </member>
+    </members>
+</doc>
