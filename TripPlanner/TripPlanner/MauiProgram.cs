@@ -1,8 +1,11 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
-using TripPlanner.Pages.TripPages;
+using TripPlanner.Views.HomeViews;
+using TripPlanner.Views.StartViews;
+using TripPlanner.Views.TourViews;
 using TripPlanner.Services;
 using TripPlanner.ViewModels;
+using TripPlanner.Views;
 
 namespace TripPlanner;
 
@@ -34,12 +37,22 @@ public static class MauiProgram
 		//ViewModels Services
 		builder.Services.AddTransient<HomeViewModel>();
 		builder.Services.AddTransient<CreateTourViewModel>();
+		builder.Services.AddTransient<NotificationViewModel>();
+		builder.Services.AddTransient<CalendarViewModel>();
+		builder.Services.AddTransient<FriendsViewModel>();
+		builder.Services.AddTransient<ProfileViewModel>();
+		builder.Services.AddTransient<TourViewModel>();
 
-        //View Services
+        //Views
         builder.Services.AddTransient<MainPage>();
 		builder.Services.AddTransient<HomePage>();
 		builder.Services.AddTransient<CreateTour1>();
 		builder.Services.AddTransient<HomePageWithoutTours>();
+		builder.Services.AddTransient<CalendarPage>();
+		builder.Services.AddTransient<NotificationPage>();
+		builder.Services.AddTransient<ProfilePage>();
+		builder.Services.AddTransient<FriendsPage>();
+		builder.Services.AddTransient<TourPage>();
 
 
 		return builder.Build();

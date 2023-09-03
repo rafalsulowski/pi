@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using Microsoft.Extensions.Logging;
+using Microsoft.Maui.Controls;
+using System.Collections.Generic;
 using System.Net.Http.Json;
 using TripPlanner.Models;
 using TripPlanner.Models.DTO.TourDTOs;
@@ -9,7 +11,8 @@ namespace TripPlanner.Services
     public class TourService
     {
         private readonly HttpClient m_HttpClient;
-        private readonly Configuration m_Configuration;
+        private readonly Configuration m_Configuration; 
+        //private readonly ILogger<Worker> _logger;
 
         public TourService(HttpClient _httpClient, Configuration configuration)
         {

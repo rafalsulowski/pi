@@ -3,13 +3,13 @@
     x:Class="TripPlanner.AppShell"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:local="clr-namespace:TripPlanner"
+    xmlns:local="clr-namespace:TripPlanner.Views.HomeViews"
     Shell.FlyoutBehavior="Disabled">
 
-    <ShellContent
-        Title="Home"
-        ContentTemplate="{DataTemplate local:MainPage}"
-        Route="MainPage" 
-        />
-
+    <TabBar Shell.TabBarTitleColor="#2B6777">
+        <ShellContent Route="Home" Icon="airplane.png" Title="Wyjazdy" ContentTemplate="{DataTemplate local:HomePage}"/>
+        <ShellContent Route="Friends" Icon="person.png" Title="Znajomi" ContentTemplate="{DataTemplate local:FriendsPage}"/>
+        <ShellContent Route="Notifiactions" Icon="bell.png" Title="Akcje" ContentTemplate="{DataTemplate local:NotificationPage}"/>
+        <ShellContent Route="Profile" Icon="user1.png" Title="Konto" ContentTemplate="{DataTemplate local:ProfilePage}"/>
+    </TabBar>
 </Shell>

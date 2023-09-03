@@ -13,6 +13,11 @@ Roboto-MediumItalic.ttf
 Roboto-Regular.ttf
 Roboto-Thin.ttf
 Roboto-ThinItalic.ttf
+airplane.scale-100.png
+airplane.scale-125.png
+airplane.scale-150.png
+airplane.scale-200.png
+airplane.scale-400.png
 appicon.ico
 appiconLargeTile.scale-100.png
 appiconLargeTile.scale-125.png
@@ -89,6 +94,11 @@ info_circle.scale-125.png
 info_circle.scale-150.png
 info_circle.scale-200.png
 info_circle.scale-400.png
+person.scale-100.png
+person.scale-125.png
+person.scale-150.png
+person.scale-200.png
+person.scale-400.png
 pic1.scale-100.jpg
 pic2.scale-100.jpg
 pic2.scale-100.png
@@ -102,6 +112,8 @@ star.scale-125.png
 star.scale-150.png
 star.scale-200.png
 star.scale-400.png
+user1.scale-100.png
+user2.scale-100.jpg
 splashSplashScreen.scale-100.png
 splashSplashScreen.scale-125.png
 splashSplashScreen.scale-150.png

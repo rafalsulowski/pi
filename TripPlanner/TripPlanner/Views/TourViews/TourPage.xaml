@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TripPlanner.Views.TourViews.TourPage"
+             xmlns:viewmodel="clr-namespace:TripPlanner.ViewModels"
+             x:DataType="viewmodel:TourViewModel"
+             Shell.NavBarIsVisible="False"
+             BackgroundColor="White">
+    <AbsoluteLayout>
+        <ScrollView>
+            <AbsoluteLayout>
+                <VerticalStackLayout>
+                    <Label 
+                        Text="Welcome to tour page"
+                        VerticalOptions="Center"
+                        HorizontalOptions="Center" />
+                    <Label Text="{Binding Tour.Title}"/>
+                </VerticalStackLayout>
+            </AbsoluteLayout>
+        </ScrollView>
+
+        
+        <!--Menu--><!--
+        <VerticalStackLayout BackgroundColor="White"
+            AbsoluteLayout.LayoutFlags="XProportional,YProportional,WidthProportional"
+            AbsoluteLayout.LayoutBounds="0.5,0.99,1,AutoSize">
+            <BoxView
+                Color="#C5C5C5"
+                HeightRequest="1"
+                VerticalOptions="Fill"/>
+            <Grid
+            Padding="0,10,0,0"
+            ColumnDefinitions="*,*,*,*"
+            ColumnSpacing="0"
+            RowSpacing="5">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="25" />
+                    <RowDefinition Height="25" />
+                </Grid.RowDefinitions>
+
+                <ImageButton
+                Grid.Column="0"
+                Grid.Row="0"
+                HorizontalOptions="Center"
+                WidthRequest="25"
+                HeightRequest="25"
+                Source="airplane.png"
+                Command="{Binding OpenHomePageCommand}">
+                </ImageButton>
+                <Label
+                Grid.Column="0"
+                Grid.Row="1"
+                Text="Wyjazdy"
+                HorizontalOptions="Center"
+                FontAttributes="Bold">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding OpenHomePageCommand}"/>
+                    </Label.GestureRecognizers>
+                </Label>
+
+                <ImageButton
+                Grid.Column="1"
+                Grid.Row="0"
+                WidthRequest="25"
+                HeightRequest="25"
+                HorizontalOptions="Center"
+                Source="person.png"
+                Command="{Binding ShowFriendsCommand}">
+                </ImageButton>
+                <Label
+                Grid.Column="1"
+                Grid.Row="1"
+                Text="Znajomi"
+                HorizontalOptions="Center"
+                FontAttributes="Bold">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding ShowFriendsCommand}"/>
+                    </Label.GestureRecognizers>
+                </Label>
+
+                <ImageButton
+                Grid.Column="2"
+                Grid.Row="0"
+                WidthRequest="25"
+                HeightRequest="25"
+                HorizontalOptions="Center"
+                Source="person.png"
+                Command="{Binding ShowNotificationCommand}">
+                </ImageButton>
+                <Label
+                Grid.Column="2"
+                Grid.Row="1"
+                HorizontalOptions="Center"
+                Text="Akcje"
+                FontAttributes="Bold">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding ShowNotificationCommand}"/>
+                    </Label.GestureRecognizers>
+                </Label>
+
+                <ImageButton
+                Grid.Column="3"
+                Grid.Row="0"
+                WidthRequest="25"
+                HeightRequest="25"
+                HorizontalOptions="Center"
+                CornerRadius="8"
+                Source="user1.png"
+                Command="{Binding ShowProfileCommand}">
+                </ImageButton>
+                <Label
+                Grid.Column="3"
+                Grid.Row="1"
+                HorizontalOptions="Center"
+                Text="Konto"
+                FontAttributes="Bold">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding ShowProfileCommand}"/>
+                    </Label.GestureRecognizers>
+                </Label>
+            </Grid>
+        </VerticalStackLayout>
+        --><!--End Menu-->
+
+    </AbsoluteLayout>
+</ContentPage>

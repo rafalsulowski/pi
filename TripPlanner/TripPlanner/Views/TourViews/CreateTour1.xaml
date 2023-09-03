@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TripPlanner.Views.TourViews.CreateTour1"
+             xmlns:viewmodel="clr-namespace:TripPlanner.ViewModels"
+             x:DataType="viewmodel:CreateTourViewModel">
+
+    <Shell.TitleView>
+        <AbsoluteLayout>
+            <ImageButton
+                HorizontalOptions="Start"
+                AbsoluteLayout.LayoutFlags="WidthProportional"
+                AbsoluteLayout.LayoutBounds="0,10,1,30"
+                Source="arrow_back.png"
+                Command="{Binding GoBackCommand}"/>
+
+            <Label
+                HorizontalOptions="Center"
+                FontSize="20"
+                AbsoluteLayout.LayoutBounds="0,0,1,38"
+                AbsoluteLayout.LayoutFlags="WidthProportional"
+                VerticalOptions="End" 
+                Text="Dodawanie wyjazdu"/>
+        </AbsoluteLayout>
+    </Shell.TitleView>
+    <Shell.BackButtonBehavior>
+        <BackButtonBehavior Command="{Binding GoBackCommand}" IsEnabled="True"/>
+    </Shell.BackButtonBehavior>
+    
+    <ScrollView>
+        <AbsoluteLayout>
+            <VerticalStackLayout
+                AbsoluteLayout.LayoutBounds="0.3,0,AutoSize,AutoSize"
+                AbsoluteLayout.LayoutFlags="XProportional"                
+                Spacing="10">
+                <Label
+                    Text="Wybierz termin"
+                    TextColor="#B2C6D5"
+                    FontAttributes="Bold"
+                    FontSize="20"/>
+                <HorizontalStackLayout Spacing="15">
+                    <ImageButton 
+                        Source="calendar3.png"
+                        WidthRequest="30"
+                        HeightRequest="30"
+                        Command="{Binding SetTourDateRangeCommand}"/>
+                    <Border 
+                        StrokeShape="RoundRectangle 10,10,10,10">
+                        <Entry
+                            MinimumWidthRequest="150"
+                            Keyboard="Chat"
+                            TextColor="#2b6777"
+                            BackgroundColor="#F2F2F2"
+                            FontAttributes="Bold"
+                            Text="{Binding DateTerm}"
+                            FontSize="20"
+                            VerticalTextAlignment="Center"
+                            HorizontalTextAlignment="Center"/>
+                    </Border>
+                </HorizontalStackLayout>
+                <HorizontalStackLayout Spacing="15">
+                    <Label 
+                        VerticalOptions="Center"
+                        Text="Wprowadź liczbę osób"
+                        TextColor="#B2C6D5"
+                        FontAttributes="Bold"
+                        FontSize="20"/>
+                    <Border 
+                        StrokeShape="RoundRectangle 10,10,10,10">
+                        <Entry
+                            MinimumWidthRequest="40"
+                            Keyboard="Numeric"
+                            TextColor="#2b6777"
+                            BackgroundColor="#F2F2F2"
+                            FontAttributes="Bold"
+                            Text="{Binding ParticipantMax}"
+                            FontSize="20"
+                            VerticalTextAlignment="Center"
+                            HorizontalTextAlignment="Center"/>
+                    </Border>
+                </HorizontalStackLayout>
+
+                <!--Budzet-->
+                <Label
+                    Text="Określ wielkość budżetu"
+                    TextColor="#B2C6D5"
+                    FontAttributes="Bold"
+                    FontSize="20"/>
+                <HorizontalStackLayout Spacing="15">
+                    <Border 
+                        StrokeShape="RoundRectangle 10,10,10,10">
+                        <Entry
+                            MinimumWidthRequest="80"
+                            Keyboard="Numeric"
+                            TextColor="#2b6777"
+                            FontAttributes="Bold"
+                            BackgroundColor="#F2F2F2"
+                            Text="{Binding BudgetSize}"
+                            FontSize="20"
+                            VerticalTextAlignment="Center"
+                            HorizontalTextAlignment="Center"/>
+                    </Border>
+                    <Border 
+                        StrokeShape="RoundRectangle 10,10,10,10">
+                        <Picker 
+                            SelectedIndex="0"
+                            SelectedItem="{Binding Current}" 
+                            ItemsSource="{Binding m_vCurrent}"
+                            TextColor="#2b6777"
+                            FontAttributes="Bold"
+                            FontSize="20"
+                            BackgroundColor="#F2F2F2"
+                            VerticalTextAlignment="Center"
+                            HorizontalTextAlignment="Center"/>
+                    </Border>
+                </HorizontalStackLayout>
+                
+                <Label 
+                    VerticalOptions="Center"
+                    Text="Wprowadź numer konta bankowego"
+                    TextColor="#B2C6D5"
+                    FontAttributes="Bold"
+                    FontSize="20"/>
+                <Border 
+                    StrokeShape="RoundRectangle 10,10,10,10">
+                    <Entry
+                    MinimumWidthRequest="40"
+                    Keyboard="Numeric"
+                    TextColor="#2b6777"
+                    BackgroundColor="#F2F2F2"
+                    FontAttributes="Bold"
+                    Text="{Binding AccountNumber}"
+                    FontSize="20"
+                    VerticalTextAlignment="Center"
+                    HorizontalTextAlignment="Center"/>
+                </Border>
+
+                <HorizontalStackLayout>
+                    <CheckBox IsChecked="{Binding BlikAccept}"></CheckBox>
+                    <Label 
+                        VerticalOptions="Center"
+                        Text="Czy akceptujesz blika?"
+                        TextColor="#B2C6D5"
+                        FontAttributes="Bold"
+                        FontSize="16"/>
+                </HorizontalStackLayout>
+
+                <Label 
+                    VerticalOptions="Center"
+                    Text="Wprowadź numer telefonu do BLIK’a"
+                    TextColor="#B2C6D5"
+                    FontAttributes="Bold"
+                    FontSize="18"/>
+                <Border
+                    StrokeShape="RoundRectangle 10,10,10,10">
+                    <Entry
+                    MinimumWidthRequest="150"
+                    Keyboard="Numeric"
+                    TextColor="#2b6777"
+                    BackgroundColor="#F2F2F2"
+                    FontAttributes="Bold"
+                    Text="{Binding NumberPhoneToBlik}"
+                    FontSize="20"
+                    VerticalTextAlignment="Center"
+                    HorizontalTextAlignment="Center"/>
+                </Border>
+
+                <Label 
+                    VerticalOptions="Center"
+                    Text="Docelowy kraj wyjazdu"
+                    TextColor="#B2C6D5"
+                    FontAttributes="Bold"
+                    FontSize="18"/>
+                <Border
+                    StrokeShape="RoundRectangle 10,10,10,10">
+                    <Entry
+                    MinimumWidthRequest="150"
+                    Keyboard="Numeric"
+                    TextColor="#2b6777"
+                    BackgroundColor="#F2F2F2"
+                    FontAttributes="Bold"
+                    Text="{Binding TargetCountry}"
+                    FontSize="20"
+                    VerticalTextAlignment="Center"
+                    HorizontalTextAlignment="Center"/>
+                </Border>
+                <Label 
+                    VerticalOptions="Center"
+                    Text="Nazwa wyjazdu"
+                    TextColor="#B2C6D5"
+                    FontAttributes="Bold"
+                    FontSize="18"/>
+                <Border
+                    StrokeShape="RoundRectangle 10,10,10,10">
+                    <Editor
+                    MinimumWidthRequest="150"
+                    HeightRequest="80"
+                    Keyboard="Chat"
+                    
+                    TextColor="#2b6777"
+                    BackgroundColor="#F2F2F2"
+                    FontAttributes="Bold"
+                    Text="{Binding Title}"
+                    FontSize="20"
+                    VerticalTextAlignment="Center"
+                    HorizontalTextAlignment="Center"/>
+                </Border>
+            </VerticalStackLayout>
+        </AbsoluteLayout>
+    </ScrollView>
+</ContentPage>

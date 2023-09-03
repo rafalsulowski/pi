@@ -18,7 +18,17 @@
         <member name="M:TripPlanner.Services.IDialogService.ShowConfirmation(System.String,System.String,System.Action{System.Boolean},System.String,System.String)">
             <param name="callback">Action to perform afterwards.</param>
         </member>
+        <member name="T:TripPlanner.ViewModels.CalendarViewModel">
+            <inheritdoc/>
+        </member>
+        <member name="F:TripPlanner.ViewModels.CalendarViewModel.goBackCommand">
+            <summary>The backing field for <see cref="P:TripPlanner.ViewModels.CalendarViewModel.GoBackCommand"/>.</summary>
+        </member>
+        <member name="P:TripPlanner.ViewModels.CalendarViewModel.GoBackCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:TripPlanner.ViewModels.CalendarViewModel.GoBack"/>.</summary>
+        </member>
         <member name="T:TripPlanner.ViewModels.CreateTourViewModel">
+            <inheritdoc/>
             <inheritdoc/>
             <inheritdoc/>
             <inheritdoc/>
@@ -42,14 +52,20 @@
         <member name="P:TripPlanner.ViewModels.CreateTourViewModel.BlikAccept">
             <inheritdoc cref="F:TripPlanner.ViewModels.CreateTourViewModel.blikAccept"/>
         </member>
-        <member name="P:TripPlanner.ViewModels.CreateTourViewModel.NumberPhoneToBLik">
-            <inheritdoc cref="F:TripPlanner.ViewModels.CreateTourViewModel.numberPhoneToBLik"/>
+        <member name="P:TripPlanner.ViewModels.CreateTourViewModel.NumberPhoneToBlik">
+            <inheritdoc cref="F:TripPlanner.ViewModels.CreateTourViewModel.numberPhoneToBlik"/>
         </member>
         <member name="P:TripPlanner.ViewModels.CreateTourViewModel.TargetCountry">
             <inheritdoc cref="F:TripPlanner.ViewModels.CreateTourViewModel.targetCountry"/>
         </member>
         <member name="P:TripPlanner.ViewModels.CreateTourViewModel.Title">
             <inheritdoc cref="F:TripPlanner.ViewModels.CreateTourViewModel.title"/>
+        </member>
+        <member name="F:TripPlanner.ViewModels.CreateTourViewModel.setTourDateRangeCommand">
+            <summary>The backing field for <see cref="P:TripPlanner.ViewModels.CreateTourViewModel.SetTourDateRangeCommand"/>.</summary>
+        </member>
+        <member name="P:TripPlanner.ViewModels.CreateTourViewModel.SetTourDateRangeCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:TripPlanner.ViewModels.CreateTourViewModel.SetTourDateRange"/>.</summary>
         </member>
         <member name="F:TripPlanner.ViewModels.CreateTourViewModel.goBackCommand">
             <summary>The backing field for <see cref="P:TripPlanner.ViewModels.CreateTourViewModel.GoBackCommand"/>.</summary>
@@ -69,7 +85,24 @@
         <member name="P:TripPlanner.ViewModels.CreateTourViewModel.ShowInfoAboutBudgetCommand">
             <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:TripPlanner.ViewModels.CreateTourViewModel.ShowInfoAboutBudget"/>.</summary>
         </member>
+        <member name="T:TripPlanner.ViewModels.FriendsViewModel">
+            <inheritdoc/>
+            <inheritdoc/>
+        </member>
+        <member name="F:TripPlanner.ViewModels.FriendsViewModel.openCalendarCommand">
+            <summary>The backing field for <see cref="P:TripPlanner.ViewModels.FriendsViewModel.OpenCalendarCommand"/>.</summary>
+        </member>
+        <member name="P:TripPlanner.ViewModels.FriendsViewModel.OpenCalendarCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:TripPlanner.ViewModels.FriendsViewModel.OpenCalendar"/>.</summary>
+        </member>
+        <member name="F:TripPlanner.ViewModels.FriendsViewModel.createTripCommand">
+            <summary>The backing field for <see cref="P:TripPlanner.ViewModels.FriendsViewModel.CreateTripCommand"/>.</summary>
+        </member>
+        <member name="P:TripPlanner.ViewModels.FriendsViewModel.CreateTripCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:TripPlanner.ViewModels.FriendsViewModel.CreateTrip"/>.</summary>
+        </member>
         <member name="T:TripPlanner.ViewModels.HomeViewModel">
+            <inheritdoc/>
             <inheritdoc/>
             <inheritdoc/>
             <inheritdoc/>
@@ -86,11 +119,90 @@
         <member name="P:TripPlanner.ViewModels.HomeViewModel.CreateTripCommand">
             <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:TripPlanner.ViewModels.HomeViewModel.CreateTrip"/>.</summary>
         </member>
+        <member name="F:TripPlanner.ViewModels.HomeViewModel.showTourCommand">
+            <summary>The backing field for <see cref="P:TripPlanner.ViewModels.HomeViewModel.ShowTourCommand"/>.</summary>
+        </member>
+        <member name="P:TripPlanner.ViewModels.HomeViewModel.ShowTourCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand`1"/> instance wrapping <see cref="M:TripPlanner.ViewModels.HomeViewModel.ShowTour(TripPlanner.Models.DTO.TourDTOs.TourDTO)"/>.</summary>
+        </member>
         <member name="F:TripPlanner.ViewModels.HomeViewModel.showNotificationCommand">
             <summary>The backing field for <see cref="P:TripPlanner.ViewModels.HomeViewModel.ShowNotificationCommand"/>.</summary>
         </member>
         <member name="P:TripPlanner.ViewModels.HomeViewModel.ShowNotificationCommand">
             <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:TripPlanner.ViewModels.HomeViewModel.ShowNotification"/>.</summary>
+        </member>
+        <member name="T:TripPlanner.ViewModels.NotificationViewModel">
+            <inheritdoc/>
+            <inheritdoc/>
+        </member>
+        <member name="F:TripPlanner.ViewModels.NotificationViewModel.openCalendarCommand">
+            <summary>The backing field for <see cref="P:TripPlanner.ViewModels.NotificationViewModel.OpenCalendarCommand"/>.</summary>
+        </member>
+        <member name="P:TripPlanner.ViewModels.NotificationViewModel.OpenCalendarCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:TripPlanner.ViewModels.NotificationViewModel.OpenCalendar"/>.</summary>
+        </member>
+        <member name="F:TripPlanner.ViewModels.NotificationViewModel.createTripCommand">
+            <summary>The backing field for <see cref="P:TripPlanner.ViewModels.NotificationViewModel.CreateTripCommand"/>.</summary>
+        </member>
+        <member name="P:TripPlanner.ViewModels.NotificationViewModel.CreateTripCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:TripPlanner.ViewModels.NotificationViewModel.CreateTrip"/>.</summary>
+        </member>
+        <member name="T:TripPlanner.ViewModels.ProfileViewModel">
+            <inheritdoc/>
+            <inheritdoc/>
+        </member>
+        <member name="F:TripPlanner.ViewModels.ProfileViewModel.openCalendarCommand">
+            <summary>The backing field for <see cref="P:TripPlanner.ViewModels.ProfileViewModel.OpenCalendarCommand"/>.</summary>
+        </member>
+        <member name="P:TripPlanner.ViewModels.ProfileViewModel.OpenCalendarCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:TripPlanner.ViewModels.ProfileViewModel.OpenCalendar"/>.</summary>
+        </member>
+        <member name="F:TripPlanner.ViewModels.ProfileViewModel.createTripCommand">
+            <summary>The backing field for <see cref="P:TripPlanner.ViewModels.ProfileViewModel.CreateTripCommand"/>.</summary>
+        </member>
+        <member name="P:TripPlanner.ViewModels.ProfileViewModel.CreateTripCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:TripPlanner.ViewModels.ProfileViewModel.CreateTrip"/>.</summary>
+        </member>
+        <member name="T:TripPlanner.ViewModels.TourViewModel">
+            <inheritdoc/>
+            <inheritdoc/>
+            <inheritdoc/>
+            <inheritdoc/>
+            <inheritdoc/>
+            <inheritdoc/>
+        </member>
+        <member name="P:TripPlanner.ViewModels.TourViewModel.Tour">
+            <inheritdoc cref="F:TripPlanner.ViewModels.TourViewModel.tour"/>
+        </member>
+        <member name="F:TripPlanner.ViewModels.TourViewModel.openHomePageCommand">
+            <summary>The backing field for <see cref="P:TripPlanner.ViewModels.TourViewModel.OpenHomePageCommand"/>.</summary>
+        </member>
+        <member name="P:TripPlanner.ViewModels.TourViewModel.OpenHomePageCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:TripPlanner.ViewModels.TourViewModel.OpenHomePage"/>.</summary>
+        </member>
+        <member name="F:TripPlanner.ViewModels.TourViewModel.showFriendsCommand">
+            <summary>The backing field for <see cref="P:TripPlanner.ViewModels.TourViewModel.ShowFriendsCommand"/>.</summary>
+        </member>
+        <member name="P:TripPlanner.ViewModels.TourViewModel.ShowFriendsCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:TripPlanner.ViewModels.TourViewModel.ShowFriends"/>.</summary>
+        </member>
+        <member name="F:TripPlanner.ViewModels.TourViewModel.showNotificationCommand">
+            <summary>The backing field for <see cref="P:TripPlanner.ViewModels.TourViewModel.ShowNotificationCommand"/>.</summary>
+        </member>
+        <member name="P:TripPlanner.ViewModels.TourViewModel.ShowNotificationCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:TripPlanner.ViewModels.TourViewModel.ShowNotification"/>.</summary>
+        </member>
+        <member name="F:TripPlanner.ViewModels.TourViewModel.showProfileCommand">
+            <summary>The backing field for <see cref="P:TripPlanner.ViewModels.TourViewModel.ShowProfileCommand"/>.</summary>
+        </member>
+        <member name="P:TripPlanner.ViewModels.TourViewModel.ShowProfileCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:TripPlanner.ViewModels.TourViewModel.ShowProfile"/>.</summary>
+        </member>
+        <member name="F:TripPlanner.ViewModels.TourViewModel.goBackCommand">
+            <summary>The backing field for <see cref="P:TripPlanner.ViewModels.TourViewModel.GoBackCommand"/>.</summary>
+        </member>
+        <member name="P:TripPlanner.ViewModels.TourViewModel.GoBackCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:TripPlanner.ViewModels.TourViewModel.GoBack"/>.</summary>
         </member>
         <member name="T:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs">
             <summary>
@@ -116,14 +228,17 @@
         <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.BlikAccept">
             <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "BlikAccept" generated properties.</summary>
         </member>
-        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.NumberPhoneToBLik">
-            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "NumberPhoneToBLik" generated properties.</summary>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.NumberPhoneToBlik">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "NumberPhoneToBlik" generated properties.</summary>
         </member>
         <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.TargetCountry">
             <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "TargetCountry" generated properties.</summary>
         </member>
         <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.Title">
             <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "Title" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.Tour">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "Tour" generated properties.</summary>
         </member>
         <member name="T:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs">
             <summary>
@@ -149,14 +264,17 @@
         <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.BlikAccept">
             <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "BlikAccept" generated properties.</summary>
         </member>
-        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.NumberPhoneToBLik">
-            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "NumberPhoneToBLik" generated properties.</summary>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.NumberPhoneToBlik">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "NumberPhoneToBlik" generated properties.</summary>
         </member>
         <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.TargetCountry">
             <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "TargetCountry" generated properties.</summary>
         </member>
         <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.Title">
             <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "Title" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.Tour">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "Tour" generated properties.</summary>
         </member>
     </members>
 </doc>

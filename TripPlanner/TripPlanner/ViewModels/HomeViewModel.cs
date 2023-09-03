@@ -1,9 +1,11 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using Microsoft.Maui.Controls.PlatformConfiguration.AndroidSpecific;
 using System.Collections.ObjectModel;
 using System.Linq;
 using TripPlanner.Models.DTO.TourDTOs;
 using TripPlanner.Services;
+using TripPlanner.Views.HomeViews;
 
 namespace TripPlanner.ViewModels
 {
@@ -13,11 +15,12 @@ namespace TripPlanner.ViewModels
         private readonly IDialogService DialogService;
         private readonly Configuration m_Configuration;
         public ObservableCollection<TourDTO> m_vTour { get; set; } = new ObservableCollection<TourDTO> ();
-        public TourDTO m_NearestTour { get; set; }
-        public int m_fAngle { get; set; } = 90;
-        public string m_startNameDayOfWeek { get; set; }
-        public string m_endNameDayOfWeek { get; set; }
-        public string m_DayToTour { get; set; } = "";
+        
+        //public TourDTO m_NearestTour { get; set; }
+        //public int m_fAngle { get; set; } = 90;
+        //public string m_startNameDayOfWeek { get; set; }
+        //public string m_endNameDayOfWeek { get; set; }
+        //public string m_DayToTour { get; set; } = "";
         
 
         public HomeViewModel(TourService tourService, IDialogService dialogService, Configuration configuration)
@@ -80,19 +83,29 @@ namespace TripPlanner.ViewModels
         [RelayCommand]
         async Task OpenCalendar()
         {
-            await Shell.Current.GoToAsync("//MainPage");
+            await Shell.Current.GoToAsync("Calendar");
         }
 
         [RelayCommand]
         async Task CreateTrip()
         {
-            await Shell.Current.GoToAsync("CreateTour1");
+            await Shell.Current.GoToAsync("CreateTour");
+        }
+
+        [RelayCommand]
+        async Task ShowTour(TourDTO tour)
+        {
+            var navigationParameter = new Dictionary<string, object>
+            {
+                { "passTour",  tour}
+            };
+            await Shell.Current.GoToAsync($"Tour", navigationParameter);
         }
 
         [RelayCommand]
         async Task ShowNotification()
         {
-            await Shell.Current.GoToAsync("//MainPage");
+            await Shell.Current.GoToAsync("Notifications");
         }
     }
 }
