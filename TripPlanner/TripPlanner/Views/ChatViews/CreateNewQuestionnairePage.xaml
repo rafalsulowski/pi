@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TripPlanner.Views.ChatViews.CreateNewQuestionnairePage"
+             xmlns:local="clr-namespace:TripPlanner.Behaviors"
+             xmlns:viewmodel="clr-namespace:TripPlanner.ViewModels"
+             x:DataType="viewmodel:CreateQuestionnaireViewModel"
+             Shell.NavBarIsVisible="False"
+             Shell.TabBarIsVisible="False"
+             BackgroundColor="{AppThemeBinding Light={StaticResource Secondary}, Dark={StaticResource Primary}}">
+    <ScrollView>
+        <AbsoluteLayout>
+            <Grid 
+                Margin="10,5,10,5"
+                HorizontalOptions="Fill"
+                AbsoluteLayout.LayoutFlags="WidthProportional"
+                AbsoluteLayout.LayoutBounds="0,0,1,AutoSize">
+                <ImageButton
+                    HorizontalOptions="Start"
+                    Source="{AppThemeBinding Light=arrow_back_wt.png, Dark=arrow_back_dt.png}"
+                    Command="{Binding GoBackCommand}"
+                    HeightRequest="35"
+                    WidthRequest="35"/>
+                <Label
+                    HorizontalOptions="Center"
+                    FontSize="20"
+                    VerticalOptions="Center">
+                    <Label.Text>
+                        <MultiBinding StringFormat="{}{1}">
+                            <Binding Source="Tworzenie ankiety"/>
+                            <Binding Path="Tour.Title"/>
+                        </MultiBinding>
+                    </Label.Text>
+                </Label>
+            </Grid>
+
+            <Border
+                StrokeShape="RoundRectangle 20,20,20,20"
+                Padding="10"
+                AbsoluteLayout.LayoutFlags="WidthProportional"
+                AbsoluteLayout.LayoutBounds="0,0,1,AutoSize"
+                HorizontalOptions="Center"
+                WidthRequest="300"
+                Margin="0,70,0,0">
+                <Grid
+                    BackgroundColor="{AppThemeBinding Light=white, Dark=black}"
+                    RowSpacing="5"
+                    RowDefinitions="40,*,*,30,60">
+                    <Label
+                        Grid.Row="0"
+                        FontSize="24"
+                        FontAttributes="Bold"
+                        TextColor="#52AB98"
+                        HorizontalOptions="Center"
+                        Text="Nowa ankieta"></Label>
+                    <Border
+                        Grid.Row="1"
+                        Padding="10"
+                        StrokeThickness="0"
+                        VerticalOptions="Center"
+                        BackgroundColor="#F2F2F2"
+                        StrokeShape="RoundRectangle 20,20,20,20">
+                        <Editor
+                            Keyboard="Chat"
+                            MinimumHeightRequest="80"
+                            MaximumHeightRequest="250"
+                            MaxLength="500"
+                            AutoSize="TextChanges"
+                            TextColor="#52AB98"
+                            Placeholder="To jest ankieta?"
+                            FontAttributes="Bold"
+                            Text=""
+                            FontSize="18"/>
+                    </Border>
+                    <CollectionView
+                        Grid.Row="2"
+                        MaximumWidthRequest="300"
+                        Margin="0,10,0,10"
+                        ItemsSource="{Binding Answers}"
+                        SelectionMode="None">
+                                                
+                        <CollectionView.ItemsLayout>
+                            <LinearItemsLayout
+                                Orientation="Vertical"
+                                ItemSpacing="5" />
+                        </CollectionView.ItemsLayout>
+                        
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <Grid
+                                    ColumnDefinitions="25,*,25">
+                                    <Image
+                                        Grid.Column="0"
+                                        VerticalOptions="Start"
+                                        Source="dot_sec.png"
+                                        WidthRequest="25"
+                                        HeightRequest="25"/>
+                                    <Label
+                                        Grid.Column="1"
+                                        VerticalOptions="Center"
+                                        TextColor="#52AB98"
+                                        FontAttributes="Bold"
+                                        FontSize="16"
+                                        Text="{Binding .}"/>
+                                    <ImageButton
+                                        Grid.Column="2"
+                                        VerticalOptions="End"
+                                        WidthRequest="25"
+                                        HeightRequest="25"
+                                        Source="x_sec.png"
+                                        Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:CreateQuestionnaireViewModel}}, Path=DeleteAnswerCommand}"
+                                        CommandParameter="{Binding .}"/>
+                                </Grid>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                    <ImageButton
+                        HorizontalOptions="Start"
+                        Grid.Row="3"
+                        Command="{Binding AddAnswerCommand}"
+                        Source="{AppThemeBinding Light=plus_wt.png, Dark=plus_dt.png}"
+                        WidthRequest="30"
+                        HeightRequest="30"/>
+                    <Button
+                        BackgroundColor="{StaticResource Primary}"
+                        TextColor="White"
+                        FontSize="20"
+                        FontAttributes="Bold"
+                        WidthRequest="200"
+                        CornerRadius="25"
+                        HeightRequest="50"
+                        Grid.Row="4"
+                        Text="Utwórz ankietę"/>
+                </Grid>
+            </Border>
+
+
+
+        </AbsoluteLayout>
+    </ScrollView>
+</ContentPage>
+
+
+
+
+
+
+<!--<CollectionView
+        Grid.Row="2"
+        MaximumWidthRequest="300"
+        Margin="0,10,0,10"
+        ItemsSource="{Binding Answers}"
+        SelectionMode="None">
+    <CollectionView.ItemsLayout>
+        <LinearItemsLayout
+                Orientation="Vertical"
+                ItemSpacing="5" />
+    </CollectionView.ItemsLayout>
+
+    <CollectionView.ItemTemplate>
+        <DataTemplate>
+            <Grid
+                ColumnDefinitions="25,*,25">
+                <Image
+                        Grid.Column="0"
+                        VerticalOptions="Start"
+                        Source="dot_sec.png"
+                        WidthRequest="25"
+                        HeightRequest="25"/>
+                <Label
+                        Grid.Column="1"
+                        VerticalOptions="Center"
+                        TextColor="#52AB98"
+                        FontAttributes="Bold"
+                        FontSize="16"
+                        Text="{Binding .}"/>
+                <ImageButton
+                        Grid.Column="2"
+                        VerticalOptions="End"
+                        WidthRequest="25"
+                        HeightRequest="25"
+                        Source="x_sec.png"
+                        Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:CreateQuestionnaireViewModel}}, Path=DeleteAnswerCommand}"
+                        CommandParameter="{Binding .}"/>
+            </Grid>
+        </DataTemplate>
+    </CollectionView.ItemTemplate>
+</CollectionView>-->

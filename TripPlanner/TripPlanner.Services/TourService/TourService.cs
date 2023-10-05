@@ -2,12 +2,11 @@
 using TripPlanner.DataAccess.IRepository;
 using TripPlanner.Models;
 using TripPlanner.Services.BudgetService;
+using TripPlanner.Services.GroupService;
 using TripPlanner.Services.BillService;
 using TripPlanner.Services.RouteService;
-using TripPlanner.Services.GroupService;
 using TripPlanner.Services.QuestionnaireService;
 using TripPlanner.Services.CheckListService;
-using System.Text.RegularExpressions;
 
 namespace TripPlanner.Services.TourService
 {
@@ -17,6 +16,7 @@ namespace TripPlanner.Services.TourService
         private readonly IParticipantTourRepository _ParticipantTourRepository;
         private readonly IOrganizerTourRepository _OrganizerTourRepository;
         private readonly ICultureAssistanceRepository _CultureAssistanceRepository;
+        private readonly IGroupRepository _GroupRepository;
         private readonly IBudgetService _BudgetService;
         private readonly IBillService _BillService;
         private readonly IRouteService _RouteService;
@@ -25,13 +25,14 @@ namespace TripPlanner.Services.TourService
         private readonly ICheckListService _CheckListService;
 
         public TourService(ITourRepository TourRepository, IParticipantTourRepository participantTourRepository, IOrganizerTourRepository organizerTourRepository,
-            ICultureAssistanceRepository __CultureAssistanceRepository, IBudgetService __BudgetService, IBillService __BillService, IRouteService __RouteService,
+            ICultureAssistanceRepository __CultureAssistanceRepository, IGroupRepository __GroupRepository, IBudgetService __BudgetService, IBillService __BillService, IRouteService __RouteService,
             IGroupService __GroupService, IQuestionnaireService __QuestionnaireService, ICheckListService __CheckListService)
         {
             _TourRepository = TourRepository;
             _ParticipantTourRepository = participantTourRepository;
             _OrganizerTourRepository = organizerTourRepository;
             _CultureAssistanceRepository = __CultureAssistanceRepository;
+            _GroupRepository = __GroupRepository;
             _BudgetService = __BudgetService;
             _BillService = __BillService;
             _RouteService = __RouteService;
@@ -123,6 +124,18 @@ namespace TripPlanner.Services.TourService
             return response;
         }
 
+        public async Task<RepositoryResponse<Group>> GetGroupAsync(Expression<Func<Group, bool>> filter, string? includeProperties = null)
+        {
+            var response = await _GroupRepository.GetFirstOrDefault(filter, includeProperties);
+            return response;
+        }
+
+        public async Task<RepositoryResponse<List<Group>>> GetGroupsAsync(Expression<Func<Group, bool>>? filter = null, string? includeProperties = null)
+        {
+            var response = await _GroupRepository.GetAll(filter, includeProperties);
+            return response;
+        }
+
         public async Task<RepositoryResponse<OrganizerTour>> GetOrganizerAsync(Expression<Func<OrganizerTour, bool>> filter, string? includeProperties = null)
         {
             var response = await _OrganizerTourRepository.GetFirstOrDefault(filter, includeProperties);
@@ -191,6 +204,24 @@ namespace TripPlanner.Services.TourService
         public async Task<RepositoryResponse<bool>> DeleteParticipantFromTour(ParticipantTour Contribute)
         {
             await _TourRepository.DeleteParticipantFromTour(Contribute);
+            return await _TourRepository.SaveChangesAsync();
+        }
+
+        public async Task<RepositoryResponse<bool>> AddGroupToTour(Group Group)
+        {
+            await _TourRepository.AddGroupToTour(Group);
+            return await _TourRepository.SaveChangesAsync();
+        }
+
+        public async Task<RepositoryResponse<bool>> DeleteGroupFromTour(Group Group)
+        {
+            await _TourRepository.DeleteGroupFromTour(Group);
+            return await _TourRepository.SaveChangesAsync();
+        }
+
+        public async Task<RepositoryResponse<bool>> AddChatToTour(Chat Chat)
+        {
+            await _TourRepository.AddChatToTour(Chat);
             return await _TourRepository.SaveChangesAsync();
         }
     }

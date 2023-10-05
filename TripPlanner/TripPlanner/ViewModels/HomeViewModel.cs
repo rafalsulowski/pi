@@ -3,6 +3,8 @@ using CommunityToolkit.Mvvm.Input;
 using Microsoft.Maui.Controls.PlatformConfiguration.AndroidSpecific;
 using System.Collections.ObjectModel;
 using System.Linq;
+using TripPlanner.Models;
+using TripPlanner.Models.DTO.ChatDTOs;
 using TripPlanner.Models.DTO.TourDTOs;
 using TripPlanner.Services;
 using TripPlanner.Views.HomeViews;
@@ -16,12 +18,6 @@ namespace TripPlanner.ViewModels
         private readonly Configuration m_Configuration;
         public ObservableCollection<TourDTO> m_vTour { get; set; } = new ObservableCollection<TourDTO> ();
         
-        //public TourDTO m_NearestTour { get; set; }
-        //public int m_fAngle { get; set; } = 90;
-        //public string m_startNameDayOfWeek { get; set; }
-        //public string m_endNameDayOfWeek { get; set; }
-        //public string m_DayToTour { get; set; } = "";
-        
 
         public HomeViewModel(TourService tourService, IDialogService dialogService, Configuration configuration)
         {
@@ -33,49 +29,145 @@ namespace TripPlanner.ViewModels
         
         public async void Init()
         {
-            //m_vTour = new ObservableCollection<TourDTO>(await m_TourService.GetUsersTours(m_Configuration.User.Id));
-            m_vTour.Add(new TourDTO { Title = "Wyjazd na Łódki 2023", EndDate = new DateTime(2023,8,5), StartDate = new DateTime(2023, 8, 9) ,CreateDate = new DateTime(2023,7,27)});
-            m_vTour.Add(new TourDTO { Title = "Wyjazd w Pieniny 2023", EndDate = new DateTime(2023,9,10), StartDate = new DateTime(2024, 9, 6) ,CreateDate = new DateTime(2023,6,12)});
-            m_vTour.Add(new TourDTO { Title = "Wyjazd na narty 2024", EndDate = new DateTime(2024, 2, 18), StartDate = new DateTime(2024, 2, 13), CreateDate = new DateTime(2023, 10, 24) });
+            m_vTour.Add(new TourDTO
+            {
+                Title = "Wyjazd na narty 2024",
+                //Description = Description,
+                //MaxParticipant = ParticipantMax,
+                //TargetCountry = TargetCountry,
+                CreateDate = DateTime.Now,
+                StartDate = new DateTime(2024, 2, 15),
+                EndDate = new DateTime(2024, 2, 15),
+                Chat = new ChatDTO
+                {
+                    Id = 1,
+                    Messages = new List<MessageDTO>
+                    {
+                        new MessageDTO
+                        {
+                            Content = "Witam wszystkich na wyjeździe na narty 2023, odbędzie się on 11.02.2023 - 15.02.2023, na czacie tym możecie pisać wiadomości do siebie",
+                            Date = DateTime.Now,
+                        },
+                        new MessageDTO
+                        {
+                            Content = "Cześć",
+                            Date = DateTime.Now,
+                        },
+                        new MessageDTO
+                        {
+                            Content = "Cześć",
+                            Date = DateTime.Now,
+                        },
+                        new MessageDTO
+                        {
+                            Content = "Wiadomość testowa4",
+                            Date = DateTime.Now,
+                        },
+                        new MessageDTO
+                        {
+                            Content = "Wiadomość testowa5",
+                            Date = DateTime.Now,
+                        },
+                        new MessageDTO
+                        {
+                            Content = "Wiadomość testowa6",
+                            Date = DateTime.Now,
+                        },
+                        new MessageDTO
+                        {
+                            Content = "Wiadomość testowa7",
+                            Date = DateTime.Now,
+                        },
+                        new MessageDTO
+                        {
+                            Content = "Wiadomość testowa8",
+                            Date = DateTime.Now,
+                        },
+                        new MessageDTO
+                        {
+                            Content = "Wiadomość testowa9",
+                            Date = DateTime.Now,
+                        },
+                        new MessageDTO
+                        {
+                            Content = "Wiadomość testowa10",
+                            Date = DateTime.Now,
+                        },
+                        new MessageDTO
+                        {
+                            Content = "Wiadomość testowa11",
+                            Date = DateTime.Now,
+                        },
+                        new MessageDTO
+                        {
+                            Content = "Wiadomość testowa12",
+                            Date = DateTime.Now,
+                        },
+                        new MessageDTO
+                        {
+                            Content = "Wiadomość testowa13",
+                            Date = DateTime.Now,
+                        },
+                        new MessageDTO
+                        {
+                            Content = "Wiadomość testowa14",
+                            Date = DateTime.Now,
+                        },
+                        new MessageDTO
+                        {
+                            Content = "Wiadomość testowa15",
+                            Date = DateTime.Now,
+                        },
+                        new MessageDTO
+                        {
+                            Content = "Wiadomość testowa16",
+                            Date = DateTime.Now,
+                        },
+                        new MessageDTO
+                        {
+                            Content = "Wiadomość testowa17",
+                            Date = DateTime.Now,
+                        },
+                        new MessageDTO
+                        {
+                            Content = "Wiadomość testowa18",
+                            Date = DateTime.Now,
+                        },
+                        new MessageDTO
+                        {
+                            Content = "Wiadomość testowa19",
+                            Date = DateTime.Now,
+                        },
+                        new MessageDTO
+                        {
+                            Content = "Wiadomość testowa20",
+                            Date = DateTime.Now,
+                        },
+                        new MessageDTO
+                        {
+                            Content = "Wiadomość testowa21",
+                            Date = DateTime.Now,
+                        },
+                        new MessageDTO
+                        {
+                            Content = "Wiadomość testowa22",
+                            Date = DateTime.Now,
+                        },
+                        new MessageDTO
+                        {
+                            Content = "Wiadomość testow23",
+                            Date = DateTime.Now,
+                        }
+                    }
+                }
+            });
+
+            //m_vTour.Add(new TourDTO { Title = "Wyjazd na Łódki 2023", EndDate = new DateTime(2023,8,5), StartDate = new DateTime(2023, 8, 9) ,CreateDate = new DateTime(2023,7,27)});
+            //m_vTour.Add(new TourDTO { Title = "Wyjazd w Pieniny 2023", EndDate = new DateTime(2023,9,10), StartDate = new DateTime(2024, 9, 6) ,CreateDate = new DateTime(2023,6,12)});
+            //m_vTour.Add(new TourDTO { Title = "Wyjazd na narty 2024", EndDate = new DateTime(2024, 2, 18), StartDate = new DateTime(2024, 2, 13), CreateDate = new DateTime(2023, 10, 24) });
             if (m_vTour == null || m_vTour.Count == 0)
             {
                 await Shell.Current.GoToAsync("HomePageWithoutTours");
-            }
-
-            //m_NearestTour = await m_TourService.GetNearestTour(m_Configuration.User.Id);
-            m_NearestTour = m_vTour[0];
-            if(m_NearestTour == null)
-            {
-                DialogService.ShowAlert("Błąd połączenia!", "Nie udało się uzyskać informacji o pierwszej natchodzącej wycieczce!", "OK");
-                return;
-            }
-
-            m_startNameDayOfWeek = m_Configuration.GetShortNameOfDayWeek(m_NearestTour.StartDate);
-            m_endNameDayOfWeek = m_Configuration.GetShortNameOfDayWeek(m_NearestTour.EndDate);
-
-            //Calculatin angle for Chart
-            double totalDay = Math.Abs(m_NearestTour.CreateDate.Subtract(m_NearestTour.StartDate).TotalDays);
-            double toStart = Math.Abs(m_NearestTour.StartDate.Subtract(DateTime.Today).TotalDays);
-
-            if (toStart < 1)
-            {
-                m_fAngle = 91;
-                m_DayToTour = "Dzisiaj";
-            }
-            else
-            {
-                if (toStart < 2)
-                {
-                    m_DayToTour = "Jutro";
-                }
-                else if (toStart < 3)
-                {
-                    m_DayToTour = "Pojutrze";
-                }
-                else
-                    m_DayToTour = Convert.ToInt32(toStart) + " dni";
-                
-                m_fAngle = Convert.ToInt32(90 - (360 * (totalDay - toStart) / totalDay));
             }
         }
 

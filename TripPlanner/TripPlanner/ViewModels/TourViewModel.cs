@@ -1,11 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using TripPlanner.Models;
 using TripPlanner.Models.DTO.TourDTOs;
 
 namespace TripPlanner.ViewModels
@@ -25,35 +19,33 @@ namespace TripPlanner.ViewModels
             Tour = (TourDTO)query["passTour"];
         }
 
-
-        [RelayCommand]
-        async Task OpenHomePage()
-        {
-            await Shell.Current.GoToAsync("Home");
-        }
-
-        [RelayCommand]
-        async Task ShowFriends()
-        {
-            await Shell.Current.GoToAsync("Friends");
-        }
-
-        [RelayCommand]
-        async Task ShowNotification()
-        {
-            await Shell.Current.GoToAsync("Notifications");
-        }
-
-        [RelayCommand]
-        async Task ShowProfile()
-        {
-            await Shell.Current.GoToAsync("Profile");
-        }
-
         [RelayCommand]
         async Task GoBack()
         {
-            await Shell.Current.GoToAsync("..");
+            await Shell.Current.GoToAsync("//Home");
         }
+
+        [RelayCommand]
+        async Task GoSettings()
+        {
+            await Shell.Current.GoToAsync("Settings");
+        }
+
+        [RelayCommand]
+        async Task GoChat()
+        {
+            var navigationParameter = new Dictionary<string, object>
+            {
+                { "passTour",  Tour}
+            };
+            await Shell.Current.GoToAsync($"/Chat", navigationParameter);
+        }
+
+        [RelayCommand]
+        async Task Go()
+        {
+            await Shell.Current.GoToAsync("//Tour");
+        }
+
     }
 }

@@ -21,5 +21,19 @@ namespace TripPlanner.ViewModels
         {
             await Shell.Current.GoToAsync("CreateTour");
         }
+
+        [RelayCommand]
+        async Task GoBack()
+        {
+            await Shell.Current.GoToAsync("CreateTour");
+        }
+
+        [RelayCommand]
+        async Task GoSettings()
+        {
+            await Shell.Current.GoToAsync("CreateTour");
+        }
+        
+
     }
 }

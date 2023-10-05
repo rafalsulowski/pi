@@ -3,37 +3,34 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="TripPlanner.Views.HomeViews.FriendsPage"
              xmlns:viewmodel="clr-namespace:TripPlanner.ViewModels"
-             x:DataType="viewmodel:FriendsViewModel">
+             x:DataType="viewmodel:FriendsViewModel"   
+             Shell.NavBarIsVisible="False">
 
-    <Shell.TitleView>
-        <AbsoluteLayout>
+    <AbsoluteLayout>
+        <Grid 
+            Margin="10,5,10,5"
+            HorizontalOptions="Fill"
+            AbsoluteLayout.LayoutFlags="WidthProportional"
+            AbsoluteLayout.LayoutBounds="0,0,1,AutoSize">
             <ImageButton
                 HorizontalOptions="Start"
-                AbsoluteLayout.LayoutFlags="WidthProportional"
-                AbsoluteLayout.LayoutBounds="5,10,1,30"
-                Source="calendar3.png"
-                Command="{Binding OpenCalendarCommand}"/>
+                Source="{AppThemeBinding Light=arrow_back_wt.png, Dark=arrow_back_dt.png}"
+                Command="{Binding GoBackCommand}"
+                HeightRequest="35"
+                WidthRequest="35"/>
 
             <Label
                 HorizontalOptions="Center"
                 FontSize="20"
-                AbsoluteLayout.LayoutBounds="0,0,1,38"
-                AbsoluteLayout.LayoutFlags="WidthProportional"
-                VerticalOptions="End" Text="TripPlanner"/>
+                VerticalOptions="Center"
+                Text="Kalendarz"/>
 
-            <ImageButton
+            <ImageButton 
                 HorizontalOptions="End"
-                AbsoluteLayout.LayoutBounds="0,10,.98,30"
-                AbsoluteLayout.LayoutFlags="WidthProportional"
-                Source="plus_circle.png"
-                Command="{Binding CreateTripCommand}"/>
-        </AbsoluteLayout>
-    </Shell.TitleView>
-    
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to friednsPage"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+                Source="{AppThemeBinding Light=plus_wt.png, Dark=plus_dt.png}"
+                Command="{Binding GoSettingsCommand}"
+                HeightRequest="30"
+                WidthRequest="30"/>
+        </Grid>
+    </AbsoluteLayout>
 </ContentPage>

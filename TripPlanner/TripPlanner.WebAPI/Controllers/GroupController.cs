@@ -5,6 +5,7 @@ using TripPlanner.Services.UserService;
 using TripPlanner.Services.TourService;
 using TripPlanner.Models.DTO.GroupDTOs;
 using TripPlanner.Services.ChatService;
+using TripPlanner.Models.DTO.ChatDTOs;
 
 namespace TripPlanner.WebAPI.Controllers
 {
@@ -65,8 +66,13 @@ namespace TripPlanner.WebAPI.Controllers
             }
 
             Group newGroup = Group;
-
             var response = await _GroupService.CreateGroup(newGroup);
+
+            //create chat to this group
+            CreateChatDTO chatDTO = new CreateChatDTO();
+            chatDTO.GroupId = newGroup.Id;
+
+
             return Ok(response.Data);
         }
 

@@ -1,6 +1,7 @@
 ﻿
 using TripPlanner.Models.DTO.BillDTOs;
 using TripPlanner.Models.DTO.BudgetDTOs;
+using TripPlanner.Models.DTO.ChatDTOs;
 using TripPlanner.Models.DTO.CheckListDTOs;
 using TripPlanner.Models.DTO.CultureDTOs;
 using TripPlanner.Models.DTO.GroupDTOs;
@@ -22,8 +23,10 @@ namespace TripPlanner.Models.DTO.TourDTOs
         public ICollection<BillDTO> Bills { get; set; } = new List<BillDTO>();
         public ICollection<CultureAssistanceDTO> CultureAssistances { get; set; } = new List<CultureAssistanceDTO>();
         public BudgetDTO? Budget { get; set; }
+        public ChatDTO? Chat { get; set; }
 
         public string Title { get; set; } = string.Empty;
+        public string Description { get; set; } = string.Empty;
         public string TargetCountry { get; set; } = string.Empty;
         public int MaxParticipant { get; set; }
         public DateTime StartDate { get; set; }
@@ -48,7 +51,9 @@ namespace TripPlanner.Models.DTO.TourDTOs
                 Bills = data.Bills.Select(u => (Bill)u).ToList(),
                 CultureAssistances = data.CultureAssistances.Select(u => (CultureAssistance)u).ToList(),
                 Budget = data.Budget,
+                Chat = data.Chat,
                 Title = data.Title,
+                Description = data.Description,
                 TargetCountry = data.TargetCountry,
                 MaxParticipant = data.MaxParticipant,
                 StartDate = data.StartDate,

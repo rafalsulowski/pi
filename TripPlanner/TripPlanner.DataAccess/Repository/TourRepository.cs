@@ -103,5 +103,52 @@ namespace TripPlanner.DataAccess.Repository
             }
             return new RepositoryResponse<bool> { Data = true };
         }
+
+        public async Task<RepositoryResponse<bool>> AddGroupToTour(Group Group)
+        {
+            var GroupDB = _context.Groups.FirstOrDefault(u => u.TourId == Group.TourId && u.Id == Group.Id);
+            if (GroupDB == null)
+            {
+                _context.Groups.Add(Group);
+            }
+            else
+            {
+                _context.Groups.Attach(Group);
+                _context.Entry(Group).State = EntityState.Modified;
+            }
+            return new RepositoryResponse<bool> { Data = true };
+        }
+
+        public async Task<RepositoryResponse<bool>> DeleteGroupFromTour(Group Group)
+        {
+            var res = _context.Groups.FirstOrDefault(u => u.Id == Group.Id && u.TourId == Group.TourId);
+            if (res != null)
+            {                
+                //first have to remove chat
+                var chat = _context.Chats.FirstOrDefault(u => u.GroupId == res.Id);
+                if(chat != null)
+                {
+                    _context.Chats.Remove(chat);
+                }
+                
+                _context.Groups.Remove(res);
+            }
+            return new RepositoryResponse<bool> { Data = true };
+        }
+
+        public async Task<RepositoryResponse<bool>> AddChatToTour(Chat Chat)
+        {
+            var ChatDB = _context.Chats.FirstOrDefault(u => u.TourId == Chat.TourId && u.Id == Chat.Id);
+            if (ChatDB == null)
+            {
+                _context.Chats.Add(Chat);
+            }
+            else
+            {
+                _context.Chats.Attach(Chat);
+                _context.Entry(Chat).State = EntityState.Modified;
+            }
+            return new RepositoryResponse<bool> { Data = true };
+        }
     }
 }

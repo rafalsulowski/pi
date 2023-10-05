@@ -12,5 +12,8 @@ namespace TripPlanner.DataAccess.IRepository
         Task<RepositoryResponse<bool>> DeleteOrganizerFromTour(OrganizerTour Contribute);
         Task<RepositoryResponse<bool>> AddCultureAssistanceToTour(CultureAssistance Contribute);
         Task<RepositoryResponse<bool>> DeleteCultureAssistanceFromTour(CultureAssistance Contribute);
+        Task<RepositoryResponse<bool>> AddGroupToTour(Group Group);
+        Task<RepositoryResponse<bool>> DeleteGroupFromTour(Group Group);
+        Task<RepositoryResponse<bool>> AddChatToTour(Chat Chat);
     }
 }

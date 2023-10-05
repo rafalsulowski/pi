@@ -4,35 +4,35 @@
              x:Class="TripPlanner.Views.HomeViews.CalendarPage"
              xmlns:viewmodel="clr-namespace:TripPlanner.ViewModels"
              x:DataType="viewmodel:CalendarViewModel"
-             Shell.TabBarIsVisible="False">
+             Shell.TabBarIsVisible="False"
+             Shell.NavBarIsVisible="False">
 
-    <Shell.TitleView>
-        <AbsoluteLayout>
+    <AbsoluteLayout>
+        <Grid 
+            Margin="10,5,10,5"
+            HorizontalOptions="Fill"
+            AbsoluteLayout.LayoutFlags="WidthProportional"
+            AbsoluteLayout.LayoutBounds="0,0,1,AutoSize">
             <ImageButton
                 HorizontalOptions="Start"
-                AbsoluteLayout.LayoutFlags="WidthProportional"
-                AbsoluteLayout.LayoutBounds="5,10,1,30"
-                Source="arrow_back.png"
-                Command="{Binding GoBackCommand}"/>
+                Source="{AppThemeBinding Light=arrow_back_wt.png, Dark=arrow_back_dt.png}"
+                Command="{Binding GoBackCommand}"
+                HeightRequest="35"
+                WidthRequest="35"/>
 
             <Label
                 HorizontalOptions="Center"
                 FontSize="20"
-                AbsoluteLayout.LayoutBounds="0,0,1,38"
-                AbsoluteLayout.LayoutFlags="WidthProportional"
-                VerticalOptions="End" 
+                VerticalOptions="Center"
                 Text="Kalendarz"/>
-        </AbsoluteLayout>
-    </Shell.TitleView>
-    <Shell.BackButtonBehavior>
-        <BackButtonBehavior Command="{Binding GoBackCommand}" IsEnabled="True"/>
-    </Shell.BackButtonBehavior>
 
-
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to calendar page"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+            <ImageButton 
+                HorizontalOptions="End"
+                Source="{AppThemeBinding Light=plus_wt.png, Dark=plus_dt.png}"
+                Command="{Binding GoSettingsCommand}"
+                HeightRequest="30"
+                WidthRequest="30"/>
+        </Grid>
+    </AbsoluteLayout>
+    
 </ContentPage>

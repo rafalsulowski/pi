@@ -1,8 +1,10 @@
 ﻿using Microsoft.Extensions.Logging;
 using Microsoft.Maui.Controls;
+using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.Net.Http.Json;
 using TripPlanner.Models;
+using TripPlanner.Models.DTO.QuestionnaireDTOs;
 using TripPlanner.Models.DTO.TourDTOs;
 using TripPlanner.Models.DTO.UserDTOs;
 
@@ -20,21 +22,27 @@ namespace TripPlanner.Services
             m_Configuration = configuration;
         }
 
-        public async Task<TourDTO> GetNearestTour(int userId)
+        public async Task<TourDTO> CreateTour(TourDTO tour)
         {
             try
             {
-                HttpResponseMessage response = m_HttpClient.GetAsync($"{m_Configuration.WebApiUrl}/Tour/GetNearestTour/{userId}").Result;
+                string json = JsonConvert.SerializeObject(tour);
+                StringContent httpContent = new StringContent(json, System.Text.Encoding.UTF8, "application/json");
+                HttpResponseMessage response = m_HttpClient.PostAsync($"{m_Configuration.WebApiUrl}/Tour/Create", httpContent).Result;
                 if (response.IsSuccessStatusCode)
                 {
-                    var Tour = await response.Content.ReadFromJsonAsync<TourDTO>();
-                    return Tour;
+                    var resp = await response.Content.ReadFromJsonAsync<TourDTO>();
+                    return resp;
                 }
             }
-            catch (Exception e) { }
+            catch (Exception e) 
+            {
+                //dorobic loggera
+            }
 
             return null;
         }
+
 
         public async Task<List<TourDTO>> GetUsersTours(int userId)
         {
@@ -51,5 +59,23 @@ namespace TripPlanner.Services
 
             return null;
         }
+
+
+
+        //public async Task<TourDTO> GetNearestTour(int userId)
+        //{
+        //    try
+        //    {
+        //        HttpResponseMessage response = m_HttpClient.GetAsync($"{m_Configuration.WebApiUrl}/Tour/GetNearestTour/{userId}").Result;
+        //        if (response.IsSuccessStatusCode)
+        //        {
+        //            var Tour = await response.Content.ReadFromJsonAsync<TourDTO>();
+        //            return Tour;
+        //        }
+        //    }
+        //    catch (Exception e) { }
+
+        //    return null;
+        //}
     }
 }

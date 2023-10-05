@@ -11,7 +11,7 @@ namespace TripPlanner.Models.DTO.GroupDTOs
         public ICollection<ParticipantGroupDTO> Participants { get; set; } = new List<ParticipantGroupDTO>();
 
         public string Name { get; set; } = string.Empty;
-        public int Volume { get; set; }
+        public int Volume { get; set; } //max participants count
 
 
         public static implicit operator Group(GroupDTO data)

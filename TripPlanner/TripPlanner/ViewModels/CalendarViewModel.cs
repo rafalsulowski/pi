@@ -10,5 +10,11 @@ namespace TripPlanner.ViewModels
         {
             await Shell.Current.GoToAsync("..");
         }
+
+        [RelayCommand]
+        async Task GoSettings()
+        {
+            await Shell.Current.GoToAsync("..");
+        }
     }
 }

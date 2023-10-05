@@ -6,6 +6,8 @@ using TripPlanner.Views.TourViews;
 using TripPlanner.Services;
 using TripPlanner.ViewModels;
 using TripPlanner.Views;
+using TripPlanner.Views.ChatViews;
+using CommunityToolkit.Maui;
 
 namespace TripPlanner;
 
@@ -16,6 +18,7 @@ public static class MauiProgram
 		var builder = MauiApp.CreateBuilder();
 		builder
 			.UseMauiApp<App>()
+			.UseMauiCommunityToolkit()
 			.ConfigureFonts(fonts =>
 			{
 				fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
@@ -42,6 +45,8 @@ public static class MauiProgram
 		builder.Services.AddTransient<FriendsViewModel>();
 		builder.Services.AddTransient<ProfileViewModel>();
 		builder.Services.AddTransient<TourViewModel>();
+		builder.Services.AddTransient<ChatViewModel>();
+		builder.Services.AddTransient<CreateQuestionnaireViewModel>();
 
         //Views
         builder.Services.AddTransient<MainPage>();
@@ -53,6 +58,8 @@ public static class MauiProgram
 		builder.Services.AddTransient<ProfilePage>();
 		builder.Services.AddTransient<FriendsPage>();
 		builder.Services.AddTransient<TourPage>();
+		builder.Services.AddTransient<ChatPage>();
+		builder.Services.AddTransient<CreateNewQuestionnairePage>();
 
 
 		return builder.Build();

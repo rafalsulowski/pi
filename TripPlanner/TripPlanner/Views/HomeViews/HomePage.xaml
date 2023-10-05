@@ -3,186 +3,86 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:viewmodel="clr-namespace:TripPlanner.ViewModels"
              xmlns:models="clr-namespace:TripPlanner.Models.DTO.TourDTOs;assembly=TripPlanner.Models"
-             xmlns:drawables="clr-namespace:TripPlanner.Drawables"
              x:Class="TripPlanner.Views.HomeViews.HomePage"
-             x:DataType="viewmodel:HomeViewModel">
+             x:DataType="viewmodel:HomeViewModel"
+             Shell.NavBarIsVisible="False">
 
-    <Shell.TitleView>
-        <AbsoluteLayout>
+    <AbsoluteLayout>
+        <Grid
+            Margin="10,5,10,5"
+            HorizontalOptions="Fill"
+            AbsoluteLayout.LayoutFlags="WidthProportional"
+            AbsoluteLayout.LayoutBounds="0,0,1,AutoSize">
+
             <ImageButton
+                Source="{AppThemeBinding Light=calendar_wt.png, Dark=calendar_dt.png}"
                 HorizontalOptions="Start"
-                AbsoluteLayout.LayoutFlags="WidthProportional"
-                AbsoluteLayout.LayoutBounds="0,10,1,30"
-                Source="calendar3.png"
+                WidthRequest="30"
                 Command="{Binding OpenCalendarCommand}"/>
 
             <Label
                 HorizontalOptions="Center"
                 FontSize="20"
-                AbsoluteLayout.LayoutBounds="0,0,1,38"
-                AbsoluteLayout.LayoutFlags="WidthProportional"
-                VerticalOptions="End"
+                VerticalOptions="Center"
                 Text="TripPlanner"/>
 
             <ImageButton
+                Source="{AppThemeBinding Light=plus_wt.png, Dark=plus_dt.png}"
                 HorizontalOptions="End"
-                AbsoluteLayout.LayoutBounds="0,10,.98,30"
-                AbsoluteLayout.LayoutFlags="WidthProportional"
-                Source="plus_circle.png"
+                HeightRequest="30"
+                WidthRequest="30"
                 Command="{Binding CreateTripCommand}"/>
-        </AbsoluteLayout>
-    </Shell.TitleView>
-    
-    <ContentPage.Resources>
-        <drawables:ChartDrawable x:Key="chartDrawables"/>
-    </ContentPage.Resources>
+        </Grid>
 
-        <AbsoluteLayout>
-            <!--<StackLayout
-                AbsoluteLayout.LayoutFlags="WidthProportional"
-                AbsoluteLayout.LayoutBounds="0,0,1,250">
-                <Border
-	                StrokeShape="Rectangle"
-                    WidthRequest="206"
-                    HeightRequest="206"
-                    HorizontalOptions="CenterAndExpand"
-	                VerticalOptions="CenterAndExpand"
-                    StrokeThickness="0">
-                    <GraphicsView
-                        x:Name="chart"
-                        AbsoluteLayout.LayoutFlags="WidthProportional"
-	                    HorizontalOptions="CenterAndExpand"
-	                    VerticalOptions="CenterAndExpand"
-	                    Drawable="{StaticResource chartDrawables}"/>
-                </Border>
-            </StackLayout>
 
-            <ImageButton
-                HorizontalOptions="Start"
-                AbsoluteLayout.LayoutBounds="5,10,1,30"
-                AbsoluteLayout.LayoutFlags="WidthProportional"
-                Source="bell.png"
-                Command="{Binding ShowNotificationCommand}"/>
-
-            <Label 
-                HorizontalOptions="Center"
-                FontSize="16" 
-                Text="Pozostało do:"
-                AbsoluteLayout.LayoutFlags="WidthProportional"
-                AbsoluteLayout.LayoutBounds="0,80,1,25"/>
-            <Label 
-                HorizontalOptions="Center"
-                VerticalOptions="Center"
-                HorizontalTextAlignment="Center"
-                AbsoluteLayout.LayoutFlags="WidthProportional" 
-                AbsoluteLayout.LayoutBounds="0,105,1,40"
-                FontSize="14" 
-                Text="{Binding m_NearestTour.Title}" 
-                LineBreakMode="CharacterWrap"
-                WidthRequest="145"/>
-            <Label 
-                HorizontalOptions="Center"
-                VerticalOptions="Center"
-                FontSize="24" 
-                Text="{Binding m_DayToTour}"
-                AbsoluteLayout.LayoutFlags="WidthProportional" 
-                AbsoluteLayout.LayoutBounds="0,145,1,35"/>
-
-            <HorizontalStackLayout 
-                HorizontalOptions="Center" 
-                AbsoluteLayout.LayoutBounds="0,240,1,25"
-                AbsoluteLayout.LayoutFlags="WidthProportional" 
-                Spacing="30">
-                <VerticalStackLayout>
-                    <Label 
-                        TextColor="#C5C5C5" 
-                        Text="Rozpoczecie" 
-                        AbsoluteLayout.LayoutFlags="WidthProportional" 
-                        HorizontalOptions="Center"
-                        FontAttributes="Bold" 
-                        AbsoluteLayout.LayoutBounds="10,255,0.9,25"/>
-                    <Label 
-                        AbsoluteLayout.LayoutFlags="WidthProportional" 
-                        HorizontalOptions="Center"
-                        AbsoluteLayout.LayoutBounds="0,320,1,25">
-                        <Label.Text>
-                            <MultiBinding StringFormat="{}{0}. {1:dd.MM.yyyy}">
-                                <Binding Path="m_startNameDayOfWeek"/>
-                                <Binding Path="m_NearestTour.StartDate"/>
-                            </MultiBinding>
-                        </Label.Text>
-                    </Label>
-                </VerticalStackLayout>
-                <VerticalStackLayout>
-                    <Label 
-                        TextColor="#C5C5C5" 
-                        Text="Zakończenie" 
-                        AbsoluteLayout.LayoutFlags="WidthProportional" 
-                        HorizontalOptions="Center"
-                        FontAttributes="Bold" 
-                        AbsoluteLayout.LayoutBounds="0,285,0.8,25"/>
-                    <Label 
-                        AbsoluteLayout.LayoutFlags="WidthProportional" 
-                        HorizontalOptions="Center" 
-                        AbsoluteLayout.LayoutBounds="90,320,1,25">
-                        <Label.Text>
-                            <MultiBinding StringFormat="{}{0}. {1:dd.MM.yyyy}">
-                                <Binding Path="m_endNameDayOfWeek"/>
-                                <Binding Path="m_NearestTour.EndDate"/>
-                            </MultiBinding>
-                        </Label.Text>
-                    </Label>
-                </VerticalStackLayout>
-            </HorizontalStackLayout>-->
-
-            <Label
+        <Label
                 FontSize="17"
                 Text="Natchodzące wyjazdy"
                 FontAttributes="Bold"
                 AbsoluteLayout.LayoutFlags="XProportional"
-                AbsoluteLayout.LayoutBounds="0.1,10,AutoSize,AutoSize"/>
+                AbsoluteLayout.LayoutBounds="0.1,110,AutoSize,AutoSize"/>
 
-            <Border
-                StrokeThickness="0"
-                Padding="20"
-                AbsoluteLayout.LayoutFlags="XProportional" 
-                AbsoluteLayout.LayoutBounds="0.5,40,AutoSize,AutoSize">
-                <CollectionView
+        <Border
+            StrokeThickness="0"
+            Padding="20"
+            AbsoluteLayout.LayoutFlags="XProportional" 
+            AbsoluteLayout.LayoutBounds="0.5,140,AutoSize,AutoSize">
+            <CollectionView
                     ItemsSource="{Binding m_vTour}"
                     SelectionMode="None">
-                    <CollectionView.ItemsLayout>
-                        <LinearItemsLayout
+                <CollectionView.ItemsLayout>
+                    <LinearItemsLayout
                         Orientation="Vertical"
                         ItemSpacing="16" />
-                    </CollectionView.ItemsLayout>
-                    <CollectionView.ItemTemplate>
-                        <DataTemplate x:DataType="models:TourDTO">
-                            <AbsoluteLayout HeightRequest="100" WidthRequest="300">
-                                <Border 
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="models:TourDTO">
+                        <AbsoluteLayout HeightRequest="100" WidthRequest="300">
+                            <Border 
+                                    StrokeThickness="0"
                                     StrokeShape="RoundRectangle 10,10,10,10"
                                     ZIndex="1">
-                                    <Image
+                                <Image
                                         Source="TourIcon/pic1.jpg"
                                         WidthRequest="100"
                                         HeightRequest="100"
                                         Aspect="Fill">
-                                        <Image.GestureRecognizers>
-                                            <TapGestureRecognizer 
-                                                Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:HomeViewModel}}, Path=ShowTourCommand}"
-                                                CommandParameter="{Binding .}"/>
-                                        </Image.GestureRecognizers>
-                                    </Image>
-                                </Border>
-                                <Border
-                                    Stroke="#2B6777"
-                                    StrokeThickness="1"
+                                </Image>
+                            </Border>
+                            <Border 
+                                    StrokeThickness="0"
                                     StrokeShape="RoundRectangle 10,10,10,10"
                                     AbsoluteLayout.LayoutFlags="WidthProportional"
                                     AbsoluteLayout.LayoutBounds="0,0,1,100"
                                     ZIndex="0">
-                                    <Rectangle BackgroundColor="{AppThemeBinding Light={StaticResource #F1F1F1}, Dark={StaticResource Gray600}}"/>
-                                </Border>
-                                <Label 
+                                <Rectangle BackgroundColor="{AppThemeBinding Light=#F1F1F1, Dark={StaticResource Gray600}}"/>
+                                <Border.GestureRecognizers>
+                                    <TapGestureRecognizer 
+                                                Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:HomeViewModel}}, Path=ShowTourCommand}"
+                                                CommandParameter="{Binding .}"/>
+                                </Border.GestureRecognizers>
+                            </Border>
+                            <Label 
                                     FontSize="14"
                                     AbsoluteLayout.LayoutBounds="105,5,AutoSize,AutoSize"
                                     HorizontalOptions="Start"
@@ -191,24 +91,24 @@
                                     TextColor="#52AB98"
                                     Text="{Binding Title}"
                                     LineBreakMode="WordWrap"/>
-                                <Label 
+                            <Label 
                                     TextColor="#52AB98"
                                     FontAttributes="Bold"
                                     AbsoluteLayout.LayoutFlags="XProportional"
                                     Margin="0,0,10,0"
                                     AbsoluteLayout.LayoutBounds="1,80,AutoSize,AutoSize"
                                     HorizontalOptions="End">
-                                    <Label.Text>
-                                        <MultiBinding StringFormat="{}{0:dd.MM.yyyy} - {1:dd.MM.yyyy}">
-                                            <Binding Path="StartDate"/>
-                                            <Binding Path="EndDate"/>
-                                        </MultiBinding>
-                                    </Label.Text>
-                                </Label>
-                            </AbsoluteLayout>
-                        </DataTemplate>
-                    </CollectionView.ItemTemplate>
-                </CollectionView>
-            </Border>
-        </AbsoluteLayout>
+                                <Label.Text>
+                                    <MultiBinding StringFormat="{}{0:dd.MM.yyyy} - {1:dd.MM.yyyy}">
+                                        <Binding Path="StartDate"/>
+                                        <Binding Path="EndDate"/>
+                                    </MultiBinding>
+                                </Label.Text>
+                            </Label>
+                        </AbsoluteLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </Border>
+    </AbsoluteLayout>
 </ContentPage>

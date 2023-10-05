@@ -5,6 +5,7 @@ namespace TripPlanner.Models.DTO.ChatDTOs
     public class ChatDTO
     {
         public int Id { get; set; }
+        public int TourId { get; set; }
         public int GroupId { get; set; }
         public ICollection<QuestionnaireDTO> Questionnaires { get; set; } = new List<QuestionnaireDTO>();
         public ICollection<MessageDTO> Messages { get; set; } = new List<MessageDTO>();
@@ -18,6 +19,7 @@ namespace TripPlanner.Models.DTO.ChatDTOs
             return new Chat
             {
                 Id = data.Id,
+                TourId = data.TourId,
                 GroupId = data.GroupId,
                 Questionnaires = data.Questionnaires.Select(u => (Questionnaire)u).ToList(),
                 Messages = data.Messages.Select(u => (Message)u).ToList(),

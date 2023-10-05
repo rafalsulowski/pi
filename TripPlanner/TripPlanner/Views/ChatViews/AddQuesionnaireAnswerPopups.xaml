@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<toolkit:Popup xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             x:Class="TripPlanner.Views.ChatViews.AddQuesionnaireAnswerPopups"
+             Color="Transparent" 
+             CanBeDismissedByTappingOutsideOfPopup="True">
+    <ScrollView 
+        BackgroundColor="{AppThemeBinding Light=white, Dark=black}">
+        <Border 
+            StrokeThickness="0"
+            VerticalOptions="Center"
+            StrokeShape="RoundRectangle 20,20,20,20">
+            <VerticalStackLayout
+                Margin="25"
+                Spacing="10"
+                WidthRequest="250"
+                VerticalOptions="CenterAndExpand">
+                <Border
+                    Padding="10"
+                    StrokeThickness="0"
+                    VerticalOptions="Center"
+                    BackgroundColor="#F2F2F2"
+                    StrokeShape="RoundRectangle 20,20,20,20">
+                    <Editor
+                        x:Name="m_Answer"
+                        Keyboard="Chat"
+                        MinimumHeightRequest="35"
+                        MaximumHeightRequest="250"
+                        MaxLength="300"
+                        AutoSize="TextChanges"
+                        TextColor="#52AB98"
+                        Placeholder="tak"
+                        FontAttributes="Bold"
+                        FontSize="18"/>
+                </Border>
+
+                <Button
+                    Clicked="Submit_Clicked"
+                    TextColor="White"
+                    FontSize="20"
+                    FontAttributes="Bold"
+                    WidthRequest="100"
+                    CornerRadius="15"
+                    HeightRequest="50"
+                    Text="Dodaj"/>
+            </VerticalStackLayout>
+        </Border>
+    </ScrollView>
+</toolkit:Popup>

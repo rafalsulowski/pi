@@ -1,3 +1,5 @@
+using Microsoft.Maui.ApplicationModel;
+using System.Runtime.InteropServices;
 using TripPlanner.Models.DTO.TourDTOs;
 using TripPlanner.ViewModels;
 

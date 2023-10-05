@@ -1,4 +1,5 @@
-﻿using TripPlanner.Views.HomeViews;
+﻿using TripPlanner.Views.ChatViews;
+using TripPlanner.Views.HomeViews;
 using TripPlanner.Views.TourViews;
 
 namespace TripPlanner;
@@ -8,8 +9,7 @@ public partial class AppShell : Shell
 	public AppShell()
 	{
 		InitializeComponent();
-
-		Routing.RegisterRoute("Home", typeof(HomePage));
+        Routing.RegisterRoute("Home", typeof(HomePage));
 		Routing.RegisterRoute("HomePageWithoutTours", typeof(HomePageWithoutTours));
 		Routing.RegisterRoute("CreateTour", typeof(CreateTour1));
 		Routing.RegisterRoute("Calendar", typeof(CalendarPage));
@@ -17,5 +17,8 @@ public partial class AppShell : Shell
 		Routing.RegisterRoute("Profile", typeof(ProfilePage));
 		Routing.RegisterRoute("Friends", typeof(FriendsPage));
 		Routing.RegisterRoute("Tour", typeof(TourPage));
+		Routing.RegisterRoute("Tour/Chat", typeof(ChatPage));
+		Routing.RegisterRoute("Tour/Chat/CreateQuestionnaire", typeof(CreateNewQuestionnairePage));
+	
 	}
 }

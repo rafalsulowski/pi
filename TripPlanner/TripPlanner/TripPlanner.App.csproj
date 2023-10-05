@@ -32,24 +32,19 @@
 
 	<ItemGroup>
 		<!-- App Icon -->
-		<MauiIcon Include="Resources\AppIcon\appicon.svg" ForegroundFile="Resources\AppIcon\appiconfg.svg" Color="#512BD4" />
+		<MauiIcon Include="Resources\AppIcon\appicon.svg" ForegroundFile="Resources\AppIcon\appiconfg.svg" Color="#2B6777" />
 
 		<!-- Splash Screen -->
 		<MauiSplashScreen Include="Resources\Splash\splash.svg" Color="#512BD4" BaseSize="128,128" />
 
 		<!-- Images -->
 		<MauiImage Include="Resources\Images\*" />
-		<MauiImage Update="Resources\Images\dotnet_bot.svg" BaseSize="168,208" />
 
 		<!-- Custom Fonts -->
 		<MauiFont Include="Resources\Fonts\*" />
 
 		<!-- Raw Assets (also remove the "Resources\Raw" prefix) -->
 		<MauiAsset Include="Resources\Raw\**" LogicalName="%(RecursiveDir)%(Filename)%(Extension)" />
-	</ItemGroup>
-
-	<ItemGroup>
-	  <MauiImage Remove="Resources\Images\user.jpg" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -67,18 +62,53 @@
 	  <None Remove="Resources\Fonts\Roboto-Regular.ttf" />
 	  <None Remove="Resources\Fonts\Roboto-Thin.ttf" />
 	  <None Remove="Resources\Fonts\Roboto-ThinItalic.ttf" />
-	  <None Remove="Resources\Images\arrow_Back.svg" />
-	  <None Remove="Resources\Images\bell.svg" />
-	  <None Remove="Resources\Images\calendar3.svg" />
-	  <None Remove="Resources\Images\calendar_date.svg" />
-	  <None Remove="Resources\Images\info_circle.svg" />
-	  <None Remove="Resources\Images\plus_circle.svg" />
-	  <None Remove="Resources\Images\star.svg" />
+	  <None Remove="Resources\Images\airplane_wt.svg" />
+	  <None Remove="Resources\Images\arrow_next_dt.svg" />
+	  <None Remove="Resources\Images\arrow_next_wt.svg" />
+	  <None Remove="Resources\Images\bell_dt.svg" />
+	  <None Remove="Resources\Images\bell_wt.svg" />
+	  <None Remove="Resources\Images\calendar_dt.svg" />
+	  <None Remove="Resources\Images\calendar_wt.svg" />
+	  <None Remove="Resources\Images\cash_dt.svg" />
+	  <None Remove="Resources\Images\cash_wt.svg" />
+	  <None Remove="Resources\Images\chat_dt.svg" />
+	  <None Remove="Resources\Images\chat_wt.svg" />
+	  <None Remove="Resources\Images\checklist_dt.svg" />
+	  <None Remove="Resources\Images\checklist_wt.svg" />
+	  <None Remove="Resources\Images\cloud_sun_dt.svg" />
+	  <None Remove="Resources\Images\cloud_sun_wt.svg" />
+	  <None Remove="Resources\Images\dot_dt.svg" />
+	  <None Remove="Resources\Images\dot_sec.svg" />
+	  <None Remove="Resources\Images\dot_wt.svg" />
+	  <None Remove="Resources\Images\globe_dt.svg" />
+	  <None Remove="Resources\Images\globe_wt.svg" />
+	  <None Remove="Resources\Images\list_check_dt.svg" />
+	  <None Remove="Resources\Images\list_check_wt.svg" />
+	  <None Remove="Resources\Images\list_stars_dt.svg" />
+	  <None Remove="Resources\Images\list_stars_wt.svg" />
+	  <None Remove="Resources\Images\people_dt.svg" />
+	  <None Remove="Resources\Images\people_wt.svg" />
+	  <None Remove="Resources\Images\person_chat_dt.svg" />
+	  <None Remove="Resources\Images\person_chat_wt.svg" />
+	  <None Remove="Resources\Images\person_wt.svg" />
+	  <None Remove="Resources\Images\plus_dt.svg" />
+	  <None Remove="Resources\Images\plus_wt.svg" />
+	  <None Remove="Resources\Images\send_dt.svg" />
+	  <None Remove="Resources\Images\send_wt.svg" />
+	  <None Remove="Resources\Images\settings_chat_dt.svg" />
+	  <None Remove="Resources\Images\settings_chat_wt.svg" />
+	  <None Remove="Resources\Images\tour_dt.svg" />
+	  <None Remove="Resources\Images\tour_wt.svg" />
+	  <None Remove="Resources\Images\x_dt.svg" />
+	  <None Remove="Resources\Images\x_sec.svg" />
+	  <None Remove="Resources\Images\x_wt.svg" />
 	</ItemGroup>
 
 	<ItemGroup>
+		<PackageReference Include="CommunityToolkit.Maui" Version="6.0.0" />
 		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.1" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="7.0.0" />
+		<PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -86,6 +116,15 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <MauiXaml Update="Views\ChatViews\AddQuesionnaireAnswerPopups.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\ChatViews\ChatPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\ChatViews\CreateNewQuestionnairePage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Views\HomeViews\CalendarPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
@@ -117,7 +156,6 @@
 
 	<ItemGroup>
 	  <Folder Include="Views\BudgetViews\" />
-	  <Folder Include="Views\ChatViews\" />
 	  <Folder Include="Views\HarmonogramViews\" />
 	</ItemGroup>
 

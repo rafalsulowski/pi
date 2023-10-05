@@ -56,29 +56,46 @@ namespace TripPlanner.WebAPI.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<RepositoryResponse<bool>>> Create([FromBody] CreateQuestionnaireDTO Questionnaire)
+        public async Task<ActionResult<RepositoryResponse<QuestionnaireDTO>>> Create([FromBody] CreateQuestionnaireDTO Questionnaire)
         {
             var resp = await _TourService.GetTourAsync(u => u.Id == Questionnaire.TourId, "Questionnaires");
             if (resp.Data == null)
             {
-                return new RepositoryResponse<bool> { Success = false, Message = $"Nie istnieje wycieczka o id = {Questionnaire.TourId}" };
+                return new RepositoryResponse<QuestionnaireDTO> { Data = null, Success = false, Message = $"Nie istnieje wycieczka o id = {Questionnaire.TourId}" };
             }
             var resp2 = await _UserService.GetUserAsync(u => u.Id == Questionnaire.UserId);
             if (resp2.Data == null)
             {
-                return new RepositoryResponse<bool> { Success = false, Message = $"Nie istnieje użytkownik o id = {Questionnaire.UserId}" };
+                return new RepositoryResponse<QuestionnaireDTO> { Data = null, Success = false, Message = $"Nie istnieje użytkownik o id = {Questionnaire.UserId}" };
             }
             var res = resp.Data.Questionnaires.FirstOrDefault(u => u.Question == Questionnaire.Question);
             if (res != null)
             {
-                return new RepositoryResponse<bool> { Success = false, Message = $"Dana wycieczka posiada już ankiete z pytaniem = {Questionnaire.Question}" };
+                return new RepositoryResponse<QuestionnaireDTO> { Data = null, Success = false, Message = $"Dana wycieczka posiada już ankiete z pytaniem = {Questionnaire.Question}" };
             }
 
             Questionnaire newQuestionnaire = Questionnaire;
             newQuestionnaire.Date = DateTime.Now;
 
             var response = await _QuestionnaireService.CreateQuestionnaire(newQuestionnaire);
-            return Ok(response.Data);
+            if (response == null)
+            {
+                return new RepositoryResponse<QuestionnaireDTO> { Data = null, Success = false, Message = $"Nie udało się utworzyć ankiety!" };
+            }
+
+            //add answers
+            foreach (var answer in Questionnaire.Answers)
+            {
+                answer.QuestionnaireId = newQuestionnaire.Id;
+                var res2 = await _QuestionnaireService.AddAnswerToQuestionnaire(answer);
+
+                if (res2.Success == false)
+                {
+                    return new RepositoryResponse<QuestionnaireDTO> { Data = null, Success = false, Message = $"Nie udało się dodać odpowiedzi {answer.Answer} do ankiety o id = {newQuestionnaire.Id}!" };
+                }
+            }
+
+            return Ok(newQuestionnaire);
         }
 
         [HttpGet("{QuestionnaireId}/Answers")]

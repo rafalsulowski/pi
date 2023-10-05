@@ -6,6 +6,9 @@ using TripPlanner.Services.CultureService;
 using TripPlanner.Services.TourService;
 using TripPlanner.Services.UserService;
 using TripPlanner.Models.DTO.CheckListDTOs;
+using TripPlanner.Models.DTO.GroupDTOs;
+using TripPlanner.Services.GroupService;
+using TripPlanner.Models.DTO.ChatDTOs;
 
 namespace TripPlanner.WebAPI.Controllers
 {
@@ -16,12 +19,14 @@ namespace TripPlanner.WebAPI.Controllers
         private readonly ITourService _TourService;
         private readonly IUserService _UserService;
         private readonly ICultureService _CultureService;
+        private readonly IGroupService _GroupService;
 
-        public TourController(ITourService TourService, IUserService userService, ICultureService cultureService)
+        public TourController(ITourService TourService, IUserService userService, ICultureService cultureService, IGroupService groupService)
         {
             _TourService = TourService;
             _UserService = userService;
             _CultureService = cultureService;
+            _GroupService = groupService;
         }
 
         // GET: api/<ValuesController>
@@ -150,20 +155,47 @@ namespace TripPlanner.WebAPI.Controllers
                 return new RepositoryResponse<int> { Data = -1, Success = false, Message = $"Nie istnieje użytkownik o id = {Tour.UserId}" };
             }
 
+            //1. Create new Tour
             Tour newTour = Tour;
             var response = await _TourService.CreateTour(newTour);
 
-            //add first ogranizer
-            OrganizerTour organizer = new OrganizerTour();
+            if(response.Success == false)
+            {
+                return new RepositoryResponse<int> { Data = -1, Success = false, Message = $"Nie udało się utowrzyć wycieczki" };
+            }
+
+            //2. Add first ogranizer
+            OrganizerTourDTO organizer = new OrganizerTourDTO();
             organizer.UserId = Tour.UserId;
             organizer.TourId = newTour.Id;
             var response2 = await _TourService.AddOrganizerToTour(organizer);
 
-            //add first participant
-            ParticipantTour participant = new ParticipantTour();
-            participant.UserId = participant.UserId;
+            if (response2.Success == false)
+            {
+                return new RepositoryResponse<int> { Data = -1, Success = false, Message = $"Nie udało się utowrzyć wycieczki ze względu na błąd podczas dodawania ogranizatora" };
+            }
+
+            //3. Add first participant (organizer is also participant)
+            ParticipantTourDTO participant = new ParticipantTourDTO();
+            participant.UserId = Tour.UserId;
             participant.TourId = newTour.Id;
             var response3 = await _TourService.AddParticipantToTour(participant);
+
+            if (response3.Success == false)
+            {
+                return new RepositoryResponse<int> { Data = -1, Success = false, Message = $"Nie udało się utowrzyć wycieczki ze względu na błąd podczas dodawania pierwszego uczestnika (organizatora)" };
+            }
+
+            //4. Add main chat
+            Chat chat = new Chat();
+            chat.TourId = newTour.Id;
+            chat.GroupId = -1; //TODO sprawdzic czy nie wywala blad podczas dodawania//
+            var response4 = await _TourService.AddChatToTour(chat);
+
+            if(response4.Success == false)
+            {
+                return new RepositoryResponse<int> { Data = -1, Success = false, Message = $"Nie udało się utowrzyć wycieczki ze względu na błąd podczas dodawania czatu głównego" };
+            }
 
             return Ok(newTour.Id);
         }
@@ -324,7 +356,7 @@ namespace TripPlanner.WebAPI.Controllers
         }
 
         [HttpGet("{TourId}/CultureAssistances")]
-        public async Task<ActionResult<RepositoryResponse<List<CultureAssistanceDTO>>>> GetCultureAssistance(int TourId)
+        public async Task<ActionResult<RepositoryResponse<List<CultureAssistanceDTO>>>> GetCulturesAssistance(int TourId)
         {
             var response = await _TourService.GetCulturesAssistanceAsync(u => u.TourId == TourId);
             List<CultureAssistanceDTO> res = response.Data.Select(u => (CultureAssistanceDTO)u).ToList();
@@ -363,6 +395,66 @@ namespace TripPlanner.WebAPI.Controllers
             return Ok(response.Data);
         }
 
+        [HttpPost("addGroup")]
+        public async Task<ActionResult<RepositoryResponse<bool>>> AddGroup([FromBody] GroupDTO group)
+        {
+            var resp = await _GroupService.GetGroupAsync(u => u.Id == group.Id);
+            if (resp.Data == null)
+            {
+                return new RepositoryResponse<bool> { Success = false, Message = $"Nie istnieje grupa o id = {group.Id}" };
+            }
+            var resp2 = await _TourService.GetTourAsync(u => u.Id == group.TourId);
+            if (resp2.Data == null)
+            {
+                return new RepositoryResponse<bool> { Success = false, Message = $"Nie istnieje wycieczka o id = {group.TourId}" };
+            }
+            
+            Group elem = group;
+
+            var response = await _TourService.AddGroupToTour(elem);
+            return Ok(response.Data);
+        }
+
+        [HttpGet("{TourId}/Groups")]
+        public async Task<ActionResult<RepositoryResponse<List<GroupDTO>>>> GetGroups(int TourId)
+        {
+            var response = await _TourService.GetGroupsAsync(u => u.TourId == TourId);
+            List<GroupDTO> res = response.Data.Select(u => (GroupDTO)u).ToList();
+            return Ok(res);
+        }
+
+        [HttpGet("{TourId}/Group/{groupId}")]
+        public async Task<ActionResult<RepositoryResponse<GroupDTO>>> GetGroupById(int TourId, int groupId)
+        {
+            var response = await _TourService.GetGroupAsync(u => u.TourId == TourId && u.Id == groupId);
+            GroupDTO res = response.Data;
+            return Ok(res);
+        }
+
+        [HttpDelete("{TourId}/deleteGroup/{groupId}")]
+        public async Task<ActionResult<RepositoryResponse<bool>>> DeleteGroup(int TourId, int groupId)
+        {
+            var resp = await _GroupService.GetGroupAsync(u => u.Id == groupId);
+            if (resp.Data == null)
+            {
+                return new RepositoryResponse<bool> { Success = false, Message = $"Nie istnieje grupa o id = {groupId}" };
+            }
+            var resp2 = await _TourService.GetTourAsync(u => u.Id == TourId);
+            if (resp2.Data == null)
+            {
+                return new RepositoryResponse<bool> { Success = false, Message = $"Nie istnieje wycieczka o id = {TourId}" };
+            }
+
+            Group elem = new Group
+            {
+                Id = groupId,
+                TourId = TourId
+            };
+
+            var response = await _TourService.DeleteGroupFromTour(elem);
+            return Ok(response.Data);
+        }
+
         // PUT api/<ValuesController>/5
         [HttpPut("{id}")]
         public async Task<ActionResult<RepositoryResponse<bool>>> Put(int id, [FromBody] EditTourDTO Tour)
@@ -380,6 +472,7 @@ namespace TripPlanner.WebAPI.Controllers
             tour.CreateDate = Tour.CreateDate;
             tour.TargetCountry = Tour.TargetCountry;
             tour.Title = Tour.Title;
+            tour.Description = Tour.Description;
             tour.Id = id;
 
             var response = await _TourService.UpdateTour(tour);

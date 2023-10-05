@@ -4,123 +4,231 @@
              x:Class="TripPlanner.Views.TourViews.TourPage"
              xmlns:viewmodel="clr-namespace:TripPlanner.ViewModels"
              x:DataType="viewmodel:TourViewModel"
-             Shell.NavBarIsVisible="False"
-             BackgroundColor="White">
-    <AbsoluteLayout>
-        <ScrollView>
-            <AbsoluteLayout>
-                <VerticalStackLayout>
-                    <Label 
-                        Text="Welcome to tour page"
-                        VerticalOptions="Center"
-                        HorizontalOptions="Center" />
-                    <Label Text="{Binding Tour.Title}"/>
-                </VerticalStackLayout>
-            </AbsoluteLayout>
-        </ScrollView>
+             Shell.NavBarIsVisible="False">
 
-        
-        <!--Menu--><!--
-        <VerticalStackLayout BackgroundColor="White"
-            AbsoluteLayout.LayoutFlags="XProportional,YProportional,WidthProportional"
-            AbsoluteLayout.LayoutBounds="0.5,0.99,1,AutoSize">
-            <BoxView
-                Color="#C5C5C5"
-                HeightRequest="1"
-                VerticalOptions="Fill"/>
-            <Grid
-            Padding="0,10,0,0"
-            ColumnDefinitions="*,*,*,*"
-            ColumnSpacing="0"
-            RowSpacing="5">
+    <ScrollView>
+        <AbsoluteLayout>
+
+        <Grid 
+            Margin="10,5,10,5"
+            HorizontalOptions="Fill"
+            AbsoluteLayout.LayoutFlags="WidthProportional"
+            AbsoluteLayout.LayoutBounds="0,0,1,AutoSize">
+            <ImageButton
+                HorizontalOptions="Start"
+                Source="{AppThemeBinding Light=arrow_back_wt.png, Dark=arrow_back_dt.png}"
+                Command="{Binding GoBackCommand}"
+                HeightRequest="35"
+                WidthRequest="35"/>
+
+            <Label
+                HorizontalOptions="Center"
+                FontSize="20"
+                VerticalOptions="Center"
+                Text="{Binding Tour.Title}"/>
+
+            <ImageButton 
+                HorizontalOptions="End"
+                Source="{AppThemeBinding Light=setting_wt.png, Dark=setting_dt.png}"
+                Command="{Binding GoSettingsCommand}"
+                HeightRequest="25"
+                WidthRequest="25"/>
+        </Grid>
+
+
+        <Grid
+            AbsoluteLayout.LayoutBounds="0.5,0,AutoSize,AutoSize"
+            AbsoluteLayout.LayoutFlags="XProportional"
+            Margin="0,70,0,30"
+            RowSpacing="15"
+            ColumnSpacing="15">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="25" />
-                    <RowDefinition Height="25" />
+                    <RowDefinition Height="150"></RowDefinition>
+                    <RowDefinition Height="150"></RowDefinition>
+                    <RowDefinition Height="150"></RowDefinition>
+                    <RowDefinition Height="150"></RowDefinition>
                 </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="150"></ColumnDefinition>
+                    <ColumnDefinition Width="150"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
 
-                <ImageButton
+                <Border
+                Grid.Row="0"
                 Grid.Column="0"
+                Stroke="{AppThemeBinding Light=#2B6777, Dark=White}"
+                StrokeShape="RoundRectangle 15,15,15,15"
+                BackgroundColor="#52AB98">
+                    <Border.GestureRecognizers>
+                        <TapGestureRecognizer 
+                            Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:TourViewModel}}, Path=GoChatCommand}"/>
+                    </Border.GestureRecognizers>
+                    <VerticalStackLayout VerticalOptions="Center" Spacing="5">
+                        <Image
+                        Source="chat_dt.png"
+                        WidthRequest="30"
+                        HeightRequest="30"/>
+                        <Label
+                        HorizontalOptions="Center"
+                        Text="czat grupowy"
+                        TextColor="White"/>
+                    </VerticalStackLayout>
+                </Border>
+
+                <Border
                 Grid.Row="0"
-                HorizontalOptions="Center"
-                WidthRequest="25"
-                HeightRequest="25"
-                Source="airplane.png"
-                Command="{Binding OpenHomePageCommand}">
-                </ImageButton>
-                <Label
+                Grid.Column="1"
+                Stroke="{AppThemeBinding Light=#2B6777, Dark=White}"
+                StrokeShape="RoundRectangle 15,15,15,15"
+                BackgroundColor="#52AB98">
+                    <Border.GestureRecognizers>
+                        <TapGestureRecognizer 
+                            Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:TourViewModel}}, Path=GoBudgetCommand}"/>
+                    </Border.GestureRecognizers>
+                    <VerticalStackLayout VerticalOptions="Center" Spacing="5">
+                        <Image
+                        Source="cash_dt.png"
+                        WidthRequest="30"
+                        HeightRequest="30"/>
+                        <Label
+                        HorizontalOptions="Center"
+                        Text="Rachunki (splitwise)"
+                        TextColor="White"/>
+                    </VerticalStackLayout>
+                </Border>
+
+                <Border
+                Grid.Row="1"
                 Grid.Column="0"
-                Grid.Row="1"
-                Text="Wyjazdy"
-                HorizontalOptions="Center"
-                FontAttributes="Bold">
-                    <Label.GestureRecognizers>
-                        <TapGestureRecognizer Command="{Binding OpenHomePageCommand}"/>
-                    </Label.GestureRecognizers>
-                </Label>
+                Stroke="{AppThemeBinding Light=#2B6777, Dark=White}"
+                StrokeShape="RoundRectangle 15,15,15,15"
+                BackgroundColor="#52AB98">
+                    <Border.GestureRecognizers>
+                        <TapGestureRecognizer 
+                            Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:TourViewModel}}, Path=GoParticipantsCommand}"/>
+                    </Border.GestureRecognizers>
+                    <VerticalStackLayout VerticalOptions="Center" Spacing="5">
+                        <Image
+                        Source="people_dt.png"
+                        WidthRequest="30"
+                        HeightRequest="30"/>
+                        <Label
+                        HorizontalOptions="Center"
+                        Text="Uczestnicy i grupy"
+                        TextColor="White"/>
+                    </VerticalStackLayout>
+                </Border>
 
-                <ImageButton
+                <Border
+                Grid.Row="1"
                 Grid.Column="1"
-                Grid.Row="0"
-                WidthRequest="25"
-                HeightRequest="25"
-                HorizontalOptions="Center"
-                Source="person.png"
-                Command="{Binding ShowFriendsCommand}">
-                </ImageButton>
-                <Label
+                Stroke="{AppThemeBinding Light=#2B6777, Dark=White}"
+                StrokeShape="RoundRectangle 15,15,15,15"
+                BackgroundColor="#52AB98">
+                    <Border.GestureRecognizers>
+                        <TapGestureRecognizer 
+                            Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:TourViewModel}}, Path=GoCalendarCommand}"/>
+                    </Border.GestureRecognizers>
+                    <VerticalStackLayout VerticalOptions="Center" Spacing="5">
+                        <Image
+                        Source="calendar_dt.png"
+                        WidthRequest="30"
+                        HeightRequest="30"/>
+                        <Label
+                        HorizontalOptions="Center"
+                        Text="Harmonogram"
+                        TextColor="White"/>
+                    </VerticalStackLayout>
+                </Border>
+
+                <Border
+                Grid.Row="2"
+                Grid.Column="0"
+                Stroke="{AppThemeBinding Light=#2B6777, Dark=White}"
+                StrokeShape="RoundRectangle 15,15,15,15"
+                BackgroundColor="#52AB98">
+                    <Border.GestureRecognizers>
+                        <TapGestureRecognizer 
+                            Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:TourViewModel}}, Path=GoCultureCommand}"/>
+                    </Border.GestureRecognizers>
+                    <VerticalStackLayout VerticalOptions="Center" Spacing="5">
+                        <Image
+                        Source="globe_dt.png"
+                        WidthRequest="30"
+                        HeightRequest="30"/>
+                        <Label
+                        HorizontalOptions="Center"
+                        Text="Dodatek kulturowy"
+                        TextColor="White"/>
+                    </VerticalStackLayout>
+                </Border>
+
+                <Border
+                Grid.Row="2"
                 Grid.Column="1"
-                Grid.Row="1"
-                Text="Znajomi"
-                HorizontalOptions="Center"
-                FontAttributes="Bold">
-                    <Label.GestureRecognizers>
-                        <TapGestureRecognizer Command="{Binding ShowFriendsCommand}"/>
-                    </Label.GestureRecognizers>
-                </Label>
+                Stroke="{AppThemeBinding Light=#2B6777, Dark=White}"
+                StrokeShape="RoundRectangle 15,15,15,15"
+                BackgroundColor="#52AB98">
+                    <Border.GestureRecognizers>
+                        <TapGestureRecognizer 
+                            Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:TourViewModel}}, Path=GoWeatherCommand}"/>
+                    </Border.GestureRecognizers>
+                    <VerticalStackLayout VerticalOptions="Center" Spacing="5">
+                        <Image
+                        Source="cloud_sun_dt.png"
+                        WidthRequest="30"
+                        HeightRequest="30"/>
+                        <Label
+                        HorizontalOptions="Center"
+                        Text="Pogoda"
+                        TextColor="White"/>
+                    </VerticalStackLayout>
+                </Border>
 
-                <ImageButton
-                Grid.Column="2"
-                Grid.Row="0"
-                WidthRequest="25"
-                HeightRequest="25"
-                HorizontalOptions="Center"
-                Source="person.png"
-                Command="{Binding ShowNotificationCommand}">
-                </ImageButton>
-                <Label
-                Grid.Column="2"
-                Grid.Row="1"
-                HorizontalOptions="Center"
-                Text="Akcje"
-                FontAttributes="Bold">
-                    <Label.GestureRecognizers>
-                        <TapGestureRecognizer Command="{Binding ShowNotificationCommand}"/>
-                    </Label.GestureRecognizers>
-                </Label>
+                <Border
+                Grid.Row="3"
+                Grid.Column="0"
+                Stroke="{AppThemeBinding Light=#2B6777, Dark=White}"
+                StrokeShape="RoundRectangle 15,15,15,15"
+                BackgroundColor="#52AB98">
+                    <Border.GestureRecognizers>
+                        <TapGestureRecognizer 
+                            Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:TourViewModel}}, Path=GoRoutesCommand}"/>
+                    </Border.GestureRecognizers>
+                    <VerticalStackLayout VerticalOptions="Center" Spacing="5">
+                        <Image
+                        Source="tour_dt.png"
+                        WidthRequest="30"
+                        HeightRequest="30"/>
+                        <Label
+                        HorizontalOptions="Center"
+                        Text="Trasy"
+                        TextColor="White"/>
+                    </VerticalStackLayout>
+                </Border>
 
-                <ImageButton
-                Grid.Column="3"
-                Grid.Row="0"
-                WidthRequest="25"
-                HeightRequest="25"
-                HorizontalOptions="Center"
-                CornerRadius="8"
-                Source="user1.png"
-                Command="{Binding ShowProfileCommand}">
-                </ImageButton>
-                <Label
-                Grid.Column="3"
-                Grid.Row="1"
-                HorizontalOptions="Center"
-                Text="Konto"
-                FontAttributes="Bold">
-                    <Label.GestureRecognizers>
-                        <TapGestureRecognizer Command="{Binding ShowProfileCommand}"/>
-                    </Label.GestureRecognizers>
-                </Label>
+                <Border
+                Grid.Row="3"
+                Grid.Column="1"
+                Stroke="{AppThemeBinding Light=#2B6777, Dark=White}"
+                StrokeShape="RoundRectangle 15,15,15,15"
+                BackgroundColor="#52AB98">
+                    <Border.GestureRecognizers>
+                        <TapGestureRecognizer 
+                            Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:TourViewModel}}, Path=GoCheckListCommand}"/>
+                    </Border.GestureRecognizers>
+                    <VerticalStackLayout VerticalOptions="Center" Spacing="5">
+                        <Image
+                        Source="checklist_dt.png"
+                        WidthRequest="30"
+                        HeightRequest="30"/>
+                        <Label
+                        HorizontalOptions="Center"
+                        Text="Checklisty i ankiety"
+                        TextColor="White"/>
+                    </VerticalStackLayout>
+                </Border>
             </Grid>
-        </VerticalStackLayout>
-        --><!--End Menu-->
-
-    </AbsoluteLayout>
+        </AbsoluteLayout>
+    </ScrollView>
 </ContentPage>

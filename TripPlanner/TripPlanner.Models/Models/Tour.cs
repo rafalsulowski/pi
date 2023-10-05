@@ -21,8 +21,10 @@ namespace TripPlanner.Models
         public ICollection<Bill> Bills { get; set; } = new List<Bill>();
         public ICollection<CultureAssistance> CultureAssistances { get; set; } = new List<CultureAssistance>();
         public Budget? Budget { get; set; }
+        public Chat? Chat { get; set; }
 
         public string Title { get; set; } = string.Empty;
+        public string Description { get; set; } = string.Empty;
         public string TargetCountry { get; set; } = string.Empty;
         public int MaxParticipant { get; set; }
         public DateTime StartDate { get; set; }
@@ -47,7 +49,9 @@ namespace TripPlanner.Models
                 Bills = data.Bills.Select(u => (BillDTO)u).ToList(),
                 CultureAssistances = data.CultureAssistances.Select(u => (CultureAssistanceDTO)u).ToList(),
                 Budget = data.Budget,
+                Chat = data.Chat,
                 Title = data.Title,
+                Description = data.Description,
                 TargetCountry = data.TargetCountry,
                 MaxParticipant = data.MaxParticipant,
                 StartDate = data.StartDate,
