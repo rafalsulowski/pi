@@ -3,7 +3,10 @@ public class MonoPackageManager_Resources {
 	public static String[] Assemblies = new String[]{
 		/* We need to ensure that "TripPlanner.App.dll" comes first in this list. */
 		"TripPlanner.App.dll",
+		"CommunityToolkit.Maui.dll",
+		"CommunityToolkit.Maui.Core.dll",
 		"CommunityToolkit.Mvvm.dll",
+		"MathConverter.Maui.dll",
 		"Microsoft.EntityFrameworkCore.dll",
 		"Microsoft.EntityFrameworkCore.Abstractions.dll",
 		"Microsoft.EntityFrameworkCore.Relational.dll",
@@ -21,6 +24,7 @@ public class MonoPackageManager_Resources {
 		"Microsoft.Extensions.Options.dll",
 		"Microsoft.Extensions.Primitives.dll",
 		"Microsoft.Maui.Graphics.dll",
+		"Newtonsoft.Json.dll",
 		"Xamarin.AndroidX.Activity.dll",
 		"Xamarin.AndroidX.AppCompat.dll",
 		"Xamarin.AndroidX.AppCompat.AppCompatResources.dll",

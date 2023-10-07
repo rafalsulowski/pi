@@ -1,16 +1,12 @@
-﻿namespace TripPlanner.Models.DTO.QuestionnaireDTOs
+﻿using TripPlanner.Models.DTO.ChatDTOs;
+using TripPlanner.Models.Models.Message;
+
+namespace TripPlanner.Models.DTO.QuestionnaireDTOs
 {
-    public class QuestionnaireDTO
+    public class QuestionnaireDTO : MessageDTO
     {
-        public int Id { get; set; }
-
-        public int UserId { get; set; }
         public int TourId { get; set; }
-        public int? ChatId { get; set; }
         public ICollection<QuestionnaireAnswerDTO> Answers { get; set; } = new List<QuestionnaireAnswerDTO>();
-
-        public string Question { get; set; } = string.Empty;
-        public DateTime Date { get; set; }
 
 
         public static implicit operator Questionnaire(QuestionnaireDTO data)
@@ -25,7 +21,7 @@
                 TourId = data.TourId,
                 ChatId = data.ChatId,
                 Answers = data.Answers.Select(u => (QuestionnaireAnswer)u).ToList(),
-                Question = data.Question,
+                Content = data.Content,
                 Date = data.Date
             };
         }

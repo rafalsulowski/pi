@@ -12,6 +12,7 @@ public class MonoPackageManager_Resources {
 		"CommunityToolkit.Maui.Core.dll",
 		"CommunityToolkit.Mvvm.dll",
 		"GoogleGson.dll",
+		"MathConverter.Maui.dll",
 		"Microsoft.EntityFrameworkCore.dll",
 		"Microsoft.EntityFrameworkCore.Abstractions.dll",
 		"Microsoft.EntityFrameworkCore.Relational.dll",

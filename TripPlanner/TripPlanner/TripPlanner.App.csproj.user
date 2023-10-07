@@ -14,7 +14,16 @@
     <MauiXaml Update="Views\ChatViews\AddQuesionnaireAnswerPopups.xaml">
       <SubType>Designer</SubType>
     </MauiXaml>
+    <MauiXaml Update="Views\ChatViews\ChatAdditionalMenuPopup.xaml">
+      <SubType>Designer</SubType>
+    </MauiXaml>
     <MauiXaml Update="Views\ChatViews\CreateNewQuestionnairePage.xaml">
+      <SubType>Designer</SubType>
+    </MauiXaml>
+    <MauiXaml Update="Views\ChatViews\PeopleChatListPopups.xaml">
+      <SubType>Designer</SubType>
+    </MauiXaml>
+    <MauiXaml Update="Views\ChatViews\QuestionnairePopup.xaml">
       <SubType>Designer</SubType>
     </MauiXaml>
   </ItemGroup>

@@ -5,6 +5,7 @@ using TripPlanner.Services.UserService;
 using TripPlanner.Services.TourService;
 using TripPlanner.Models.DTO.ChatDTOs;
 using TripPlanner.Services.GroupService;
+using TripPlanner.Models.Models.Message;
 
 namespace TripPlanner.WebAPI.Controllers
 {

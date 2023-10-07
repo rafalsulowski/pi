@@ -1,5 +1,6 @@
 ﻿using System.Linq.Expressions;
 using TripPlanner.Models;
+using TripPlanner.Models.Models.Message;
 
 namespace TripPlanner.DataAccess.IRepository
 {

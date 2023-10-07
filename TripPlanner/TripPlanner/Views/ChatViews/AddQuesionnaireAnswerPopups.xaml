@@ -5,24 +5,23 @@
              x:Class="TripPlanner.Views.ChatViews.AddQuesionnaireAnswerPopups"
              Color="Transparent" 
              CanBeDismissedByTappingOutsideOfPopup="True">
-    <ScrollView 
-        BackgroundColor="{AppThemeBinding Light=white, Dark=black}">
-        <Border 
+    <Border
             StrokeThickness="0"
             VerticalOptions="Center"
+            BackgroundColor="{AppThemeBinding Light=white, Dark=black}"
             StrokeShape="RoundRectangle 20,20,20,20">
-            <VerticalStackLayout
+        <VerticalStackLayout
                 Margin="25"
                 Spacing="10"
                 WidthRequest="250"
                 VerticalOptions="CenterAndExpand">
-                <Border
+            <Border
                     Padding="10"
                     StrokeThickness="0"
                     VerticalOptions="Center"
                     BackgroundColor="#F2F2F2"
                     StrokeShape="RoundRectangle 20,20,20,20">
-                    <Editor
+                <Editor
                         x:Name="m_Answer"
                         Keyboard="Chat"
                         MinimumHeightRequest="35"
@@ -33,18 +32,18 @@
                         Placeholder="tak"
                         FontAttributes="Bold"
                         FontSize="18"/>
-                </Border>
+            </Border>
 
-                <Button
+            <Button
+                BackgroundColor="{StaticResource Primary}"
                     Clicked="Submit_Clicked"
-                    TextColor="White"
+                    TextColor="{AppThemeBinding Light=white, Dark=black}"
                     FontSize="20"
                     FontAttributes="Bold"
                     WidthRequest="100"
                     CornerRadius="15"
                     HeightRequest="50"
                     Text="Dodaj"/>
-            </VerticalStackLayout>
-        </Border>
-    </ScrollView>
+        </VerticalStackLayout>
+    </Border>
 </toolkit:Popup>

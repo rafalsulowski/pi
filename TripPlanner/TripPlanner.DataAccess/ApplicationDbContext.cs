@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System.Reflection.Metadata;
 using TripPlanner.Models;
+using TripPlanner.Models.Models.Message;
 
 namespace TripPlanner.DataAccess
 {

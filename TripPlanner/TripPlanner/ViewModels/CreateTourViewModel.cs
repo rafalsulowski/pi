@@ -3,6 +3,7 @@ using CommunityToolkit.Mvvm.Input;
 using System.Collections.ObjectModel;
 using TripPlanner.Models;
 using TripPlanner.Models.DTO.TourDTOs;
+using TripPlanner.Models.Models.Message;
 using TripPlanner.Services;
 
 namespace TripPlanner.ViewModels

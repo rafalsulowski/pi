@@ -45,5 +45,45 @@ namespace TripPlanner.Services
 
             return null;
         }
+
+        public async Task<List<string>> GetAnswerVoter(int tourId)
+        {
+            //try
+            //{
+            //    HttpResponseMessage response = m_HttpClient.GetAsync($"{m_Configuration.WebApiUrl}/Tour/GetUserTours/{userId}").Result;
+            //    if (response.IsSuccessStatusCode)
+            //    {
+            //        var tours = await response.Content.ReadFromJsonAsync<List<TourDTO>>();
+            //        return tours;
+            //    }
+            //}
+            //catch (Exception e) { }
+
+            //return null;
+
+            return new List<string> { "Adam", "Michał", "Alicja", "Kuba", "Rafał", "Maris" };
+        }
+
+
+        public async Task<bool> VoteForAnswer(int userId, int answerId)
+        {
+            //try
+            //{
+            //    HttpResponseMessage response = m_HttpClient.GetAsync($"{m_Configuration.WebApiUrl}/Tour/GetUserTours/{userId}").Result;
+            //    if (response.IsSuccessStatusCode)
+            //    {
+            //        var tours = await response.Content.ReadFromJsonAsync<List<TourDTO>>();
+            //        return tours;
+            //    }
+            //}
+            //catch (Exception e) { }
+
+            //return null;
+
+            return true;
+        }
+
+        
+
     }
 }

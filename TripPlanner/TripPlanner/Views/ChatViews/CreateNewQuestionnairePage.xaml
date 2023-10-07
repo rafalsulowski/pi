@@ -69,7 +69,7 @@
                             TextColor="#52AB98"
                             Placeholder="To jest ankieta?"
                             FontAttributes="Bold"
-                            Text=""
+                            Text="{Binding Question}"
                             FontSize="18"/>
                     </Border>
                     <CollectionView
@@ -130,6 +130,7 @@
                         CornerRadius="25"
                         HeightRequest="50"
                         Grid.Row="4"
+                        Command="{Binding CreateCommand}"
                         Text="Utwórz ankietę"/>
                 </Grid>
             </Border>

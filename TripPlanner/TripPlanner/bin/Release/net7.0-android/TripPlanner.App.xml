@@ -4,7 +4,203 @@
         <name>TripPlanner.App</name>
     </assembly>
     <members>
+        <member name="M:TripPlanner.Services.DialogService.ShowAlert(System.String,System.String,System.String)">
+            <summary>
+            "Fire and forget". Method returns BEFORE showing alert.
+            </summary>
+        </member>
+        <member name="M:TripPlanner.Services.DialogService.ShowConfirmation(System.String,System.String,System.Action{System.Boolean},System.String,System.String)">
+            <summary>
+            "Fire and forget". Method returns BEFORE showing alert.
+            </summary>
+            <param name="callback">Action to perform afterwards.</param>
+        </member>
+        <member name="M:TripPlanner.Services.IDialogService.ShowConfirmation(System.String,System.String,System.Action{System.Boolean},System.String,System.String)">
+            <param name="callback">Action to perform afterwards.</param>
+        </member>
+        <member name="T:TripPlanner.ViewModels.CalendarViewModel">
+            <inheritdoc/>
+            <inheritdoc/>
+        </member>
+        <member name="F:TripPlanner.ViewModels.CalendarViewModel.goBackCommand">
+            <summary>The backing field for <see cref="P:TripPlanner.ViewModels.CalendarViewModel.GoBackCommand"/>.</summary>
+        </member>
+        <member name="P:TripPlanner.ViewModels.CalendarViewModel.GoBackCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:TripPlanner.ViewModels.CalendarViewModel.GoBack"/>.</summary>
+        </member>
+        <member name="F:TripPlanner.ViewModels.CalendarViewModel.goSettingsCommand">
+            <summary>The backing field for <see cref="P:TripPlanner.ViewModels.CalendarViewModel.GoSettingsCommand"/>.</summary>
+        </member>
+        <member name="P:TripPlanner.ViewModels.CalendarViewModel.GoSettingsCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:TripPlanner.ViewModels.CalendarViewModel.GoSettings"/>.</summary>
+        </member>
+        <member name="T:TripPlanner.ViewModels.ChatViewModel">
+            <inheritdoc/>
+            <inheritdoc/>
+            <inheritdoc/>
+            <inheritdoc/>
+            <inheritdoc/>
+            <inheritdoc/>
+        </member>
+        <member name="P:TripPlanner.ViewModels.ChatViewModel.Tour">
+            <inheritdoc cref="F:TripPlanner.ViewModels.ChatViewModel.tour"/>
+        </member>
+        <member name="P:TripPlanner.ViewModels.ChatViewModel.Chat">
+            <inheritdoc cref="F:TripPlanner.ViewModels.ChatViewModel.chat"/>
+        </member>
+        <member name="P:TripPlanner.ViewModels.ChatViewModel.Messages">
+            <inheritdoc cref="F:TripPlanner.ViewModels.ChatViewModel.messages"/>
+        </member>
+        <member name="P:TripPlanner.ViewModels.ChatViewModel.PromptLabel">
+            <inheritdoc cref="F:TripPlanner.ViewModels.ChatViewModel.promptLabel"/>
+        </member>
+        <member name="P:TripPlanner.ViewModels.ChatViewModel.IsRefreshing">
+            <inheritdoc cref="F:TripPlanner.ViewModels.ChatViewModel.isRefreshing"/>
+        </member>
+        <member name="P:TripPlanner.ViewModels.ChatViewModel.Message">
+            <inheritdoc cref="F:TripPlanner.ViewModels.ChatViewModel.message"/>
+        </member>
+        <member name="F:TripPlanner.ViewModels.ChatViewModel.goBackCommand">
+            <summary>The backing field for <see cref="P:TripPlanner.ViewModels.ChatViewModel.GoBackCommand"/>.</summary>
+        </member>
+        <member name="P:TripPlanner.ViewModels.ChatViewModel.GoBackCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:TripPlanner.ViewModels.ChatViewModel.GoBack"/>.</summary>
+        </member>
+        <member name="F:TripPlanner.ViewModels.ChatViewModel.sendMessageCommand">
+            <summary>The backing field for <see cref="P:TripPlanner.ViewModels.ChatViewModel.SendMessageCommand"/>.</summary>
+        </member>
+        <member name="P:TripPlanner.ViewModels.ChatViewModel.SendMessageCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:TripPlanner.ViewModels.ChatViewModel.SendMessage"/>.</summary>
+        </member>
+        <member name="F:TripPlanner.ViewModels.ChatViewModel.loadMoreMessagesCommand">
+            <summary>The backing field for <see cref="P:TripPlanner.ViewModels.ChatViewModel.LoadMoreMessagesCommand"/>.</summary>
+        </member>
+        <member name="P:TripPlanner.ViewModels.ChatViewModel.LoadMoreMessagesCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:TripPlanner.ViewModels.ChatViewModel.LoadMoreMessages"/>.</summary>
+        </member>
+        <member name="F:TripPlanner.ViewModels.ChatViewModel.showMoreChatActionCommand">
+            <summary>The backing field for <see cref="P:TripPlanner.ViewModels.ChatViewModel.ShowMoreChatActionCommand"/>.</summary>
+        </member>
+        <member name="P:TripPlanner.ViewModels.ChatViewModel.ShowMoreChatActionCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:TripPlanner.ViewModels.ChatViewModel.ShowMoreChatAction"/>.</summary>
+        </member>
+        <member name="F:TripPlanner.ViewModels.ChatViewModel.showVoterCommand">
+            <summary>The backing field for <see cref="P:TripPlanner.ViewModels.ChatViewModel.ShowVoterCommand"/>.</summary>
+        </member>
+        <member name="P:TripPlanner.ViewModels.ChatViewModel.ShowVoterCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand`1"/> instance wrapping <see cref="M:TripPlanner.ViewModels.ChatViewModel.ShowVoter(TripPlanner.Models.DTO.QuestionnaireDTOs.QuestionnaireDTO)"/>.</summary>
+        </member>
+        <member name="T:TripPlanner.ViewModels.CreateQuestionnaireViewModel">
+            <inheritdoc/>
+            <inheritdoc/>
+            <inheritdoc/>
+            <inheritdoc/>
+            <inheritdoc/>
+        </member>
+        <member name="P:TripPlanner.ViewModels.CreateQuestionnaireViewModel.Tour">
+            <inheritdoc cref="F:TripPlanner.ViewModels.CreateQuestionnaireViewModel.tour"/>
+        </member>
+        <member name="P:TripPlanner.ViewModels.CreateQuestionnaireViewModel.Answers">
+            <inheritdoc cref="F:TripPlanner.ViewModels.CreateQuestionnaireViewModel.answers"/>
+        </member>
+        <member name="P:TripPlanner.ViewModels.CreateQuestionnaireViewModel.Question">
+            <inheritdoc cref="F:TripPlanner.ViewModels.CreateQuestionnaireViewModel.question"/>
+        </member>
+        <member name="F:TripPlanner.ViewModels.CreateQuestionnaireViewModel.goBackCommand">
+            <summary>The backing field for <see cref="P:TripPlanner.ViewModels.CreateQuestionnaireViewModel.GoBackCommand"/>.</summary>
+        </member>
+        <member name="P:TripPlanner.ViewModels.CreateQuestionnaireViewModel.GoBackCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:TripPlanner.ViewModels.CreateQuestionnaireViewModel.GoBack"/>.</summary>
+        </member>
+        <member name="F:TripPlanner.ViewModels.CreateQuestionnaireViewModel.addAnswerCommand">
+            <summary>The backing field for <see cref="P:TripPlanner.ViewModels.CreateQuestionnaireViewModel.AddAnswerCommand"/>.</summary>
+        </member>
+        <member name="P:TripPlanner.ViewModels.CreateQuestionnaireViewModel.AddAnswerCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:TripPlanner.ViewModels.CreateQuestionnaireViewModel.AddAnswer"/>.</summary>
+        </member>
+        <member name="F:TripPlanner.ViewModels.CreateQuestionnaireViewModel.deleteAnswerCommand">
+            <summary>The backing field for <see cref="P:TripPlanner.ViewModels.CreateQuestionnaireViewModel.DeleteAnswerCommand"/>.</summary>
+        </member>
+        <member name="P:TripPlanner.ViewModels.CreateQuestionnaireViewModel.DeleteAnswerCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand`1"/> instance wrapping <see cref="M:TripPlanner.ViewModels.CreateQuestionnaireViewModel.DeleteAnswer(System.String)"/>.</summary>
+        </member>
+        <member name="F:TripPlanner.ViewModels.CreateQuestionnaireViewModel.createCommand">
+            <summary>The backing field for <see cref="P:TripPlanner.ViewModels.CreateQuestionnaireViewModel.CreateCommand"/>.</summary>
+        </member>
+        <member name="P:TripPlanner.ViewModels.CreateQuestionnaireViewModel.CreateCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:TripPlanner.ViewModels.CreateQuestionnaireViewModel.Create"/>.</summary>
+        </member>
+        <member name="T:TripPlanner.ViewModels.CreateTourViewModel">
+            <inheritdoc/>
+            <inheritdoc/>
+            <inheritdoc/>
+            <inheritdoc/>
+        </member>
+        <member name="P:TripPlanner.ViewModels.CreateTourViewModel.DateTerm">
+            <inheritdoc cref="F:TripPlanner.ViewModels.CreateTourViewModel.dateTerm"/>
+        </member>
+        <member name="P:TripPlanner.ViewModels.CreateTourViewModel.ParticipantMax">
+            <inheritdoc cref="F:TripPlanner.ViewModels.CreateTourViewModel.participantMax"/>
+        </member>
+        <member name="P:TripPlanner.ViewModels.CreateTourViewModel.TargetCountry">
+            <inheritdoc cref="F:TripPlanner.ViewModels.CreateTourViewModel.targetCountry"/>
+        </member>
+        <member name="P:TripPlanner.ViewModels.CreateTourViewModel.Title">
+            <inheritdoc cref="F:TripPlanner.ViewModels.CreateTourViewModel.title"/>
+        </member>
+        <member name="P:TripPlanner.ViewModels.CreateTourViewModel.Description">
+            <inheritdoc cref="F:TripPlanner.ViewModels.CreateTourViewModel.description"/>
+        </member>
+        <member name="F:TripPlanner.ViewModels.CreateTourViewModel.setTourDateRangeCommand">
+            <summary>The backing field for <see cref="P:TripPlanner.ViewModels.CreateTourViewModel.SetTourDateRangeCommand"/>.</summary>
+        </member>
+        <member name="P:TripPlanner.ViewModels.CreateTourViewModel.SetTourDateRangeCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:TripPlanner.ViewModels.CreateTourViewModel.SetTourDateRange"/>.</summary>
+        </member>
+        <member name="F:TripPlanner.ViewModels.CreateTourViewModel.goBackCommand">
+            <summary>The backing field for <see cref="P:TripPlanner.ViewModels.CreateTourViewModel.GoBackCommand"/>.</summary>
+        </member>
+        <member name="P:TripPlanner.ViewModels.CreateTourViewModel.GoBackCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:TripPlanner.ViewModels.CreateTourViewModel.GoBack"/>.</summary>
+        </member>
+        <member name="F:TripPlanner.ViewModels.CreateTourViewModel.goNextCommand">
+            <summary>The backing field for <see cref="P:TripPlanner.ViewModels.CreateTourViewModel.GoNextCommand"/>.</summary>
+        </member>
+        <member name="P:TripPlanner.ViewModels.CreateTourViewModel.GoNextCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:TripPlanner.ViewModels.CreateTourViewModel.GoNext"/>.</summary>
+        </member>
+        <member name="T:TripPlanner.ViewModels.FriendsViewModel">
+            <inheritdoc/>
+            <inheritdoc/>
+            <inheritdoc/>
+            <inheritdoc/>
+        </member>
+        <member name="F:TripPlanner.ViewModels.FriendsViewModel.openCalendarCommand">
+            <summary>The backing field for <see cref="P:TripPlanner.ViewModels.FriendsViewModel.OpenCalendarCommand"/>.</summary>
+        </member>
+        <member name="P:TripPlanner.ViewModels.FriendsViewModel.OpenCalendarCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:TripPlanner.ViewModels.FriendsViewModel.OpenCalendar"/>.</summary>
+        </member>
+        <member name="F:TripPlanner.ViewModels.FriendsViewModel.createTripCommand">
+            <summary>The backing field for <see cref="P:TripPlanner.ViewModels.FriendsViewModel.CreateTripCommand"/>.</summary>
+        </member>
+        <member name="P:TripPlanner.ViewModels.FriendsViewModel.CreateTripCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:TripPlanner.ViewModels.FriendsViewModel.CreateTrip"/>.</summary>
+        </member>
+        <member name="F:TripPlanner.ViewModels.FriendsViewModel.goBackCommand">
+            <summary>The backing field for <see cref="P:TripPlanner.ViewModels.FriendsViewModel.GoBackCommand"/>.</summary>
+        </member>
+        <member name="P:TripPlanner.ViewModels.FriendsViewModel.GoBackCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:TripPlanner.ViewModels.FriendsViewModel.GoBack"/>.</summary>
+        </member>
+        <member name="F:TripPlanner.ViewModels.FriendsViewModel.goSettingsCommand">
+            <summary>The backing field for <see cref="P:TripPlanner.ViewModels.FriendsViewModel.GoSettingsCommand"/>.</summary>
+        </member>
+        <member name="P:TripPlanner.ViewModels.FriendsViewModel.GoSettingsCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:TripPlanner.ViewModels.FriendsViewModel.GoSettings"/>.</summary>
+        </member>
         <member name="T:TripPlanner.ViewModels.HomeViewModel">
+            <inheritdoc/>
             <inheritdoc/>
             <inheritdoc/>
             <inheritdoc/>
@@ -21,11 +217,298 @@
         <member name="P:TripPlanner.ViewModels.HomeViewModel.CreateTripCommand">
             <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:TripPlanner.ViewModels.HomeViewModel.CreateTrip"/>.</summary>
         </member>
+        <member name="F:TripPlanner.ViewModels.HomeViewModel.showTourCommand">
+            <summary>The backing field for <see cref="P:TripPlanner.ViewModels.HomeViewModel.ShowTourCommand"/>.</summary>
+        </member>
+        <member name="P:TripPlanner.ViewModels.HomeViewModel.ShowTourCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand`1"/> instance wrapping <see cref="M:TripPlanner.ViewModels.HomeViewModel.ShowTour(TripPlanner.Models.DTO.TourDTOs.TourDTO)"/>.</summary>
+        </member>
         <member name="F:TripPlanner.ViewModels.HomeViewModel.showNotificationCommand">
             <summary>The backing field for <see cref="P:TripPlanner.ViewModels.HomeViewModel.ShowNotificationCommand"/>.</summary>
         </member>
         <member name="P:TripPlanner.ViewModels.HomeViewModel.ShowNotificationCommand">
             <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:TripPlanner.ViewModels.HomeViewModel.ShowNotification"/>.</summary>
+        </member>
+        <member name="T:TripPlanner.ViewModels.NotificationViewModel">
+            <inheritdoc/>
+            <inheritdoc/>
+        </member>
+        <member name="F:TripPlanner.ViewModels.NotificationViewModel.openCalendarCommand">
+            <summary>The backing field for <see cref="P:TripPlanner.ViewModels.NotificationViewModel.OpenCalendarCommand"/>.</summary>
+        </member>
+        <member name="P:TripPlanner.ViewModels.NotificationViewModel.OpenCalendarCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:TripPlanner.ViewModels.NotificationViewModel.OpenCalendar"/>.</summary>
+        </member>
+        <member name="F:TripPlanner.ViewModels.NotificationViewModel.createTripCommand">
+            <summary>The backing field for <see cref="P:TripPlanner.ViewModels.NotificationViewModel.CreateTripCommand"/>.</summary>
+        </member>
+        <member name="P:TripPlanner.ViewModels.NotificationViewModel.CreateTripCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:TripPlanner.ViewModels.NotificationViewModel.CreateTrip"/>.</summary>
+        </member>
+        <member name="T:TripPlanner.ViewModels.ProfileViewModel">
+            <inheritdoc/>
+            <inheritdoc/>
+        </member>
+        <member name="F:TripPlanner.ViewModels.ProfileViewModel.openCalendarCommand">
+            <summary>The backing field for <see cref="P:TripPlanner.ViewModels.ProfileViewModel.OpenCalendarCommand"/>.</summary>
+        </member>
+        <member name="P:TripPlanner.ViewModels.ProfileViewModel.OpenCalendarCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:TripPlanner.ViewModels.ProfileViewModel.OpenCalendar"/>.</summary>
+        </member>
+        <member name="F:TripPlanner.ViewModels.ProfileViewModel.createTripCommand">
+            <summary>The backing field for <see cref="P:TripPlanner.ViewModels.ProfileViewModel.CreateTripCommand"/>.</summary>
+        </member>
+        <member name="P:TripPlanner.ViewModels.ProfileViewModel.CreateTripCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:TripPlanner.ViewModels.ProfileViewModel.CreateTrip"/>.</summary>
+        </member>
+        <member name="T:TripPlanner.ViewModels.QuestionnaireViewModel">
+            <inheritdoc/>
+            <inheritdoc/>
+            <inheritdoc/>
+        </member>
+        <member name="P:TripPlanner.ViewModels.QuestionnaireViewModel.Questionnaire">
+            <inheritdoc cref="F:TripPlanner.ViewModels.QuestionnaireViewModel.questionnaire"/>
+        </member>
+        <member name="F:TripPlanner.ViewModels.QuestionnaireViewModel.voteCommand">
+            <summary>The backing field for <see cref="P:TripPlanner.ViewModels.QuestionnaireViewModel.VoteCommand"/>.</summary>
+        </member>
+        <member name="P:TripPlanner.ViewModels.QuestionnaireViewModel.VoteCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand`1"/> instance wrapping <see cref="M:TripPlanner.ViewModels.QuestionnaireViewModel.Vote(TripPlanner.Models.DTO.QuestionnaireDTOs.QuestionnaireAnswerDTO)"/>.</summary>
+        </member>
+        <member name="F:TripPlanner.ViewModels.QuestionnaireViewModel.showVoterCommand">
+            <summary>The backing field for <see cref="P:TripPlanner.ViewModels.QuestionnaireViewModel.ShowVoterCommand"/>.</summary>
+        </member>
+        <member name="P:TripPlanner.ViewModels.QuestionnaireViewModel.ShowVoterCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand`1"/> instance wrapping <see cref="M:TripPlanner.ViewModels.QuestionnaireViewModel.ShowVoter(TripPlanner.Models.DTO.QuestionnaireDTOs.QuestionnaireAnswerDTO)"/>.</summary>
+        </member>
+        <member name="T:TripPlanner.ViewModels.TourViewModel">
+            <inheritdoc/>
+            <inheritdoc/>
+            <inheritdoc/>
+            <inheritdoc/>
+            <inheritdoc/>
+        </member>
+        <member name="P:TripPlanner.ViewModels.TourViewModel.Tour">
+            <inheritdoc cref="F:TripPlanner.ViewModels.TourViewModel.tour"/>
+        </member>
+        <member name="F:TripPlanner.ViewModels.TourViewModel.goBackCommand">
+            <summary>The backing field for <see cref="P:TripPlanner.ViewModels.TourViewModel.GoBackCommand"/>.</summary>
+        </member>
+        <member name="P:TripPlanner.ViewModels.TourViewModel.GoBackCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:TripPlanner.ViewModels.TourViewModel.GoBack"/>.</summary>
+        </member>
+        <member name="F:TripPlanner.ViewModels.TourViewModel.goSettingsCommand">
+            <summary>The backing field for <see cref="P:TripPlanner.ViewModels.TourViewModel.GoSettingsCommand"/>.</summary>
+        </member>
+        <member name="P:TripPlanner.ViewModels.TourViewModel.GoSettingsCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:TripPlanner.ViewModels.TourViewModel.GoSettings"/>.</summary>
+        </member>
+        <member name="F:TripPlanner.ViewModels.TourViewModel.goChatCommand">
+            <summary>The backing field for <see cref="P:TripPlanner.ViewModels.TourViewModel.GoChatCommand"/>.</summary>
+        </member>
+        <member name="P:TripPlanner.ViewModels.TourViewModel.GoChatCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:TripPlanner.ViewModels.TourViewModel.GoChat"/>.</summary>
+        </member>
+        <member name="F:TripPlanner.ViewModels.TourViewModel.goCommand">
+            <summary>The backing field for <see cref="P:TripPlanner.ViewModels.TourViewModel.GoCommand"/>.</summary>
+        </member>
+        <member name="P:TripPlanner.ViewModels.TourViewModel.GoCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:TripPlanner.ViewModels.TourViewModel.Go"/>.</summary>
+        </member>
+        <member name="M:Microsoft.Maui.Controls.ColorAnimationExtensions_Button.TextColorTo(Microsoft.Maui.Controls.Button,Microsoft.Maui.Graphics.Color,System.UInt32,System.UInt32,Microsoft.Maui.Easing)">
+            <summary>
+            Animates the TextColor of an <see cref = "T:Microsoft.Maui.ITextStyle"/> to the given color
+            </summary>
+            <param name = "element"></param>
+            <param name = "color">The target color to animate the <see cref = "P:Microsoft.Maui.ITextStyle.TextColor"/> to</param>
+            <param name = "rate">The time, in milliseconds, between the frames of the animation</param>
+            <param name = "length">The duration, in milliseconds, of the animation</param>
+            <param name = "easing">The easing function to be used in the animation</param>
+            <returns>Value indicating if the animation completed successfully or not</returns>
+        </member>
+        <member name="M:Microsoft.Maui.Controls.ColorAnimationExtensions_DatePicker.TextColorTo(Microsoft.Maui.Controls.DatePicker,Microsoft.Maui.Graphics.Color,System.UInt32,System.UInt32,Microsoft.Maui.Easing)">
+            <summary>
+            Animates the TextColor of an <see cref = "T:Microsoft.Maui.ITextStyle"/> to the given color
+            </summary>
+            <param name = "element"></param>
+            <param name = "color">The target color to animate the <see cref = "P:Microsoft.Maui.ITextStyle.TextColor"/> to</param>
+            <param name = "rate">The time, in milliseconds, between the frames of the animation</param>
+            <param name = "length">The duration, in milliseconds, of the animation</param>
+            <param name = "easing">The easing function to be used in the animation</param>
+            <returns>Value indicating if the animation completed successfully or not</returns>
+        </member>
+        <member name="M:Microsoft.Maui.Controls.ColorAnimationExtensions_Editor.TextColorTo(Microsoft.Maui.Controls.Editor,Microsoft.Maui.Graphics.Color,System.UInt32,System.UInt32,Microsoft.Maui.Easing)">
+            <summary>
+            Animates the TextColor of an <see cref = "T:Microsoft.Maui.ITextStyle"/> to the given color
+            </summary>
+            <param name = "element"></param>
+            <param name = "color">The target color to animate the <see cref = "P:Microsoft.Maui.ITextStyle.TextColor"/> to</param>
+            <param name = "rate">The time, in milliseconds, between the frames of the animation</param>
+            <param name = "length">The duration, in milliseconds, of the animation</param>
+            <param name = "easing">The easing function to be used in the animation</param>
+            <returns>Value indicating if the animation completed successfully or not</returns>
+        </member>
+        <member name="M:Microsoft.Maui.Controls.ColorAnimationExtensions_Entry.TextColorTo(Microsoft.Maui.Controls.Entry,Microsoft.Maui.Graphics.Color,System.UInt32,System.UInt32,Microsoft.Maui.Easing)">
+            <summary>
+            Animates the TextColor of an <see cref = "T:Microsoft.Maui.ITextStyle"/> to the given color
+            </summary>
+            <param name = "element"></param>
+            <param name = "color">The target color to animate the <see cref = "P:Microsoft.Maui.ITextStyle.TextColor"/> to</param>
+            <param name = "rate">The time, in milliseconds, between the frames of the animation</param>
+            <param name = "length">The duration, in milliseconds, of the animation</param>
+            <param name = "easing">The easing function to be used in the animation</param>
+            <returns>Value indicating if the animation completed successfully or not</returns>
+        </member>
+        <member name="M:Microsoft.Maui.Controls.ColorAnimationExtensions_Label.TextColorTo(Microsoft.Maui.Controls.Label,Microsoft.Maui.Graphics.Color,System.UInt32,System.UInt32,Microsoft.Maui.Easing)">
+            <summary>
+            Animates the TextColor of an <see cref = "T:Microsoft.Maui.ITextStyle"/> to the given color
+            </summary>
+            <param name = "element"></param>
+            <param name = "color">The target color to animate the <see cref = "P:Microsoft.Maui.ITextStyle.TextColor"/> to</param>
+            <param name = "rate">The time, in milliseconds, between the frames of the animation</param>
+            <param name = "length">The duration, in milliseconds, of the animation</param>
+            <param name = "easing">The easing function to be used in the animation</param>
+            <returns>Value indicating if the animation completed successfully or not</returns>
+        </member>
+        <member name="M:Microsoft.Maui.Controls.ColorAnimationExtensions_Picker.TextColorTo(Microsoft.Maui.Controls.Picker,Microsoft.Maui.Graphics.Color,System.UInt32,System.UInt32,Microsoft.Maui.Easing)">
+            <summary>
+            Animates the TextColor of an <see cref = "T:Microsoft.Maui.ITextStyle"/> to the given color
+            </summary>
+            <param name = "element"></param>
+            <param name = "color">The target color to animate the <see cref = "P:Microsoft.Maui.ITextStyle.TextColor"/> to</param>
+            <param name = "rate">The time, in milliseconds, between the frames of the animation</param>
+            <param name = "length">The duration, in milliseconds, of the animation</param>
+            <param name = "easing">The easing function to be used in the animation</param>
+            <returns>Value indicating if the animation completed successfully or not</returns>
+        </member>
+        <member name="M:Microsoft.Maui.Controls.ColorAnimationExtensions_RadioButton.TextColorTo(Microsoft.Maui.Controls.RadioButton,Microsoft.Maui.Graphics.Color,System.UInt32,System.UInt32,Microsoft.Maui.Easing)">
+            <summary>
+            Animates the TextColor of an <see cref = "T:Microsoft.Maui.ITextStyle"/> to the given color
+            </summary>
+            <param name = "element"></param>
+            <param name = "color">The target color to animate the <see cref = "P:Microsoft.Maui.ITextStyle.TextColor"/> to</param>
+            <param name = "rate">The time, in milliseconds, between the frames of the animation</param>
+            <param name = "length">The duration, in milliseconds, of the animation</param>
+            <param name = "easing">The easing function to be used in the animation</param>
+            <returns>Value indicating if the animation completed successfully or not</returns>
+        </member>
+        <member name="M:Microsoft.Maui.Controls.ColorAnimationExtensions_SearchBar.TextColorTo(Microsoft.Maui.Controls.SearchBar,Microsoft.Maui.Graphics.Color,System.UInt32,System.UInt32,Microsoft.Maui.Easing)">
+            <summary>
+            Animates the TextColor of an <see cref = "T:Microsoft.Maui.ITextStyle"/> to the given color
+            </summary>
+            <param name = "element"></param>
+            <param name = "color">The target color to animate the <see cref = "P:Microsoft.Maui.ITextStyle.TextColor"/> to</param>
+            <param name = "rate">The time, in milliseconds, between the frames of the animation</param>
+            <param name = "length">The duration, in milliseconds, of the animation</param>
+            <param name = "easing">The easing function to be used in the animation</param>
+            <returns>Value indicating if the animation completed successfully or not</returns>
+        </member>
+        <member name="M:Microsoft.Maui.Controls.ColorAnimationExtensions_TimePicker.TextColorTo(Microsoft.Maui.Controls.TimePicker,Microsoft.Maui.Graphics.Color,System.UInt32,System.UInt32,Microsoft.Maui.Easing)">
+            <summary>
+            Animates the TextColor of an <see cref = "T:Microsoft.Maui.ITextStyle"/> to the given color
+            </summary>
+            <param name = "element"></param>
+            <param name = "color">The target color to animate the <see cref = "P:Microsoft.Maui.ITextStyle.TextColor"/> to</param>
+            <param name = "rate">The time, in milliseconds, between the frames of the animation</param>
+            <param name = "length">The duration, in milliseconds, of the animation</param>
+            <param name = "easing">The easing function to be used in the animation</param>
+            <returns>Value indicating if the animation completed successfully or not</returns>
+        </member>
+        <member name="T:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs">
+            <summary>
+            A helper type providing cached, reusable <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instances
+            for all properties generated with <see cref="T:CommunityToolkit.Mvvm.ComponentModel.ObservablePropertyAttribute"/>.
+            </summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.Tour">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "Tour" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.Chat">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "Chat" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.Messages">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "Messages" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.PromptLabel">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "PromptLabel" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.IsRefreshing">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "IsRefreshing" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.Message">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "Message" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.Answers">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "Answers" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.Question">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "Question" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.DateTerm">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "DateTerm" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.ParticipantMax">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "ParticipantMax" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.TargetCountry">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "TargetCountry" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.Title">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "Title" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.Description">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "Description" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.Questionnaire">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "Questionnaire" generated properties.</summary>
+        </member>
+        <member name="T:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs">
+            <summary>
+            A helper type providing cached, reusable <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instances
+            for all properties generated with <see cref="T:CommunityToolkit.Mvvm.ComponentModel.ObservablePropertyAttribute"/>.
+            </summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.Tour">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "Tour" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.Chat">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "Chat" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.Messages">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "Messages" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.PromptLabel">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "PromptLabel" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.IsRefreshing">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "IsRefreshing" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.Message">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "Message" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.Answers">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "Answers" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.Question">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "Question" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.DateTerm">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "DateTerm" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.ParticipantMax">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "ParticipantMax" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.TargetCountry">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "TargetCountry" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.Title">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "Title" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.Description">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "Description" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.Questionnaire">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "Questionnaire" generated properties.</summary>
         </member>
     </members>
 </doc>

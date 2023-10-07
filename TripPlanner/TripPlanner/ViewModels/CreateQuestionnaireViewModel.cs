@@ -20,7 +20,6 @@ namespace TripPlanner.ViewModels
     [QueryProperty("passChatId", "ChatId")]
     public partial class CreateQuestionnaireViewModel : ObservableObject, IQueryAttributable
     {
-        private readonly IDialogService m_DialogService;
         private readonly Configuration m_Configuration;
         private readonly QuestionnaireService m_QuestionnaireService;
 
@@ -35,9 +34,9 @@ namespace TripPlanner.ViewModels
         
         int ChatId;
 
-        public CreateQuestionnaireViewModel(Configuration configuration, IDialogService dialogService)
+        public CreateQuestionnaireViewModel(Configuration configuration, QuestionnaireService questionnaireService)
         {
-            m_DialogService = dialogService;
+            m_QuestionnaireService = questionnaireService;
             m_Configuration = configuration;
             Answers = new ObservableCollection<string>();
             Answers.Add("tak");
@@ -85,7 +84,7 @@ namespace TripPlanner.ViewModels
         [RelayCommand]
         async Task DeleteAnswer(string answer)
         {
-            if(Answers.Count == 1)
+            if(Answers.Count <= 2)
                 await Shell.Current.CurrentPage.DisplayAlert("Błąd", "Ankieta musi posiadać chociaż dwie odpowiedzi!", "Ok");
             else
                 Answers.Remove(answer);
@@ -95,14 +94,14 @@ namespace TripPlanner.ViewModels
         [RelayCommand]
         async Task Create()
         {
-            if(Question == "")
+            if(Question == null || Question == "")
                 await Shell.Current.CurrentPage.DisplayAlert("Błąd", "Nie zadałeś pytania!", "Ok");
-            else if(Answers.Count <= 2)
+            else if(Answers.Count < 2)
                 await Shell.Current.CurrentPage.DisplayAlert("Błąd", "Ankieta musi posiadać chociaż dwie odpowiedzi!", "Ok");
             else
             {
                 CreateQuestionnaireDTO questionnaireDTO = new CreateQuestionnaireDTO();
-                questionnaireDTO.Question = Question;
+                questionnaireDTO.Content = Question;
                 questionnaireDTO.TourId = Tour.Id;
                 questionnaireDTO.ChatId = ChatId;
                 questionnaireDTO.UserId = m_Configuration.User.Id;

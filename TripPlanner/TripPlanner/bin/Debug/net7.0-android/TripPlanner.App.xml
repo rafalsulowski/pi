@@ -57,8 +57,8 @@
         <member name="P:TripPlanner.ViewModels.ChatViewModel.IsRefreshing">
             <inheritdoc cref="F:TripPlanner.ViewModels.ChatViewModel.isRefreshing"/>
         </member>
-        <member name="P:TripPlanner.ViewModels.ChatViewModel.IsMoreActionClicked">
-            <inheritdoc cref="F:TripPlanner.ViewModels.ChatViewModel.isMoreActionClicked"/>
+        <member name="P:TripPlanner.ViewModels.ChatViewModel.Message">
+            <inheritdoc cref="F:TripPlanner.ViewModels.ChatViewModel.message"/>
         </member>
         <member name="F:TripPlanner.ViewModels.ChatViewModel.goBackCommand">
             <summary>The backing field for <see cref="P:TripPlanner.ViewModels.ChatViewModel.GoBackCommand"/>.</summary>
@@ -66,11 +66,11 @@
         <member name="P:TripPlanner.ViewModels.ChatViewModel.GoBackCommand">
             <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:TripPlanner.ViewModels.ChatViewModel.GoBack"/>.</summary>
         </member>
-        <member name="F:TripPlanner.ViewModels.ChatViewModel.goSettingsCommand">
-            <summary>The backing field for <see cref="P:TripPlanner.ViewModels.ChatViewModel.GoSettingsCommand"/>.</summary>
+        <member name="F:TripPlanner.ViewModels.ChatViewModel.sendMessageCommand">
+            <summary>The backing field for <see cref="P:TripPlanner.ViewModels.ChatViewModel.SendMessageCommand"/>.</summary>
         </member>
-        <member name="P:TripPlanner.ViewModels.ChatViewModel.GoSettingsCommand">
-            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:TripPlanner.ViewModels.ChatViewModel.GoSettings"/>.</summary>
+        <member name="P:TripPlanner.ViewModels.ChatViewModel.SendMessageCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:TripPlanner.ViewModels.ChatViewModel.SendMessage"/>.</summary>
         </member>
         <member name="F:TripPlanner.ViewModels.ChatViewModel.loadMoreMessagesCommand">
             <summary>The backing field for <see cref="P:TripPlanner.ViewModels.ChatViewModel.LoadMoreMessagesCommand"/>.</summary>
@@ -84,11 +84,11 @@
         <member name="P:TripPlanner.ViewModels.ChatViewModel.ShowMoreChatActionCommand">
             <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:TripPlanner.ViewModels.ChatViewModel.ShowMoreChatAction"/>.</summary>
         </member>
-        <member name="F:TripPlanner.ViewModels.ChatViewModel.addQuestionnaireCommand">
-            <summary>The backing field for <see cref="P:TripPlanner.ViewModels.ChatViewModel.AddQuestionnaireCommand"/>.</summary>
+        <member name="F:TripPlanner.ViewModels.ChatViewModel.showVoterCommand">
+            <summary>The backing field for <see cref="P:TripPlanner.ViewModels.ChatViewModel.ShowVoterCommand"/>.</summary>
         </member>
-        <member name="P:TripPlanner.ViewModels.ChatViewModel.AddQuestionnaireCommand">
-            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:TripPlanner.ViewModels.ChatViewModel.AddQuestionnaire"/>.</summary>
+        <member name="P:TripPlanner.ViewModels.ChatViewModel.ShowVoterCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand`1"/> instance wrapping <see cref="M:TripPlanner.ViewModels.ChatViewModel.ShowVoter(TripPlanner.Models.DTO.QuestionnaireDTOs.QuestionnaireDTO)"/>.</summary>
         </member>
         <member name="T:TripPlanner.ViewModels.CreateQuestionnaireViewModel">
             <inheritdoc/>
@@ -261,6 +261,26 @@
         <member name="P:TripPlanner.ViewModels.ProfileViewModel.CreateTripCommand">
             <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:TripPlanner.ViewModels.ProfileViewModel.CreateTrip"/>.</summary>
         </member>
+        <member name="T:TripPlanner.ViewModels.QuestionnaireViewModel">
+            <inheritdoc/>
+            <inheritdoc/>
+            <inheritdoc/>
+        </member>
+        <member name="P:TripPlanner.ViewModels.QuestionnaireViewModel.Questionnaire">
+            <inheritdoc cref="F:TripPlanner.ViewModels.QuestionnaireViewModel.questionnaire"/>
+        </member>
+        <member name="F:TripPlanner.ViewModels.QuestionnaireViewModel.voteCommand">
+            <summary>The backing field for <see cref="P:TripPlanner.ViewModels.QuestionnaireViewModel.VoteCommand"/>.</summary>
+        </member>
+        <member name="P:TripPlanner.ViewModels.QuestionnaireViewModel.VoteCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand`1"/> instance wrapping <see cref="M:TripPlanner.ViewModels.QuestionnaireViewModel.Vote(TripPlanner.Models.DTO.QuestionnaireDTOs.QuestionnaireAnswerDTO)"/>.</summary>
+        </member>
+        <member name="F:TripPlanner.ViewModels.QuestionnaireViewModel.showVoterCommand">
+            <summary>The backing field for <see cref="P:TripPlanner.ViewModels.QuestionnaireViewModel.ShowVoterCommand"/>.</summary>
+        </member>
+        <member name="P:TripPlanner.ViewModels.QuestionnaireViewModel.ShowVoterCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand`1"/> instance wrapping <see cref="M:TripPlanner.ViewModels.QuestionnaireViewModel.ShowVoter(TripPlanner.Models.DTO.QuestionnaireDTOs.QuestionnaireAnswerDTO)"/>.</summary>
+        </member>
         <member name="T:TripPlanner.ViewModels.TourViewModel">
             <inheritdoc/>
             <inheritdoc/>
@@ -415,8 +435,8 @@
         <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.IsRefreshing">
             <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "IsRefreshing" generated properties.</summary>
         </member>
-        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.IsMoreActionClicked">
-            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "IsMoreActionClicked" generated properties.</summary>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.Message">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "Message" generated properties.</summary>
         </member>
         <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.Answers">
             <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "Answers" generated properties.</summary>
@@ -439,6 +459,9 @@
         <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.Description">
             <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "Description" generated properties.</summary>
         </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.Questionnaire">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "Questionnaire" generated properties.</summary>
+        </member>
         <member name="T:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs">
             <summary>
             A helper type providing cached, reusable <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instances
@@ -460,8 +483,8 @@
         <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.IsRefreshing">
             <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "IsRefreshing" generated properties.</summary>
         </member>
-        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.IsMoreActionClicked">
-            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "IsMoreActionClicked" generated properties.</summary>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.Message">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "Message" generated properties.</summary>
         </member>
         <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.Answers">
             <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "Answers" generated properties.</summary>
@@ -483,6 +506,9 @@
         </member>
         <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.Description">
             <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "Description" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.Questionnaire">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "Questionnaire" generated properties.</summary>
         </member>
     </members>
 </doc>

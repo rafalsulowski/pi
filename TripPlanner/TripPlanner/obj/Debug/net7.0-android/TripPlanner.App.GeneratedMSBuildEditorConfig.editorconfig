@@ -44,6 +44,12 @@ build_metadata.AdditionalFiles.ManifestResourceName = TripPlanner.Views.ChatView
 build_metadata.AdditionalFiles.TargetPath = Views\ChatViews\AddQuesionnaireAnswerPopups.xaml
 build_metadata.AdditionalFiles.RelativePath = Views\ChatViews\AddQuesionnaireAnswerPopups.xaml
 
+[C:/Users/01159502/Desktop/TripPlanner/TripPlanner/TripPlanner/Views/ChatViews/ChatAdditionalMenuPopup.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = TripPlanner.Views.ChatViews.ChatAdditionalMenuPopup.xaml
+build_metadata.AdditionalFiles.TargetPath = Views\ChatViews\ChatAdditionalMenuPopup.xaml
+build_metadata.AdditionalFiles.RelativePath = Views\ChatViews\ChatAdditionalMenuPopup.xaml
+
 [C:/Users/01159502/Desktop/TripPlanner/TripPlanner/TripPlanner/Views/ChatViews/ChatPage.xaml]
 build_metadata.AdditionalFiles.GenKind = Xaml
 build_metadata.AdditionalFiles.ManifestResourceName = TripPlanner.Views.ChatViews.ChatPage.xaml
@@ -55,6 +61,18 @@ build_metadata.AdditionalFiles.GenKind = Xaml
 build_metadata.AdditionalFiles.ManifestResourceName = TripPlanner.Views.ChatViews.CreateNewQuestionnairePage.xaml
 build_metadata.AdditionalFiles.TargetPath = Views\ChatViews\CreateNewQuestionnairePage.xaml
 build_metadata.AdditionalFiles.RelativePath = Views\ChatViews\CreateNewQuestionnairePage.xaml
+
+[C:/Users/01159502/Desktop/TripPlanner/TripPlanner/TripPlanner/Views/ChatViews/PeopleChatListPopups.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = TripPlanner.Views.ChatViews.PeopleChatListPopups.xaml
+build_metadata.AdditionalFiles.TargetPath = Views\ChatViews\PeopleChatListPopups.xaml
+build_metadata.AdditionalFiles.RelativePath = Views\ChatViews\PeopleChatListPopups.xaml
+
+[C:/Users/01159502/Desktop/TripPlanner/TripPlanner/TripPlanner/Views/ChatViews/QuestionnairePopup.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = TripPlanner.Views.ChatViews.QuestionnairePopup.xaml
+build_metadata.AdditionalFiles.TargetPath = Views\ChatViews\QuestionnairePopup.xaml
+build_metadata.AdditionalFiles.RelativePath = Views\ChatViews\QuestionnairePopup.xaml
 
 [C:/Users/01159502/Desktop/TripPlanner/TripPlanner/TripPlanner/Views/HomeViews/CalendarPage.xaml]
 build_metadata.AdditionalFiles.GenKind = Xaml

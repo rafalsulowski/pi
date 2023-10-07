@@ -1,10 +1,13 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
+﻿using CommunityToolkit.Maui.Core.Extensions;
+using CommunityToolkit.Maui.Views;
+using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using System.ComponentModel;
-using TripPlanner.Models;
+using System.Collections.ObjectModel;
 using TripPlanner.Models.DTO.ChatDTOs;
-using TripPlanner.Models.DTO.GroupDTOs;
+using TripPlanner.Models.DTO.QuestionnaireDTOs;
 using TripPlanner.Models.DTO.TourDTOs;
+using TripPlanner.Services;
+using TripPlanner.Views.ChatViews;
 
 namespace TripPlanner.ViewModels
 {
@@ -12,6 +15,9 @@ namespace TripPlanner.ViewModels
     public partial class ChatViewModel : ObservableObject, IQueryAttributable
     {
         private readonly Configuration m_Configuration;
+        private readonly TourService m_TourService;
+        private readonly ChatService m_ChatService;
+        private readonly QuestionnaireService m_QuestionnaireService;
 
         [ObservableProperty]
         TourDTO tour;
@@ -20,7 +26,7 @@ namespace TripPlanner.ViewModels
         ChatDTO chat;
 
         [ObservableProperty]
-        List<MessageDTO> messages;
+        ObservableCollection<MessageDTO> messages;
 
         [ObservableProperty]
         bool promptLabel;
@@ -29,14 +35,17 @@ namespace TripPlanner.ViewModels
         bool isRefreshing;
 
         [ObservableProperty]
-        bool isMoreActionClicked;
+        string message;
 
-        public ChatViewModel(Configuration configuration)
+        public ChatViewModel(Configuration configuration, TourService tourService, ChatService chatService, QuestionnaireService questionnaireService)
         {
             m_Configuration = configuration;
+            m_TourService = tourService;
+            m_ChatService = chatService;
+            m_QuestionnaireService = questionnaireService;
+
             IsRefreshing = false;
-            IsMoreActionClicked = false;
-            Messages = new List<MessageDTO>();
+            Messages = new ObservableCollection<MessageDTO>();
         }
 
         public void ApplyQueryAttributes(IDictionary<string, object> query)
@@ -51,11 +60,11 @@ namespace TripPlanner.ViewModels
                 Chat.Messages = Chat.Messages.Reverse().ToList();
                 if (Chat.Messages.Count >= m_Configuration.AddChatMessagesWhileReload)
                 {
-                    Messages = Chat.Messages.Take(m_Configuration.AddChatMessagesWhileReload).ToList();
+                    Messages = Chat.Messages.Take(m_Configuration.AddChatMessagesWhileReload).ToObservableCollection();
                 }
                 else
                 {
-                    Messages = Chat.Messages.ToList();
+                    Messages = Chat.Messages.ToObservableCollection();
                 }
 
             }
@@ -78,9 +87,20 @@ namespace TripPlanner.ViewModels
         }
 
         [RelayCommand]
-        async Task GoSettings()
+        async Task SendMessage()
         {
-            await Shell.Current.GoToAsync("..");
+            if(Message != null && Message != "")
+            {
+                //wyslac do api
+
+                Messages.Add(new TextMessageDTO { 
+                    Content = Message, 
+                    UserId = m_Configuration.User.Id, 
+                    ChatId = Chat.Id,
+                    Id = -1,
+                    LikesCount = 0,
+                    Date = DateTime.Now });
+            }
         }
         
         [RelayCommand]
@@ -105,18 +125,17 @@ namespace TripPlanner.ViewModels
         [RelayCommand]
         async Task ShowMoreChatAction()
         {
-            IsMoreActionClicked = !IsMoreActionClicked;
+            await Shell.Current.CurrentPage.ShowPopupAsync(new ChatAdditionalMenuPopup(m_TourService, Tour, Chat.Id));
         }
 
+
         [RelayCommand]
-        async Task AddQuestionnaire()
+        async Task ShowVoter(QuestionnaireDTO questionnaire)
         {
-            var navigationParameter = new Dictionary<string, object>
-            {
-                { "passTour",  Tour},
-                { "passChatId",  Chat.Id},
-            };
-            await Shell.Current.GoToAsync($"CreateQuestionnaire", navigationParameter);
+            await Shell.Current.CurrentPage.ShowPopupAsync(
+                new QuestionnairePopup(
+                    new QuestionnaireViewModel(m_Configuration, m_QuestionnaireService, questionnaire)));
         }
+        
     }
 }

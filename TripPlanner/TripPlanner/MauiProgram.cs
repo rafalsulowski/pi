@@ -8,6 +8,8 @@ using TripPlanner.ViewModels;
 using TripPlanner.Views;
 using TripPlanner.Views.ChatViews;
 using CommunityToolkit.Maui;
+using TripPlanner.DataTemplates;
+using HexInnovation;
 
 namespace TripPlanner;
 
@@ -34,8 +36,14 @@ public static class MauiProgram
         builder.Services.AddSingleton<Configuration>();
         builder.Services.AddSingleton<HttpClient>();
 
+		//Data Template Selectors
+        builder.Services.AddSingleton<MessageDataTemplateSelector>();
+		builder.Services.AddSingleton<MathConverter>();
+
         //Data Managment Services
         builder.Services.AddSingleton<TourService>();
+        builder.Services.AddSingleton<ChatService>();
+        builder.Services.AddSingleton<QuestionnaireService>();
         
 		//ViewModels Services
 		builder.Services.AddTransient<HomeViewModel>();

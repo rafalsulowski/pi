@@ -5,6 +5,7 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using TripPlanner.Models;
+using TripPlanner.Models.Models.Message;
 
 namespace TripPlanner.Services.ChatService
 {

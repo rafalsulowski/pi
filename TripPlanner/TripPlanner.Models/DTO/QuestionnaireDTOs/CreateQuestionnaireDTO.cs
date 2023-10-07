@@ -1,11 +1,13 @@
-﻿namespace TripPlanner.Models.DTO.QuestionnaireDTOs
+﻿using TripPlanner.Models.Models.Message;
+
+namespace TripPlanner.Models.DTO.QuestionnaireDTOs
 {
     public class CreateQuestionnaireDTO
     {
         public int UserId { get; set; }
         public int TourId { get; set; }
-        public int? ChatId { get; set; }
-        public string Question { get; set; } = string.Empty;
+        public int ChatId { get; set; }
+        public string Content { get; set; } = string.Empty;
         public ICollection<CreateQuestionnaireAnswerDTO> Answers { get; set; } = new List<CreateQuestionnaireAnswerDTO>();
 
 
@@ -19,7 +21,7 @@
                 UserId = data.UserId,
                 TourId = data.TourId,
                 ChatId = data.ChatId,
-                Question = data.Question,
+                Content = data.Content,
                 Answers = data.Answers.Select(u => (QuestionnaireAnswer)u).ToList()
             };
         }

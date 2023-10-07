@@ -1,8 +1,10 @@
-﻿namespace TripPlanner.Models.DTO.QuestionnaireDTOs
+﻿using TripPlanner.Models.Models.Message;
+
+namespace TripPlanner.Models.DTO.QuestionnaireDTOs
 {
     public class EditQuestionnaireDTO
     {
-        public string Question { get; set; } = string.Empty;
+        public string Content { get; set; } = string.Empty;
 
 
         public static implicit operator Questionnaire(EditQuestionnaireDTO data)
@@ -12,7 +14,7 @@
 
             return new Questionnaire
             {
-                Question = data.Question,
+                Content = data.Content,
             };
         }
     }

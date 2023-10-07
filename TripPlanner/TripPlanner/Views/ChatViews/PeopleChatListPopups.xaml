@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<toolkit:Popup xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             x:Class="TripPlanner.Views.ChatViews.PeopleChatListPopups"
+             Color="Transparent"
+             CanBeDismissedByTappingOutsideOfPopup="True">
+    <Border
+        Padding="40,40,40,40"
+        StrokeShape="RoundRectangle 20,20,20,20"
+        BackgroundColor="{AppThemeBinding Light=white, Dark=black}">
+        <CollectionView
+            x:Name="m_List">
+
+            <CollectionView.Header>
+                <Label
+                    HorizontalOptions="Center"
+                    HorizontalTextAlignment="Center"
+                    TextColor="#52AB98"
+                    FontSize="20"
+                    FontAttributes="Bold"
+                    x:Name="m_Header"/>
+            </CollectionView.Header>
+
+            <CollectionView.Footer>
+                <Label
+                    HorizontalOptions="Center"
+                    HorizontalTextAlignment="Center"
+                    TextColor="#52AB98"
+                    FontSize="13"
+                    FontAttributes="Bold"
+                    x:Name="m_Footer"/>
+            </CollectionView.Footer>
+
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Grid ColumnDefinitions="30,*"
+                          ColumnSpacing="10">
+                        <Image
+                            Grid.Column="0"
+                            Source="dot_sec.png"
+                            WidthRequest="30"
+                            HeightRequest="30"/>
+                        <Label
+                            Grid.Column="1"
+                            Text="{Binding .}"
+                            MaximumWidthRequest="300"/>
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+
+        </CollectionView>
+    </Border>
+        
+</toolkit:Popup>

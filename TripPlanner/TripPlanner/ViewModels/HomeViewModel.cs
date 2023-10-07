@@ -5,6 +5,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using TripPlanner.Models;
 using TripPlanner.Models.DTO.ChatDTOs;
+using TripPlanner.Models.DTO.QuestionnaireDTOs;
 using TripPlanner.Models.DTO.TourDTOs;
 using TripPlanner.Services;
 using TripPlanner.Views.HomeViews;
@@ -43,119 +44,166 @@ namespace TripPlanner.ViewModels
                     Id = 1,
                     Messages = new List<MessageDTO>
                     {
-                        new MessageDTO
+                        new TextMessageDTO
                         {
                             Content = "Witam wszystkich na wyjeździe na narty 2023, odbędzie się on 11.02.2023 - 15.02.2023, na czacie tym możecie pisać wiadomości do siebie",
                             Date = DateTime.Now,
                         },
-                        new MessageDTO
+                        new TextMessageDTO
                         {
                             Content = "Cześć",
                             Date = DateTime.Now,
                         },
-                        new MessageDTO
+                        new TextMessageDTO
                         {
                             Content = "Cześć",
                             Date = DateTime.Now,
                         },
-                        new MessageDTO
+                        new TextMessageDTO
                         {
                             Content = "Wiadomość testowa4",
                             Date = DateTime.Now,
                         },
-                        new MessageDTO
+                        new TextMessageDTO
                         {
                             Content = "Wiadomość testowa5",
                             Date = DateTime.Now,
                         },
-                        new MessageDTO
+                        new TextMessageDTO
                         {
                             Content = "Wiadomość testowa6",
                             Date = DateTime.Now,
                         },
-                        new MessageDTO
+                        new TextMessageDTO
                         {
                             Content = "Wiadomość testowa7",
                             Date = DateTime.Now,
                         },
-                        new MessageDTO
+                        new TextMessageDTO
                         {
                             Content = "Wiadomość testowa8",
                             Date = DateTime.Now,
                         },
-                        new MessageDTO
+                        new TextMessageDTO
                         {
                             Content = "Wiadomość testowa9",
                             Date = DateTime.Now,
                         },
-                        new MessageDTO
+                        new TextMessageDTO
                         {
                             Content = "Wiadomość testowa10",
                             Date = DateTime.Now,
                         },
-                        new MessageDTO
+                        new TextMessageDTO
                         {
                             Content = "Wiadomość testowa11",
                             Date = DateTime.Now,
                         },
-                        new MessageDTO
+                        new TextMessageDTO
                         {
                             Content = "Wiadomość testowa12",
                             Date = DateTime.Now,
                         },
-                        new MessageDTO
+                        new TextMessageDTO
                         {
                             Content = "Wiadomość testowa13",
                             Date = DateTime.Now,
                         },
-                        new MessageDTO
+                        new TextMessageDTO
                         {
                             Content = "Wiadomość testowa14",
                             Date = DateTime.Now,
                         },
-                        new MessageDTO
+                        new TextMessageDTO
                         {
                             Content = "Wiadomość testowa15",
                             Date = DateTime.Now,
                         },
-                        new MessageDTO
+                        new TextMessageDTO
                         {
                             Content = "Wiadomość testowa16",
                             Date = DateTime.Now,
                         },
-                        new MessageDTO
+                        new TextMessageDTO
                         {
                             Content = "Wiadomość testowa17",
                             Date = DateTime.Now,
                         },
-                        new MessageDTO
+                        new TextMessageDTO
                         {
                             Content = "Wiadomość testowa18",
                             Date = DateTime.Now,
                         },
-                        new MessageDTO
+                        new TextMessageDTO
                         {
                             Content = "Wiadomość testowa19",
                             Date = DateTime.Now,
                         },
-                        new MessageDTO
+                        new TextMessageDTO
                         {
                             Content = "Wiadomość testowa20",
                             Date = DateTime.Now,
                         },
-                        new MessageDTO
+                        new TextMessageDTO
                         {
                             Content = "Wiadomość testowa21",
                             Date = DateTime.Now,
                         },
-                        new MessageDTO
+                        new TextMessageDTO
                         {
                             Content = "Wiadomość testowa22",
                             Date = DateTime.Now,
                         },
-                        new MessageDTO
+                        new QuestionnaireDTO
                         {
-                            Content = "Wiadomość testow23",
+                            Id = 123,
+                            Content = "To jest ankieta?",
+                            Answers = new List<QuestionnaireAnswerDTO>
+                            {
+                                new QuestionnaireAnswerDTO{
+                                    Answer = "tak",
+                                    PercentageShare = 0.7,
+                                    Votes = new List<QuestionnaireVoteDTO>
+                                    {
+                                        new QuestionnaireVoteDTO{ QuestionnaireAnswerId = 1, UserId = 1 },
+                                        new QuestionnaireVoteDTO{ QuestionnaireAnswerId = 1, UserId = 1 },
+                                        new QuestionnaireVoteDTO{ QuestionnaireAnswerId = 1, UserId = 1 },
+                                        new QuestionnaireVoteDTO{ QuestionnaireAnswerId = 1, UserId = 1 },
+                                        new QuestionnaireVoteDTO{ QuestionnaireAnswerId = 1, UserId = 1 },
+                                        new QuestionnaireVoteDTO{ QuestionnaireAnswerId = 1, UserId = 1 },
+                                        new QuestionnaireVoteDTO{ QuestionnaireAnswerId = 1, UserId = 1 },
+                                        new QuestionnaireVoteDTO{ QuestionnaireAnswerId = 1, UserId = 1 },
+                                        new QuestionnaireVoteDTO{ QuestionnaireAnswerId = 1, UserId = 1 }
+                                    }
+                                },
+                                new QuestionnaireAnswerDTO{ 
+                                    Answer = "nie",
+                                    PercentageShare = 0.1,
+                                    Votes = new List<QuestionnaireVoteDTO>
+                                    {
+                                        new QuestionnaireVoteDTO{ QuestionnaireAnswerId = 1, UserId = 1 },
+                                        new QuestionnaireVoteDTO{ QuestionnaireAnswerId = 1, UserId = 1 },
+                                        new QuestionnaireVoteDTO{ QuestionnaireAnswerId = 1, UserId = 1 },
+                                        new QuestionnaireVoteDTO{ QuestionnaireAnswerId = 1, UserId = 1 },
+                                        new QuestionnaireVoteDTO{ QuestionnaireAnswerId = 1, UserId = 1 }
+                                    }
+                                },
+                                new QuestionnaireAnswerDTO{ 
+                                    Answer = "może",
+                                    PercentageShare = 0.2,
+                                    Votes = new List<QuestionnaireVoteDTO>
+                                    {
+                                        new QuestionnaireVoteDTO{ QuestionnaireAnswerId = 1, UserId = 1 },
+                                        new QuestionnaireVoteDTO{ QuestionnaireAnswerId = 1, UserId = 1 },
+                                        new QuestionnaireVoteDTO{ QuestionnaireAnswerId = 1, UserId = 1 }
+                                    }
+                                },
+                            },
+                            Date = DateTime.Now,
+                        },
+                        new TextMessageDTO
+                        {
+                            Content = "Wiadomość testowa23",
                             Date = DateTime.Now,
                         }
                     }

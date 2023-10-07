@@ -8,6 +8,7 @@ using TripPlanner.Models.DTO.QuestionnaireDTOs;
 using TripPlanner.Models.DTO.RouteDTOs;
 using TripPlanner.Models.DTO.TourDTOs;
 using TripPlanner.Models.DTO.UserDTOs;
+using TripPlanner.Models.Models.Message;
 
 namespace TripPlanner.Models
 {

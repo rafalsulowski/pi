@@ -7,6 +7,7 @@ using TripPlanner.Models.DTO.CultureDTOs;
 using TripPlanner.Models.DTO.GroupDTOs;
 using TripPlanner.Models.DTO.QuestionnaireDTOs;
 using TripPlanner.Models.DTO.RouteDTOs;
+using TripPlanner.Models.Models.Message;
 
 namespace TripPlanner.Models.DTO.TourDTOs
 {

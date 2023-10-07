@@ -1,5 +1,6 @@
 ﻿using TripPlanner.Models.DTO.ChatDTOs;
 using TripPlanner.Models.DTO.QuestionnaireDTOs;
+using TripPlanner.Models.Models.Message;
 
 namespace TripPlanner.Models
 {

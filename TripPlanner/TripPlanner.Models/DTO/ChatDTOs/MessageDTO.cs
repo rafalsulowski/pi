@@ -1,4 +1,6 @@
-﻿namespace TripPlanner.Models.DTO.ChatDTOs
+﻿using TripPlanner.Models.Models.Message;
+
+namespace TripPlanner.Models.DTO.ChatDTOs
 {
     public class MessageDTO
     {
