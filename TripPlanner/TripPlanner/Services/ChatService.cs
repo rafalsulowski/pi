@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TripPlanner.Services
 {
-    public class ChatService
+    public class ChatService : IService
     {
         private readonly HttpClient m_HttpClient;
         private readonly Configuration m_Configuration;

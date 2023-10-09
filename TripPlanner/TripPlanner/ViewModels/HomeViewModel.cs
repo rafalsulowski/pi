@@ -162,7 +162,6 @@ namespace TripPlanner.ViewModels
                             {
                                 new QuestionnaireAnswerDTO{
                                     Answer = "tak",
-                                    PercentageShare = 0.7,
                                     Votes = new List<QuestionnaireVoteDTO>
                                     {
                                         new QuestionnaireVoteDTO{ QuestionnaireAnswerId = 1, UserId = 1 },
@@ -171,14 +170,13 @@ namespace TripPlanner.ViewModels
                                         new QuestionnaireVoteDTO{ QuestionnaireAnswerId = 1, UserId = 1 },
                                         new QuestionnaireVoteDTO{ QuestionnaireAnswerId = 1, UserId = 1 },
                                         new QuestionnaireVoteDTO{ QuestionnaireAnswerId = 1, UserId = 1 },
-                                        new QuestionnaireVoteDTO{ QuestionnaireAnswerId = 1, UserId = 1 },
+                                        new QuestionnaireVoteDTO{ QuestionnaireAnswerId = 1, UserId = 2 },
                                         new QuestionnaireVoteDTO{ QuestionnaireAnswerId = 1, UserId = 1 },
                                         new QuestionnaireVoteDTO{ QuestionnaireAnswerId = 1, UserId = 1 }
                                     }
                                 },
                                 new QuestionnaireAnswerDTO{ 
                                     Answer = "nie",
-                                    PercentageShare = 0.1,
                                     Votes = new List<QuestionnaireVoteDTO>
                                     {
                                         new QuestionnaireVoteDTO{ QuestionnaireAnswerId = 1, UserId = 1 },
@@ -190,7 +188,6 @@ namespace TripPlanner.ViewModels
                                 },
                                 new QuestionnaireAnswerDTO{ 
                                     Answer = "może",
-                                    PercentageShare = 0.2,
                                     Votes = new List<QuestionnaireVoteDTO>
                                     {
                                         new QuestionnaireVoteDTO{ QuestionnaireAnswerId = 1, UserId = 1 },

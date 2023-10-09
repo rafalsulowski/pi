@@ -37,6 +37,9 @@ namespace TripPlanner.ViewModels
         [ObservableProperty]
         string message;
 
+        [ObservableProperty]
+        int? userId;
+
         public ChatViewModel(Configuration configuration, TourService tourService, ChatService chatService, QuestionnaireService questionnaireService)
         {
             m_Configuration = configuration;
@@ -45,6 +48,7 @@ namespace TripPlanner.ViewModels
             m_QuestionnaireService = questionnaireService;
 
             IsRefreshing = false;
+            UserId = m_Configuration.User.Id;
             Messages = new ObservableCollection<MessageDTO>();
         }
 
@@ -74,7 +78,6 @@ namespace TripPlanner.ViewModels
 
             PromptLabel = Messages.Count > 0 ? false : true;
         }
-
 
         [RelayCommand]
         async Task GoBack()
@@ -120,6 +123,8 @@ namespace TripPlanner.ViewModels
                 Messages.Add(Chat.Messages.ElementAt(Messages.Count));
             }
             IsRefreshing = false;
+
+            Thread.Sleep(1000);
         }
 
         [RelayCommand]
@@ -129,13 +134,14 @@ namespace TripPlanner.ViewModels
         }
 
 
-        [RelayCommand]
-        async Task ShowVoter(QuestionnaireDTO questionnaire)
-        {
-            await Shell.Current.CurrentPage.ShowPopupAsync(
-                new QuestionnairePopup(
-                    new QuestionnaireViewModel(m_Configuration, m_QuestionnaireService, questionnaire)));
-        }
+        //[RelayCommand]
+        //async Task ShowVoter(object s)
+        //{
+
+        //    //await Shell.Current.CurrentPage.ShowPopupAsync(
+        //    //    new QuestionnairePopup(
+        //    //        new QuestionnaireViewModel(m_Configuration, m_QuestionnaireService, questionnaire)));
+        //}
         
     }
 }

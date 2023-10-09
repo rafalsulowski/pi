@@ -48,6 +48,15 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <AndroidResource Remove="Converters\**" />
+	  <Compile Remove="Converters\**" />
+	  <EmbeddedResource Remove="Converters\**" />
+	  <MauiCss Remove="Converters\**" />
+	  <MauiXaml Remove="Converters\**" />
+	  <None Remove="Converters\**" />
+	</ItemGroup>
+
+	<ItemGroup>
 	  <None Remove="Platforms\Android\Resources\xml\network_security_config.xml" />
 	  <None Remove="Resources\Fonts\LICENSE.txt" />
 	  <None Remove="Resources\Fonts\Roboto-Black.ttf" />
@@ -75,6 +84,14 @@
 	  <None Remove="Resources\Images\chat_wt.svg" />
 	  <None Remove="Resources\Images\checklist_dt.svg" />
 	  <None Remove="Resources\Images\checklist_wt.svg" />
+	  <None Remove="Resources\Images\circle_dt.svg" />
+	  <None Remove="Resources\Images\circle_ok_dt.svg" />
+	  <None Remove="Resources\Images\circle_ok_pri.svg" />
+	  <None Remove="Resources\Images\circle_ok_sec.svg" />
+	  <None Remove="Resources\Images\circle_ok_wt.svg" />
+	  <None Remove="Resources\Images\circle_pri.svg" />
+	  <None Remove="Resources\Images\circle_sec.svg" />
+	  <None Remove="Resources\Images\circle_wt.svg" />
 	  <None Remove="Resources\Images\cloud_sun_dt.svg" />
 	  <None Remove="Resources\Images\cloud_sun_wt.svg" />
 	  <None Remove="Resources\Images\dot_dt.svg" />
@@ -84,8 +101,10 @@
 	  <None Remove="Resources\Images\globe_wt.svg" />
 	  <None Remove="Resources\Images\list_check_dt.svg" />
 	  <None Remove="Resources\Images\list_check_wt.svg" />
+	  <None Remove="Resources\Images\list_dt.svg" />
 	  <None Remove="Resources\Images\list_stars_dt.svg" />
 	  <None Remove="Resources\Images\list_stars_wt.svg" />
+	  <None Remove="Resources\Images\list_wt.svg" />
 	  <None Remove="Resources\Images\people_dt.svg" />
 	  <None Remove="Resources\Images\people_wt.svg" />
 	  <None Remove="Resources\Images\person_chat_dt.svg" />
@@ -117,6 +136,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <MauiXaml Update="Controls\QuestionnaireControls\QuestionnaireControl.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Views\ChatViews\AddQuesionnaireAnswerPopups.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
@@ -165,12 +187,14 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Folder Include="Converters\" />
 	  <Folder Include="Views\BudgetViews\" />
 	  <Folder Include="Views\HarmonogramViews\" />
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Compile Update="Controls\QuestionnaireControls\QuestionnaireControl.xaml.cs">
+	    <DependentUpon>QuestionnaireControl.xaml</DependentUpon>
+	  </Compile>
 	  <Compile Update="Views\HomeViews\HomePage.xaml.cs">
 	    <DependentUpon>%(Filename)</DependentUpon>
 	  </Compile>

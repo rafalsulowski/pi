@@ -12,7 +12,6 @@ namespace TripPlanner.Models
         public ICollection<QuestionnaireVote> Votes { get; set; } = new List<QuestionnaireVote>();
 
         public string Answer { get; set; } = string.Empty;
-        public double PercentageShare { get; set; }
 
 
         public static implicit operator QuestionnaireAnswerDTO(QuestionnaireAnswer data)
@@ -25,8 +24,7 @@ namespace TripPlanner.Models
                 Id = data.Id,
                 QuestionnaireId = data.QuestionnaireId,
                 Votes = data.Votes.Select(u => (QuestionnaireVoteDTO)u).ToList(),
-                Answer = data.Answer,
-                PercentageShare = data.PercentageShare
+                Answer = data.Answer
             };
         }
     }

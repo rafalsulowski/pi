@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TripPlanner.Services
 {
-    public class DialogService : IDialogService
+    public class DialogService : IDialogService, IService
     {
         // ----- async calls (use with "await" - MUST BE ON DISPATCHER THREAD) -----
 

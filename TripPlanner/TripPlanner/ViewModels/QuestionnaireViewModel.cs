@@ -1,6 +1,7 @@
 ﻿using CommunityToolkit.Maui.Views;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using TripPlanner.Controls.QuestionnaireControls;
 using TripPlanner.Models.DTO.QuestionnaireDTOs;
 using TripPlanner.Models.Models.Message;
 using TripPlanner.Services;
@@ -36,9 +37,9 @@ namespace TripPlanner.ViewModels
         }
 
         [RelayCommand]
-        async Task ShowVoter(QuestionnaireAnswerDTO answer)
+        async Task ShowVoter(AnswerGDTO answer)
         {
-            var res = m_QuestionnaireService.GetAnswerVoter(answer.Id);
+            var res = m_QuestionnaireService.GetAnswerVoters(answer.Id);
 
             if (res.Result != null)
             {

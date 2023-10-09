@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:localTemplates="clr-namespace:TripPlanner.DataTemplates"
              x:Class="TripPlanner.Views.ChatViews.ChatPage"
+             xmlns:controls="clr-namespace:TripPlanner.Controls.QuestionnaireControls"
              xmlns:models="clr-namespace:TripPlanner.Models.DTO.QuestionnaireDTOs;assembly=TripPlanner.Models"
              xmlns:viewmodel="clr-namespace:TripPlanner.ViewModels"
              x:DataType="viewmodel:ChatViewModel"
@@ -40,7 +41,7 @@
                     Grid.Row="0"
                     HorizontalOptions="Center"
                     FontSize="15"
-                    TextColor="#52AB98"
+                    TextColor="#B2C6D5"
                     Text="{Binding Date}"/>
                 <Label
                     Grid.Column="1"
@@ -70,10 +71,15 @@
             </Grid>
         </DataTemplate>
 
-        <DataTemplate x:Key="QuestionnaireMessage" x:DataType="models:QuestionnaireDTO">
+        <DataTemplate x:Key="QuestionnaireMessage"
+            x:DataType="models:QuestionnaireDTO">
             <VerticalStackLayout
                 Rotation="180"
                 Margin="10,0,10,0">
+
+                <controls:QuestionnaireControl Questionnaire="{Binding .}">
+                </controls:QuestionnaireControl>
+                
                 <Label
                     Grid.Column="1"
                     Grid.Row="0"
@@ -141,7 +147,6 @@
                                                 </ImageButton.GestureRecognizers>
                                             </ImageButton>
                                         </Grid>
-                                        <ProgressBar ProgressColor="{StaticResource Secondary}" Progress="{Binding PercentageShare}"/>
                                     </VerticalStackLayout>
                                 </DataTemplate>
                             </CollectionView.ItemTemplate>
@@ -173,7 +178,6 @@
 
     <ScrollView>
         <AbsoluteLayout>
-
             <Grid 
                 Margin="10,5,10,5"
                 HorizontalOptions="Fill"

@@ -649,7 +649,7 @@ namespace TripPlanner.DataAccess
             // koniec realcji
 
             modelBuilder.Entity<Questionnaire>()
-                .Property(s => s.Question)
+                .Property(s => s.Content)
                 .IsRequired();
 
             modelBuilder.Entity<Questionnaire>()

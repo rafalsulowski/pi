@@ -10,7 +10,7 @@ using TripPlanner.Models.DTO.UserDTOs;
 
 namespace TripPlanner.Services
 {
-    public class TourService
+    public class TourService : IService
     {
         private readonly HttpClient m_HttpClient;
         private readonly Configuration m_Configuration; 

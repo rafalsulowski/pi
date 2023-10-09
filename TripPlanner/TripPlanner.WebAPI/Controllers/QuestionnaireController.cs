@@ -69,10 +69,10 @@ namespace TripPlanner.WebAPI.Controllers
             {
                 return new RepositoryResponse<QuestionnaireDTO> { Data = null, Success = false, Message = $"Nie istnieje użytkownik o id = {Questionnaire.UserId}" };
             }
-            var res = resp.Data.Questionnaires.FirstOrDefault(u => u.Question == Questionnaire.Question);
+            var res = resp.Data.Questionnaires.FirstOrDefault(u => u.Content == Questionnaire.Content);
             if (res != null)
             {
-                return new RepositoryResponse<QuestionnaireDTO> { Data = null, Success = false, Message = $"Dana wycieczka posiada już ankiete z pytaniem = {Questionnaire.Question}" };
+                return new RepositoryResponse<QuestionnaireDTO> { Data = null, Success = false, Message = $"Dana wycieczka posiada już ankiete z pytaniem = {Questionnaire.Content}" };
             }
 
             Questionnaire newQuestionnaire = Questionnaire;
@@ -269,15 +269,15 @@ namespace TripPlanner.WebAPI.Controllers
             {
                 return new RepositoryResponse<bool> { Success = false, Message = $"Nie istnieje wycieczka o id = {resp2.Data.TourId}" };
             }
-            var res = resp.Data.Questionnaires.FirstOrDefault(u => u.Question == Questionnaire.Question);
+            var res = resp.Data.Questionnaires.FirstOrDefault(u => u.Content == Questionnaire.Content);
             if (res != null)
             {
-                return new RepositoryResponse<bool> { Success = false, Message = $"Dana wycieczka posiada już ankiete z pytaniem = {Questionnaire.Question}" };
+                return new RepositoryResponse<bool> { Success = false, Message = $"Dana wycieczka posiada już ankiete z pytaniem = {Questionnaire.Content}" };
             }
 
             Questionnaire elem = resp2.Data;
             elem.Id = QuestionnaireId;
-            elem.Question = Questionnaire.Question;
+            elem.Content = Questionnaire.Content;
 
             var response = await _QuestionnaireService.UpdateQuestionnaire(elem);
             return Ok(response.Data);

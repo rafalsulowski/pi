@@ -78,7 +78,6 @@
                                             </Image.GestureRecognizers>
                                         </Image>
                                     </Grid>
-                                    <ProgressBar ProgressColor="{StaticResource Secondary}" Progress="{Binding PercentageShare}"/>
                                 </VerticalStackLayout>
                             </DataTemplate>
                         </CollectionView.ItemTemplate>

@@ -8,7 +8,6 @@
         public ICollection<QuestionnaireVoteDTO> Votes { get; set; } = new List<QuestionnaireVoteDTO>();
 
         public string Answer { get; set; } = string.Empty;
-        public double PercentageShare { get; set; }
 
 
         public static implicit operator QuestionnaireAnswer(QuestionnaireAnswerDTO data)
@@ -21,8 +20,7 @@
                 Id = data.Id,
                 QuestionnaireId = data.QuestionnaireId,
                 Votes = data.Votes.Select(u => (QuestionnaireVote)u).ToList(),
-                Answer = data.Answer,
-                PercentageShare = data.PercentageShare
+                Answer = data.Answer
             };
         }
     }

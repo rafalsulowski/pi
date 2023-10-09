@@ -60,6 +60,9 @@
         <member name="P:TripPlanner.ViewModels.ChatViewModel.Message">
             <inheritdoc cref="F:TripPlanner.ViewModels.ChatViewModel.message"/>
         </member>
+        <member name="P:TripPlanner.ViewModels.ChatViewModel.UserId">
+            <inheritdoc cref="F:TripPlanner.ViewModels.ChatViewModel.userId"/>
+        </member>
         <member name="F:TripPlanner.ViewModels.ChatViewModel.goBackCommand">
             <summary>The backing field for <see cref="P:TripPlanner.ViewModels.ChatViewModel.GoBackCommand"/>.</summary>
         </member>
@@ -88,7 +91,7 @@
             <summary>The backing field for <see cref="P:TripPlanner.ViewModels.ChatViewModel.ShowVoterCommand"/>.</summary>
         </member>
         <member name="P:TripPlanner.ViewModels.ChatViewModel.ShowVoterCommand">
-            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand`1"/> instance wrapping <see cref="M:TripPlanner.ViewModels.ChatViewModel.ShowVoter(TripPlanner.Models.DTO.QuestionnaireDTOs.QuestionnaireDTO)"/>.</summary>
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand`1"/> instance wrapping <see cref="M:TripPlanner.ViewModels.ChatViewModel.ShowVoter(System.Object)"/>.</summary>
         </member>
         <member name="T:TripPlanner.ViewModels.CreateQuestionnaireViewModel">
             <inheritdoc/>
@@ -438,6 +441,9 @@
         <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.Message">
             <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "Message" generated properties.</summary>
         </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.UserId">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "UserId" generated properties.</summary>
+        </member>
         <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.Answers">
             <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "Answers" generated properties.</summary>
         </member>
@@ -485,6 +491,9 @@
         </member>
         <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.Message">
             <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "Message" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.UserId">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "UserId" generated properties.</summary>
         </member>
         <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.Answers">
             <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "Answers" generated properties.</summary>

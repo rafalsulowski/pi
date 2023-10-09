@@ -231,7 +231,6 @@ C:\Users\01159502\Desktop\TripPlanner\TripPlanner\TripPlanner.WebAPI\obj\Debug\n
 C:\Users\01159502\Desktop\TripPlanner\TripPlanner\TripPlanner.WebAPI\obj\Debug\net7.0\TripPlanner.WebAPI.AssemblyInfoInputs.cache
 C:\Users\01159502\Desktop\TripPlanner\TripPlanner\TripPlanner.WebAPI\obj\Debug\net7.0\TripPlanner.WebAPI.AssemblyInfo.cs
 C:\Users\01159502\Desktop\TripPlanner\TripPlanner\TripPlanner.WebAPI\obj\Debug\net7.0\TripPlanner.WebAPI.csproj.CoreCompileInputs.cache
-C:\Users\01159502\Desktop\TripPlanner\TripPlanner\TripPlanner.WebAPI\obj\Debug\net7.0\TripPlanner.WebAPI.MvcApplicationPartsAssemblyInfo.cs
 C:\Users\01159502\Desktop\TripPlanner\TripPlanner\TripPlanner.WebAPI\obj\Debug\net7.0\TripPlanner.WebAPI.MvcApplicationPartsAssemblyInfo.cache
 C:\Users\01159502\Desktop\TripPlanner\TripPlanner\TripPlanner.WebAPI\obj\Debug\net7.0\staticwebassets\msbuild.TripPlanner.WebAPI.Microsoft.AspNetCore.StaticWebAssets.props
 C:\Users\01159502\Desktop\TripPlanner\TripPlanner\TripPlanner.WebAPI\obj\Debug\net7.0\staticwebassets\msbuild.build.TripPlanner.WebAPI.props
@@ -247,3 +246,4 @@ C:\Users\01159502\Desktop\TripPlanner\TripPlanner\TripPlanner.WebAPI\obj\Debug\n
 C:\Users\01159502\Desktop\TripPlanner\TripPlanner\TripPlanner.WebAPI\obj\Debug\net7.0\TripPlanner.WebAPI.pdb
 C:\Users\01159502\Desktop\TripPlanner\TripPlanner\TripPlanner.WebAPI\obj\Debug\net7.0\TripPlanner.WebAPI.genruntimeconfig.cache
 C:\Users\01159502\Desktop\TripPlanner\TripPlanner\TripPlanner.WebAPI\obj\Debug\net7.0\ref\TripPlanner.WebAPI.dll
+C:\Users\01159502\Desktop\TripPlanner\TripPlanner\TripPlanner.WebAPI\obj\Debug\net7.0\TripPlanner.WebAPI.MvcApplicationPartsAssemblyInfo.cs

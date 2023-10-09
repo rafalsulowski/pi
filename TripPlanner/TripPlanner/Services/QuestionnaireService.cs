@@ -12,7 +12,7 @@ using TripPlanner.Models.DTO.UserDTOs;
 
 namespace TripPlanner.Services
 {
-    public class QuestionnaireService
+    public class QuestionnaireService : IService
     {
         private readonly HttpClient m_HttpClient;
         private readonly Configuration m_Configuration; 
@@ -46,7 +46,7 @@ namespace TripPlanner.Services
             return null;
         }
 
-        public async Task<List<string>> GetAnswerVoter(int tourId)
+        public async Task<List<string>> GetAnswerVoters(int tourId)
         {
             //try
             //{
