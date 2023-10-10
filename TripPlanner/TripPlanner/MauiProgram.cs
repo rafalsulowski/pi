@@ -55,6 +55,7 @@ public static class MauiProgram
 		builder.Services.AddTransient<TourViewModel>();
 		builder.Services.AddTransient<ChatViewModel>();
 		builder.Services.AddTransient<CreateQuestionnaireViewModel>();
+		builder.Services.AddTransient<QuestionnaireViewModel>();
 
         //Views
         builder.Services.AddTransient<MainPage>();

@@ -3,6 +3,7 @@ using CommunityToolkit.Maui.Views;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using System.Collections.ObjectModel;
+using TripPlanner.Controls.QuestionnaireControls;
 using TripPlanner.Models.DTO.ChatDTOs;
 using TripPlanner.Models.DTO.QuestionnaireDTOs;
 using TripPlanner.Models.DTO.TourDTOs;
@@ -92,25 +93,27 @@ namespace TripPlanner.ViewModels
         [RelayCommand]
         async Task SendMessage()
         {
-            if(Message != null && Message != "")
+            if (Message != null && Message != "")
             {
                 //wyslac do api
 
-                Messages.Add(new TextMessageDTO { 
-                    Content = Message, 
-                    UserId = m_Configuration.User.Id, 
+                Messages.Add(new TextMessageDTO
+                {
+                    Content = Message,
+                    UserId = m_Configuration.User.Id,
                     ChatId = Chat.Id,
                     Id = -1,
                     LikesCount = 0,
-                    Date = DateTime.Now });
+                    Date = DateTime.Now
+                });
             }
         }
-        
+
         [RelayCommand]
         async Task LoadMoreMessages()
         {
             IsRefreshing = true;
-            for(int i = 0; i < m_Configuration.AddChatMessagesWhileReload; i++)
+            for (int i = 0; i < m_Configuration.AddChatMessagesWhileReload; i++)
             {
                 if (Messages.Count == Chat.Messages.Count)
                 {
@@ -122,9 +125,9 @@ namespace TripPlanner.ViewModels
 
                 Messages.Add(Chat.Messages.ElementAt(Messages.Count));
             }
-            IsRefreshing = false;
 
-            Thread.Sleep(1000);
+            Thread.Sleep(2000);
+            IsRefreshing = false;
         }
 
         [RelayCommand]
@@ -134,14 +137,29 @@ namespace TripPlanner.ViewModels
         }
 
 
-        //[RelayCommand]
-        //async Task ShowVoter(object s)
-        //{
 
-        //    //await Shell.Current.CurrentPage.ShowPopupAsync(
-        //    //    new QuestionnairePopup(
-        //    //        new QuestionnaireViewModel(m_Configuration, m_QuestionnaireService, questionnaire)));
-        //}
-        
+        [RelayCommand]
+        async Task Vote(AnswerGDTO answer)
+        {
+            var res = m_QuestionnaireService.VoteForAnswer(m_Configuration.User.Id, answer.Id);
+
+            if (res.Result == false)
+            {
+                await Shell.Current.CurrentPage.DisplayAlert("Błąd", "Nie udało się oddać głosu!", "Ok");
+            }
+        }
+
+        [RelayCommand]
+        async Task ShowVoters(AnswerGDTO answer)
+        {
+            var res = m_QuestionnaireService.GetAnswerVoters(answer.Id);
+
+            if (res.Result != null)
+            {
+                await Shell.Current.CurrentPage.ShowPopupAsync(new PeopleChatListPopups($"Zagłosowali na \"{answer.Answer}\"", res.Result));
+            }
+            else
+                await Shell.Current.CurrentPage.DisplayAlert("Błąd", "Nie udało się pobrać listy osób czatu!", "Ok");
+        }
     }
-}
+    }

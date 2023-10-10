@@ -46,116 +46,139 @@ namespace TripPlanner.ViewModels
                     {
                         new TextMessageDTO
                         {
+                            UserId = 1,
                             Content = "Witam wszystkich na wyjeździe na narty 2023, odbędzie się on 11.02.2023 - 15.02.2023, na czacie tym możecie pisać wiadomości do siebie",
                             Date = DateTime.Now,
                         },
                         new TextMessageDTO
                         {
+                            UserId = 1,
                             Content = "Cześć",
                             Date = DateTime.Now,
                         },
                         new TextMessageDTO
                         {
+                            UserId = 1,
                             Content = "Cześć",
                             Date = DateTime.Now,
                         },
                         new TextMessageDTO
                         {
+                            UserId = 1,
                             Content = "Wiadomość testowa4",
                             Date = DateTime.Now,
                         },
                         new TextMessageDTO
                         {
+                            UserId = 2,
                             Content = "Wiadomość testowa5",
                             Date = DateTime.Now,
                         },
                         new TextMessageDTO
                         {
+                            UserId = 2,
                             Content = "Wiadomość testowa6",
                             Date = DateTime.Now,
                         },
                         new TextMessageDTO
                         {
+                            UserId = 1,
                             Content = "Wiadomość testowa7",
                             Date = DateTime.Now,
                         },
                         new TextMessageDTO
                         {
+                            UserId = 1,
                             Content = "Wiadomość testowa8",
                             Date = DateTime.Now,
                         },
                         new TextMessageDTO
                         {
+                            UserId = 1,
                             Content = "Wiadomość testowa9",
                             Date = DateTime.Now,
                         },
                         new TextMessageDTO
                         {
+                            UserId = 1,
                             Content = "Wiadomość testowa10",
                             Date = DateTime.Now,
                         },
                         new TextMessageDTO
                         {
+                            UserId = 1,
                             Content = "Wiadomość testowa11",
                             Date = DateTime.Now,
                         },
                         new TextMessageDTO
                         {
+                            UserId = 1,
                             Content = "Wiadomość testowa12",
                             Date = DateTime.Now,
                         },
                         new TextMessageDTO
                         {
+                            UserId = 3 ,
                             Content = "Wiadomość testowa13",
                             Date = DateTime.Now,
                         },
                         new TextMessageDTO
                         {
+                            UserId = 1,
                             Content = "Wiadomość testowa14",
                             Date = DateTime.Now,
                         },
                         new TextMessageDTO
                         {
+                            UserId = 1,
                             Content = "Wiadomość testowa15",
                             Date = DateTime.Now,
                         },
                         new TextMessageDTO
                         {
-                            Content = "Wiadomość testowa16",
+                            UserId = 2,
+                            Content = "Wiadom ość testow a16 Wiadomość  test owa16 Wiadom ość te stowa16Wia domość testowa16 Wiadomość testow aw a16Wiado mość testowa 16Wiad o 16Wiado mość testowa 16Wiad omość  testowa16",
                             Date = DateTime.Now,
                         },
                         new TextMessageDTO
                         {
+                            UserId = 1,
                             Content = "Wiadomość testowa17",
                             Date = DateTime.Now,
                         },
                         new TextMessageDTO
                         {
+                            UserId = 1,
                             Content = "Wiadomość testowa18",
                             Date = DateTime.Now,
                         },
                         new TextMessageDTO
                         {
+                            UserId = 1,
                             Content = "Wiadomość testowa19",
                             Date = DateTime.Now,
                         },
                         new TextMessageDTO
                         {
+                            UserId = 1,
                             Content = "Wiadomość testowa20",
                             Date = DateTime.Now,
                         },
                         new TextMessageDTO
                         {
+                            UserId = 1,
                             Content = "Wiadomość testowa21",
                             Date = DateTime.Now,
                         },
                         new TextMessageDTO
                         {
+                            UserId = 1,
                             Content = "Wiadomość testowa22",
                             Date = DateTime.Now,
                         },
                         new QuestionnaireDTO
                         {
+                            UserId = 1,
                             Id = 123,
                             Content = "To jest ankieta?",
                             Answers = new List<QuestionnaireAnswerDTO>
@@ -200,6 +223,7 @@ namespace TripPlanner.ViewModels
                         },
                         new TextMessageDTO
                         {
+                            UserId = 1,
                             Content = "Wiadomość testowa23",
                             Date = DateTime.Now,
                         }

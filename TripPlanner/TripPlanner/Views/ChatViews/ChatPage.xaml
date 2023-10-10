@@ -12,8 +12,9 @@
 
     <ContentPage.Resources>
 
-        <DataTemplate x:Key="NormalMessage">
+        <DataTemplate x:Key="TextOtherMessage">
             <Grid
+                RowSpacing="1"
                 Rotation="180"
                 Margin="5,0,5,0"
                 Padding="0,0,0,5"
@@ -52,7 +53,7 @@
                     MaxLines="2"
                     Text="{Binding UserId}"/>
                 <Border
-                    Margin="0,0,50,0"
+                    HorizontalOptions="Start"
                     BackgroundColor="#E3E3E3"
                     VerticalOptions="Start"
                     Grid.Column="1"
@@ -60,10 +61,49 @@
                     StrokeThickness="0"
                     StrokeShape="RoundRectangle 10,10,10,10">
                     <Label
+                        MaximumWidthRequest="250"
                         Padding="5"
                         FontSize="15"
                         FontAttributes="Bold"
                         TextColor="#52AB98"
+                        LineBreakMode="CharacterWrap"
+                        MaxLines="25"
+                        Text="{Binding Content}"/>
+                </Border>
+            </Grid>
+        </DataTemplate>
+
+        <DataTemplate x:Key="TextMyMessage">
+            <Grid
+                Rotation="180"
+                Margin="5,0,5,0"
+                Padding="0,0,0,5"
+                ColumnSpacing="5"
+                RowSpacing="3"
+                RowDefinitions="20,*"
+                ColumnDefinitions="45,*">
+                <Label
+                    Grid.Column="1"
+                    Grid.Row="0"
+                    HorizontalOptions="Center"
+                    FontSize="15"
+                    TextColor="#B2C6D5"
+                    Text="{Binding Date}"/>
+                <Border
+                    HorizontalOptions="End"
+                    BackgroundColor="#52AB98"
+                    VerticalOptions="Start"
+                    Grid.Column="1"
+                    Grid.Row="1"
+                    Margin="0,0,25,0"
+                    StrokeThickness="0"
+                    StrokeShape="RoundRectangle 10,10,10,10">
+                    <Label
+                        MaximumWidthRequest="250"
+                        Padding="5"
+                        FontSize="15"
+                        FontAttributes="Bold"
+                        TextColor="White"
                         LineBreakMode="CharacterWrap"
                         MaxLines="25"
                         Text="{Binding Content}"/>
@@ -76,101 +116,17 @@
             <VerticalStackLayout
                 Rotation="180"
                 Margin="10,0,10,0">
-
-                <controls:QuestionnaireControl Questionnaire="{Binding .}">
-                </controls:QuestionnaireControl>
-                
-                <Label
-                    Grid.Column="1"
-                    Grid.Row="0"
-                    HorizontalOptions="Center"
-                    FontSize="15"
-                    TextColor="#52AB98"
-                    Text="{Binding Date}"/>
-                <Border
-                    Padding="10,5,10,5"
-                    Stroke="{AppThemeBinding Light=black, Dark=white}"
-                    StrokeShape="RoundRectangle 10,10,10,10">
-                    <Border.GestureRecognizers>
-                        <TapGestureRecognizer 
-                            Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:ChatViewModel}}, Path=ShowVoterCommand}"
-                            CommandParameter="{Binding .}"/>
-                    </Border.GestureRecognizers>
-                    <VerticalStackLayout Spacing="5">
-                        <HorizontalStackLayout 
-                            HorizontalOptions="Center"
-                            Spacing="15">
-                            <Image
-                                WidthRequest="25"
-                                Source="bell_dt.png"/>
-                            <Label
-                                FontSize="20"
-                                FontAttributes="Bold"
-                                TextColor="{StaticResource Secondary}"
-                                Text="Ankieta"/>
-                        </HorizontalStackLayout>
-                        <Label HorizontalOptions="Center"
-                            FontSize="20"
-                            FontAttributes="Bold"
-                            TextColor="{StaticResource Secondary}"
-                            Text="{Binding Content}"/>
-                        <CollectionView ItemsSource="{Binding Answers}">
-                            <CollectionView.ItemTemplate>
-                                <DataTemplate x:DataType="models:QuestionnaireAnswerDTO">
-                                    <VerticalStackLayout Margin="20,0,0,0">
-                                        <Grid ColumnDefinitions="20,*,20"
-                                            ColumnSpacing="10"
-                                            HorizontalOptions="FillAndExpand">
-                                            <Image
-                                                Grid.Column="0"
-                                                HorizontalOptions="Start"
-                                                Source="bell_wt.png"
-                                                WidthRequest="20"/>
-                                            <Label
-                                                Grid.Column="1"
-                                                HorizontalOptions="Start"
-                                                VerticalOptions="Center"
-                                                FontAttributes="Bold"
-                                                FontSize="16"
-                                                MaximumWidthRequest="240"
-                                                TextColor="{StaticResource Secondary}"
-                                                Text="{Binding Answer}"/>
-                                            <ImageButton
-                                                Grid.Column="2"
-                                                HorizontalOptions="End"
-                                                Source="{AppThemeBinding Light=person_chat_wt.png, Dark=person_chat_dt.png}"
-                                                WidthRequest="20">
-                                                <ImageButton.GestureRecognizers>
-                                                    <TapGestureRecognizer
-                                                        Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:ChatViewModel}}, Path=ShowVoterCommand}"
-                                                        CommandParameter="{Binding .}"/>
-                                                </ImageButton.GestureRecognizers>
-                                            </ImageButton>
-                                        </Grid>
-                                    </VerticalStackLayout>
-                                </DataTemplate>
-                            </CollectionView.ItemTemplate>
-                        </CollectionView>
-                        <Label
-                            HorizontalOptions="Center"
-                            FontSize="15"
-                            TextColor="#B2C6D5"
-                            VerticalOptions="Center">
-                            <Label.Text>
-                                <MultiBinding StringFormat="{}{0} '{1}'">
-                                    <Binding Source="Swój głos oddałeś na "/>
-                                    <Binding Source="tak"/>
-                                </MultiBinding>
-                            </Label.Text>
-                        </Label>
-                    </VerticalStackLayout>
-                </Border>
+                <controls:QuestionnaireControl Questionnaire="{Binding .}"/>
             </VerticalStackLayout>
         </DataTemplate>
 
-
+        <DataTemplate x:Key="NullMessage">
+        </DataTemplate>
+        
         <localTemplates:MessageDataTemplateSelector x:Key="MessageSelector"
-                                             NormalMessage="{StaticResource NormalMessage}"
+                                             NullMessage="{StaticResource NullMessage}"
+                                             TextOtherMessage="{StaticResource TextOtherMessage}"
+                                             TextMyMessage="{StaticResource TextMyMessage}"
                                              QuestionnaireMessage="{StaticResource QuestionnaireMessage}" />
     </ContentPage.Resources>
 
@@ -256,16 +212,6 @@
                         <StackLayout>
                         </StackLayout>
                     </CollectionView.Header>
-                    <CollectionView.Footer>
-                        <StackLayout>
-                            <ActivityIndicator
-                                IsRunning="True" 
-                                IsVisible="{Binding IsRefreshing}"
-                                HeightRequest="40"
-                                WidthRequest="40"
-                                HorizontalOptions="Center"/>
-                        </StackLayout>
-                    </CollectionView.Footer>
                 </CollectionView>
 
                 <Grid

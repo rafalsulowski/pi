@@ -26,7 +26,7 @@ namespace TripPlanner.ViewModels
 
 
         [RelayCommand]
-        async Task Vote(QuestionnaireAnswerDTO answer)
+        async Task Vote(AnswerGDTO answer)
         {
             var res = m_QuestionnaireService.VoteForAnswer(m_Configuration.User.Id, answer.Id);
 
@@ -37,16 +37,16 @@ namespace TripPlanner.ViewModels
         }
 
         [RelayCommand]
-        async Task ShowVoter(AnswerGDTO answer)
+        async Task ShowVoter(object answer)
         {
-            var res = m_QuestionnaireService.GetAnswerVoters(answer.Id);
+            //var res = m_QuestionnaireService.GetAnswerVoters(answer.Id);
 
-            if (res.Result != null)
-            {
-                await Shell.Current.CurrentPage.ShowPopupAsync(new PeopleChatListPopups($"Zagłosowali na \"{answer.Answer}\"", res.Result));
-            }
-            else
-                await Shell.Current.CurrentPage.DisplayAlert("Błąd", "Nie udało się pobrać listy osób czatu!", "Ok");
+            //if (res.Result != null)
+            //{
+            //    await Shell.Current.CurrentPage.ShowPopupAsync(new PeopleChatListPopups($"Zagłosowali na \"{answer.Answer}\"", res.Result));
+            //}
+            //else
+            //    await Shell.Current.CurrentPage.DisplayAlert("Błąd", "Nie udało się pobrać listy osób czatu!", "Ok");
         }
     }
 }

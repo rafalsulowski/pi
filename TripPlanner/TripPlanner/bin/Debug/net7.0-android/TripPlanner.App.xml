@@ -41,6 +41,7 @@
             <inheritdoc/>
             <inheritdoc/>
             <inheritdoc/>
+            <inheritdoc/>
         </member>
         <member name="P:TripPlanner.ViewModels.ChatViewModel.Tour">
             <inheritdoc cref="F:TripPlanner.ViewModels.ChatViewModel.tour"/>
@@ -87,11 +88,17 @@
         <member name="P:TripPlanner.ViewModels.ChatViewModel.ShowMoreChatActionCommand">
             <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:TripPlanner.ViewModels.ChatViewModel.ShowMoreChatAction"/>.</summary>
         </member>
-        <member name="F:TripPlanner.ViewModels.ChatViewModel.showVoterCommand">
-            <summary>The backing field for <see cref="P:TripPlanner.ViewModels.ChatViewModel.ShowVoterCommand"/>.</summary>
+        <member name="F:TripPlanner.ViewModels.ChatViewModel.voteCommand">
+            <summary>The backing field for <see cref="P:TripPlanner.ViewModels.ChatViewModel.VoteCommand"/>.</summary>
         </member>
-        <member name="P:TripPlanner.ViewModels.ChatViewModel.ShowVoterCommand">
-            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand`1"/> instance wrapping <see cref="M:TripPlanner.ViewModels.ChatViewModel.ShowVoter(System.Object)"/>.</summary>
+        <member name="P:TripPlanner.ViewModels.ChatViewModel.VoteCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand`1"/> instance wrapping <see cref="M:TripPlanner.ViewModels.ChatViewModel.Vote(TripPlanner.Controls.QuestionnaireControls.AnswerGDTO)"/>.</summary>
+        </member>
+        <member name="F:TripPlanner.ViewModels.ChatViewModel.showVotersCommand">
+            <summary>The backing field for <see cref="P:TripPlanner.ViewModels.ChatViewModel.ShowVotersCommand"/>.</summary>
+        </member>
+        <member name="P:TripPlanner.ViewModels.ChatViewModel.ShowVotersCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand`1"/> instance wrapping <see cref="M:TripPlanner.ViewModels.ChatViewModel.ShowVoters(TripPlanner.Controls.QuestionnaireControls.AnswerGDTO)"/>.</summary>
         </member>
         <member name="T:TripPlanner.ViewModels.CreateQuestionnaireViewModel">
             <inheritdoc/>
@@ -276,13 +283,13 @@
             <summary>The backing field for <see cref="P:TripPlanner.ViewModels.QuestionnaireViewModel.VoteCommand"/>.</summary>
         </member>
         <member name="P:TripPlanner.ViewModels.QuestionnaireViewModel.VoteCommand">
-            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand`1"/> instance wrapping <see cref="M:TripPlanner.ViewModels.QuestionnaireViewModel.Vote(TripPlanner.Models.DTO.QuestionnaireDTOs.QuestionnaireAnswerDTO)"/>.</summary>
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand`1"/> instance wrapping <see cref="M:TripPlanner.ViewModels.QuestionnaireViewModel.Vote(TripPlanner.Controls.QuestionnaireControls.AnswerGDTO)"/>.</summary>
         </member>
         <member name="F:TripPlanner.ViewModels.QuestionnaireViewModel.showVoterCommand">
             <summary>The backing field for <see cref="P:TripPlanner.ViewModels.QuestionnaireViewModel.ShowVoterCommand"/>.</summary>
         </member>
         <member name="P:TripPlanner.ViewModels.QuestionnaireViewModel.ShowVoterCommand">
-            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand`1"/> instance wrapping <see cref="M:TripPlanner.ViewModels.QuestionnaireViewModel.ShowVoter(TripPlanner.Models.DTO.QuestionnaireDTOs.QuestionnaireAnswerDTO)"/>.</summary>
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand`1"/> instance wrapping <see cref="M:TripPlanner.ViewModels.QuestionnaireViewModel.ShowVoter(System.Object)"/>.</summary>
         </member>
         <member name="T:TripPlanner.ViewModels.TourViewModel">
             <inheritdoc/>
