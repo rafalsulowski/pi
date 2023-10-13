@@ -3995,9 +3995,10 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "C:\\Program Files\\DevExpress 22.1\\Components\\System\\Components\\Packages": {},
         "C:\\Program Files\\dotnet\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {},
-        "https://packages.infragistics.com/nuget/licensed": {}
+        "https://nuget.devexpress.com/YEaDiY7l1fXBITbeaSipumiXdNVTbX4hY8RtiEhVgSFGcuiNsz/api": {}
       },
       "frameworks": {
         "net7.0": {

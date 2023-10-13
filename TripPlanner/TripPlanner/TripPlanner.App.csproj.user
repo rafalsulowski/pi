@@ -29,5 +29,14 @@
     <MauiXaml Update="Views\ChatViews\QuestionnairePopup.xaml">
       <SubType>Designer</SubType>
     </MauiXaml>
+    <MauiXaml Update="Views\ParticipantsListViews\AddParticipantPage.xaml">
+      <SubType>Designer</SubType>
+    </MauiXaml>
+    <MauiXaml Update="Views\ParticipantsListViews\AddParticipantPopup.xaml">
+      <SubType>Designer</SubType>
+    </MauiXaml>
+    <MauiXaml Update="Views\ParticipantsListViews\ParticipantsListPage.xaml">
+      <SubType>Designer</SubType>
+    </MauiXaml>
   </ItemGroup>
 </Project>

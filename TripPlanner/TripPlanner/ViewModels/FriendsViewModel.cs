@@ -1,39 +1,85 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
+﻿using CommunityToolkit.Maui.Alerts;
+using CommunityToolkit.Maui.Core;
+using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TripPlanner.Models.DTO.TourDTOs;
+using TripPlanner.Models.DTO.UserDTOs;
+using TripPlanner.Services;
 
 namespace TripPlanner.ViewModels
 {
-    public partial class FriendsViewModel : ObservableObject
+    [QueryProperty("passTour", "Tour")]
+    public partial class FriendsViewModel : ObservableObject, IQueryAttributable
     {
-        [RelayCommand]
-        async Task OpenCalendar()
+        TourDTO Tour;
+        private ObservableCollection<UserDTO> Friends;
+
+        private readonly Configuration m_Configuration;
+        private readonly TourService m_TourService;
+        private readonly UserService m_UserService;
+
+        [ObservableProperty]
+        string searchExpression;
+
+        [ObservableProperty]
+        ObservableCollection<UserDTO> friendsRef;
+
+        public FriendsViewModel(Configuration configuration, TourService tourService, UserService userService)
         {
-            await Shell.Current.GoToAsync("Calendar");
+            m_Configuration = configuration;
+            m_TourService = tourService;
+            m_UserService = userService;
         }
 
-        [RelayCommand]
-        async Task CreateTrip()
+        public void ApplyQueryAttributes(IDictionary<string, object> query)
         {
-            await Shell.Current.GoToAsync("CreateTour");
+            Tour = (TourDTO)query["passTour"];
+
+            if (Tour == null)
+            {
+                Shell.Current.CurrentPage.DisplayAlert("Awaria", "Niespodziewany brak danych wycieczki!", "Ok :(");
+                return;
+            }
+            else
+            {
+                Friends = m_UserService.GetFriends(m_Configuration.User.Id).Result;
+                FriendsRef = Friends;
+            }
         }
 
         [RelayCommand]
         async Task GoBack()
         {
-            await Shell.Current.GoToAsync("CreateTour");
+            var navigationParameter = new Dictionary<string, object>
+            {
+                { "passTour",  Tour}
+            };
+            await Shell.Current.GoToAsync($"Tour", navigationParameter);
         }
 
         [RelayCommand]
-        async Task GoSettings()
+        async Task Add(UserDTO user)
         {
-            await Shell.Current.GoToAsync("CreateTour");
+            var res = await Shell.Current.CurrentPage.DisplayAlert("Dodawanie uczestnika", $"Czy potwierdzasz dodanie {user.FullAddress} do wyajzdu", "Ok", "Anuluj");
+
+            if(res)
+            {
+                var res2 = await m_TourService.AddParticipant(Tour.Id, user.Id);
+                if (res2 == "") //OK
+                {
+                    var confirmCopyToast = Toast.Make("Dodano nowego uczestnika", ToastDuration.Short, 14);
+                    await confirmCopyToast.Show();
+                }
+                else
+                    await Shell.Current.CurrentPage.DisplayAlert("Błąd", res2, "Ok :(");
+            }
         }
-        
 
     }
 }

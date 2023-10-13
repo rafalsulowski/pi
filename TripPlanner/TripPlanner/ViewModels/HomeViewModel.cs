@@ -39,6 +39,7 @@ namespace TripPlanner.ViewModels
                 CreateDate = DateTime.Now,
                 StartDate = new DateTime(2024, 2, 15),
                 EndDate = new DateTime(2024, 2, 15),
+                InviteLink = "https://tripplanner.com/join/k23hbf8s0",
                 Chat = new ChatDTO
                 {
                     Id = 1,

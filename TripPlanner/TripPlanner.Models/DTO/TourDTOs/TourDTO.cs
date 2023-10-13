@@ -7,6 +7,7 @@ using TripPlanner.Models.DTO.CultureDTOs;
 using TripPlanner.Models.DTO.GroupDTOs;
 using TripPlanner.Models.DTO.QuestionnaireDTOs;
 using TripPlanner.Models.DTO.RouteDTOs;
+using TripPlanner.Models.Models;
 using TripPlanner.Models.Models.Message;
 
 namespace TripPlanner.Models.DTO.TourDTOs
@@ -15,8 +16,9 @@ namespace TripPlanner.Models.DTO.TourDTOs
     {
         public int Id { get; set; }
 
-        public ICollection<OrganizerTourDTO> Organizers { get; set; } = new List<OrganizerTourDTO>();
+        //public ICollection<ParticipantTourDTO> Organizers { get; set; } = new List<ParticipantTourDTO>();
         public ICollection<ParticipantTourDTO> Participants { get; set; } = new List<ParticipantTourDTO>();
+        public ICollection<Invitation> Invitations { get; set; } = new List<Invitation>();
         public ICollection<CheckListDTO> CheckLists { get; set; } = new List<CheckListDTO>();
         public ICollection<QuestionnaireDTO> Questionnaires { get; set; } = new List<QuestionnaireDTO>();
         public ICollection<GroupDTO> Groups { get; set; } = new List<GroupDTO>();
@@ -33,6 +35,7 @@ namespace TripPlanner.Models.DTO.TourDTOs
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
         public DateTime CreateDate { get; set; }
+        public string InviteLink { get; set; } = string.Empty;
 
 
         public static implicit operator Tour(TourDTO data)
@@ -43,7 +46,7 @@ namespace TripPlanner.Models.DTO.TourDTOs
             return new Tour
             {
                 Id = data.Id,
-                Organizers = data.Organizers.Select(u => (OrganizerTour)u).ToList(),
+                //Organizers = data.Organizers.Select(u => (ParticipantTour)u).ToList(),
                 Participants = data.Participants.Select(u => (ParticipantTour)u).ToList(),
                 CheckLists = data.CheckLists.Select(u => (CheckList)u).ToList(),
                 Questionnaires = data.Questionnaires.Select(u => (Questionnaire)u).ToList(),
@@ -51,6 +54,7 @@ namespace TripPlanner.Models.DTO.TourDTOs
                 Groups = data.Groups.Select(u => (Group)u).ToList(),
                 Bills = data.Bills.Select(u => (Bill)u).ToList(),
                 CultureAssistances = data.CultureAssistances.Select(u => (CultureAssistance)u).ToList(),
+                Invitations = data.Invitations.Select(u => (Invitation)u).ToList(),
                 Budget = data.Budget,
                 Chat = data.Chat,
                 Title = data.Title,
@@ -60,6 +64,7 @@ namespace TripPlanner.Models.DTO.TourDTOs
                 StartDate = data.StartDate,
                 EndDate = data.EndDate,
                 CreateDate = data.CreateDate,
+                InviteLink = data.InviteLink,
             };
         }
     }

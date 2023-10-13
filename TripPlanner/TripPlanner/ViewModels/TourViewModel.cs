@@ -42,9 +42,13 @@ namespace TripPlanner.ViewModels
         }
 
         [RelayCommand]
-        async Task Go()
+        async Task GoParticipants()
         {
-            await Shell.Current.GoToAsync("//Tour");
+            var navigationParameter = new Dictionary<string, object>
+            {
+                { "passTour",  Tour}
+            };
+            await Shell.Current.GoToAsync($"/Participants", navigationParameter);
         }
 
     }

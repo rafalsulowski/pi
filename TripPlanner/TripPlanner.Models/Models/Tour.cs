@@ -5,6 +5,7 @@ using TripPlanner.Models.DTO.GroupDTOs;
 using TripPlanner.Models.DTO.QuestionnaireDTOs;
 using TripPlanner.Models.DTO.RouteDTOs;
 using TripPlanner.Models.DTO.TourDTOs;
+using TripPlanner.Models.Models;
 using TripPlanner.Models.Models.Message;
 
 namespace TripPlanner.Models
@@ -13,8 +14,9 @@ namespace TripPlanner.Models
     {
         public int Id { get; set; }
 
-        public ICollection<OrganizerTour> Organizers { get; set; } = new List<OrganizerTour>();
+        //public ICollection<OrganizerTour> Organizers { get; set; } = new List<OrganizerTour>();
         public ICollection<ParticipantTour> Participants { get; set; } = new List<ParticipantTour>();
+        public ICollection<Invitation> Invitations { get; set; } = new List<Invitation>();
         public ICollection<CheckList> CheckLists { get; set; } = new List<CheckList>();
         public ICollection<Questionnaire> Questionnaires { get; set; } = new List<Questionnaire>();
         public ICollection<Group> Groups { get; set; } = new List<Group>();
@@ -31,6 +33,7 @@ namespace TripPlanner.Models
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
         public DateTime CreateDate { get; set; }
+        public string InviteLink { get; set; } = string.Empty;
 
 
         public static implicit operator TourDTO(Tour data)
@@ -41,7 +44,7 @@ namespace TripPlanner.Models
             return new TourDTO
             {
                 Id = data.Id,
-                Organizers = data.Organizers.Select(u => (OrganizerTourDTO)u).ToList(),
+                //Organizers = data.Organizers.Select(u => (ParticipantTourDTO)u).ToList(),
                 Participants = data.Participants.Select(u => (ParticipantTourDTO)u).ToList(),
                 CheckLists = data.CheckLists.Select(u => (CheckListDTO)u).ToList(),
                 Questionnaires = data.Questionnaires.Select(u => (QuestionnaireDTO)u).ToList(),
@@ -49,6 +52,7 @@ namespace TripPlanner.Models
                 Groups = data.Groups.Select(u => (GroupDTO)u).ToList(),
                 Bills = data.Bills.Select(u => (BillDTO)u).ToList(),
                 CultureAssistances = data.CultureAssistances.Select(u => (CultureAssistanceDTO)u).ToList(),
+                Invitations = data.Invitations.Select(u => (Invitation)u).ToList(),
                 Budget = data.Budget,
                 Chat = data.Chat,
                 Title = data.Title,
@@ -57,7 +61,8 @@ namespace TripPlanner.Models
                 MaxParticipant = data.MaxParticipant,
                 StartDate = data.StartDate,
                 EndDate = data.EndDate,
-                CreateDate = data.CreateDate,                
+                CreateDate = data.CreateDate,
+                InviteLink = data.InviteLink,
             };
         }
     }

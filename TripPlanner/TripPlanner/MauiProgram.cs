@@ -10,6 +10,7 @@ using TripPlanner.Views.ChatViews;
 using CommunityToolkit.Maui;
 using TripPlanner.DataTemplates;
 using HexInnovation;
+using TripPlanner.Views.ParticipantsListViews;
 
 namespace TripPlanner;
 
@@ -44,6 +45,7 @@ public static class MauiProgram
         builder.Services.AddSingleton<TourService>();
         builder.Services.AddSingleton<ChatService>();
         builder.Services.AddSingleton<QuestionnaireService>();
+        builder.Services.AddSingleton<UserService>();
         
 		//ViewModels Services
 		builder.Services.AddTransient<HomeViewModel>();
@@ -56,6 +58,7 @@ public static class MauiProgram
 		builder.Services.AddTransient<ChatViewModel>();
 		builder.Services.AddTransient<CreateQuestionnaireViewModel>();
 		builder.Services.AddTransient<QuestionnaireViewModel>();
+		builder.Services.AddTransient<ParticipantsViewModel>();
 
         //Views
         builder.Services.AddTransient<MainPage>();
@@ -69,6 +72,8 @@ public static class MauiProgram
 		builder.Services.AddTransient<TourPage>();
 		builder.Services.AddTransient<ChatPage>();
 		builder.Services.AddTransient<CreateNewQuestionnairePage>();
+		builder.Services.AddTransient<ParticipantsListPage>();
+		builder.Services.AddTransient<AddParticipantPage>();
 
 
 		return builder.Build();

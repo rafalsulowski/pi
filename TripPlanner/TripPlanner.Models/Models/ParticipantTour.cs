@@ -10,6 +10,10 @@ namespace TripPlanner.Models
         public Tour Tour { get; set; } = null!;
         public int TourId { get; set; }
 
+        public string Nickname { get; set; } = string.Empty;
+        public bool IsOrganizer { get; set; }
+        public DateTime AccessionDate { get; set; }
+
 
         public static implicit operator ParticipantTourDTO(ParticipantTour data)
         {
@@ -19,7 +23,10 @@ namespace TripPlanner.Models
             return new ParticipantTourDTO
             {
                 UserId = data.UserId,
-                TourId = data.TourId
+                TourId = data.TourId,
+                Nickname = data.Nickname,
+                IsOrganizer = data.IsOrganizer,
+                AccessionDate = data.AccessionDate,
             };
         }
     }

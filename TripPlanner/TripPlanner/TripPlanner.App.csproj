@@ -89,14 +89,18 @@
 	  <None Remove="Resources\Images\circle_ok_pri.svg" />
 	  <None Remove="Resources\Images\circle_ok_sec.svg" />
 	  <None Remove="Resources\Images\circle_ok_wt.svg" />
+	  <None Remove="Resources\Images\circle_plus_pri.svg" />
+	  <None Remove="Resources\Images\circle_plus_sec.svg" />
 	  <None Remove="Resources\Images\circle_pri.svg" />
 	  <None Remove="Resources\Images\circle_sec.svg" />
 	  <None Remove="Resources\Images\circle_wt.svg" />
 	  <None Remove="Resources\Images\cloud_sun_dt.svg" />
 	  <None Remove="Resources\Images\cloud_sun_wt.svg" />
+	  <None Remove="Resources\Images\copy_dt.svg" />
 	  <None Remove="Resources\Images\dot_dt.svg" />
 	  <None Remove="Resources\Images\dot_sec.svg" />
 	  <None Remove="Resources\Images\dot_wt.svg" />
+	  <None Remove="Resources\Images\download_sec.svg" />
 	  <None Remove="Resources\Images\globe_dt.svg" />
 	  <None Remove="Resources\Images\globe_wt.svg" />
 	  <None Remove="Resources\Images\list_check_dt.svg" />
@@ -105,6 +109,9 @@
 	  <None Remove="Resources\Images\list_stars_dt.svg" />
 	  <None Remove="Resources\Images\list_stars_wt.svg" />
 	  <None Remove="Resources\Images\list_wt.svg" />
+	  <None Remove="Resources\Images\organizer_dt.svg" />
+	  <None Remove="Resources\Images\organizer_gray.svg" />
+	  <None Remove="Resources\Images\organizer_sec.svg" />
 	  <None Remove="Resources\Images\people_dt.svg" />
 	  <None Remove="Resources\Images\people_wt.svg" />
 	  <None Remove="Resources\Images\person_chat_dt.svg" />
@@ -112,6 +119,8 @@
 	  <None Remove="Resources\Images\person_wt.svg" />
 	  <None Remove="Resources\Images\plus_dt.svg" />
 	  <None Remove="Resources\Images\plus_wt.svg" />
+	  <None Remove="Resources\Images\search_dt.svg" />
+	  <None Remove="Resources\Images\search_gray.svg" />
 	  <None Remove="Resources\Images\send_dt.svg" />
 	  <None Remove="Resources\Images\send_wt.svg" />
 	  <None Remove="Resources\Images\settings_chat_dt.svg" />
@@ -173,6 +182,15 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\HomeViews\ProfilePage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\ParticipantsListViews\AddParticipantPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\ParticipantsListViews\AddParticipantPopup.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\ParticipantsListViews\ParticipantsListPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\StartViews\MainPage.xaml">

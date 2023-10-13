@@ -125,17 +125,15 @@ namespace TripPlanner.ViewModels
 
                 Messages.Add(Chat.Messages.ElementAt(Messages.Count));
             }
-
-            Thread.Sleep(2000);
             IsRefreshing = false;
         }
+
 
         [RelayCommand]
         async Task ShowMoreChatAction()
         {
             await Shell.Current.CurrentPage.ShowPopupAsync(new ChatAdditionalMenuPopup(m_TourService, Tour, Chat.Id));
         }
-
 
 
         [RelayCommand]
@@ -148,6 +146,7 @@ namespace TripPlanner.ViewModels
                 await Shell.Current.CurrentPage.DisplayAlert("Błąd", "Nie udało się oddać głosu!", "Ok");
             }
         }
+
 
         [RelayCommand]
         async Task ShowVoters(AnswerGDTO answer)

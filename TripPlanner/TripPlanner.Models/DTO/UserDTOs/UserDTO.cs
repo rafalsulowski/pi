@@ -28,10 +28,9 @@ namespace TripPlanner.Models.DTO.UserDTOs
         public ICollection<ParticipantBillDTO> BillSettle { get; set; } = new List<ParticipantBillDTO>();
 
         public string Email { get; set; } = string.Empty;
-        public string Name { get; set; } = string.Empty;
-        public string Surname { get; set; } = string.Empty;
-        public string PasswordHash { get; set; } = string.Empty;
-        public string Address { get; set; } = string.Empty;
+        public string FullName { get; set; } = string.Empty;
+        public string FullAddress { get; set; } = string.Empty;
+        public string City { get; set; } = string.Empty;
         public DateTime DateOfBirth { get; set; }
 
 
@@ -55,11 +54,10 @@ namespace TripPlanner.Models.DTO.UserDTOs
                 Bills = User.Bills.Select(u => (Bill)u).ToList(),
                 BillSettle = User.BillSettle.Select(u => (ParticipantBill)u).ToList(),
                 Email = User.Email,
-                Name = User.Name,
-                Surname = User.Surname,
-                PasswordHash = User.PasswordHash,
-                Address = User.Address,
-                DateOfBirth = User.DateOfBirth
+                FullName = User.FullName,
+                FullAddress = User.FullAddress,
+                City = User.City,
+                DateOfBirth = User.DateOfBirth,
             };
         }
     }

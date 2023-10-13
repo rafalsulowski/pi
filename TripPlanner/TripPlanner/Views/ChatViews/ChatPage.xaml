@@ -196,7 +196,7 @@
                     Grid.Row="0"
                     Margin="0,50,0,0"
                     Rotation="180"
-                    RemainingItemsThreshold="0"
+                    RemainingItemsThreshold="4"
                     RemainingItemsThresholdReachedCommand="{Binding LoadMoreMessagesCommand}"
                     x:Name="m_chatControl"
                     ItemsSource="{Binding Messages}"
