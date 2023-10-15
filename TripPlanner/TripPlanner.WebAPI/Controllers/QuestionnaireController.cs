@@ -4,7 +4,7 @@ using TripPlanner.Services.QuestionnaireService;
 using TripPlanner.Services.UserService;
 using TripPlanner.Services.TourService;
 using TripPlanner.Models.DTO.QuestionnaireDTOs;
-using TripPlanner.Models.Models.Message;
+using TripPlanner.Models.Models.Message.Questionnaire;
 
 namespace TripPlanner.WebAPI.Controllers
 {

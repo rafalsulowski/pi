@@ -19,14 +19,8 @@
                 FontSize="20"
                 AbsoluteLayout.LayoutBounds="0,0,1,38"
                 AbsoluteLayout.LayoutFlags="WidthProportional"
-                VerticalOptions="End" Text="TripPlanner"/>
-
-            <ImageButton
-                HorizontalOptions="End"
-                AbsoluteLayout.LayoutBounds="0,10,.98,30"
-                AbsoluteLayout.LayoutFlags="WidthProportional"
-                Source="plus_circle.png"
-                Command="{Binding CreateTripCommand}"/>
+                VerticalOptions="End" 
+                Text="Profil"/>
         </AbsoluteLayout>
     </Shell.TitleView>
     

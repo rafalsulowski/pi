@@ -1,5 +1,6 @@
-﻿using TripPlanner.Models.DTO.QuestionnaireDTOs;
-using TripPlanner.Models.Models.Message;
+﻿using TripPlanner.Models.DTO.MessageDTOs;
+using TripPlanner.Models.Models;
+using TripPlanner.Models.Models.MessageModels;
 
 namespace TripPlanner.Models.DTO.ChatDTOs
 {
@@ -7,8 +8,6 @@ namespace TripPlanner.Models.DTO.ChatDTOs
     {
         public int Id { get; set; }
         public int TourId { get; set; }
-        public int GroupId { get; set; }
-        public ICollection<QuestionnaireDTO> Questionnaires { get; set; } = new List<QuestionnaireDTO>();
         public ICollection<MessageDTO> Messages { get; set; } = new List<MessageDTO>();
 
 
@@ -21,8 +20,6 @@ namespace TripPlanner.Models.DTO.ChatDTOs
             {
                 Id = data.Id,
                 TourId = data.TourId,
-                GroupId = data.GroupId,
-                Questionnaires = data.Questionnaires.Select(u => (Questionnaire)u).ToList(),
                 Messages = data.Messages.Select(u => (Message)u).ToList(),
             };
         }

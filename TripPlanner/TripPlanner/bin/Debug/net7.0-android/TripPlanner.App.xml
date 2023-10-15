@@ -185,17 +185,11 @@
             <inheritdoc/>
             <inheritdoc/>
         </member>
-        <member name="F:TripPlanner.ViewModels.FriendsViewModel.openCalendarCommand">
-            <summary>The backing field for <see cref="P:TripPlanner.ViewModels.FriendsViewModel.OpenCalendarCommand"/>.</summary>
+        <member name="P:TripPlanner.ViewModels.FriendsViewModel.SearchExpression">
+            <inheritdoc cref="F:TripPlanner.ViewModels.FriendsViewModel.searchExpression"/>
         </member>
-        <member name="P:TripPlanner.ViewModels.FriendsViewModel.OpenCalendarCommand">
-            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:TripPlanner.ViewModels.FriendsViewModel.OpenCalendar"/>.</summary>
-        </member>
-        <member name="F:TripPlanner.ViewModels.FriendsViewModel.createTripCommand">
-            <summary>The backing field for <see cref="P:TripPlanner.ViewModels.FriendsViewModel.CreateTripCommand"/>.</summary>
-        </member>
-        <member name="P:TripPlanner.ViewModels.FriendsViewModel.CreateTripCommand">
-            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:TripPlanner.ViewModels.FriendsViewModel.CreateTrip"/>.</summary>
+        <member name="P:TripPlanner.ViewModels.FriendsViewModel.FriendsRef">
+            <inheritdoc cref="F:TripPlanner.ViewModels.FriendsViewModel.friendsRef"/>
         </member>
         <member name="F:TripPlanner.ViewModels.FriendsViewModel.goBackCommand">
             <summary>The backing field for <see cref="P:TripPlanner.ViewModels.FriendsViewModel.GoBackCommand"/>.</summary>
@@ -203,11 +197,17 @@
         <member name="P:TripPlanner.ViewModels.FriendsViewModel.GoBackCommand">
             <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:TripPlanner.ViewModels.FriendsViewModel.GoBack"/>.</summary>
         </member>
-        <member name="F:TripPlanner.ViewModels.FriendsViewModel.goSettingsCommand">
-            <summary>The backing field for <see cref="P:TripPlanner.ViewModels.FriendsViewModel.GoSettingsCommand"/>.</summary>
+        <member name="F:TripPlanner.ViewModels.FriendsViewModel.addCommand">
+            <summary>The backing field for <see cref="P:TripPlanner.ViewModels.FriendsViewModel.AddCommand"/>.</summary>
         </member>
-        <member name="P:TripPlanner.ViewModels.FriendsViewModel.GoSettingsCommand">
-            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:TripPlanner.ViewModels.FriendsViewModel.GoSettings"/>.</summary>
+        <member name="P:TripPlanner.ViewModels.FriendsViewModel.AddCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand`1"/> instance wrapping <see cref="M:TripPlanner.ViewModels.FriendsViewModel.Add(TripPlanner.Models.DTO.UserDTOs.UserDTO)"/>.</summary>
+        </member>
+        <member name="F:TripPlanner.ViewModels.FriendsViewModel.openCalendarCommand">
+            <summary>The backing field for <see cref="P:TripPlanner.ViewModels.FriendsViewModel.OpenCalendarCommand"/>.</summary>
+        </member>
+        <member name="P:TripPlanner.ViewModels.FriendsViewModel.OpenCalendarCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:TripPlanner.ViewModels.FriendsViewModel.OpenCalendar"/>.</summary>
         </member>
         <member name="T:TripPlanner.ViewModels.HomeViewModel">
             <inheritdoc/>
@@ -269,9 +269,6 @@
         </member>
         <member name="P:TripPlanner.ViewModels.ParticipantsViewModel.SearchExpression">
             <inheritdoc cref="F:TripPlanner.ViewModels.ParticipantsViewModel.searchExpression"/>
-        </member>
-        <member name="P:TripPlanner.ViewModels.ParticipantsViewModel.LinkTojoin">
-            <inheritdoc cref="F:TripPlanner.ViewModels.ParticipantsViewModel.linkTojoin"/>
         </member>
         <member name="P:TripPlanner.ViewModels.ParticipantsViewModel.Participants">
             <inheritdoc cref="F:TripPlanner.ViewModels.ParticipantsViewModel.participants"/>
@@ -535,8 +532,8 @@
         <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.SearchExpression">
             <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "SearchExpression" generated properties.</summary>
         </member>
-        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.LinkTojoin">
-            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "LinkTojoin" generated properties.</summary>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.FriendsRef">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "FriendsRef" generated properties.</summary>
         </member>
         <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.Participants">
             <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "Participants" generated properties.</summary>
@@ -598,8 +595,8 @@
         <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.SearchExpression">
             <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "SearchExpression" generated properties.</summary>
         </member>
-        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.LinkTojoin">
-            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "LinkTojoin" generated properties.</summary>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.FriendsRef">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "FriendsRef" generated properties.</summary>
         </member>
         <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.Participants">
             <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "Participants" generated properties.</summary>

@@ -1,14 +1,14 @@
 ﻿
-using TripPlanner.Models.DTO.BillDTOs;
-using TripPlanner.Models.DTO.BudgetDTOs;
 using TripPlanner.Models.DTO.ChatDTOs;
 using TripPlanner.Models.DTO.CheckListDTOs;
-using TripPlanner.Models.DTO.CultureDTOs;
-using TripPlanner.Models.DTO.GroupDTOs;
-using TripPlanner.Models.DTO.QuestionnaireDTOs;
 using TripPlanner.Models.DTO.RouteDTOs;
-using TripPlanner.Models.Models;
-using TripPlanner.Models.Models.Message;
+using TripPlanner.Models.DTO.MessageDTOs.QuestionnaireDTOs;
+using TripPlanner.Models.Models.CheckListModels;
+using TripPlanner.Models.Models.MessageModels.QuestionnaireModels;
+using TripPlanner.Models.Models.RouteModels;
+using TripPlanner.Models.Models.TourModels;
+using TripPlanner.Models.DTO.CultureDTOs;
+using TripPlanner.Models.Models.CultureModels;
 
 namespace TripPlanner.Models.DTO.TourDTOs
 {
@@ -16,17 +16,12 @@ namespace TripPlanner.Models.DTO.TourDTOs
     {
         public int Id { get; set; }
 
-        //public ICollection<ParticipantTourDTO> Organizers { get; set; } = new List<ParticipantTourDTO>();
         public ICollection<ParticipantTourDTO> Participants { get; set; } = new List<ParticipantTourDTO>();
-        public ICollection<Invitation> Invitations { get; set; } = new List<Invitation>();
         public ICollection<CheckListDTO> CheckLists { get; set; } = new List<CheckListDTO>();
         public ICollection<QuestionnaireDTO> Questionnaires { get; set; } = new List<QuestionnaireDTO>();
-        public ICollection<GroupDTO> Groups { get; set; } = new List<GroupDTO>();
         public ICollection<RouteDTO> Routes { get; set; } = new List<RouteDTO>();
-        public ICollection<BillDTO> Bills { get; set; } = new List<BillDTO>();
-        public ICollection<CultureAssistanceDTO> CultureAssistances { get; set; } = new List<CultureAssistanceDTO>();
-        public BudgetDTO? Budget { get; set; }
-        public ChatDTO? Chat { get; set; }
+        public ICollection<CultureAssistanceDTO> Cultures { get; set; } = new List<CultureAssistanceDTO>();
+        public ChatDTO Chat { get; set; } = null!;
 
         public string Title { get; set; } = string.Empty;
         public string Description { get; set; } = string.Empty;
@@ -46,16 +41,11 @@ namespace TripPlanner.Models.DTO.TourDTOs
             return new Tour
             {
                 Id = data.Id,
-                //Organizers = data.Organizers.Select(u => (ParticipantTour)u).ToList(),
                 Participants = data.Participants.Select(u => (ParticipantTour)u).ToList(),
                 CheckLists = data.CheckLists.Select(u => (CheckList)u).ToList(),
                 Questionnaires = data.Questionnaires.Select(u => (Questionnaire)u).ToList(),
                 Routes = data.Routes.Select(u => (Route)u).ToList(),
-                Groups = data.Groups.Select(u => (Group)u).ToList(),
-                Bills = data.Bills.Select(u => (Bill)u).ToList(),
-                CultureAssistances = data.CultureAssistances.Select(u => (CultureAssistance)u).ToList(),
-                Invitations = data.Invitations.Select(u => (Invitation)u).ToList(),
-                Budget = data.Budget,
+                Cultures = data.Cultures.Select(u => (CultureAssistance)u).ToList(),
                 Chat = data.Chat,
                 Title = data.Title,
                 Description = data.Description,

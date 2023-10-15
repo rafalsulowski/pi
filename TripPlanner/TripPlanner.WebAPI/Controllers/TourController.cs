@@ -9,6 +9,7 @@ using TripPlanner.Models.DTO.CheckListDTOs;
 using TripPlanner.Models.DTO.GroupDTOs;
 using TripPlanner.Services.GroupService;
 using TripPlanner.Models.DTO.ChatDTOs;
+using TripPlanner.Models.Models.Tour;
 
 namespace TripPlanner.WebAPI.Controllers
 {

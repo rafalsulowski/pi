@@ -7,6 +7,7 @@ using TripPlanner.Services.BillService;
 using TripPlanner.Services.RouteService;
 using TripPlanner.Services.QuestionnaireService;
 using TripPlanner.Services.CheckListService;
+using TripPlanner.Models.Models.Tour;
 
 namespace TripPlanner.Services.TourService
 {

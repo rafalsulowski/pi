@@ -1,6 +1,4 @@
-﻿
-
-namespace TripPlanner.Models
+﻿namespace TripPlanner.Models.Models
 {
     public class RepositoryResponse<T>
     {

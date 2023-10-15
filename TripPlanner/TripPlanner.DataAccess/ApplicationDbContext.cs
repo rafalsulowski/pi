@@ -1,7 +1,11 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System.Reflection.Metadata;
-using TripPlanner.Models;
-using TripPlanner.Models.Models.Message;
+using TripPlanner.Models.Models;
+using TripPlanner.Models.Models.CheckListModels;
+using TripPlanner.Models.Models.CultureModels;
+using TripPlanner.Models.Models.MessageModels;
+using TripPlanner.Models.Models.MessageModels.QuestionnaireModels;
+using TripPlanner.Models.Models.RouteModels;
+using TripPlanner.Models.Models.TourModels;
 
 namespace TripPlanner.DataAccess
 {
@@ -12,22 +16,12 @@ namespace TripPlanner.DataAccess
 
         }
 
-        public DbSet<Bill> Bills { get; set; }
-        public DbSet<BillPicture> BillPictures { get; set; }
-        public DbSet<Budget> Budgets { get; set; }
-        public DbSet<BudgetExpenditure> BudgetExpenditures { get; set; }
         public DbSet<Chat> Chats { get; set; }
         public DbSet<CheckList> CheckLists { get; set; }
         public DbSet<CheckListField> CheckListFields { get; set; }
-        public DbSet<ContributeBudget> ContributeBudgets { get; set; }
         public DbSet<Culture> Cultures { get; set; }
-        public DbSet<CultureAssistance> CultureAssistances { get; set; }
-        public DbSet<Group> Groups { get; set; }
         public DbSet<Message> Messages { get; set; }
-        public DbSet<ParticipantBill> ParticipantBills { get; set; }
-        public DbSet<ParticipantGroup> ParticipantGroups { get; set; }
         public DbSet<ParticipantTour> ParticipantTours { get; set; }
-        public DbSet<OrganizerTour> OrganizerTours { get; set; }
         public DbSet<Questionnaire> Questionnaires { get; set; }
         public DbSet<QuestionnaireAnswer> QuestionnaireAnswers { get; set; }
         public DbSet<QuestionnaireVote> QuestionnaireVotes { get; set; }
@@ -51,35 +45,7 @@ namespace TripPlanner.DataAccess
                 .IsRequired();
 
             modelBuilder.Entity<User>()
-                .HasMany(sc => sc.OrganizerTours)
-                .WithOne(s => s.User)
-                .HasForeignKey(sc => sc.UserId)
-                .OnDelete(DeleteBehavior.NoAction)
-                .IsRequired();
-
-            modelBuilder.Entity<User>()
-                .HasMany(u => u.ParticipantGroups)
-                .WithOne()
-                .HasForeignKey(u => u.UserId)
-                .OnDelete(DeleteBehavior.NoAction)
-                .IsRequired();
-
-            modelBuilder.Entity<User>()
-                .HasMany(u => u.ParticipantBudgets)
-                .WithOne()
-                .HasForeignKey(u => u.UserId)
-                .OnDelete(DeleteBehavior.NoAction)
-                .IsRequired();
-
-            modelBuilder.Entity<User>()
                 .HasMany(u => u.QuestionnaireVotes)
-                .WithOne()
-                .HasForeignKey(u => u.UserId)
-                .OnDelete(DeleteBehavior.NoAction)
-                .IsRequired();
-
-            modelBuilder.Entity<User>()
-                .HasMany(u => u.BillSettle)
                 .WithOne()
                 .HasForeignKey(u => u.UserId)
                 .OnDelete(DeleteBehavior.NoAction)
@@ -107,13 +73,6 @@ namespace TripPlanner.DataAccess
                 .IsRequired();
 
             modelBuilder.Entity<User>()
-                .HasMany(u => u.Bills)
-                .WithOne()
-                .HasForeignKey(u => u.UserId)
-                .OnDelete(DeleteBehavior.NoAction)
-                .IsRequired();
-
-            modelBuilder.Entity<User>()
                 .HasMany(u => u.Messages)
                 .WithOne()
                 .HasForeignKey(u => u.UserId)
@@ -122,11 +81,11 @@ namespace TripPlanner.DataAccess
             // koniec realcji
 
             modelBuilder.Entity<User>()
-                .Property(s => s.Name)
+                .Property(s => s.FullName)
                 .IsRequired();
 
             modelBuilder.Entity<User>()
-                .Property(s => s.Surname)
+                .Property(s => s.City)
                 .IsRequired();
 
             modelBuilder.Entity<User>()
@@ -138,7 +97,7 @@ namespace TripPlanner.DataAccess
                 .IsRequired();
             
             modelBuilder.Entity<User>()
-                .Property(s => s.Address)
+                .Property(s => s.FullAddress)
                 .IsRequired();
 
             modelBuilder.Entity<User>()
@@ -152,13 +111,13 @@ namespace TripPlanner.DataAccess
 
             //relacje
             modelBuilder.Entity<Tour>()
-                .HasOne(e => e.Budget)
+                .HasOne(e => e.Chat)
                 .WithOne(e => e.Tour)
-                .HasForeignKey<Budget>(e => e.TourId)
+                .HasForeignKey<Chat>(e => e.TourId)
                 .IsRequired();
 
             modelBuilder.Entity<Tour>()
-                .HasMany(sc => sc.CultureAssistances)
+                .HasMany(sc => sc.Cultures)
                 .WithOne(s => s.Tour)
                 .OnDelete(DeleteBehavior.NoAction)
                 .HasForeignKey(sc => sc.TourId)
@@ -168,13 +127,6 @@ namespace TripPlanner.DataAccess
                 .HasMany(sc => sc.Participants)
                 .WithOne(s => s.Tour)
                 .HasForeignKey(sc => sc.TourId)
-                .OnDelete(DeleteBehavior.NoAction)
-                .IsRequired();
-
-            modelBuilder.Entity<Tour>()
-                .HasMany(u => u.Organizers)
-                .WithOne()
-                .HasForeignKey(u => u.TourId)
                 .OnDelete(DeleteBehavior.NoAction)
                 .IsRequired();
 
@@ -563,19 +515,6 @@ namespace TripPlanner.DataAccess
             modelBuilder.Entity<Message>()
                 .Property(s => s.Date)
                 .IsRequired();
-            #endregion
-
-            #region OrganizerTour
-            modelBuilder.Entity<OrganizerTour>().HasKey(sc => new { sc.UserId, sc.TourId });
-            
-            //relacje
-            modelBuilder.Entity<OrganizerTour>()
-               .HasOne(u => u.Tour)
-               .WithMany(u => u.Organizers)
-               .HasForeignKey(u => u.TourId)
-               .OnDelete(DeleteBehavior.NoAction)
-               .IsRequired();
-            //koniec relacji
             #endregion
 
             #region ParticipantBill

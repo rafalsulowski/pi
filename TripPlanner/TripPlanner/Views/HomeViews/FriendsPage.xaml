@@ -23,14 +23,7 @@
                 HorizontalOptions="Center"
                 FontSize="20"
                 VerticalOptions="Center"
-                Text="Kalendarz"/>
-
-            <ImageButton 
-                HorizontalOptions="End"
-                Source="{AppThemeBinding Light=plus_wt.png, Dark=plus_dt.png}"
-                Command="{Binding GoSettingsCommand}"
-                HeightRequest="30"
-                WidthRequest="30"/>
+                Text="Znajomi"/>
         </Grid>
     </AbsoluteLayout>
 </ContentPage>

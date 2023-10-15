@@ -1,4 +1,6 @@
 ﻿
+using TripPlanner.Models.Models;
+
 namespace TripPlanner.Models.DTO.UserDTOs
 {
     public class CreateUserDTO

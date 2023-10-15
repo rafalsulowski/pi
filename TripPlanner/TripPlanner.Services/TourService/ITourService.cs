@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using TripPlanner.Models;
 using TripPlanner.Models.DTO.ChatDTOs;
+using TripPlanner.Models.Models.Tour;
 
 namespace TripPlanner.Services.TourService
 {

@@ -2,7 +2,7 @@
 using TripPlanner.DataAccess.IRepository;
 using TripPlanner.DataAccess.Repository;
 using TripPlanner.Models;
-using TripPlanner.Models.Models.Message;
+using TripPlanner.Models.Models.Message.Questionnaire;
 
 namespace TripPlanner.DataAccess.Repository
 {

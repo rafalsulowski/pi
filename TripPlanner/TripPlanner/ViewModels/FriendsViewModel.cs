@@ -71,14 +71,20 @@ namespace TripPlanner.ViewModels
             if(res)
             {
                 var res2 = await m_TourService.AddParticipant(Tour.Id, user.Id);
-                if (res2 == "") //OK
+                if (res2.Success)
                 {
                     var confirmCopyToast = Toast.Make("Dodano nowego uczestnika", ToastDuration.Short, 14);
                     await confirmCopyToast.Show();
                 }
                 else
-                    await Shell.Current.CurrentPage.DisplayAlert("Błąd", res2, "Ok :(");
+                    await Shell.Current.CurrentPage.DisplayAlert("Błąd", res2.Message, "Ok :(");
             }
+        }
+
+        [RelayCommand]
+        async Task OpenCalendar()
+        {
+            await Shell.Current.GoToAsync("Calendar");
         }
 
     }

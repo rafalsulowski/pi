@@ -1,4 +1,6 @@
-﻿namespace TripPlanner.Models.DTO.TourDTOs
+﻿using TripPlanner.Models.Models.TourModels;
+
+namespace TripPlanner.Models.DTO.TourDTOs
 {
     public class ParticipantTourDTO
     {

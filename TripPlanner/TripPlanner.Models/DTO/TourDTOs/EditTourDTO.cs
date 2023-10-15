@@ -1,4 +1,6 @@
 ﻿
+using TripPlanner.Models.Models.TourModels;
+
 namespace TripPlanner.Models.DTO.TourDTOs
 {
     public class EditTourDTO

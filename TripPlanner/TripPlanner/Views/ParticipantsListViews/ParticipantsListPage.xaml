@@ -16,12 +16,6 @@
                 WidthRequest="260"
                 Margin="0,0,0,5"
                 HorizontalOptions="Center">
-                <VerticalStackLayout.GestureRecognizers>
-                    <TapGestureRecognizer 
-                        Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:ParticipantsViewModel}}, Path=MoreInfoParticipantCommand}"
-                        CommandParameter="{Binding .}">
-                    </TapGestureRecognizer>
-                </VerticalStackLayout.GestureRecognizers>
                 <HorizontalStackLayout 
                     Spacing="5">
                     <Label
@@ -30,7 +24,7 @@
                         FontSize="18"
                         TextColor="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource Secondary}}">
                         <Label.Text>
-                            <MultiBinding StringFormat="{}{0}. {1} {2}">
+                            <MultiBinding StringFormat="{}{0}. {1}">
                                 <Binding Path="Order"/>
                                 <Binding Path="FullName"/>
                             </MultiBinding>
@@ -60,12 +54,6 @@
                 WidthRequest="260"
                 Margin="0,0,0,5"
                 HorizontalOptions="Center">
-                <VerticalStackLayout.GestureRecognizers>
-                    <TapGestureRecognizer 
-                        Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:ParticipantsViewModel}}, Path=MoreInfoParticipantCommand}"
-                        CommandParameter="{Binding .}">
-                    </TapGestureRecognizer>
-                </VerticalStackLayout.GestureRecognizers>
                 <HorizontalStackLayout 
                     Spacing="5">
                     <Label
@@ -74,7 +62,7 @@
                         FontSize="18"
                         TextColor="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource Secondary}}">
                         <Label.Text>
-                            <MultiBinding StringFormat="{}{0}. {1} {2}">
+                            <MultiBinding StringFormat="{}{0}. {1}">
                                 <Binding Path="Order"/>
                                 <Binding Path="FullName"/>
                             </MultiBinding>

@@ -1,4 +1,6 @@
-﻿namespace TripPlanner.Models.DTO.CheckListDTOs
+﻿using TripPlanner.Models.Models.CheckListModels;
+
+namespace TripPlanner.Models.DTO.CheckListDTOs
 {
     public class EditCheckListDTO
     {

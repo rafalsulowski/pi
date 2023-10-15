@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using TripPlanner.DataAccess.IRepository;
 using TripPlanner.Models;
+using TripPlanner.Models.Models.Tour;
 
 namespace TripPlanner.DataAccess.Repository
 {

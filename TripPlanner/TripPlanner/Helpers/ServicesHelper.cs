@@ -1,13 +1,4 @@
-﻿using Android.App;
-using Android.App.AppSearch;
-using Android.Service.QuickSettings;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using TripPlanner.Services;
-
+﻿
 namespace TripPlanner.Helpers
 {
     public static class ServicesHelper

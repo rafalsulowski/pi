@@ -1,4 +1,6 @@
-﻿namespace TripPlanner.Models.DTO.CultureDTOs
+﻿using TripPlanner.Models.Models.CultureModels;
+
+namespace TripPlanner.Models.DTO.CultureDTOs
 {
     public class CultureAssistanceDTO
     {

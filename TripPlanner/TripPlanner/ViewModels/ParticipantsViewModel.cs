@@ -52,7 +52,7 @@ namespace TripPlanner.ViewModels
             }
             else
             {
-                Participants = m_TourService.GetParticipants(Tour.Id).Result;
+                Participants = m_TourService.GetParticipants(Tour.Id).Result.Data;
                 ParticipantsRef = Participants;
             }
         }

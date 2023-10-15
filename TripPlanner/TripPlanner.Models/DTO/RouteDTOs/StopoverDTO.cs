@@ -1,4 +1,6 @@
-﻿namespace TripPlanner.Models.DTO.RouteDTOs
+﻿using TripPlanner.Models.Models.RouteModels;
+
+namespace TripPlanner.Models.DTO.RouteDTOs
 {
     public class StopoverDTO
     {
