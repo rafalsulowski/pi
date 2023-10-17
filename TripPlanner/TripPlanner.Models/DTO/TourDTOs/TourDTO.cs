@@ -9,6 +9,7 @@ using TripPlanner.Models.Models.RouteModels;
 using TripPlanner.Models.Models.TourModels;
 using TripPlanner.Models.DTO.CultureDTOs;
 using TripPlanner.Models.Models.CultureModels;
+using TripPlanner.Models.Models.BillModels;
 
 namespace TripPlanner.Models.DTO.TourDTOs
 {
@@ -21,6 +22,7 @@ namespace TripPlanner.Models.DTO.TourDTOs
         public ICollection<QuestionnaireDTO> Questionnaires { get; set; } = new List<QuestionnaireDTO>();
         public ICollection<RouteDTO> Routes { get; set; } = new List<RouteDTO>();
         public ICollection<CultureAssistanceDTO> Cultures { get; set; } = new List<CultureAssistanceDTO>();
+        public ICollection<ShareDTO> Shares { get; set; } = new List<ShareDTO>();
         public ChatDTO Chat { get; set; } = null!;
 
         public string Title { get; set; } = string.Empty;
@@ -46,6 +48,7 @@ namespace TripPlanner.Models.DTO.TourDTOs
                 Questionnaires = data.Questionnaires.Select(u => (Questionnaire)u).ToList(),
                 Routes = data.Routes.Select(u => (Route)u).ToList(),
                 Cultures = data.Cultures.Select(u => (CultureAssistance)u).ToList(),
+                Shares = data.Shares.Select(u => (Share)u).ToList(),
                 Chat = data.Chat,
                 Title = data.Title,
                 Description = data.Description,
