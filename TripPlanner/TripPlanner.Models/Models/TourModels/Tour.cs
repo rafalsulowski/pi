@@ -1,4 +1,5 @@
-﻿using TripPlanner.Models.DTO.CheckListDTOs;
+﻿using TripPlanner.Models.DTO.BillDTOs;
+using TripPlanner.Models.DTO.CheckListDTOs;
 using TripPlanner.Models.DTO.CultureDTOs;
 using TripPlanner.Models.DTO.MessageDTOs.QuestionnaireDTOs;
 using TripPlanner.Models.DTO.RouteDTOs;

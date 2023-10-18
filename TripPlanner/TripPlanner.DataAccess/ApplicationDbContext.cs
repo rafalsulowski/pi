@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using TripPlanner.Models.Models;
+using TripPlanner.Models.Models.BillModels;
 using TripPlanner.Models.Models.CheckListModels;
 using TripPlanner.Models.Models.CultureModels;
 using TripPlanner.Models.Models.MessageModels;
@@ -17,6 +18,8 @@ namespace TripPlanner.DataAccess
         }
 
         public DbSet<Chat> Chats { get; set; }
+        public DbSet<BillContributor> BillContributors { get; set; }
+        public DbSet<Bill> Bill { get; set; }
         public DbSet<CheckList> CheckLists { get; set; }
         public DbSet<CheckListField> CheckListFields { get; set; }
         public DbSet<Culture> Cultures { get; set; }
@@ -45,6 +48,27 @@ namespace TripPlanner.DataAccess
                 .IsRequired();
 
             modelBuilder.Entity<User>()
+                .HasMany(sc => sc.Shares)
+                .WithOne(s => s.Creator)
+                .OnDelete(DeleteBehavior.NoAction)
+                .HasForeignKey(sc => sc.CreatorId)
+                .IsRequired();
+
+            modelBuilder.Entity<User>()
+                .HasMany(sc => sc.BillContributors)
+                .WithOne(s => s.User)
+                .OnDelete(DeleteBehavior.NoAction)
+                .HasForeignKey(sc => sc.UserId)
+                .IsRequired();
+
+            modelBuilder.Entity<User>()
+                .HasMany(sc => sc.BillsPayed)
+                .WithOne(s => s.User)
+                .OnDelete(DeleteBehavior.NoAction)
+                .HasForeignKey(sc => sc.UserId)
+                .IsRequired();
+
+            modelBuilder.Entity<User>()
                 .HasMany(u => u.QuestionnaireVotes)
                 .WithOne()
                 .HasForeignKey(u => u.UserId)
@@ -65,12 +89,12 @@ namespace TripPlanner.DataAccess
                 .OnDelete(DeleteBehavior.NoAction)
                 .IsRequired();
 
-            modelBuilder.Entity<User>()
-                .HasMany(u => u.Questionnaires)
-                .WithOne()
-                .HasForeignKey(u => u.UserId)
-                .OnDelete(DeleteBehavior.NoAction)
-                .IsRequired();
+            //modelBuilder.Entity<User>()
+            //    .HasMany(u => u.Questionnaires)
+            //    .WithOne()
+            //    .HasForeignKey(u => u.UserId)
+            //    .OnDelete(DeleteBehavior.NoAction)
+            //    .IsRequired();
 
             modelBuilder.Entity<User>()
                 .HasMany(u => u.Messages)
@@ -124,6 +148,13 @@ namespace TripPlanner.DataAccess
                 .IsRequired();
 
             modelBuilder.Entity<Tour>()
+                .HasMany(sc => sc.Shares)
+                .WithOne(s => s.Tour)
+                .OnDelete(DeleteBehavior.NoAction)
+                .HasForeignKey(sc => sc.TourId)
+                .IsRequired();
+
+            modelBuilder.Entity<Tour>()
                 .HasMany(sc => sc.Participants)
                 .WithOne(s => s.Tour)
                 .HasForeignKey(sc => sc.TourId)
@@ -146,20 +177,6 @@ namespace TripPlanner.DataAccess
 
             modelBuilder.Entity<Tour>()
                 .HasMany(u => u.Questionnaires)
-                .WithOne()
-                .HasForeignKey(u => u.TourId)
-                .OnDelete(DeleteBehavior.NoAction)
-                .IsRequired();
-
-            modelBuilder.Entity<Tour>()
-                .HasMany(u => u.Bills)
-                .WithOne()
-                .HasForeignKey(u => u.TourId)
-                .OnDelete(DeleteBehavior.NoAction)
-                .IsRequired();
-
-            modelBuilder.Entity<Tour>()
-                .HasMany(u => u.Groups)
                 .WithOne()
                 .HasForeignKey(u => u.TourId)
                 .OnDelete(DeleteBehavior.NoAction)
@@ -193,116 +210,81 @@ namespace TripPlanner.DataAccess
 
             //relacje
             modelBuilder.Entity<Bill>()
-                .HasMany(sc => sc.Participants)
+                .HasMany(sc => sc.Contributors)
                 .WithOne(s => s.Bill)
                 .OnDelete(DeleteBehavior.NoAction)
                 .HasForeignKey(sc => sc.BillId)
                 .IsRequired();
 
             modelBuilder.Entity<Bill>()
-                .HasOne(u => u.User)
-                .WithMany(u => u.Bills)
-                .HasForeignKey(u => u.UserId)
-                .OnDelete(DeleteBehavior.NoAction)
-                .IsRequired();
-
-            modelBuilder.Entity<Bill>()
-                .HasOne(u => u.Tour)
-                .WithMany(u => u.Bills)
-                .HasForeignKey(u => u.TourId)
-                .OnDelete(DeleteBehavior.NoAction)
-                .IsRequired();
-
-            modelBuilder.Entity<Bill>()
-                .HasMany(sc => sc.Pictures)
-                .WithOne(s => s.Bill)
-                .HasForeignKey(sc => sc.BillId)
-                .OnDelete(DeleteBehavior.NoAction)
-                .IsRequired();
+                .HasOne(sc => sc.Payer)
+                .WithOne(sc => sc.Bill)
+                .HasForeignKey<BillContributor>(sc => sc.BillId)
+                .IsRequired(); //TODO sprawdzic czy dziala
             // koniec realcji
 
             modelBuilder.Entity<Bill>()
-                .Property(s => s.Name)
+                .Property(s => s.CreatedDate)
                 .IsRequired();
 
             modelBuilder.Entity<Bill>()
-                .Property(s => s.Ammount)
-                .HasColumnType("decimal(6,2)")
+                .Property(s => s.BillType)
+                .IsRequired();
+
+            modelBuilder.Entity<Bill>()
+                .Property(s => s.ImageFilePath)
+                .IsRequired();
+
+            modelBuilder.Entity<Bill>()
+                .Property(s => s.Value)
                 .IsRequired();
             #endregion
 
-            #region BillPicture
-            modelBuilder.Entity<BillPicture>()
-                .HasKey(e => e.Id);
-
-            modelBuilder.Entity<BillPicture>()
-                .Property(s => s.FilePath)
-                .IsRequired();
-            #endregion
-
-            #region Budget
-            modelBuilder.Entity<Budget>()
+            #region Transfer
+            modelBuilder.Entity<Transfer>()
                 .HasKey(e => e.Id);
 
             //relacje
-            modelBuilder.Entity<Budget>()
-                .HasMany(sc => sc.Contributes)
-                .WithOne(s => s.Budget)
-                .OnDelete(DeleteBehavior.NoAction)
-                .HasForeignKey(sc => sc.BudgetId)
-                .IsRequired();
+            modelBuilder.Entity<Transfer>()
+                .HasOne(sc => sc.Sender)
+                .WithOne(sc => sc.Transfer)
+                .HasForeignKey<TransferContributor>(sc => sc.TransferId)
+                .IsRequired(); //TODO sprawdzic czy dziala
 
-            modelBuilder.Entity<Budget>()
-                .HasMany(sc => sc.Expenditures)
-                .WithOne(s => s.Budget)
-                .HasForeignKey(sc => sc.BudgetId)
-                .OnDelete(DeleteBehavior.NoAction)
-                .IsRequired();
+            modelBuilder.Entity<Transfer>()
+                .HasOne(sc => sc.Recipient)
+                .WithOne(sc => sc.Transfer)
+                .HasForeignKey<TransferContributor>(sc => sc.TransferId)
+                .IsRequired(); //TODO sprawdzic czy dziala
             // koniec realcji
 
-            modelBuilder.Entity<Budget>()
-                .Property(s => s.AccountNumber)
+            modelBuilder.Entity<Bill>()
+                .Property(s => s.CreatedDate)
                 .IsRequired();
 
-            modelBuilder.Entity<Budget>()
-                .Property(s => s.ActualPeyments)
-                .HasColumnType("decimal(7,2)")
+            modelBuilder.Entity<Bill>()
+                .Property(s => s.BillType)
                 .IsRequired();
 
-            modelBuilder.Entity<Budget>()
-                .Property(s => s.Capital)
-                .HasColumnType("decimal(7,2)")
+            modelBuilder.Entity<Bill>()
+                .Property(s => s.ImageFilePath)
                 .IsRequired();
 
-            modelBuilder.Entity<Budget>()
-                .Property(s => s.PaymentsDeadline)
-                .IsRequired();
-
-            modelBuilder.Entity<Budget>()
-                .Property(s => s.Log)
-                .IsRequired();
-
-            modelBuilder.Entity<Budget>()
-                .Property(s => s.Currency)
+            modelBuilder.Entity<Bill>()
+                .Property(s => s.Value)
                 .IsRequired();
             #endregion
 
-            #region BudgetExpenditure
-            modelBuilder.Entity<BudgetExpenditure>()
-                .HasKey(e => e.Id);
+            #region BillContributor
+            modelBuilder.Entity<BillContributor>().HasKey(sc => new { sc.UserId, sc.BillId });
 
-            modelBuilder.Entity<BudgetExpenditure>()
-                .Property(s => s.Cost)
-                .HasColumnType("decimal(6,2)")
+            modelBuilder.Entity<BillContributor>()
+                .Property(s => s.Value)
                 .IsRequired();
+            #endregion
 
-            modelBuilder.Entity<BudgetExpenditure>()
-                .Property(s => s.Name)
-                .IsRequired();
-
-            modelBuilder.Entity<BudgetExpenditure>()
-                .Property(s => s.Description)
-                .IsRequired();
+            #region TransferContributor
+            modelBuilder.Entity<TransferContributor>().HasKey(sc => new { sc.UserId, sc.TransferId});
             #endregion
 
             #region Chat
@@ -310,13 +292,6 @@ namespace TripPlanner.DataAccess
                 .HasKey(e => e.Id);
 
             //relacje
-            modelBuilder.Entity<Chat>()
-                .HasMany(sc => sc.Questionnaires)
-                .WithOne(s => s.Chat)
-                .OnDelete(DeleteBehavior.NoAction)
-                .HasForeignKey(sc => sc.ChatId)
-                .IsRequired(false);
-
             modelBuilder.Entity<Chat>()
                 .HasMany(sc => sc.Messages)
                 .WithOne(s => s.Chat)
@@ -379,36 +354,13 @@ namespace TripPlanner.DataAccess
                 .IsRequired();
             #endregion
 
-            #region ContributesBudget
-            modelBuilder.Entity<ContributeBudget>().HasKey(sc => new { sc.BudgetId, sc.UserId});
-
-            //relacje
-            modelBuilder.Entity<ContributeBudget>()
-               .HasOne(u => u.User)
-               .WithMany(u => u.ParticipantBudgets)
-               .HasForeignKey(u => u.UserId)
-               .OnDelete(DeleteBehavior.NoAction)
-               .IsRequired();
-            //koniec relacji
-
-            modelBuilder.Entity<ContributeBudget>()
-                .Property(s => s.Payment)
-                .HasColumnType("decimal(6,2)")
-                .IsRequired();
-
-            modelBuilder.Entity<ContributeBudget>()
-                .Property(s => s.Debt)
-                .HasColumnType("decimal(6,2)")
-                .IsRequired();
-            #endregion
-
             #region Culture
             modelBuilder.Entity<Culture>()
                 .HasKey(e => e.Id);
 
             //relacje
             modelBuilder.Entity<Culture>()
-                .HasMany(sc => sc.Tours)
+                .HasMany(sc => sc.CultureAssistances)
                 .WithOne(s => s.Culture)
                 .OnDelete(DeleteBehavior.NoAction)
                 .HasForeignKey(sc => sc.CultureId)
@@ -460,99 +412,35 @@ namespace TripPlanner.DataAccess
                 .IsRequired();
             #endregion
 
-            #region Group
-            modelBuilder.Entity<Group>()
+            #region TextMessage
+            modelBuilder.Entity<TextMessage>()
                 .HasKey(e => e.Id);
 
             //relacje
-            modelBuilder.Entity<Group>()
-                .HasMany(sc => sc.Participants)
-                .WithOne(s => s.Group)
-                .OnDelete(DeleteBehavior.NoAction)
-                .HasForeignKey(sc => sc.GroupId)
-                .IsRequired();
-
-            modelBuilder.Entity<Group>()
-                .HasOne(e => e.Chat)
-                .WithOne(e => e.Group)
-                .HasForeignKey<Chat>(e => e.GroupId)
-                .IsRequired();
-
-            modelBuilder.Entity<Group>()
-               .HasOne(u => u.Tour)
-               .WithMany(u => u.Groups)
-               .HasForeignKey(u => u.TourId)
-               .OnDelete(DeleteBehavior.NoAction)
-               .IsRequired();
-            // koniec realcji
-
-            modelBuilder.Entity<Group>()
-                .Property(s => s.Name)
-                .IsRequired();
-
-            modelBuilder.Entity<Group>()
-                .Property(s => s.Volume)
-                .IsRequired();
-            #endregion
-
-            #region Message
-            modelBuilder.Entity<Message>()
-                .HasKey(e => e.Id);
-
-            //relacje
-            modelBuilder.Entity<Message>()
-               .HasOne(u => u.User)
-               .WithMany(u => u.Messages)
-               .HasForeignKey(u => u.UserId)
-               .OnDelete(DeleteBehavior.NoAction)
-               .IsRequired();
             //koniec relacji
 
-            modelBuilder.Entity<Message>()
+            modelBuilder.Entity<TextMessage>()
                 .Property(s => s.Content)
                 .IsRequired();
 
-            modelBuilder.Entity<Message>()
+            modelBuilder.Entity<TextMessage>()
                 .Property(s => s.Date)
                 .IsRequired();
             #endregion
 
-            #region ParticipantBill
-            modelBuilder.Entity<ParticipantBill>().HasKey(sc => new { sc.UserId, sc.BillId});
+            #region NoticeMessage
+            modelBuilder.Entity<NoticeMessage>()
+                .HasKey(e => e.Id);
 
             //relacje
-            modelBuilder.Entity<ParticipantBill>()
-               .HasOne(u => u.User)
-               .WithMany(u => u.BillSettle)
-               .HasForeignKey(u => u.UserId)
-               .OnDelete(DeleteBehavior.NoAction)
-               .IsRequired();
             //koniec relacji
 
-            modelBuilder.Entity<ParticipantBill>()
-                .Property(s => s.Payment)
-                .HasColumnType("decimal(6,2)")
+            modelBuilder.Entity<NoticeMessage>()
+                .Property(s => s.Content)
                 .IsRequired();
-            modelBuilder.Entity<ParticipantBill>()
-                .Property(s => s.Debt)
-                .HasColumnType("decimal(6,2)")
-                .IsRequired();
-            #endregion
 
-            #region ParticipantGroup
-            modelBuilder.Entity<ParticipantGroup>().HasKey(sc => new { sc.UserId, sc.GroupId });
-
-            //relacje
-            modelBuilder.Entity<ParticipantGroup>()
-               .HasOne(u => u.User)
-               .WithMany(u => u.ParticipantGroups)
-               .HasForeignKey(u => u.UserId)
-               .OnDelete(DeleteBehavior.NoAction)
-               .IsRequired();
-            //koniec relacji
-
-            modelBuilder.Entity<ParticipantGroup>()
-                .Property(s => s.IsOrganizer)
+            modelBuilder.Entity<NoticeMessage>()
+                .Property(s => s.Date)
                 .IsRequired();
             #endregion
 
@@ -579,12 +467,12 @@ namespace TripPlanner.DataAccess
                .OnDelete(DeleteBehavior.NoAction)
                .IsRequired();
 
-            modelBuilder.Entity<Questionnaire>()
-               .HasOne(u => u.User)
-               .WithMany(u => u.Questionnaires)
-               .HasForeignKey(u => u.UserId)
-               .OnDelete(DeleteBehavior.NoAction)
-               .IsRequired();
+            //modelBuilder.Entity<Questionnaire>()
+            //   .HasOne(u => u.User)
+            //   .WithMany(u => u.Questionnaires)
+            //   .HasForeignKey(u => u.UserId)
+            //   .OnDelete(DeleteBehavior.NoAction)
+            //   .IsRequired();
             // koniec realcji
 
             modelBuilder.Entity<Questionnaire>()

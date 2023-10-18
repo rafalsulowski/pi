@@ -5,6 +5,7 @@ namespace TripPlanner.Models.Models.CultureModels
     public class Culture
     {
         public int Id { get; set; }
+        public ICollection<CultureAssistance> CultureAssistances { get; set; } = new List<CultureAssistance>();
 
         public string Name { get; set; } = string.Empty;
         public string Description { get; set; } = string.Empty;

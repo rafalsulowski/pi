@@ -7,26 +7,23 @@ using TripPlanner.Models.DTO.BillDTOs;
 
 namespace TripPlanner.Models.Models.BillModels
 {
-    public class BillContributor
+    public class TransferContributor
     {
-        public int BillId { get; set; }
-        public Bill Bill { get; set; } = null!;
+        public int TransferId { get; set; }
+        public Transfer Transfer { get; set; } = null!;
         public int UserId { get; set; }
         public User User { get; set; } = null!;
 
-        public decimal Value;
 
-
-        public static implicit operator BillContributorDTO(BillContributor data)
+        public static implicit operator TransferContributorDTO(TransferContributor data)
         {
             if (data == null)
                 return null;
 
-            return new BillContributorDTO
+            return new TransferContributorDTO
             {
-                BillId = data.BillId,
-                UserId = data.UserId,
-                Value = data.Value,
+                TransferId = data.TransferId,
+                UserId = data.UserId
             };
         }
     }

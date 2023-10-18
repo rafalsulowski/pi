@@ -10,6 +10,7 @@ using TripPlanner.Models.Models.TourModels;
 using TripPlanner.Models.DTO.CultureDTOs;
 using TripPlanner.Models.Models.CultureModels;
 using TripPlanner.Models.Models.BillModels;
+using TripPlanner.Models.DTO.BillDTOs;
 
 namespace TripPlanner.Models.DTO.TourDTOs
 {

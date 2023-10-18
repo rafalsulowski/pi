@@ -8,24 +8,21 @@ using TripPlanner.Models.Models.BillModels;
 
 namespace TripPlanner.Models.DTO.BillDTOs
 {
-    public class BillContributorDTO
+    public class TransferContributorDTO
     {
-        public int BillId { get; set; }
+        public int TransferId { get; set; }
         public int UserId { get; set; }
 
-        public decimal Value;
-        
-        
-        public static implicit operator BillContributor(BillContributorDTO data)
+
+        public static implicit operator TransferContributor(TransferContributorDTO data)
         {
             if (data == null)
                 return null;
 
-            return new BillContributor
+            return new TransferContributor
             {
-                BillId = data.BillId,
-                UserId = data.UserId,
-                Value = data.Value,
+                TransferId = data.TransferId,
+                UserId = data.UserId
             };
         }
     }
