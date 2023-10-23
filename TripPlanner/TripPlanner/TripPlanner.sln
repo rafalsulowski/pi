@@ -8,24 +8,26 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TripPlanner.App", "TripPlan
 		{C1CF6F67-9B87-45D7-8B34-ADDE0EFDEE2B} = {C1CF6F67-9B87-45D7-8B34-ADDE0EFDEE2B}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TripPlanner.WebAPI", "..\TripPlanner.WebAPI\TripPlanner.WebAPI.csproj", "{E977911D-FBAC-4021-BEF3-52B293DCE1FA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TripPlanner.WebAPI", "..\TripPlanner.WebAPI\TripPlanner.WebAPI.csproj", "{E977911D-FBAC-4021-BEF3-52B293DCE1FA}"
 	ProjectSection(ProjectDependencies) = postProject
 		{C1CF6F67-9B87-45D7-8B34-ADDE0EFDEE2B} = {C1CF6F67-9B87-45D7-8B34-ADDE0EFDEE2B}
 		{FD377025-76EF-4E8F-AF1E-BD52738856F8} = {FD377025-76EF-4E8F-AF1E-BD52738856F8}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TripPlanner.Models", "..\TripPlanner.Models\TripPlanner.Models.csproj", "{C1CF6F67-9B87-45D7-8B34-ADDE0EFDEE2B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TripPlanner.Models", "..\TripPlanner.Models\TripPlanner.Models.csproj", "{C1CF6F67-9B87-45D7-8B34-ADDE0EFDEE2B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TripPlanner.DataAccess", "..\TripPlanner.DataAccess\TripPlanner.DataAccess.csproj", "{321ED22F-034B-44D9-97B1-3FFE7C2B74D7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TripPlanner.DataAccess", "..\TripPlanner.DataAccess\TripPlanner.DataAccess.csproj", "{321ED22F-034B-44D9-97B1-3FFE7C2B74D7}"
 	ProjectSection(ProjectDependencies) = postProject
 		{C1CF6F67-9B87-45D7-8B34-ADDE0EFDEE2B} = {C1CF6F67-9B87-45D7-8B34-ADDE0EFDEE2B}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TripPlanner.Services", "..\TripPlanner.Services\TripPlanner.Services.csproj", "{FD377025-76EF-4E8F-AF1E-BD52738856F8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TripPlanner.Services", "..\TripPlanner.Services\TripPlanner.Services.csproj", "{FD377025-76EF-4E8F-AF1E-BD52738856F8}"
 	ProjectSection(ProjectDependencies) = postProject
 		{321ED22F-034B-44D9-97B1-3FFE7C2B74D7} = {321ED22F-034B-44D9-97B1-3FFE7C2B74D7}
 		{C1CF6F67-9B87-45D7-8B34-ADDE0EFDEE2B} = {C1CF6F67-9B87-45D7-8B34-ADDE0EFDEE2B}
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TripPlanner.WebSocketServer", "..\TripPlanner.WebSocketServer\TripPlanner.WebSocketServer.csproj", "{0D468FAD-922E-47EB-8632-DED9C0FBDC16}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -55,6 +57,10 @@ Global
 		{FD377025-76EF-4E8F-AF1E-BD52738856F8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FD377025-76EF-4E8F-AF1E-BD52738856F8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FD377025-76EF-4E8F-AF1E-BD52738856F8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0D468FAD-922E-47EB-8632-DED9C0FBDC16}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0D468FAD-922E-47EB-8632-DED9C0FBDC16}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0D468FAD-922E-47EB-8632-DED9C0FBDC16}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0D468FAD-922E-47EB-8632-DED9C0FBDC16}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

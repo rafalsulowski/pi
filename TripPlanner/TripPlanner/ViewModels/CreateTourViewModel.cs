@@ -3,7 +3,8 @@ using CommunityToolkit.Mvvm.Input;
 using System.Collections.ObjectModel;
 using TripPlanner.Models;
 using TripPlanner.Models.DTO.TourDTOs;
-using TripPlanner.Models.Models.Message;
+using TripPlanner.Models.Models;
+using TripPlanner.Models.Models.MessageModels;
 using TripPlanner.Services;
 
 namespace TripPlanner.ViewModels
@@ -11,13 +12,14 @@ namespace TripPlanner.ViewModels
     public partial class CreateTourViewModel : ObservableObject
     {
         private readonly TourService m_TourService;
-        private readonly IDialogService DialogService;
         private readonly Configuration m_Configuration;
         public ObservableCollection<TourDTO> m_vTour { get; set; } = new ObservableCollection<TourDTO>();
-        public ObservableCollection<string> m_vCurrent { get; set; } = new ObservableCollection<string>();
 
         [ObservableProperty]
-        string dateTerm;
+        DateTime startDate;
+
+        [ObservableProperty]
+        DateTime stopDate;
 
         [ObservableProperty]
         int participantMax;
@@ -26,20 +28,29 @@ namespace TripPlanner.ViewModels
         string targetCountry;
 
         [ObservableProperty]
+        string targetRegion;
+
+        [ObservableProperty]
         string title;
 
         [ObservableProperty]
         string description;
 
-        public CreateTourViewModel(TourService tourService, IDialogService dialogService, Configuration configuration)
+        public CreateTourViewModel(TourService tourService, Configuration configuration)
         {
             m_TourService = tourService;
-            DialogService = dialogService;
             m_Configuration = configuration;
 
-            DateTerm = "11.05.2023 - 25.05.2023";
-            ParticipantMax = 13;
+            startDate = DateTime.Now;
+            stopDate = DateTime.Now;
 
+            //startDate = new DateTime(2023,12,29);
+            //stopDate = new DateTime(2024,1,4);
+            //ParticipantMax = 13;
+            //title = "Wyjazd na narty 2024";
+            //description = "Pierwszy wyajzd na słowację";
+            //targetCountry = "Słowacja";
+            //targetRegion = "Chopok";
         }
 
 
@@ -65,98 +76,32 @@ namespace TripPlanner.ViewModels
                 Description = Description,
                 MaxParticipant = ParticipantMax,
                 TargetCountry = TargetCountry,
+                TargetRegion = TargetRegion,
                 UserId = m_Configuration.User.Id,
-                CreateDate = DateTime.Now,
-                StartDate = new DateTime(2024, 2, 15),
-                EndDate = new DateTime(2024, 2, 15)
+                CreateDate = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 12, 0, 0),
+                StartDate = new DateTime(StartDate.Year, StartDate.Month, StartDate.Day, 12, 0, 0),
+                EndDate = new DateTime(StopDate.Year, StopDate.Month, StopDate.Day, 12, 0, 0),
             };
 
-
-            //pobierz nowo utowrzona wycieczke dla sprawdzenia
-
-            TourDTO newTourFromApi = new TourDTO
+            RepositoryResponse<int> resp = m_TourService.CreateTour(tour).Result;
+            
+            if(!resp.Success)
             {
+                await Shell.Current.CurrentPage.DisplayAlert("Błąd", $"Błąd podczas tworzenia wyiceczki! Wiadomość od serwera: {resp.Message}", "Ok :(");
+                return;
+            }
 
-                Title = Title,
-                Description = Description,
-                MaxParticipant = ParticipantMax,
-                TargetCountry = TargetCountry,
-                CreateDate = DateTime.Now,
-                StartDate = new DateTime(2024, 2, 15),
-                EndDate = new DateTime(2024, 2, 15),
-                Chat = new Chat
-                {
-                    Id = 1,
-                    Messages = new List<Message>
-                    {
-                        new Message
-                        {
-                            Content = "Wiadomość testowa",
-                            Date = DateTime.Now,
-                        },
-                        new Message
-                        {
-                            Content = "Wiadomość testowa2",
-                            Date = DateTime.Now,
-                        },
-                        new Message
-                        {
-                            Content = "Wiadomość testowa3",
-                            Date = DateTime.Now,
-                        },
-                        new Message
-                        {
-                            Content = "Wiadomość testowa4",
-                            Date = DateTime.Now,
-                        },
-                        new Message
-                        {
-                            Content = "Wiadomość testowa5",
-                            Date = DateTime.Now,
-                        },
-                        new Message
-                        {
-                            Content = "Wiadomość testowa6",
-                            Date = DateTime.Now,
-                        },
-                        new Message
-                        {
-                            Content = "Wiadomość testowa7",
-                            Date = DateTime.Now,
-                        },
-                        new Message
-                        {
-                            Content = "Wiadomość testowa8",
-                            Date = DateTime.Now,
-                        },
-                        new Message
-                        {
-                            Content = "Wiadomość testowa9",
-                            Date = DateTime.Now,
-                        },
-                        new Message
-                        {
-                            Content = "Wiadomość testowa10",
-                            Date = DateTime.Now,
-                        },
-                        new Message
-                        {
-                            Content = "Wiadomość testowa11",
-                            Date = DateTime.Now,
-                        },
-                        new Message
-                        {
-                            Content = "Wiadomość testowa12",
-                            Date = DateTime.Now,
-                        }
-                    }
-                }
-            };
+            TourDTO newTour = m_TourService.GetTourById(resp.Data).Result;
 
+            if (resp is null)
+            {
+                await Shell.Current.CurrentPage.DisplayAlert("Błąd", $"Błąd podczas pobrania nowo utowrzonej wycieczki! Wycieczka zostałą utowrzony jendak nie została poprawnie pobrana z powrotem do aplikacji. Spróbuj wejść w wycieczkę z widoku głównego!", "Ok :(");
+                return;
+            }
 
             var navigationParameter = new Dictionary<string, object>
             {
-                { "passTour",  newTourFromApi}
+                { "passTour",  newTour}
             };
             await Shell.Current.GoToAsync($"Tour", navigationParameter);
         }

@@ -5,12 +5,12 @@ namespace TripPlanner
 {
     public class Configuration
     {
-        public readonly int AddChatMessagesWhileReload = 20; //ile wiadomosci dodatkowo wyswietlic na czacie przy odswierzeniu okna
+        public readonly int AddChatMessagesWhileReload = 200; //ile wiadomosci dodatkowo wyswietlic na czacie przy odswierzeniu okna
 
         public readonly string WebApiUrl = DeviceInfo.Platform == DevicePlatform.Android ? "http://10.0.2.2:5119/api" : "http://localhost:5119/api";
         public UserDTO User { get; private set; } = new UserDTO
         {
-            Id = 2, 
+            Id = 3,
             FullName = "Rafał Sulowski", 
             FullAddress = "Willowa 34a, Lublin 20-819", 
             City = "Lublin", 

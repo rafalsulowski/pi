@@ -1,15 +1,8 @@
 ﻿using CommunityToolkit.Maui.Views;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using TripPlanner.Models;
-using TripPlanner.Models.DTO.ChatDTOs;
-using TripPlanner.Models.DTO.QuestionnaireDTOs;
+using TripPlanner.Models.DTO.MessageDTOs.QuestionnaireDTOs;
 using TripPlanner.Models.DTO.TourDTOs;
 using TripPlanner.Services;
 using TripPlanner.Views.ChatViews;
@@ -103,7 +96,6 @@ namespace TripPlanner.ViewModels
                 CreateQuestionnaireDTO questionnaireDTO = new CreateQuestionnaireDTO();
                 questionnaireDTO.Content = Question;
                 questionnaireDTO.TourId = Tour.Id;
-                questionnaireDTO.ChatId = ChatId;
                 questionnaireDTO.UserId = m_Configuration.User.Id;
                 
                 foreach(var answer in Answers)

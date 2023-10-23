@@ -4,10 +4,15 @@ using TripPlanner.Services.UserService;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
-using TripPlanner.Services.BillService;
 using TripPlanner.Models.DTO.UserDTOs;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Identity;
+using TripPlanner.Models.Models;
+using TripPlanner.Models.Models.BillModels;
+using TripPlanner.Models.DTO.TourDTOs;
+using TripPlanner.Models.Models.TourModels;
+using TripPlanner.Services.TourService;
+using TripPlanner.Models.Models.UserModels;
 
 namespace TripPlanner.WebAPI.Controllers
 {
@@ -17,12 +22,14 @@ namespace TripPlanner.WebAPI.Controllers
     {
 
         private readonly IUserService _UserService;
+        private readonly ITourService _TourService;
         private readonly IPasswordHasher<User> _passwordHasher;
 
-        public UserController(IUserService userService, IPasswordHasher<User> passwordHasher)
+        public UserController(IUserService userService, IPasswordHasher<User> passwordHasher, ITourService tourService)
         {
             _UserService = userService;
             _passwordHasher = passwordHasher;
+            _TourService = tourService;
         }
 
         // GET: api/<ValuesController>
@@ -34,6 +41,31 @@ namespace TripPlanner.WebAPI.Controllers
             return Ok(res);
         }
 
+        [HttpGet("GetToursOfUser/{userId}")]
+        public async Task<ActionResult<RepositoryResponse<List<TourDTO>>>> GetToursOfUser(int userId)
+        {
+            var response = await _UserService.GetUserAsync(u => u.Id == userId, "ParticipantTours");
+            if (response.Data == null)
+            {
+                return new RepositoryResponse<List<TourDTO>> { Data = null, Success = false, Message = "Użytkownik z tym id nie istnieje" };
+            }
+
+            UserDTO res = response.Data;
+            List<TourDTO> tours = new List<TourDTO>();
+
+            if(res.ParticipantTours.Count == 0)
+                return Ok(tours);
+
+            foreach(ParticipantTour participant in res.ParticipantTours)
+            {
+                var resp = await _TourService.GetTourAsync(u => u.Id == participant.TourId);
+                if (resp.Data is not null)
+                    tours.Add(resp.Data);
+            }
+
+            return Ok(tours);
+        }
+
         [HttpGet("{UserId}/GetWithCheckLists")]
         public async Task<ActionResult<RepositoryResponse<UserDTO>>> GetWithCheckLists(int UserId)
         {
@@ -42,10 +74,10 @@ namespace TripPlanner.WebAPI.Controllers
             return Ok(res);
         }
 
-        [HttpGet("{UserId}/GetWithOrganizerTours")]
-        public async Task<ActionResult<RepositoryResponse<UserDTO>>> GetWithOrganizerTours(int UserId)
+        [HttpGet("{UserId}/GetWithShares")]
+        public async Task<ActionResult<RepositoryResponse<UserDTO>>> GetWithShares(int UserId)
         {
-            var response = await _UserService.GetUserAsync(u => u.Id == UserId, "OrganizerTours");
+            var response = await _UserService.GetUserAsync(u => u.Id == UserId, "Shares");
             UserDTO res = response.Data;
             return Ok(res);
         }
@@ -58,34 +90,10 @@ namespace TripPlanner.WebAPI.Controllers
             return Ok(res);
         }
 
-        [HttpGet("{UserId}/GetWithParticipantBudgets")]
-        public async Task<ActionResult<RepositoryResponse<UserDTO>>> GetWithParticipantBudgets(int UserId)
-        {
-            var response = await _UserService.GetUserAsync(u => u.Id == UserId, "ParticipantBudgets");
-            UserDTO res = response.Data;
-            return Ok(res);
-        }
-
-        [HttpGet("{UserId}/GetWithQuestionnaires")]
-        public async Task<ActionResult<RepositoryResponse<UserDTO>>> GetWithQuestionnaires(int UserId)
-        {
-            var response = await _UserService.GetUserAsync(u => u.Id == UserId, "Questionnaires");
-            UserDTO res = response.Data;
-            return Ok(res);
-        }
-
         [HttpGet("{UserId}/GetWithQuestionnaireVotes")]
         public async Task<ActionResult<RepositoryResponse<UserDTO>>> GetWithQuestionnaireVotes(int UserId)
         {
             var response = await _UserService.GetUserAsync(u => u.Id == UserId, "QuestionnaireVotes");
-            UserDTO res = response.Data;
-            return Ok(res);
-        }
-
-        [HttpGet("{UserId}/GetWithParticipantGroups")]
-        public async Task<ActionResult<RepositoryResponse<UserDTO>>> GetWithParticipantGroups(int UserId)
-        {
-            var response = await _UserService.GetUserAsync(u => u.Id == UserId, "ParticipantGroups");
             UserDTO res = response.Data;
             return Ok(res);
         }
@@ -98,14 +106,6 @@ namespace TripPlanner.WebAPI.Controllers
             return Ok(res);
         }
 
-        [HttpGet("{UserId}/GetWithBills/{id}")]
-        public async Task<ActionResult<RepositoryResponse<UserDTO>>> GetWithBills(int UserId)
-        {
-            var response = await _UserService.GetUserAsync(u => u.Id == UserId, "Bills");
-            UserDTO res = response.Data;
-            return Ok(res);
-        }
-
         [HttpGet("{UserId}/GetWithMessages")]
         public async Task<ActionResult<RepositoryResponse<UserDTO>>> GetWithMessages(int UserId)
         {
@@ -114,10 +114,34 @@ namespace TripPlanner.WebAPI.Controllers
             return Ok(res);
         }
 
-        [HttpGet("{UserId}/GetWithBillSettle")]
-        public async Task<ActionResult<RepositoryResponse<UserDTO>>> GetWithBillSettle(int UserId)
+        [HttpGet("{UserId}/GetWithBillContributors")]
+        public async Task<ActionResult<RepositoryResponse<UserDTO>>> GetWithBillContributors(int UserId)
         {
-            var response = await _UserService.GetUserAsync(u => u.Id == UserId, "BillSettle");
+            var response = await _UserService.GetUserAsync(u => u.Id == UserId, "BillContributors");
+            UserDTO res = response.Data;
+            return Ok(res);
+        }
+
+        [HttpGet("{UserId}/GetWithBillPayed")]
+        public async Task<ActionResult<RepositoryResponse<UserDTO>>> GetWithBillPayed(int UserId)
+        {
+            var response = await _UserService.GetUserAsync(u => u.Id == UserId, "BillsPayed");
+            UserDTO res = response.Data;
+            return Ok(res);
+        }
+
+        [HttpGet("{UserId}/GetWithTransfersSender")]
+        public async Task<ActionResult<RepositoryResponse<UserDTO>>> GetWithTransfersSender(int UserId)
+        {
+            var response = await _UserService.GetUserAsync(u => u.Id == UserId, "TransfersSender");
+            UserDTO res = response.Data;
+            return Ok(res);
+        }
+
+        [HttpGet("{UserId}/GetWithTransfersRecipient")]
+        public async Task<ActionResult<RepositoryResponse<UserDTO>>> GetWithTransfersRecipient(int UserId)
+        {
+            var response = await _UserService.GetUserAsync(u => u.Id == UserId, "TransfersRecipient");
             UserDTO res = response.Data;
             return Ok(res);
         }
@@ -167,10 +191,7 @@ namespace TripPlanner.WebAPI.Controllers
             }
 
             User newUser = userResponse.Data;
-            newUser.Name = user.Name;
-            newUser.Surname = user.Surname;
             newUser.Email = user.Email;
-            newUser.Address = user.Address;
             newUser.DateOfBirth = user.DateOfBirth;
             newUser.PasswordHash = user.PasswordHash;
             newUser.Id = id;
@@ -194,7 +215,7 @@ namespace TripPlanner.WebAPI.Controllers
         }
 
         [HttpPost("login")]
-        public async Task<ActionResult> Login([FromBody] UserDTO loginUser)
+        public async Task<ActionResult> Login([FromBody] LoginDTO loginUser)
         {
             var userResponse = await _UserService.GetUserAsync(u => u.Email == loginUser.Email);
 
@@ -209,8 +230,9 @@ namespace TripPlanner.WebAPI.Controllers
 
             var claims = new List<Claim>()
             {
-                new Claim(ClaimTypes.Name, user.Name.ToString()),
-                new Claim(ClaimTypes.Surname, user.Surname.ToString()),
+                new Claim(ClaimTypes.Name, user.FullName.ToString()),
+                new Claim(ClaimTypes.DateOfBirth, user.DateOfBirth.ToString()),
+                new Claim(ClaimTypes.StateOrProvince, user.FullAddress.ToString()),
                 new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
                 new Claim(ClaimTypes.Email, user.Email.ToString())
             };

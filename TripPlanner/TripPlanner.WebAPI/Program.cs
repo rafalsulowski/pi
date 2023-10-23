@@ -8,21 +8,11 @@ using Microsoft.AspNetCore.Identity;
 using TripPlanner.Models;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
-using TripPlanner.Services.BillService;
-using TripPlanner.Services.BillPictureService;
-using TripPlanner.Services.BudgetService;
-using TripPlanner.Services.BudgetExpenditureService;
 using TripPlanner.Services.ChatService;
 using TripPlanner.Services.CheckListService;
 using TripPlanner.Services.CheckListFieldService;
-using TripPlanner.Services.ContributeBudgetService;
 using TripPlanner.Services.CultureService;
 using TripPlanner.Services.CultureAssistanceService;
-using TripPlanner.Services.GroupService;
-using TripPlanner.Services.MessageService;
-using TripPlanner.Services.OrganizerTourService;
-using TripPlanner.Services.ParticipantBillService;
-using TripPlanner.Services.ParticipantGroupService;
 using TripPlanner.Services.ParticipantTourService;
 using TripPlanner.Services.QuestionnaireService;
 using TripPlanner.Services.QuestionnaireAnswerService;
@@ -30,6 +20,12 @@ using TripPlanner.Services.QuestionnaireVoteService;
 using TripPlanner.Services.RouteService;
 using TripPlanner.Services.StopoverService;
 using TripPlanner.Services.TourService;
+using TripPlanner.Services.BillService;
+using TripPlanner.Services.ScheduleService;
+using TripPlanner.Models.Models.UserModels;
+using TripPlanner.Services.FriendService;
+using TripPlanner.Services.Notificationservice;
+using TripPlanner.Services.NotificationService;
 
 namespace TripPlanner.WebAPI
 {
@@ -78,46 +74,34 @@ namespace TripPlanner.WebAPI
 
 
             builder.Services.AddScoped<IUserRepository, UserRepository>();
-            builder.Services.AddScoped<IBillRepository, BillRepository>();
-            builder.Services.AddScoped<IBillPictureRepository, BillPictureRepository>();
-            builder.Services.AddScoped<IBudgetRepository, BudgetRepository>();
-            builder.Services.AddScoped<IBudgetExpenditureRepository, BudgetExpenditureRepository>();
-            builder.Services.AddScoped<IChatRepository, ChatRepository>();
             builder.Services.AddScoped<ICheckListRepository, CheckListRepository>();
             builder.Services.AddScoped<ICheckListFieldRepository, CheckListFieldRepository>();
-            builder.Services.AddScoped<IContributeBudgetRepository, ContributeBudgetRepository>();
             builder.Services.AddScoped<ICultureRepository, CultureRepository>();
             builder.Services.AddScoped<ICultureAssistanceRepository, CultureAssistanceRepository>();
-            builder.Services.AddScoped<IGroupRepository, GroupRepository>();
-            builder.Services.AddScoped<IMessageRepository, MessageRepository>();
-            builder.Services.AddScoped<IOrganizerTourRepository, OrganizerTourRepository>();
-            builder.Services.AddScoped<IParticipantBillRepository, ParticipantBillRepository>();
-            builder.Services.AddScoped<IParticipantGroupRepository, ParticipantGroupRepository>();
             builder.Services.AddScoped<IParticipantTourRepository, ParticipantTourRepository>();
             builder.Services.AddScoped<IQuestionnaireRepository, QuestionnaireRepository>();
             builder.Services.AddScoped<IQuestionnaireAnswerRepository, QuestionnaireAnswerRepository>();
             builder.Services.AddScoped<IQuestionnaireVoteRepository, QuestionnaireVoteRepository>();
             builder.Services.AddScoped<IRouteRepository, RouteRepository>();
             builder.Services.AddScoped<IStopoverRepository, StopoverRepository>();
+            builder.Services.AddScoped<ITextMessageRepository, TextMessageRepository>();
+            builder.Services.AddScoped<INoticeMessageRepository, NoticeMessageRepository>();
             builder.Services.AddScoped<ITourRepository, TourRepository>();
+            builder.Services.AddScoped<IBillRepository, BillRepository>();
+            builder.Services.AddScoped<ITransferRepository, TransferRepository>();
+            builder.Services.AddScoped<IBillContributorRepository, BillContributorRepository>();
+            builder.Services.AddScoped<IScheduleDayRepository, ScheduleDayRepository>();
+            builder.Services.AddScoped<IScheduleEventRepository, ScheduleEventRepository>();
+            builder.Services.AddScoped<IFriendRepository, FriendRepository>();
+            builder.Services.AddScoped<INotificationRepository, NotificationRepository>();
 
 
             builder.Services.AddScoped<IUserService, UserService>();
-            builder.Services.AddScoped<IBillService, BillService>();
-            builder.Services.AddScoped<IBillPictureService, BillPictureService>();
-            builder.Services.AddScoped<IBudgetService, BudgetService>();
-            builder.Services.AddScoped<IBudgetExpenditureService, BudgetExpenditureService>();
             builder.Services.AddScoped<IChatService, ChatService>();
             builder.Services.AddScoped<ICheckListService, CheckListService>();
             builder.Services.AddScoped<ICheckListFieldService, CheckListFieldService>();
-            builder.Services.AddScoped<IContributeBudgetService, ContributeBudgetService>();
             builder.Services.AddScoped<ICultureService, CultureService>();
             builder.Services.AddScoped<ICultureAssistanceService, CultureAssistanceService>();
-            builder.Services.AddScoped<IGroupService, GroupService>();
-            builder.Services.AddScoped<IMessageService, MessageService>();
-            builder.Services.AddScoped<IOrganizerTourService, OrganizerTourService>();
-            builder.Services.AddScoped<IParticipantBillService, ParticipantBillService>();
-            builder.Services.AddScoped<IParticipantGroupService, ParticipantGroupService>();
             builder.Services.AddScoped<IParticipantTourService, ParticipantTourService>();
             builder.Services.AddScoped<IQuestionnaireService, QuestionnaireService>();
             builder.Services.AddScoped<IQuestionnaireAnswerService, QuestionnaireAnswerService>();
@@ -125,6 +109,10 @@ namespace TripPlanner.WebAPI
             builder.Services.AddScoped<IRouteService, RouteService>();
             builder.Services.AddScoped<IStopoverService, StopoverService>();
             builder.Services.AddScoped<ITourService, TourService>();
+            builder.Services.AddScoped<IBillService, BillService>();
+            builder.Services.AddScoped<IScheduleService, ScheduleService>();
+            builder.Services.AddScoped<IFriendService, FriendService>();
+            builder.Services.AddScoped<INotificationService, NotificationService>();
 
             builder.Services.AddScoped<IPasswordHasher<User>, PasswordHasher<User>>();
             var app = builder.Build();
@@ -136,7 +124,7 @@ namespace TripPlanner.WebAPI
                 app.UseSwaggerUI();
             }
 
-            //app.UseHttpsRedirection();
+            app.UseHttpsRedirection();
 
             app.UseAuthorization();
 

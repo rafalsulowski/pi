@@ -1,26 +1,21 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using TripPlanner.Models;
 using TripPlanner.Services.CultureService;
-using TripPlanner.Services.UserService;
-using TripPlanner.Services.TourService;
 using TripPlanner.Models.DTO.CultureDTOs;
+using TripPlanner.Models.Models;
+using TripPlanner.Models.Models.CultureModels;
 
 namespace TripPlanner.WebAPI.Controllers
 {
     [Route("[controller]/")]
     [ApiController]
-    [ApiExplorerSettings(IgnoreApi = ProjectConfiguration.HideContorller)]
+    //[ApiExplorerSettings(IgnoreApi = ProjectConfiguration.HideContorller)]
     public class CultureController : ControllerBase
     {
         private readonly ICultureService _CultureService;
-        private readonly IUserService _UserService;
-        private readonly ITourService _TourService;
 
-        public CultureController(ICultureService CultureService, IUserService userService, ITourService tourService)
+        public CultureController(ICultureService CultureService)
         {
             _CultureService = CultureService;
-            _UserService = userService;
-            _TourService = tourService;
         }
 
         [HttpGet]
@@ -51,7 +46,14 @@ namespace TripPlanner.WebAPI.Controllers
             Culture newCulture = Culture;
 
             var response = await _CultureService.CreateCulture(newCulture);
-            return Ok(response.Data);
+            if (response.Success)
+            {
+                return Ok(response.Data);
+            }
+            else
+            {
+                return BadRequest(response.Message);
+            }
         }
 
         [HttpPut("{CultureId}")]
@@ -70,10 +72,16 @@ namespace TripPlanner.WebAPI.Controllers
 
             Culture elem = Culture;
             elem.Id = CultureId;
-            elem.Tours = resp2.Data.Tours;
 
             var response = await _CultureService.UpdateCulture(elem);
-            return Ok(response.Data);
+            if (response.Success)
+            {
+                return Ok(response.Data);
+            }
+            else
+            {
+                return BadRequest(response.Message);
+            }
         }
 
         [HttpDelete("{id}")]
@@ -86,7 +94,7 @@ namespace TripPlanner.WebAPI.Controllers
             }
             else
             {
-                return NotFound(response.Data);
+                return BadRequest(response.Message);
             }
         }
     }

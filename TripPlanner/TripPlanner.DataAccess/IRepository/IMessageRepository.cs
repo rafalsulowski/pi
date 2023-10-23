@@ -1,5 +1,6 @@
 ﻿using TripPlanner.Models;
-using TripPlanner.Models.Models.Message;
+using TripPlanner.Models.Models;
+using TripPlanner.Models.Models.MessageModels;
 
 namespace TripPlanner.DataAccess.IRepository
 {

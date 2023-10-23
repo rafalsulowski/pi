@@ -4,11 +4,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TripPlanner.Models.DTO.BillDTOs;
+using TripPlanner.Models.DTO.MessageDTOs.QuestionnaireDTOs;
+using TripPlanner.Models.DTO.MessageDTOs;
+using TripPlanner.Models.Models.MessageModels.QuestionnaireModels;
+using TripPlanner.Models.Models.MessageModels;
 using TripPlanner.Models.Models.TourModels;
+using TripPlanner.Models.Models.UserModels;
 
 namespace TripPlanner.Models.Models.BillModels
 {
-    public class Share
+    public abstract class Share
     {
         public int Id { get; set; }
 
@@ -27,15 +32,16 @@ namespace TripPlanner.Models.Models.BillModels
             if (data == null)
                 return null;
 
-            return new ShareDTO
+            if (data is Bill)
             {
-                Id = data.Id,
-                TourId = data.TourId,
-                CreatedDate = data.CreatedDate,
-                CreatorId = data.CreatorId,
-                ImageFilePath = data.ImageFilePath,
-                Value = data.Value,
-            };
+                return (BillDTO)data;
+            }
+            else if (data is Transfer)
+            {
+                return (TransferDTO)data;
+            }
+            else
+                return null;
         }
     }
 }

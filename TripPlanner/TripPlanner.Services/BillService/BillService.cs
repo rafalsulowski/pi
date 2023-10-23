@@ -1,128 +1,84 @@
-﻿using System.Linq.Expressions;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using TripPlanner.DataAccess.IRepository;
-using TripPlanner.Models;
+using TripPlanner.Models.Models.RouteModels;
+using TripPlanner.Models.Models;
+using TripPlanner.Models.Models.BillModels;
+using TripPlanner.DataAccess.Repository;
 
 namespace TripPlanner.Services.BillService
 {
     public class BillService : IBillService
     {
+        private readonly ITransferRepository _TransferRepository;
         private readonly IBillRepository _BillRepository;
-        private readonly IBillPictureRepository _BillPictureRepository;
-        private readonly IParticipantBillRepository _ParticipantBillRepository;
-        public BillService(IBillRepository BillRepository, IBillPictureRepository billPictureRepository, IParticipantBillRepository participantBillRepository)
+        private readonly IBillContributorRepository _BillContributorRepository;
+        public BillService(ITransferRepository TransferRepository, IBillRepository BillRepository, IBillContributorRepository billContributorRepository)
         {
+            _TransferRepository = TransferRepository;
             _BillRepository = BillRepository;
-            _BillPictureRepository = billPictureRepository;
-            _ParticipantBillRepository = participantBillRepository;
+            _BillContributorRepository = billContributorRepository;
+        }
+
+        public async Task<RepositoryResponse<bool>> CreateTransfer(Transfer Transfer)
+        {
+            _TransferRepository.Add(Transfer);
+            var response = await _TransferRepository.SaveChangesAsync();
+            return response;
+        }
+
+        public async Task<RepositoryResponse<bool>> DeleteTransfer(Transfer Transfer)
+        {
+            _TransferRepository.Remove(Transfer);
+            var response = await _TransferRepository.SaveChangesAsync();
+            return response;
         }
 
         public async Task<RepositoryResponse<bool>> CreateBill(Bill Bill)
         {
             _BillRepository.Add(Bill);
             var response = await _BillRepository.SaveChangesAsync();
+
+            //dodanie billcontributors
+            foreach(var contributors in Bill.Contributors)
+            {
+                _BillContributorRepository.Add(new BillContributor
+                {
+                    BillId = Bill.Id,
+                    UserId = contributors.UserId,
+                    Due = contributors.Due,
+                });
+            }
             return response;
         }
 
         public async Task<RepositoryResponse<bool>> DeleteBill(Bill Bill)
         {
-            var resp = await _BillRepository.GetFirstOrDefault(u => u.Id == Bill.Id, "Participants,Pictures");
-            if (resp.Data == null)
-                return new RepositoryResponse<bool> { Data = true, Message = "Rachunek zostal usuniety", Success = true };
-            
-            //removing participants
-            Bill billDB = resp.Data;
-            foreach (var participant in billDB.Participants)
-                _ParticipantBillRepository.Remove(participant);
+            var resp = await _BillContributorRepository.GetAll(u => u.BillId == Bill.Id);
+            if (resp.Data != null)
+            {
+                //removing Contributors
+                List<BillContributor> BillContributors = resp.Data;
+                foreach (var billContributor in BillContributors)
+                    _BillContributorRepository.Remove(billContributor );
+            }
 
-            //removing pictures
-            foreach (var picture in billDB.Pictures)
-                _BillPictureRepository.Remove(picture);
-
-            _BillRepository.Remove(billDB);
+            _BillRepository.Remove(Bill);
             var response = await _BillRepository.SaveChangesAsync();
             return response;
         }
 
-        public async Task<RepositoryResponse<Bill>> GetBillAsync(Expression<Func<Bill, bool>> filter, string? includeProperties = null)
+
+
+        public async Task<RepositoryResponse<bool>> DeleteBillContributors(BillContributor Bill)
         {
-            var response = await _BillRepository.GetFirstOrDefault(filter, includeProperties);
+            _BillContributorRepository.Remove(Bill);
+            var response = await _BillContributorRepository.SaveChangesAsync();
             return response;
         }
 
-        public async Task<RepositoryResponse<List<Bill>>> GetBillsAsync(Expression<Func<Bill, bool>>? filter = null, string? includeProperties = null)
-        {
-            var response = await _BillRepository.GetAll(filter, includeProperties);
-            return response;
-        }
-
-        public async Task<RepositoryResponse<ParticipantBill>> GetParticipantBillAsync(Expression<Func<ParticipantBill, bool>> filter, string? includeProperties = null)
-        {
-            var response = await _ParticipantBillRepository.GetFirstOrDefault(filter, includeProperties);
-            return response;
-        }
-
-        public async Task<RepositoryResponse<List<ParticipantBill>>> GetParticipantsBillAsync(Expression<Func<ParticipantBill, bool>>? filter = null, string? includeProperties = null)
-        {
-            var response = await _ParticipantBillRepository.GetAll(filter, includeProperties);
-            return response;
-        }
-
-        public async Task<RepositoryResponse<BillPicture>> GetBillPictureAsync(Expression<Func<BillPicture, bool>> filter, string? includeProperties = null)
-        {
-            var response = await _BillPictureRepository.GetFirstOrDefault(filter, includeProperties);
-            return response;
-        }
-
-        public async Task<RepositoryResponse<List<BillPicture>>> GetBillPicturesAsync(Expression<Func<BillPicture, bool>>? filter = null, string? includeProperties = null)
-        {
-            var response = await _BillPictureRepository.GetAll(filter, includeProperties);
-            return response;
-        }
-
-        public async Task<RepositoryResponse<bool>> UpdateBill(Bill Bill)
-        {
-            var response = await _BillRepository.Update(Bill);
-            if(response.Success==false)
-            {
-                return response;
-            }
-            response = await _BillRepository.SaveChangesAsync();
-            return response;
-        }
-
-        public async Task<RepositoryResponse<bool>> AddParticipantToBill(ParticipantBill participant)
-        {
-            await _BillRepository.AddParticipantToBill(participant);
-            return await _BillRepository.SaveChangesAsync();
-        }
-
-        public async Task<RepositoryResponse<bool>> UpdateParticipantBill(ParticipantBill participant)
-        {
-            var response = await _BillRepository.UpdateParticipantBill(participant);
-            if (response.Success == false)
-            {
-                return response;
-            }
-            response = await _BillRepository.SaveChangesAsync();
-            return response;
-        }
-
-        public async Task<RepositoryResponse<bool>> DeleteParticipantFromBill(ParticipantBill participant)
-        {
-            await _BillRepository.DeleteParticipantFromBill(participant);
-            return await _BillRepository.SaveChangesAsync();
-        }
-
-        public async Task<RepositoryResponse<bool>> AddPictureToBill(BillPicture Picture)
-        {
-            await _BillRepository.AddPictureToBill(Picture);
-            return await _BillRepository.SaveChangesAsync();
-        }
-
-        public async Task<RepositoryResponse<bool>> DeletePictureFromBill(BillPicture Picture)
-        {
-            await _BillRepository.DeletePictureFromBill(Picture);
-            return await _BillRepository.SaveChangesAsync();
-        }
     }
 }

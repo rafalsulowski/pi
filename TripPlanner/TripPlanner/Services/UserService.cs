@@ -15,7 +15,6 @@ namespace TripPlanner.Services
     {
         private readonly HttpClient m_HttpClient;
         private readonly Configuration m_Configuration;
-        //private readonly ILogger<Worker> _logger;
 
         public UserService(HttpClient _httpClient, Configuration configuration)
         {
@@ -43,6 +42,26 @@ namespace TripPlanner.Services
 
             return null;
         }
+
+        public async Task<List<TourDTO>> GetToursOfUser(int userId)
+        {
+            try
+            {
+                HttpResponseMessage response = m_HttpClient.GetAsync($"{m_Configuration.WebApiUrl}/User/GetToursOfUser/{userId}").Result;
+                if (response.IsSuccessStatusCode)
+                {
+                    var tours = await response.Content.ReadFromJsonAsync<List<TourDTO>>();
+                    return tours;
+                }
+                else
+                    return new List<TourDTO>();
+            }
+            catch (Exception)
+            {
+                return new List<TourDTO>();
+            }
+        }
+
 
         public async Task<ObservableCollection<UserDTO>> GetFriends(int userId)
         {

@@ -1,7 +1,11 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using System.Linq.Expressions;
+using System.Linq;
 using TripPlanner.DataAccess.IRepository;
 using TripPlanner.Models;
-using TripPlanner.Models.Models.Tour;
+using TripPlanner.Models.Models;
+using TripPlanner.Models.Models.CultureModels;
+using TripPlanner.Models.Models.TourModels;
 
 namespace TripPlanner.DataAccess.Repository
 {
@@ -55,31 +59,6 @@ namespace TripPlanner.DataAccess.Repository
             return new RepositoryResponse<bool> { Data = true };
         }
 
-        public async Task<RepositoryResponse<bool>> AddOrganizerToTour(OrganizerTour Organizer)
-        {
-            var OrganizerDB = _context.OrganizerTours.FirstOrDefault(u => u.TourId == Organizer.TourId && u.UserId == Organizer.UserId);
-            if (OrganizerDB == null)
-            {
-                _context.OrganizerTours.Add(Organizer);
-            }
-            else
-            {
-                _context.OrganizerTours.Attach(Organizer);
-                _context.Entry(Organizer).State = EntityState.Modified;
-            }
-            return new RepositoryResponse<bool> { Data = true };
-        }
-
-        public async Task<RepositoryResponse<bool>> DeleteOrganizerFromTour(OrganizerTour Organizer)
-        {
-            var res = _context.OrganizerTours.FirstOrDefault(u => u.UserId == Organizer.UserId && u.TourId == Organizer.TourId);
-            if (res != null)
-            {
-                _context.OrganizerTours.Remove(res);
-            }
-            return new RepositoryResponse<bool> { Data = true };
-        }
-
         public async Task<RepositoryResponse<bool>> AddCultureAssistanceToTour(CultureAssistance CultureAssistance)
         {
             var CultureAssistanceDB = _context.CultureAssistances.FirstOrDefault(u => u.TourId == CultureAssistance.TourId && u.CultureId == CultureAssistance.CultureId);
@@ -105,51 +84,5 @@ namespace TripPlanner.DataAccess.Repository
             return new RepositoryResponse<bool> { Data = true };
         }
 
-        public async Task<RepositoryResponse<bool>> AddGroupToTour(Group Group)
-        {
-            var GroupDB = _context.Groups.FirstOrDefault(u => u.TourId == Group.TourId && u.Id == Group.Id);
-            if (GroupDB == null)
-            {
-                _context.Groups.Add(Group);
-            }
-            else
-            {
-                _context.Groups.Attach(Group);
-                _context.Entry(Group).State = EntityState.Modified;
-            }
-            return new RepositoryResponse<bool> { Data = true };
-        }
-
-        public async Task<RepositoryResponse<bool>> DeleteGroupFromTour(Group Group)
-        {
-            var res = _context.Groups.FirstOrDefault(u => u.Id == Group.Id && u.TourId == Group.TourId);
-            if (res != null)
-            {                
-                //first have to remove chat
-                var chat = _context.Chats.FirstOrDefault(u => u.GroupId == res.Id);
-                if(chat != null)
-                {
-                    _context.Chats.Remove(chat);
-                }
-                
-                _context.Groups.Remove(res);
-            }
-            return new RepositoryResponse<bool> { Data = true };
-        }
-
-        public async Task<RepositoryResponse<bool>> AddChatToTour(Chat Chat)
-        {
-            var ChatDB = _context.Chats.FirstOrDefault(u => u.TourId == Chat.TourId && u.Id == Chat.Id);
-            if (ChatDB == null)
-            {
-                _context.Chats.Add(Chat);
-            }
-            else
-            {
-                _context.Chats.Attach(Chat);
-                _context.Entry(Chat).State = EntityState.Modified;
-            }
-            return new RepositoryResponse<bool> { Data = true };
-        }
     }
 }

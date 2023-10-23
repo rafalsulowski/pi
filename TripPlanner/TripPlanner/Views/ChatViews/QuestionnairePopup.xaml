@@ -4,7 +4,7 @@
              xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              x:Class="TripPlanner.Views.ChatViews.QuestionnairePopup"
              xmlns:viewmodel="clr-namespace:TripPlanner.ViewModels"
-             xmlns:models="clr-namespace:TripPlanner.Models.DTO.QuestionnaireDTOs;assembly=TripPlanner.Models"
+             xmlns:models="clr-namespace:TripPlanner.Models.DTO.MessageDTOs.QuestionnaireDTOs;assembly=TripPlanner.Models"
              x:DataType="viewmodel:QuestionnaireViewModel"
              Color="Transparent"
              CanBeDismissedByTappingOutsideOfPopup="True">

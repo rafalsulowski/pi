@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿
 using TripPlanner.Models.DTO.BillDTOs;
-using TripPlanner.Models.DTO.ChatDTOs;
-using TripPlanner.Models.DTO.MessageDTOs;
-using TripPlanner.Models.Models.CheckListModels;
+using TripPlanner.Models.Models.UserModels;
 
 namespace TripPlanner.Models.Models.BillModels
 {
@@ -22,8 +16,9 @@ namespace TripPlanner.Models.Models.BillModels
     public class Bill : Share
     {
         public int PayerId { get; set; }
-        public BillContributor Payer { get; set; } = null!;
+        public User Payer { get; set; } = null!;
 
+        public string Name { get; set; } = string.Empty;
         public BillType BillType { get; set; }
         public ICollection<BillContributor> Contributors { get; set; } = new List<BillContributor>();
 
@@ -36,6 +31,7 @@ namespace TripPlanner.Models.Models.BillModels
             return new BillDTO
             {
                 Id = data.Id,
+                Name = data.Name,
                 CreatedDate = data.CreatedDate,
                 CreatorId = data.CreatorId,
                 ImageFilePath = data.ImageFilePath,

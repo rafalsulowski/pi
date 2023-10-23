@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using TripPlanner.Models.DTO.ChatDTOs;
-using TripPlanner.Models.DTO.MessageDTOs;
-using TripPlanner.Models.Models;
-using TripPlanner.Models.Models.BillModels;
+﻿using TripPlanner.Models.Models.BillModels;
 
 namespace TripPlanner.Models.DTO.BillDTOs
 {
@@ -11,7 +6,8 @@ namespace TripPlanner.Models.DTO.BillDTOs
     {
         public int PayerId { get; set; }
 
-        public BillType BillType;
+        public string Name { get; set; } = string.Empty;
+        public BillType BillType { get; set; }
         public ICollection<BillContributorDTO> Contributors { get; set; } = new List<BillContributorDTO>();
 
         public static implicit operator Bill(BillDTO data)
@@ -22,6 +18,7 @@ namespace TripPlanner.Models.DTO.BillDTOs
             return new Bill
             {
                 Id = data.Id,
+                Name = data.Name,
                 CreatedDate = data.CreatedDate,
                 CreatorId = data.CreatorId,
                 ImageFilePath = data.ImageFilePath,

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TripPlanner.Models.DTO.TourDTOs;
 using TripPlanner.Models.DTO.UserDTOs;
 
 namespace TripPlanner.DataTemplates

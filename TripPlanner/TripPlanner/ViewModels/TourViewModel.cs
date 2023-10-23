@@ -1,17 +1,25 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using TripPlanner.Models.DTO.TourDTOs;
+using TripPlanner.Services;
 
 namespace TripPlanner.ViewModels
 {
     [QueryProperty("passTour", "Tour")]
     public partial class TourViewModel : ObservableObject, IQueryAttributable
     {
+
+        private readonly TourService m_TourService;
+        private readonly Configuration m_Configuration;
+
+
         [ObservableProperty]
         TourDTO tour;
 
-        public TourViewModel()
+        public TourViewModel(TourService tourService, Configuration configuration)
         {
+            m_TourService = tourService;
+            m_Configuration = configuration;
         }
 
         public void ApplyQueryAttributes(IDictionary<string, object> query)
@@ -34,9 +42,17 @@ namespace TripPlanner.ViewModels
         [RelayCommand]
         async Task GoChat()
         {
+            TourDTO NewTour = await m_TourService.GetTourWithMessages(Tour.Id);
+
+            if(NewTour == null)
+            {
+                await Shell.Current.CurrentPage.DisplayAlert("Błąd", "Nie udało się pobrać wiadomości!", "Ok :(");
+                return;
+            }
+
             var navigationParameter = new Dictionary<string, object>
             {
-                { "passTour",  Tour}
+                { "passTour",  NewTour}
             };
             await Shell.Current.GoToAsync($"/Chat", navigationParameter);
         }

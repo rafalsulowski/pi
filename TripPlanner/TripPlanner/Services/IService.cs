@@ -8,8 +8,5 @@ namespace TripPlanner.Services
 {
     public interface IService
     {
-
-        //public WebApiResponse<bool> Create();
-
     }
 }

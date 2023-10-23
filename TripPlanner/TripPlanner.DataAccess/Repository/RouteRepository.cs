@@ -2,6 +2,8 @@
 using TripPlanner.DataAccess.IRepository;
 using TripPlanner.DataAccess.Repository;
 using TripPlanner.Models;
+using TripPlanner.Models.Models;
+using TripPlanner.Models.Models.RouteModels;
 
 namespace TripPlanner.DataAccess.Repository
 {

@@ -1,22 +1,21 @@
 ﻿using System.Linq.Expressions;
 using TripPlanner.DataAccess.IRepository;
 using TripPlanner.Models;
-using TripPlanner.Services.BillService;
-using TripPlanner.Services.BudgetService;
 using TripPlanner.Services.CheckListService;
-using TripPlanner.Services.GroupService;
 using TripPlanner.Services.QuestionnaireService;
 using TripPlanner.Services.RouteService;
 using TripPlanner.Services.ParticipantTourService;
 using TripPlanner.Services.TourService;
-using TripPlanner.Services.OrganizerTourService;
 using TripPlanner.Services.CultureAssistanceService;
-using TripPlanner.DataAccess.Repository;
-using TripPlanner.Services.ParticipantBillService;
-using TripPlanner.Services.ParticipantGroupService;
-using TripPlanner.Services.ContributeBudgetService;
 using TripPlanner.Services.QuestionnaireVoteService;
-using TripPlanner.Services.MessageService;
+using TripPlanner.Models.Models;
+using TripPlanner.Models.Models.UserModels;
+using TripPlanner.Models.Models.BillModels;
+using TripPlanner.Services.BillService;
+using TripPlanner.Services.FriendService;
+using TripPlanner.Services.ChatService;
+using TripPlanner.Models.Models.MessageModels;
+using TripPlanner.Models.Models.MessageModels.QuestionnaireModels;
 
 namespace TripPlanner.Services.UserService
 {
@@ -25,36 +24,30 @@ namespace TripPlanner.Services.UserService
         private readonly IUserRepository _UserRepository;
         private readonly ITourService _TourService;
         private readonly IParticipantTourService _ParticipantTourService;
-        private readonly IOrganizerTourService _OrganizerTourService;
         private readonly ICultureAssistanceService _CultureAssistanceService;
-        private readonly IContributeBudgetService _ContributeBudgetService;
-        private readonly IBillService _BillService;
         private readonly IRouteService _RouteService;
-        private readonly IMessageService _MessageService;
-        private readonly IParticipantBillService _ParticipantBillService;
-        private readonly IParticipantGroupService _ParticipantGroupService;
         private readonly IQuestionnaireService _QuestionnaireService;
         private readonly IQuestionnaireVoteService _QuestionnaireVoteService;
         private readonly ICheckListService _CheckListService;
-        public UserService(IUserRepository userRepository, ITourService __TourService, IParticipantTourService __ParticipantTourService,
-            IOrganizerTourService __OrganizerTourService, ICultureAssistanceService __CultureAssistanceService,
-            IContributeBudgetService __ContributeBudgetService, IBillService __BillService, IRouteService __RouteService, IParticipantGroupService __ParticipantGroupService, 
-            IQuestionnaireService __QuestionnaireService, ICheckListService __CheckListService, IParticipantBillService __ParticipantBillService, IQuestionnaireVoteService __QuestionnaireVoteService, IMessageService __MessageService)
+        private readonly IBillService _IBillService;
+        private readonly IFriendService _FriendService;
+        private readonly IChatService _ChatService;
+        public UserService(IBillService __IBillService, IFriendService __FriendService, IUserRepository userRepository, ITourService __TourService, IParticipantTourService __ParticipantTourService,
+            ICultureAssistanceService __CultureAssistanceService,
+            IRouteService __RouteService, IChatService chatService,
+            IQuestionnaireService __QuestionnaireService, ICheckListService __CheckListService, IQuestionnaireVoteService __QuestionnaireVoteService)
         {
             _UserRepository = userRepository;
             _TourService = __TourService;
             _ParticipantTourService = __ParticipantTourService;
-            _OrganizerTourService = __OrganizerTourService;
             _CultureAssistanceService = __CultureAssistanceService;
-            _ContributeBudgetService = __ContributeBudgetService;
-            _BillService = __BillService;
             _RouteService = __RouteService;
-            _MessageService = __MessageService;
-            _ParticipantGroupService = __ParticipantGroupService;
             _QuestionnaireService = __QuestionnaireService;
             _QuestionnaireVoteService = __QuestionnaireVoteService;
             _CheckListService = __CheckListService;
-            _ParticipantBillService = __ParticipantBillService;
+            _IBillService = __IBillService;
+            _FriendService = __FriendService;
+            _ChatService = chatService;
         }
 
         public async Task<RepositoryResponse<bool>> CreateUser(User user)
@@ -66,60 +59,56 @@ namespace TripPlanner.Services.UserService
 
         public async Task<RepositoryResponse<bool>> DeleteUser(User user)
         {
-            var resp = await _UserRepository.GetFirstOrDefault(u => u.Id == user.Id, "CheckLists,OrganizerTours,ParticipantTours,ParticipantBudgets,ParticipantGroups,Routes,Bills,Questionnaires,QuestionnaireVotes,Messages,BillSettle");
+            var resp = await _UserRepository.GetFirstOrDefault(u => u.Id == user.Id, "Shares,BillContributors,CheckLists,ParticipantTours,Routes,QuestionnaireVotes,Messages");
             if (resp.Data == null)
                 return new RepositoryResponse<bool> { Data = true, Message = "Uzytkownik zostal usuniety", Success = true };
 
-            //removing OrganizerTours
             User UserDB = resp.Data;
-            foreach (var Organizers in UserDB.OrganizerTours)
-                await _OrganizerTourService.DeleteOrganizerTour(Organizers);
-
             //removing ParticipantTours
             foreach (var Participants in UserDB.ParticipantTours)
                 await _ParticipantTourService.DeleteParticipantTour(Participants);
 
-            //removing ParticipantBudgets
-            foreach (var CultureAssistances in UserDB.ParticipantBudgets)
-                await _ContributeBudgetService.DeleteContributeBudget(CultureAssistances);
+            //removing Shares
+            foreach (var Shares in UserDB.Shares)
+            {
+                if(Shares is not null && Shares is Bill)
+                    await _IBillService.DeleteBill((Bill)Shares);
+                else if (Shares is not null && Shares is Transfer)
+                    await _IBillService.DeleteTransfer((Transfer)Shares);
+            }
+
+            //removing BillContributors
+            foreach (var BillContributors in UserDB.BillContributors)
+                await _IBillService.DeleteBillContributors(BillContributors);
 
             //removing CheckLists
             foreach (var CheckLists in UserDB.CheckLists)
                 await _CheckListService.DeleteCheckList(CheckLists);
 
-            //removing Questionnaires
-            foreach (var Questionnaires in UserDB.Questionnaires)
-                await _QuestionnaireService.DeleteQuestionnaire(Questionnaires);
-
             //removing QuestionnaireVotes
             foreach (var Questionnaires in UserDB.QuestionnaireVotes)
                 await _QuestionnaireVoteService.DeleteQuestionnaireVote(Questionnaires);
-
-            //removing ParticipantGroups
-            foreach (var Groups in UserDB.ParticipantGroups)
-                await _ParticipantGroupService.DeleteParticipantGroup(Groups);
 
             //removing Routes
             foreach (var Routes in UserDB.Routes)
                 await _RouteService.DeleteRoute(Routes);
 
-            //removing BillSettle
-            foreach (var Bills in UserDB.BillSettle)
-                await _ParticipantBillService.DeleteParticipantBill(Bills);
-
-            //removing Bills
-            foreach (var Bills in UserDB.Bills)
-                await _BillService.DeleteBill(Bills);
-
-            //removing Bills
-            foreach (var Bills in UserDB.Messages)
-                await _MessageService.DeleteMessage(Bills);
-
+            //removing Messages
+            foreach (var Messages in UserDB.Messages)
+            {
+                if(Messages is not null && Messages is TextMessage)
+                    await _ChatService.DeleteTextMessage((TextMessage)Messages);
+                else if (Messages is not null && Messages is NoticeMessage)
+                    await _ChatService.DeleteNoticeMessage((NoticeMessage)Messages);
+                else if (Messages is not null && Messages is Questionnaire)
+                    await _QuestionnaireService.DeleteQuestionnaire((Questionnaire)Messages);
+            }
 
             _UserRepository.Remove(UserDB);
             var response = await _UserRepository.SaveChangesAsync();
             return response;
         }
+
 
         public async Task<RepositoryResponse<User>> GetUserAsync(Expression<Func<User, bool>> filter, string? includeProperties = null)
         {

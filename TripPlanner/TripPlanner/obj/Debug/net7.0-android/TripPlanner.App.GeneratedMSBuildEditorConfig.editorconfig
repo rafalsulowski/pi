@@ -98,12 +98,6 @@ build_metadata.AdditionalFiles.ManifestResourceName = TripPlanner.Views.HomeView
 build_metadata.AdditionalFiles.TargetPath = Views\HomeViews\HomePage.xaml
 build_metadata.AdditionalFiles.RelativePath = Views\HomeViews\HomePage.xaml
 
-[C:/Users/01159502/Desktop/TripPlanner/TripPlanner/TripPlanner/Views/HomeViews/HomePageWithoutTours.xaml]
-build_metadata.AdditionalFiles.GenKind = Xaml
-build_metadata.AdditionalFiles.ManifestResourceName = TripPlanner.Views.HomeViews.HomePageWithoutTours.xaml
-build_metadata.AdditionalFiles.TargetPath = Views\HomeViews\HomePageWithoutTours.xaml
-build_metadata.AdditionalFiles.RelativePath = Views\HomeViews\HomePageWithoutTours.xaml
-
 [C:/Users/01159502/Desktop/TripPlanner/TripPlanner/TripPlanner/Views/HomeViews/NotificationPage.xaml]
 build_metadata.AdditionalFiles.GenKind = Xaml
 build_metadata.AdditionalFiles.ManifestResourceName = TripPlanner.Views.HomeViews.NotificationPage.xaml
@@ -140,11 +134,11 @@ build_metadata.AdditionalFiles.ManifestResourceName = TripPlanner.Views.StartVie
 build_metadata.AdditionalFiles.TargetPath = Views\StartViews\MainPage.xaml
 build_metadata.AdditionalFiles.RelativePath = Views\StartViews\MainPage.xaml
 
-[C:/Users/01159502/Desktop/TripPlanner/TripPlanner/TripPlanner/Views/TourViews/CreateTour1.xaml]
+[C:/Users/01159502/Desktop/TripPlanner/TripPlanner/TripPlanner/Views/TourViews/CreateTour.xaml]
 build_metadata.AdditionalFiles.GenKind = Xaml
-build_metadata.AdditionalFiles.ManifestResourceName = TripPlanner.Views.TourViews.CreateTour1.xaml
-build_metadata.AdditionalFiles.TargetPath = Views\TourViews\CreateTour1.xaml
-build_metadata.AdditionalFiles.RelativePath = Views\TourViews\CreateTour1.xaml
+build_metadata.AdditionalFiles.ManifestResourceName = TripPlanner.Views.TourViews.CreateTour.xaml
+build_metadata.AdditionalFiles.TargetPath = Views\TourViews\CreateTour.xaml
+build_metadata.AdditionalFiles.RelativePath = Views\TourViews\CreateTour.xaml
 
 [C:/Users/01159502/Desktop/TripPlanner/TripPlanner/TripPlanner/Views/TourViews/TourPage.xaml]
 build_metadata.AdditionalFiles.GenKind = Xaml

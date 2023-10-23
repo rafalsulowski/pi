@@ -2,8 +2,7 @@
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using TripPlanner.Controls.QuestionnaireControls;
-using TripPlanner.Models.DTO.QuestionnaireDTOs;
-using TripPlanner.Models.Models.Message;
+using TripPlanner.Models.DTO.MessageDTOs.QuestionnaireDTOs;
 using TripPlanner.Services;
 using TripPlanner.Views.ChatViews;
 

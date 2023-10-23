@@ -2,68 +2,68 @@
 using TripPlanner.DataAccess.IRepository;
 using TripPlanner.DataAccess.Repository;
 using TripPlanner.Models;
-using TripPlanner.Models.Models.Message;
+using TripPlanner.Models.Models;
+using TripPlanner.Models.Models.MessageModels;
 
 namespace TripPlanner.Services.ChatService
 {
     public class ChatService : IChatService
     {
-        private readonly IChatRepository _ChatRepository;
-        private readonly IMessageRepository _MessageRepository;
-        public ChatService(IChatRepository ChatRepository, IMessageRepository messageRepository)
+        private readonly ITextMessageRepository _TextMessageRepository;
+        private readonly INoticeMessageRepository _NoticeMessageRepository;
+        public ChatService(ITextMessageRepository __TextMessageRepository, INoticeMessageRepository __NoticeMessageRepository)
         {
-            _ChatRepository = ChatRepository;
-            _MessageRepository = messageRepository;
+            _TextMessageRepository = __TextMessageRepository;
+            _NoticeMessageRepository = __NoticeMessageRepository;
         }
 
-        public async Task<RepositoryResponse<bool>> CreateChat(Chat Chat)
+
+        public async Task<RepositoryResponse<TextMessage>> GetTextMessageAsync(Expression<Func<TextMessage, bool>> filter, string? includeProperties = null)
         {
-            _ChatRepository.Add(Chat);
-            var response = await _ChatRepository.SaveChangesAsync();
+            var response = await _TextMessageRepository.GetFirstOrDefault(filter, includeProperties);
             return response;
         }
 
-        public async Task<RepositoryResponse<bool>> DeleteChat(Chat Chat)
+        public async Task<RepositoryResponse<List<TextMessage>>> GetTextMessagesAsync(Expression<Func<TextMessage, bool>>? filter = null, string? includeProperties = null)
         {
-            _ChatRepository.Remove(Chat);
-            var response = await _ChatRepository.SaveChangesAsync();
+            var response = await _TextMessageRepository.GetAll(filter, includeProperties);
             return response;
         }
 
-        public async Task<RepositoryResponse<Chat>> GetChatAsync(Expression<Func<Chat, bool>> filter, string? includeProperties = null)
+        public async Task<RepositoryResponse<NoticeMessage>> GetNoticeMessageAsync(Expression<Func<NoticeMessage, bool>> filter, string? includeProperties = null)
         {
-            var response = await _ChatRepository.GetFirstOrDefault(filter, includeProperties);
+            var response = await _NoticeMessageRepository.GetFirstOrDefault(filter, includeProperties);
             return response;
         }
 
-        public async Task<RepositoryResponse<List<Chat>>> GetChatsAsync(Expression<Func<Chat, bool>>? filter = null, string? includeProperties = null)
+        public async Task<RepositoryResponse<List<NoticeMessage>>> GetNoticeMessagesAsync(Expression<Func<NoticeMessage, bool>>? filter = null, string? includeProperties = null)
         {
-            var response = await _ChatRepository.GetAll(filter, includeProperties);
+            var response = await _NoticeMessageRepository.GetAll(filter, includeProperties);
             return response;
         }
 
-        public async Task<RepositoryResponse<Message>> GetMessageAsync(Expression<Func<Message, bool>> filter, string? includeProperties = null)
+        public async Task<RepositoryResponse<bool>> AddTextMessage(TextMessage Message)
         {
-            var response = await _MessageRepository.GetFirstOrDefault(filter, includeProperties);
-            return response;
+            _TextMessageRepository.Add(Message);
+            return await _TextMessageRepository.SaveChangesAsync();
         }
 
-        public async Task<RepositoryResponse<List<Message>>> GetMessagesAsync(Expression<Func<Message, bool>>? filter = null, string? includeProperties = null)
+        public async Task<RepositoryResponse<bool>> DeleteTextMessage(TextMessage Message)
         {
-            var response = await _MessageRepository.GetAll(filter, includeProperties);
-            return response;
+            _TextMessageRepository.Add(Message);
+            return await _TextMessageRepository.SaveChangesAsync();
         }
 
-        public async Task<RepositoryResponse<bool>> AddMessageToChat(Message Message)
+        public async Task<RepositoryResponse<bool>> AddNoticeMessage(NoticeMessage Message)
         {
-            await _ChatRepository.AddMessageToChat(Message);
-            return await _ChatRepository.SaveChangesAsync();
+            _NoticeMessageRepository.Add(Message);
+            return await _NoticeMessageRepository.SaveChangesAsync();
         }
 
-        public async Task<RepositoryResponse<bool>> DeleteMessageFromChat(Message Message)
+        public async Task<RepositoryResponse<bool>> DeleteNoticeMessage(NoticeMessage Message)
         {
-            await _ChatRepository.DeleteMessageFromChat(Message);
-            return await _ChatRepository.SaveChangesAsync();
+            _NoticeMessageRepository.Add(Message);
+            return await _NoticeMessageRepository.SaveChangesAsync();
         }
     }
 }

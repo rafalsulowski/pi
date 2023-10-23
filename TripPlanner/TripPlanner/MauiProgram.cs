@@ -29,17 +29,12 @@ public static class MauiProgram
 				fonts.AddFont("Roboto-Regular.ttf", "RobotoRegular");
 			});
 
-#if DEBUG
-		builder.Logging.AddDebug();
-#endif
-		//App Services
-        builder.Services.AddSingleton<IDialogService, DialogService>();
+        //App Services
         builder.Services.AddSingleton<Configuration>();
         builder.Services.AddSingleton<HttpClient>();
 
 		//Data Template Selectors
         builder.Services.AddSingleton<MessageDataTemplateSelector>();
-		builder.Services.AddSingleton<MathConverter>();
 
         //Data Managment Services
         builder.Services.AddSingleton<TourService>();
@@ -63,8 +58,7 @@ public static class MauiProgram
         //Views
         builder.Services.AddTransient<MainPage>();
 		builder.Services.AddTransient<HomePage>();
-		builder.Services.AddTransient<CreateTour1>();
-		builder.Services.AddTransient<HomePageWithoutTours>();
+		builder.Services.AddTransient<CreateTour>();
 		builder.Services.AddTransient<CalendarPage>();
 		builder.Services.AddTransient<NotificationPage>();
 		builder.Services.AddTransient<ProfilePage>();

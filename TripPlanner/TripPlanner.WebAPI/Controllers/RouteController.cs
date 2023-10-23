@@ -1,16 +1,17 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using TripPlanner.Models;
 using TripPlanner.Services.RouteService;
 using TripPlanner.Services.UserService;
 using TripPlanner.Services.TourService;
 using TripPlanner.Models.DTO.RouteDTOs;
-using Route = TripPlanner.Models.Route;
+using TripPlanner.Models.Models;
+using TripPlanner.Models.Models.RouteModels;
+using Route = TripPlanner.Models.Models.RouteModels.Route;
 
 namespace TripPlanner.WebAPI.Controllers
 {
     [Route("[controller]/")]
     [ApiController]
-    [ApiExplorerSettings(IgnoreApi = ProjectConfiguration.HideContorller)]
+    //[ApiExplorerSettings(IgnoreApi = ProjectConfiguration.HideContorller)]
     public class RouteController : ControllerBase
     {
         private readonly IRouteService _RouteService;
@@ -41,7 +42,7 @@ namespace TripPlanner.WebAPI.Controllers
                 return new RepositoryResponse<string> { Data = "", Success = false, Message = $"Nie istnieje trasa o id = {routeId}" };
             }
 
-            Route route = response.Data;
+            Models.Models.RouteModels.Route route = response.Data;
             //zbudowac url i wyslac
 
             return Ok(new RepositoryResponse<string> { Data = "whole url", Message = "", Success = true});
@@ -99,7 +100,14 @@ namespace TripPlanner.WebAPI.Controllers
             Route newRoute = Route;
 
             var response = await _RouteService.CreateRoute(newRoute);
-            return Ok(response.Data);
+            if (response.Success)
+            {
+                return Ok(response.Data);
+            }
+            else
+            {
+                return NotFound(response.Message);
+            }
         }
 
         [HttpGet("{RouteId}/Stopovers")]
@@ -165,7 +173,14 @@ namespace TripPlanner.WebAPI.Controllers
             newStopover.Id = stopoverId;
 
             var response = await _RouteService.UpdateStopover(newStopover);
-            return Ok(response.Data);
+            if (response.Success)
+            {
+                return Ok(response.Data);
+            }
+            else
+            {
+                return NotFound(response.Message);
+            }
         }
 
         [HttpDelete("{RouteId}/deleteStopover/{stopoverId}")]
@@ -187,7 +202,14 @@ namespace TripPlanner.WebAPI.Controllers
             elem.Id = stopoverId;
 
             var response = await _RouteService.DeleteStopoverFromRoute(elem);
-            return Ok(response.Data);
+            if (response.Success)
+            {
+                return Ok(response.Data);
+            }
+            else
+            {
+                return NotFound(response.Message);
+            }
         }
 
         [HttpPut("{RouteId}")]
@@ -208,7 +230,14 @@ namespace TripPlanner.WebAPI.Controllers
             elem.Id = RouteId;
 
             var response = await _RouteService.UpdateRoute(elem);
-            return Ok(response.Data);
+            if (response.Success)
+            {
+                return Ok(response.Data);
+            }
+            else
+            {
+                return NotFound(response.Message);
+            }
         }
 
         [HttpDelete("{id}")]

@@ -22,6 +22,7 @@ namespace TripPlanner.Models.DTO.BillDTOs
             return new Transfer
             {
                 Id = data.Id,
+                TourId = data.TourId,
                 CreatedDate = data.CreatedDate,
                 CreatorId = data.CreatorId,
                 ImageFilePath = data.ImageFilePath,

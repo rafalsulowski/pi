@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "jn1OURA/Ak+VpX8Y3gD2U2Z8rsWLbBNkWfs64LC7Nc4=",
+  "Source": "TripPlanner.WebSocketServer",
+  "BasePath": "_content/TripPlanner.WebSocketServer",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}

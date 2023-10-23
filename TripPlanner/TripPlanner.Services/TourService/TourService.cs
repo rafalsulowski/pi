@@ -1,13 +1,22 @@
 ﻿using System.Linq.Expressions;
 using TripPlanner.DataAccess.IRepository;
 using TripPlanner.Models;
-using TripPlanner.Services.BudgetService;
-using TripPlanner.Services.GroupService;
-using TripPlanner.Services.BillService;
 using TripPlanner.Services.RouteService;
 using TripPlanner.Services.QuestionnaireService;
 using TripPlanner.Services.CheckListService;
-using TripPlanner.Models.Models.Tour;
+using TripPlanner.Models.Models;
+using TripPlanner.Models.Models.TourModels;
+using TripPlanner.Models.Models.CultureModels;
+using TripPlanner.Models.Models.CheckListModels;
+using TripPlanner.Services.ScheduleService;
+using TripPlanner.Services.ChatService;
+using TripPlanner.Services.BillService;
+using TripPlanner.Models.Models.BillModels;
+using TripPlanner.Models.DTO.TourDTOs;
+using TripPlanner.Models.Models.ScheduleModels;
+using TripPlanner.Services.Notificationservice;
+using TripPlanner.Models.Models.MessageModels.QuestionnaireModels;
+using TripPlanner.Models.Models.MessageModels;
 
 namespace TripPlanner.Services.TourService
 {
@@ -15,80 +24,121 @@ namespace TripPlanner.Services.TourService
     {
         private readonly ITourRepository _TourRepository;
         private readonly IParticipantTourRepository _ParticipantTourRepository;
-        private readonly IOrganizerTourRepository _OrganizerTourRepository;
         private readonly ICultureAssistanceRepository _CultureAssistanceRepository;
-        private readonly IGroupRepository _GroupRepository;
-        private readonly IBudgetService _BudgetService;
-        private readonly IBillService _BillService;
         private readonly IRouteService _RouteService;
-        private readonly IGroupService _GroupService;
         private readonly IQuestionnaireService _QuestionnaireService;
         private readonly ICheckListService _CheckListService;
+        private readonly IScheduleService _ScheduleService;
+        private readonly IBillService     _BillService;
+        private readonly IChatService     _ChatService;
+        private readonly INotificationService _NotificationService;
 
-        public TourService(ITourRepository TourRepository, IParticipantTourRepository participantTourRepository, IOrganizerTourRepository organizerTourRepository,
-            ICultureAssistanceRepository __CultureAssistanceRepository, IGroupRepository __GroupRepository, IBudgetService __BudgetService, IBillService __BillService, IRouteService __RouteService,
-            IGroupService __GroupService, IQuestionnaireService __QuestionnaireService, ICheckListService __CheckListService)
+        public TourService(INotificationService notificationService, IChatService __ChatService, IScheduleService __ScheduleService, IBillService __BillService, ITourRepository TourRepository, IParticipantTourRepository participantTourRepository,
+            ICultureAssistanceRepository __CultureAssistanceRepository, IRouteService __RouteService, IQuestionnaireService __QuestionnaireService, ICheckListService __CheckListService)
         {
             _TourRepository = TourRepository;
             _ParticipantTourRepository = participantTourRepository;
-            _OrganizerTourRepository = organizerTourRepository;
             _CultureAssistanceRepository = __CultureAssistanceRepository;
-            _GroupRepository = __GroupRepository;
-            _BudgetService = __BudgetService;
-            _BillService = __BillService;
             _RouteService = __RouteService;
-            _GroupService = __GroupService;
             _QuestionnaireService = __QuestionnaireService;
             _CheckListService = __CheckListService;
+            _ScheduleService = __ScheduleService;
+            _BillService = __BillService;
+            _ChatService = __ChatService;
+            _NotificationService = notificationService;
         }
 
-        public async Task<RepositoryResponse<bool>> CreateTour(Tour Tour)
+        public async Task<RepositoryResponse<bool>> CreateTour(Tour Tour, int userId)
         {
             _TourRepository.Add(Tour);
             var response = await _TourRepository.SaveChangesAsync();
+
+            //dodanie pierwszego uczestnia
+            ParticipantTourDTO participant = new ParticipantTourDTO();
+            participant.UserId = userId;
+            participant.TourId = Tour.Id;
+            participant.IsOrganizer = true;
+            participant.AccessionDate = Tour.CreateDate;
+            var response3 = await AddParticipantToTour(participant);
+            if (response3.Success == false)
+            {
+                await DeleteTour(Tour);
+                return new RepositoryResponse<bool> { Data = false, Success = false, Message = $"Nie udało się utowrzyć wycieczki ze względu na błąd podczas dodawania pierwszego uczestnika" };
+            }
+
+            //utworzenie harmongramu
+            List<ScheduleDay> schedule = new List<ScheduleDay>();
+            int daysCount = (Tour.EndDate - Tour.StartDate).Days;
+
+            for(int i = 0; i <= daysCount; i++)
+            {
+               DateTimeOffset offsest = Tour.StartDate.Add(new TimeSpan(i, 0, 0, 0));
+                var resp4 = await _ScheduleService.CreateScheduleDay(new ScheduleDay
+                {
+                    Date = offsest.Date,
+                    Description = "",
+                    TourId = Tour.Id,
+                });
+                if (resp4.Success == false)
+                {
+                    await DeleteTour(Tour);
+                    return new RepositoryResponse<bool> { Data = false, Success = false, Message = $"Nie udało się utowrzyć wycieczki ze względu na błąd podczas tworzenia harmonogramu" };
+                }
+            }
             return response;
         }
 
         public async Task<RepositoryResponse<bool>> DeleteTour(Tour Tour)
         {
-            var resp = await _TourRepository.GetFirstOrDefault(u => u.Id == Tour.Id, "Organizers,Participants,CheckLists,Questionnaires,Groups,Routes,Bills,CultureAssistances,Budget");
+            var resp = await _TourRepository.GetFirstOrDefault(u => u.Id == Tour.Id, "Participants,CheckLists,Questionnaires,Routes,CultureAssistances");
             if (resp.Data == null)
                 return new RepositoryResponse<bool> { Data = true, Message = "Wycieczka zostala usunieta", Success = true };
 
-            //removing Organizers
             Tour TourDB = resp.Data;
-            foreach (var Organizers in TourDB.Organizers)
-                _OrganizerTourRepository.Remove(Organizers);
-
             //removing Participants
             foreach (var Participants in TourDB.Participants)
                 _ParticipantTourRepository.Remove(Participants);
 
             //removing CultureAssistances
-            foreach (var CultureAssistances in TourDB.CultureAssistances)
+            foreach (var CultureAssistances in TourDB.Cultures)
                 _CultureAssistanceRepository.Remove(CultureAssistances);
 
             //removing CheckLists
             foreach (var CheckLists in TourDB.CheckLists)
                 await _CheckListService.DeleteCheckList(CheckLists);
 
-            //removing Questionnaires
-            foreach (var Questionnaires in TourDB.Questionnaires)
-                await _QuestionnaireService.DeleteQuestionnaire(Questionnaires);
-
-            //removing Groups
-            foreach (var Groups in TourDB.Groups)
-                await _GroupService.DeleteGroup(Groups);
+            //removing Messages
+            foreach (var Messages in TourDB.Messages)
+            {
+                if (Messages is not null && Messages is TextMessage)
+                    await _ChatService.DeleteTextMessage((TextMessage)Messages);
+                else if (Messages is not null && Messages is NoticeMessage)
+                    await _ChatService.DeleteNoticeMessage((NoticeMessage)Messages);
+                else if (Messages is not null && Messages is Questionnaire)
+                    await _QuestionnaireService.DeleteQuestionnaire((Questionnaire)Messages);
+            }
 
             //removing Routes
             foreach (var Routes in TourDB.Routes)
                 await _RouteService.DeleteRoute(Routes);
 
-            //removing Bills
-            foreach (var Bills in TourDB.Bills)
-                await _BillService.DeleteBill(Bills);
+            //removing Schedule
+            foreach (var Schedule in TourDB.Schedule)
+                await _ScheduleService.DeleteScheduleDay(Schedule);
 
-            await _BudgetService.DeleteBudget(TourDB.Budget);
+            //removing Shares
+            foreach (var Shares in TourDB.Shares)
+            {
+                if(Shares is not null && Shares is Bill)
+                    await _BillService.DeleteBill((Bill)Shares);
+                else if (Shares is not null && Shares is Transfer)
+                    await _BillService.DeleteTransfer((Transfer)Shares);
+            }
+
+            //removing Notification
+            foreach (var Notifications in TourDB.Notifications)
+                await _NotificationService.DeleteNotification(Notifications);
+
 
             _TourRepository.Remove(TourDB);
             var response = await _TourRepository.SaveChangesAsync();
@@ -101,11 +151,6 @@ namespace TripPlanner.Services.TourService
             return response;
         }
 
-        //public async Task<RepositoryResponse<List<Tour>>> GetUserToursAsync(int userId)
-        //{
-        //    var response = await _TourRepository.GetUserToursAsync(userId);
-        //    return response;
-        //}
 
         public async Task<RepositoryResponse<List<Tour>>> GetToursAsync(Expression<Func<Tour, bool>>? filter = null, string? includeProperties = null)
         {
@@ -122,30 +167,6 @@ namespace TripPlanner.Services.TourService
         public async Task<RepositoryResponse<List<ParticipantTour>>> GetParticipantsAsync(Expression<Func<ParticipantTour, bool>>? filter = null, string? includeProperties = null)
         {
             var response = await _ParticipantTourRepository.GetAll(filter, includeProperties);
-            return response;
-        }
-
-        public async Task<RepositoryResponse<Group>> GetGroupAsync(Expression<Func<Group, bool>> filter, string? includeProperties = null)
-        {
-            var response = await _GroupRepository.GetFirstOrDefault(filter, includeProperties);
-            return response;
-        }
-
-        public async Task<RepositoryResponse<List<Group>>> GetGroupsAsync(Expression<Func<Group, bool>>? filter = null, string? includeProperties = null)
-        {
-            var response = await _GroupRepository.GetAll(filter, includeProperties);
-            return response;
-        }
-
-        public async Task<RepositoryResponse<OrganizerTour>> GetOrganizerAsync(Expression<Func<OrganizerTour, bool>> filter, string? includeProperties = null)
-        {
-            var response = await _OrganizerTourRepository.GetFirstOrDefault(filter, includeProperties);
-            return response;
-        }
-
-        public async Task<RepositoryResponse<List<OrganizerTour>>> GetOrganizersAsync(Expression<Func<OrganizerTour, bool>>? filter = null, string? includeProperties = null)
-        {
-            var response = await _OrganizerTourRepository.GetAll(filter, includeProperties);
             return response;
         }
 
@@ -184,18 +205,6 @@ namespace TripPlanner.Services.TourService
             return await _TourRepository.SaveChangesAsync();
         }
 
-        public async Task<RepositoryResponse<bool>> AddOrganizerToTour(OrganizerTour Contribute)
-        {
-            await _TourRepository.AddOrganizerToTour(Contribute);
-            return await _TourRepository.SaveChangesAsync();
-        }
-
-        public async Task<RepositoryResponse<bool>> DeleteOrganizerFromTour(OrganizerTour Contribute)
-        {
-            await _TourRepository.DeleteOrganizerFromTour(Contribute);
-            return await _TourRepository.SaveChangesAsync();
-        }
-
         public async Task<RepositoryResponse<bool>> AddParticipantToTour(ParticipantTour Contribute)
         {
             await _TourRepository.AddParticipantToTour(Contribute);
@@ -208,22 +217,5 @@ namespace TripPlanner.Services.TourService
             return await _TourRepository.SaveChangesAsync();
         }
 
-        public async Task<RepositoryResponse<bool>> AddGroupToTour(Group Group)
-        {
-            await _TourRepository.AddGroupToTour(Group);
-            return await _TourRepository.SaveChangesAsync();
-        }
-
-        public async Task<RepositoryResponse<bool>> DeleteGroupFromTour(Group Group)
-        {
-            await _TourRepository.DeleteGroupFromTour(Group);
-            return await _TourRepository.SaveChangesAsync();
-        }
-
-        public async Task<RepositoryResponse<bool>> AddChatToTour(Chat Chat)
-        {
-            await _TourRepository.AddChatToTour(Chat);
-            return await _TourRepository.SaveChangesAsync();
-        }
     }
 }

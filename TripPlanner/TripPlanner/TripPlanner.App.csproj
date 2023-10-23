@@ -136,8 +136,10 @@
 		<PackageReference Include="CommunityToolkit.Maui" Version="6.0.0" />
 		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.1" />
 		<PackageReference Include="MathConverter.Maui" Version="2.2.0" />
-		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="7.0.0" />
 		<PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+		<PackageReference Include="Microsoft.AspNetCore.SignalR.Client" Version="7.0.12" />
+		<PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="7.0.1" />
+		<PackageReference Include="OnScreenSizeMarkup.Maui" Version="2.0.8" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -175,9 +177,6 @@
 	  <MauiXaml Update="Views\HomeViews\HomePage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Views\HomeViews\HomePageWithoutTours.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
 	  <MauiXaml Update="Views\HomeViews\NotificationPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
@@ -196,7 +195,7 @@
 	  <MauiXaml Update="Views\StartViews\MainPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Views\TourViews\CreateTour1.xaml">
+	  <MauiXaml Update="Views\TourViews\CreateTour.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\TourViews\TourPage.xaml">
@@ -216,15 +215,16 @@
 	  <Compile Update="Views\HomeViews\HomePage.xaml.cs">
 	    <DependentUpon>%(Filename)</DependentUpon>
 	  </Compile>
-	  <Compile Update="Views\HomeViews\HomePageWithoutTours.xaml.cs">
-	    <DependentUpon>%(Filename)</DependentUpon>
-	  </Compile>
 	  <Compile Update="Views\StartViews\MainPage.xaml.cs">
 	    <DependentUpon>%(Filename)</DependentUpon>
 	  </Compile>
-	  <Compile Update="Views\TourViews\CreateTour1.xaml.cs">
-	    <DependentUpon>%(Filename)</DependentUpon>
+	  <Compile Update="Views\TourViews\CreateTour.xaml.cs">
+	    <DependentUpon>CreateTour.xaml</DependentUpon>
 	  </Compile>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <PackageReference Update="Microsoft.Extensions.Logging.Abstractions" Version="7.0.1" />
 	</ItemGroup>
 
 </Project>

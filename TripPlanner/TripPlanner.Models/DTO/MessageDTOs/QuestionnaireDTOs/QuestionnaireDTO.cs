@@ -4,7 +4,6 @@ namespace TripPlanner.Models.DTO.MessageDTOs.QuestionnaireDTOs
 {
     public class QuestionnaireDTO : MessageDTO
     {
-        public int TourId { get; set; }
         public ICollection<QuestionnaireAnswerDTO> Answers { get; set; } = new List<QuestionnaireAnswerDTO>();
 
 
@@ -18,7 +17,6 @@ namespace TripPlanner.Models.DTO.MessageDTOs.QuestionnaireDTOs
                 Id = data.Id,
                 UserId = data.UserId,
                 TourId = data.TourId,
-                ChatId = data.ChatId,
                 Answers = data.Answers.Select(u => (QuestionnaireAnswer)u).ToList(),
                 Content = data.Content,
                 Date = data.Date

@@ -4,16 +4,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TripPlanner.Models.DTO.BillDTOs;
+using TripPlanner.Models.Models.UserModels;
 
 namespace TripPlanner.Models.Models.BillModels
 {
     public class Transfer : Share
     {
         public int SenderId { get; set; }
-        public TransferContributor Sender { get; set; } = null!;
+        public User Sender { get; set; } = null!;
 
         public int RecipientId { get; set; }
-        public TransferContributor Recipient { get; set; } = null!;
+        public User Recipient { get; set; } = null!;
 
 
         public static implicit operator TransferDTO(Transfer data)

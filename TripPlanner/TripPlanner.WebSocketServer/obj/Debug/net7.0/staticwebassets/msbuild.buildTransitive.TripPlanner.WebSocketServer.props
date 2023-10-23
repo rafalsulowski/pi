@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\buildMultiTargeting\TripPlanner.WebSocketServer.props" />
+</Project>

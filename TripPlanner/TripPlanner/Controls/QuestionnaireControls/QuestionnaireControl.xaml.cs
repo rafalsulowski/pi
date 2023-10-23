@@ -2,7 +2,7 @@ using CommunityToolkit.Maui.Views;
 using System.Runtime.CompilerServices;
 using TripPlanner.Helpers;
 using TripPlanner.Models;
-using TripPlanner.Models.DTO.QuestionnaireDTOs;
+using TripPlanner.Models.DTO.MessageDTOs.QuestionnaireDTOs;
 using TripPlanner.ViewModels;
 
 namespace TripPlanner.Controls.QuestionnaireControls

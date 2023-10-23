@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.SignalR.Client;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,13 +11,16 @@ namespace TripPlanner.Services
     {
         private readonly HttpClient m_HttpClient;
         private readonly Configuration m_Configuration;
-        //private readonly ILogger<Worker> _logger;
+
+        private HubConnection HubConnection;
 
         public ChatService(HttpClient _httpClient, Configuration configuration)
         {
             m_HttpClient = _httpClient;
             m_Configuration = configuration;
         }
+
+
 
 
 

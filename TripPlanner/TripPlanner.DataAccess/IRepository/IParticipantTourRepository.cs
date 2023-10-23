@@ -1,5 +1,6 @@
 ﻿using TripPlanner.Models;
-using TripPlanner.Models.Models.Tour;
+using TripPlanner.Models.Models;
+using TripPlanner.Models.Models.TourModels;
 
 namespace TripPlanner.DataAccess.IRepository
 {

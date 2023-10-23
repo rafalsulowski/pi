@@ -3,14 +3,15 @@ using TripPlanner.Models;
 using TripPlanner.Services.QuestionnaireService;
 using TripPlanner.Services.UserService;
 using TripPlanner.Services.TourService;
-using TripPlanner.Models.DTO.QuestionnaireDTOs;
-using TripPlanner.Models.Models.Message.Questionnaire;
+using TripPlanner.Models.Models;
+using TripPlanner.Models.DTO.MessageDTOs.QuestionnaireDTOs;
+using TripPlanner.Models.Models.MessageModels.QuestionnaireModels;
 
 namespace TripPlanner.WebAPI.Controllers
 {
     [Route("[controller]/")]
     [ApiController]
-    [ApiExplorerSettings(IgnoreApi = ProjectConfiguration.HideContorller)]
+    //[ApiExplorerSettings(IgnoreApi = ProjectConfiguration.HideContorller)]
     public class QuestionnaireController : ControllerBase
     {
         private readonly IQuestionnaireService _QuestionnaireService;
@@ -69,12 +70,7 @@ namespace TripPlanner.WebAPI.Controllers
             {
                 return new RepositoryResponse<QuestionnaireDTO> { Data = null, Success = false, Message = $"Nie istnieje użytkownik o id = {Questionnaire.UserId}" };
             }
-            var res = resp.Data.Questionnaires.FirstOrDefault(u => u.Content == Questionnaire.Content);
-            if (res != null)
-            {
-                return new RepositoryResponse<QuestionnaireDTO> { Data = null, Success = false, Message = $"Dana wycieczka posiada już ankiete z pytaniem = {Questionnaire.Content}" };
-            }
-
+            
             Questionnaire newQuestionnaire = Questionnaire;
             newQuestionnaire.Date = DateTime.Now;
 
@@ -269,11 +265,7 @@ namespace TripPlanner.WebAPI.Controllers
             {
                 return new RepositoryResponse<bool> { Success = false, Message = $"Nie istnieje wycieczka o id = {resp2.Data.TourId}" };
             }
-            var res = resp.Data.Questionnaires.FirstOrDefault(u => u.Content == Questionnaire.Content);
-            if (res != null)
-            {
-                return new RepositoryResponse<bool> { Success = false, Message = $"Dana wycieczka posiada już ankiete z pytaniem = {Questionnaire.Content}" };
-            }
+            
 
             Questionnaire elem = resp2.Data;
             elem.Id = QuestionnaireId;

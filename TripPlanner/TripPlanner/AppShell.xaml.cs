@@ -11,8 +11,7 @@ public partial class AppShell : Shell
 	{
 		InitializeComponent();
         Routing.RegisterRoute("Home", typeof(HomePage));
-		Routing.RegisterRoute("HomePageWithoutTours", typeof(HomePageWithoutTours));
-		Routing.RegisterRoute("CreateTour", typeof(CreateTour1));
+		Routing.RegisterRoute("CreateTour", typeof(CreateTour));
 		Routing.RegisterRoute("Calendar", typeof(CalendarPage));
 		Routing.RegisterRoute("Notifications", typeof(NotificationPage));
 		Routing.RegisterRoute("Profile", typeof(ProfilePage));

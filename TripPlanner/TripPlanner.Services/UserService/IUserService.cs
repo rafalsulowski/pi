@@ -5,6 +5,8 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using TripPlanner.Models;
+using TripPlanner.Models.Models;
+using TripPlanner.Models.Models.UserModels;
 
 namespace TripPlanner.Services.UserService
 {

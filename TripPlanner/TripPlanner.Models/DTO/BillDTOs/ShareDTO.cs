@@ -8,7 +8,7 @@ using TripPlanner.Models.Models.BillModels;
 
 namespace TripPlanner.Models.DTO.BillDTOs
 {
-    public class ShareDTO
+    public abstract class ShareDTO
     {
         public int Id { get; set; }
         public int TourId { get; set; }
@@ -23,14 +23,16 @@ namespace TripPlanner.Models.DTO.BillDTOs
             if (data == null)
                 return null;
 
-            return new Share
+            if (data is BillDTO)
             {
-                Id = data.Id,
-                CreatedDate = data.CreatedDate,
-                CreatorId = data.CreatorId,
-                ImageFilePath = data.ImageFilePath,
-                Value = data.Value,
-            };
+                return (Bill)data;
+            }
+            else if (data is TransferDTO)
+            {
+                return (Transfer)data;
+            }
+            else
+                return null;
         }
     }
 }

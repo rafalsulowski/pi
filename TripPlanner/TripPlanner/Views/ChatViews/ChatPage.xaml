@@ -3,15 +3,79 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:localTemplates="clr-namespace:TripPlanner.DataTemplates"
              x:Class="TripPlanner.Views.ChatViews.ChatPage"
-             xmlns:controls="clr-namespace:TripPlanner.Controls.QuestionnaireControls"
-             xmlns:models="clr-namespace:TripPlanner.Models.DTO.QuestionnaireDTOs;assembly=TripPlanner.Models"
+    xmlns:controls="clr-namespace:TripPlanner.Controls.QuestionnaireControls"
+    xmlns:markups="clr-namespace:OnScreenSizeMarkup.Maui;assembly=OnScreenSizeMarkup.Maui"
+    xmlns:models="clr-namespace:TripPlanner.Models.DTO.MessageDTOs.QuestionnaireDTOs;assembly=TripPlanner.Models"
              xmlns:viewmodel="clr-namespace:TripPlanner.ViewModels"
              x:DataType="viewmodel:ChatViewModel"
              Shell.NavBarIsVisible="False"
              Shell.TabBarIsVisible="False">
 
     <ContentPage.Resources>
-
+        
+        <DataTemplate
+            x:Key="NoticeMessage">
+            <Grid
+                BackgroundColor="Red"
+                RowSpacing="1"
+                Rotation="180"
+                Margin="5,0,5,0"
+                Padding="0,0,0,5"
+                ColumnSpacing="5"
+                RowDefinitions="20,20,*"
+                ColumnDefinitions="45,*">
+                <Border
+                    VerticalOptions="Start"
+                    MaximumHeightRequest="40"
+                    Grid.Column="0"
+                    Grid.Row="2"
+                    Margin="5,0,0,0"
+                    StrokeThickness="0"
+                    StrokeShape="RoundRectangle 20,20,20,20">
+                    <Image
+                        BackgroundColor="Transparent"
+                        Source="user.jpg"
+                        WidthRequest="40"
+                        HeightRequest="40"
+                        Aspect="Fill">
+                    </Image>
+                </Border>
+                <Label
+                    Grid.Column="1"
+                    Grid.Row="0"
+                    HorizontalOptions="Center"
+                    FontSize="15"
+                    TextColor="#B2C6D5"
+                    Text="{Binding Date}" />
+                <Label
+                    Grid.Column="1"
+                    Grid.Row="1"
+                    FontSize="15"
+                    TextColor="#52AB98"
+                    LineBreakMode="CharacterWrap"
+                    MaxLines="2"
+                    Text="{Binding UserId}" />
+                <Border
+                    HorizontalOptions="Start"
+                    BackgroundColor="#E3E3E3"
+                    VerticalOptions="Start"
+                    Grid.Column="1"
+                    Grid.Row="2"
+                    StrokeThickness="0"
+                    StrokeShape="RoundRectangle 10,10,10,10">
+                    <Label
+                        MaximumWidthRequest="250"
+                        Padding="5"
+                        FontSize="15"
+                        FontAttributes="Bold"
+                        TextColor="#52AB98"
+                        LineBreakMode="CharacterWrap"
+                        MaxLines="25"
+                        Text="{Binding Content}" />
+                </Border>
+            </Grid>
+        </DataTemplate>
+        
         <DataTemplate x:Key="TextOtherMessage">
             <Grid
                 RowSpacing="1"
@@ -125,6 +189,7 @@
         
         <localTemplates:MessageDataTemplateSelector x:Key="MessageSelector"
                                              NullMessage="{StaticResource NullMessage}"
+                                             NoticeMessage="{StaticResource NoticeMessage}"
                                              TextOtherMessage="{StaticResource TextOtherMessage}"
                                              TextMyMessage="{StaticResource TextMyMessage}"
                                              QuestionnaireMessage="{StaticResource QuestionnaireMessage}" />
@@ -133,70 +198,48 @@
 
 
     <ScrollView>
-        <AbsoluteLayout>
-            <Grid 
-                Margin="10,5,10,5"
-                HorizontalOptions="Fill"
-                AbsoluteLayout.LayoutFlags="WidthProportional"
-                AbsoluteLayout.LayoutBounds="0,0,1,AutoSize">
+        <VerticalStackLayout
+            Spacing="10">
+            <Grid
+                HeightRequest="{markups:OnScreenSize ExtraSmall='25', Small='25', Medium='30', Large='35', ExtraLarge='50'}"
+                ColumnDefinitions="{markups:OnScreenSize ExtraSmall='25,*,25', Small='25,*,25', Medium='30,*,30', Large='35,*,35', ExtraLarge='50,*,50'}"
+                Margin="10,5,10,0">
                 <ImageButton
-                    HorizontalOptions="Start"
+                    Grid.Column="0"
                     Source="{AppThemeBinding Light=arrow_back_wt.png, Dark=arrow_back_dt.png}"
-                    Command="{Binding GoBackCommand}"
-                    HeightRequest="35"
-                    WidthRequest="35"/>
+                    WidthRequest="{markups:OnScreenSize ExtraSmall='25', Small='25', Medium='30', Large='35', ExtraLarge='50'}"
+                    Command="{Binding GoBackCommand}" />
+
                 <Label
+                    Grid.Column="1"
+                    FontSize="{markups:OnScreenSize ExtraSmall='12', Small='15', Medium='18', Large='24', ExtraLarge='35'}"
                     HorizontalOptions="Center"
-                    FontSize="20"
                     VerticalOptions="Center">
                     <Label.Text>
-                        <MultiBinding StringFormat="{}{0} - {1}">
-                            <Binding Source="Czat"/>
-                            <Binding Path="Tour.Title"/>
+                        <MultiBinding
+                            StringFormat="{}{0} - {1}">
+                            <Binding
+                                Source="Czat" />
+                            <Binding
+                                Path="Tour.Title" />
                         </MultiBinding>
                     </Label.Text>
                 </Label>
             </Grid>
 
+
             <Grid
-                RowSpacing="5"
-                AbsoluteLayout.LayoutFlags="WidthProportional,HeightProportional"
-                AbsoluteLayout.LayoutBounds="0,0,1,1">
+                RowSpacing="5">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"></RowDefinition>
                     <RowDefinition Height="Auto"></RowDefinition>
                 </Grid.RowDefinitions>
 
-                <Border
-                    IsVisible="{Binding PromptLabel}"
-                    BackgroundColor="#E3E3E3"
-                    VerticalOptions="Start"
-                    Grid.Row="0"
-                    StrokeThickness="0"
-                    WidthRequest="260"
-                    HeightRequest="80"
-                    Margin="0,150,0,0"
-                    StrokeShape="RoundRectangle 10,10,10,10">
-                    <Grid RowDefinitions="100,30">
-                        <Image 
-                            Source="{AppThemeBinding Light=bell_wt.png, Dark=bell_dt.png}"
-                            HeightRequest="100"
-                            WidthRequest="100"/>
-                        <Label
-                            Grid.Row="1"
-                            VerticalOptions="Center"
-                            HorizontalOptions="Center"
-                            FontAttributes="Bold"
-                            FontSize="18"
-                            Text="Napisz pierwszą wiadomość"/>
-                    </Grid>
-                </Border>
-
                 <CollectionView
                     Grid.Row="0"
                     Margin="0,50,0,0"
                     Rotation="180"
-                    RemainingItemsThreshold="4"
+                    RemainingItemsThreshold="0"
                     RemainingItemsThresholdReachedCommand="{Binding LoadMoreMessagesCommand}"
                     x:Name="m_chatControl"
                     ItemsSource="{Binding Messages}"
@@ -261,6 +304,6 @@
                         WidthRequest="25"/>
                 </Grid>
             </Grid>
-        </AbsoluteLayout>
+        </VerticalStackLayout>
     </ScrollView>
 </ContentPage>

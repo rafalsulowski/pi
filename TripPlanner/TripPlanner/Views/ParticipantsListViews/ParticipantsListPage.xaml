@@ -10,7 +10,6 @@
              Shell.TabBarIsVisible="False">
 
     <ContentPage.Resources>
-
         <DataTemplate x:Key="OrganizerParticipant">
             <VerticalStackLayout
                 WidthRequest="260"

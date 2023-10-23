@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Net.Http.Json;
 using System.Text.Json.Serialization;
 using TripPlanner.Models;
-using TripPlanner.Models.DTO.QuestionnaireDTOs;
+using TripPlanner.Models.DTO.MessageDTOs.QuestionnaireDTOs;
 using TripPlanner.Models.DTO.TourDTOs;
 using TripPlanner.Models.DTO.UserDTOs;
 

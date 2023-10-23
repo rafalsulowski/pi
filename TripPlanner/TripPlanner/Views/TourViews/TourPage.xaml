@@ -3,232 +3,244 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="TripPlanner.Views.TourViews.TourPage"
              xmlns:viewmodel="clr-namespace:TripPlanner.ViewModels"
+             xmlns:markups="clr-namespace:OnScreenSizeMarkup.Maui;assembly=OnScreenSizeMarkup.Maui"
              x:DataType="viewmodel:TourViewModel"
              Shell.NavBarIsVisible="False">
 
     <ScrollView>
-        <AbsoluteLayout>
+        <VerticalStackLayout
+            Spacing="10">
+            <Grid
+                HeightRequest="{markups:OnScreenSize ExtraSmall='25', Small='25', Medium='30', Large='35', ExtraLarge='50'}"
+                ColumnDefinitions="{markups:OnScreenSize ExtraSmall='25,*,25', Small='25,*,25', Medium='30,*,30', Large='35,*,35', ExtraLarge='50,*,50'}"
+                Margin="10,5,10,0">
+                <ImageButton
+                    Grid.Column="0"
+                    Source="{AppThemeBinding Light=arrow_back_wt.png, Dark=arrow_back_dt.png}"
+                    Command="{Binding GoBackCommand}"
+                    HeightRequest="{markups:OnScreenSize ExtraSmall='25', Small='25', Medium='30', Large='35', ExtraLarge='50'}"/>
+                
+                <Label
+                    Grid.Column="1"
+                    HorizontalOptions="Center"
+                    FontSize="{markups:OnScreenSize ExtraSmall='12', Small='15', Medium='18', Large='24', ExtraLarge='35'}"
+                    VerticalOptions="Center"
+                    Text="{Binding Tour.Title}" />
 
-        <Grid 
-            Margin="10,5,10,5"
-            HorizontalOptions="Fill"
-            AbsoluteLayout.LayoutFlags="WidthProportional"
-            AbsoluteLayout.LayoutBounds="0,0,1,AutoSize">
-            <ImageButton
-                HorizontalOptions="Start"
-                Source="{AppThemeBinding Light=arrow_back_wt.png, Dark=arrow_back_dt.png}"
-                Command="{Binding GoBackCommand}"
-                HeightRequest="35"
-                WidthRequest="35"/>
-
-            <Label
-                HorizontalOptions="Center"
-                FontSize="20"
-                VerticalOptions="Center"
-                Text="{Binding Tour.Title}"/>
-
-            <ImageButton 
-                HorizontalOptions="End"
-                Source="{AppThemeBinding Light=setting_wt.png, Dark=setting_dt.png}"
-                Command="{Binding GoSettingsCommand}"
-                HeightRequest="25"
-                WidthRequest="25"/>
-        </Grid>
+                <ImageButton
+                    Grid.Column="2"
+                    Source="{AppThemeBinding Light=setting_wt.png, Dark=setting_dt.png}"
+                    Command="{Binding GoSettingsCommand}"
+                    HeightRequest="{markups:OnScreenSize ExtraSmall='25', Small='25', Medium='25', Large='35', ExtraLarge='50'}" />
+            </Grid>
 
 
-        <Grid
-            AbsoluteLayout.LayoutBounds="0.5,0,AutoSize,AutoSize"
-            AbsoluteLayout.LayoutFlags="XProportional"
-            Margin="0,70,0,30"
-            RowSpacing="15"
-            ColumnSpacing="15">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="150"></RowDefinition>
-                    <RowDefinition Height="150"></RowDefinition>
-                    <RowDefinition Height="150"></RowDefinition>
-                    <RowDefinition Height="150"></RowDefinition>
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="150"></ColumnDefinition>
-                    <ColumnDefinition Width="150"></ColumnDefinition>
-                </Grid.ColumnDefinitions>
-
+            <Grid
+                Margin="10,0,10,0"
+                RowSpacing="{markups:OnScreenSize ExtraSmall='8', Small='10', Medium='10', Large='15', ExtraLarge='20'}"
+                RowDefinitions="{markups:OnScreenSize ExtraSmall='130,130,130,130', Small='130,130,130,130', Medium='130,130,130,130', Large='130,130,130,130', ExtraLarge='130,130,130,130'}"
+                ColumnSpacing="{markups:OnScreenSize ExtraSmall='8', Small='10', Medium='10', Large='15', ExtraLarge='20'}"
+                ColumnDefinitions="{markups:OnScreenSize ExtraSmall='130,130,130,130', Small='130,130,130,130', Medium='*,*', Large='130,130,130,130', ExtraLarge='130,130,130,130'}">
                 <Border
-                Grid.Row="0"
-                Grid.Column="0"
-                Stroke="{AppThemeBinding Light=#2B6777, Dark=White}"
-                StrokeShape="RoundRectangle 15,15,15,15"
-                BackgroundColor="#52AB98">
+                    Grid.Row="0"
+                    Grid.Column="0"
+                    Stroke="{AppThemeBinding Light=#2B6777, Dark=White}"
+                    StrokeShape="RoundRectangle 15,15,15,15"
+                    BackgroundColor="#52AB98">
                     <Border.GestureRecognizers>
-                        <TapGestureRecognizer 
-                            Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:TourViewModel}}, Path=GoChatCommand}"/>
+                        <TapGestureRecognizer
+                            Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:TourViewModel}}, Path=GoChatCommand}" />
                     </Border.GestureRecognizers>
-                    <VerticalStackLayout VerticalOptions="Center" Spacing="5">
+                    <VerticalStackLayout
+                        VerticalOptions="Center"
+                        Spacing="5">
                         <Image
-                        Source="chat_dt.png"
-                        WidthRequest="30"
-                        HeightRequest="30"/>
+                            Source="chat_dt.png"
+                            HeightRequest="{markups:OnScreenSize ExtraSmall='25', Small='25', Medium='30', Large='35', ExtraLarge='50'}"/>
                         <Label
-                        HorizontalOptions="Center"
-                        Text="czat grupowy"
-                        TextColor="White"/>
+                            FontSize="{markups:OnScreenSize ExtraSmall='12', Small='15', Medium='15', Large='24', ExtraLarge='35'}"
+                            FontAttributes="Bold"
+                            HorizontalOptions="Center"
+                            Text="czat grupowy"
+                            TextColor="White" />
                     </VerticalStackLayout>
                 </Border>
 
                 <Border
-                Grid.Row="0"
-                Grid.Column="1"
-                Stroke="{AppThemeBinding Light=#2B6777, Dark=White}"
-                StrokeShape="RoundRectangle 15,15,15,15"
-                BackgroundColor="#52AB98">
+                    Grid.Row="0"
+                    Grid.Column="1"
+                    Stroke="{AppThemeBinding Light=#2B6777, Dark=White}"
+                    StrokeShape="RoundRectangle 15,15,15,15"
+                    BackgroundColor="#52AB98">
                     <Border.GestureRecognizers>
-                        <TapGestureRecognizer 
-                            Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:TourViewModel}}, Path=GoBudgetCommand}"/>
+                        <TapGestureRecognizer
+                            Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:TourViewModel}}, Path=GoBudgetCommand}" />
                     </Border.GestureRecognizers>
-                    <VerticalStackLayout VerticalOptions="Center" Spacing="5">
+                    <VerticalStackLayout
+                        VerticalOptions="Center"
+                        Spacing="5">
                         <Image
-                        Source="cash_dt.png"
-                        WidthRequest="30"
-                        HeightRequest="30"/>
+                            Source="cash_dt.png"
+                            HeightRequest="{markups:OnScreenSize ExtraSmall='25', Small='25', Medium='30', Large='35', ExtraLarge='50'}" />
                         <Label
-                        HorizontalOptions="Center"
-                        Text="Rachunki (splitwise)"
-                        TextColor="White"/>
+                            FontSize="{markups:OnScreenSize ExtraSmall='12', Small='15', Medium='15', Large='24', ExtraLarge='35'}"
+                            FontAttributes="Bold"
+                            HorizontalOptions="Center"
+                            Text="Rachunki"
+                            TextColor="White" />
                     </VerticalStackLayout>
                 </Border>
 
                 <Border
-                Grid.Row="1"
-                Grid.Column="0"
-                Stroke="{AppThemeBinding Light=#2B6777, Dark=White}"
-                StrokeShape="RoundRectangle 15,15,15,15"
-                BackgroundColor="#52AB98">
+                    Grid.Row="1"
+                    Grid.Column="0"
+                    Stroke="{AppThemeBinding Light=#2B6777, Dark=White}"
+                    StrokeShape="RoundRectangle 15,15,15,15"
+                    BackgroundColor="#52AB98">
                     <Border.GestureRecognizers>
-                        <TapGestureRecognizer 
-                            Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:TourViewModel}}, Path=GoParticipantsCommand}"/>
+                        <TapGestureRecognizer
+                            Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:TourViewModel}}, Path=GoParticipantsCommand}" />
                     </Border.GestureRecognizers>
-                    <VerticalStackLayout VerticalOptions="Center" Spacing="5">
+                    <VerticalStackLayout
+                        VerticalOptions="Center"
+                        Spacing="5">
                         <Image
-                        Source="people_dt.png"
-                        WidthRequest="30"
-                        HeightRequest="30"/>
+                            Source="people_dt.png"
+                            HeightRequest="{markups:OnScreenSize ExtraSmall='25', Small='25', Medium='30', Large='35', ExtraLarge='50'}" />
                         <Label
-                        HorizontalOptions="Center"
-                        Text="Uczestnicy i grupy"
-                        TextColor="White"/>
+                            FontSize="{markups:OnScreenSize ExtraSmall='12', Small='15', Medium='15', Large='24', ExtraLarge='35'}"
+                            FontAttributes="Bold"
+                            HorizontalOptions="Center"
+                            Text="Uczestnicy"
+                            TextColor="White" />
                     </VerticalStackLayout>
                 </Border>
 
                 <Border
-                Grid.Row="1"
-                Grid.Column="1"
-                Stroke="{AppThemeBinding Light=#2B6777, Dark=White}"
-                StrokeShape="RoundRectangle 15,15,15,15"
-                BackgroundColor="#52AB98">
+                    Grid.Row="1"
+                    Grid.Column="1"
+                    Stroke="{AppThemeBinding Light=#2B6777, Dark=White}"
+                    StrokeShape="RoundRectangle 15,15,15,15"
+                    BackgroundColor="#52AB98">
                     <Border.GestureRecognizers>
-                        <TapGestureRecognizer 
-                            Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:TourViewModel}}, Path=GoCalendarCommand}"/>
+                        <TapGestureRecognizer
+                            Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:TourViewModel}}, Path=GoCalendarCommand}" />
                     </Border.GestureRecognizers>
-                    <VerticalStackLayout VerticalOptions="Center" Spacing="5">
+                    <VerticalStackLayout
+                        VerticalOptions="Center"
+                        Spacing="5">
                         <Image
-                        Source="calendar_dt.png"
-                        WidthRequest="30"
-                        HeightRequest="30"/>
+                            Source="calendar_dt.png"
+                            HeightRequest="{markups:OnScreenSize ExtraSmall='25', Small='25', Medium='30', Large='35', ExtraLarge='50'}" />
                         <Label
-                        HorizontalOptions="Center"
-                        Text="Harmonogram"
-                        TextColor="White"/>
+                            FontSize="{markups:OnScreenSize ExtraSmall='12', Small='15', Medium='15', Large='24', ExtraLarge='35'}"
+                            FontAttributes="Bold"
+                            HorizontalOptions="Center"
+                            Text="Harmonogram"
+                            TextColor="White" />
                     </VerticalStackLayout>
                 </Border>
 
                 <Border
-                Grid.Row="2"
-                Grid.Column="0"
-                Stroke="{AppThemeBinding Light=#2B6777, Dark=White}"
-                StrokeShape="RoundRectangle 15,15,15,15"
-                BackgroundColor="#52AB98">
+                    Grid.Row="2"
+                    Grid.Column="0"
+                    Stroke="{AppThemeBinding Light=#2B6777, Dark=White}"
+                    StrokeShape="RoundRectangle 15,15,15,15"
+                    BackgroundColor="#52AB98">
                     <Border.GestureRecognizers>
-                        <TapGestureRecognizer 
-                            Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:TourViewModel}}, Path=GoCultureCommand}"/>
+                        <TapGestureRecognizer
+                            Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:TourViewModel}}, Path=GoCultureCommand}" />
                     </Border.GestureRecognizers>
-                    <VerticalStackLayout VerticalOptions="Center" Spacing="5">
+                    <VerticalStackLayout
+                        VerticalOptions="Center"
+                        Spacing="5">
                         <Image
-                        Source="globe_dt.png"
-                        WidthRequest="30"
-                        HeightRequest="30"/>
+                            Source="globe_dt.png"
+                            HeightRequest="{markups:OnScreenSize ExtraSmall='25', Small='25', Medium='30', Large='35', ExtraLarge='50'}" />
                         <Label
-                        HorizontalOptions="Center"
-                        Text="Dodatek kulturowy"
-                        TextColor="White"/>
+                            FontSize="{markups:OnScreenSize ExtraSmall='12', Small='15', Medium='15', Large='24', ExtraLarge='35'}"
+                            FontAttributes="Bold"
+                            HorizontalOptions="Center"
+                            Text="Zwyczaje miejsca"
+                            TextColor="White" />
                     </VerticalStackLayout>
                 </Border>
 
                 <Border
-                Grid.Row="2"
-                Grid.Column="1"
-                Stroke="{AppThemeBinding Light=#2B6777, Dark=White}"
-                StrokeShape="RoundRectangle 15,15,15,15"
-                BackgroundColor="#52AB98">
+                    Grid.Row="2"
+                    Grid.Column="1"
+                    Stroke="{AppThemeBinding Light=#2B6777, Dark=White}"
+                    StrokeShape="RoundRectangle 15,15,15,15"
+                    BackgroundColor="#52AB98">
                     <Border.GestureRecognizers>
-                        <TapGestureRecognizer 
-                            Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:TourViewModel}}, Path=GoWeatherCommand}"/>
+                        <TapGestureRecognizer
+                            Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:TourViewModel}}, Path=GoWeatherCommand}" />
                     </Border.GestureRecognizers>
-                    <VerticalStackLayout VerticalOptions="Center" Spacing="5">
+                    <VerticalStackLayout
+                        VerticalOptions="Center"
+                        Spacing="5">
                         <Image
-                        Source="cloud_sun_dt.png"
-                        WidthRequest="30"
-                        HeightRequest="30"/>
+                            Source="cloud_sun_dt.png"
+                            HeightRequest="{markups:OnScreenSize ExtraSmall='25', Small='25', Medium='30', Large='35', ExtraLarge='50'}" />
                         <Label
-                        HorizontalOptions="Center"
-                        Text="Pogoda"
-                        TextColor="White"/>
+                            FontSize="{markups:OnScreenSize ExtraSmall='12', Small='15', Medium='15', Large='24', ExtraLarge='35'}"
+                            FontAttributes="Bold"
+                            HorizontalOptions="Center"
+                            Text="Pogoda"
+                            TextColor="White" />
                     </VerticalStackLayout>
                 </Border>
 
                 <Border
-                Grid.Row="3"
-                Grid.Column="0"
-                Stroke="{AppThemeBinding Light=#2B6777, Dark=White}"
-                StrokeShape="RoundRectangle 15,15,15,15"
-                BackgroundColor="#52AB98">
+                    Grid.Row="3"
+                    Grid.Column="0"
+                    Stroke="{AppThemeBinding Light=#2B6777, Dark=White}"
+                    StrokeShape="RoundRectangle 15,15,15,15"
+                    BackgroundColor="#52AB98">
                     <Border.GestureRecognizers>
-                        <TapGestureRecognizer 
-                            Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:TourViewModel}}, Path=GoRoutesCommand}"/>
+                        <TapGestureRecognizer
+                            Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:TourViewModel}}, Path=GoRoutesCommand}" />
                     </Border.GestureRecognizers>
-                    <VerticalStackLayout VerticalOptions="Center" Spacing="5">
+                    <VerticalStackLayout
+                        VerticalOptions="Center"
+                        Spacing="5">
                         <Image
-                        Source="tour_dt.png"
-                        WidthRequest="30"
-                        HeightRequest="30"/>
+                            Source="tour_dt.png"
+                            HeightRequest="{markups:OnScreenSize ExtraSmall='25', Small='25', Medium='30', Large='35', ExtraLarge='50'}" />
                         <Label
-                        HorizontalOptions="Center"
-                        Text="Trasy"
-                        TextColor="White"/>
+                            FontSize="{markups:OnScreenSize ExtraSmall='12', Small='15', Medium='15', Large='24', ExtraLarge='35'}"
+                            FontAttributes="Bold"
+                            HorizontalOptions="Center"
+                            Text="Trasy"
+                            TextColor="White" />
                     </VerticalStackLayout>
                 </Border>
 
                 <Border
-                Grid.Row="3"
-                Grid.Column="1"
-                Stroke="{AppThemeBinding Light=#2B6777, Dark=White}"
-                StrokeShape="RoundRectangle 15,15,15,15"
-                BackgroundColor="#52AB98">
+                    Grid.Row="3"
+                    Grid.Column="1"
+                    Stroke="{AppThemeBinding Light=#2B6777, Dark=White}"
+                    StrokeShape="RoundRectangle 15,15,15,15"
+                    BackgroundColor="#52AB98">
                     <Border.GestureRecognizers>
-                        <TapGestureRecognizer 
-                            Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:TourViewModel}}, Path=GoCheckListCommand}"/>
+                        <TapGestureRecognizer
+                            Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:TourViewModel}}, Path=GoCheckListCommand}" />
                     </Border.GestureRecognizers>
-                    <VerticalStackLayout VerticalOptions="Center" Spacing="5">
+                    <VerticalStackLayout
+                        VerticalOptions="Center"
+                        Spacing="5">
                         <Image
-                        Source="checklist_dt.png"
-                        WidthRequest="30"
-                        HeightRequest="30"/>
+                            Source="checklist_dt.png"
+                            HeightRequest="{markups:OnScreenSize ExtraSmall='25', Small='25', Medium='30', Large='35', ExtraLarge='50'}" />
                         <Label
-                        HorizontalOptions="Center"
-                        Text="Checklisty i ankiety"
-                        TextColor="White"/>
+                            FontSize="{markups:OnScreenSize ExtraSmall='12', Small='15', Medium='15', Large='24', ExtraLarge='35'}"
+                            FontAttributes="Bold"
+                            HorizontalOptions="Center"
+                            Text="Checklisty"
+                            TextColor="White" />
                     </VerticalStackLayout>
                 </Border>
             </Grid>
-        </AbsoluteLayout>
+        </VerticalStackLayout>
     </ScrollView>
 </ContentPage>

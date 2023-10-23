@@ -1,5 +1,4 @@
-﻿using TripPlanner.Models.DTO.ChatDTOs;
-using TripPlanner.Models.DTO.MessageDTOs;
+﻿using TripPlanner.Models.DTO.MessageDTOs;
 
 namespace TripPlanner.Models.Models.MessageModels
 {
@@ -14,7 +13,7 @@ namespace TripPlanner.Models.Models.MessageModels
             {
                 Id = data.Id,
                 UserId = data.UserId,
-                ChatId = data.ChatId,
+                TourId = data.TourId,
                 Content = data.Content,
                 Date = data.Date,
             };

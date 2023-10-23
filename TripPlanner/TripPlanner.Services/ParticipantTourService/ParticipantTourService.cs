@@ -1,7 +1,8 @@
 ﻿using System.Linq.Expressions;
 using TripPlanner.DataAccess.IRepository;
 using TripPlanner.Models;
-using TripPlanner.Models.Models.Tour;
+using TripPlanner.Models.Models;
+using TripPlanner.Models.Models.TourModels;
 
 namespace TripPlanner.Services.ParticipantTourService
 {

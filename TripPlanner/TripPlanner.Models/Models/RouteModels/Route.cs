@@ -1,5 +1,6 @@
 ﻿using TripPlanner.Models.DTO.RouteDTOs;
 using TripPlanner.Models.Models.TourModels;
+using TripPlanner.Models.Models.UserModels;
 
 namespace TripPlanner.Models.Models.RouteModels
 {

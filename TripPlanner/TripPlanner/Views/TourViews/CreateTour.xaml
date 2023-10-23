@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TripPlanner.Views.TourViews.CreateTour"
+             xmlns:viewmodel="clr-namespace:TripPlanner.ViewModels"
+             x:DataType="viewmodel:CreateTourViewModel"
+             xmlns:markups="clr-namespace:OnScreenSizeMarkup.Maui;assembly=OnScreenSizeMarkup.Maui"
+             BackgroundColor="{AppThemeBinding Light=white, Dark=black}"
+             Shell.NavBarIsVisible="False">
+
+    
+    <ScrollView>
+        <VerticalStackLayout
+            Spacing="10">
+            <Grid
+                HeightRequest="{markups:OnScreenSize ExtraSmall='25', Small='25', Medium='30', Large='35', ExtraLarge='50'}"
+                ColumnDefinitions="{markups:OnScreenSize ExtraSmall='25,*,25', Small='25,*,25', Medium='30,*,30', Large='35,*,35', ExtraLarge='50,*,50'}"
+                Margin="10,5,10,0">
+                <ImageButton
+                    Grid.Column="0"
+                    Source="{AppThemeBinding Light=arrow_back_wt.png, Dark=arrow_back_dt.png}"
+                    WidthRequest="{markups:OnScreenSize ExtraSmall='25', Small='25', Medium='30', Large='35', ExtraLarge='50'}"
+                    Command="{Binding GoBackCommand}" />
+
+                <Label
+                    Grid.Column="1"
+                    FontSize="{markups:OnScreenSize ExtraSmall='12', Small='15', Medium='20', Large='24', ExtraLarge='35'}"
+                    HorizontalOptions="Center"
+                    VerticalOptions="Center"
+                    FontAttributes="Bold"
+                    Text="Tworzenie wyjazdu" />
+            </Grid>
+
+            <VerticalStackLayout
+                Spacing="5"
+                HorizontalOptions="Center">
+                <Label
+                    HorizontalOptions="Center"
+                    TextType="Html"
+                    FontSize="{markups:OnScreenSize ExtraSmall='12', Small='15', Medium='18', Large='24', ExtraLarge='35'}">
+                    <![CDATA[ Wybierz termin wyjazdu<span style="color:red;">*</span>]]>
+                </Label>
+                <HorizontalStackLayout
+                    Spacing="15"
+                    HorizontalOptions="Center">
+                    <Border
+                        BackgroundColor="{StaticResource Gray100}"
+                        StrokeShape="RoundRectangle 10,10,10,10">
+                        <DatePicker
+                            Margin="10,0,10,0"
+                            TextColor="#52AB98"
+                            FontAttributes="Bold"
+                            FontSize="{markups:OnScreenSize ExtraSmall='12', Small='15', Medium='17', Large='24', ExtraLarge='35'}"
+                            Format="dd/MM/yyyy"
+                            Date="{Binding StartDate}"
+                            MinimumDate="01/01/2023" />
+                    </Border>
+                </HorizontalStackLayout>
+            </VerticalStackLayout>
+
+            <VerticalStackLayout
+                Spacing="5"
+                HorizontalOptions="Center">
+                <Label
+                    HorizontalOptions="Center"
+                    TextType="Html"
+                    FontSize="{markups:OnScreenSize ExtraSmall='12', Small='15', Medium='18', Large='24', ExtraLarge='35'}">
+                    <![CDATA[ Wybierz termin powrotu<span style="color:red;">*</span>]]>
+                </Label>
+                <HorizontalStackLayout
+                    Spacing="15"
+                    HorizontalOptions="Center">
+                    <Border
+                        BackgroundColor="{StaticResource Gray100}"
+                        StrokeShape="RoundRectangle 10,10,10,10">
+                        <DatePicker
+                            Margin="10,0,10,0"
+                            TextColor="#52AB98"
+                            FontAttributes="Bold"
+                            FontSize="{markups:OnScreenSize ExtraSmall='12', Small='15', Medium='17', Large='24', ExtraLarge='35'}"
+                            Format="dd/MM/yyyy"
+                            Date="{Binding StartDate}"
+                            MinimumDate="01/01/2023" />
+                    </Border>
+                </HorizontalStackLayout>
+            </VerticalStackLayout>
+
+            <HorizontalStackLayout
+                Spacing="5"
+                HorizontalOptions="Center">
+                <Label
+                    VerticalTextAlignment="Center"
+                    HorizontalOptions="Center"
+                    TextType="Html"
+                    FontSize="{markups:OnScreenSize ExtraSmall='12', Small='15', Medium='18', Large='24', ExtraLarge='35'}">
+                    <![CDATA[ Liczba uczestników<span style="color:red;">*</span>]]>
+                </Label>
+                <Border
+                    Padding="3,0,3,0"
+                    BackgroundColor="{StaticResource Gray100}"
+                    StrokeShape="RoundRectangle 10,10,10,10">
+                    <Entry
+                        MaxLength="3"
+                        MinimumWidthRequest="43"
+                        Keyboard="Numeric"
+                        TextColor="#52AB98"
+                        FontAttributes="Bold"
+                        Text="{Binding ParticipantMax}"
+                        FontSize="{markups:OnScreenSize ExtraSmall='12', Small='15', Medium='17', Large='24', ExtraLarge='35'}"
+                        VerticalTextAlignment="Center"
+                        HorizontalTextAlignment="Center" />
+                </Border>
+            </HorizontalStackLayout>
+
+            <VerticalStackLayout
+                Spacing="5">
+
+                <Label
+                    HorizontalOptions="Center"
+                    TextType="Html"
+                    FontSize="{markups:OnScreenSize ExtraSmall='12', Small='15', Medium='18', Large='24', ExtraLarge='35'}">
+                    <![CDATA[ Docelowy kraj<span style="color:red;">*</span>]]>
+                </Label>
+                <Border
+                    BackgroundColor="{StaticResource Gray100}"
+                    HorizontalOptions="Center"
+                    StrokeShape="RoundRectangle 10,10,10,10">
+                    <ScrollView
+                        Orientation="Vertical"
+                        MaximumWidthRequest="{markups:OnScreenSize ExtraSmall='150', Small='200', Medium='250', Large='300', ExtraLarge='350'}">
+                        <Editor
+                            MaxLength="100"
+                            Keyboard="Chat"
+                            AutoSize="TextChanges"
+                            TextColor="#52AB98"
+                            FontAttributes="Bold"
+                            Text="{Binding TargetCountry}"
+                            FontSize="{markups:OnScreenSize ExtraSmall='12', Small='15', Medium='17', Large='24', ExtraLarge='35'}"
+                            VerticalTextAlignment="Center"
+                            HorizontalTextAlignment="Center" />
+                    </ScrollView>
+                </Border>
+            </VerticalStackLayout>
+
+            <VerticalStackLayout
+                Spacing="5">
+                <Label
+                    HorizontalOptions="Center"
+                    TextType="Html"
+                    FontSize="{markups:OnScreenSize ExtraSmall='12', Small='15', Medium='18', Large='24', ExtraLarge='35'}">
+                    <![CDATA[ Docelowy miejsce<span style="color:red;">*</span>]]>
+                </Label>
+                <Border
+                    BackgroundColor="{StaticResource Gray100}"
+                    HorizontalOptions="Center"
+                    StrokeShape="RoundRectangle 10,10,10,10">
+                    <ScrollView
+                        Orientation="Vertical"
+                        MaximumWidthRequest="{markups:OnScreenSize ExtraSmall='150', Small='200', Medium='250', Large='300', ExtraLarge='350'}">
+                        <Editor
+                            MaxLength="100"
+                            Keyboard="Chat"
+                            AutoSize="TextChanges"
+                            TextColor="#52AB98"
+                            FontAttributes="Bold"
+                            Text="{Binding TargetRegion}"
+                            FontSize="{markups:OnScreenSize ExtraSmall='12', Small='15', Medium='17', Large='24', ExtraLarge='35'}"
+                            VerticalTextAlignment="Center"
+                            HorizontalTextAlignment="Center" />
+                    </ScrollView>
+                </Border>
+            </VerticalStackLayout>
+            
+            <VerticalStackLayout
+                Spacing="5">
+                <Label
+                    HorizontalOptions="Center"
+                    TextType="Html"
+                    FontSize="{markups:OnScreenSize ExtraSmall='12', Small='15', Medium='18', Large='24', ExtraLarge='35'}">
+                    <![CDATA[ Tytuł<span style="color:red;">*</span>]]>
+                </Label>
+                <Border
+                    BackgroundColor="{StaticResource Gray100}"
+                    HorizontalOptions="Center"
+                    StrokeShape="RoundRectangle 10,10,10,10">
+                    <ScrollView
+                        Orientation="Vertical"
+                        MaximumWidthRequest="{markups:OnScreenSize ExtraSmall='150', Small='200', Medium='250', Large='300', ExtraLarge='350'}">
+                        <Editor
+                            MaxLength="50"
+                            Keyboard="Chat"
+                            Placeholder="maks. 50 znaków"
+                            AutoSize="TextChanges"
+                            TextColor="#52AB98"
+                            FontAttributes="Bold"
+                            Text="{Binding Title}"
+                            FontSize="{markups:OnScreenSize ExtraSmall='12', Small='15', Medium='17', Large='24', ExtraLarge='35'}"
+                            VerticalTextAlignment="Center"
+                            HorizontalTextAlignment="Center" />
+                    </ScrollView>
+                </Border>
+            </VerticalStackLayout>
+
+            <VerticalStackLayout
+                Spacing="5">
+                <Label
+                    HorizontalOptions="Center"
+                    Text="Opis"
+                    FontSize="{markups:OnScreenSize ExtraSmall='12', Small='15', Medium='18', Large='24', ExtraLarge='35'}">
+                </Label>
+                <Border
+                    BackgroundColor="{StaticResource Gray100}"
+                    HorizontalOptions="Center"
+                    StrokeShape="RoundRectangle 10,10,10,10">
+                    <ScrollView
+                        Orientation="Vertical"
+                        MaximumWidthRequest="{markups:OnScreenSize ExtraSmall='150', Small='200', Medium='250', Large='300', ExtraLarge='350'}">
+                        <Editor
+                            MaxLength="500"
+                            Keyboard="Chat"
+                            AutoSize="TextChanges"
+                            TextColor="#52AB98"
+                            FontAttributes="Bold"
+                            Text="{Binding Description}"
+                            FontSize="{markups:OnScreenSize ExtraSmall='12', Small='15', Medium='17', Large='24', ExtraLarge='35'}"
+                            VerticalTextAlignment="Center"
+                            HorizontalTextAlignment="Center" />
+                    </ScrollView>
+                </Border>
+            </VerticalStackLayout>
+
+            <Button
+                CornerRadius="20"
+                Margin="0,20,0,0"
+                BackgroundColor="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource Secondary}}"
+                TextColor="White"
+                FontAttributes="Bold"
+                FontSize="18"
+                WidthRequest="120"
+                HeightRequest="50"
+                Text="Utwórz"
+                Command="{Binding GoNextCommand}" />
+
+            <Label
+                TextColor="{StaticResource Gray400}"
+                Margin="0,20,10,10"
+                HorizontalOptions="End"
+                FontSize="{markups:OnScreenSize ExtraSmall='9', Small='11', Medium='13', Large='15', ExtraLarge='17'}"
+                Text="*  - pole obowiązkowe"></Label>
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

@@ -13,7 +13,7 @@ namespace TripPlanner.Models.DTO.MessageDTOs
             {
                 Id = data.Id,
                 UserId = data.UserId,
-                ChatId = data.ChatId,
+                TourId = data.TourId,
                 Content = data.Content,
                 Date = data.Date,
             };

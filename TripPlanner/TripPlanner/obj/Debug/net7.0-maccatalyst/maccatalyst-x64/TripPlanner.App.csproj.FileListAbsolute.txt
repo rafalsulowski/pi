@@ -545,7 +545,6 @@ C:\Users\01159502\Desktop\TripPlanner\TripPlanner\TripPlanner\bin\Debug\net7.0-m
 C:\Users\01159502\Desktop\TripPlanner\TripPlanner\TripPlanner\bin\Debug\net7.0-maccatalyst\maccatalyst-x64\Microsoft.Extensions.DependencyInjection.Abstractions.dll
 C:\Users\01159502\Desktop\TripPlanner\TripPlanner\TripPlanner\bin\Debug\net7.0-maccatalyst\maccatalyst-x64\Microsoft.Extensions.Logging.dll
 C:\Users\01159502\Desktop\TripPlanner\TripPlanner\TripPlanner\bin\Debug\net7.0-maccatalyst\maccatalyst-x64\Microsoft.Extensions.Logging.Abstractions.dll
-C:\Users\01159502\Desktop\TripPlanner\TripPlanner\TripPlanner\bin\Debug\net7.0-maccatalyst\maccatalyst-x64\Microsoft.Extensions.Logging.Debug.dll
 C:\Users\01159502\Desktop\TripPlanner\TripPlanner\TripPlanner\bin\Debug\net7.0-maccatalyst\maccatalyst-x64\Microsoft.Extensions.Options.dll
 C:\Users\01159502\Desktop\TripPlanner\TripPlanner\TripPlanner\bin\Debug\net7.0-maccatalyst\maccatalyst-x64\Microsoft.Extensions.Primitives.dll
 C:\Users\01159502\Desktop\TripPlanner\TripPlanner\TripPlanner\bin\Debug\net7.0-maccatalyst\maccatalyst-x64\Microsoft.Maui.Graphics.dll
@@ -1010,3 +1009,13 @@ C:\Users\01159502\Desktop\TripPlanner\TripPlanner\TripPlanner\obj\Debug\net7.0-m
 C:\Users\01159502\Desktop\TripPlanner\TripPlanner\TripPlanner\obj\Debug\net7.0-maccatalyst\maccatalyst-x64\resizetizer\r\search_gray.png
 C:\Users\01159502\Desktop\TripPlanner\TripPlanner\TripPlanner\obj\Debug\net7.0-maccatalyst\maccatalyst-x64\resizetizer\r\search_gray@2x.png
 C:\Users\01159502\Desktop\TripPlanner\TripPlanner\TripPlanner\obj\Debug\net7.0-maccatalyst\maccatalyst-x64\resizetizer\r\search_gray@3x.png
+C:\Users\01159502\Desktop\TripPlanner\TripPlanner\TripPlanner\bin\Debug\net7.0-maccatalyst\maccatalyst-x64\Microsoft.AspNetCore.Connections.Abstractions.dll
+C:\Users\01159502\Desktop\TripPlanner\TripPlanner\TripPlanner\bin\Debug\net7.0-maccatalyst\maccatalyst-x64\Microsoft.AspNetCore.Http.Connections.Client.dll
+C:\Users\01159502\Desktop\TripPlanner\TripPlanner\TripPlanner\bin\Debug\net7.0-maccatalyst\maccatalyst-x64\Microsoft.AspNetCore.Http.Connections.Common.dll
+C:\Users\01159502\Desktop\TripPlanner\TripPlanner\TripPlanner\bin\Debug\net7.0-maccatalyst\maccatalyst-x64\Microsoft.AspNetCore.SignalR.Client.dll
+C:\Users\01159502\Desktop\TripPlanner\TripPlanner\TripPlanner\bin\Debug\net7.0-maccatalyst\maccatalyst-x64\Microsoft.AspNetCore.SignalR.Client.Core.dll
+C:\Users\01159502\Desktop\TripPlanner\TripPlanner\TripPlanner\bin\Debug\net7.0-maccatalyst\maccatalyst-x64\Microsoft.AspNetCore.SignalR.Common.dll
+C:\Users\01159502\Desktop\TripPlanner\TripPlanner\TripPlanner\bin\Debug\net7.0-maccatalyst\maccatalyst-x64\Microsoft.AspNetCore.SignalR.Protocols.Json.dll
+C:\Users\01159502\Desktop\TripPlanner\TripPlanner\TripPlanner\bin\Debug\net7.0-maccatalyst\maccatalyst-x64\Microsoft.Extensions.Features.dll
+C:\Users\01159502\Desktop\TripPlanner\TripPlanner\TripPlanner\bin\Debug\net7.0-maccatalyst\maccatalyst-x64\System.IO.Pipelines.dll
+C:\Users\01159502\Desktop\TripPlanner\TripPlanner\TripPlanner\bin\Debug\net7.0-maccatalyst\maccatalyst-x64\OnScreenSizeMarkup.Maui.dll

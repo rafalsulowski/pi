@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using TripPlanner.Models.DTO.QuestionnaireDTOs;
+﻿
+using TripPlanner.Models.DTO.MessageDTOs.QuestionnaireDTOs;
 
 namespace TripPlanner.Controls.QuestionnaireControls
 {

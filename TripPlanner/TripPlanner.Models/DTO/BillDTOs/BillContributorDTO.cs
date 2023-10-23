@@ -13,7 +13,7 @@ namespace TripPlanner.Models.DTO.BillDTOs
         public int BillId { get; set; }
         public int UserId { get; set; }
 
-        public decimal Value;
+        public decimal Due;
         
         
         public static implicit operator BillContributor(BillContributorDTO data)
@@ -25,7 +25,7 @@ namespace TripPlanner.Models.DTO.BillDTOs
             {
                 BillId = data.BillId,
                 UserId = data.UserId,
-                Value = data.Value,
+                Due = data.Due,
             };
         }
     }

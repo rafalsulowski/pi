@@ -2,7 +2,8 @@
 using TripPlanner.DataAccess.IRepository;
 using TripPlanner.DataAccess.Repository;
 using TripPlanner.Models;
-using TripPlanner.Models.Models.Tour;
+using TripPlanner.Models.Models;
+using TripPlanner.Models.Models.TourModels;
 
 namespace TripPlanner.DataAccess.Repository
 {

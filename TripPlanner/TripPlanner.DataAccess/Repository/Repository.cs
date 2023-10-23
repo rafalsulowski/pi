@@ -2,6 +2,7 @@
 using System.Linq.Expressions;
 using TripPlanner.DataAccess.IRepository;
 using TripPlanner.Models;
+using TripPlanner.Models.Models;
 
 namespace TripPlanner.DataAccess.Repository
 {

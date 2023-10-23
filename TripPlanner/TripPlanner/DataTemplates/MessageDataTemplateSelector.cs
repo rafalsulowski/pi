@@ -1,12 +1,13 @@
 ﻿using TripPlanner.Helpers;
-using TripPlanner.Models.DTO.ChatDTOs;
-using TripPlanner.Models.DTO.QuestionnaireDTOs;
+using TripPlanner.Models.DTO.MessageDTOs;
+using TripPlanner.Models.DTO.MessageDTOs.QuestionnaireDTOs;
 
 namespace TripPlanner.DataTemplates
 {
     public class MessageDataTemplateSelector : DataTemplateSelector
     {
         public DataTemplate NullMessage { get; set; }
+        public DataTemplate NoticeMessage { get; set; }
         public DataTemplate TextOtherMessage { get; set; }
         public DataTemplate TextMyMessage { get; set; }
         public DataTemplate QuestionnaireMessage { get; set; }
@@ -23,15 +24,21 @@ namespace TripPlanner.DataTemplates
                     else
                         return TextOtherMessage;
                 }
-                else
+                else if (item is QuestionnaireDTO)
                 {
                     return QuestionnaireMessage;
                 }
+                else if (item is NoticeMessageDTO)
+                {
+                    return NoticeMessage;
+                }
+                else
+                    return NullMessage;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 Shell.Current.CurrentPage.DisplayAlert("Awaria", "Zły system operacyjny! Czat jest dostępny tylko na: Windows, Android, Ios, MacCatalyst", "Ok :(");
-                return TextOtherMessage;
+                return NullMessage;
             }
         }
     }

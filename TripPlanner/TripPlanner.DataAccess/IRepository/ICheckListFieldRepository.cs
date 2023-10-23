@@ -1,5 +1,6 @@
-﻿using TripPlanner.Models;
-using TripPlanner.Models.Models.CheckList;
+﻿
+using TripPlanner.Models.Models;
+using TripPlanner.Models.Models.CheckListModels;
 
 namespace TripPlanner.DataAccess.IRepository
 {

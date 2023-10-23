@@ -4,20 +4,6 @@
         <name>TripPlanner.App</name>
     </assembly>
     <members>
-        <member name="M:TripPlanner.Services.DialogService.ShowAlert(System.String,System.String,System.String)">
-            <summary>
-            "Fire and forget". Method returns BEFORE showing alert.
-            </summary>
-        </member>
-        <member name="M:TripPlanner.Services.DialogService.ShowConfirmation(System.String,System.String,System.Action{System.Boolean},System.String,System.String)">
-            <summary>
-            "Fire and forget". Method returns BEFORE showing alert.
-            </summary>
-            <param name="callback">Action to perform afterwards.</param>
-        </member>
-        <member name="M:TripPlanner.Services.IDialogService.ShowConfirmation(System.String,System.String,System.Action{System.Boolean},System.String,System.String)">
-            <param name="callback">Action to perform afterwards.</param>
-        </member>
         <member name="T:TripPlanner.ViewModels.CalendarViewModel">
             <inheritdoc/>
             <inheritdoc/>
@@ -46,23 +32,14 @@
         <member name="P:TripPlanner.ViewModels.ChatViewModel.Tour">
             <inheritdoc cref="F:TripPlanner.ViewModels.ChatViewModel.tour"/>
         </member>
-        <member name="P:TripPlanner.ViewModels.ChatViewModel.Chat">
-            <inheritdoc cref="F:TripPlanner.ViewModels.ChatViewModel.chat"/>
-        </member>
         <member name="P:TripPlanner.ViewModels.ChatViewModel.Messages">
             <inheritdoc cref="F:TripPlanner.ViewModels.ChatViewModel.messages"/>
-        </member>
-        <member name="P:TripPlanner.ViewModels.ChatViewModel.PromptLabel">
-            <inheritdoc cref="F:TripPlanner.ViewModels.ChatViewModel.promptLabel"/>
         </member>
         <member name="P:TripPlanner.ViewModels.ChatViewModel.IsRefreshing">
             <inheritdoc cref="F:TripPlanner.ViewModels.ChatViewModel.isRefreshing"/>
         </member>
         <member name="P:TripPlanner.ViewModels.ChatViewModel.Message">
             <inheritdoc cref="F:TripPlanner.ViewModels.ChatViewModel.message"/>
-        </member>
-        <member name="P:TripPlanner.ViewModels.ChatViewModel.UserId">
-            <inheritdoc cref="F:TripPlanner.ViewModels.ChatViewModel.userId"/>
         </member>
         <member name="F:TripPlanner.ViewModels.ChatViewModel.goBackCommand">
             <summary>The backing field for <see cref="P:TripPlanner.ViewModels.ChatViewModel.GoBackCommand"/>.</summary>
@@ -146,14 +123,20 @@
             <inheritdoc/>
             <inheritdoc/>
         </member>
-        <member name="P:TripPlanner.ViewModels.CreateTourViewModel.DateTerm">
-            <inheritdoc cref="F:TripPlanner.ViewModels.CreateTourViewModel.dateTerm"/>
+        <member name="P:TripPlanner.ViewModels.CreateTourViewModel.StartDate">
+            <inheritdoc cref="F:TripPlanner.ViewModels.CreateTourViewModel.startDate"/>
+        </member>
+        <member name="P:TripPlanner.ViewModels.CreateTourViewModel.StopDate">
+            <inheritdoc cref="F:TripPlanner.ViewModels.CreateTourViewModel.stopDate"/>
         </member>
         <member name="P:TripPlanner.ViewModels.CreateTourViewModel.ParticipantMax">
             <inheritdoc cref="F:TripPlanner.ViewModels.CreateTourViewModel.participantMax"/>
         </member>
         <member name="P:TripPlanner.ViewModels.CreateTourViewModel.TargetCountry">
             <inheritdoc cref="F:TripPlanner.ViewModels.CreateTourViewModel.targetCountry"/>
+        </member>
+        <member name="P:TripPlanner.ViewModels.CreateTourViewModel.TargetRegion">
+            <inheritdoc cref="F:TripPlanner.ViewModels.CreateTourViewModel.targetRegion"/>
         </member>
         <member name="P:TripPlanner.ViewModels.CreateTourViewModel.Title">
             <inheritdoc cref="F:TripPlanner.ViewModels.CreateTourViewModel.title"/>
@@ -214,6 +197,13 @@
             <inheritdoc/>
             <inheritdoc/>
             <inheritdoc/>
+            <inheritdoc/>
+        </member>
+        <member name="P:TripPlanner.ViewModels.HomeViewModel.Tours">
+            <inheritdoc cref="F:TripPlanner.ViewModels.HomeViewModel.tours"/>
+        </member>
+        <member name="P:TripPlanner.ViewModels.HomeViewModel.EmptyTours">
+            <inheritdoc cref="F:TripPlanner.ViewModels.HomeViewModel.emptyTours"/>
         </member>
         <member name="F:TripPlanner.ViewModels.HomeViewModel.openCalendarCommand">
             <summary>The backing field for <see cref="P:TripPlanner.ViewModels.HomeViewModel.OpenCalendarCommand"/>.</summary>
@@ -490,14 +480,8 @@
         <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.Tour">
             <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "Tour" generated properties.</summary>
         </member>
-        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.Chat">
-            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "Chat" generated properties.</summary>
-        </member>
         <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.Messages">
             <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "Messages" generated properties.</summary>
-        </member>
-        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.PromptLabel">
-            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "PromptLabel" generated properties.</summary>
         </member>
         <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.IsRefreshing">
             <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "IsRefreshing" generated properties.</summary>
@@ -505,23 +489,26 @@
         <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.Message">
             <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "Message" generated properties.</summary>
         </member>
-        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.UserId">
-            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "UserId" generated properties.</summary>
-        </member>
         <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.Answers">
             <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "Answers" generated properties.</summary>
         </member>
         <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.Question">
             <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "Question" generated properties.</summary>
         </member>
-        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.DateTerm">
-            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "DateTerm" generated properties.</summary>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.StartDate">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "StartDate" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.StopDate">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "StopDate" generated properties.</summary>
         </member>
         <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.ParticipantMax">
             <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "ParticipantMax" generated properties.</summary>
         </member>
         <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.TargetCountry">
             <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "TargetCountry" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.TargetRegion">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "TargetRegion" generated properties.</summary>
         </member>
         <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.Title">
             <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "Title" generated properties.</summary>
@@ -534,6 +521,12 @@
         </member>
         <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.FriendsRef">
             <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "FriendsRef" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.Tours">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "Tours" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.EmptyTours">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "EmptyTours" generated properties.</summary>
         </member>
         <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.Participants">
             <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "Participants" generated properties.</summary>
@@ -553,14 +546,8 @@
         <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.Tour">
             <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "Tour" generated properties.</summary>
         </member>
-        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.Chat">
-            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "Chat" generated properties.</summary>
-        </member>
         <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.Messages">
             <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "Messages" generated properties.</summary>
-        </member>
-        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.PromptLabel">
-            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "PromptLabel" generated properties.</summary>
         </member>
         <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.IsRefreshing">
             <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "IsRefreshing" generated properties.</summary>
@@ -568,23 +555,26 @@
         <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.Message">
             <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "Message" generated properties.</summary>
         </member>
-        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.UserId">
-            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "UserId" generated properties.</summary>
-        </member>
         <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.Answers">
             <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "Answers" generated properties.</summary>
         </member>
         <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.Question">
             <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "Question" generated properties.</summary>
         </member>
-        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.DateTerm">
-            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "DateTerm" generated properties.</summary>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.StartDate">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "StartDate" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.StopDate">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "StopDate" generated properties.</summary>
         </member>
         <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.ParticipantMax">
             <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "ParticipantMax" generated properties.</summary>
         </member>
         <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.TargetCountry">
             <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "TargetCountry" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.TargetRegion">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "TargetRegion" generated properties.</summary>
         </member>
         <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.Title">
             <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "Title" generated properties.</summary>
@@ -597,6 +587,12 @@
         </member>
         <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.FriendsRef">
             <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "FriendsRef" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.Tours">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "Tours" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.EmptyTours">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "EmptyTours" generated properties.</summary>
         </member>
         <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.Participants">
             <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "Participants" generated properties.</summary>
