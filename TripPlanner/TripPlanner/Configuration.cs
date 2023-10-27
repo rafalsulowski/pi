@@ -10,7 +10,7 @@ namespace TripPlanner
         public readonly string WebApiUrl = DeviceInfo.Platform == DevicePlatform.Android ? "http://10.0.2.2:5119/api" : "http://localhost:5119/api";
         public UserDTO User { get; private set; } = new UserDTO
         {
-            Id = 3,
+            Id = 1,
             FullName = "Rafał Sulowski", 
             FullAddress = "Willowa 34a, Lublin 20-819", 
             City = "Lublin", 
@@ -62,5 +62,7 @@ namespace TripPlanner
                     return "";
             }
         }
+
+        
     }
 }

@@ -35,13 +35,27 @@ namespace TripPlanner.WebAPI.Controllers
             var response = await _TourService.GetToursAsync();
             return Ok(response.Data);
         }
-
+        
         [HttpGet("{tourId}/GetWithParticipants")]
         public async Task<ActionResult<RepositoryResponse<TourDTO>>> GetWithParticipant(int tourId)
         {
             var response = await _TourService.GetTourAsync(u => u.Id == tourId, "Participants");
             TourDTO res = response.Data;
             return Ok(res);
+        }
+
+        [HttpGet("{tourId}/GetExtendParticipants")]
+        public async Task<ActionResult<RepositoryResponse<List<ExtendParticipantDTO>>>> GetExtendParticipants(int tourId)
+        {
+            RepositoryResponse<List<ExtendParticipantDTO>> response = await _TourService.GetTourExtendParticipants(tourId);
+            return Ok(new RepositoryResponse<List<ExtendParticipantDTO>> { Data = response.Data, Message = "Ok", Success = true });
+        }
+
+        [HttpGet("{tourId}/GetParticipantsNames")]
+        public async Task<ActionResult<RepositoryResponse<List<string>>>> GetParticipantsNames(int tourId)
+        {
+            RepositoryResponse<List<string>> response = await _TourService.GetParticipantsNames(tourId);
+            return Ok(new RepositoryResponse<List<string>> { Data = response.Data, Message = "Ok", Success = true });
         }
 
         [HttpGet("{tourId}/GetWithMessages")]
@@ -116,19 +130,19 @@ namespace TripPlanner.WebAPI.Controllers
             var resp3 = await _TourService.GetTourAsync(u => u.Title == Tour.Title);
             if (resp3.Data != null)
             {
-                return new RepositoryResponse<int> { Data = -1, Success = false, Message = $"Istnieje wycieczka o tytule = {Tour.Title}" };
+                return new RepositoryResponse<int> { Data = -1, Success = false, Message = $"Istnieje wycieczka o tytule {Tour.Title}" };
             }
             var resp = await _UserService.GetUserAsync(u => u.Id == Tour.UserId);
             if (resp.Data == null)
             {
-                return new RepositoryResponse<int> { Data = -1, Success = false, Message = $"Nie istnieje użytkownik o id = {Tour.UserId}" };
+                return new RepositoryResponse<int> { Data = -1, Success = false, Message = $"Nie istnieje użytkownik o id {Tour.UserId}" };
             }
 
             Tour newTour = Tour;
             var response = await _TourService.CreateTour(newTour, Tour.UserId);
             if (response.Success)
             {
-                return Ok(newTour);
+                return Ok(new RepositoryResponse<int> { Data = newTour.Id, Success = true, Message = "" });
             }
             else
             {
@@ -342,11 +356,11 @@ namespace TripPlanner.WebAPI.Controllers
                 return new RepositoryResponse<bool> { Success = false, Message = $"Nie istnieje użytkownik o id = {userId}" };
             }
 
-            ParticipantTour? participant = resp2.Data.Participants.Where(p => p.UserId == resp.Data.Id).First();
-            if (participant == null || participant?.IsOrganizer == false)
-            {
-                return new RepositoryResponse<bool> { Success = false, Message = $"Odmowa dostępu!" };
-            }
+            //ParticipantTour? participant = resp2.Data.Participants.Where(p => p.UserId == resp.Data.Id).First();
+            //if (participant == null || participant?.IsOrganizer == false)
+            //{
+            //    return new RepositoryResponse<bool> { Success = false, Message = $"Odmowa dostępu!" };
+            //}
 
             var response = await _TourService.DeleteTour(new Tour() { Id = tourId });
             if (response.Success)

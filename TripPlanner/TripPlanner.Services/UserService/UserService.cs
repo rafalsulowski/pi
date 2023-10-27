@@ -16,12 +16,16 @@ using TripPlanner.Services.FriendService;
 using TripPlanner.Services.ChatService;
 using TripPlanner.Models.Models.MessageModels;
 using TripPlanner.Models.Models.MessageModels.QuestionnaireModels;
+using TripPlanner.Models.DTO.TourDTOs;
+using TripPlanner.DataAccess.Repository;
+using TripPlanner.Models.Models.TourModels;
 
 namespace TripPlanner.Services.UserService
 {
     public class UserService : IUserService
     {
         private readonly IUserRepository _UserRepository;
+        private readonly IFriendRepository _FriendRepository;
         private readonly ITourService _TourService;
         private readonly IParticipantTourService _ParticipantTourService;
         private readonly ICultureAssistanceService _CultureAssistanceService;
@@ -35,7 +39,7 @@ namespace TripPlanner.Services.UserService
         public UserService(IBillService __IBillService, IFriendService __FriendService, IUserRepository userRepository, ITourService __TourService, IParticipantTourService __ParticipantTourService,
             ICultureAssistanceService __CultureAssistanceService,
             IRouteService __RouteService, IChatService chatService,
-            IQuestionnaireService __QuestionnaireService, ICheckListService __CheckListService, IQuestionnaireVoteService __QuestionnaireVoteService)
+            IQuestionnaireService __QuestionnaireService, ICheckListService __CheckListService, IQuestionnaireVoteService __QuestionnaireVoteService, IFriendRepository friendRepository)
         {
             _UserRepository = userRepository;
             _TourService = __TourService;
@@ -48,6 +52,7 @@ namespace TripPlanner.Services.UserService
             _IBillService = __IBillService;
             _FriendService = __FriendService;
             _ChatService = chatService;
+            _FriendRepository = friendRepository;
         }
 
         public async Task<RepositoryResponse<bool>> CreateUser(User user)
@@ -109,6 +114,43 @@ namespace TripPlanner.Services.UserService
             return response;
         }
 
+        public async Task<RepositoryResponse<List<ExtendParticipantDTO>>> GetFriends(int userId)
+        {
+            var resp = await _FriendRepository.GetAll(u => u.Friend1Id == userId || u.Friend2Id == userId);
+            List<ExtendParticipantDTO> listReturn = new List<ExtendParticipantDTO>();
+            if (resp.Success)
+            {
+                if (resp.Data is null)
+                {
+                    return new RepositoryResponse<List<ExtendParticipantDTO>> { Data = listReturn, Message = "", Success = true };
+                }
+
+                List<Friend> list = resp.Data;
+                for (int i = 0; i < list.Count; i++)
+                {
+                    int userIdToSearch = list[i].Friend1Id == userId ? list[i].Friend2Id : list[i].Friend1Id;  
+                    User? user = _UserRepository.GetFirstOrDefault(u => u.Id == userIdToSearch).Result?.Data;
+
+                    if (user is null)
+                        return new RepositoryResponse<List<ExtendParticipantDTO>> { Data = listReturn, Message = "", Success = true };
+
+                    ExtendParticipantDTO participantDTO = new ExtendParticipantDTO();
+                    participantDTO.Order = i + 1;
+                    participantDTO.Email = user.Email;
+                    participantDTO.City = user.City;
+                    participantDTO.Nickname = "";
+                    participantDTO.Age = _TourService.CalculateAge(user.DateOfBirth, DateTime.Now);
+                    participantDTO.DateOfBirth = user.DateOfBirth;
+                    participantDTO.FullName = user.FullName;
+                    participantDTO.IsOrganizer = false;
+
+                    listReturn.Add(participantDTO);
+                }
+
+            }
+
+            return new RepositoryResponse<List<ExtendParticipantDTO>> { Data = listReturn, Message = "", Success = true };
+        }
 
         public async Task<RepositoryResponse<User>> GetUserAsync(Expression<Func<User, bool>> filter, string? includeProperties = null)
         {

@@ -1,12 +1,117 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="TripPlanner.Views.ParticipantsListViews.AddParticipantPage"
-             Title="AddParticipantPage">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+            xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+            xmlns:localTemplates="clr-namespace:TripPlanner.DataTemplates"
+            x:Class="TripPlanner.Views.ParticipantsListViews.AddParticipantPage"
+            xmlns:model="clr-namespace:TripPlanner.Models.DTO.TourDTOs;assembly=TripPlanner.Models"
+            xmlns:markups="clr-namespace:OnScreenSizeMarkup.Maui;assembly=OnScreenSizeMarkup.Maui"
+            xmlns:viewmodel="clr-namespace:TripPlanner.ViewModels"
+            x:DataType="viewmodel:ParticipantsViewModel"
+            Shell.NavBarIsVisible="False"
+            Shell.TabBarIsVisible="False">
+
+    
+    <StackLayout
+        Orientation="Vertical"
+        Spacing="10">
+        <Grid
+            RowDefinitions="Auto"
+            ColumnDefinitions="{markups:OnScreenSize ExtraSmall='25,*,25', Small='25,*,25', Medium='30,*,30', Large='35,*,35', ExtraLarge='50,*,50'}"
+            Margin="10,5,10,0">
+            <ImageButton
+                Grid.Column="0"
+                Source="{AppThemeBinding Light=arrow_back_wt.png, Dark=arrow_back_dt.png}"
+                Command="{Binding GoBackCommand}"
+                HeightRequest="{markups:OnScreenSize ExtraSmall='25', Small='25', Medium='30', Large='35', ExtraLarge='50'}" />
+
+            <Label
+                Grid.Column="1"
+                HorizontalOptions="Center"
+                FontSize="{markups:OnScreenSize ExtraSmall='12', Small='15', Medium='18', Large='24', ExtraLarge='35'}"
+                VerticalOptions="Center"
+                Text="Dodawanie uczestników">
+            </Label>
+        </Grid>
+
+        <Border
+            Margin="{markups:OnScreenSize ExtraSmall='10,0,10,0', Small='10,0,10,0', Medium='10,0,10,0', Large='30,0,30,0', ExtraLarge='50,0,50,0'}"
+            Stroke="{AppThemeBinding Light=#939393, Dark=transparent}"
+            BackgroundColor="{AppThemeBinding Light=white, Dark=#939393}"
+            StrokeShape="RoundRectangle 25,25,25,25">
+            <SearchBar
+                FontSize="{markups:OnScreenSize ExtraSmall='13', Small='14', Medium='16', Large='18', ExtraLarge='20'}"
+                x:Name="searchBar"
+                SearchCommand="{Binding ParticipantSearchingCommand}"
+                SearchCommandParameter="{Binding Text, Source={x:Reference searchBar}}"
+                CancelButtonColor="#939393"
+                Placeholder="Wyszukaj znajomego">
+            </SearchBar>
+        </Border>
+
+        <RefreshView
+            IsRefreshing="{Binding Refresh}"
+            Command="{Binding RefreshViewCommand}"
+            Margin="10,10,10,0">
+            <CollectionView
+                EmptyView="Brak znajomych do wyświetlenia"
+                ItemsSource="{Binding Participants}"
+                SelectionMode="None">
+                <CollectionView.ItemsLayout>
+                    <LinearItemsLayout
+                        Orientation="Vertical"
+                        ItemSpacing="20" />
+                </CollectionView.ItemsLayout>
+                <CollectionView.Header>
+                    <Label
+                        TextColor="#939393"
+                        FontSize="{markups:OnScreenSize ExtraSmall='12', Small='13', Medium='15', Large='17', ExtraLarge='19'}"
+                        Text="Znajomi w tripPlanner" />
+                </CollectionView.Header>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="model:ExtendParticipantDTO">
+                        <VerticalStackLayout
+                            HorizontalOptions="Center">
+                            <HorizontalStackLayout
+                                Spacing="5">
+                                <Label
+                                    FontAttributes="Bold"
+                                    WidthRequest="{markups:OnScreenSize ExtraSmall='150', Small='190', Medium='230', Large='300', ExtraLarge='400'}"
+                                    FontSize="{markups:OnScreenSize ExtraSmall='14', Small='16', Medium='18', Large='20', ExtraLarge='25'}"
+                                    TextColor="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource Secondary}}">
+                                    <Label.Text>
+                                        <MultiBinding
+                                            StringFormat="{}{0}. {1}">
+                                            <Binding
+                                                Path="Order" />
+                                            <Binding
+                                                Path="FullName" />
+                                        </MultiBinding>
+                                    </Label.Text>
+                                </Label>
+                                <Image
+                                    HeightRequest="{markups:OnScreenSize ExtraSmall='25', Small='25', Medium='25', Large='35', ExtraLarge='50'}"
+                                    Source="organizer_sec.png" />
+                            </HorizontalStackLayout>
+                            <Label
+                                FontSize="{markups:OnScreenSize ExtraSmall='12', Small='14', Medium='16', Large='18', ExtraLarge='22'}"
+                                WidthRequest="{markups:OnScreenSize ExtraSmall='180', Small='210', Medium='260', Large='340', ExtraLarge='455'}"
+                                TextColor="{AppThemeBinding Light=#939393, Dark=white}">
+                                <Label.Text>
+                                    <MultiBinding
+                                        StringFormat="{}{0}, wiek {1}, {2}">
+                                        <Binding
+                                            Path="Email" />
+                                        <Binding
+                                            Path="Age" />
+                                        <Binding
+                                            Path="City" />
+                                    </MultiBinding>
+                                </Label.Text>
+                            </Label>
+                        </VerticalStackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </RefreshView>
+    </StackLayout>
 </ContentPage>

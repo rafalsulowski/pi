@@ -8,6 +8,8 @@ using System.Text;
 using System.Threading.Tasks;
 using TripPlanner.Models.DTO.TourDTOs;
 using TripPlanner.Models.DTO.UserDTOs;
+using TripPlanner.Models.Models.TourModels;
+using TripPlanner.Models.Models;
 
 namespace TripPlanner.Services
 {
@@ -63,49 +65,29 @@ namespace TripPlanner.Services
         }
 
 
-        public async Task<ObservableCollection<UserDTO>> GetFriends(int userId)
+        public async Task<List<ExtendParticipantDTO>> GetFriends(int userId)
         {
-            await Task.Delay(1000);
-            return new ObservableCollection<UserDTO>
+            try
             {
-                new UserDTO
+                HttpResponseMessage response = m_HttpClient.GetAsync($"{m_Configuration.WebApiUrl}/User/{userId}/GetFriends").Result;
+                if (response.IsSuccessStatusCode)
                 {
-                    FullName = "Maria Gut",
-                    Email = "gut22@gmial.com",
-                    City = "Lublin",
-                    DateOfBirth = new DateTime(2002,2,22),
-                    FullAddress = "Skowronkowa 108C, 20-819",
-                    Id = 1
-                },
-                new UserDTO
-                {
-                    FullName = "Krystyna Gut",
-                    Email = "gutkrystyna22@gmial.com",
-                    City = "Lublin",
-                    DateOfBirth = new DateTime(2002,2,22),
-                    FullAddress = "Skowronkowa 108C, 20-819",
-                    Id = 1
-                },
-                new UserDTO
-                {
-                    FullName = "Zuzia Popiołek",
-                    Email = "bibix@gmial.com",
-                    City = "Lublin",
-                    DateOfBirth = new DateTime(2001,6,22),
-                    FullAddress = "Skowronkowa 108C, 20-819",
-                    Id = 1
-                },
-                new UserDTO
-                {
-                    FullName = "Kamil Smołecki",
-                    Email = "kamilsmlo@gmial.com",
-                    City = "Kraśnik",
-                    DateOfBirth = new DateTime(2000,12,22),
-                    FullAddress = "Poddwrokowa 123, 12-619",
-                    Id = 1
-                },
+                    var tour = await response.Content.ReadFromJsonAsync<RepositoryResponse<List<ExtendParticipantDTO>>>();
 
-            };
+                    if (tour.Success)
+                    {
+                        return tour.Data?.ToList();
+                    }
+                    else
+                        return null;
+                }
+                else
+                    return null;
+            }
+            catch (Exception)
+            {
+                return null;
+            }
         }
     }
 }

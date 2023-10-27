@@ -44,19 +44,14 @@ namespace TripPlanner.ViewModels
             startDate = DateTime.Now;
             stopDate = DateTime.Now;
 
-            //startDate = new DateTime(2023,12,29);
-            //stopDate = new DateTime(2024,1,4);
-            //ParticipantMax = 13;
-            //title = "Wyjazd na narty 2024";
-            //description = "Pierwszy wyajzd na słowację";
-            //targetCountry = "Słowacja";
-            //targetRegion = "Chopok";
-        }
-
-
-        [RelayCommand]
-        async Task SetTourDateRange()
-        {
+            //dane testowe
+            startDate = new DateTime(2023, 12, 29);
+            stopDate = new DateTime(2024, 1, 4);
+            ParticipantMax = 13;
+            title = "Wyjazd na narty 2024";
+            description = "Pierwszy wyajzd na słowację";
+            targetCountry = "Słowacja";
+            targetRegion = "Chopok";
         }
 
         [RelayCommand]
@@ -68,7 +63,42 @@ namespace TripPlanner.ViewModels
         [RelayCommand]
         async Task GoNext()
         {
-            //walidacja i utworzenie wycieczki
+            //walidacja
+            if(string.IsNullOrEmpty(Title))
+            {
+                await Shell.Current.CurrentPage.DisplayAlert("Niepoprawne dane", $"Tytul wycieczki nie może być pusty", "Ok");
+                return;
+            }
+            if (string.IsNullOrEmpty(TargetCountry))
+            {
+                await Shell.Current.CurrentPage.DisplayAlert("Niepoprawne dane", $"Musisz określić docelowy kraj wyczieczki", "Ok");
+                return;
+            }
+            if (string.IsNullOrEmpty(TargetRegion))
+            {
+                await Shell.Current.CurrentPage.DisplayAlert("Niepoprawne dane", $"Musisz określić docelowe miejsce wyczieczki", "Ok");
+                return;
+            }
+            if (ParticipantMax > 1000 || ParticipantMax < 0)
+            {
+                await Shell.Current.CurrentPage.DisplayAlert("Niepoprawne dane", $"Liczba uczestników musi być z zakresu (0, 1000)", "Ok");
+                return;
+            }
+            if (StopDate < DateTime.Now || StartDate < DateTime.Now)
+            {
+                await Shell.Current.CurrentPage.DisplayAlert("Niepoprawne dane", $"Data zakończenia lub rozpoczęcia wycieczki już mineła", "Ok");
+                return;
+            }
+            if (StopDate < StartDate)
+            {
+                await Shell.Current.CurrentPage.DisplayAlert("Niepoprawne dane", $"Data zakończenia wycieczki nie może być przed datą jej rozpoczecia", "Ok");
+                return;
+            }
+            if (string.IsNullOrEmpty(Title))
+            {
+                await Shell.Current.CurrentPage.DisplayAlert("Niepoprawne dane", $"Tytul wycieczki nie może być pusty", "Ok");
+                return;
+            }
 
             CreateTourDTO tour = new CreateTourDTO
             {
@@ -87,7 +117,7 @@ namespace TripPlanner.ViewModels
             
             if(!resp.Success)
             {
-                await Shell.Current.CurrentPage.DisplayAlert("Błąd", $"Błąd podczas tworzenia wyiceczki! Wiadomość od serwera: {resp.Message}", "Ok :(");
+                await Shell.Current.CurrentPage.DisplayAlert("Błąd", $"{resp.Message}", "Ok");
                 return;
             }
 
@@ -95,10 +125,11 @@ namespace TripPlanner.ViewModels
 
             if (resp is null)
             {
-                await Shell.Current.CurrentPage.DisplayAlert("Błąd", $"Błąd podczas pobrania nowo utowrzonej wycieczki! Wycieczka zostałą utowrzony jendak nie została poprawnie pobrana z powrotem do aplikacji. Spróbuj wejść w wycieczkę z widoku głównego!", "Ok :(");
+                await Shell.Current.CurrentPage.DisplayAlert("Błąd", $"Błąd podczas pobrania nowo utowrzonej wycieczki! Wycieczka została utowrzona jendak nie została poprawnie załadowana do aplikacji. Odświerz stronę główną i spróbuj wejść w wycieczkę!", "Ok");
                 return;
             }
 
+            await Shell.Current.CurrentPage.DisplayAlert("Powodzednie", $"Utworzono wyjazd", "Ok");
             var navigationParameter = new Dictionary<string, object>
             {
                 { "passTour",  newTour}

@@ -8,146 +8,153 @@
              xmlns:markups="clr-namespace:OnScreenSizeMarkup.Maui;assembly=OnScreenSizeMarkup.Maui"
              Shell.NavBarIsVisible="False">
 
-    <VerticalStackLayout Spacing="10">
-        <Grid
-            HeightRequest="{markups:OnScreenSize ExtraSmall='25', Small='25', Medium='30', Large='35', ExtraLarge='50'}"
-            ColumnDefinitions="{markups:OnScreenSize ExtraSmall='25,*,25', Small='25,*,25', Medium='30,*,30', Large='35,*,35', ExtraLarge='50,*,50'}"
-            Margin="10,5,10,0">
-            <ImageButton
-                Grid.Column="0"
-                Source="{AppThemeBinding Light=calendar_wt.png, Dark=calendar_dt.png}"
-                WidthRequest="{markups:OnScreenSize ExtraSmall='25', Small='25', Medium='30', Large='35', ExtraLarge='50'}"
-                Command="{Binding OpenCalendarCommand}"/>
+    <ScrollView>
+        <StackLayout
+            Spacing="10"
+            Orientation="Vertical">
+            <Grid
+                HeightRequest="{markups:OnScreenSize ExtraSmall='25', Small='25', Medium='30', Large='35', ExtraLarge='50'}"
+                ColumnDefinitions="{markups:OnScreenSize ExtraSmall='25,*,25', Small='25,*,25', Medium='30,*,30', Large='35,*,35', ExtraLarge='50,*,50'}"
+                Margin="10,5,10,0">
+                <ImageButton
+                    Grid.Column="0"
+                    Source="{AppThemeBinding Light=calendar_wt.png, Dark=calendar_dt.png}"
+                    WidthRequest="{markups:OnScreenSize ExtraSmall='25', Small='25', Medium='30', Large='35', ExtraLarge='50'}"
+                    Command="{Binding OpenCalendarCommand}" />
+
+                <Label
+                    Grid.Column="1"
+                    FontSize="{markups:OnScreenSize ExtraSmall='12', Small='15', Medium='18', Large='24', ExtraLarge='35'}"
+                    HorizontalOptions="Center"
+                    VerticalOptions="Center"
+                    Text="TripPlanner" />
+
+                <ImageButton
+                    Grid.Column="2"
+                    Source="{AppThemeBinding Light=plus_wt.png, Dark=plus_dt.png}"
+                    HeightRequest="{markups:OnScreenSize ExtraSmall='25', Small='25', Medium='30', Large='35', ExtraLarge='50'}"
+                    Command="{Binding CreateTripCommand}" />
+            </Grid>
 
             <Label
-                Grid.Column="1"
-                FontSize="{markups:OnScreenSize ExtraSmall='12', Small='15', Medium='18', Large='24', ExtraLarge='35'}"
+                FontSize="{markups:OnScreenSize ExtraSmall='12', Small='12', Medium='16', Large='24', ExtraLarge='35'}"
+                Text="Natchodzące wyjazdy"
+                TextColor="{AppThemeBinding Light={StaticResource Gray600}, Dark={StaticResource Gray200}}"
                 HorizontalOptions="Center"
-                VerticalOptions="Center"
-                Text="TripPlanner"/>
+                FontAttributes="Bold" />
 
-            <ImageButton
-                Grid.Column="2"
-                Source="{AppThemeBinding Light=plus_wt.png, Dark=plus_dt.png}"
-                HeightRequest="{markups:OnScreenSize ExtraSmall='25', Small='25', Medium='30', Large='35', ExtraLarge='50'}"
-                Command="{Binding CreateTripCommand}"/>
-        </Grid>
+            <VerticalStackLayout
+                Margin="0,30,0,0"
+                Spacing="20"
+                IsVisible="{Binding EmptyTours}">
+                <Border
+                    WidthRequest="{markups:OnScreenSize ExtraSmall='200', Small='200', Medium='250', Large='300', ExtraLarge='350'}"
+                    HeightRequest="100"
+                    BackgroundColor="#90D5C6"
+                    Padding="20"
+                    StrokeShape="RoundRectangle 10,10,10,10">
+                    <VerticalStackLayout
+                        Spacing="10">
+                        <Label
+                            FontAttributes="Bold"
+                            HorizontalOptions="Center"
+                            Text="Brak zaplanowanych wyjazdów"
+                            FontSize="{markups:OnScreenSize ExtraSmall='12', Small='12', Medium='14', Large='24', ExtraLarge='35'}" />
+                        <Label
+                            HorizontalOptions="Center"
+                            Text="Zaplanuj wyjazd teraz!"
+                            FontSize="{markups:OnScreenSize ExtraSmall='12', Small='12', Medium='14', Large='24', ExtraLarge='35'}" />
+                    </VerticalStackLayout>
+                </Border>
 
-        <Label
-            FontSize="{markups:OnScreenSize ExtraSmall='12', Small='12', Medium='16', Large='24', ExtraLarge='35'}"
-            Text="Natchodzące wyjazdy"
-            TextColor="{StaticResource Gray600}"
-            HorizontalOptions="Center"
-            FontAttributes="Bold"/>
+                <Button
+                    TextColor="{StaticResource Secondary}"
+                    Text="Stwórz nowy wyjazd"
+                    BorderColor="{StaticResource Secondary}"
+                    BackgroundColor="White"
+                    BorderWidth="2"
+                    CornerRadius="20"
+                    WidthRequest="200"
+                    HeightRequest="60"
+                    FontSize="{markups:OnScreenSize ExtraSmall='14', Small='14', Medium='16', Large='20', ExtraLarge='24'}"
+                    FontAttributes="Bold"
+                    Command="{Binding CreateTripCommand}">
+                </Button>
+            </VerticalStackLayout>
 
-        <VerticalStackLayout
-            Margin="0,30,0,0"
-            Spacing="20"
-            IsVisible="{Binding EmptyTours}">
-            <Border
-                WidthRequest="{markups:OnScreenSize ExtraSmall='200', Small='200', Medium='250', Large='300', ExtraLarge='350'}"
-                HeightRequest="100"
-                BackgroundColor="#90D5C6"
-                Padding="20"
-                StrokeShape="RoundRectangle 10,10,10,10">
-                <VerticalStackLayout
-                    Spacing="10">
-                    <Label
-                        FontAttributes="Bold"
-                        HorizontalOptions="Center"
-                        Text="Brak zaplanowanych wyjazdów"
-                        FontSize="{markups:OnScreenSize ExtraSmall='12', Small='12', Medium='14', Large='24', ExtraLarge='35'}" />
-                    <Label
-                        HorizontalOptions="Center"
-                        Text="Zaplanuj wyjazd teraz!"
-                        FontSize="{markups:OnScreenSize ExtraSmall='12', Small='12', Medium='14', Large='24', ExtraLarge='35'}" />
-                </VerticalStackLayout>
-            </Border>
-
-            <Button
-                TextColor="{StaticResource Secondary}"
-                Text="Stwórz nowy wyjazd"
-                BorderColor="{StaticResource Secondary}"
-                BackgroundColor="White"
-                BorderWidth="2"
-                CornerRadius="20"
-                WidthRequest="200"
-                HeightRequest="60"
-                FontSize="{markups:OnScreenSize ExtraSmall='14', Small='14', Medium='16', Large='20', ExtraLarge='24'}"
-                FontAttributes="Bold"
-                Command="{Binding CreateTripCommand}">
-            </Button>
-        </VerticalStackLayout>
-
-
-        <Border
-            HorizontalOptions="Center"
-            StrokeThickness="0"
-            Padding="10">
-            <CollectionView
-                ItemsSource="{Binding Tours}"
-                SelectionMode="None">
-                <CollectionView.ItemsLayout>
-                    <LinearItemsLayout
-                        Orientation="Vertical"
-                        ItemSpacing="16" />
-                </CollectionView.ItemsLayout>
-                <CollectionView.ItemTemplate>
-                    <DataTemplate
-                        x:DataType="models:TourDTO">
-                        <Border
-                            BackgroundColor="#F1F1F1"
-                            StrokeShape="RoundRectangle 10,10,10,10">
-                            <Border.GestureRecognizers>
-                                <TapGestureRecognizer
-                                    Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:HomeViewModel}}, Path=ShowTourCommand}"
-                                    CommandParameter="{Binding .}" />
-                            </Border.GestureRecognizers>
-                            <AbsoluteLayout
-                                HeightRequest="{markups:OnScreenSize ExtraSmall='80', Small='90', Medium='100', Large='130', ExtraLarge='150'}">
+            <RefreshView
+                IsRefreshing="{Binding Refresh}"
+                Command="{Binding RefreshViewCommand}">
+                <CollectionView
+                    ItemsSource="{Binding Tours}"
+                    SelectionMode="None">
+                    <CollectionView.ItemsLayout>
+                        <LinearItemsLayout
+                            Orientation="Vertical"
+                            ItemSpacing="16" />
+                    </CollectionView.ItemsLayout>
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate
+                            x:DataType="models:TourDTO">
+                            <Border
+                                Padding="10,0,10,0"
+                                StrokeThickness="0"
+                                StrokeShape="RoundRectangle 10,10,10,10">
+                                <Border.GestureRecognizers>
+                                    <TapGestureRecognizer
+                                        Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:HomeViewModel}}, Path=ShowTourCommand}"
+                                        CommandParameter="{Binding .}" />
+                                </Border.GestureRecognizers>
                                 <Border
-                                    StrokeThickness="0"
                                     StrokeShape="RoundRectangle 10,10,10,10"
-                                    ZIndex="1">
-                                    <Image
-                                        Source="TourIcon/pic1.jpg"
-                                        WidthRequest="{markups:OnScreenSize ExtraSmall='70', Small='80', Medium='100', Large='120', ExtraLarge='200'}"
-                                        HeightRequest="{markups:OnScreenSize ExtraSmall='70', Small='80', Medium='100', Large='120', ExtraLarge='200'}"
-                                        Aspect="Fill">
-                                    </Image>
+                                    BackgroundColor="{AppThemeBinding Light=#F1F1F1, Dark=#E1E1E1}">
+                                    <AbsoluteLayout
+                                        HeightRequest="{markups:OnScreenSize ExtraSmall='80', Small='90', Medium='100', Large='130', ExtraLarge='150'}">
+                                        <Border
+                                            StrokeThickness="0"
+                                            StrokeShape="RoundRectangle 10,10,10,10"
+                                            ZIndex="1">
+                                            <Image
+                                                Source="TourIcon/pic1.jpg"
+                                                WidthRequest="{markups:OnScreenSize ExtraSmall='70', Small='80', Medium='100', Large='120', ExtraLarge='200'}"
+                                                HeightRequest="{markups:OnScreenSize ExtraSmall='70', Small='80', Medium='100', Large='120', ExtraLarge='200'}"
+                                                Aspect="Fill">
+                                            </Image>
+                                        </Border>
+                                        <Label
+                                            FontSize="{markups:OnScreenSize ExtraSmall='12', Small='12', Medium='15', Large='24', ExtraLarge='20'}"
+                                            AbsoluteLayout.LayoutBounds="105,5,AutoSize,AutoSize"
+                                            HorizontalOptions="Start"
+                                            MaximumWidthRequest="{markups:OnScreenSize ExtraSmall='120', Small='120', Medium='175', Large='200', ExtraLarge='300'}"
+                                            FontAttributes="Bold"
+                                            TextColor="#52AB98"
+                                            Text="{Binding Title}"
+                                            LineBreakMode="WordWrap" />
+                                        <Label
+                                            FontSize="{markups:OnScreenSize ExtraSmall='10', Small='10', Medium='13', Large='16', ExtraLarge='20'}"
+                                            TextColor="#52AB98"
+                                            FontAttributes="Bold"
+                                            Margin="0,0,10,0"
+                                            AbsoluteLayout.LayoutFlags="XProportional"
+                                            AbsoluteLayout.LayoutBounds="1,80,AutoSize,AutoSize"
+                                            HorizontalOptions="End">
+                                            <Label.Text>
+                                                <MultiBinding
+                                                    StringFormat="{}{0:dd.MM.yyyy} - {1:dd.MM.yyyy}">
+                                                    <Binding
+                                                        Path="StartDate" />
+                                                    <Binding
+                                                        Path="EndDate" />
+                                                </MultiBinding>
+                                            </Label.Text>
+                                        </Label>
+                                    </AbsoluteLayout>
                                 </Border>
-                                <Label
-                                    FontSize="{markups:OnScreenSize ExtraSmall='12', Small='12', Medium='15', Large='24', ExtraLarge='20'}"
-                                    AbsoluteLayout.LayoutBounds="105,5,AutoSize,AutoSize"
-                                    HorizontalOptions="Start"
-                                    MaximumWidthRequest="{markups:OnScreenSize ExtraSmall='120', Small='120', Medium='175', Large='200', ExtraLarge='300'}"
-                                    FontAttributes="Bold"
-                                    TextColor="#52AB98"
-                                    Text="{Binding Title}"
-                                    LineBreakMode="WordWrap" />
-                                <Label
-                                    FontSize="{markups:OnScreenSize ExtraSmall='10', Small='10', Medium='13', Large='16', ExtraLarge='20'}"
-                                    TextColor="#52AB98"
-                                    FontAttributes="Bold"
-                                    Margin="0,0,10,0"
-                                    AbsoluteLayout.LayoutFlags="XProportional"
-                                    AbsoluteLayout.LayoutBounds="1,80,AutoSize,AutoSize"
-                                    HorizontalOptions="End">
-                                    <Label.Text>
-                                        <MultiBinding
-                                            StringFormat="{}{0:dd.MM.yyyy} - {1:dd.MM.yyyy}">
-                                            <Binding
-                                                Path="StartDate" />
-                                            <Binding
-                                                Path="EndDate" />
-                                        </MultiBinding>
-                                    </Label.Text>
-                                </Label>
-                            </AbsoluteLayout>
-                        </Border>
-                    </DataTemplate>
-                </CollectionView.ItemTemplate>
-            </CollectionView>
-        </Border>
-    </VerticalStackLayout>
+                            </Border>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </RefreshView>
+        </StackLayout>
+    </ScrollView>
 </ContentPage>

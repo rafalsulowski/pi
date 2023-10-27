@@ -79,7 +79,7 @@
                             FontAttributes="Bold"
                             FontSize="{markups:OnScreenSize ExtraSmall='12', Small='15', Medium='17', Large='24', ExtraLarge='35'}"
                             Format="dd/MM/yyyy"
-                            Date="{Binding StartDate}"
+                            Date="{Binding StopDate}"
                             MinimumDate="01/01/2023" />
                     </Border>
                 </HorizontalStackLayout>

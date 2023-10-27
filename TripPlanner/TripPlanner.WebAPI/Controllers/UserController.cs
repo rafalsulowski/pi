@@ -66,6 +66,13 @@ namespace TripPlanner.WebAPI.Controllers
             return Ok(tours);
         }
 
+        [HttpGet("{userId}/GetFriends")]
+        public async Task<ActionResult<RepositoryResponse<List<ExtendParticipantDTO>>>> GetFriends(int userId)
+        {
+            RepositoryResponse<List<ExtendParticipantDTO>> response = await _UserService.GetFriends(userId);
+            return Ok(new RepositoryResponse<List<ExtendParticipantDTO>> { Data = response.Data, Message = "Ok", Success = true });
+        }
+
         [HttpGet("{UserId}/GetWithCheckLists")]
         public async Task<ActionResult<RepositoryResponse<UserDTO>>> GetWithCheckLists(int UserId)
         {

@@ -6,63 +6,55 @@ using CommunityToolkit.Maui.Views;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
 using TripPlanner.Models.DTO.TourDTOs;
-using TripPlanner.Models.DTO.UserDTOs;
 using TripPlanner.Services;
 using TripPlanner.Views.ParticipantsListViews;
 
 namespace TripPlanner.ViewModels
 {
 
-    [QueryProperty("passTour", "Tour")]
+    [QueryProperty("passTourId", "TourId")]
     public partial class ParticipantsViewModel : ObservableObject, IQueryAttributable
     {
         private readonly Configuration m_Configuration;
         private readonly TourService m_TourService;
+        private ObservableCollection<ExtendParticipantDTO> ParticipantsRef;
 
         [ObservableProperty]
         TourDTO tour;
+        
+        [ObservableProperty]
+        int tourId;
 
         [ObservableProperty]
-        string searchExpression;
+        bool refresh;
 
         [ObservableProperty]
         ObservableCollection<ExtendParticipantDTO> participants;
-
-        [ObservableProperty]
-        ObservableCollection<ExtendParticipantDTO> participantsRef;
 
         public ParticipantsViewModel(Configuration configuration, TourService tourService)
         {
             m_Configuration = configuration;
             m_TourService = tourService;
-
             Participants = new ObservableCollection<ExtendParticipantDTO>();
             ParticipantsRef = new ObservableCollection<ExtendParticipantDTO>();
         }
 
-        public void ApplyQueryAttributes(IDictionary<string, object> query)
+        public async void ApplyQueryAttributes(IDictionary<string, object> query)
         {
-            Tour = (TourDTO)query["passTour"];
-
-            if(Tour == null)
-            {
-                Shell.Current.CurrentPage.DisplayAlert("Awaria", "Niespodziewany brak danych o wyjeździe!", "Ok :(");
-                return;
-            }
-            else
-            {
-                Participants = m_TourService.GetParticipants(Tour.Id).Result.Data;
-                ParticipantsRef = Participants;
-            }
-        }
+            TourId = (int)query["passTourId"];
+            Tour = m_TourService.GetTourById(TourId).Result;
+            LoadData();
+        }   
 
         [RelayCommand]
         async Task GoBack()
         {
             var navigationParameter = new Dictionary<string, object>
             {
-                { "passTour",  Tour}
+                { "passTourId",  Tour.Id}
             };
             await Shell.Current.GoToAsync($"Tour", navigationParameter);
         }
@@ -70,7 +62,7 @@ namespace TripPlanner.ViewModels
         [RelayCommand]
         async Task Add()
         {
-            var result = await Shell.Current.CurrentPage.ShowPopupAsync(new AddParticipantPopup(Tour, Tour.InviteLink));
+            var result = await Shell.Current.CurrentPage.ShowPopupAsync(new AddParticipantPopup(Tour));
         }
 
         [RelayCommand]
@@ -79,9 +71,12 @@ namespace TripPlanner.ViewModels
         }
 
         [RelayCommand]
-        public async Task ParticipantSearching()
+        public async Task ParticipantSearching(string query)
         {
-            ParticipantsRef = Participants.Where(i => i.FullName.Contains(SearchExpression)).ToObservableCollection();
+            if (string.IsNullOrEmpty(query))
+                Participants = ParticipantsRef;
+            else
+                Participants = ParticipantsRef.Where(i => i.FullName.StartsWith(query, StringComparison.OrdinalIgnoreCase))?.ToObservableCollection();
         }
 
         [RelayCommand]
@@ -94,7 +89,7 @@ namespace TripPlanner.ViewModels
             await Shell.Current.GoToAsync($"AddParticipantFromFriends", navigationParameter);
         }
 
-        [RelayCommand] //zrobic interface viewmodela z ta funkcja do wykorzystywania
+        [RelayCommand]
         public async Task CopyToClipboard()
         {
             await Clipboard.Default.SetTextAsync(Tour.InviteLink);
@@ -103,6 +98,30 @@ namespace TripPlanner.ViewModels
             await confirmCopyToast.Show();
         }
 
+        [RelayCommand]
+        async Task RefreshView()
+        {
+            Refresh = true;
+            LoadData();
 
+            var confirmCopyToast = Toast.Make("Odświerzono listę uczestników", ToastDuration.Short, 14);
+            await confirmCopyToast.Show();
+            Refresh = false;
+        }
+
+        private async void LoadData()
+        {
+            var value = m_TourService.GetTourExtendParticipant(Tour.Id).Result;
+
+            if (value is null)
+            {
+                await Shell.Current.CurrentPage.DisplayAlert("Błąd", "Nie udało się pobrać listy uczestników wyjazdu", "Ok");
+            }
+            else
+            {
+                Participants = value.ToObservableCollection();
+                ParticipantsRef = value.ToObservableCollection();
+            }
+        }
     }
 }

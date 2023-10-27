@@ -11,7 +11,7 @@
         <VerticalStackLayout
             Spacing="10">
             <Grid
-                HeightRequest="{markups:OnScreenSize ExtraSmall='25', Small='25', Medium='30', Large='35', ExtraLarge='50'}"
+                RowDefinitions="Auto"
                 ColumnDefinitions="{markups:OnScreenSize ExtraSmall='25,*,25', Small='25,*,25', Medium='30,*,30', Large='35,*,35', ExtraLarge='50,*,50'}"
                 Margin="10,5,10,0">
                 <ImageButton

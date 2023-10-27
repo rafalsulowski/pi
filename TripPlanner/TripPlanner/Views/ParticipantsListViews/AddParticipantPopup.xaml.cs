@@ -7,10 +7,10 @@ namespace TripPlanner.Views.ParticipantsListViews;
 public partial class AddParticipantPopup : Popup
 {
     private TourDTO Tour;
-	public AddParticipantPopup(TourDTO tour, string linkToJoin)
+	public AddParticipantPopup(TourDTO tour)
 	{
 		InitializeComponent();
-        LabelLink.Text = linkToJoin;
+        LabelLink.Text = tour.InviteLink;
         Tour = tour;
     }
 
@@ -20,7 +20,7 @@ public partial class AddParticipantPopup : Popup
 
         var navigationParameter = new Dictionary<string, object>
             {
-                { "passTour",  Tour}
+                { "passTourId",  Tour.Id}
             };
         await Shell.Current.GoToAsync($"AddParticipantFromFriends", navigationParameter);
     }

@@ -6,12 +6,12 @@ namespace TripPlanner.Views.ChatViews;
 
 public partial class PeopleChatListPopups : Popup
 {
-	public PeopleChatListPopups(string title, List<string> participants)
+	public PeopleChatListPopups(string title, List<ExtendParticipantDTO> participants)
 	{
 		InitializeComponent();
         
         if(participants == null)
-            participants = new List<string>();
+            participants = new List<ExtendParticipantDTO>();
 
         m_Header.Text = title;
         m_List.ItemsSource = participants;

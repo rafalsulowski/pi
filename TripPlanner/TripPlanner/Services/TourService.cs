@@ -67,39 +67,25 @@ namespace TripPlanner.Services
             {
                 string json = JsonConvert.SerializeObject(tour);
                 StringContent httpContent = new StringContent(json, System.Text.Encoding.UTF8, "application/json");
-                HttpResponseMessage response = m_HttpClient.PostAsync($"{m_Configuration.WebApiUrl}/Tour/Create", httpContent).Result;
-                RepositoryResponse<int> resp = await response.Content.ReadFromJsonAsync<RepositoryResponse<int>>();
-                if (response.IsSuccessStatusCode)
+                HttpResponseMessage response = m_HttpClient.PostAsync($"{m_Configuration.WebApiUrl}/Tour", httpContent).Result;
+                if(response.IsSuccessStatusCode)
                 {
-                    return new RepositoryResponse<int> { Data = resp.Data, Message = "", Success = true };
+                    RepositoryResponse<int> resp = await response.Content.ReadFromJsonAsync<RepositoryResponse<int>>();
+                    if (resp.Success)
+                    {
+                        return new RepositoryResponse<int> { Data = resp.Data, Message = "", Success = true };
+                    }
+                    else
+                        return new RepositoryResponse<int> { Data = -1, Message = resp.Message, Success = false };
                 }
                 else
-                    return new RepositoryResponse<int> { Data = -1, Message = resp.Message, Success = false };
+                    return new RepositoryResponse<int> { Data = -1, Message = "Błąd serwera podczas tworzenia nowej wycieczki", Success = false };
 
             }
             catch (Exception e)
             {
-                return new RepositoryResponse<int> { Data = -1, Message = $"Wyjątek podczas tworzenia wycieczki. Message = {e.Message}", Success = false };
+                return new RepositoryResponse<int> { Data = -1, Message = $"Wyjątek podczas tworzenia wycieczki. Wiadomość od serwera = {e.Message}", Success = false };
             }
-        }
-
-
-        public async Task<List<string>> GetTourParticipantsNames(int tourId)
-        {
-            //try
-            //{
-            //    HttpResponseMessage response = m_HttpClient.GetAsync($"{m_Configuration.WebApiUrl}/Tour/GetUserTours/{userId}").Result;
-            //    if (response.IsSuccessStatusCode)
-            //    {
-            //        var tours = await response.Content.ReadFromJsonAsync<List<TourDTO>>();
-            //        return tours;
-            //    }
-            //}
-            //catch (Exception e) { }
-
-            //return null;
-
-            return new List<string> { "Adam", "Michał", "Alicja", "Kuba", "Rafał", "Maris" };
         }
 
         public async Task<RepositoryResponse<bool>> AddParticipant(int tourId, int userId)
@@ -112,225 +98,48 @@ namespace TripPlanner.Services
             };
         }
 
-
-
-
-        public async Task<RepositoryResponse<ObservableCollection<ExtendParticipantDTO>>> GetParticipants(int tourId)
+        public async Task<List<ExtendParticipantDTO>> GetTourExtendParticipant(int tourId)
         {
-            //try
-            //{
-            //    HttpResponseMessage response = m_HttpClient.GetAsync($"{m_Configuration.WebApiUrl}/Tour/GetUserTours/{userId}").Result;
-            //    if (response.IsSuccessStatusCode)
-            //    {
-            //        var tours = await response.Content.ReadFromJsonAsync<List<ExtendParticipantDTO>>();
-
-            //        return new WebApiResponse<ObservableCollection<ExtendParticipantDTO>> { Data = tours.ToObservableCollection(), Success = true, Message = "" };
-            //    }
-            //}
-            //catch (Exception e) { }
-
-            //return null;
-
-            return new RepositoryResponse<ObservableCollection<ExtendParticipantDTO>>
+            try
             {
-                Success = true,
-                Message = "",
-                Data = new ObservableCollection<ExtendParticipantDTO>
+                HttpResponseMessage response = m_HttpClient.GetAsync($"{m_Configuration.WebApiUrl}/Tour/{tourId}/GetExtendParticipants").Result;
+                if (response.IsSuccessStatusCode)
                 {
-                    new ExtendParticipantDTO
+                    var tour = await response.Content.ReadFromJsonAsync<RepositoryResponse<List<ExtendParticipantDTO>>>();
+
+                    if (tour.Success)
                     {
-                        Id = 1,
-                        FullName = "Rafał Sulowski",
-                        DateOfBirth = new DateTime(2001, 2, 2),
-                        City = "Lublin",
-                        Email = "rmsulowksi@gmail.com",
-                        Age = DateTime.Now.Year - new DateTime(2001, 2, 2).Year,
-                        IsOrganizer = true,
-                        Nickname = "Prezes",
-                        Order = 1
-                    },
-                    new ExtendParticipantDTO
-                    {
-                        Id = 1,
-                        FullName = "Maria Gut",
-                        DateOfBirth = new DateTime(2002, 2, 22),
-                        City = "Lublin",
-                        Email = "gut22@gmail.com",
-                        Age = DateTime.Now.Year - new DateTime(2002, 2, 2).Year,
-                        IsOrganizer = false,
-                        Nickname = "Maris",
-                        Order = 2
-                    },
-                    new ExtendParticipantDTO
-                    {
-                        Id = 1,
-                        FullName = "Krystyna Gut",
-                        DateOfBirth = new DateTime(2002, 2, 22),
-                        City = "Lublin",
-                        Email = "gutkry22@gmail.com",
-                        Age = DateTime.Now.Year - new DateTime(2002, 2, 2).Year,
-                        IsOrganizer = false,
-                        Nickname = "Kris",
-                        Order = 3
-                    },
-                    new ExtendParticipantDTO
-                    {
-                        Id = 1,
-                        FullName = "Zuzia Popiolek",
-                        DateOfBirth = new DateTime(2001, 4, 2),
-                        City = "Lublin",
-                        Email = "zuzix@gmail.com",
-                        Age = DateTime.Now.Year - new DateTime(2001, 2, 2).Year,
-                        IsOrganizer = false,
-                        Nickname = "Bubix",
-                        Order = 4
-                    },
-                    new ExtendParticipantDTO
-                    {
-                        Id = 1,
-                        FullName = "Rafał Sulowski",
-                        DateOfBirth = new DateTime(2001, 2, 2),
-                        City = "Lublin",
-                        Email = "rmsulowksi@gmail.com",
-                        Age = DateTime.Now.Year - new DateTime(2001, 2, 2).Year,
-                        IsOrganizer = true,
-                        Nickname = "Prezes",
-                        Order = 5
-                    },
-                    new ExtendParticipantDTO
-                    {
-                        Id = 1,
-                        FullName = "Maria Gut",
-                        DateOfBirth = new DateTime(2002, 2, 22),
-                        City = "Lublin",
-                        Email = "gut22@gmail.com",
-                        Age = DateTime.Now.Year - new DateTime(2002, 2, 2).Year,
-                        IsOrganizer = false,
-                        Nickname = "Maris",
-                        Order = 6
-                    },
-                    new ExtendParticipantDTO
-                    {
-                        Id = 1,
-                        FullName = "Krystyna Gut",
-                        DateOfBirth = new DateTime(2002, 2, 22),
-                        City = "Lublin",
-                        Email = "gutkry22@gmail.com",
-                        Age = DateTime.Now.Year - new DateTime(2002, 2, 2).Year,
-                        IsOrganizer = false,
-                        Nickname = "Kris",
-                        Order = 7
-                    },
-                    new ExtendParticipantDTO
-                    {
-                        Id = 1,
-                        FullName = "Zuzia Popiolek",
-                        DateOfBirth = new DateTime(2001, 4, 2),
-                        City = "Lublin",
-                        Email = "zuzix@gmail.com",
-                        Age = DateTime.Now.Year - new DateTime(2001, 2, 2).Year,
-                        IsOrganizer = false,
-                        Nickname = "Bubix",
-                        Order = 8
-                    },
-                    new ExtendParticipantDTO
-                    {
-                        Id = 1,
-                        FullName = "Rafał Sulowski",
-                        DateOfBirth = new DateTime(2001, 2, 2),
-                        City = "Lublin",
-                        Email = "rmsulowksi@gmail.com",
-                        Age = DateTime.Now.Year - new DateTime(2001, 2, 2).Year,
-                        IsOrganizer = true,
-                        Nickname = "Prezes",
-                        Order = 9
-                    },
-                    new ExtendParticipantDTO
-                    {
-                        Id = 1,
-                        FullName = "Maria Gut",
-                        DateOfBirth = new DateTime(2002, 2, 22),
-                        City = "Lublin",
-                        Email = "gut22@gmail.com",
-                        Age = DateTime.Now.Year - new DateTime(2002, 2, 2).Year,
-                        IsOrganizer = false,
-                        Nickname = "Maris",
-                        Order = 10
-                    },
-                    new ExtendParticipantDTO
-                    {
-                        Id = 1,
-                        FullName = "Krystyna Gut",
-                        DateOfBirth = new DateTime(2002, 2, 22),
-                        City = "Lublin",
-                        Email = "gutkry22@gmail.com",
-                        Age = DateTime.Now.Year - new DateTime(2002, 2, 2).Year,
-                        IsOrganizer = false,
-                        Nickname = "Kris",
-                        Order = 11
-                    },
-                    new ExtendParticipantDTO
-                    {
-                        Id = 1,
-                        FullName = "Zuzia Popiolek",
-                        DateOfBirth = new DateTime(2001, 4, 2),
-                        City = "Lublin",
-                        Email = "zuzix@gmail.com",
-                        Age = DateTime.Now.Year - new DateTime(2001, 2, 2).Year,
-                        IsOrganizer = false,
-                        Nickname = "Bubix",
-                        Order = 12
-                    },
-                    new ExtendParticipantDTO
-                    {
-                        Id = 1,
-                        FullName = "Rafał Sulowski",
-                        DateOfBirth = new DateTime(2001, 2, 2),
-                        City = "Lublin",
-                        Email = "rmsulowksi@gmail.com",
-                        Age = DateTime.Now.Year - new DateTime(2001, 2, 2).Year,
-                        IsOrganizer = true,
-                        Nickname = "Prezes",
-                        Order = 13
-                    },
-                    new ExtendParticipantDTO
-                    {
-                        Id = 1,
-                        FullName = "Maria Gut",
-                        DateOfBirth = new DateTime(2002, 2, 22),
-                        City = "Lublin",
-                        Email = "gut22@gmail.com",
-                        Age = DateTime.Now.Year - new DateTime(2002, 2, 2).Year,
-                        IsOrganizer = false,
-                        Nickname = "Maris",
-                        Order = 14
-                    },
-                    new ExtendParticipantDTO
-                    {
-                        Id = 1,
-                        FullName = "Krystyna Gut",
-                        DateOfBirth = new DateTime(2002, 2, 22),
-                        City = "Lublin",
-                        Email = "gutkry22@gmail.com",
-                        Age = DateTime.Now.Year - new DateTime(2002, 2, 2).Year,
-                        IsOrganizer = false,
-                        Nickname = "Kris",
-                        Order = 15
-                    },
-                    new ExtendParticipantDTO
-                    {
-                        Id = 1,
-                        FullName = "Zuzia Popiolek",
-                        DateOfBirth = new DateTime(2001, 4, 2),
-                        City = "Lublin",
-                        Email = "zuzix@gmail.com",
-                        Age = DateTime.Now.Year - new DateTime(2001, 2, 2).Year,
-                        IsOrganizer = false,
-                        Nickname = "Bubix",
-                        Order = 16
-                    },
+                        return tour.Data?.ToList();
+                    }
+                    else
+                        return null;
                 }
-            };
+                else
+                    return null;
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
+
+        public async Task<List<string>> GetTourParticipantsNames(int tourId)
+        {
+            try
+            {
+                HttpResponseMessage response = m_HttpClient.GetAsync($"{m_Configuration.WebApiUrl}/Tour/{tourId}/GetParticipantsNames").Result;
+                if (response.IsSuccessStatusCode)
+                {
+                    List<string> tour = await response.Content.ReadFromJsonAsync<List<string>>();
+                    return tour;
+                }
+                else
+                    return null;
+            }
+            catch (Exception)
+            {
+                return null;
+            }
         }
     }
 }

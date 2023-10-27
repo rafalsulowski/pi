@@ -30,7 +30,7 @@ public partial class ChatAdditionalMenuPopup : Popup
 
     async void ShowPeopleOnChat(object sender, EventArgs args)
     {
-        var res = m_TourService.GetTourParticipantsNames(Tour.Id);
+        var res = m_TourService.GetTourExtendParticipant(Tour.Id);
 
         if (res.Result != null)
         {

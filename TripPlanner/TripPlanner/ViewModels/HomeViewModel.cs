@@ -1,4 +1,6 @@
-﻿using CommunityToolkit.Maui.Core.Extensions;
+﻿using CommunityToolkit.Maui.Alerts;
+using CommunityToolkit.Maui.Core;
+using CommunityToolkit.Maui.Core.Extensions;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using System.Collections.ObjectModel;
@@ -17,17 +19,18 @@ namespace TripPlanner.ViewModels
 
         [ObservableProperty]
         bool emptyTours;
+        
+        [ObservableProperty]
+        bool refresh;
+
 
         public HomeViewModel(Configuration configuration, UserService userService)
         {
             m_Configuration = configuration;
             m_UserService = userService;
-
-            Tours = m_UserService.GetToursOfUser(m_Configuration.User.Id).Result.ToList();
-            if(Tours.Count == 0 ) 
-            {
-                emptyTours = true;
-            }
+            Refresh = false;
+            EmptyTours = false;
+            LoadData();
         }
         
         [RelayCommand]
@@ -47,7 +50,7 @@ namespace TripPlanner.ViewModels
         {
             var navigationParameter = new Dictionary<string, object>
             {
-                { "passTour",  tour}
+                { "passTourId",  tour.Id}
             };
             await Shell.Current.GoToAsync($"Tour", navigationParameter);
         }
@@ -56,6 +59,28 @@ namespace TripPlanner.ViewModels
         async Task ShowNotification()
         {
             await Shell.Current.GoToAsync("Notifications");
-        }        
+        }
+
+        [RelayCommand]
+        async Task RefreshView()
+        {
+            Refresh = true;
+            LoadData();
+
+            var confirmCopyToast = Toast.Make("Odświerzono listę wycieczek", ToastDuration.Short, 14);
+            await confirmCopyToast.Show();
+            Refresh = false;
+        }
+
+        private void LoadData()
+        {
+            Tours = m_UserService.GetToursOfUser(m_Configuration.User.Id).Result.ToList();
+            if (Tours.Count == 0)
+            {
+                EmptyTours = true;
+            }
+            else
+                EmptyTours = false;
+        }
     }
 }

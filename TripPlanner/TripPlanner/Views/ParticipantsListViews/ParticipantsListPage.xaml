@@ -3,24 +3,22 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="TripPlanner.Views.ParticipantsListViews.ParticipantsListPage"
              xmlns:localTemplates="clr-namespace:TripPlanner.DataTemplates"
+             xmlns:markups="clr-namespace:OnScreenSizeMarkup.Maui;assembly=OnScreenSizeMarkup.Maui"
              xmlns:viewmodel="clr-namespace:TripPlanner.ViewModels"
              x:DataType="viewmodel:ParticipantsViewModel"
-             BackgroundColor="{AppThemeBinding Light=white, Dark=black}"
              Shell.NavBarIsVisible="False"
              Shell.TabBarIsVisible="False">
 
     <ContentPage.Resources>
         <DataTemplate x:Key="OrganizerParticipant">
             <VerticalStackLayout
-                WidthRequest="260"
-                Margin="0,0,0,5"
                 HorizontalOptions="Center">
                 <HorizontalStackLayout 
                     Spacing="5">
                     <Label
                         FontAttributes="Bold"
-                        WidthRequest="230"
-                        FontSize="18"
+                        WidthRequest="{markups:OnScreenSize ExtraSmall='150', Small='190', Medium='230', Large='300', ExtraLarge='400'}"
+                        FontSize="{markups:OnScreenSize ExtraSmall='14', Small='16', Medium='18', Large='20', ExtraLarge='25'}"
                         TextColor="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource Secondary}}">
                         <Label.Text>
                             <MultiBinding StringFormat="{}{0}. {1}">
@@ -30,12 +28,12 @@
                         </Label.Text>
                     </Label>
                     <Image
-                        WidthRequest="25"
+                        HeightRequest="{markups:OnScreenSize ExtraSmall='25', Small='25', Medium='25', Large='35', ExtraLarge='50'}"
                         Source="organizer_sec.png"/>
                 </HorizontalStackLayout>
                 <Label
-                    FontSize="16"
-                    MaximumWidthRequest="250"
+                    FontSize="{markups:OnScreenSize ExtraSmall='12', Small='14', Medium='16', Large='18', ExtraLarge='22'}"
+                    WidthRequest="{markups:OnScreenSize ExtraSmall='180', Small='210', Medium='260', Large='340', ExtraLarge='455'}"
                     TextColor="{AppThemeBinding Light=#939393, Dark=white}">
                     <Label.Text>
                         <MultiBinding StringFormat="{}{0}, wiek {1}, {2}">
@@ -50,36 +48,41 @@
 
         <DataTemplate x:Key="NormalParticipant">
             <VerticalStackLayout
-                WidthRequest="260"
-                Margin="0,0,0,5"
                 HorizontalOptions="Center">
-                <HorizontalStackLayout 
+                <HorizontalStackLayout
                     Spacing="5">
                     <Label
                         FontAttributes="Bold"
-                        WidthRequest="230"
-                        FontSize="18"
+                        WidthRequest="{markups:OnScreenSize ExtraSmall='150', Small='190', Medium='230', Large='300', ExtraLarge='400'}"
+                        FontSize="{markups:OnScreenSize ExtraSmall='14', Small='16', Medium='18', Large='20', ExtraLarge='25'}"
                         TextColor="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource Secondary}}">
                         <Label.Text>
-                            <MultiBinding StringFormat="{}{0}. {1}">
-                                <Binding Path="Order"/>
-                                <Binding Path="FullName"/>
+                            <MultiBinding
+                                StringFormat="{}{0}. {1}">
+                                <Binding
+                                    Path="Order" />
+                                <Binding
+                                    Path="FullName" />
                             </MultiBinding>
                         </Label.Text>
                     </Label>
                     <Image
-                        WidthRequest="25"
-                        Source="{AppThemeBinding Light=organizer_gray.png, Dark=organizer_dt.png}"/>
+                        HeightRequest="{markups:OnScreenSize ExtraSmall='25', Small='25', Medium='25', Large='35', ExtraLarge='50'}"
+                        Source="{AppThemeBinding Light=organizer_gray.png, Dark=organizer_dt.png}" />
                 </HorizontalStackLayout>
                 <Label
-                    FontSize="16"
-                    MaximumWidthRequest="250"
+                    FontSize="{markups:OnScreenSize ExtraSmall='12', Small='14', Medium='16', Large='18', ExtraLarge='22'}"
+                    WidthRequest="{markups:OnScreenSize ExtraSmall='180', Small='210', Medium='260', Large='340', ExtraLarge='455'}"
                     TextColor="{AppThemeBinding Light=#939393, Dark=white}">
                     <Label.Text>
-                        <MultiBinding StringFormat="{}{0}, wiek {1}, {2}">
-                            <Binding Path="Email"/>
-                            <Binding Path="Age"/>
-                            <Binding Path="City"/>
+                        <MultiBinding
+                            StringFormat="{}{0}, wiek {1}, {2}">
+                            <Binding
+                                Path="Email" />
+                            <Binding
+                                Path="Age" />
+                            <Binding
+                                Path="City" />
                         </MultiBinding>
                     </Label.Text>
                 </Label>
@@ -92,103 +95,88 @@
     </ContentPage.Resources>
 
 
-    <Grid
-        RowDefinitions="Auto,Auto,Auto,*,Auto" 
-        RowSpacing="15">
+    <StackLayout
+        Orientation="Vertical"
+        Spacing="10">
         <Grid
-            ColumnDefinitions="Auto,*"
-            Grid.Row="0"
-            Margin="10,10,10,5">
+            RowDefinitions="Auto"
+            ColumnDefinitions="{markups:OnScreenSize ExtraSmall='25,*,25', Small='25,*,25', Medium='30,*,30', Large='35,*,35', ExtraLarge='50,*,50'}"
+            Margin="10,5,10,0">
             <ImageButton
                 Grid.Column="0"
-                HorizontalOptions="Start"
                 Source="{AppThemeBinding Light=arrow_back_wt.png, Dark=arrow_back_dt.png}"
                 Command="{Binding GoBackCommand}"
-                HeightRequest="35"
-                WidthRequest="35"/>
+                HeightRequest="{markups:OnScreenSize ExtraSmall='25', Small='25', Medium='30', Large='35', ExtraLarge='50'}" />
+
             <Label
                 Grid.Column="1"
                 HorizontalOptions="Center"
-                FontSize="20"
+                FontSize="{markups:OnScreenSize ExtraSmall='12', Small='15', Medium='18', Large='24', ExtraLarge='35'}"
                 VerticalOptions="Center">
                 <Label.Text>
-                    <MultiBinding StringFormat="{}{0} - {1}">
-                        <Binding Source="Uczestnicy wyjazdu"/>
-                        <Binding Path="Tour.Title"/>
+                    <MultiBinding
+                        StringFormat="{}{0} - {1}">
+                        <Binding
+                            Source="Uczestnicy wyjazdu" />
+                        <Binding
+                            Path="Tour.Title" />
                     </MultiBinding>
                 </Label.Text>
             </Label>
         </Grid>
+
         <Border
-            Margin="10,0,10,0"
-            Grid.Row="1"
+            Margin="{markups:OnScreenSize ExtraSmall='10,0,10,0', Small='10,0,10,0', Medium='10,0,10,0', Large='30,0,30,0', ExtraLarge='50,0,50,0'}"
             Stroke="{AppThemeBinding Light=#939393, Dark=transparent}"
             BackgroundColor="{AppThemeBinding Light=white, Dark=#939393}"
-            StrokeShape="RoundRectangle 25,25,25,25"
-            Padding="15,0,15,0">
-            <Grid
-                ColumnDefinitions="*, 22"
-                ColumnSpacing="10">
-                <Editor
-                    Grid.Column="0"
-                    HorizontalOptions="Start"
-                    Keyboard="Chat"
-                    Placeholder="Wyszukaj uczestnika"
-                    AutoSize="TextChanges"
-                    TextColor="{AppThemeBinding Light=#939393, Dark=white}"
-                    PlaceholderColor="{AppThemeBinding Light=#939393, Dark=white}"
-                    FontAttributes="Bold"
-                    MaxLength="100"
-                    Text="{Binding SearchExpression}"
-                    FontSize="20"
-                    VerticalOptions="FillAndExpand"
-                    VerticalTextAlignment="Center"/>
-                <Image
-                    Grid.Column="1"
-                    HorizontalOptions="End"
-                    WidthRequest="22"
-                    Source="{AppThemeBinding Light=search_gray.png, Dark=search_dt.png}">
-                    <Image.GestureRecognizers>
-                        <TapGestureRecognizer Command="{Binding ParticipantSearchingCommand}"></TapGestureRecognizer>
-                    </Image.GestureRecognizers>
-                </Image>
-            </Grid>
+            StrokeShape="RoundRectangle 25,25,25,25">
+            <SearchBar
+                FontSize="{markups:OnScreenSize ExtraSmall='13', Small='14', Medium='16', Large='18', ExtraLarge='20'}"
+                x:Name="searchBar"
+                SearchCommand="{Binding ParticipantSearchingCommand}"
+                SearchCommandParameter="{Binding Text, Source={x:Reference searchBar}}"
+                CancelButtonColor="#939393"
+                Placeholder="Wyszukaj uczestnika">
+            </SearchBar>
         </Border>
-        <Grid
+
+        <Border
             Margin="10,0,10,0"
-            Grid.Row="2"
-            ColumnDefinitions="Auto,*,Auto,Auto"
-            ColumnSpacing="5">
-            <Border
-                Grid.Column="0"
-                Padding="15,5,15,5"
-                BackgroundColor="{AppThemeBinding Light=transparent, Dark={StaticResource Secondary}}"
-                Stroke="{StaticResource Secondary}"
-                StrokeShape="RoundRectangle 25,25,25,25">
-                <Border.GestureRecognizers>
-                    <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:ParticipantsViewModel}}, Path=AddCommand}">
-                    </TapGestureRecognizer>
-                </Border.GestureRecognizers>
-                <Label
+            HorizontalOptions="Start"
+            WidthRequest="100"
+            Padding="15,5,15,5"
+            BackgroundColor="{AppThemeBinding Light=transparent, Dark={StaticResource Secondary}}"
+            Stroke="{StaticResource Secondary}"
+            StrokeShape="RoundRectangle 25,25,25,25">
+            <Border.GestureRecognizers>
+                <TapGestureRecognizer
+                    Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:ParticipantsViewModel}}, Path=AddCommand}">
+                </TapGestureRecognizer>
+            </Border.GestureRecognizers>
+            <Label
+                HorizontalOptions="Center"
                 FontSize="18"
                 FontAttributes="Bold"
                 TextColor="{AppThemeBinding Light={StaticResource Secondary}, Dark=white}"
-                Text="Dodaj"/>
-            </Border>
-        </Grid>
+                Text="Dodaj" />
+        </Border>
 
-        <CollectionView
-            Grid.Row="3"
-            Margin="10,10,10,0"
-            ItemsSource="{Binding ParticipantsRef}"
-            ItemTemplate="{StaticResource ParticipantSelector}"
-            SelectionMode="None">
-            <CollectionView.ItemsLayout>
-                <LinearItemsLayout
-                    Orientation="Vertical"
-                    ItemSpacing="12" />
-            </CollectionView.ItemsLayout>
-        </CollectionView>
+        <RefreshView
+            IsRefreshing="{Binding Refresh}"
+            Command="{Binding RefreshViewCommand}"
+            Margin="10,10,10,0">
+            <CollectionView
+                EmptyView="Brak uczestników do wyświetlenia"
+                ItemsSource="{Binding Participants}"
+                ItemTemplate="{StaticResource ParticipantSelector}"
+                SelectionMode="None">
+                <CollectionView.ItemsLayout>
+                    <LinearItemsLayout
+                        Orientation="Vertical"
+                        ItemSpacing="20" />
+                </CollectionView.ItemsLayout>
+            </CollectionView>
+        </RefreshView>
 
         <HorizontalStackLayout
             HorizontalOptions="End"
@@ -208,5 +196,5 @@
                  Source="download_sec.png"/>
         </HorizontalStackLayout>
 
-    </Grid>
+    </StackLayout>
 </ContentPage>

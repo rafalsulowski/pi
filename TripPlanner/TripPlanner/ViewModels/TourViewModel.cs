@@ -14,6 +14,9 @@ namespace TripPlanner.ViewModels
 
 
         [ObservableProperty]
+        int tourId;
+
+        [ObservableProperty]
         TourDTO tour;
 
         public TourViewModel(TourService tourService, Configuration configuration)
@@ -24,7 +27,8 @@ namespace TripPlanner.ViewModels
 
         public void ApplyQueryAttributes(IDictionary<string, object> query)
         {
-            Tour = (TourDTO)query["passTour"];
+            TourId = (int)query["passTourId"];
+            Tour = m_TourService.GetTourById(TourId).Result;
         }
 
         [RelayCommand]
@@ -62,7 +66,7 @@ namespace TripPlanner.ViewModels
         {
             var navigationParameter = new Dictionary<string, object>
             {
-                { "passTour",  Tour}
+                { "passTourId",  TourId}
             };
             await Shell.Current.GoToAsync($"/Participants", navigationParameter);
         }
