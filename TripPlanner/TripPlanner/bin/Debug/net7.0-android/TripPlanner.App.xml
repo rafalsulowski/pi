@@ -4,6 +4,43 @@
         <name>TripPlanner.App</name>
     </assembly>
     <members>
+        <member name="T:TripPlanner.ViewModels.AddParticipantsViewModel">
+            <inheritdoc/>
+            <inheritdoc/>
+            <inheritdoc/>
+            <inheritdoc/>
+            <inheritdoc/>
+        </member>
+        <member name="P:TripPlanner.ViewModels.AddParticipantsViewModel.Refresh">
+            <inheritdoc cref="F:TripPlanner.ViewModels.AddParticipantsViewModel.refresh"/>
+        </member>
+        <member name="P:TripPlanner.ViewModels.AddParticipantsViewModel.Friends">
+            <inheritdoc cref="F:TripPlanner.ViewModels.AddParticipantsViewModel.friends"/>
+        </member>
+        <member name="F:TripPlanner.ViewModels.AddParticipantsViewModel.goBackCommand">
+            <summary>The backing field for <see cref="P:TripPlanner.ViewModels.AddParticipantsViewModel.GoBackCommand"/>.</summary>
+        </member>
+        <member name="P:TripPlanner.ViewModels.AddParticipantsViewModel.GoBackCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:TripPlanner.ViewModels.AddParticipantsViewModel.GoBack"/>.</summary>
+        </member>
+        <member name="F:TripPlanner.ViewModels.AddParticipantsViewModel.addCommand">
+            <summary>The backing field for <see cref="P:TripPlanner.ViewModels.AddParticipantsViewModel.AddCommand"/>.</summary>
+        </member>
+        <member name="P:TripPlanner.ViewModels.AddParticipantsViewModel.AddCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand`1"/> instance wrapping <see cref="M:TripPlanner.ViewModels.AddParticipantsViewModel.Add(TripPlanner.Models.DTO.UserDTOs.ExtendFriendDTO)"/>.</summary>
+        </member>
+        <member name="F:TripPlanner.ViewModels.AddParticipantsViewModel.participantSearchingCommand">
+            <summary>The backing field for <see cref="P:TripPlanner.ViewModels.AddParticipantsViewModel.ParticipantSearchingCommand"/>.</summary>
+        </member>
+        <member name="P:TripPlanner.ViewModels.AddParticipantsViewModel.ParticipantSearchingCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand`1"/> instance wrapping <see cref="M:TripPlanner.ViewModels.AddParticipantsViewModel.ParticipantSearching(System.String)"/>.</summary>
+        </member>
+        <member name="F:TripPlanner.ViewModels.AddParticipantsViewModel.refreshViewCommand">
+            <summary>The backing field for <see cref="P:TripPlanner.ViewModels.AddParticipantsViewModel.RefreshViewCommand"/>.</summary>
+        </member>
+        <member name="P:TripPlanner.ViewModels.AddParticipantsViewModel.RefreshViewCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:TripPlanner.ViewModels.AddParticipantsViewModel.RefreshView"/>.</summary>
+        </member>
         <member name="T:TripPlanner.ViewModels.CalendarViewModel">
             <inheritdoc/>
             <inheritdoc/>
@@ -257,6 +294,9 @@
             <inheritdoc/>
             <inheritdoc/>
             <inheritdoc/>
+            <inheritdoc/>
+            <inheritdoc/>
+            <inheritdoc/>
         </member>
         <member name="P:TripPlanner.ViewModels.ParticipantsViewModel.Tour">
             <inheritdoc cref="F:TripPlanner.ViewModels.ParticipantsViewModel.tour"/>
@@ -266,6 +306,9 @@
         </member>
         <member name="P:TripPlanner.ViewModels.ParticipantsViewModel.Refresh">
             <inheritdoc cref="F:TripPlanner.ViewModels.ParticipantsViewModel.refresh"/>
+        </member>
+        <member name="P:TripPlanner.ViewModels.ParticipantsViewModel.IsOrganizer">
+            <inheritdoc cref="F:TripPlanner.ViewModels.ParticipantsViewModel.isOrganizer"/>
         </member>
         <member name="P:TripPlanner.ViewModels.ParticipantsViewModel.Participants">
             <inheritdoc cref="F:TripPlanner.ViewModels.ParticipantsViewModel.participants"/>
@@ -299,6 +342,24 @@
         </member>
         <member name="P:TripPlanner.ViewModels.ParticipantsViewModel.GoToFriendsListCommand">
             <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:TripPlanner.ViewModels.ParticipantsViewModel.GoToFriendsList"/>.</summary>
+        </member>
+        <member name="F:TripPlanner.ViewModels.ParticipantsViewModel.deleteParticipantCommand">
+            <summary>The backing field for <see cref="P:TripPlanner.ViewModels.ParticipantsViewModel.DeleteParticipantCommand"/>.</summary>
+        </member>
+        <member name="P:TripPlanner.ViewModels.ParticipantsViewModel.DeleteParticipantCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand`1"/> instance wrapping <see cref="M:TripPlanner.ViewModels.ParticipantsViewModel.DeleteParticipant(TripPlanner.Models.DTO.TourDTOs.ExtendParticipantDTO)"/>.</summary>
+        </member>
+        <member name="F:TripPlanner.ViewModels.ParticipantsViewModel.makeOrganizerCommand">
+            <summary>The backing field for <see cref="P:TripPlanner.ViewModels.ParticipantsViewModel.MakeOrganizerCommand"/>.</summary>
+        </member>
+        <member name="P:TripPlanner.ViewModels.ParticipantsViewModel.MakeOrganizerCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand`1"/> instance wrapping <see cref="M:TripPlanner.ViewModels.ParticipantsViewModel.MakeOrganizer(TripPlanner.Models.DTO.TourDTOs.ExtendParticipantDTO)"/>.</summary>
+        </member>
+        <member name="F:TripPlanner.ViewModels.ParticipantsViewModel.deleteOrganizerCommand">
+            <summary>The backing field for <see cref="P:TripPlanner.ViewModels.ParticipantsViewModel.DeleteOrganizerCommand"/>.</summary>
+        </member>
+        <member name="P:TripPlanner.ViewModels.ParticipantsViewModel.DeleteOrganizerCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand`1"/> instance wrapping <see cref="M:TripPlanner.ViewModels.ParticipantsViewModel.DeleteOrganizer(TripPlanner.Models.DTO.TourDTOs.ExtendParticipantDTO)"/>.</summary>
         </member>
         <member name="F:TripPlanner.ViewModels.ParticipantsViewModel.copyToClipboardCommand">
             <summary>The backing field for <see cref="P:TripPlanner.ViewModels.ParticipantsViewModel.CopyToClipboardCommand"/>.</summary>
@@ -490,6 +551,12 @@
             for all properties generated with <see cref="T:CommunityToolkit.Mvvm.ComponentModel.ObservablePropertyAttribute"/>.
             </summary>
         </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.Refresh">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "Refresh" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.Friends">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "Friends" generated properties.</summary>
+        </member>
         <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.Tour">
             <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "Tour" generated properties.</summary>
         </member>
@@ -541,11 +608,11 @@
         <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.EmptyTours">
             <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "EmptyTours" generated properties.</summary>
         </member>
-        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.Refresh">
-            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "Refresh" generated properties.</summary>
-        </member>
         <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.TourId">
             <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "TourId" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.IsOrganizer">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "IsOrganizer" generated properties.</summary>
         </member>
         <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.Participants">
             <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "Participants" generated properties.</summary>
@@ -558,6 +625,12 @@
             A helper type providing cached, reusable <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instances
             for all properties generated with <see cref="T:CommunityToolkit.Mvvm.ComponentModel.ObservablePropertyAttribute"/>.
             </summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.Refresh">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "Refresh" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.Friends">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "Friends" generated properties.</summary>
         </member>
         <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.Tour">
             <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "Tour" generated properties.</summary>
@@ -610,11 +683,11 @@
         <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.EmptyTours">
             <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "EmptyTours" generated properties.</summary>
         </member>
-        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.Refresh">
-            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "Refresh" generated properties.</summary>
-        </member>
         <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.TourId">
             <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "TourId" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.IsOrganizer">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "IsOrganizer" generated properties.</summary>
         </member>
         <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.Participants">
             <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "Participants" generated properties.</summary>

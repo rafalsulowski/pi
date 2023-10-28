@@ -10,83 +10,122 @@
              Shell.TabBarIsVisible="False">
 
     <ContentPage.Resources>
-        <DataTemplate x:Key="OrganizerParticipant">
-            <VerticalStackLayout
-                HorizontalOptions="Center">
-                <HorizontalStackLayout 
-                    Spacing="5">
+        <DataTemplate
+            x:Key="OrganizerParticipant">
+            <SwipeView>
+                <SwipeView.LeftItems>
+                    <SwipeItems>
+                        <SwipeItem
+                            Text="Usuń"
+                            IconImageSource="{AppThemeBinding Light=trash_wt.png, Dark=trash_dt.png}"
+                            BackgroundColor="LightPink"
+                            Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:ParticipantsViewModel}}, Path=DeleteParticipantCommand}"
+                            CommandParameter="{Binding .}" />
+                    </SwipeItems>
+                </SwipeView.LeftItems>
+                <VerticalStackLayout
+                    HorizontalOptions="Center">
+                    <HorizontalStackLayout 
+                        Spacing="5">
+                        <Label
+                            FontAttributes="Bold"
+                            WidthRequest="{markups:OnScreenSize ExtraSmall='150', Small='190', Medium='230', Large='300', ExtraLarge='400'}"
+                            FontSize="{markups:OnScreenSize ExtraSmall='14', Small='16', Medium='18', Large='20', ExtraLarge='25'}"
+                            TextColor="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource Secondary}}">
+                            <Label.Text>
+                                <MultiBinding StringFormat="{}{0}. {1}">
+                                    <Binding Path="Order"/>
+                                    <Binding Path="FullName"/>
+                                </MultiBinding>
+                            </Label.Text>
+                        </Label>
+                        <Image
+                            HeightRequest="{markups:OnScreenSize ExtraSmall='25', Small='25', Medium='25', Large='35', ExtraLarge='50'}"
+                            Source="organizer_sec.png">
+                            <Image.GestureRecognizers>
+                                <TapGestureRecognizer
+                                    Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:ParticipantsViewModel}}, Path=DeleteOrganizerCommand}"
+                                    CommandParameter="{Binding .}">
+                                </TapGestureRecognizer>
+                            </Image.GestureRecognizers>
+                        </Image>
+                    </HorizontalStackLayout>
                     <Label
-                        FontAttributes="Bold"
-                        WidthRequest="{markups:OnScreenSize ExtraSmall='150', Small='190', Medium='230', Large='300', ExtraLarge='400'}"
-                        FontSize="{markups:OnScreenSize ExtraSmall='14', Small='16', Medium='18', Large='20', ExtraLarge='25'}"
-                        TextColor="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource Secondary}}">
+                        FontSize="{markups:OnScreenSize ExtraSmall='12', Small='14', Medium='16', Large='18', ExtraLarge='22'}"
+                        WidthRequest="{markups:OnScreenSize ExtraSmall='180', Small='210', Medium='260', Large='340', ExtraLarge='455'}"
+                        TextColor="{AppThemeBinding Light=#939393, Dark=white}">
                         <Label.Text>
-                            <MultiBinding StringFormat="{}{0}. {1}">
-                                <Binding Path="Order"/>
-                                <Binding Path="FullName"/>
+                            <MultiBinding StringFormat="{}{0}, wiek {1}, {2}">
+                                <Binding Path="Email"/>
+                                <Binding Path="Age"/>
+                                <Binding Path="City"/>
                             </MultiBinding>
                         </Label.Text>
                     </Label>
-                    <Image
-                        HeightRequest="{markups:OnScreenSize ExtraSmall='25', Small='25', Medium='25', Large='35', ExtraLarge='50'}"
-                        Source="organizer_sec.png"/>
-                </HorizontalStackLayout>
-                <Label
-                    FontSize="{markups:OnScreenSize ExtraSmall='12', Small='14', Medium='16', Large='18', ExtraLarge='22'}"
-                    WidthRequest="{markups:OnScreenSize ExtraSmall='180', Small='210', Medium='260', Large='340', ExtraLarge='455'}"
-                    TextColor="{AppThemeBinding Light=#939393, Dark=white}">
-                    <Label.Text>
-                        <MultiBinding StringFormat="{}{0}, wiek {1}, {2}">
-                            <Binding Path="Email"/>
-                            <Binding Path="Age"/>
-                            <Binding Path="City"/>
-                        </MultiBinding>
-                    </Label.Text>
-                </Label>
-            </VerticalStackLayout>
+                </VerticalStackLayout>
+            </SwipeView>
         </DataTemplate>
 
         <DataTemplate x:Key="NormalParticipant">
-            <VerticalStackLayout
-                HorizontalOptions="Center">
-                <HorizontalStackLayout
-                    Spacing="5">
+            <SwipeView>
+                <SwipeView.LeftItems>
+                    <SwipeItems>
+                        <SwipeItem
+                            Text="Usuń"
+                            IconImageSource="{AppThemeBinding Light=trash_wt.png, Dark=trash_dt.png}"
+                            BackgroundColor="LightPink"
+                            Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:ParticipantsViewModel}}, Path=DeleteParticipantCommand}"
+                            CommandParameter="{Binding .}" />
+                    </SwipeItems>
+                </SwipeView.LeftItems>
+                <VerticalStackLayout
+                    HorizontalOptions="Center">
+                    <HorizontalStackLayout
+                        Spacing="5">
+                        <Label
+                            FontAttributes="Bold"
+                            WidthRequest="{markups:OnScreenSize ExtraSmall='150', Small='190', Medium='230', Large='300', ExtraLarge='400'}"
+                            FontSize="{markups:OnScreenSize ExtraSmall='14', Small='16', Medium='18', Large='20', ExtraLarge='25'}"
+                            TextColor="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource Secondary}}">
+                            <Label.Text>
+                                <MultiBinding
+                                    StringFormat="{}{0}. {1}">
+                                    <Binding
+                                        Path="Order" />
+                                    <Binding
+                                        Path="FullName" />
+                                </MultiBinding>
+                            </Label.Text>
+                        </Label>
+                        <Image
+                            HeightRequest="{markups:OnScreenSize ExtraSmall='25', Small='25', Medium='25', Large='35', ExtraLarge='50'}"
+                            Source="{AppThemeBinding Light=organizer_gray.png, Dark=organizer_dt.png}">
+                            <Image.GestureRecognizers>
+                                <TapGestureRecognizer
+                                    Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:ParticipantsViewModel}}, Path=MakeOrganizerCommand}"
+                                    CommandParameter="{Binding .}">
+                                </TapGestureRecognizer>
+                            </Image.GestureRecognizers>
+                        </Image>
+                    </HorizontalStackLayout>
                     <Label
-                        FontAttributes="Bold"
-                        WidthRequest="{markups:OnScreenSize ExtraSmall='150', Small='190', Medium='230', Large='300', ExtraLarge='400'}"
-                        FontSize="{markups:OnScreenSize ExtraSmall='14', Small='16', Medium='18', Large='20', ExtraLarge='25'}"
-                        TextColor="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource Secondary}}">
+                        FontSize="{markups:OnScreenSize ExtraSmall='12', Small='14', Medium='16', Large='18', ExtraLarge='22'}"
+                        WidthRequest="{markups:OnScreenSize ExtraSmall='180', Small='210', Medium='260', Large='340', ExtraLarge='455'}"
+                        TextColor="{AppThemeBinding Light=#939393, Dark=white}">
                         <Label.Text>
                             <MultiBinding
-                                StringFormat="{}{0}. {1}">
+                                StringFormat="{}{0}, wiek {1}, {2}">
                                 <Binding
-                                    Path="Order" />
+                                    Path="Email" />
                                 <Binding
-                                    Path="FullName" />
+                                    Path="Age" />
+                                <Binding
+                                    Path="City" />
                             </MultiBinding>
                         </Label.Text>
                     </Label>
-                    <Image
-                        HeightRequest="{markups:OnScreenSize ExtraSmall='25', Small='25', Medium='25', Large='35', ExtraLarge='50'}"
-                        Source="{AppThemeBinding Light=organizer_gray.png, Dark=organizer_dt.png}" />
-                </HorizontalStackLayout>
-                <Label
-                    FontSize="{markups:OnScreenSize ExtraSmall='12', Small='14', Medium='16', Large='18', ExtraLarge='22'}"
-                    WidthRequest="{markups:OnScreenSize ExtraSmall='180', Small='210', Medium='260', Large='340', ExtraLarge='455'}"
-                    TextColor="{AppThemeBinding Light=#939393, Dark=white}">
-                    <Label.Text>
-                        <MultiBinding
-                            StringFormat="{}{0}, wiek {1}, {2}">
-                            <Binding
-                                Path="Email" />
-                            <Binding
-                                Path="Age" />
-                            <Binding
-                                Path="City" />
-                        </MultiBinding>
-                    </Label.Text>
-                </Label>
-            </VerticalStackLayout>
+                </VerticalStackLayout>
+            </SwipeView>
         </DataTemplate>
 
         <localTemplates:ParticipantDataTemplateSelector x:Key="ParticipantSelector"
@@ -135,30 +174,10 @@
                 x:Name="searchBar"
                 SearchCommand="{Binding ParticipantSearchingCommand}"
                 SearchCommandParameter="{Binding Text, Source={x:Reference searchBar}}"
-                CancelButtonColor="#939393"
+                CancelButtonColor="{AppThemeBinding Light=#939393, Dark=white}"
+                TextColor="{AppThemeBinding Light=#939393, Dark=white}"
                 Placeholder="Wyszukaj uczestnika">
             </SearchBar>
-        </Border>
-
-        <Border
-            Margin="10,0,10,0"
-            HorizontalOptions="Start"
-            WidthRequest="100"
-            Padding="15,5,15,5"
-            BackgroundColor="{AppThemeBinding Light=transparent, Dark={StaticResource Secondary}}"
-            Stroke="{StaticResource Secondary}"
-            StrokeShape="RoundRectangle 25,25,25,25">
-            <Border.GestureRecognizers>
-                <TapGestureRecognizer
-                    Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:ParticipantsViewModel}}, Path=AddCommand}">
-                </TapGestureRecognizer>
-            </Border.GestureRecognizers>
-            <Label
-                HorizontalOptions="Center"
-                FontSize="18"
-                FontAttributes="Bold"
-                TextColor="{AppThemeBinding Light={StaticResource Secondary}, Dark=white}"
-                Text="Dodaj" />
         </Border>
 
         <RefreshView
@@ -175,12 +194,19 @@
                         Orientation="Vertical"
                         ItemSpacing="20" />
                 </CollectionView.ItemsLayout>
+                <CollectionView.Footer>
+                    <ImageButton
+                        IsVisible="{Binding IsOrganizer}"
+                        HorizontalOptions="Center"
+                        HeightRequest="{markups:OnScreenSize ExtraSmall='30', Small='35', Medium='40', Large='45', ExtraLarge='50'}"
+                        Command="{Binding AddCommand}"
+                        Source="{AppThemeBinding Light=plus_circle_pri.png, Dark=plus_circle_sec.png}" />
+                </CollectionView.Footer>
             </CollectionView>
         </RefreshView>
 
         <HorizontalStackLayout
             HorizontalOptions="End"
-            Margin="10"
             Grid.Row="4"
             Spacing="10">
             <HorizontalStackLayout.GestureRecognizers>

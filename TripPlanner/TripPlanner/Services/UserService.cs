@@ -65,29 +65,46 @@ namespace TripPlanner.Services
         }
 
 
-        public async Task<List<ExtendParticipantDTO>> GetFriends(int userId)
+        public async Task<List<ExtendFriendDTO>> GetFriends(int userId)
         {
             try
             {
                 HttpResponseMessage response = m_HttpClient.GetAsync($"{m_Configuration.WebApiUrl}/User/{userId}/GetFriends").Result;
                 if (response.IsSuccessStatusCode)
                 {
-                    var tour = await response.Content.ReadFromJsonAsync<RepositoryResponse<List<ExtendParticipantDTO>>>();
+                    var tour = await response.Content.ReadFromJsonAsync<RepositoryResponse<List<ExtendFriendDTO>>>();
 
                     if (tour.Success)
-                    {
                         return tour.Data?.ToList();
-                    }
-                    else
-                        return null;
                 }
-                else
-                    return null;
             }
             catch (Exception)
             {
-                return null;
             }
+
+            return null;
         }
+
+        public async Task<List<ExtendFriendDTO>> GetFriendsBasedOnTour(int userId, int tourId)
+        {
+            try
+            {
+                HttpResponseMessage response = m_HttpClient.GetAsync($"{m_Configuration.WebApiUrl}/User/{userId}/GetFriendsBasedOnTour/{tourId}").Result;
+                if (response.IsSuccessStatusCode)
+                {
+                    var tour = await response.Content.ReadFromJsonAsync<RepositoryResponse<List<ExtendFriendDTO>>>();
+
+                    if (tour.Success)
+                        return tour.Data?.ToList();
+                }
+            }
+            catch (Exception e)
+            {
+                
+            }
+
+            return null;
+        }
+        
     }
 }

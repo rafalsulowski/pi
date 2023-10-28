@@ -9,6 +9,7 @@ using TripPlanner.Models;
 using TripPlanner.Models.DTO.TourDTOs;
 using TripPlanner.Models.DTO.UserDTOs;
 using TripPlanner.Models.Models;
+using TripPlanner.Models.Models.TourModels;
 
 namespace TripPlanner.Services
 {
@@ -37,6 +38,25 @@ namespace TripPlanner.Services
                     return null;
             }
             catch (Exception e)
+            {
+                return null;
+            }
+        }
+
+        public async Task<TourDTO> GetTourWithParticipants(int tourId)
+        {
+            try
+            {
+                HttpResponseMessage response = m_HttpClient.GetAsync($"{m_Configuration.WebApiUrl}/Tour/{tourId}/GetWithParticipants").Result;
+                if (response.IsSuccessStatusCode)
+                {
+                    TourDTO tour = await response.Content.ReadFromJsonAsync<TourDTO>();
+                    return tour;
+                }
+                else
+                    return null;
+            }
+            catch (Exception)
             {
                 return null;
             }
@@ -88,14 +108,87 @@ namespace TripPlanner.Services
             }
         }
 
-        public async Task<RepositoryResponse<bool>> AddParticipant(int tourId, int userId)
+        public async Task<bool> AddParticipant(int tourId, int userId)
         {
-            return new RepositoryResponse<bool>
+            try
             {
-                Success = true,
-                Message = "",
-                Data = true
-            };
+                ParticipantTourDTO participant = new ParticipantTourDTO
+                {
+                    UserId = userId,
+                    TourId = tourId,
+                    IsOrganizer = false,
+                    AccessionDate = DateTime.Now,
+                    Nickname = ""
+                };
+
+                string json = JsonConvert.SerializeObject(participant);
+                StringContent httpContent = new StringContent(json, System.Text.Encoding.UTF8, "application/json");
+                HttpResponseMessage response = m_HttpClient.PostAsync($"{m_Configuration.WebApiUrl}/Tour/addParticipant", httpContent).Result;
+                if (response.IsSuccessStatusCode)
+                {
+                    var resp = await response.Content.ReadFromJsonAsync<bool>();
+                    if (resp)
+                    {
+                        return true;
+                    }
+                }
+            }
+            catch (Exception) { }
+            return false;
+        }
+
+        public async Task<bool> DeleteParticipant(int tourId, int userId)
+        {
+            try
+            {
+                HttpResponseMessage response = m_HttpClient.DeleteAsync($"{m_Configuration.WebApiUrl}/Tour/{tourId}/deleteParticipant/{userId}").Result;
+                if (response.IsSuccessStatusCode)
+                {
+                    var resp = await response.Content.ReadFromJsonAsync<bool>();
+                    if (resp)
+                    {
+                        return true;
+                    }
+                }
+            }
+            catch (Exception) { }
+            return false;
+        }
+
+        public async Task<bool> AddOrganizer(int tourId, int userId)
+        {
+            try
+            {
+                HttpResponseMessage response = m_HttpClient.PutAsync($"{m_Configuration.WebApiUrl}/Tour/{tourId}/makeOrganizer/{userId}", null).Result;
+                if (response.IsSuccessStatusCode)
+                {
+                    var resp = await response.Content.ReadFromJsonAsync<bool>();
+                    if (resp)
+                    {
+                        return true;
+                    }
+                }
+            }
+            catch (Exception) { }
+            return false;
+        }
+
+        public async Task<bool> DeleteOrganizer(int tourId, int userId)
+        {
+            try
+            {
+                HttpResponseMessage response = m_HttpClient.PutAsync($"{m_Configuration.WebApiUrl}/Tour/{tourId}/deleteOrganizer/{userId}", null).Result;
+                if (response.IsSuccessStatusCode)
+                {
+                    var resp = await response.Content.ReadFromJsonAsync<bool>();
+                    if (resp)
+                    {
+                        return true;
+                    }
+                }
+            }
+            catch (Exception) { }
+            return false;
         }
 
         public async Task<List<ExtendParticipantDTO>> GetTourExtendParticipant(int tourId)
@@ -111,16 +204,29 @@ namespace TripPlanner.Services
                     {
                         return tour.Data?.ToList();
                     }
-                    else
-                        return null;
                 }
-                else
-                    return null;
             }
-            catch (Exception)
+            catch (Exception) { }
+            return null;
+        }
+
+        public async Task<ExtendParticipantDTO> GetTourExtendParticipantById(int tourId, int userId)
+        {
+            try
             {
-                return null;
+                HttpResponseMessage response = m_HttpClient.GetAsync($"{m_Configuration.WebApiUrl}/Tour/{tourId}/GetExtendParticipantsById/{userId}").Result;
+                if (response.IsSuccessStatusCode)
+                {
+                    var tour = await response.Content.ReadFromJsonAsync<RepositoryResponse<ExtendParticipantDTO>>();
+
+                    if (tour.Success )
+                    {
+                        return tour.Data;
+                    }
+                }
             }
+            catch (Exception) { }
+            return null;
         }
 
         public async Task<List<string>> GetTourParticipantsNames(int tourId)

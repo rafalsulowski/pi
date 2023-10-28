@@ -54,6 +54,7 @@ public static class MauiProgram
 		builder.Services.AddTransient<CreateQuestionnaireViewModel>();
 		builder.Services.AddTransient<QuestionnaireViewModel>();
 		builder.Services.AddTransient<ParticipantsViewModel>();
+		builder.Services.AddTransient<AddParticipantsViewModel>();
 
         //Views
         builder.Services.AddTransient<MainPage>();

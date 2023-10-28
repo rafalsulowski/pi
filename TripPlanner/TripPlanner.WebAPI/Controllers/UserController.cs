@@ -67,10 +67,17 @@ namespace TripPlanner.WebAPI.Controllers
         }
 
         [HttpGet("{userId}/GetFriends")]
-        public async Task<ActionResult<RepositoryResponse<List<ExtendParticipantDTO>>>> GetFriends(int userId)
+        public async Task<ActionResult<RepositoryResponse<List<ExtendFriendDTO>>>> GetFriends(int userId)
         {
-            RepositoryResponse<List<ExtendParticipantDTO>> response = await _UserService.GetFriends(userId);
-            return Ok(new RepositoryResponse<List<ExtendParticipantDTO>> { Data = response.Data, Message = "Ok", Success = true });
+            RepositoryResponse<List<ExtendFriendDTO>> response = await _UserService.GetFriends(userId, -1);
+            return Ok(new RepositoryResponse<List<ExtendFriendDTO>> { Data = response.Data, Message = "Ok", Success = true });
+        }
+
+        [HttpGet("{userId}/GetFriendsBasedOnTour/{tourId}")]
+        public async Task<ActionResult<RepositoryResponse<List<ExtendFriendDTO>>>> GetFriendsBasedOnTour(int userId, int tourId)
+        {
+            RepositoryResponse<List<ExtendFriendDTO>> response = await _UserService.GetFriends(userId, tourId);
+            return Ok(new RepositoryResponse<List<ExtendFriendDTO>> { Data = response.Data, Message = "Ok", Success = true });
         }
 
         [HttpGet("{UserId}/GetWithCheckLists")]
@@ -186,6 +193,67 @@ namespace TripPlanner.WebAPI.Controllers
             newUser.PasswordHash = hashed;
             var response = await _UserService.CreateUser(newUser);
             return Ok(response.Data);
+        }
+
+        [HttpPost("addFriend")]
+        public async Task<ActionResult<RepositoryResponse<bool>>> AddFriend([FromBody] FriendDTO Tour)
+        {
+            if(Tour.Friend1Id == Tour.Friend2Id)
+            {
+                return new RepositoryResponse<bool> { Success = false, Message = $"Podano takie same id użytkowników" };
+            }
+            var resp = await _UserService.GetUserAsync(u => u.Id == Tour.Friend1Id);
+            if (resp.Data == null)
+            {
+                return new RepositoryResponse<bool> { Success = false, Message = $"Nie istnieje użytkownik o id = {Tour.Friend1Id}" };
+            }
+            var resp2 = await _UserService.GetUserAsync(u => u.Id == Tour.Friend2Id);
+            if (resp2.Data == null)
+            {
+                return new RepositoryResponse<bool> { Success = false, Message = $"Nie istnieje użytkownik o id = {Tour.Friend2Id}" };
+            }
+            var resp3 = _UserService.GetFriendAsync(u => u.Friend1Id == Tour.Friend1Id && u.Friend2Id == Tour.Friend2Id);
+            if (resp3 != null)
+            {
+                if(resp3.Result.Data is not null)
+                    return new RepositoryResponse<bool> { Success = false, Message = $"Użytkownicy są już znajomymi" };
+            }
+
+            Friend elem = Tour;
+
+            var response = await _UserService.AddFriend(elem);
+            return Ok(response);
+        }
+
+        [HttpDelete("{userId}/deleteFriend/{user2Id}")]
+        public async Task<ActionResult<RepositoryResponse<bool>>> DeleteFriend(int userId, int user2Id)
+        {
+            var resp = await _UserService.GetUserAsync(u => u.Id == userId);
+            if (resp.Data == null)
+            {
+                return new RepositoryResponse<bool> { Success = false, Message = $"Nie istnieje użytkownik o id = {userId}" };
+            }
+            var resp2 = await _UserService.GetUserAsync(u => u.Id == user2Id);
+            if (resp2.Data == null)
+            {
+                return new RepositoryResponse<bool> { Success = false, Message = $"Nie istnieje użytkownik o id = {userId}" };
+            }
+
+            Friend elem = new Friend
+            {
+                Friend1Id = userId,
+                Friend2Id = user2Id
+            };
+
+            var response = await _UserService.DeleteFriend(elem);
+            if (response.Success)
+            {
+                return Ok(response.Data);
+            }
+            else
+            {
+                return BadRequest(response.Message);
+            }
         }
 
         [HttpPut("{id}")]

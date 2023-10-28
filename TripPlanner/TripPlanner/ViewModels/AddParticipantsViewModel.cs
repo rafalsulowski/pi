@@ -6,11 +6,10 @@ using CommunityToolkit.Maui.Views;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
 using TripPlanner.Models.DTO.TourDTOs;
+using TripPlanner.Models.DTO.UserDTOs;
+using TripPlanner.Models.Models.UserModels;
 using TripPlanner.Services;
-using TripPlanner.Views.ParticipantsListViews;
 
 namespace TripPlanner.ViewModels
 {
@@ -21,24 +20,22 @@ namespace TripPlanner.ViewModels
         private readonly Configuration m_Configuration;
         private readonly TourService m_TourService;
         private readonly UserService m_UserService;
-        private ObservableCollection<ExtendParticipantDTO> FriendsRef;
-                
-        [ObservableProperty]
-        int tourId;
+        private ObservableCollection<ExtendFriendDTO> FriendsRef;
+        private int TourId;
 
         [ObservableProperty]
         bool refresh;
 
         [ObservableProperty]
-        ObservableCollection<ExtendParticipantDTO> friends;
+        ObservableCollection<ExtendFriendDTO> friends;
 
         public AddParticipantsViewModel(Configuration configuration, TourService tourService, UserService userService)
         {
             m_Configuration = configuration;
             m_TourService = tourService;
             m_UserService = userService;
-            Friends = new ObservableCollection<ExtendParticipantDTO>();
-            FriendsRef = new ObservableCollection<ExtendParticipantDTO>();
+            Friends = new ObservableCollection<ExtendFriendDTO>();
+            FriendsRef = new ObservableCollection<ExtendFriendDTO>();
         }
 
         public async void ApplyQueryAttributes(IDictionary<string, object> query)
@@ -58,9 +55,31 @@ namespace TripPlanner.ViewModels
         }
 
         [RelayCommand]
-        async Task Add()
+        async Task Add(ExtendFriendDTO friend)
         {
-            //TODO
+            if(friend.IsParticipant)
+            {
+                await Shell.Current.CurrentPage.DisplayAlert("Uwaga", "Ten użytkownik jest już uczestnikiem tej wycieczki", "Ok");
+            }
+            else
+            {
+                var result = await Shell.Current.CurrentPage.DisplayAlert("Uwaga", $"Czy na pewno chcesz dodać użytkownika {friend.FullName} do wycieczki?", "Dodaj", "Anuluj");
+
+                if(result)
+                {
+                    var response = await m_TourService.AddParticipant(TourId, friend.UserId);
+                    if(response)
+                    {
+                        await RefreshViewAfterAdd();
+                        var confirmCopyToast = Toast.Make("Dodano do wyjazdu", ToastDuration.Short, 14);
+                        await confirmCopyToast.Show();
+                    }
+                    else
+                    {
+                        await Shell.Current.CurrentPage.DisplayAlert("Błąd", $"Nie udało się dodać znajomego do wyjazdu", "Ok");
+                    }
+                }
+            }
         }
 
 
@@ -68,9 +87,9 @@ namespace TripPlanner.ViewModels
         public async Task ParticipantSearching(string query)
         {
             if (string.IsNullOrEmpty(query))
-                Participants = ParticipantsRef;
+                Friends = FriendsRef;
             else
-                Participants = ParticipantsRef.Where(i => i.FullName.StartsWith(query, StringComparison.OrdinalIgnoreCase))?.ToObservableCollection();
+                Friends = FriendsRef.Where(i => i.FullName.StartsWith(query, StringComparison.OrdinalIgnoreCase))?.ToObservableCollection();
         }
 
         [RelayCommand]
@@ -79,14 +98,19 @@ namespace TripPlanner.ViewModels
             Refresh = true;
             LoadData();
 
-            var confirmCopyToast = Toast.Make("Odświerzono listę uczestników", ToastDuration.Short, 14);
+            var confirmCopyToast = Toast.Make("Odświerzono listę znajomych", ToastDuration.Short, 14);
             await confirmCopyToast.Show();
             Refresh = false;
         }
 
+        async Task RefreshViewAfterAdd()
+        {
+            LoadData();
+        }
+
         private async void LoadData()
         {
-            var value = m_UserService.GetFriends(m_Configuration.User.Id).Result;
+            var value = m_UserService.GetFriendsBasedOnTour(m_Configuration.User.Id, TourId).Result;
 
             if (value is null)
             {
@@ -98,5 +122,6 @@ namespace TripPlanner.ViewModels
                 FriendsRef = value.ToObservableCollection();
             }
         }
+
     }
 }

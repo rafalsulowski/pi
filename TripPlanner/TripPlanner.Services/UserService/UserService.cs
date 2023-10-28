@@ -19,6 +19,7 @@ using TripPlanner.Models.Models.MessageModels.QuestionnaireModels;
 using TripPlanner.Models.DTO.TourDTOs;
 using TripPlanner.DataAccess.Repository;
 using TripPlanner.Models.Models.TourModels;
+using TripPlanner.Models.DTO.UserDTOs;
 
 namespace TripPlanner.Services.UserService
 {
@@ -114,17 +115,26 @@ namespace TripPlanner.Services.UserService
             return response;
         }
 
-        public async Task<RepositoryResponse<List<ExtendParticipantDTO>>> GetFriends(int userId)
+        public async Task<RepositoryResponse<List<ExtendFriendDTO>>> GetFriends(int userId, int tourId)
         {
             var resp = await _FriendRepository.GetAll(u => u.Friend1Id == userId || u.Friend2Id == userId);
-            List<ExtendParticipantDTO> listReturn = new List<ExtendParticipantDTO>();
+
+            RepositoryResponse<Tour> resp2 = new RepositoryResponse<Tour>();
+            Tour tour = null;
+            if (tourId != -1)
+            {
+                resp2 = await _TourService.GetTourAsync(u => u.Id == tourId, "Participants");
+                tour = resp2.Data;
+            }
+
+            List<ExtendFriendDTO> listReturn = new List<ExtendFriendDTO>();
             if (resp.Success)
             {
                 if (resp.Data is null)
                 {
-                    return new RepositoryResponse<List<ExtendParticipantDTO>> { Data = listReturn, Message = "", Success = true };
+                    return new RepositoryResponse<List<ExtendFriendDTO>> { Data = listReturn, Message = "", Success = true };
                 }
-
+                
                 List<Friend> list = resp.Data;
                 for (int i = 0; i < list.Count; i++)
                 {
@@ -132,24 +142,28 @@ namespace TripPlanner.Services.UserService
                     User? user = _UserRepository.GetFirstOrDefault(u => u.Id == userIdToSearch).Result?.Data;
 
                     if (user is null)
-                        return new RepositoryResponse<List<ExtendParticipantDTO>> { Data = listReturn, Message = "", Success = true };
+                        return new RepositoryResponse<List<ExtendFriendDTO>> { Data = listReturn, Message = "", Success = true };
 
-                    ExtendParticipantDTO participantDTO = new ExtendParticipantDTO();
+                    ExtendFriendDTO participantDTO = new ExtendFriendDTO();
+                    participantDTO.UserId = user.Id;
                     participantDTO.Order = i + 1;
                     participantDTO.Email = user.Email;
                     participantDTO.City = user.City;
-                    participantDTO.Nickname = "";
                     participantDTO.Age = _TourService.CalculateAge(user.DateOfBirth, DateTime.Now);
-                    participantDTO.DateOfBirth = user.DateOfBirth;
                     participantDTO.FullName = user.FullName;
-                    participantDTO.IsOrganizer = false;
+
+                    if(tour != null)
+                    {
+                        bool val = tour.Participants.FirstOrDefault(p => p.UserId == user.Id) != null;
+                        participantDTO.IsParticipant = val;
+                    }
 
                     listReturn.Add(participantDTO);
                 }
 
             }
 
-            return new RepositoryResponse<List<ExtendParticipantDTO>> { Data = listReturn, Message = "", Success = true };
+            return new RepositoryResponse<List<ExtendFriendDTO>> { Data = listReturn, Message = "", Success = true };
         }
 
         public async Task<RepositoryResponse<User>> GetUserAsync(Expression<Func<User, bool>> filter, string? includeProperties = null)
@@ -173,6 +187,24 @@ namespace TripPlanner.Services.UserService
             }
             response = await _UserRepository.SaveChangesAsync();
             return response;
+        }
+
+        public async Task<RepositoryResponse<Friend>> GetFriendAsync(Expression<Func<Friend, bool>> filter, string? includeProperties = null)
+        {
+            var response = await _FriendRepository.GetFirstOrDefault(filter, includeProperties);
+            return response;
+        }
+
+        public async Task<RepositoryResponse<bool>> AddFriend(Friend Contribute)
+        {
+            await _UserRepository.AddFriend(Contribute);
+            return await _UserRepository.SaveChangesAsync();
+        }
+
+        public async Task<RepositoryResponse<bool>> DeleteFriend(Friend Contribute)
+        {
+            await _UserRepository.DeleteFriend(Contribute);
+            return await _UserRepository.SaveChangesAsync();
         }
     }
 }

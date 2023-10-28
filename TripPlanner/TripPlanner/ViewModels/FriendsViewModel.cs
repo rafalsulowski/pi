@@ -1,5 +1,6 @@
 ﻿using CommunityToolkit.Maui.Alerts;
 using CommunityToolkit.Maui.Core;
+using CommunityToolkit.Maui.Core.Extensions;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using System;
@@ -18,7 +19,7 @@ namespace TripPlanner.ViewModels
     public partial class FriendsViewModel : ObservableObject, IQueryAttributable
     {
         TourDTO Tour;
-        private ObservableCollection<UserDTO> Friends;
+        private ObservableCollection<ExtendFriendDTO> Friends;
 
         private readonly Configuration m_Configuration;
         private readonly TourService m_TourService;
@@ -28,7 +29,7 @@ namespace TripPlanner.ViewModels
         string searchExpression;
 
         [ObservableProperty]
-        ObservableCollection<UserDTO> friendsRef;
+        ObservableCollection<ExtendFriendDTO> friendsRef;
 
         public FriendsViewModel(Configuration configuration, TourService tourService, UserService userService)
         {
@@ -48,7 +49,7 @@ namespace TripPlanner.ViewModels
             }
             else
             {
-                Friends = m_UserService.GetFriends(m_Configuration.User.Id).Result;
+                Friends = m_UserService.GetFriends(m_Configuration.User.Id).Result.ToObservableCollection();
                 FriendsRef = Friends;
             }
         }
@@ -71,13 +72,13 @@ namespace TripPlanner.ViewModels
             if(res)
             {
                 var res2 = await m_TourService.AddParticipant(Tour.Id, user.Id);
-                if (res2.Success)
+                if (res2)
                 {
                     var confirmCopyToast = Toast.Make("Dodano nowego uczestnika", ToastDuration.Short, 14);
                     await confirmCopyToast.Show();
                 }
                 else
-                    await Shell.Current.CurrentPage.DisplayAlert("Błąd", res2.Message, "Ok :(");
+                    await Shell.Current.CurrentPage.DisplayAlert("Błąd", "Nie udało się dodać nowego uczestnika do wyjazdu", "Ok :(");
             }
         }
 

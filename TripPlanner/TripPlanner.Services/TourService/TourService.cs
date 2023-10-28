@@ -186,6 +186,35 @@ namespace TripPlanner.Services.TourService
             return response;
         }
 
+
+        public async Task<RepositoryResponse<ExtendParticipantDTO>> GetTourExtendParticipant(int tourId, int userId)
+        {
+            var resp = await _ParticipantTourRepository.GetFirstOrDefault(u => u.TourId == tourId && u.UserId == userId);
+
+            if (resp.Data is null)
+                return new RepositoryResponse<ExtendParticipantDTO> { Data = null, Message = "", Success = false };
+
+            var resp2 = _UserRepository.GetFirstOrDefault(u => u.Id == userId).Result;
+
+            if (resp2.Data is null)
+                return new RepositoryResponse<ExtendParticipantDTO> { Data = null, Message = "", Success = false };
+
+            User user = resp2.Data as User;
+
+            ExtendParticipantDTO participantDTO = new ExtendParticipantDTO();
+            participantDTO.UserId = user.Id;
+            participantDTO.Order = 0;
+            participantDTO.Email = user.Email;
+            participantDTO.City = user.City;
+            participantDTO.Nickname = resp.Data.Nickname;
+            participantDTO.Age = CalculateAge(user.DateOfBirth, DateTime.Now);
+            participantDTO.DateOfBirth = user.DateOfBirth;
+            participantDTO.FullName = user.FullName;
+            participantDTO.IsOrganizer = resp.Data.IsOrganizer;
+            
+            return new RepositoryResponse<ExtendParticipantDTO> { Data = participantDTO, Message = "", Success = true };
+        }
+
         public async Task<RepositoryResponse<List<ExtendParticipantDTO>>> GetTourExtendParticipants(int tourId)
         {
             var resp = await _ParticipantTourRepository.GetAll(u => u.TourId == tourId);
@@ -206,6 +235,7 @@ namespace TripPlanner.Services.TourService
                         return new RepositoryResponse<List<ExtendParticipantDTO>> { Data = listReturn, Message = "", Success = true};
 
                     ExtendParticipantDTO participantDTO = new ExtendParticipantDTO();
+                    participantDTO.UserId = user.Id;
                     participantDTO.Order = i + 1;
                     participantDTO.Email = user.Email;
                     participantDTO.City = user.City;

@@ -84,6 +84,10 @@
 	  <None Remove="Resources\Images\chat_wt.svg" />
 	  <None Remove="Resources\Images\checklist_dt.svg" />
 	  <None Remove="Resources\Images\checklist_wt.svg" />
+	  <None Remove="Resources\Images\check_ok_dt.svg" />
+	  <None Remove="Resources\Images\check_ok_pri.svg" />
+	  <None Remove="Resources\Images\check_ok_sec.svg" />
+	  <None Remove="Resources\Images\check_ok_wt.svg" />
 	  <None Remove="Resources\Images\circle_dt.svg" />
 	  <None Remove="Resources\Images\circle_ok_dt.svg" />
 	  <None Remove="Resources\Images\circle_ok_pri.svg" />
@@ -117,7 +121,11 @@
 	  <None Remove="Resources\Images\person_chat_dt.svg" />
 	  <None Remove="Resources\Images\person_chat_wt.svg" />
 	  <None Remove="Resources\Images\person_wt.svg" />
+	  <None Remove="Resources\Images\plus_circle_pri.svg" />
+	  <None Remove="Resources\Images\plus_circle_sec.svg" />
 	  <None Remove="Resources\Images\plus_dt.svg" />
+	  <None Remove="Resources\Images\plus_pri.svg" />
+	  <None Remove="Resources\Images\plus_sec.svg" />
 	  <None Remove="Resources\Images\plus_wt.svg" />
 	  <None Remove="Resources\Images\search_dt.svg" />
 	  <None Remove="Resources\Images\search_gray.svg" />
@@ -127,6 +135,8 @@
 	  <None Remove="Resources\Images\settings_chat_wt.svg" />
 	  <None Remove="Resources\Images\tour_dt.svg" />
 	  <None Remove="Resources\Images\tour_wt.svg" />
+	  <None Remove="Resources\Images\trash_dt.svg" />
+	  <None Remove="Resources\Images\trash_wt.svg" />
 	  <None Remove="Resources\Images\x_dt.svg" />
 	  <None Remove="Resources\Images\x_sec.svg" />
 	  <None Remove="Resources\Images\x_wt.svg" />

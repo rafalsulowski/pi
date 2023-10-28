@@ -18,6 +18,7 @@ namespace TripPlanner.DataAccess.Repository
         public async Task<RepositoryResponse<bool>> Update(ParticipantTour post)
         {
             var postDB = await GetFirstOrDefault(u => u.TourId == post.TourId && u.UserId == post.UserId);
+            var res = postDB.Data;
             if (postDB == null)
             {
                 return new RepositoryResponse<bool>
@@ -27,6 +28,7 @@ namespace TripPlanner.DataAccess.Repository
                     Message = "ParticipantTour with this Id was not found."
                 };
             }
+            _context.Entry(res).State = EntityState.Detached;
             _context.ParticipantTours.Attach(post);
             _context.Entry(post).State = EntityState.Modified;
             return new RepositoryResponse<bool> { Data = true };

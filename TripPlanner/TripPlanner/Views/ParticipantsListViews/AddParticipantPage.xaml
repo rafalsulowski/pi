@@ -6,11 +6,122 @@
             xmlns:model="clr-namespace:TripPlanner.Models.DTO.TourDTOs;assembly=TripPlanner.Models"
             xmlns:markups="clr-namespace:OnScreenSizeMarkup.Maui;assembly=OnScreenSizeMarkup.Maui"
             xmlns:viewmodel="clr-namespace:TripPlanner.ViewModels"
-            x:DataType="viewmodel:ParticipantsViewModel"
+            x:DataType="viewmodel:AddParticipantsViewModel"
             Shell.NavBarIsVisible="False"
             Shell.TabBarIsVisible="False">
 
-    
+
+    <ContentPage.Resources>
+        <DataTemplate
+            x:Key="IsNotParticipant">
+            <VerticalStackLayout
+                HorizontalOptions="Center">
+                <HorizontalStackLayout
+                    Spacing="5">
+                    <Label
+                        FontAttributes="Bold"
+                        WidthRequest="{markups:OnScreenSize ExtraSmall='150', Small='190', Medium='230', Large='300', ExtraLarge='400'}"
+                        FontSize="{markups:OnScreenSize ExtraSmall='14', Small='16', Medium='18', Large='20', ExtraLarge='25'}"
+                        TextColor="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource Secondary}}">
+                        <Label.Text>
+                            <MultiBinding
+                                StringFormat="{}{0}. {1}">
+                                <Binding
+                                    Path="Order" />
+                                <Binding
+                                    Path="FullName" />
+                            </MultiBinding>
+                        </Label.Text>
+                    </Label>
+                    <Image
+                        HeightRequest="{markups:OnScreenSize ExtraSmall='25', Small='25', Medium='25', Large='35', ExtraLarge='50'}"
+                        Source="{AppThemeBinding Light=plus_pri.png, Dark=plus_sec.png}">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer
+                                Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:AddParticipantsViewModel}}, Path=AddCommand}"
+                                CommandParameter="{Binding .}">
+                            </TapGestureRecognizer>
+                        </Image.GestureRecognizers>
+                    </Image>
+                </HorizontalStackLayout>
+                <Label
+                    FontSize="{markups:OnScreenSize ExtraSmall='12', Small='14', Medium='16', Large='18', ExtraLarge='22'}"
+                    WidthRequest="{markups:OnScreenSize ExtraSmall='180', Small='210', Medium='260', Large='340', ExtraLarge='455'}"
+                    TextColor="{AppThemeBinding Light=#939393, Dark=white}">
+                    <Label.Text>
+                        <MultiBinding
+                            StringFormat="{}{0}, wiek {1}, {2}">
+                            <Binding
+                                Path="Email" />
+                            <Binding
+                                Path="Age" />
+                            <Binding
+                                Path="City" />
+                        </MultiBinding>
+                    </Label.Text>
+                </Label>
+            </VerticalStackLayout>
+        </DataTemplate>
+
+        <DataTemplate
+            x:Key="IsParticipant">
+            <VerticalStackLayout
+                HorizontalOptions="Center">
+                <HorizontalStackLayout
+                    Spacing="5">
+                    <Label
+                        FontAttributes="Bold"
+                        WidthRequest="{markups:OnScreenSize ExtraSmall='150', Small='190', Medium='230', Large='300', ExtraLarge='400'}"
+                        FontSize="{markups:OnScreenSize ExtraSmall='14', Small='16', Medium='18', Large='20', ExtraLarge='25'}"
+                        TextColor="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource Secondary}}">
+                        <Label.Text>
+                            <MultiBinding
+                                StringFormat="{}{0}. {1}">
+                                <Binding
+                                    Path="Order" />
+                                <Binding
+                                    Path="FullName" />
+                            </MultiBinding>
+                        </Label.Text>
+                    </Label>
+                    <Image
+                        HeightRequest="{markups:OnScreenSize ExtraSmall='20', Small='20', Medium='25', Large='35', ExtraLarge='50'}"
+                        Source="{AppThemeBinding Light=check_ok_pri.png, Dark=check_ok_sec.png}">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer
+                                Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:AddParticipantsViewModel}}, Path=AddCommand}"
+                                CommandParameter="{Binding .}">
+                            </TapGestureRecognizer>
+                        </Image.GestureRecognizers>
+                    </Image>
+                </HorizontalStackLayout>
+                <Label
+                    FontSize="{markups:OnScreenSize ExtraSmall='12', Small='14', Medium='16', Large='18', ExtraLarge='22'}"
+                    WidthRequest="{markups:OnScreenSize ExtraSmall='180', Small='210', Medium='260', Large='340', ExtraLarge='455'}"
+                    TextColor="{AppThemeBinding Light=#939393, Dark=white}">
+                    <Label.Text>
+                        <MultiBinding
+                            StringFormat="{}{0}, wiek {1}, {2}">
+                            <Binding
+                                Path="Email" />
+                            <Binding
+                                Path="Age" />
+                            <Binding
+                                Path="City" />
+                        </MultiBinding>
+                    </Label.Text>
+                </Label>
+            </VerticalStackLayout>
+        </DataTemplate>
+
+        <localTemplates:FriendDataTemplateSelector
+            x:Key="FriendSelector"
+            IsParticipant="{StaticResource IsParticipant}"
+            IsNotParticipant="{StaticResource IsNotParticipant}" />
+    </ContentPage.Resources>
+
+
+
     <StackLayout
         Orientation="Vertical"
         Spacing="10">
@@ -54,7 +165,8 @@
             Margin="10,10,10,0">
             <CollectionView
                 EmptyView="Brak znajomych do wyświetlenia"
-                ItemsSource="{Binding Participants}"
+                ItemsSource="{Binding Friends}"
+                ItemTemplate="{StaticResource FriendSelector}"
                 SelectionMode="None">
                 <CollectionView.ItemsLayout>
                     <LinearItemsLayout
@@ -67,50 +179,6 @@
                         FontSize="{markups:OnScreenSize ExtraSmall='12', Small='13', Medium='15', Large='17', ExtraLarge='19'}"
                         Text="Znajomi w tripPlanner" />
                 </CollectionView.Header>
-                <CollectionView.ItemTemplate>
-                    <DataTemplate x:DataType="model:ExtendParticipantDTO">
-                        <VerticalStackLayout
-                            HorizontalOptions="Center">
-                            <HorizontalStackLayout
-                                Spacing="5">
-                                <Label
-                                    FontAttributes="Bold"
-                                    WidthRequest="{markups:OnScreenSize ExtraSmall='150', Small='190', Medium='230', Large='300', ExtraLarge='400'}"
-                                    FontSize="{markups:OnScreenSize ExtraSmall='14', Small='16', Medium='18', Large='20', ExtraLarge='25'}"
-                                    TextColor="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource Secondary}}">
-                                    <Label.Text>
-                                        <MultiBinding
-                                            StringFormat="{}{0}. {1}">
-                                            <Binding
-                                                Path="Order" />
-                                            <Binding
-                                                Path="FullName" />
-                                        </MultiBinding>
-                                    </Label.Text>
-                                </Label>
-                                <Image
-                                    HeightRequest="{markups:OnScreenSize ExtraSmall='25', Small='25', Medium='25', Large='35', ExtraLarge='50'}"
-                                    Source="organizer_sec.png" />
-                            </HorizontalStackLayout>
-                            <Label
-                                FontSize="{markups:OnScreenSize ExtraSmall='12', Small='14', Medium='16', Large='18', ExtraLarge='22'}"
-                                WidthRequest="{markups:OnScreenSize ExtraSmall='180', Small='210', Medium='260', Large='340', ExtraLarge='455'}"
-                                TextColor="{AppThemeBinding Light=#939393, Dark=white}">
-                                <Label.Text>
-                                    <MultiBinding
-                                        StringFormat="{}{0}, wiek {1}, {2}">
-                                        <Binding
-                                            Path="Email" />
-                                        <Binding
-                                            Path="Age" />
-                                        <Binding
-                                            Path="City" />
-                                    </MultiBinding>
-                                </Label.Text>
-                            </Label>
-                        </VerticalStackLayout>
-                    </DataTemplate>
-                </CollectionView.ItemTemplate>
             </CollectionView>
         </RefreshView>
     </StackLayout>
