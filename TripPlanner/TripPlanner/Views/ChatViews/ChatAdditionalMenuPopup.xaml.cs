@@ -8,13 +8,11 @@ public partial class ChatAdditionalMenuPopup : Popup
 {
     TourService m_TourService;
     TourDTO Tour;
-    int ChatId;
-	public ChatAdditionalMenuPopup(TourService tourService, TourDTO tour, int chatId)
+	public ChatAdditionalMenuPopup(TourService tourService, TourDTO tour)
 	{
 		InitializeComponent();
         m_TourService = tourService;
         Tour = tour;
-        ChatId = chatId;
 	}
 
     async void AddQuestionnaire(object sender, EventArgs args)
@@ -22,7 +20,6 @@ public partial class ChatAdditionalMenuPopup : Popup
         var navigationParameter = new Dictionary<string, object>
             {
                 { "passTour",  Tour},
-                { "passChatId",  ChatId},
             };
         await CloseAsync();
         await Shell.Current.GoToAsync($"CreateQuestionnaire", navigationParameter);

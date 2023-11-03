@@ -4,7 +4,6 @@
             xmlns:localTemplates="clr-namespace:TripPlanner.DataTemplates"
             x:Class="TripPlanner.Views.ParticipantsListViews.AddParticipantPage"
             xmlns:model="clr-namespace:TripPlanner.Models.DTO.TourDTOs;assembly=TripPlanner.Models"
-            xmlns:markups="clr-namespace:OnScreenSizeMarkup.Maui;assembly=OnScreenSizeMarkup.Maui"
             xmlns:viewmodel="clr-namespace:TripPlanner.ViewModels"
             x:DataType="viewmodel:AddParticipantsViewModel"
             Shell.NavBarIsVisible="False"
@@ -20,8 +19,8 @@
                     Spacing="5">
                     <Label
                         FontAttributes="Bold"
-                        WidthRequest="{markups:OnScreenSize ExtraSmall='150', Small='190', Medium='230', Large='300', ExtraLarge='400'}"
-                        FontSize="{markups:OnScreenSize ExtraSmall='14', Small='16', Medium='18', Large='20', ExtraLarge='25'}"
+                        WidthRequest="230"
+                        FontSize="18"
                         TextColor="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource Secondary}}">
                         <Label.Text>
                             <MultiBinding
@@ -34,7 +33,7 @@
                         </Label.Text>
                     </Label>
                     <Image
-                        HeightRequest="{markups:OnScreenSize ExtraSmall='25', Small='25', Medium='25', Large='35', ExtraLarge='50'}"
+                        HeightRequest="25"
                         Source="{AppThemeBinding Light=plus_pri.png, Dark=plus_sec.png}">
                         <Image.GestureRecognizers>
                             <TapGestureRecognizer
@@ -45,8 +44,8 @@
                     </Image>
                 </HorizontalStackLayout>
                 <Label
-                    FontSize="{markups:OnScreenSize ExtraSmall='12', Small='14', Medium='16', Large='18', ExtraLarge='22'}"
-                    WidthRequest="{markups:OnScreenSize ExtraSmall='180', Small='210', Medium='260', Large='340', ExtraLarge='455'}"
+                    FontSize="18"
+                    WidthRequest="260"
                     TextColor="{AppThemeBinding Light=#939393, Dark=white}">
                     <Label.Text>
                         <MultiBinding
@@ -71,8 +70,8 @@
                     Spacing="5">
                     <Label
                         FontAttributes="Bold"
-                        WidthRequest="{markups:OnScreenSize ExtraSmall='150', Small='190', Medium='230', Large='300', ExtraLarge='400'}"
-                        FontSize="{markups:OnScreenSize ExtraSmall='14', Small='16', Medium='18', Large='20', ExtraLarge='25'}"
+                        WidthRequest="230"
+                        FontSize="18"
                         TextColor="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource Secondary}}">
                         <Label.Text>
                             <MultiBinding
@@ -85,7 +84,7 @@
                         </Label.Text>
                     </Label>
                     <Image
-                        HeightRequest="{markups:OnScreenSize ExtraSmall='20', Small='20', Medium='25', Large='35', ExtraLarge='50'}"
+                        HeightRequest="25"
                         Source="{AppThemeBinding Light=check_ok_pri.png, Dark=check_ok_sec.png}">
                         <Image.GestureRecognizers>
                             <TapGestureRecognizer
@@ -96,8 +95,8 @@
                     </Image>
                 </HorizontalStackLayout>
                 <Label
-                    FontSize="{markups:OnScreenSize ExtraSmall='12', Small='14', Medium='16', Large='18', ExtraLarge='22'}"
-                    WidthRequest="{markups:OnScreenSize ExtraSmall='180', Small='210', Medium='260', Large='340', ExtraLarge='455'}"
+                    FontSize="16"
+                    WidthRequest="260"
                     TextColor="{AppThemeBinding Light=#939393, Dark=white}">
                     <Label.Text>
                         <MultiBinding
@@ -127,30 +126,32 @@
         Spacing="10">
         <Grid
             RowDefinitions="Auto"
-            ColumnDefinitions="{markups:OnScreenSize ExtraSmall='25,*,25', Small='25,*,25', Medium='30,*,30', Large='35,*,35', ExtraLarge='50,*,50'}"
+            ColumnDefinitions="30,*,30"
             Margin="10,5,10,0">
             <ImageButton
                 Grid.Column="0"
                 Source="{AppThemeBinding Light=arrow_back_wt.png, Dark=arrow_back_dt.png}"
                 Command="{Binding GoBackCommand}"
-                HeightRequest="{markups:OnScreenSize ExtraSmall='25', Small='25', Medium='30', Large='35', ExtraLarge='50'}" />
+                HeightRequest="30" />
 
             <Label
                 Grid.Column="1"
                 HorizontalOptions="Center"
-                FontSize="{markups:OnScreenSize ExtraSmall='12', Small='15', Medium='18', Large='24', ExtraLarge='35'}"
+                FontSize="18"
                 VerticalOptions="Center"
                 Text="Dodawanie uczestników">
             </Label>
         </Grid>
 
         <Border
-            Margin="{markups:OnScreenSize ExtraSmall='10,0,10,0', Small='10,0,10,0', Medium='10,0,10,0', Large='30,0,30,0', ExtraLarge='50,0,50,0'}"
+            HorizontalOptions="Center"
+            Margin="10,0,10,0"
             Stroke="{AppThemeBinding Light=#939393, Dark=transparent}"
             BackgroundColor="{AppThemeBinding Light=white, Dark=#939393}"
             StrokeShape="RoundRectangle 25,25,25,25">
             <SearchBar
-                FontSize="{markups:OnScreenSize ExtraSmall='13', Small='14', Medium='16', Large='18', ExtraLarge='20'}"
+                HorizontalOptions="Center"
+                FontSize="16"
                 x:Name="searchBar"
                 SearchCommand="{Binding ParticipantSearchingCommand}"
                 SearchCommandParameter="{Binding Text, Source={x:Reference searchBar}}"
@@ -175,8 +176,9 @@
                 </CollectionView.ItemsLayout>
                 <CollectionView.Header>
                     <Label
+                        HorizontalOptions="Center"
                         TextColor="#939393"
-                        FontSize="{markups:OnScreenSize ExtraSmall='12', Small='13', Medium='15', Large='17', ExtraLarge='19'}"
+                        FontSize="15"
                         Text="Znajomi w tripPlanner" />
                 </CollectionView.Header>
             </CollectionView>

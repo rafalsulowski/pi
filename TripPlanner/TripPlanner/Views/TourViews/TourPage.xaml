@@ -3,7 +3,6 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="TripPlanner.Views.TourViews.TourPage"
              xmlns:viewmodel="clr-namespace:TripPlanner.ViewModels"
-             xmlns:markups="clr-namespace:OnScreenSizeMarkup.Maui;assembly=OnScreenSizeMarkup.Maui"
              x:DataType="viewmodel:TourViewModel"
              Shell.NavBarIsVisible="False">
 
@@ -12,18 +11,18 @@
             Spacing="10">
             <Grid
                 RowDefinitions="Auto"
-                ColumnDefinitions="{markups:OnScreenSize ExtraSmall='25,*,25', Small='25,*,25', Medium='30,*,30', Large='35,*,35', ExtraLarge='50,*,50'}"
+                ColumnDefinitions="30,*,30"
                 Margin="10,5,10,0">
                 <ImageButton
                     Grid.Column="0"
                     Source="{AppThemeBinding Light=arrow_back_wt.png, Dark=arrow_back_dt.png}"
                     Command="{Binding GoBackCommand}"
-                    HeightRequest="{markups:OnScreenSize ExtraSmall='25', Small='25', Medium='30', Large='35', ExtraLarge='50'}"/>
+                    HeightRequest="30"/>
                 
                 <Label
                     Grid.Column="1"
                     HorizontalOptions="Center"
-                    FontSize="{markups:OnScreenSize ExtraSmall='12', Small='15', Medium='18', Large='24', ExtraLarge='35'}"
+                    FontSize="18"
                     VerticalOptions="Center"
                     Text="{Binding Tour.Title}" />
 
@@ -31,16 +30,16 @@
                     Grid.Column="2"
                     Source="{AppThemeBinding Light=setting_wt.png, Dark=setting_dt.png}"
                     Command="{Binding GoSettingsCommand}"
-                    HeightRequest="{markups:OnScreenSize ExtraSmall='25', Small='25', Medium='25', Large='35', ExtraLarge='50'}" />
+                    HeightRequest="25" />
             </Grid>
 
 
             <Grid
                 Margin="10,0,10,0"
-                RowSpacing="{markups:OnScreenSize ExtraSmall='8', Small='10', Medium='10', Large='15', ExtraLarge='20'}"
-                RowDefinitions="{markups:OnScreenSize ExtraSmall='130,130,130,130', Small='130,130,130,130', Medium='130,130,130,130', Large='130,130,130,130', ExtraLarge='130,130,130,130'}"
-                ColumnSpacing="{markups:OnScreenSize ExtraSmall='8', Small='10', Medium='10', Large='15', ExtraLarge='20'}"
-                ColumnDefinitions="{markups:OnScreenSize ExtraSmall='130,130,130,130', Small='130,130,130,130', Medium='*,*', Large='130,130,130,130', ExtraLarge='130,130,130,130'}">
+                RowSpacing="10"
+                RowDefinitions="130,130,130,130"
+                ColumnSpacing="10"
+                ColumnDefinitions="*,*">
                 <Border
                     Grid.Row="0"
                     Grid.Column="0"
@@ -56,9 +55,9 @@
                         Spacing="5">
                         <Image
                             Source="chat_dt.png"
-                            HeightRequest="{markups:OnScreenSize ExtraSmall='25', Small='25', Medium='30', Large='35', ExtraLarge='50'}"/>
+                            HeightRequest="30"/>
                         <Label
-                            FontSize="{markups:OnScreenSize ExtraSmall='12', Small='15', Medium='15', Large='24', ExtraLarge='35'}"
+                            FontSize="15"
                             FontAttributes="Bold"
                             HorizontalOptions="Center"
                             Text="czat grupowy"
@@ -81,9 +80,9 @@
                         Spacing="5">
                         <Image
                             Source="cash_dt.png"
-                            HeightRequest="{markups:OnScreenSize ExtraSmall='25', Small='25', Medium='30', Large='35', ExtraLarge='50'}" />
+                            HeightRequest="30" />
                         <Label
-                            FontSize="{markups:OnScreenSize ExtraSmall='12', Small='15', Medium='15', Large='24', ExtraLarge='35'}"
+                            FontSize="15"
                             FontAttributes="Bold"
                             HorizontalOptions="Center"
                             Text="Rachunki"
@@ -106,9 +105,9 @@
                         Spacing="5">
                         <Image
                             Source="people_dt.png"
-                            HeightRequest="{markups:OnScreenSize ExtraSmall='25', Small='25', Medium='30', Large='35', ExtraLarge='50'}" />
+                            HeightRequest="30" />
                         <Label
-                            FontSize="{markups:OnScreenSize ExtraSmall='12', Small='15', Medium='15', Large='24', ExtraLarge='35'}"
+                            FontSize="15"
                             FontAttributes="Bold"
                             HorizontalOptions="Center"
                             Text="Uczestnicy"
@@ -131,9 +130,9 @@
                         Spacing="5">
                         <Image
                             Source="calendar_dt.png"
-                            HeightRequest="{markups:OnScreenSize ExtraSmall='25', Small='25', Medium='30', Large='35', ExtraLarge='50'}" />
+                            HeightRequest="30" />
                         <Label
-                            FontSize="{markups:OnScreenSize ExtraSmall='12', Small='15', Medium='15', Large='24', ExtraLarge='35'}"
+                            FontSize="15"
                             FontAttributes="Bold"
                             HorizontalOptions="Center"
                             Text="Harmonogram"
@@ -156,9 +155,9 @@
                         Spacing="5">
                         <Image
                             Source="globe_dt.png"
-                            HeightRequest="{markups:OnScreenSize ExtraSmall='25', Small='25', Medium='30', Large='35', ExtraLarge='50'}" />
+                            HeightRequest="30" />
                         <Label
-                            FontSize="{markups:OnScreenSize ExtraSmall='12', Small='15', Medium='15', Large='24', ExtraLarge='35'}"
+                            FontSize="15"
                             FontAttributes="Bold"
                             HorizontalOptions="Center"
                             Text="Zwyczaje miejsca"
@@ -181,9 +180,9 @@
                         Spacing="5">
                         <Image
                             Source="cloud_sun_dt.png"
-                            HeightRequest="{markups:OnScreenSize ExtraSmall='25', Small='25', Medium='30', Large='35', ExtraLarge='50'}" />
+                            HeightRequest="30" />
                         <Label
-                            FontSize="{markups:OnScreenSize ExtraSmall='12', Small='15', Medium='15', Large='24', ExtraLarge='35'}"
+                            FontSize="15"
                             FontAttributes="Bold"
                             HorizontalOptions="Center"
                             Text="Pogoda"
@@ -206,9 +205,9 @@
                         Spacing="5">
                         <Image
                             Source="tour_dt.png"
-                            HeightRequest="{markups:OnScreenSize ExtraSmall='25', Small='25', Medium='30', Large='35', ExtraLarge='50'}" />
+                            HeightRequest="30" />
                         <Label
-                            FontSize="{markups:OnScreenSize ExtraSmall='12', Small='15', Medium='15', Large='24', ExtraLarge='35'}"
+                            FontSize="15"
                             FontAttributes="Bold"
                             HorizontalOptions="Center"
                             Text="Trasy"
@@ -231,9 +230,9 @@
                         Spacing="5">
                         <Image
                             Source="checklist_dt.png"
-                            HeightRequest="{markups:OnScreenSize ExtraSmall='25', Small='25', Medium='30', Large='35', ExtraLarge='50'}" />
+                            HeightRequest="30" />
                         <Label
-                            FontSize="{markups:OnScreenSize ExtraSmall='12', Small='15', Medium='15', Large='24', ExtraLarge='35'}"
+                            FontSize="15"
                             FontAttributes="Bold"
                             HorizontalOptions="Center"
                             Text="Checklisty"

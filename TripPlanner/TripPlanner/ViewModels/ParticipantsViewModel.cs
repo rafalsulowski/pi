@@ -101,6 +101,39 @@ namespace TripPlanner.ViewModels
         }
 
         [RelayCommand]
+        async Task LeftTour(ExtendParticipantDTO participant)
+        {
+            int organizers = Participants.Select(u => u.IsOrganizer).Where(u => u == true).Count();
+            if (IsOrganizer && organizers <= 1)
+            {
+                await Shell.Current.CurrentPage.DisplayAlert("Uwaga", "Jesteś jedynym organiazatorem wyjazdu, nie możesz wyjśc ponieważ wyjazd musi mieć minimalnie jednego organiazatora", "Ok");
+            }
+            else
+            {
+                var res = await Shell.Current.CurrentPage.DisplayAlert("Uwaga", "Czy na pewno chcesz opuścić wyjazd?", "Dalej", "Anuluj");
+                if (res)
+                {
+                    var response = await m_TourService.DeleteParticipant(Tour.Id, participant.UserId);
+                    if (response)
+                    {
+                        var navigationParameter = new Dictionary<string, object>
+                        {
+                            { "reload",  true}
+                        };
+                        await Shell.Current.GoToAsync("//Home", navigationParameter);
+                        var confirmCopyToast = Toast.Make($"Opuszczono wyjazd", ToastDuration.Long, 14);
+                        await confirmCopyToast.Show();
+                    }
+                    else
+                    {
+                        await Shell.Current.CurrentPage.DisplayAlert("Błąd", $"Nie udało się opuścić wyjazdu", "Ok");
+                    }
+                }
+            }
+        }
+
+
+        [RelayCommand]
         async Task DeleteParticipant(ExtendParticipantDTO participant)
         {
             if (IsOrganizer)
@@ -192,7 +225,7 @@ namespace TripPlanner.ViewModels
         {
             if (IsOrganizer)
             {
-                if (Participants.Select(u => u.IsOrganizer).ToList().Count == 1)
+                if (Participants.Select(u => u.IsOrganizer).Where(u => u == true).Count() == 1)
                 {
                     await Shell.Current.CurrentPage.DisplayAlert("Uwaga", "Wyjazd musi posiadać minimalnie jendego organiazatora", "Ok");
                     return;
@@ -262,6 +295,12 @@ namespace TripPlanner.ViewModels
         async Task RefreshView()
         {
             Refresh = true;
+            
+            Tour = await m_TourService.GetTourWithParticipants(TourId);
+            if (Tour is null)
+                await Shell.Current.CurrentPage.DisplayAlert("Błąd", "Nie udało się pobrać informacji o wyjeździe", "Ok");
+
+            IsOrganizer = Tour.Participants.First(u => u.UserId == m_Configuration.User.Id).IsOrganizer;
             LoadData();
 
             var confirmCopyToast = Toast.Make("Odświerzono listę uczestników", ToastDuration.Short, 14);

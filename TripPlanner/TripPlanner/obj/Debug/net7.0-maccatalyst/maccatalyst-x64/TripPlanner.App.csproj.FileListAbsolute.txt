@@ -1049,3 +1049,4 @@ C:\Users\01159502\Desktop\TripPlanner\TripPlanner\TripPlanner\obj\Debug\net7.0-m
 C:\Users\01159502\Desktop\TripPlanner\TripPlanner\TripPlanner\obj\Debug\net7.0-maccatalyst\maccatalyst-x64\resizetizer\r\trash_wt.png
 C:\Users\01159502\Desktop\TripPlanner\TripPlanner\TripPlanner\obj\Debug\net7.0-maccatalyst\maccatalyst-x64\resizetizer\r\trash_wt@2x.png
 C:\Users\01159502\Desktop\TripPlanner\TripPlanner\TripPlanner\obj\Debug\net7.0-maccatalyst\maccatalyst-x64\resizetizer\r\trash_wt@3x.png
+C:\Users\01159502\Desktop\TripPlanner\TripPlanner\TripPlanner\bin\Debug\net7.0-maccatalyst\maccatalyst-x64\Microsoft.Extensions.Http.dll

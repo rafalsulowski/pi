@@ -27,7 +27,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TripPlanner.Services", "..\
 		{C1CF6F67-9B87-45D7-8B34-ADDE0EFDEE2B} = {C1CF6F67-9B87-45D7-8B34-ADDE0EFDEE2B}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TripPlanner.WebSocketServer", "..\TripPlanner.WebSocketServer\TripPlanner.WebSocketServer.csproj", "{0D468FAD-922E-47EB-8632-DED9C0FBDC16}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TripPlanner.WebSocketServer", "..\TripPlanner.WebSocketServer\TripPlanner.WebSocketServer.csproj", "{0D468FAD-922E-47EB-8632-DED9C0FBDC16}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

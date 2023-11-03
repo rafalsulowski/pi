@@ -46,17 +46,9 @@ namespace TripPlanner.ViewModels
         [RelayCommand]
         async Task GoChat()
         {
-            TourDTO NewTour = await m_TourService.GetTourWithMessages(Tour.Id);
-
-            if(NewTour == null)
-            {
-                await Shell.Current.CurrentPage.DisplayAlert("Błąd", "Nie udało się pobrać wiadomości!", "Ok :(");
-                return;
-            }
-
             var navigationParameter = new Dictionary<string, object>
             {
-                { "passTour",  NewTour}
+                { "passTourId",  TourId}
             };
             await Shell.Current.GoToAsync($"/Chat", navigationParameter);
         }

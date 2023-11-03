@@ -4,7 +4,6 @@
              x:Class="TripPlanner.Views.ParticipantsListViews.AddParticipantPopup"
              xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
             xmlns:viewmodel="clr-namespace:TripPlanner.ViewModels"
-            xmlns:markups="clr-namespace:OnScreenSizeMarkup.Maui;assembly=OnScreenSizeMarkup.Maui"
             Color="Transparent" 
              CanBeDismissedByTappingOutsideOfPopup="True">
 
@@ -15,12 +14,12 @@
         BackgroundColor="{AppThemeBinding Light=white, Dark=black}"
         StrokeShape="RoundRectangle 20,20,20,20">
         <VerticalStackLayout
-            Padding="10,40,10,100"
+            Padding="10,40,10,50"
             Spacing="20">
             <Label
                 HorizontalOptions="Center"
                 HorizontalTextAlignment="Center"
-                FontSize="{markups:OnScreenSize ExtraSmall='18', Small='20', Medium='24', Large='28', ExtraLarge='35'}"
+                FontSize="24"
                 FontAttributes="Bold"
                 TextColor="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource Secondary}}"
                 Text="W jaki sposób chcesz dodać użytkownika?"/>
@@ -29,25 +28,31 @@
                 BackgroundColor="{StaticResource Secondary}"
                 Stroke="{StaticResource Secondary}">
                 <VerticalStackLayout
+                    Spacing="7"
                     Padding="10">
                     <Label
                         HorizontalOptions="Center"
                         FontAttributes="Bold"
-                        FontSize="{markups:OnScreenSize ExtraSmall='14', Small='16', Medium='18', Large='20', ExtraLarge='22'}"
+                        FontSize="18"
                         Text="Link z zaproszeniem"
                         TextColor="White"/>
-                    <HorizontalStackLayout Spacing="10">
+                    <Grid
+                        ColumnDefinitions="*,35"
+                        HorizontalOptions="Center">
                         <Label
+                            Grid.Column="0"
                             VerticalOptions="Center"
-                            HorizontalOptions="Center"
-                            FontSize="{markups:OnScreenSize ExtraSmall='14', Small='15', Medium='16', Large='18', ExtraLarge='20'}"
+                            HorizontalTextAlignment="Center"
+                            MaximumWidthRequest="200"
+                            FontSize="16"
                             x:Name="LabelLink"
                             TextColor="white"/>
                         <ImageButton
-                            HeightRequest="{markups:OnScreenSize ExtraSmall='15', Small='18', Medium='20', Large='25', ExtraLarge='35'}"
+                            Grid.Column="1"
+                            HeightRequest="20"
                             Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:ParticipantsViewModel}}, Path=CopyToClipboardCommand}"
-                            Source="{AppThemeBinding Light=copy_wt.png, Dark=copy_dt.png}"/>
-                    </HorizontalStackLayout>
+                            Source="copy_dt.png"/>
+                    </Grid>
                 </VerticalStackLayout>
             </Border>
 
@@ -62,7 +67,7 @@
                     TextColor="{StaticResource Secondary}"
                     HorizontalOptions="Center"
                     Text="Wyszukaj z listy znajomych"
-                    FontSize="{markups:OnScreenSize ExtraSmall='16', Small='18', Medium='20', Large='22', ExtraLarge='24'}"
+                    FontSize="20"
                     FontAttributes="Bold"/>
             </Border>
         </VerticalStackLayout>

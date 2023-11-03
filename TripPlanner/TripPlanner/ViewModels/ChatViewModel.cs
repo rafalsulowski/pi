@@ -3,6 +3,7 @@ using CommunityToolkit.Maui.Views;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Microsoft.AspNetCore.SignalR.Client;
+using Microsoft.EntityFrameworkCore.Diagnostics;
 using System.Collections.ObjectModel;
 using TripPlanner.Controls.QuestionnaireControls;
 using TripPlanner.Models.DTO.MessageDTOs;
@@ -12,13 +13,13 @@ using TripPlanner.Views.ChatViews;
 
 namespace TripPlanner.ViewModels
 {
-    [QueryProperty("passTour", "Tour")]
     public partial class ChatViewModel : ObservableObject, IQueryAttributable
     {
         private readonly Configuration m_Configuration;
         private readonly TourService m_TourService;
         private readonly ChatService m_ChatService;
         private readonly QuestionnaireService m_QuestionnaireService;
+        private int TourId;
 
         [ObservableProperty]
         TourDTO tour;
@@ -44,10 +45,11 @@ namespace TripPlanner.ViewModels
             Messages = new ObservableCollection<MessageDTO>();
         }
 
-        public void ApplyQueryAttributes(IDictionary<string, object> query)
+        public async void ApplyQueryAttributes(IDictionary<string, object> query)
         {
-            Tour = (TourDTO)query["passTour"];
-            Messages = Tour.Messages.Reverse().ToObservableCollection();
+            TourId = (int)query["passTourId"];
+            //await m_ChatService.Connect();
+           // await LoadData();
         }
 
         [RelayCommand]
@@ -55,7 +57,7 @@ namespace TripPlanner.ViewModels
         {
             var navigationParameter = new Dictionary<string, object>
             {
-                { "passTour",  Tour}
+                { "passTourId",  TourId}
             };
             await Shell.Current.GoToAsync($"Tour", navigationParameter);
         }
@@ -63,66 +65,24 @@ namespace TripPlanner.ViewModels
         [RelayCommand]
         async Task SendMessage()
         {
-            if (hubConnection is not null)
-            {
-                await hubConnection.SendAsync("SendMessage", "test1", "test2");
-            }
-
-
             //if (Message != null && Message != "")
             //{
-            //    //wyslac do api
+            //    int id = await m_ChatService.SendMessage(Message);
 
             //    Messages.Add(new TextMessageDTO
             //    {
             //        Content = Message,
             //        UserId = m_Configuration.User.Id,
-            //        ChatId = Chat.Id,
-            //        Id = -1,
+            //        Id = id,
             //        Date = DateTime.Now
             //    });
             //}
         }
-
-        [RelayCommand]
-        async Task LoadMoreMessages()
-        {
-            IsRefreshing = true;
-            for (int i = 0; i < m_Configuration.AddChatMessagesWhileReload; i++)
-            {
-                if (Messages.Count == Tour.Messages.Count)
-                {
-                    //pobrac z api wiecej wiadomosci,
-                    //dac wtedy activitiindicator zeby sie krecil
-                    //potem break
-                    break;
-                }
-
-                Messages.Add(Tour.Messages.ElementAt(Messages.Count));
-            }
-            IsRefreshing = false;
-        }
-
-        private HubConnection hubConnection;
-        public bool IsConnected => hubConnection?.State == HubConnectionState.Connected;
-
+        
         [RelayCommand]
         async Task ShowMoreChatAction()
         {
-            HubConnection hubConnection = new HubConnectionBuilder()
-                .WithUrl("wss://localhost:7035/chat")
-                .WithAutomaticReconnect()
-                .Build();
-
-            hubConnection.On<string, string>("ReceiveMessage", (user, message) =>
-            {
-                var formattedMessage = $"cos tam";
-                Messages.Add(new TextMessageDTO { Content = $"{user} {message}" });
-            });
-
-            await hubConnection.StartAsync();
-
-            //await Shell.Current.CurrentPage.ShowPopupAsync(new ChatAdditionalMenuPopup(m_TourService, Tour, Chat.Id));
+            await Shell.Current.CurrentPage.ShowPopupAsync(new ChatAdditionalMenuPopup(m_TourService, Tour));
         }
 
         [RelayCommand]
@@ -136,7 +96,6 @@ namespace TripPlanner.ViewModels
             }
         }
 
-
         [RelayCommand]
         async Task ShowVoters(AnswerGDTO answer)
         {
@@ -144,11 +103,21 @@ namespace TripPlanner.ViewModels
 
             if (res.Result != null)
             {
-                //TODO
-                //await Shell.Current.CurrentPage.ShowPopupAsync(new PeopleChatListPopups($"Zagłosowali na \"{answer.Answer}\"", res.Result));
+                await Shell.Current.CurrentPage.ShowPopupAsync(new PeopleChatListPopups($"Zagłosowali na \"{answer.Answer}\"", res.Result));
             }
             else
                 await Shell.Current.CurrentPage.DisplayAlert("Błąd", "Nie udało się pobrać listy osób czatu!", "Ok");
         }
+
+        async Task LoadData()
+        {
+            //Tour = await m_TourService.GetTourWithMessages(TourId);
+            //if(Tour is null)
+            //{
+            //    await Shell.Current.CurrentPage.DisplayAlert("Błąd", "Nie udało się pobrać wiadomości", "Ok");
+            //    return;
+            //}
+            //Messages = Tour.Messages.Reverse().ToObservableCollection();
+        }
     }
-    }
+}

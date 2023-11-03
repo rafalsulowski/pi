@@ -4,6 +4,7 @@ using Microsoft.Maui.Controls;
 using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Net.Http;
 using System.Net.Http.Json;
 using TripPlanner.Models;
 using TripPlanner.Models.DTO.TourDTOs;
@@ -18,9 +19,9 @@ namespace TripPlanner.Services
         private readonly HttpClient m_HttpClient;
         private readonly Configuration m_Configuration;
 
-        public TourService(HttpClient _httpClient, Configuration configuration)
+        public TourService(IHttpClientFactory httpClient, Configuration configuration)
         {
-            m_HttpClient = _httpClient;
+            m_HttpClient = httpClient.CreateClient("httpClient");
             m_Configuration = configuration;
         }
 
@@ -43,11 +44,11 @@ namespace TripPlanner.Services
             }
         }
 
-        public async Task<TourDTO> GetTourWithParticipants(int tourId)
+        public async Task<TourDTO> GetTourWithMessages(int tourId)
         {
             try
             {
-                HttpResponseMessage response = m_HttpClient.GetAsync($"{m_Configuration.WebApiUrl}/Tour/{tourId}/GetWithParticipants").Result;
+                HttpResponseMessage response = m_HttpClient.GetAsync($"{m_Configuration.WebApiUrl}/Tour/{tourId}/GetWithMessages").Result;
                 if (response.IsSuccessStatusCode)
                 {
                     TourDTO tour = await response.Content.ReadFromJsonAsync<TourDTO>();
@@ -62,11 +63,11 @@ namespace TripPlanner.Services
             }
         }
 
-        public async Task<TourDTO> GetTourWithMessages(int tourId)
+        public async Task<TourDTO> GetTourWithParticipants(int tourId)
         {
             try
             {
-                HttpResponseMessage response = m_HttpClient.GetAsync($"{m_Configuration.WebApiUrl}/Tour/{tourId}/GetWithMessages").Result;
+                HttpResponseMessage response = m_HttpClient.GetAsync($"{m_Configuration.WebApiUrl}/Tour/{tourId}/GetWithParticipants").Result;
                 if (response.IsSuccessStatusCode)
                 {
                     TourDTO tour = await response.Content.ReadFromJsonAsync<TourDTO>();

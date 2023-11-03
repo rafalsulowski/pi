@@ -62,7 +62,7 @@ namespace TripPlanner.Controls.QuestionnaireControls
 			//m_Configuration = Application.Current.MainPage.Handler.MauiContext.Services.GetService(typeof(Configuration)) as Configuration;
 			try
 			{
-				m_Configuration = ServicesHelper.GetService<Configuration>();
+				//m_Configuration = ServicesHelper.GetService<Configuration>();
 			}
 			catch (Exception ex)
 			{

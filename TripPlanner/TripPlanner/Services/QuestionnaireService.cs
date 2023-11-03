@@ -3,6 +3,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Maui.Controls;
 using Newtonsoft.Json;
 using System.Collections.Generic;
+using System.Net.Http;
 using System.Net.Http.Json;
 using System.Text.Json.Serialization;
 using TripPlanner.Models;
@@ -15,12 +16,11 @@ namespace TripPlanner.Services
     public class QuestionnaireService : IService
     {
         private readonly HttpClient m_HttpClient;
-        private readonly Configuration m_Configuration; 
-        //private readonly ILogger<Worker> _logger;
+        private readonly Configuration m_Configuration;
 
-        public QuestionnaireService(HttpClient _httpClient, Configuration configuration)
+        public QuestionnaireService(IHttpClientFactory httpClient, Configuration configuration)
         {
-            m_HttpClient = _httpClient;
+            m_HttpClient = httpClient.CreateClient("httpClient");
             m_Configuration = configuration;
         }
 
@@ -46,7 +46,7 @@ namespace TripPlanner.Services
             return null;
         }
 
-        public async Task<List<string>> GetAnswerVoters(int tourId)
+        public async Task<List<ExtendParticipantDTO>> GetAnswerVoters(int tourId)
         {
             //try
             //{
@@ -61,7 +61,7 @@ namespace TripPlanner.Services
 
             //return null;
 
-            return new List<string> { "Adam", "Michał", "Alicja", "Kuba", "Rafał", "Maris" };
+            return new List<ExtendParticipantDTO> ();
         }
 
 

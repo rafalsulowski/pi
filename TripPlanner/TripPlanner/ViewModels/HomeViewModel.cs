@@ -9,7 +9,7 @@ using TripPlanner.Services;
 
 namespace TripPlanner.ViewModels
 {
-    public partial class HomeViewModel : ObservableObject
+    public partial class HomeViewModel : ObservableObject, IQueryAttributable
     {
         private readonly UserService m_UserService;
         private readonly Configuration m_Configuration;
@@ -23,7 +23,6 @@ namespace TripPlanner.ViewModels
         [ObservableProperty]
         bool refresh;
 
-
         public HomeViewModel(Configuration configuration, UserService userService)
         {
             m_Configuration = configuration;
@@ -32,7 +31,13 @@ namespace TripPlanner.ViewModels
             EmptyTours = false;
             LoadData();
         }
-        
+
+        public async void ApplyQueryAttributes(IDictionary<string, object> query)
+        {
+            bool reload = (bool)query["reload"]; //przy opuszczniu wyjazdu zaistnaial potrzeba do odswierzenia strony glownej aby wycieczka ktorą opuściliśmy już się nie pokazywała
+            await RefreshView();
+        }
+
         [RelayCommand]
         async Task OpenCalendar()
         {

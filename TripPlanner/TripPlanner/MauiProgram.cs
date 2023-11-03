@@ -11,6 +11,7 @@ using CommunityToolkit.Maui;
 using TripPlanner.DataTemplates;
 using HexInnovation;
 using TripPlanner.Views.ParticipantsListViews;
+using Microsoft.Maui.Controls.Hosting;
 
 namespace TripPlanner;
 
@@ -31,9 +32,20 @@ public static class MauiProgram
 
         //App Services
         builder.Services.AddSingleton<Configuration>();
-        builder.Services.AddSingleton<HttpClient>();
+		builder.Services.AddHttpClient("httpClient")
+			.ConfigurePrimaryHttpMessageHandler(() => {
+                HttpClientHandler handler = new HttpClientHandler();
+				handler.ServerCertificateCustomValidationCallback = (message, cert, chain, errors) =>
+				{
+					if (cert.Issuer.Equals("CN=localhost"))
+						return true;
+					return errors == System.Net.Security.SslPolicyErrors.None;
+				};
+				return handler;
+			});
 
-		//Data Template Selectors
+
+        //Data Template Selectors
         builder.Services.AddSingleton<MessageDataTemplateSelector>();
 
         //Data Managment Services

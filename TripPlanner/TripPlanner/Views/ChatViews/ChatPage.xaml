@@ -3,9 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:localTemplates="clr-namespace:TripPlanner.DataTemplates"
              x:Class="TripPlanner.Views.ChatViews.ChatPage"
-    xmlns:controls="clr-namespace:TripPlanner.Controls.QuestionnaireControls"
-    xmlns:markups="clr-namespace:OnScreenSizeMarkup.Maui;assembly=OnScreenSizeMarkup.Maui"
-    xmlns:models="clr-namespace:TripPlanner.Models.DTO.MessageDTOs.QuestionnaireDTOs;assembly=TripPlanner.Models"
+             xmlns:controls="clr-namespace:TripPlanner.Controls.QuestionnaireControls"
+             xmlns:models="clr-namespace:TripPlanner.Models.DTO.MessageDTOs.QuestionnaireDTOs;assembly=TripPlanner.Models"
              xmlns:viewmodel="clr-namespace:TripPlanner.ViewModels"
              x:DataType="viewmodel:ChatViewModel"
              Shell.NavBarIsVisible="False"
@@ -16,7 +15,6 @@
         <DataTemplate
             x:Key="NoticeMessage">
             <Grid
-                BackgroundColor="Red"
                 RowSpacing="1"
                 Rotation="180"
                 Margin="5,0,5,0"
@@ -196,23 +194,89 @@
     </ContentPage.Resources>
 
 
+    <StackLayout
+        Orientation="Vertical"
+        Spacing="10">
+        
+        <ImageButton
+            Grid.Column="0"
+            Source="{AppThemeBinding Light=arrow_back_wt.png, Dark=arrow_back_dt.png}"
+            WidthRequest="30"
+            Command="{Binding GoBackCommand}" />
 
-    <ScrollView>
-        <VerticalStackLayout
+        <CollectionView
+            x:Name="m_chatControl"
+            Rotation="180"
+            Margin="0,50,0,0"
+            EmptyView="Brak wiadomości"
+            ItemTemplate="{StaticResource MessageSelector}"
+            SelectionMode="None">
+            <CollectionView.ItemsLayout>
+                <LinearItemsLayout
+                    Orientation="Vertical"
+                    ItemSpacing="5" />
+            </CollectionView.ItemsLayout>
+        </CollectionView>
+        
+        <Border
+            Margin="0,0,0,5"
+            BackgroundColor="#E3E3E3"
+            Grid.Column="1"
+            Grid.Row="0"
+            StrokeThickness="0"
+            VerticalOptions="Center"
+            StrokeShape="RoundRectangle 20,20,20,20">
+            <StackLayout
+                Padding="5,0,5,0">
+                <Editor
+                    x:Name="m_Message"
+                    Keyboard="Chat"
+                    MinimumHeightRequest="35"
+                    MaximumHeightRequest="250"
+                    AutoSize="TextChanges"
+                    TextColor="#52AB98"
+                    FontAttributes="Bold"
+                    BackgroundColor="{StaticResource Gray100}"
+                    FontSize="20"
+                    VerticalOptions="FillAndExpand"
+                    VerticalTextAlignment="Center" />
+            </StackLayout>
+        </Border>
+        <ImageButton
+            Grid.Column="2"
+            Grid.Row="0"
+            Margin="5,0,5,10"
+            VerticalOptions="End"
+            Clicked="OnSendClicked"
+            Source="{AppThemeBinding Light=send_wt.png, Dark=send_dt.png}"
+            HeightRequest="25"
+            WidthRequest="25" />
+
+
+
+
+    </StackLayout>
+    
+    
+    
+
+    <!--<ScrollView>
+        <StackLayout
+            Orientation="Vertical"
             Spacing="10">
             <Grid
-                HeightRequest="{markups:OnScreenSize ExtraSmall='25', Small='25', Medium='30', Large='35', ExtraLarge='50'}"
-                ColumnDefinitions="{markups:OnScreenSize ExtraSmall='25,*,25', Small='25,*,25', Medium='30,*,30', Large='35,*,35', ExtraLarge='50,*,50'}"
+                HeightRequest="50"
+                ColumnDefinitions="30,*,30"
                 Margin="10,5,10,0">
                 <ImageButton
                     Grid.Column="0"
                     Source="{AppThemeBinding Light=arrow_back_wt.png, Dark=arrow_back_dt.png}"
-                    WidthRequest="{markups:OnScreenSize ExtraSmall='25', Small='25', Medium='30', Large='35', ExtraLarge='50'}"
+                    WidthRequest="30"
                     Command="{Binding GoBackCommand}" />
 
                 <Label
                     Grid.Column="1"
-                    FontSize="{markups:OnScreenSize ExtraSmall='12', Small='15', Medium='18', Large='24', ExtraLarge='35'}"
+                    FontSize="18"
                     HorizontalOptions="Center"
                     VerticalOptions="Center">
                     <Label.Text>
@@ -229,32 +293,26 @@
 
 
             <Grid
-                RowSpacing="5">
+                Margin="0,50,0,50"
+                RowSpacing="15">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"></RowDefinition>
                     <RowDefinition Height="Auto"></RowDefinition>
                 </Grid.RowDefinitions>
 
                 <CollectionView
+                    x:Name="m_chatControl"
                     Grid.Row="0"
                     Margin="0,50,0,0"
                     Rotation="180"
-                    RemainingItemsThreshold="0"
-                    RemainingItemsThresholdReachedCommand="{Binding LoadMoreMessagesCommand}"
-                    x:Name="m_chatControl"
-                    ItemsSource="{Binding Messages}"
+                    EmptyView="Brak wiadomości"
                     ItemTemplate="{StaticResource MessageSelector}"
                     SelectionMode="None">
                     <CollectionView.ItemsLayout>
                         <LinearItemsLayout
-                                Orientation="Vertical"
-                                ItemSpacing="5" />
+                            Orientation="Vertical"
+                            ItemSpacing="5" />
                     </CollectionView.ItemsLayout>
-
-                    <CollectionView.Header>
-                        <StackLayout>
-                        </StackLayout>
-                    </CollectionView.Header>
                 </CollectionView>
 
                 <Grid
@@ -280,6 +338,7 @@
                             StrokeShape="RoundRectangle 20,20,20,20">
                         <StackLayout Padding="5,0,5,0">
                             <Editor
+                                x:Name="m_Message"
                                     Keyboard="Chat"
                                     MinimumHeightRequest="35"
                                     MaximumHeightRequest="250"
@@ -298,12 +357,12 @@
                         Grid.Row="0"
                         Margin="5,0,5,10"
                         VerticalOptions="End"
-                        Command="{Binding SendMessageCommand}"
+                        Clicked="OnSendClicked"
                         Source="{AppThemeBinding Light=send_wt.png, Dark=send_dt.png}"
                         HeightRequest="25"
                         WidthRequest="25"/>
                 </Grid>
             </Grid>
-        </VerticalStackLayout>
-    </ScrollView>
+        </StackLayout>
+    </ScrollView>-->
 </ContentPage>

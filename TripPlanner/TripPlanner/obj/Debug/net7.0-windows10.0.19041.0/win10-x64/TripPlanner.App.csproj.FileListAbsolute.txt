@@ -1343,7 +1343,6 @@ C:\Users\01159502\Desktop\TripPlanner\TripPlanner\TripPlanner\bin\Debug\net7.0-w
 C:\Users\01159502\Desktop\TripPlanner\TripPlanner\TripPlanner\bin\Debug\net7.0-windows10.0.19041.0\win10-x64\Microsoft.AspNetCore.SignalR.Protocols.Json.dll
 C:\Users\01159502\Desktop\TripPlanner\TripPlanner\TripPlanner\bin\Debug\net7.0-windows10.0.19041.0\win10-x64\Microsoft.Extensions.Features.dll
 C:\Users\01159502\Desktop\TripPlanner\TripPlanner\TripPlanner\bin\Debug\net7.0-windows10.0.19041.0\win10-x64\System.IO.Pipelines.dll
-C:\Users\01159502\Desktop\TripPlanner\TripPlanner\TripPlanner\bin\Debug\net7.0-windows10.0.19041.0\win10-x64\mscordaccore_amd64_amd64_7.0.1123.42427.dll
 C:\Users\01159502\Desktop\TripPlanner\TripPlanner\TripPlanner\bin\Debug\net7.0-windows10.0.19041.0\win10-x64\OnScreenSizeMarkup.Maui.dll
 C:\Users\01159502\Desktop\TripPlanner\TripPlanner\TripPlanner\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\check_ok_dt.scale-100.png
 C:\Users\01159502\Desktop\TripPlanner\TripPlanner\TripPlanner\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\check_ok_dt.scale-125.png
@@ -1385,11 +1384,6 @@ C:\Users\01159502\Desktop\TripPlanner\TripPlanner\TripPlanner\obj\Debug\net7.0-w
 C:\Users\01159502\Desktop\TripPlanner\TripPlanner\TripPlanner\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\plus_circle_sec.scale-150.png
 C:\Users\01159502\Desktop\TripPlanner\TripPlanner\TripPlanner\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\plus_circle_sec.scale-200.png
 C:\Users\01159502\Desktop\TripPlanner\TripPlanner\TripPlanner\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\plus_circle_sec.scale-400.png
-C:\Users\01159502\Desktop\TripPlanner\TripPlanner\TripPlanner\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\trash.scale-100.png
-C:\Users\01159502\Desktop\TripPlanner\TripPlanner\TripPlanner\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\trash.scale-125.png
-C:\Users\01159502\Desktop\TripPlanner\TripPlanner\TripPlanner\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\trash.scale-150.png
-C:\Users\01159502\Desktop\TripPlanner\TripPlanner\TripPlanner\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\trash.scale-200.png
-C:\Users\01159502\Desktop\TripPlanner\TripPlanner\TripPlanner\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\trash.scale-400.png
 C:\Users\01159502\Desktop\TripPlanner\TripPlanner\TripPlanner\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\trash_dt.scale-100.png
 C:\Users\01159502\Desktop\TripPlanner\TripPlanner\TripPlanner\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\trash_dt.scale-125.png
 C:\Users\01159502\Desktop\TripPlanner\TripPlanner\TripPlanner\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\trash_dt.scale-150.png
@@ -1400,3 +1394,5 @@ C:\Users\01159502\Desktop\TripPlanner\TripPlanner\TripPlanner\obj\Debug\net7.0-w
 C:\Users\01159502\Desktop\TripPlanner\TripPlanner\TripPlanner\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\trash_wt.scale-150.png
 C:\Users\01159502\Desktop\TripPlanner\TripPlanner\TripPlanner\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\trash_wt.scale-200.png
 C:\Users\01159502\Desktop\TripPlanner\TripPlanner\TripPlanner\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\trash_wt.scale-400.png
+C:\Users\01159502\Desktop\TripPlanner\TripPlanner\TripPlanner\bin\Debug\net7.0-windows10.0.19041.0\win10-x64\mscordaccore_amd64_amd64_7.0.1323.51816.dll
+C:\Users\01159502\Desktop\TripPlanner\TripPlanner\TripPlanner\bin\Debug\net7.0-windows10.0.19041.0\win10-x64\Microsoft.Extensions.Http.dll

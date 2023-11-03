@@ -14,48 +14,36 @@ namespace TripPlanner.WebSocketServer
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            builder.Services.AddSignalR();
-            builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-                .AddJwtBearer(opt =>
-                {
-                    opt.TokenValidationParameters = new TokenValidationParameters
-                    {
-                        // token validation code
-                    };
-                    opt.Events = new JwtBearerEvents
-                    {
-                        OnMessageReceived = context =>
-                        {
-                            var accessToken = context.Request.Query["access_token"];
-                            var path = context.HttpContext.Request.Path;
-                            if (!string.IsNullOrEmpty(accessToken)
-                                && path.StartsWithSegments("/kitchen"))
-                            {
-                                context.Token = accessToken;
-                            }
-                            return Task.CompletedTask;
-                        }
-                    };
-                });
-            builder.Services.AddResponseCompression(opts =>
-            {
-                opts.MimeTypes = ResponseCompressionDefaults.MimeTypes.Concat(
-                    new[] { "application/octet-stream" });
-            });
+            // Add services to the container.
+            builder.Services.AddRazorPages();
 
+            // Gerald: Enable SignalR functionality
+            builder.Services.AddSignalR();
 
             var app = builder.Build();
 
-            //app.MapPost("broadcast", async (string message, IHubContext<ChatHub, IChatClient> context) =>
-            //{
-            //    await context.Clients.All.ReceiveMessage(message);
-            //    return Results.NoContent();
-            //});
-            //app.MapBlazorHub();
-            app.MapHub<ChatHub>("/chatHub");
+            // Configure the HTTP request pipeline.
+            if (!app.Environment.IsDevelopment())
+            {
+                app.UseExceptionHandler("/Error");
+                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+                app.UseHsts();
 
+                // Gerald: Make sure to disable this for development!
+                app.UseHttpsRedirection();
+            }
 
-            app.UseHttpsRedirection();
+            app.UseStaticFiles();
+
+            app.UseRouting();
+
+            app.UseAuthorization();
+
+            app.MapRazorPages();
+
+            // Gerald: Configure SignalR Endpoint
+            app.MapHub<ChatHub>("/chat");
+
             app.Run();
         }
     }

@@ -64,7 +64,6 @@
             <inheritdoc/>
             <inheritdoc/>
             <inheritdoc/>
-            <inheritdoc/>
         </member>
         <member name="P:TripPlanner.ViewModels.ChatViewModel.Tour">
             <inheritdoc cref="F:TripPlanner.ViewModels.ChatViewModel.tour"/>
@@ -89,12 +88,6 @@
         </member>
         <member name="P:TripPlanner.ViewModels.ChatViewModel.SendMessageCommand">
             <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:TripPlanner.ViewModels.ChatViewModel.SendMessage"/>.</summary>
-        </member>
-        <member name="F:TripPlanner.ViewModels.ChatViewModel.loadMoreMessagesCommand">
-            <summary>The backing field for <see cref="P:TripPlanner.ViewModels.ChatViewModel.LoadMoreMessagesCommand"/>.</summary>
-        </member>
-        <member name="P:TripPlanner.ViewModels.ChatViewModel.LoadMoreMessagesCommand">
-            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:TripPlanner.ViewModels.ChatViewModel.LoadMoreMessages"/>.</summary>
         </member>
         <member name="F:TripPlanner.ViewModels.ChatViewModel.showMoreChatActionCommand">
             <summary>The backing field for <see cref="P:TripPlanner.ViewModels.ChatViewModel.ShowMoreChatActionCommand"/>.</summary>
@@ -297,6 +290,7 @@
             <inheritdoc/>
             <inheritdoc/>
             <inheritdoc/>
+            <inheritdoc/>
         </member>
         <member name="P:TripPlanner.ViewModels.ParticipantsViewModel.Tour">
             <inheritdoc cref="F:TripPlanner.ViewModels.ParticipantsViewModel.tour"/>
@@ -342,6 +336,12 @@
         </member>
         <member name="P:TripPlanner.ViewModels.ParticipantsViewModel.GoToFriendsListCommand">
             <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:TripPlanner.ViewModels.ParticipantsViewModel.GoToFriendsList"/>.</summary>
+        </member>
+        <member name="F:TripPlanner.ViewModels.ParticipantsViewModel.leftTourCommand">
+            <summary>The backing field for <see cref="P:TripPlanner.ViewModels.ParticipantsViewModel.LeftTourCommand"/>.</summary>
+        </member>
+        <member name="P:TripPlanner.ViewModels.ParticipantsViewModel.LeftTourCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand`1"/> instance wrapping <see cref="M:TripPlanner.ViewModels.ParticipantsViewModel.LeftTour(TripPlanner.Models.DTO.TourDTOs.ExtendParticipantDTO)"/>.</summary>
         </member>
         <member name="F:TripPlanner.ViewModels.ParticipantsViewModel.deleteParticipantCommand">
             <summary>The backing field for <see cref="P:TripPlanner.ViewModels.ParticipantsViewModel.DeleteParticipantCommand"/>.</summary>

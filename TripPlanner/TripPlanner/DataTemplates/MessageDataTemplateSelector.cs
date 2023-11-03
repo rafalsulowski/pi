@@ -16,7 +16,8 @@ namespace TripPlanner.DataTemplates
         {
             try
             {
-                Configuration configuration = ServicesHelper.Current.GetService<Configuration>();
+                Configuration configuration = new Configuration();
+                //Configuration configuration = ServicesHelper.Current.GetService<Configuration>();
                 if (item is TextMessageDTO)
                 {
                     if (configuration.User.Id == ((TextMessageDTO)item).UserId)
@@ -37,7 +38,7 @@ namespace TripPlanner.DataTemplates
             }
             catch (Exception)
             {
-                Shell.Current.CurrentPage.DisplayAlert("Awaria", "Zły system operacyjny! Czat jest dostępny tylko na: Windows, Android, Ios, MacCatalyst", "Ok :(");
+                Shell.Current.CurrentPage.DisplayAlert("Awaria", "Zły system operacyjny! Czat jest dostępny tylko na: Windows, Android, Ios, MacCatalyst", "Ok");
                 return NullMessage;
             }
         }

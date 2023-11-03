@@ -18,9 +18,21 @@ namespace TripPlanner.Services
         private readonly HttpClient m_HttpClient;
         private readonly Configuration m_Configuration;
 
-        public UserService(HttpClient _httpClient, Configuration configuration)
+        public HttpClientHandler GetInsecureHandler()
         {
-            m_HttpClient = _httpClient;
+            HttpClientHandler handler = new HttpClientHandler();
+            handler.ServerCertificateCustomValidationCallback = (message, cert, chain, errors) =>
+            {
+                if (cert.Issuer.Equals("CN=localhost"))
+                    return true;
+                return errors == System.Net.Security.SslPolicyErrors.None;
+            };
+            return handler;
+        }
+
+        public UserService(IHttpClientFactory httpClient, Configuration configuration)
+        {
+            m_HttpClient = httpClient.CreateClient("httpClient");
             m_Configuration = configuration;
         }
 

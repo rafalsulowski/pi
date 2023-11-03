@@ -132,7 +132,7 @@ namespace TripPlanner.ViewModels
             await Shell.Current.CurrentPage.DisplayAlert("Powodzednie", $"Utworzono wyjazd", "Ok");
             var navigationParameter = new Dictionary<string, object>
             {
-                { "passTour",  newTour}
+                { "passTourId",  newTour.Id}
             };
             await Shell.Current.GoToAsync($"Tour", navigationParameter);
         }
