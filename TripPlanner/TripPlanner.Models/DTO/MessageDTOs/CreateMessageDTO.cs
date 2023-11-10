@@ -22,5 +22,18 @@ namespace TripPlanner.Models.DTO.MessageDTOs
                 Content = data.Content,
             };
         }
+
+        public static implicit operator NoticeMessage(CreateMessageDTO data)
+        {
+            if (data == null)
+                return null;
+
+            return new NoticeMessage
+            {
+                UserId = data.UserId,
+                TourId = data.TourId,
+                Content = data.Content,
+            };
+        }
     }
 }

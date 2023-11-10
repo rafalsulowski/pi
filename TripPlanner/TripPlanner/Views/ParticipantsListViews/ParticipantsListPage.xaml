@@ -10,8 +10,7 @@
 
     <ContentPage.Resources>
 
-        <DataTemplate
-            x:Key="MyPersonNormal">
+        <DataTemplate x:Key="MyPersonNormal">
             <SwipeView>
                 <SwipeView.LeftItems>
                     <SwipeItems>
@@ -34,11 +33,13 @@
                             TextColor="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource Secondary}}">
                             <Label.Text>
                                 <MultiBinding
-                                    StringFormat="{}{0}. {1}">
+                                    StringFormat="{}{0}. {1} '{2}'">
                                     <Binding
                                         Path="Order" />
                                     <Binding
                                         Path="FullName" />
+                                    <Binding
+                                        Path="Nickname" />
                                 </MultiBinding>
                             </Label.Text>
                         </Label>
@@ -73,8 +74,7 @@
             </SwipeView>
         </DataTemplate>
         
-        <DataTemplate
-            x:Key="MyPersonOrganizer">
+        <DataTemplate x:Key="MyPersonOrganizer">
             <SwipeView>
                 <SwipeView.LeftItems>
                     <SwipeItems>
@@ -97,11 +97,13 @@
                             TextColor="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource Secondary}}">
                             <Label.Text>
                                 <MultiBinding
-                                    StringFormat="{}{0}. {1}">
+                                    StringFormat="{}{0}. {1} '{2}'">
                                     <Binding
                                         Path="Order" />
                                     <Binding
                                         Path="FullName" />
+                                    <Binding
+                                        Path="Nickname" />
                                 </MultiBinding>
                             </Label.Text>
                         </Label>
@@ -136,8 +138,7 @@
             </SwipeView>
         </DataTemplate>
         
-        <DataTemplate
-            x:Key="OrganizerParticipant">
+        <DataTemplate x:Key="OrganizerParticipant">
             <SwipeView>
                 <SwipeView.LeftItems>
                     <SwipeItems>
@@ -159,9 +160,10 @@
                             FontSize="18"
                             TextColor="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource Secondary}}">
                             <Label.Text>
-                                <MultiBinding StringFormat="{}{0}. {1}">
+                                <MultiBinding StringFormat="{}{0}. {1} '{2}'">
                                     <Binding Path="Order"/>
                                     <Binding Path="FullName"/>
+                                    <Binding Path="Nickname"/>
                                 </MultiBinding>
                             </Label.Text>
                         </Label>
@@ -215,11 +217,13 @@
                             TextColor="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource Secondary}}">
                             <Label.Text>
                                 <MultiBinding
-                                    StringFormat="{}{0}. {1}">
+                                    StringFormat="{}{0}. {1} '{2}'">
                                     <Binding
                                         Path="Order" />
                                     <Binding
                                         Path="FullName" />
+                                    <Binding
+                                        Path="Nickname" />
                                 </MultiBinding>
                             </Label.Text>
                         </Label>

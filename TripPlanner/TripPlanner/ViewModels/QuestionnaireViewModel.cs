@@ -1,4 +1,6 @@
-﻿using CommunityToolkit.Maui.Views;
+﻿using CommunityToolkit.Maui.Alerts;
+using CommunityToolkit.Maui.Core;
+using CommunityToolkit.Maui.Views;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using TripPlanner.Controls.QuestionnaireControls;
@@ -11,15 +13,15 @@ namespace TripPlanner.ViewModels
     public partial class QuestionnaireViewModel : ObservableObject
     {
         private readonly Configuration m_Configuration;
-        private readonly QuestionnaireService m_QuestionnaireService;
+        private readonly ChatService m_ChatService;
 
         [ObservableProperty]
         QuestionnaireDTO questionnaire;
 
-        public QuestionnaireViewModel(Configuration configuration, QuestionnaireService questionnaireService, QuestionnaireDTO questionnaire)
+        public QuestionnaireViewModel(Configuration configuration, ChatService chatService, QuestionnaireDTO questionnaire)
         {
             m_Configuration = configuration;
-            m_QuestionnaireService = questionnaireService;
+            m_ChatService = chatService;
             Questionnaire = questionnaire;
         }
 
@@ -27,25 +29,23 @@ namespace TripPlanner.ViewModels
         [RelayCommand]
         async Task Vote(AnswerGDTO answer)
         {
-            var res = m_QuestionnaireService.VoteForAnswer(m_Configuration.User.Id, answer.Id);
-
-            if(res.Result == false)
+            var res = await m_ChatService.VoteForAnswer(m_Configuration.User.Id, answer.Id);
+            if (res.Success)
             {
-                await Shell.Current.CurrentPage.DisplayAlert("Błąd", "Nie udało się oddać głosu!", "Ok");
+                //jakaś zmiana w interfejsie uzytkownika, odświerzenie ankiety
+                var confirmCopyToast = Toast.Make($"Oddano swój głos", ToastDuration.Long, 14);
+                await confirmCopyToast.Show();
             }
+            else
+                await Shell.Current.CurrentPage.DisplayAlert("Błąd", res.Message, "Ok");
+
         }
 
         [RelayCommand]
-        async Task ShowVoter(object answer)
+        async Task ShowVoters(AnswerGDTO answer)
         {
-            //var res = m_QuestionnaireService.GetAnswerVoters(answer.Id);
-
-            //if (res.Result != null)
-            //{
-            //    await Shell.Current.CurrentPage.ShowPopupAsync(new PeopleChatListPopups($"Zagłosowali na \"{answer.Answer}\"", res.Result));
-            //}
-            //else
-            //    await Shell.Current.CurrentPage.DisplayAlert("Błąd", "Nie udało się pobrać listy osób czatu!", "Ok");
+            var res = m_ChatService.GetAnswerVoters(answer.Id);
+            await Shell.Current.CurrentPage.ShowPopupAsync(new PeopleChatListPopups($"Zagłosowali na \"{answer.Answer}\"", res.Result));
         }
     }
 }

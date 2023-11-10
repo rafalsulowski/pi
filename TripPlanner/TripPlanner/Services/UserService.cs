@@ -1,34 +1,16 @@
 ﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
 using System.Net.Http.Json;
 using System.Text;
-using System.Threading.Tasks;
 using TripPlanner.Models.DTO.TourDTOs;
 using TripPlanner.Models.DTO.UserDTOs;
-using TripPlanner.Models.Models.TourModels;
 using TripPlanner.Models.Models;
 
 namespace TripPlanner.Services
 {
-    public class UserService : IService
+    public class UserService
     {
         private readonly HttpClient m_HttpClient;
         private readonly Configuration m_Configuration;
-
-        public HttpClientHandler GetInsecureHandler()
-        {
-            HttpClientHandler handler = new HttpClientHandler();
-            handler.ServerCertificateCustomValidationCallback = (message, cert, chain, errors) =>
-            {
-                if (cert.Issuer.Equals("CN=localhost"))
-                    return true;
-                return errors == System.Net.Security.SslPolicyErrors.None;
-            };
-            return handler;
-        }
 
         public UserService(IHttpClientFactory httpClient, Configuration configuration)
         {
@@ -36,47 +18,8 @@ namespace TripPlanner.Services
             m_Configuration = configuration;
         }
 
-        public async Task<CreateUserDTO> Register(CreateUserDTO user)
-        {
-            //try
-            //{
-            //    string json = JsonConvert.SerializeObject(tour);
-            //    StringContent httpContent = new StringContent(json, System.Text.Encoding.UTF8, "application/json");
-            //    HttpResponseMessage response = m_HttpClient.PostAsync($"{m_Configuration.WebApiUrl}/Tour/Create", httpContent).Result;
-            //    if (response.IsSuccessStatusCode)
-            //    {
-            //        var resp = await response.Content.ReadFromJsonAsync<TourDTO>();
-            //        return resp;
-            //    }
-            //}
-            //catch (Exception e)
-            //{
-            //    //dorobic loggera
-            //}
 
-            return null;
-        }
-
-        public async Task<List<TourDTO>> GetToursOfUser(int userId)
-        {
-            try
-            {
-                HttpResponseMessage response = m_HttpClient.GetAsync($"{m_Configuration.WebApiUrl}/User/GetToursOfUser/{userId}").Result;
-                if (response.IsSuccessStatusCode)
-                {
-                    var tours = await response.Content.ReadFromJsonAsync<List<TourDTO>>();
-                    return tours;
-                }
-                else
-                    return new List<TourDTO>();
-            }
-            catch (Exception)
-            {
-                return new List<TourDTO>();
-            }
-        }
-
-
+        // Zwraca liste znajomych
         public async Task<List<ExtendFriendDTO>> GetFriends(int userId)
         {
             try
@@ -84,39 +27,69 @@ namespace TripPlanner.Services
                 HttpResponseMessage response = m_HttpClient.GetAsync($"{m_Configuration.WebApiUrl}/User/{userId}/GetFriends").Result;
                 if (response.IsSuccessStatusCode)
                 {
-                    var tour = await response.Content.ReadFromJsonAsync<RepositoryResponse<List<ExtendFriendDTO>>>();
-
-                    if (tour.Success)
-                        return tour.Data?.ToList();
+                    return await response.Content.ReadFromJsonAsync<List<ExtendFriendDTO>>();
                 }
             }
-            catch (Exception)
-            {
-            }
-
+            catch (Exception) { }
             return null;
         }
 
-        public async Task<List<ExtendFriendDTO>> GetFriendsBasedOnTour(int userId, int tourId)
+        // Zwraca liste wyjazdów do których należy dany użytkownik
+        public async Task<List<TourDTO>> GetToursOfUser(int userId)
         {
             try
             {
-                HttpResponseMessage response = m_HttpClient.GetAsync($"{m_Configuration.WebApiUrl}/User/{userId}/GetFriendsBasedOnTour/{tourId}").Result;
+                HttpResponseMessage response = m_HttpClient.GetAsync($"{m_Configuration.WebApiUrl}/User/GetToursOfUser/{userId}").Result;
                 if (response.IsSuccessStatusCode)
                 {
-                    var tour = await response.Content.ReadFromJsonAsync<RepositoryResponse<List<ExtendFriendDTO>>>();
-
-                    if (tour.Success)
-                        return tour.Data?.ToList();
+                    return await response.Content.ReadFromJsonAsync<List<TourDTO>>();
                 }
+            }
+            catch (Exception) { }
+            return null;
+        }
+
+        // Zwraca liste znajomych z wyjazdu
+        public async Task<List<ExtendFriendDTO>> GetFriendsWithInfoAboutTour(int userId, int tourId)
+        {
+            try
+            {
+                HttpResponseMessage response = m_HttpClient.GetAsync($"{m_Configuration.WebApiUrl}/User/{userId}/GetFriendsWithInfoAboutTour/{tourId}").Result;
+                if (response.IsSuccessStatusCode)
+                {
+                    return await response.Content.ReadFromJsonAsync<List<ExtendFriendDTO>>();
+                }
+            }
+            catch (Exception) { }
+            return null;
+        }
+
+
+        //Tworzenie nowego użytkownika
+        public async Task<RepositoryResponse<int>> Register(CreateUserDTO user)
+        {
+            string errMsg = "";
+            try
+            {
+                string json = JsonConvert.SerializeObject(user);
+                StringContent httpContent = new StringContent(json, Encoding.UTF8, "application/json");
+                HttpResponseMessage response = m_HttpClient.PostAsync($"{m_Configuration.WebApiUrl}/User", httpContent).Result;
+                if (response.IsSuccessStatusCode)
+                {
+                    RepositoryResponse<int> resp = await response.Content.ReadFromJsonAsync<RepositoryResponse<int>>();
+                    if (resp.Success)
+                        return new RepositoryResponse<int> { Data = resp.Data, Message = "", Success = true };
+                    else
+                        errMsg = resp.Message;
+                }
+                else
+                    errMsg = $"Kod błędu: {response.StatusCode}";
             }
             catch (Exception e)
             {
-                
+                errMsg = $"Wyjątek: {e.Message}";
             }
-
-            return null;
+            return new RepositoryResponse<int> { Data = -1, Message = errMsg, Success = false };
         }
-        
     }
 }

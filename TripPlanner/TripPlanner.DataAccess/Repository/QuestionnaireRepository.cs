@@ -78,6 +78,28 @@ namespace TripPlanner.DataAccess.Repository
         public async Task<RepositoryResponse<bool>> AddVoteToAnswer(QuestionnaireVote Vote)
         {
             var VoteDB = _context.QuestionnaireVotes.AsNoTracking().FirstOrDefault(u => u.UserId == Vote.UserId && u.QuestionnaireAnswerId == Vote.QuestionnaireAnswerId);
+
+            //sprawdzenie czy uzytkownik nie zaglosowal na inna odpowiedz w tej ankiecie
+            var answerDB = _context.QuestionnaireAnswers.FirstOrDefault(u => u.Id == Vote.QuestionnaireAnswerId);
+            if (answerDB is null)
+                return new RepositoryResponse<bool> { Data = false, Message = $"Nie udało się odnaleźć odpowiedzi o id= {Vote.QuestionnaireAnswerId}" };
+
+            var otherAnswers = await _context.QuestionnaireAnswers.Where(u => u.QuestionnaireId == answerDB.QuestionnaireId).ToListAsync();
+            foreach (var answser in otherAnswers)
+            {
+                int e = 10;
+                //if (otherAnswerFromTheSameQuestionnaire is null)
+                //    continue;
+
+                //QuestionnaireVote otherVoteOfThisUser = otherAnswerFromTheSameQuestionnaire.Data.Votes.First(u => u.UserId == Vote.UserId);
+
+                //if(otherVoteOfThisUser is not null)
+                //{
+                //    VoteDB = otherVoteOfThisUser;
+                //    break;
+                //}
+            }
+
             if (VoteDB == null)
             {
                 _context.QuestionnaireVotes.Add(Vote);

@@ -9,7 +9,7 @@
     ".NETCoreApp,Version=v7.0/win10-x64": {
       "TripPlanner.App/1.0": {
         "dependencies": {
-          "CommunityToolkit.Maui": "6.0.0",
+          "CommunityToolkit.Maui": "6.1.0",
           "CommunityToolkit.Mvvm": "8.2.2",
           "MathConverter.Maui": "2.2.0",
           "Microsoft.AspNetCore.SignalR.Client": "7.0.13",
@@ -798,9 +798,9 @@
           }
         }
       },
-      "CommunityToolkit.Maui/6.0.0": {
+      "CommunityToolkit.Maui/6.1.0": {
         "dependencies": {
-          "CommunityToolkit.Maui.Core": "6.0.0"
+          "CommunityToolkit.Maui.Core": "6.1.0"
         },
         "runtime": {
           "lib/net7.0-windows10.0.19041/CommunityToolkit.Maui.dll": {
@@ -809,7 +809,7 @@
           }
         }
       },
-      "CommunityToolkit.Maui.Core/6.0.0": {
+      "CommunityToolkit.Maui.Core/6.1.0": {
         "dependencies": {
           "System.Speech": "7.0.0"
         },
@@ -1271,19 +1271,19 @@
       "serviceable": false,
       "sha512": ""
     },
-    "CommunityToolkit.Maui/6.0.0": {
+    "CommunityToolkit.Maui/6.1.0": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-Pffh+cX5qA1DxecPOt2Zs2YVx3O1WQNQUV3Frbesoc6VWz7MJq3sQhN3emOqr7/ATvvTv7r8lqEYGduHtiNsgA==",
-      "path": "communitytoolkit.maui/6.0.0",
-      "hashPath": "communitytoolkit.maui.6.0.0.nupkg.sha512"
+      "sha512": "sha512-TB26N0SuIhGxrZXEz637LlIZoTjz6Qoc1osSm2vpw8zIj9ZiziJauXS+bN26T1ve+MXq777Gm4Il0p5rHXUKRQ==",
+      "path": "communitytoolkit.maui/6.1.0",
+      "hashPath": "communitytoolkit.maui.6.1.0.nupkg.sha512"
     },
-    "CommunityToolkit.Maui.Core/6.0.0": {
+    "CommunityToolkit.Maui.Core/6.1.0": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-crumJ4LAic/AUeG9gOkddaoAIR19iIq0u7kpugn1etsXMS3jr1vS/lIee5KFRUBL36ijSEzE0bGLAkCIaw9aSg==",
-      "path": "communitytoolkit.maui.core/6.0.0",
-      "hashPath": "communitytoolkit.maui.core.6.0.0.nupkg.sha512"
+      "sha512": "sha512-Sby05Q2+LscL1pRprKsqFmCw+lOhhxlpMKb3Xb5FlIiTC1tYyHvIKhDJAfoKCJpoYi/6sFb0WlQAI7oLai8ulg==",
+      "path": "communitytoolkit.maui.core/6.1.0",
+      "hashPath": "communitytoolkit.maui.core.6.1.0.nupkg.sha512"
     },
     "CommunityToolkit.Mvvm/8.2.2": {
       "type": "package",

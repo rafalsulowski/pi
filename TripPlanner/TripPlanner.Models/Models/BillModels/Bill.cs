@@ -18,7 +18,6 @@ namespace TripPlanner.Models.Models.BillModels
         public int PayerId { get; set; }
         public User Payer { get; set; } = null!;
 
-        public string Name { get; set; } = string.Empty;
         public BillType BillType { get; set; }
         public ICollection<BillContributor> Contributors { get; set; } = new List<BillContributor>();
 
@@ -31,7 +30,9 @@ namespace TripPlanner.Models.Models.BillModels
             return new BillDTO
             {
                 Id = data.Id,
+                TourId = data.TourId,
                 Name = data.Name,
+                Description = data.Description,
                 CreatedDate = data.CreatedDate,
                 CreatorId = data.CreatorId,
                 ImageFilePath = data.ImageFilePath,

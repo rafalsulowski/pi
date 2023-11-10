@@ -1,21 +1,16 @@
-﻿using Microsoft.AspNetCore.SignalR.Client;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Http;
+﻿using Newtonsoft.Json;
+using System.Net.Http.Json;
 using System.Text;
-using System.Threading.Tasks;
-using TripPlanner.Models.DTO.MessageDTOs;
-using TripPlanner.Models.Models.MessageModels;
+using TripPlanner.Models.DTO.MessageDTOs.QuestionnaireDTOs;
+using TripPlanner.Models.DTO.TourDTOs;
+using TripPlanner.Models.Models;
 
 namespace TripPlanner.Services
 {
-    public class ChatService : IService
+    public class ChatService
     {
         private readonly HttpClient m_HttpClient;
         private readonly Configuration m_Configuration;
-        //private HubConnection m_HubConnection;
-        //public bool IsConnected => m_HubConnection?.State == HubConnectionState.Connected;
 
         public ChatService(IHttpClientFactory httpClient, Configuration configuration)
         {
@@ -23,29 +18,79 @@ namespace TripPlanner.Services
             m_Configuration = configuration;
         }
 
-        public async Task<bool> Connect()
+        //Zwraca wszystkie oddane głosy na odpowiedź o danym id, ankiety o danym id
+        public async Task<List<ExtendParticipantDTO>> GetAnswerVoters(int answerId)
         {
-            //m_HubConnection = new HubConnectionBuilder()
-            //    .WithUrl("wss://localhost:7035/chat")
-            //    .WithAutomaticReconnect()
-            //    .Build();
-
-            //m_HubConnection.On<string, string>("ReceiveMessage", (user, message) =>
-            //{
-            //    var formattedMessage = $"cos tam";
-            //    //Messages.Add(new TextMessageDTO { Content = $"{user} {message}" });
-            //});
-
-            //await m_HubConnection.StartAsync();
-            return true;
-        }
-
-        public async Task<int> SendMessage(string message)
-        {
-
-            return 1;
+            try
+            {
+                HttpResponseMessage response = m_HttpClient.GetAsync($"{m_Configuration.WebApiUrl}/Questionnaire/{answerId}/Votes").Result;
+                if (response.IsSuccessStatusCode)
+                {
+                    return await response.Content.ReadFromJsonAsync<List<ExtendParticipantDTO>>();
+                }
+            }
+            catch (Exception) { }
+            return null;
         }
 
 
+        //Tworzenie nowej ankiety
+        public async Task<RepositoryResponse<bool>> CreateQuestionnaire(CreateQuestionnaireDTO questionnaire)
+        {
+            string errMsg = "";
+            try
+            {
+                string json = JsonConvert.SerializeObject(questionnaire);
+                StringContent httpContent = new StringContent(json, System.Text.Encoding.UTF8, "application/json");
+                HttpResponseMessage response = m_HttpClient.PostAsync($"{m_Configuration.WebApiUrl}/Questionnaire/Create", httpContent).Result;
+                if (response.IsSuccessStatusCode)
+                {
+                    var resp = await response.Content.ReadFromJsonAsync<RepositoryResponse<bool>>();
+                    if (resp.Success)
+                        return new RepositoryResponse<bool> { Data = false, Message = "", Success = true };
+                    else
+                        errMsg = resp.Message;
+                }
+                else
+                    errMsg = $"Kod błędu: {response.StatusCode}";
+            }
+            catch (Exception e)
+            {
+                errMsg = $"Wyjątek: {e.Message}";
+            }
+            return new RepositoryResponse<bool> { Data = false, Message = errMsg, Success = false };
+        }
+
+        //Zagłosuj na daną odpowiedź
+        public async Task<RepositoryResponse<bool>> VoteForAnswer(int userId, int answerId)
+        {
+            string errMsg = "";
+            try
+            {
+                QuestionnaireVoteDTO vote = new QuestionnaireVoteDTO 
+                {
+                    UserId = userId,
+                    QuestionnaireAnswerId = answerId
+                };
+                string json = JsonConvert.SerializeObject(vote);
+                StringContent httpContent = new StringContent(json, Encoding.UTF8, "application/json");
+                HttpResponseMessage response = m_HttpClient.PostAsync($"{m_Configuration.WebApiUrl}/Questionnaire/addVote", httpContent).Result;
+                if (response.IsSuccessStatusCode)
+                {
+                    var resp = await response.Content.ReadFromJsonAsync<RepositoryResponse<bool>>();
+                    if (resp.Success)
+                        return new RepositoryResponse<bool> { Data = true, Message = "", Success = true };
+                    else
+                        errMsg = resp.Message;
+                }
+                else
+                    errMsg = $"Kod błędu: {response.StatusCode}";
+            }
+            catch (Exception e)
+            {
+                errMsg = $"Wyjątek: {e.Message}";
+            }
+            return new RepositoryResponse<bool> { Data = false, Message = errMsg, Success = false };
+        }
     }
 }

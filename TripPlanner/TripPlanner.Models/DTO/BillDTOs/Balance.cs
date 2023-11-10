@@ -10,30 +10,6 @@ namespace TripPlanner.Models.DTO.BillDTOs
 {
     public class Balance
     {
-        public Balance(List<ParticipantTour> participants) 
-        {
-            TotalBalance = 0;   
-
-            UserBalances.Clear();
-            foreach (var participant in participants)
-            {
-                UserBalance userBalance = new UserBalance
-                {
-                    UserId = participant.UserId,
-                    Due = 0,
-                };
-
-                if (participant.Nickname == null || participant.Nickname.Length == 0)
-                {
-                    userBalance.Name = participant.User.FullName;
-                }
-                else
-                    userBalance.Name = participant.Nickname;
-
-                UserBalances.Add(userBalance);
-            }
-        }
-
         public decimal TotalBalance { get; set; }
         public ICollection<UserBalance> UserBalances { get; set; } = new List<UserBalance>();
     }
@@ -42,6 +18,14 @@ namespace TripPlanner.Models.DTO.BillDTOs
     {
         public int UserId { get; set; }
         public string Name { get; set; } = string.Empty;
-        public decimal Due { get; set; }
+        public decimal Saldo { get; set; } // wartosc na minusie oznacza ze ktos porzyczył pieniądze, na plusie że ktoś ma do oddania
+        public ICollection<OtherUser> BalanceWithOtherUsers { get; set; } = new List<OtherUser>(); //uczestnicy ktorzy wisią temu uczestnikowi lub na odwrót
+    }
+
+    public class OtherUser
+    {
+        public int UserId { get; set; }
+        public string Name { get; set; } = string.Empty;
+        public decimal Saldo { get; set; } // wartosc na minusie oznacza ze ktos porzyczył pieniądze, na plusie że ktoś ma do oddania
     }
 }

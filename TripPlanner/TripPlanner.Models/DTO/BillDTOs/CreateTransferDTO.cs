@@ -17,6 +17,8 @@ namespace TripPlanner.Models.DTO.BillDTOs
         public int RecipientId { get; set; }
 
         public DateTime CreatedDate { get; set; }
+        public string Name { get; set; } = string.Empty;
+        public string Description { get; set; } = string.Empty;
         public decimal Value { get; set; }
         public string ImageFilePath { get; set; } = string.Empty;
 
@@ -29,6 +31,8 @@ namespace TripPlanner.Models.DTO.BillDTOs
             return new Transfer
             {
                 TourId = data.TourId,
+                Description = data.Description,
+                Name = data.Name,
                 CreatedDate = data.CreatedDate,
                 CreatorId = data.CreatorId,
                 ImageFilePath = data.ImageFilePath,

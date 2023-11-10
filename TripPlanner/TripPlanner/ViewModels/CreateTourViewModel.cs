@@ -57,7 +57,11 @@ namespace TripPlanner.ViewModels
         [RelayCommand]
         async Task GoBack()
         {
-            await Shell.Current.GoToAsync("//Home");
+            var navigationParameter = new Dictionary<string, object>
+            {
+                { "Reload", false }
+            };
+            await Shell.Current.GoToAsync("//Home", navigationParameter);
         }
 
         [RelayCommand]

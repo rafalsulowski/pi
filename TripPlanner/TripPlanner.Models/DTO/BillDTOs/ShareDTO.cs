@@ -15,6 +15,8 @@ namespace TripPlanner.Models.DTO.BillDTOs
         public int CreatorId { get; set; }
 
         public DateTime CreatedDate { get; set; }
+        public string Description { get; set; } = string.Empty;
+        public string Name { get; set; } = string.Empty;
         public decimal Value { get; set; }
         public string ImageFilePath { get; set; } = string.Empty;
 

@@ -5,6 +5,7 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using System.Collections.ObjectModel;
 using TripPlanner.Models.DTO.TourDTOs;
+using TripPlanner.Models.Models.TourModels;
 using TripPlanner.Services;
 
 namespace TripPlanner.ViewModels
@@ -15,11 +16,8 @@ namespace TripPlanner.ViewModels
         private readonly Configuration m_Configuration;
 
         [ObservableProperty]
-        public List<TourDTO> tours;
+        public ObservableCollection<TourDTO> tours;
 
-        [ObservableProperty]
-        bool emptyTours;
-        
         [ObservableProperty]
         bool refresh;
 
@@ -27,15 +25,14 @@ namespace TripPlanner.ViewModels
         {
             m_Configuration = configuration;
             m_UserService = userService;
-            Refresh = false;
-            EmptyTours = false;
+            Refresh = false; 
             LoadData();
         }
 
         public async void ApplyQueryAttributes(IDictionary<string, object> query)
         {
-            bool reload = (bool)query["reload"]; //przy opuszczniu wyjazdu zaistnaial potrzeba do odswierzenia strony glownej aby wycieczka ktorą opuściliśmy już się nie pokazywała
-            await RefreshView();
+            if((bool)query["Reload"])
+                await RefreshView();
         }
 
         [RelayCommand]
@@ -79,13 +76,7 @@ namespace TripPlanner.ViewModels
 
         private void LoadData()
         {
-            Tours = m_UserService.GetToursOfUser(m_Configuration.User.Id).Result.ToList();
-            if (Tours.Count == 0)
-            {
-                EmptyTours = true;
-            }
-            else
-                EmptyTours = false;
+            Tours = m_UserService.GetToursOfUser(m_Configuration.User.Id).Result.ToObservableCollection();
         }
     }
 }

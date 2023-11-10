@@ -47,13 +47,18 @@ public static class MauiProgram
 
         //Data Template Selectors
         builder.Services.AddSingleton<MessageDataTemplateSelector>();
+        builder.Services.AddSingleton<FriendDataTemplateSelector>();
+        builder.Services.AddSingleton<ParticipantDataTemplateSelector>();
+
 
         //Data Managment Services
         builder.Services.AddSingleton<TourService>();
         builder.Services.AddSingleton<ChatService>();
-        builder.Services.AddSingleton<QuestionnaireService>();
         builder.Services.AddSingleton<UserService>();
+        builder.Services.AddSingleton<ShareService>();
+        builder.Services.AddSingleton<ScheduleService>();
         
+
 		//ViewModels Services
 		builder.Services.AddTransient<HomeViewModel>();
 		builder.Services.AddTransient<CreateTourViewModel>();
@@ -67,6 +72,7 @@ public static class MauiProgram
 		builder.Services.AddTransient<QuestionnaireViewModel>();
 		builder.Services.AddTransient<ParticipantsViewModel>();
 		builder.Services.AddTransient<AddParticipantsViewModel>();
+
 
         //Views
         builder.Services.AddTransient<MainPage>();

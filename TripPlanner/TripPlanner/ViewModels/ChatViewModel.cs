@@ -1,9 +1,12 @@
-﻿using CommunityToolkit.Maui.Core.Extensions;
+﻿using CommunityToolkit.Maui.Alerts;
+using CommunityToolkit.Maui.Core;
+using CommunityToolkit.Maui.Core.Extensions;
 using CommunityToolkit.Maui.Views;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using Microsoft.AspNetCore.SignalR;
 using Microsoft.AspNetCore.SignalR.Client;
-using Microsoft.EntityFrameworkCore.Diagnostics;
+using Newtonsoft.Json;
 using System.Collections.ObjectModel;
 using TripPlanner.Controls.QuestionnaireControls;
 using TripPlanner.Models.DTO.MessageDTOs;
@@ -18,43 +21,76 @@ namespace TripPlanner.ViewModels
         private readonly Configuration m_Configuration;
         private readonly TourService m_TourService;
         private readonly ChatService m_ChatService;
-        private readonly QuestionnaireService m_QuestionnaireService;
+        private HubConnection m_Connection;
         private int TourId;
-
-        [ObservableProperty]
-        TourDTO tour;
 
         [ObservableProperty]
         ObservableCollection<MessageDTO> messages;
 
         [ObservableProperty]
-        bool isRefreshing;
-
-        [ObservableProperty]
         string message;
 
 
-        public ChatViewModel(Configuration configuration, TourService tourService, ChatService chatService, QuestionnaireService questionnaireService)
+        public ChatViewModel(Configuration configuration, TourService tourService, ChatService chatService)
         {
             m_Configuration = configuration;
             m_TourService = tourService;
             m_ChatService = chatService;
-            m_QuestionnaireService = questionnaireService;
 
-            IsRefreshing = false;
             Messages = new ObservableCollection<MessageDTO>();
         }
 
         public async void ApplyQueryAttributes(IDictionary<string, object> query)
         {
             TourId = (int)query["passTourId"];
-            //await m_ChatService.Connect();
-           // await LoadData();
+            await Connect();
+        }
+
+        async Task Connect()
+        {
+            try
+            {
+                m_Connection = new HubConnectionBuilder()
+                .WithUrl(m_Configuration.WssUrl)
+                .Build();
+
+                m_Connection.On<string>("MessageReceived", (message) =>
+                {
+                    TextMessageDTO msg = JsonConvert.DeserializeObject<TextMessageDTO>(message);
+                    if (msg != null)
+                    {
+                        Messages.Add(msg);
+                    }
+                });
+
+                m_Connection.On<string>("SetConnection", (message) =>
+                {
+                    JsonSerializerSettings settings = new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.All };
+                    List<MessageDTO> msgs = JsonConvert.DeserializeObject<List<MessageDTO>>(message, settings);
+                    Messages = msgs.ToObservableCollection();
+                });
+
+                await m_Connection.StartAsync();
+
+                //wyslanie wiadomosci do api ze zaczynamy korzystac z czatu
+                await m_Connection.InvokeCoreAsync("SetConnection", args: new[] { TourId.ToString() });
+            }
+            catch (HubException ex)
+            {
+                await Shell.Current.CurrentPage.DisplayAlert("Błąd", $"{ex.Message}", "Ok");
+            }
+            catch(Exception)
+            {
+                await Shell.Current.CurrentPage.DisplayAlert("Błąd", $"Nieznany błąd", "Ok");
+            }
         }
 
         [RelayCommand]
         async Task GoBack()
         {
+            //wyslanie wiadomosci do api ze konczymy korzystac z czatu
+            await m_Connection.InvokeCoreAsync("LeaveGroup", args: new[] { TourId.ToString() });
+
             var navigationParameter = new Dictionary<string, object>
             {
                 { "passTourId",  TourId}
@@ -65,59 +101,62 @@ namespace TripPlanner.ViewModels
         [RelayCommand]
         async Task SendMessage()
         {
-            //if (Message != null && Message != "")
-            //{
-            //    int id = await m_ChatService.SendMessage(Message);
+            try
+            {
+                //walidacja treści wiadomości pod wzgledem prób hackowania
+                Message = Message.TrimStart().TrimStart();
 
-            //    Messages.Add(new TextMessageDTO
-            //    {
-            //        Content = Message,
-            //        UserId = m_Configuration.User.Id,
-            //        Id = id,
-            //        Date = DateTime.Now
-            //    });
-            //}
+                if (string.IsNullOrEmpty(Message))
+                    return;
+
+                TextMessageDTO msg = new TextMessageDTO
+                {
+                    Content = Message,
+                    Date = DateTime.Now,
+                    UserId = m_Configuration.User.Id,
+                    TourId = TourId
+                };
+
+                string json = JsonConvert.SerializeObject(msg);
+                await m_Connection.InvokeCoreAsync("SendTextMessage", args: new[] { json });
+                Message = String.Empty;
+            }
+            catch (HubException ex)
+            {
+                await Shell.Current.CurrentPage.DisplayAlert("Błąd", $"{ex.Message}", "Ok");
+            }
+            catch (Exception)
+            {
+                await Shell.Current.CurrentPage.DisplayAlert("Błąd", $"Nieznany błąd", "Ok");
+            }
         }
         
         [RelayCommand]
         async Task ShowMoreChatAction()
         {
-            await Shell.Current.CurrentPage.ShowPopupAsync(new ChatAdditionalMenuPopup(m_TourService, Tour));
+            await Shell.Current.CurrentPage.ShowPopupAsync(new ChatAdditionalMenuPopup(m_TourService, TourId));
         }
 
-        [RelayCommand]
-        async Task Vote(AnswerGDTO answer)
-        {
-            var res = m_QuestionnaireService.VoteForAnswer(m_Configuration.User.Id, answer.Id);
+        //[RelayCommand]
+        //async Task Vote(AnswerGDTO answer)
+        //{
+        //    var res = await m_ChatService.VoteForAnswer(m_Configuration.User.Id, answer.Id);
+        //    if (res.Success)
+        //    {
+        //        //jakaś zmiana w interfejsie uzytkownika, odświerzenie ankiety
+        //        var confirmCopyToast = Toast.Make($"Oddano swój głos", ToastDuration.Long, 14);
+        //        await confirmCopyToast.Show();
+        //    }
+        //    else
+        //        await Shell.Current.CurrentPage.DisplayAlert("Błąd", res.Message, "Ok");
 
-            if (res.Result == false)
-            {
-                await Shell.Current.CurrentPage.DisplayAlert("Błąd", "Nie udało się oddać głosu!", "Ok");
-            }
-        }
+        //}
 
-        [RelayCommand]
-        async Task ShowVoters(AnswerGDTO answer)
-        {
-            var res = m_QuestionnaireService.GetAnswerVoters(answer.Id);
-
-            if (res.Result != null)
-            {
-                await Shell.Current.CurrentPage.ShowPopupAsync(new PeopleChatListPopups($"Zagłosowali na \"{answer.Answer}\"", res.Result));
-            }
-            else
-                await Shell.Current.CurrentPage.DisplayAlert("Błąd", "Nie udało się pobrać listy osób czatu!", "Ok");
-        }
-
-        async Task LoadData()
-        {
-            //Tour = await m_TourService.GetTourWithMessages(TourId);
-            //if(Tour is null)
-            //{
-            //    await Shell.Current.CurrentPage.DisplayAlert("Błąd", "Nie udało się pobrać wiadomości", "Ok");
-            //    return;
-            //}
-            //Messages = Tour.Messages.Reverse().ToObservableCollection();
-        }
+        //[RelayCommand]
+        //async Task ShowVoters(AnswerGDTO answer)
+        //{
+        //    var res = m_ChatService.GetAnswerVoters(answer.Id);
+        //    await Shell.Current.CurrentPage.ShowPopupAsync(new PeopleChatListPopups($"Zagłosowali na \"{answer.Answer}\"", res.Result));
+        //}
     }
 }

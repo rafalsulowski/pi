@@ -12,8 +12,8 @@ namespace TripPlanner.Services.TourService
         Task<RepositoryResponse<Tour>> GetTourAsync(Expression<Func<Tour, bool>> filter, string? includeProperties = null);
         Task<RepositoryResponse<List<ParticipantTour>>> GetParticipantsAsync(Expression<Func<ParticipantTour, bool>>? filter = null, string? includeProperties = null);
         Task<RepositoryResponse<List<ExtendParticipantDTO>>> GetTourExtendParticipants(int tourId);
-        Task<RepositoryResponse<ExtendParticipantDTO>> GetTourExtendParticipant(int tourId, int userId);
-        Task<RepositoryResponse<List<string>>> GetParticipantsNames(int tourId);
+        Task<RepositoryResponse<ExtendParticipantDTO>> GetTourExtendParticipantById(int tourId, int userId);
+        Task<RepositoryResponse<List<ExtendParticipantDTO>>> GetParticipantsNames(int tourId);
         Task<RepositoryResponse<ParticipantTour>> GetParticipantAsync(Expression<Func<ParticipantTour, bool>> filter, string? includeProperties = null);
         Task<RepositoryResponse<List<CultureAssistance>>> GetCulturesAssistanceAsync(Expression<Func<CultureAssistance, bool>>? filter = null, string? includeProperties = null);
         Task<RepositoryResponse<CultureAssistance>> GetCultureAssistanceAsync(Expression<Func<CultureAssistance, bool>> filter, string? includeProperties = null);

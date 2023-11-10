@@ -6,7 +6,6 @@ namespace TripPlanner.Models.DTO.BillDTOs
     {
         public int PayerId { get; set; }
 
-        public string Name { get; set; } = string.Empty;
         public BillType BillType { get; set; }
         public ICollection<BillContributorDTO> Contributors { get; set; } = new List<BillContributorDTO>();
 
@@ -18,6 +17,7 @@ namespace TripPlanner.Models.DTO.BillDTOs
             return new Bill
             {
                 Id = data.Id,
+                Description = data.Description,
                 Name = data.Name,
                 CreatedDate = data.CreatedDate,
                 CreatorId = data.CreatorId,

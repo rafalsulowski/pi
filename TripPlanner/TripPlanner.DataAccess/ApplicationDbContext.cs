@@ -258,6 +258,14 @@ namespace TripPlanner.DataAccess
                 .IsRequired();
 
             modelBuilder.Entity<Share>()
+                .Property(e => e.Name)
+                .IsRequired();
+
+            modelBuilder.Entity<Share>()
+                .Property(e => e.Description)
+                .IsRequired();
+
+            modelBuilder.Entity<Share>()
                 .Property(e => e.ImageFilePath)
                 .IsRequired();
 
@@ -281,10 +289,6 @@ namespace TripPlanner.DataAccess
 
             modelBuilder.Entity<Bill>()
                 .Property(s => s.BillType)
-                .IsRequired();
-
-            modelBuilder.Entity<Bill>()
-                .Property(s => s.Name)
                 .IsRequired();
             #endregion
 

@@ -1,11 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "GdDthG2HWTsNIFQsXkkuxFue+0rLhb+lNsjBJmCxKISBngMc5Q+Bg1HfI9gjuGx/zBp6oUWo0hwMj9EKoqsdcQ==",
+  "dgSpecHash": "bwo3gA8mMc6UDKstNTLs4HCBKw7PGKLTO8H8pGTZctx+028LaIm8txNQItRiyOmXp2LVCS3QQZ5d9JNFEM2C0Q==",
   "success": true,
   "projectFilePath": "C:\\Users\\01159502\\Desktop\\TripPlanner\\TripPlanner\\TripPlanner\\TripPlanner.App.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\01159502\\.nuget\\packages\\communitytoolkit.maui\\6.0.0\\communitytoolkit.maui.6.0.0.nupkg.sha512",
-    "C:\\Users\\01159502\\.nuget\\packages\\communitytoolkit.maui.core\\6.0.0\\communitytoolkit.maui.core.6.0.0.nupkg.sha512",
+    "C:\\Users\\01159502\\.nuget\\packages\\communitytoolkit.maui\\6.1.0\\communitytoolkit.maui.6.1.0.nupkg.sha512",
+    "C:\\Users\\01159502\\.nuget\\packages\\communitytoolkit.maui.core\\6.1.0\\communitytoolkit.maui.core.6.1.0.nupkg.sha512",
     "C:\\Users\\01159502\\.nuget\\packages\\communitytoolkit.mvvm\\8.2.2\\communitytoolkit.mvvm.8.2.2.nupkg.sha512",
     "C:\\Users\\01159502\\.nuget\\packages\\googlegson\\2.9.1.1\\googlegson.2.9.1.1.nupkg.sha512",
     "C:\\Users\\01159502\\.nuget\\packages\\mathconverter.maui\\2.2.0\\mathconverter.maui.2.2.0.nupkg.sha512",

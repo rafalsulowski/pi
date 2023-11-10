@@ -9,6 +9,11 @@ using TripPlanner.Models.Models.TourModels;
 using TripPlanner.Models.Models.CultureModels;
 using TripPlanner.Services.ChatService;
 using TripPlanner.Services.ParticipantTourService;
+using TripPlanner.Models.DTO.MessageDTOs;
+using static System.Runtime.InteropServices.JavaScript.JSType;
+using TripPlanner.Models.DTO.MessageDTOs.QuestionnaireDTOs;
+using TripPlanner.Models.Models.MessageModels.QuestionnaireModels;
+using TripPlanner.Models.Models.MessageModels;
 
 namespace TripPlanner.WebAPI.Controllers
 {
@@ -33,104 +38,90 @@ namespace TripPlanner.WebAPI.Controllers
 
         // GET: api/<ValuesController>
         [HttpGet]
-        public async Task<ActionResult<RepositoryResponse<List<TourDTO>>>> Get()
+        public async Task<ActionResult<List<TourDTO>>> Get()
         {
-            var response = await _TourService.GetToursAsync();
-            return Ok(response.Data);
+            RepositoryResponse<List<Tour>> response = await _TourService.GetToursAsync();
+            return Ok(response.Data?.Select(u => (TourDTO)u).ToList());
         }
         
         [HttpGet("{tourId}/GetWithParticipants")]
-        public async Task<ActionResult<RepositoryResponse<TourDTO>>> GetWithParticipant(int tourId)
+        public async Task<ActionResult<TourDTO>> GetWithParticipant(int tourId)
         {
-            var response = await _TourService.GetTourAsync(u => u.Id == tourId, "Participants");
-            TourDTO res = response.Data;
-            return Ok(res);
+            RepositoryResponse<Tour> response = await _TourService.GetTourAsync(u => u.Id == tourId, "Participants");
+            return Ok((TourDTO)response.Data);
         }
 
         [HttpGet("{tourId}/GetExtendParticipants")]
-        public async Task<ActionResult<RepositoryResponse<List<ExtendParticipantDTO>>>> GetExtendParticipants(int tourId)
+        public async Task<ActionResult<List<ExtendParticipantDTO>>> GetExtendParticipants(int tourId)
         {
             RepositoryResponse<List<ExtendParticipantDTO>> response = await _TourService.GetTourExtendParticipants(tourId);
-            return Ok(new RepositoryResponse<List<ExtendParticipantDTO>> { Data = response.Data, Message = "", Success = true });
+            return Ok(response.Data);
         }
 
         [HttpGet("{tourId}/GetExtendParticipantsById/{userId}")]
-        public async Task<ActionResult<RepositoryResponse<ExtendParticipantDTO>>> GetExtendParticipantsById(int tourId, int userId)
+        public async Task<ActionResult<ExtendParticipantDTO>> GetExtendParticipantsById(int tourId, int userId)
         {
-            RepositoryResponse<ExtendParticipantDTO> response = await _TourService.GetTourExtendParticipant(tourId, userId);
-            return Ok(new RepositoryResponse<ExtendParticipantDTO> { Data = response.Data, Message = "", Success = true });
+            RepositoryResponse<ExtendParticipantDTO> response = await _TourService.GetTourExtendParticipantById(tourId, userId);
+            return Ok(response.Data);
         }
 
         [HttpGet("{tourId}/GetParticipantsNames")]
-        public async Task<ActionResult<RepositoryResponse<List<string>>>> GetParticipantsNames(int tourId)
+        public async Task<ActionResult<List<ExtendParticipantDTO>>> GetParticipantsNames(int tourId)
         {
-            RepositoryResponse<List<string>> response = await _TourService.GetParticipantsNames(tourId);
-            return Ok(new RepositoryResponse<List<string>> { Data = response.Data, Message = "", Success = true });
+            RepositoryResponse<List<ExtendParticipantDTO>> response = await _TourService.GetParticipantsNames(tourId);
+            return Ok(response.Data);
         }
 
         [HttpGet("{tourId}/GetWithMessages")]
-        public async Task<ActionResult<RepositoryResponse<TourDTO>>> GetWithMessages(int tourId)
+        public async Task<ActionResult<TourDTO>> GetWithMessages(int tourId)
         {
-            var response = await _TourService.GetTourAsync(u => u.Id == tourId, "Messages");
-            TourDTO res = response.Data;
-            return Ok(res);
+            RepositoryResponse<Tour> response = await _TourService.GetTourAsync(u => u.Id == tourId, "Messages");
+            return Ok((TourDTO)response.Data);
         }
 
         [HttpGet("{tourId}/GetWithCheckLists")]
-        public async Task<ActionResult<RepositoryResponse<TourDTO>>> GetWithCheckLists(int tourId)
+        public async Task<ActionResult<TourDTO>> GetWithCheckLists(int tourId)
         {
-            var response = await _TourService.GetTourAsync(u => u.Id == tourId, "CheckLists");
-            TourDTO res = response.Data;
-            return Ok(res);
+            RepositoryResponse<Tour> response = await _TourService.GetTourAsync(u => u.Id == tourId, "CheckLists");
+            return Ok((TourDTO)response.Data);
         }
 
         [HttpGet("{tourId}/GetWithQuestionnaires")]
-        public async Task<ActionResult<RepositoryResponse<TourDTO>>> GetWithQuestionnaires(int tourId)
+        public async Task<ActionResult<TourDTO>> GetWithQuestionnaires(int tourId)
         {
-            var response = await _TourService.GetTourAsync(u => u.Id == tourId, "Questionnaires");
-            TourDTO res = response.Data;
-            return Ok(res);
+            RepositoryResponse<Tour> response = await _TourService.GetTourAsync(u => u.Id == tourId, "Questionnaires");
+            return Ok((TourDTO)response.Data);
         }
 
 
         [HttpGet("{tourId}/GetWithRoutes")]
-        public async Task<ActionResult<RepositoryResponse<TourDTO>>> GetWithRoutes(int tourId)
+        public async Task<ActionResult<TourDTO>> GetWithRoutes(int tourId)
         {
-            var response = await _TourService.GetTourAsync(u => u.Id == tourId, "Routes");
-            TourDTO res = response.Data;
-            return Ok(res);
+            RepositoryResponse<Tour> response = await _TourService.GetTourAsync(u => u.Id == tourId, "Routes");
+            return Ok((TourDTO)response.Data);
         }
 
         [HttpGet("{tourId}/GetWithBills/{id}")]
-        public async Task<ActionResult<RepositoryResponse<TourDTO>>> GetWithBills(int tourId)
+        public async Task<ActionResult<TourDTO>> GetWithBills(int tourId)
         {
-            var response = await _TourService.GetTourAsync(u => u.Id == tourId, "Bills");
-            TourDTO res = response.Data;
-            return Ok(res);
+            RepositoryResponse<Tour> response = await _TourService.GetTourAsync(u => u.Id == tourId, "Bills");
+            return Ok((TourDTO)response.Data);
         }
 
         [HttpGet("{tourId}/GetWithCultureAssistance")]
-        public async Task<ActionResult<RepositoryResponse<TourDTO>>> GetWithCultureAssistance(int tourId)
+        public async Task<ActionResult<TourDTO>> GetWithCultureAssistance(int tourId)
         {
-            var response = await _TourService.GetTourAsync(u => u.Id == tourId, "CultureAssistance");
-            TourDTO res = response.Data;
-            return Ok(res);
+            RepositoryResponse<Tour> response = await _TourService.GetTourAsync(u => u.Id == tourId, "CultureAssistance");
+            return Ok((TourDTO)response.Data);
         }
 
 
         // GET api/<ValuesController>/5
         [HttpGet("{tourId}")]
-        public async Task<ActionResult<RepositoryResponse<TourDTO>>> Get(int tourId)
+        public async Task<ActionResult<TourDTO>> Get(int tourId)
         {
-            var response = await _TourService.GetTourAsync(u => u.Id == tourId);
-            if (response.Success)
-            {
-                return Ok(response.Data);
-            }
-            else
-            {
-                return BadRequest(response.Data);
-            }
+            RepositoryResponse<Tour> response = await _TourService.GetTourAsync(u => u.Id == tourId);
+            return Ok((TourDTO)response.Data);
         }
 
         // POST api/<ValuesController>
@@ -151,13 +142,9 @@ namespace TripPlanner.WebAPI.Controllers
             Tour newTour = Tour;
             var response = await _TourService.CreateTour(newTour, Tour.UserId);
             if (response.Success)
-            {
                 return Ok(new RepositoryResponse<int> { Data = newTour.Id, Success = true, Message = "" });
-            }
             else
-            {
-                return NotFound(response);
-            }
+                return NotFound(new RepositoryResponse<int> { Data = -1, Success = false, Message = response.Message });
         }
 
 
@@ -183,23 +170,24 @@ namespace TripPlanner.WebAPI.Controllers
             ParticipantTour elem = Tour;
 
             var response = await _TourService.AddParticipantToTour(elem);
-            return Ok(response.Data);
+            if (response.Success)
+                return Ok(new RepositoryResponse<bool> { Data = true, Success = true, Message = "" });
+            else
+                return NotFound(new RepositoryResponse<bool> { Data = false, Success = false, Message = response.Message });
         }
 
         [HttpGet("{TourId}/Participants")]
-        public async Task<ActionResult<RepositoryResponse<List<ParticipantTourDTO>>>> GetParticipant(int TourId)
+        public async Task<ActionResult<List<ParticipantTourDTO>>> GetParticipant(int TourId)
         {
             var response = await _TourService.GetParticipantsAsync(u => u.TourId == TourId);
-            List<ParticipantTourDTO> res = response.Data.Select(u => (ParticipantTourDTO)u).ToList();
-            return Ok(res);
+            return Ok(response.Data?.Select(u => (ParticipantTourDTO)u).ToList());
         }
 
         [HttpGet("{TourId}/Participant/{userId}")]
-        public async Task<ActionResult<RepositoryResponse<ParticipantTourDTO>>> GetParticipantById(int TourId, int userId)
+        public async Task<ActionResult<ParticipantTourDTO>> GetParticipantById(int TourId, int userId)
         {
             var response = await _TourService.GetParticipantAsync(u => u.TourId == TourId && u.UserId == userId);
-            ParticipantTourDTO res = response.Data;
-            return Ok(res);
+            return Ok((ParticipantTourDTO)response.Data);
         }
 
         [HttpDelete("{TourId}/deleteParticipant/{userId}")]
@@ -224,17 +212,13 @@ namespace TripPlanner.WebAPI.Controllers
 
             var response = await _TourService.DeleteParticipantFromTour(elem);
             if (response.Success)
-            {
-                return Ok(response.Data);
-            }
+                return Ok(new RepositoryResponse<bool> { Data = true, Success = true, Message = "" });
             else
-            {
-                return BadRequest(response.Message);
-            }
+                return NotFound(new RepositoryResponse<bool> { Data = false, Success = false, Message = response.Message });
         }
 
         [HttpPut("{id}/makeOrganizer/{userId}")]
-        public async Task<ActionResult<RepositoryResponse<bool>>> makeOrganizer(int id, int userId)
+        public async Task<ActionResult<RepositoryResponse<bool>>> MakeOrganizer(int id, int userId)
         {
             var resp2 = await _TourService.GetTourAsync(u => u.Id == id, "Participants");
             if (resp2.Data == null)
@@ -257,17 +241,13 @@ namespace TripPlanner.WebAPI.Controllers
 
             var response = await _ParticipantTourService.UpdateParticipantTour(newParticipant);
             if (response.Success)
-            {
-                return Ok(response.Data);
-            }
+                return Ok(new RepositoryResponse<bool> { Data = true, Message = "", Success = true });
             else
-            {
-                return BadRequest(response.Message);
-            }
+                return BadRequest(new RepositoryResponse<bool> { Data = false, Message = response.Message, Success = false });
         }
 
         [HttpPut("{id}/deleteOrganizer/{userId}")]
-        public async Task<ActionResult<RepositoryResponse<bool>>> deleteOrganizer(int id, int userId)
+        public async Task<ActionResult<RepositoryResponse<bool>>> DeleteOrganizer(int id, int userId)
         {
             var resp2 = await _TourService.GetTourAsync(u => u.Id == id, "Participants");
             if (resp2.Data == null)
@@ -290,13 +270,9 @@ namespace TripPlanner.WebAPI.Controllers
 
             var response = await _ParticipantTourService.UpdateParticipantTour(newParticipant);
             if (response.Success)
-            {
-                return Ok(response.Data);
-            }
+                return Ok(new RepositoryResponse<bool> { Data = true, Message = "", Success = true });
             else
-            {
-                return BadRequest(response.Message);
-            }
+                return BadRequest(new RepositoryResponse<bool> { Data = false, Message = response.Message, Success = false });
         }
 
         [HttpPost("addCultureAssistance")]
@@ -321,23 +297,24 @@ namespace TripPlanner.WebAPI.Controllers
             CultureAssistance elem = Tour;
 
             var response = await _TourService.AddCultureAssistanceToTour(elem);
-            return Ok(response.Data);
+            if (response.Success)
+                return Ok(new RepositoryResponse<bool> { Data = true, Message = "", Success = true });
+            else
+                return BadRequest(new RepositoryResponse<bool> { Data = false, Message = response.Message, Success = false });
         }
 
         [HttpGet("{TourId}/CultureAssistances")]
-        public async Task<ActionResult<RepositoryResponse<List<CultureAssistanceDTO>>>> GetCulturesAssistance(int TourId)
+        public async Task<ActionResult<List<CultureAssistanceDTO>>> GetCulturesAssistance(int TourId)
         {
             var response = await _TourService.GetCulturesAssistanceAsync(u => u.TourId == TourId);
-            List<CultureAssistanceDTO> res = response.Data.Select(u => (CultureAssistanceDTO)u).ToList();
-            return Ok(res);
+            return Ok(response.Data?.Select(u => (CultureAssistanceDTO)u).ToList());
         }
 
         [HttpGet("{TourId}/CultureAssistance/{CultureId}")]
-        public async Task<ActionResult<RepositoryResponse<CultureAssistanceDTO>>> GetCultureAssistanceById(int TourId, int CultureId)
+        public async Task<ActionResult<CultureAssistanceDTO>> GetCultureAssistanceById(int TourId, int CultureId)
         {
             var response = await _TourService.GetCultureAssistanceAsync(u => u.TourId == TourId && u.CultureId == CultureId);
-            CultureAssistanceDTO res = response.Data;
-            return Ok(res);
+            return Ok((CultureAssistanceDTO)response.Data);
         }
 
         [HttpDelete("{TourId}/deleteCultureAssistance/{cultureId}")]
@@ -362,13 +339,9 @@ namespace TripPlanner.WebAPI.Controllers
 
             var response = await _TourService.DeleteCultureAssistanceFromTour(elem);
             if (response.Success)
-            {
-                return Ok(response.Data);
-            }
+                return Ok(new RepositoryResponse<bool> { Data = true, Message = "", Success = true });
             else
-            {
-                return BadRequest(response.Message);
-            }
+                return BadRequest(new RepositoryResponse<bool> { Data = false, Message = response.Message, Success = false });
         }
 
         // PUT api/<ValuesController>/5
@@ -407,13 +380,9 @@ namespace TripPlanner.WebAPI.Controllers
 
             var response = await _TourService.UpdateTour(tour);
             if (response.Success)
-            {
-                return Ok(response.Data);
-            }
+                return Ok(new RepositoryResponse<bool> { Data = true, Message = "", Success = true });
             else
-            {
-                return BadRequest(response.Message);
-            }
+                return BadRequest(new RepositoryResponse<bool> { Data = false, Message = response.Message, Success = false });
         }
 
         // DELETE api/<ValuesController>/5
@@ -426,27 +395,24 @@ namespace TripPlanner.WebAPI.Controllers
                 return new RepositoryResponse<bool> { Success = false, Message = $"Nie istnieje Wycieczka o id = {tourId}" };
             }
 
+
             var resp = await _UserService.GetUserAsync(u => u.Id == userId);
             if (resp.Data == null)
             {
                 return new RepositoryResponse<bool> { Success = false, Message = $"Nie istnieje użytkownik o id = {userId}" };
             }
 
-            //ParticipantTour? participant = resp2.Data.Participants.Where(p => p.UserId == resp.Data.Id).First();
-            //if (participant == null || participant?.IsOrganizer == false)
-            //{
-            //    return new RepositoryResponse<bool> { Success = false, Message = $"Odmowa dostępu!" };
-            //}
+            ParticipantTour? participant = resp2.Data.Participants.Where(p => p.UserId == resp.Data.Id).First();
+            if (participant == null || participant?.IsOrganizer == false)
+            {
+                return new RepositoryResponse<bool> { Success = false, Message = $"Odmowa dostępu!" };
+            }
 
             var response = await _TourService.DeleteTour(new Tour() { Id = tourId });
             if (response.Success)
-            {
-                return Ok(response.Data);
-            }
+                return Ok(new RepositoryResponse<bool> { Data = true, Message = "", Success = true });
             else
-            {
-                return BadRequest(response.Message);
-            }
+                return BadRequest(new RepositoryResponse<bool> { Data = false, Message = response.Message, Success = false });
         }
     }
 }

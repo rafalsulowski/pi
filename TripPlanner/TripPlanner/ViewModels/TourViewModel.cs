@@ -5,13 +5,9 @@ using TripPlanner.Services;
 
 namespace TripPlanner.ViewModels
 {
-    [QueryProperty("passTour", "Tour")]
     public partial class TourViewModel : ObservableObject, IQueryAttributable
     {
-
         private readonly TourService m_TourService;
-        private readonly Configuration m_Configuration;
-
 
         [ObservableProperty]
         int tourId;
@@ -19,22 +15,32 @@ namespace TripPlanner.ViewModels
         [ObservableProperty]
         TourDTO tour;
 
-        public TourViewModel(TourService tourService, Configuration configuration)
+        public TourViewModel(TourService tourService)
         {
             m_TourService = tourService;
-            m_Configuration = configuration;
         }
 
-        public void ApplyQueryAttributes(IDictionary<string, object> query)
+        public async void ApplyQueryAttributes(IDictionary<string, object> query)
         {
             TourId = (int)query["passTourId"];
             Tour = m_TourService.GetTourById(TourId).Result;
+
+            if(Tour is null)
+            {
+                await Shell.Current.CurrentPage.DisplayAlert("Błąd", "Nie udało pobrać się informacji o wycieczce, sprawdź swoje połączenie internetowe", "Ok");
+                var navigationParameter = new Dictionary<string, object> { };
+                await Shell.Current.GoToAsync("//Home", navigationParameter);
+            }
         }
 
         [RelayCommand]
         async Task GoBack()
         {
-            await Shell.Current.GoToAsync("//Home");
+            var navigationParameter = new Dictionary<string, object>
+            {
+                { "Reload", false }
+            };
+            await Shell.Current.GoToAsync("//Home", navigationParameter);
         }
 
         [RelayCommand]

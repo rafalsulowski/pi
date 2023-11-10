@@ -23,6 +23,8 @@ namespace TripPlanner.Models.Models.BillModels
         public User Creator { get; set; } = null!;
 
         public DateTime CreatedDate { get; set; }
+        public string Description { get; set; } = string.Empty;
+        public string Name { get; set; } = string.Empty;
         public decimal Value { get; set; }
         public string ImageFilePath { get; set; } = string.Empty;
 

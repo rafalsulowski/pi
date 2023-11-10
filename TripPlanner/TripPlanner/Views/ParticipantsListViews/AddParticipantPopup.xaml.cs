@@ -6,21 +6,20 @@ namespace TripPlanner.Views.ParticipantsListViews;
 
 public partial class AddParticipantPopup : Popup
 {
-    private TourDTO Tour;
-	public AddParticipantPopup(TourDTO tour)
+    private int TourId;
+	public AddParticipantPopup(int tourId, string inviteLink)
 	{
 		InitializeComponent();
-        LabelLink.Text = tour.InviteLink;
-        Tour = tour;
+        LabelLink.Text = inviteLink;
+        TourId = tourId;
     }
 
 	public async void GoToFriendList_Cliked(object sender, EventArgs e)
 	{
         await CloseAsync();
-
         var navigationParameter = new Dictionary<string, object>
             {
-                { "passTourId",  Tour.Id}
+                { "passTourId",  TourId}
             };
         await Shell.Current.GoToAsync($"AddParticipantFromFriends", navigationParameter);
     }

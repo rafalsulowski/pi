@@ -7,19 +7,19 @@ namespace TripPlanner.Views.ChatViews;
 public partial class ChatAdditionalMenuPopup : Popup
 {
     TourService m_TourService;
-    TourDTO Tour;
-	public ChatAdditionalMenuPopup(TourService tourService, TourDTO tour)
+    int TourId;
+	public ChatAdditionalMenuPopup(TourService tourService, int tourId)
 	{
 		InitializeComponent();
         m_TourService = tourService;
-        Tour = tour;
+        TourId = tourId;
 	}
 
     async void AddQuestionnaire(object sender, EventArgs args)
     {
         var navigationParameter = new Dictionary<string, object>
             {
-                { "passTour",  Tour},
+                { "passTourId",  TourId},
             };
         await CloseAsync();
         await Shell.Current.GoToAsync($"CreateQuestionnaire", navigationParameter);
@@ -27,14 +27,8 @@ public partial class ChatAdditionalMenuPopup : Popup
 
     async void ShowPeopleOnChat(object sender, EventArgs args)
     {
-        var res = m_TourService.GetTourExtendParticipant(Tour.Id);
-
-        if (res.Result != null)
-        {
-            await CloseAsync();
-            await Shell.Current.CurrentPage.ShowPopupAsync(new PeopleChatListPopups("Lista osób czatu", res.Result));
-        }
-        else
-            await Shell.Current.CurrentPage.DisplayAlert("B³¹d", "Nie uda³o siê pobraæ listy osób czatu!", "Ok");
+        List<ExtendParticipantDTO> list = await m_TourService.GetTourExtendParticipant(TourId);
+        await CloseAsync();
+        await Shell.Current.CurrentPage.ShowPopupAsync(new PeopleChatListPopups("Lista osób czatu", list));
     }
 }

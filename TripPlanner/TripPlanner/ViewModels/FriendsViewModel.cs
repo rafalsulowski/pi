@@ -67,12 +67,12 @@ namespace TripPlanner.ViewModels
         [RelayCommand]
         async Task Add(UserDTO user)
         {
-            var res = await Shell.Current.CurrentPage.DisplayAlert("Dodawanie uczestnika", $"Czy potwierdzasz dodanie {user.FullAddress} do wyajzdu", "Ok", "Anuluj");
+            var res = await Shell.Current.CurrentPage.DisplayAlert("Dodawanie uczestnika", $"Czy na pewno chcesz dodać {user.FullAddress} do wyajzdu", "Ok", "Anuluj");
 
             if(res)
             {
                 var res2 = await m_TourService.AddParticipant(Tour.Id, user.Id);
-                if (res2)
+                if (res2.Success)
                 {
                     var confirmCopyToast = Toast.Make("Dodano nowego uczestnika", ToastDuration.Short, 14);
                     await confirmCopyToast.Show();

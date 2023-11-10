@@ -23,7 +23,9 @@ namespace TripPlanner.Models.DTO.BillDTOs
             {
                 Id = data.Id,
                 TourId = data.TourId,
-                CreatedDate = data.CreatedDate,
+                Description = data.Description,
+                Name = data.Name,
+                ShareDate = data.ShareDate,
                 CreatorId = data.CreatorId,
                 ImageFilePath = data.ImageFilePath,
                 Value = data.Value,

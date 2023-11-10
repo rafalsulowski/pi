@@ -144,7 +144,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="CommunityToolkit.Maui" Version="6.0.0" />
+		<PackageReference Include="CommunityToolkit.Maui" Version="6.1.0" />
 		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.2" />
 		<PackageReference Include="MathConverter.Maui" Version="2.2.0" />
 		<PackageReference Include="Microsoft.Extensions.Http" Version="7.0.0" />
@@ -160,6 +160,9 @@
 
 	<ItemGroup>
 	  <MauiXaml Update="Controls\QuestionnaireControls\QuestionnaireControl.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\BudgetViews\BillPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\ChatViews\AddQuesionnaireAnswerPopups.xaml">
@@ -216,7 +219,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Folder Include="Views\BudgetViews\" />
 	  <Folder Include="Views\HarmonogramViews\" />
 	</ItemGroup>
 

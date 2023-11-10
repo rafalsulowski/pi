@@ -6,6 +6,7 @@ using TripPlanner.Services.TourService;
 using TripPlanner.Models.Models;
 using TripPlanner.Models.DTO.MessageDTOs.QuestionnaireDTOs;
 using TripPlanner.Models.Models.MessageModels.QuestionnaireModels;
+using TripPlanner.Services.ChatService;
 
 namespace TripPlanner.WebAPI.Controllers
 {
@@ -15,14 +16,16 @@ namespace TripPlanner.WebAPI.Controllers
     public class QuestionnaireController : ControllerBase
     {
         private readonly IQuestionnaireService _QuestionnaireService;
+        private readonly IChatService _ChatService;
         private readonly IUserService _UserService;
         private readonly ITourService _TourService;
 
-        public QuestionnaireController(IQuestionnaireService QuestionnaireService, IUserService userService, ITourService tourService)
+        public QuestionnaireController(IQuestionnaireService QuestionnaireService, IUserService userService, ITourService tourService, IChatService chatService)
         {
             _QuestionnaireService = QuestionnaireService;
             _UserService = userService;
             _TourService = tourService;
+            _ChatService = chatService;
         }
 
         [HttpGet]

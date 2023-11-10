@@ -11,12 +11,10 @@
              Shell.TabBarIsVisible="False">
 
     <ContentPage.Resources>
-        
-        <DataTemplate
-            x:Key="NoticeMessage">
+
+        <DataTemplate x:Key="NoticeMessage">
             <Grid
                 RowSpacing="1"
-                Rotation="180"
                 Margin="5,0,5,0"
                 Padding="0,0,0,5"
                 ColumnSpacing="5"
@@ -73,11 +71,10 @@
                 </Border>
             </Grid>
         </DataTemplate>
-        
+
         <DataTemplate x:Key="TextOtherMessage">
             <Grid
                 RowSpacing="1"
-                Rotation="180"
                 Margin="5,0,5,0"
                 Padding="0,0,0,5"
                 ColumnSpacing="5"
@@ -105,7 +102,7 @@
                     HorizontalOptions="Center"
                     FontSize="15"
                     TextColor="#B2C6D5"
-                    Text="{Binding Date}"/>
+                    Text="{Binding Date}" />
                 <Label
                     Grid.Column="1"
                     Grid.Row="1"
@@ -113,7 +110,7 @@
                     TextColor="#52AB98"
                     LineBreakMode="CharacterWrap"
                     MaxLines="2"
-                    Text="{Binding UserId}"/>
+                    Text="{Binding UserId}" />
                 <Border
                     HorizontalOptions="Start"
                     BackgroundColor="#E3E3E3"
@@ -130,14 +127,13 @@
                         TextColor="#52AB98"
                         LineBreakMode="CharacterWrap"
                         MaxLines="25"
-                        Text="{Binding Content}"/>
+                        Text="{Binding Content}" />
                 </Border>
             </Grid>
         </DataTemplate>
 
         <DataTemplate x:Key="TextMyMessage">
             <Grid
-                Rotation="180"
                 Margin="5,0,5,0"
                 Padding="0,0,0,5"
                 ColumnSpacing="5"
@@ -150,7 +146,7 @@
                     HorizontalOptions="Center"
                     FontSize="15"
                     TextColor="#B2C6D5"
-                    Text="{Binding Date}"/>
+                    Text="{Binding Date}" />
                 <Border
                     HorizontalOptions="End"
                     BackgroundColor="#52AB98"
@@ -168,7 +164,7 @@
                         TextColor="White"
                         LineBreakMode="CharacterWrap"
                         MaxLines="25"
-                        Text="{Binding Content}"/>
+                        Text="{Binding Content}" />
                 </Border>
             </Grid>
         </DataTemplate>
@@ -176,39 +172,62 @@
         <DataTemplate x:Key="QuestionnaireMessage"
             x:DataType="models:QuestionnaireDTO">
             <VerticalStackLayout
-                Rotation="180"
                 Margin="10,0,10,0">
-                <controls:QuestionnaireControl Questionnaire="{Binding .}"/>
+                <controls:QuestionnaireControl
+                    Questionnaire="{Binding .}" />
             </VerticalStackLayout>
         </DataTemplate>
 
         <DataTemplate x:Key="NullMessage">
         </DataTemplate>
-        
-        <localTemplates:MessageDataTemplateSelector x:Key="MessageSelector"
-                                             NullMessage="{StaticResource NullMessage}"
-                                             NoticeMessage="{StaticResource NoticeMessage}"
-                                             TextOtherMessage="{StaticResource TextOtherMessage}"
-                                             TextMyMessage="{StaticResource TextMyMessage}"
-                                             QuestionnaireMessage="{StaticResource QuestionnaireMessage}" />
+
+        <localTemplates:MessageDataTemplateSelector
+            x:Key="MessageSelector"
+            NullMessage="{StaticResource NullMessage}"
+            NoticeMessage="{StaticResource NoticeMessage}"
+            TextOtherMessage="{StaticResource TextOtherMessage}"
+            TextMyMessage="{StaticResource TextMyMessage}"
+            QuestionnaireMessage="{StaticResource QuestionnaireMessage}" />
     </ContentPage.Resources>
 
 
-    <StackLayout
-        Orientation="Vertical"
-        Spacing="10">
+    <Grid
+        RowSpacing="10">
+        <Grid.RowDefinitions>
+            <RowDefinition
+                Height="30"></RowDefinition>
+            <RowDefinition
+                Height="*"></RowDefinition>
+            <RowDefinition
+                Height="Auto"></RowDefinition>
+        </Grid.RowDefinitions>
         
-        <ImageButton
-            Grid.Column="0"
-            Source="{AppThemeBinding Light=arrow_back_wt.png, Dark=arrow_back_dt.png}"
-            WidthRequest="30"
-            Command="{Binding GoBackCommand}" />
+        <Grid
+            Grid.Row="0"
+            RowDefinitions="Auto"
+            ColumnDefinitions="30,*,30"
+            Margin="10,5,10,0">
+            <ImageButton
+                Grid.Column="0"
+                Source="{AppThemeBinding Light=arrow_back_wt.png, Dark=arrow_back_dt.png}"
+                Command="{Binding GoBackCommand}"
+                HeightRequest="30" />
 
+            <Label
+                Grid.Column="1"
+                HorizontalOptions="Center"
+                FontSize="18"
+                VerticalOptions="Center"
+                Text="Czat grupowy" />
+        </Grid>
+        
         <CollectionView
-            x:Name="m_chatControl"
-            Rotation="180"
-            Margin="0,50,0,0"
+            VerticalScrollBarVisibility="Never"
+            HorizontalScrollBarVisibility="Never"
+            ItemsUpdatingScrollMode="KeepLastItemInView"
+            Grid.Row="1"
             EmptyView="Brak wiadomości"
+            ItemsSource="{Binding Messages}"
             ItemTemplate="{StaticResource MessageSelector}"
             SelectionMode="None">
             <CollectionView.ItemsLayout>
@@ -217,152 +236,53 @@
                     ItemSpacing="5" />
             </CollectionView.ItemsLayout>
         </CollectionView>
-        
-        <Border
-            Margin="0,0,0,5"
-            BackgroundColor="#E3E3E3"
-            Grid.Column="1"
-            Grid.Row="0"
-            StrokeThickness="0"
-            VerticalOptions="Center"
-            StrokeShape="RoundRectangle 20,20,20,20">
-            <StackLayout
-                Padding="5,0,5,0">
-                <Editor
-                    x:Name="m_Message"
-                    Keyboard="Chat"
-                    MinimumHeightRequest="35"
-                    MaximumHeightRequest="250"
-                    AutoSize="TextChanges"
-                    TextColor="#52AB98"
-                    FontAttributes="Bold"
-                    BackgroundColor="{StaticResource Gray100}"
-                    FontSize="20"
-                    VerticalOptions="FillAndExpand"
-                    VerticalTextAlignment="Center" />
-            </StackLayout>
-        </Border>
-        <ImageButton
-            Grid.Column="2"
-            Grid.Row="0"
-            Margin="5,0,5,10"
-            VerticalOptions="End"
-            Clicked="OnSendClicked"
-            Source="{AppThemeBinding Light=send_wt.png, Dark=send_dt.png}"
-            HeightRequest="25"
-            WidthRequest="25" />
 
-
-
-
-    </StackLayout>
-    
-    
-    
-
-    <!--<ScrollView>
-        <StackLayout
-            Orientation="Vertical"
-            Spacing="10">
-            <Grid
-                HeightRequest="50"
-                ColumnDefinitions="30,*,30"
-                Margin="10,5,10,0">
-                <ImageButton
-                    Grid.Column="0"
-                    Source="{AppThemeBinding Light=arrow_back_wt.png, Dark=arrow_back_dt.png}"
-                    WidthRequest="30"
-                    Command="{Binding GoBackCommand}" />
-
-                <Label
-                    Grid.Column="1"
-                    FontSize="18"
-                    HorizontalOptions="Center"
-                    VerticalOptions="Center">
-                    <Label.Text>
-                        <MultiBinding
-                            StringFormat="{}{0} - {1}">
-                            <Binding
-                                Source="Czat" />
-                            <Binding
-                                Path="Tour.Title" />
-                        </MultiBinding>
-                    </Label.Text>
-                </Label>
-            </Grid>
-
-
-            <Grid
-                Margin="0,50,0,50"
-                RowSpacing="15">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="*"></RowDefinition>
-                    <RowDefinition Height="Auto"></RowDefinition>
-                </Grid.RowDefinitions>
-
-                <CollectionView
-                    x:Name="m_chatControl"
-                    Grid.Row="0"
-                    Margin="0,50,0,0"
-                    Rotation="180"
-                    EmptyView="Brak wiadomości"
-                    ItemTemplate="{StaticResource MessageSelector}"
-                    SelectionMode="None">
-                    <CollectionView.ItemsLayout>
-                        <LinearItemsLayout
-                            Orientation="Vertical"
-                            ItemSpacing="5" />
-                    </CollectionView.ItemsLayout>
-                </CollectionView>
-
-                <Grid
-                    Grid.Row="1"
-                    RowDefinitions="Auto"
-                    ColumnDefinitions="35,*,35">
-                    <ImageButton
-                        Grid.Column="0"
-                        Grid.Row="0"
-                        Margin="5,0,5,10"
-                        VerticalOptions="End"
-                        Command="{Binding ShowMoreChatActionCommand}"
-                        Source="{AppThemeBinding Light=settings_chat_wt.png, Dark=settings_chat_dt.png}"
-                        HeightRequest="25"
-                        WidthRequest="25"/>
-                    <Border
-                        Margin="0,0,0,5"
-                            BackgroundColor="#E3E3E3"
-                            Grid.Column="1"
-                            Grid.Row="0"
-                            StrokeThickness="0"
-                            VerticalOptions="Center"
-                            StrokeShape="RoundRectangle 20,20,20,20">
-                        <StackLayout Padding="5,0,5,0">
-                            <Editor
-                                x:Name="m_Message"
-                                    Keyboard="Chat"
-                                    MinimumHeightRequest="35"
-                                    MaximumHeightRequest="250"
-                                    AutoSize="TextChanges"
-                                    TextColor="#52AB98"
-                                    FontAttributes="Bold"
-                                    BackgroundColor="{StaticResource Gray100}"
-                                    Text="{Binding Message}"
-                                    FontSize="20"
-                                    VerticalOptions="FillAndExpand"
-                                    VerticalTextAlignment="Center"/>
-                        </StackLayout>
-                    </Border>
-                    <ImageButton
-                        Grid.Column="2"
-                        Grid.Row="0"
-                        Margin="5,0,5,10"
-                        VerticalOptions="End"
-                        Clicked="OnSendClicked"
-                        Source="{AppThemeBinding Light=send_wt.png, Dark=send_dt.png}"
-                        HeightRequest="25"
-                        WidthRequest="25"/>
-                </Grid>
-            </Grid>
-        </StackLayout>
-    </ScrollView>-->
+        <Grid
+            Grid.Row="2"
+            RowDefinitions="Auto"
+            ColumnDefinitions="40,*,40">
+            <ImageButton
+                Grid.Column="0"
+                Grid.Row="0"
+                Margin="5,0,5,15"
+                VerticalOptions="End"
+                Command="{Binding ShowMoreChatActionCommand}"
+                Source="{AppThemeBinding Light=settings_chat_wt.png, Dark=settings_chat_dt.png}"
+                HeightRequest="25"
+                WidthRequest="25" />
+            <Border
+                Margin="0,0,0,5"
+                BackgroundColor="#E3E3E3"
+                Grid.Column="1"
+                Grid.Row="0"
+                StrokeThickness="0"
+                VerticalOptions="Center"
+                StrokeShape="RoundRectangle 20,20,20,20">
+                <StackLayout
+                    Padding="5,0,5,0">
+                    <Editor
+                        Keyboard="Chat"
+                        MinimumHeightRequest="35"
+                        MaximumHeightRequest="250"
+                        AutoSize="TextChanges"
+                        TextColor="#52AB98"
+                        FontAttributes="Bold"
+                        BackgroundColor="{StaticResource Gray100}"
+                        Text="{Binding Message}"
+                        FontSize="20"
+                        VerticalOptions="FillAndExpand"
+                        VerticalTextAlignment="Center" />
+                </StackLayout>
+            </Border>
+            <ImageButton
+                Grid.Column="2"
+                Grid.Row="0"
+                Margin="5,0,5,15"
+                VerticalOptions="End"
+                Command="{Binding SendMessageCommand}"
+                Source="{AppThemeBinding Light=send_wt.png, Dark=send_dt.png}"
+                HeightRequest="30"
+                WidthRequest="30" />
+        </Grid>
+    </Grid>
 </ContentPage>

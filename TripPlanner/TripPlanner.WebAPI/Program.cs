@@ -26,6 +26,8 @@ using TripPlanner.Models.Models.UserModels;
 using TripPlanner.Services.FriendService;
 using TripPlanner.Services.Notificationservice;
 using TripPlanner.Services.NotificationService;
+using TripPlanner.WebSocketServer;
+using Microsoft.AspNetCore.SignalR;
 
 namespace TripPlanner.WebAPI
 {
@@ -60,7 +62,10 @@ namespace TripPlanner.WebAPI
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
-            if(System.Environment.MachineName == "RMSULOWSKR")
+            builder.Services.AddSignalR();
+            builder.Services.AddSingleton<IUserIdProvider, NameUserIdProvider>();
+
+            if (System.Environment.MachineName == "RMSULOWSKR")
             {
                 builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(
                 builder.Configuration.GetConnectionString("SqlConnectionString")));
@@ -72,16 +77,15 @@ namespace TripPlanner.WebAPI
             }
 
 
-
             builder.Services.AddScoped<IUserRepository, UserRepository>();
             builder.Services.AddScoped<ICheckListRepository, CheckListRepository>();
             builder.Services.AddScoped<ICheckListFieldRepository, CheckListFieldRepository>();
             builder.Services.AddScoped<ICultureRepository, CultureRepository>();
             builder.Services.AddScoped<ICultureAssistanceRepository, CultureAssistanceRepository>();
             builder.Services.AddScoped<IParticipantTourRepository, ParticipantTourRepository>();
-            builder.Services.AddScoped<IQuestionnaireRepository, QuestionnaireRepository>();
-            builder.Services.AddScoped<IQuestionnaireAnswerRepository, QuestionnaireAnswerRepository>();
             builder.Services.AddScoped<IQuestionnaireVoteRepository, QuestionnaireVoteRepository>();
+            builder.Services.AddScoped<IQuestionnaireAnswerRepository, QuestionnaireAnswerRepository>();
+            builder.Services.AddScoped<IQuestionnaireRepository, QuestionnaireRepository>();
             builder.Services.AddScoped<IRouteRepository, RouteRepository>();
             builder.Services.AddScoped<IStopoverRepository, StopoverRepository>();
             builder.Services.AddScoped<ITextMessageRepository, TextMessageRepository>();
@@ -103,9 +107,9 @@ namespace TripPlanner.WebAPI
             builder.Services.AddScoped<ICultureService, CultureService>();
             builder.Services.AddScoped<ICultureAssistanceService, CultureAssistanceService>();
             builder.Services.AddScoped<IParticipantTourService, ParticipantTourService>();
-            builder.Services.AddScoped<IQuestionnaireService, QuestionnaireService>();
-            builder.Services.AddScoped<IQuestionnaireAnswerService, QuestionnaireAnswerService>();
             builder.Services.AddScoped<IQuestionnaireVoteService, QuestionnaireVoteService>();
+            builder.Services.AddScoped<IQuestionnaireAnswerService, QuestionnaireAnswerService>();
+            builder.Services.AddScoped<IQuestionnaireService, QuestionnaireService>();
             builder.Services.AddScoped<IRouteService, RouteService>();
             builder.Services.AddScoped<IStopoverService, StopoverService>();
             builder.Services.AddScoped<ITourService, TourService>();
@@ -115,6 +119,7 @@ namespace TripPlanner.WebAPI
             builder.Services.AddScoped<INotificationService, NotificationService>();
 
             builder.Services.AddScoped<IPasswordHasher<User>, PasswordHasher<User>>();
+            
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
@@ -123,6 +128,8 @@ namespace TripPlanner.WebAPI
                 app.UseSwagger();
                 app.UseSwaggerUI();
             }
+
+            app.MapHub<ChatHub>("/chat");
 
             app.UseHttpsRedirection();
 

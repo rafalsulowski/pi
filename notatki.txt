@@ -1,0 +1,71 @@
+7.11
+-udalo sie zrobic grupy w signalR
+-przywrocic dobry wyglad czatu
+-zastanaiwanie sie nad powiadomieniami
+
+
+do zrobienia
+1. dopiescic dodawanie ankiet
+2. lista osob czatu - OKK
+3. usuwanie enterow na koncu wiadomosci - OKK
+
+
+8.11
+-ustandaryzowany sposob wykorzystywania webapi
+-poprawiono pozostale okna dla lista osob czatu, dodawanie osob, nadawanie organizatorow, itd
+-poprawialem liste uczestnikow na tiptop (ZOSTALO DO DODANIA MECHANIZM NADAWANIA KSYWEK)
+-troche zaczalem poprawiac zwracanie wartosci z api (tour i user controller OK, DOKONCZYC RESZTE KONTROLEROW)
+-Zacząłem robic splitwise
+
+Do zrobienia
+Zaszłośc z 7.11 czyli: 1. dopiescic dodawanie ankiet
+Kontunuować splitwise (1. nowa baza danych 2. backend 3. frontend)
+
+9.11
+Kontunuacja splitwise, frontend w figmie, coś tam backend
+
+
+10.11
+Kontunuacja splitwise, frontend w figmie, duzo zrobione backend
+
+do zrobienia:
+1. Zaszłośc z 7.11 czyli: 1. dopiescic dodawanie ankiet
+2. dokonczyc backend dla splitwise
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

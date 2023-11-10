@@ -15,8 +15,7 @@ namespace TripPlanner.Models.Models.BillModels
         public Bill Bill { get; set; } = null!;
         public int UserId { get; set; }
         public User User { get; set; } = null!;
-
-        public decimal Due;
+        public decimal Due { get; set; }
 
 
         public static implicit operator BillContributorDTO(BillContributor data)

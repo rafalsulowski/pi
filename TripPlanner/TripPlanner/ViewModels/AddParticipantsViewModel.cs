@@ -8,13 +8,12 @@ using CommunityToolkit.Mvvm.Input;
 using System.Collections.ObjectModel;
 using TripPlanner.Models.DTO.TourDTOs;
 using TripPlanner.Models.DTO.UserDTOs;
+using TripPlanner.Models.Models.TourModels;
 using TripPlanner.Models.Models.UserModels;
 using TripPlanner.Services;
 
 namespace TripPlanner.ViewModels
 {
-
-    [QueryProperty("passTourId", "TourId")]
     public partial class AddParticipantsViewModel : ObservableObject, IQueryAttributable
     {
         private readonly Configuration m_Configuration;
@@ -38,7 +37,7 @@ namespace TripPlanner.ViewModels
             FriendsRef = new ObservableCollection<ExtendFriendDTO>();
         }
 
-        public async void ApplyQueryAttributes(IDictionary<string, object> query)
+        public void ApplyQueryAttributes(IDictionary<string, object> query)
         {
             TourId = (int)query["passTourId"];
             LoadData();
@@ -59,25 +58,19 @@ namespace TripPlanner.ViewModels
         {
             if(friend.IsParticipant)
             {
-                await Shell.Current.CurrentPage.DisplayAlert("Uwaga", "Ten użytkownik jest już uczestnikiem tej wycieczki", "Ok");
+                var confirmCopyToast = Toast.Make("Użytkownik jest już uczestnikiem wyjazdu", ToastDuration.Short, 14);
+                await confirmCopyToast.Show();
             }
             else
             {
-                var result = await Shell.Current.CurrentPage.DisplayAlert("Uwaga", $"Czy na pewno chcesz dodać użytkownika {friend.FullName} do wycieczki?", "Dodaj", "Anuluj");
-
+                var result = await Shell.Current.CurrentPage.DisplayAlert("Uwaga", $"Czy na pewno chcesz dodać {friend.FullName} do wyjazdu?", "Dodaj", "Anuluj");
                 if(result)
                 {
                     var response = await m_TourService.AddParticipant(TourId, friend.UserId);
-                    if(response)
-                    {
+                    if(response.Success)
                         await RefreshViewAfterAdd();
-                        var confirmCopyToast = Toast.Make("Dodano do wyjazdu", ToastDuration.Short, 14);
-                        await confirmCopyToast.Show();
-                    }
                     else
-                    {
-                        await Shell.Current.CurrentPage.DisplayAlert("Błąd", $"Nie udało się dodać znajomego do wyjazdu", "Ok");
-                    }
+                        await Shell.Current.CurrentPage.DisplayAlert("Błąd", response.Message, "Ok");
                 }
             }
         }
@@ -106,11 +99,13 @@ namespace TripPlanner.ViewModels
         async Task RefreshViewAfterAdd()
         {
             LoadData();
+            var confirmCopyToast = Toast.Make("Dodano do wyjazdu", ToastDuration.Short, 14);
+            await confirmCopyToast.Show();
         }
 
         private async void LoadData()
         {
-            var value = m_UserService.GetFriendsBasedOnTour(m_Configuration.User.Id, TourId).Result;
+            var value = m_UserService.GetFriendsWithInfoAboutTour(m_Configuration.User.Id, TourId).Result;
 
             if (value is null)
             {

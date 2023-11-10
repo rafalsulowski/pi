@@ -7,7 +7,6 @@ using TripPlanner.Services.CheckListService;
 using TripPlanner.Models.Models;
 using TripPlanner.Models.Models.TourModels;
 using TripPlanner.Models.Models.CultureModels;
-using TripPlanner.Models.Models.CheckListModels;
 using TripPlanner.Services.ScheduleService;
 using TripPlanner.Services.ChatService;
 using TripPlanner.Services.BillService;
@@ -17,7 +16,6 @@ using TripPlanner.Models.Models.ScheduleModels;
 using TripPlanner.Services.Notificationservice;
 using TripPlanner.Models.Models.MessageModels.QuestionnaireModels;
 using TripPlanner.Models.Models.MessageModels;
-using System.Collections.Generic;
 using TripPlanner.Models.Models.UserModels;
 
 namespace TripPlanner.Services.TourService
@@ -186,8 +184,7 @@ namespace TripPlanner.Services.TourService
             return response;
         }
 
-
-        public async Task<RepositoryResponse<ExtendParticipantDTO>> GetTourExtendParticipant(int tourId, int userId)
+        public async Task<RepositoryResponse<ExtendParticipantDTO>> GetTourExtendParticipantById(int tourId, int userId)
         {
             var resp = await _ParticipantTourRepository.GetFirstOrDefault(u => u.TourId == tourId && u.UserId == userId);
 
@@ -220,7 +217,7 @@ namespace TripPlanner.Services.TourService
             var resp = await _ParticipantTourRepository.GetAll(u => u.TourId == tourId);
             List<ExtendParticipantDTO> listReturn = new List<ExtendParticipantDTO>();
             if (resp.Success)
-            {             
+            {
                 if(resp.Data is null)
                 {
                     return new RepositoryResponse<List<ExtendParticipantDTO>> { Data = listReturn, Message = "", Success = true};
@@ -253,12 +250,34 @@ namespace TripPlanner.Services.TourService
             return new RepositoryResponse<List<ExtendParticipantDTO>> { Data = listReturn, Message = "", Success = true};
         }
 
-        public async Task<RepositoryResponse<List<string>>> GetParticipantsNames(int tourId)
+        public async Task<RepositoryResponse<List<ExtendParticipantDTO>>> GetParticipantsNames(int tourId)
         {
-            //Zaslepka bo na razie nie przydatne
             var resp = await _ParticipantTourRepository.GetAll(u => u.TourId == tourId);
-            List<string> listReturn = new List<string>();
-            return new RepositoryResponse<List<string>> { Data = listReturn, Message = "", Success = true };
+            List<ExtendParticipantDTO> listReturn = new List<ExtendParticipantDTO>();
+            if (resp.Success)
+            {
+                if (resp.Data is null)
+                {
+                    return new RepositoryResponse<List<ExtendParticipantDTO>> { Data = listReturn, Message = "", Success = true };
+                }
+
+                List<ParticipantTour> list = resp.Data;
+                for (int i = 0; i < list.Count; i++)
+                {
+                    User? user = _UserRepository.GetFirstOrDefault(u => u.Id == list[i].UserId).Result?.Data;
+
+                    if (user is null)
+                        return new RepositoryResponse<List<ExtendParticipantDTO>> { Data = listReturn, Message = "", Success = true };
+
+                    ExtendParticipantDTO participantDTO = new ExtendParticipantDTO();
+                    participantDTO.Nickname = list[i].Nickname;
+                    participantDTO.FullName = user.FullName;
+                    listReturn.Add(participantDTO);
+                }
+
+            }
+
+            return new RepositoryResponse<List<ExtendParticipantDTO>> { Data = listReturn, Message = "", Success = true };
         }
 
         public int CalculateAge(DateTime birthDate, DateTime now)
