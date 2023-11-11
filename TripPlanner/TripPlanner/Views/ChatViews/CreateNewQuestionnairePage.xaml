@@ -6,8 +6,7 @@
              xmlns:viewmodel="clr-namespace:TripPlanner.ViewModels"
              x:DataType="viewmodel:CreateQuestionnaireViewModel"
              Shell.NavBarIsVisible="False"
-             Shell.TabBarIsVisible="False"
-             BackgroundColor="{AppThemeBinding Light={StaticResource Secondary}, Dark={StaticResource Primary}}">
+             Shell.TabBarIsVisible="False">
     <ScrollView>
         <AbsoluteLayout>
             <Grid 
@@ -107,7 +106,7 @@
                                         VerticalOptions="End"
                                         WidthRequest="25"
                                         HeightRequest="25"
-                                        Source="x_sec.png"
+                                        Source="trash_sec.png"
                                         Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:CreateQuestionnaireViewModel}}, Path=DeleteAnswerCommand}"
                                         CommandParameter="{Binding .}"/>
                                 </Grid>

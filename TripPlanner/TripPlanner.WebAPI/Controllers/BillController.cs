@@ -28,17 +28,17 @@ namespace TripPlanner.WebAPI.Controllers
         }
 
 
-        [HttpGet("GetSharesPresentation/{userId}/{tourId}")]
+        [HttpGet("getSharesPresentation/{userId}/{tourId}")]
         public async Task<ActionResult<RepositoryResponse<List<SharePresentationDTO>>>> GetSharesPresentation(int userId, int tourId)
         {
             var response = await _BillService.GetSharesPresentationAsync(userId, tourId);
             if (response.Success)
                 return Ok(new RepositoryResponse<List<SharePresentationDTO>> { Data = response.Data, Message = "", Success = true });
             else
-                return BadRequest(new RepositoryResponse<BillPresentationDTO> { Data = null, Message = response.Message, Success = false });
+                return BadRequest(new RepositoryResponse<List<SharePresentationDTO>> { Data = null, Message = response.Message, Success = false });
         }
 
-        [HttpGet("GetBillPresentation/{userId}/{billId}")]
+        [HttpGet("getBillPresentation/{userId}/{billId}")]
         public async Task<ActionResult<RepositoryResponse<BillPresentationDTO>>> GetBillPresentation(int userId, int billId, int tourId)
         {
             var response = await _BillService.GetBillPresentation(userId, billId, tourId);
@@ -48,38 +48,47 @@ namespace TripPlanner.WebAPI.Controllers
                 return BadRequest(new RepositoryResponse<BillPresentationDTO> { Data = null, Message = response.Message, Success = false });
         }
 
-        [HttpGet("GetTransferPresentation/{userId}/{transferId}")]
+        [HttpGet("getTransferPresentation/{userId}/{transferId}")]
         public async Task<ActionResult<RepositoryResponse<TransferPresentationDTO>>> GetTransferPresentation(int userId, int transferId, int tourId)
         {
             var response = await _BillService.GetTransferPresentation(userId, transferId, tourId);
             if (response.Success)
                 return Ok(new RepositoryResponse<TransferPresentationDTO> { Data = response.Data, Message = "", Success = true });
             else
-                return BadRequest(new RepositoryResponse<BillPresentationDTO> { Data = null, Message = response.Message, Success = false });
+                return BadRequest(new RepositoryResponse<TransferPresentationDTO> { Data = null, Message = response.Message, Success = false });
         }
 
-        [HttpGet("GetBalance/{tourId}")]
+        [HttpGet("getBalance/{tourId}")]
         public async Task<ActionResult<RepositoryResponse<Balance>>> GetBalance(int tourId)
         {
             var response = await _BillService.GetBalance(tourId);
             if (response.Success)
                 return Ok(new RepositoryResponse<Balance> { Data = response.Data, Message = "", Success = true });
             else
-                return BadRequest(new RepositoryResponse<BillPresentationDTO> { Data = null, Message = response.Message, Success = false });
+                return BadRequest(new RepositoryResponse<Balance> { Data = null, Message = response.Message, Success = false });
+        }
+        
+        [HttpGet("getBalanceOfUser/{userId}/{tourId}")]
+        public async Task<ActionResult<RepositoryResponse<UserBalance>>> GetBalanceOfUser(int userId, int tourId)
+        {
+            var response = await _BillService.GetBalanceOfUser(userId, tourId);
+            if (response.Success)
+                return Ok(new RepositoryResponse<UserBalance> { Data = response.Data, Message = "", Success = true });
+            else
+                return BadRequest(new RepositoryResponse<UserBalance> { Data = null, Message = response.Message, Success = false });
         }
 
-
-        [HttpPost("CreateBill")]
+        [HttpPost("createBill")]
         public async Task<ActionResult<RepositoryResponse<bool>>> CreateBill([FromBody] CreateBillDTO Bill)
         {
             var resp = await _TourService.GetTourAsync(u => u.Id == Bill.TourId);
             if (resp.Data == null)
             {
-                return new RepositoryResponse<bool> { Success = false, Message = $"Nie istnieje wycieczka o id = {Bill.TourId}" };
+                return new RepositoryResponse<bool> { Success = false, Message = $"Nie istnieje wyjazd o id = {Bill.TourId}" };
             }
             if (resp.Data.Shares.FirstOrDefault(u => ((Bill)u).Name == Bill.Name) != null)
             {
-                return new RepositoryResponse<bool> { Success = false, Message = $"Dana wycieczka posiada już rachunek o nazwie = {Bill.Name}" };
+                return new RepositoryResponse<bool> { Success = false, Message = $"Dana wyjazd posiada już rachunek o nazwie = {Bill.Name}" };
             }
             var resp2 = await _UserService.GetUserAsync(u => u.Id == Bill.CreatorId);
             if (resp2.Data == null)
@@ -101,13 +110,13 @@ namespace TripPlanner.WebAPI.Controllers
                 return BadRequest(new RepositoryResponse<bool> { Data = true, Success = false, Message = response.Message });
         }
 
-        [HttpPost("CreateTransfer")]
+        [HttpPost("createTransfer")]
         public async Task<ActionResult<RepositoryResponse<bool>>> CreateTransfer([FromBody] CreateTransferDTO transfer)
         {
             var resp = await _TourService.GetTourAsync(u => u.Id == transfer.TourId);
             if (resp.Data == null)
             {
-                return new RepositoryResponse<bool> { Data = false, Success = false, Message = $"Nie istnieje wycieczka o id = {transfer.TourId}" };
+                return new RepositoryResponse<bool> { Data = false, Success = false, Message = $"Nie istnieje wyjazd o id = {transfer.TourId}" };
             }
             var resp2 = await _UserService.GetUserAsync(u => u.Id == transfer.CreatorId);
             if (resp2.Data == null)
@@ -133,140 +142,152 @@ namespace TripPlanner.WebAPI.Controllers
                 return BadRequest(new RepositoryResponse<bool> { Data = true, Success = false, Message = response.Message });
         }
 
-        // PUT api/<ValuesController>/5
         [HttpPut("updateBill/{billId}/{userId}")]
         public async Task<ActionResult<RepositoryResponse<bool>>> UpdateBill(int billid, int userId, [FromBody] CreateBillDTO bill)
         {
             var resp2 = await _BillService.GetBillAsync(u => u.Id == billid);
-            if (resp2.Data == null)
+            if (resp2.Success == false || resp2.Data == null)
             {
                 return new RepositoryResponse<bool> { Success = false, Message = $"Nie istnieje rachunek o id = {billid}" };
             }
 
             var resp = await _UserService.GetUserAsync(u => u.Id == userId);
-            if (resp.Data == null)
+            if (resp.Success == false || resp.Data == null)
             {
                 return new RepositoryResponse<bool> { Success = false, Message = $"Nie istnieje użytkownik o id = {userId}" };
             }
 
-            //walidacja uczesnika czy moze modyfikować
+            //walidacja uczesnika czy moze modyfikować rachunek
+            var resp3 = await _TourService.GetTourAsync(u => u.Id == resp2.Data.TourId, "Participants");
+            if(resp3.Success == false || resp3.Data == null)
+            {
+                return new RepositoryResponse<bool> { Success = false, Message = $"Nie istnieje wyjazd o id = {resp2.Data.TourId}" };
+            }
+            ParticipantTour? participant = resp3.Data.Participants.FirstOrDefault(p => p.UserId == userId);
+            if (participant == null || (participant.IsOrganizer == false && bill.CreatorId != participant.UserId
+                || bill.PayerId != participant.UserId))
+            {
+                return new RepositoryResponse<bool> { Success = false, Message = $"Odmowa dostępu!" };
+            }
 
+            Bill newBill = bill;
+            newBill.Id = billid;
+            newBill.TourId = resp2.Data.TourId;
 
-
-            Bill newBill = resp2.Data;
-            tour.Id = id;
-            tour.MaxParticipant = Tour.MaxParticipant;
-            tour.StartDate = Tour.StartDate;
-            tour.EndDate = Tour.EndDate;
-            tour.CreateDate = Tour.CreateDate;
-            tour.TargetCountry = Tour.TargetCountry;
-            tour.TargetRegion = Tour.TargetRegion;
-            tour.WeatherCords = Tour.WeatherCords;
-            tour.Title = Tour.Title;
-            tour.Description = Tour.Description;
-
-            var response = await _TourService.UpdateTour(tour);
+            var response = await _BillService.UpdateBill(newBill);
             if (response.Success)
                 return Ok(new RepositoryResponse<bool> { Data = true, Message = "", Success = true });
             else
                 return BadRequest(new RepositoryResponse<bool> { Data = false, Message = response.Message, Success = false });
         }
 
-        // PUT api/<ValuesController>/5
-        [HttpPut("{id}/{userId}")]
-        public async Task<ActionResult<RepositoryResponse<bool>>> Put(int id, int userId, [FromBody] EditTourDTO Tour)
+        [HttpPut("updateTransfer{transferId}/{userId}")]
+        public async Task<ActionResult<RepositoryResponse<bool>>> UpdateTransfer(int transferId, int userId, [FromBody] CreateTransferDTO transfer)
         {
-            var resp2 = await _TourService.GetTourAsync(u => u.Id == id, "Participants");
-            if (resp2.Data == null)
+            var resp2 = await _BillService.GetTransferAsync(u => u.Id == transferId);
+            if (resp2.Success == false || resp2.Data == null)
             {
-                return new RepositoryResponse<bool> { Success = false, Message = $"Nie istnieje Wycieczka o id = {id}" };
+                return new RepositoryResponse<bool> { Success = false, Message = $"Nie istnieje rachunek o id = {transferId}" };
             }
 
             var resp = await _UserService.GetUserAsync(u => u.Id == userId);
-            if (resp.Data == null)
+            if (resp.Success == false || resp.Data == null)
             {
                 return new RepositoryResponse<bool> { Success = false, Message = $"Nie istnieje użytkownik o id = {userId}" };
             }
 
-            ParticipantTour? participant = resp2.Data.Participants.Where(p => p.UserId == resp.Data.Id).First();
-            if (participant == null || participant?.IsOrganizer == false)
+            //walidacja uczesnika czy moze modyfikować rachunek
+            var resp3 = await _TourService.GetTourAsync(u => u.Id == resp2.Data.TourId, "Participants");
+            if (resp3.Success == false || resp3.Data == null)
+            {
+                return new RepositoryResponse<bool> { Success = false, Message = $"Nie istnieje wyjazd o id = {resp2.Data.TourId}" };
+            }
+            ParticipantTour? participant = resp3.Data.Participants.FirstOrDefault(p => p.UserId == userId);
+            if (participant == null || (participant.IsOrganizer == false && (transfer.CreatorId != participant.UserId
+                || transfer.SenderId != participant.UserId || transfer.RecipientId != participant.UserId)))
             {
                 return new RepositoryResponse<bool> { Success = false, Message = $"Odmowa dostępu!" };
             }
 
-            Tour tour = resp2.Data;
-            tour.Id = id;
-            tour.MaxParticipant = Tour.MaxParticipant;
-            tour.StartDate = Tour.StartDate;
-            tour.EndDate = Tour.EndDate;
-            tour.CreateDate = Tour.CreateDate;
-            tour.TargetCountry = Tour.TargetCountry;
-            tour.TargetRegion = Tour.TargetRegion;
-            tour.WeatherCords = Tour.WeatherCords;
-            tour.Title = Tour.Title;
-            tour.Description = Tour.Description;
+            Transfer newTransfer = transfer;
+            newTransfer.Id = transferId;
+            newTransfer.TourId = resp2.Data.TourId;
 
-            var response = await _TourService.UpdateTour(tour);
+            var response = await _BillService.UpdateTransfer(newTransfer);
             if (response.Success)
                 return Ok(new RepositoryResponse<bool> { Data = true, Message = "", Success = true });
             else
                 return BadRequest(new RepositoryResponse<bool> { Data = false, Message = response.Message, Success = false });
         }
 
-        // DELETE api/<ValuesController>/5
-        [HttpDelete("{tourId}/{userId}")]
-        public async Task<ActionResult<RepositoryResponse<bool>>> Delete(int userId, int tourId)
+        [HttpDelete("deleteBill/{billId}/{userId}")]
+        public async Task<ActionResult<RepositoryResponse<bool>>> DeleteBill(int billid, int userId)
         {
-            var resp2 = await _TourService.GetTourAsync(u => u.Id == tourId, "Participants");
-            if (resp2.Data == null)
+            var resp2 = await _BillService.GetBillAsync(u => u.Id == billid);
+            if (resp2.Success == false || resp2.Data == null)
             {
-                return new RepositoryResponse<bool> { Success = false, Message = $"Nie istnieje Wycieczka o id = {tourId}" };
+                return new RepositoryResponse<bool> { Success = false, Message = $"Nie istnieje rachunek o id = {billid}" };
+            }
+            Bill bill = resp2.Data;
+
+            var resp = await _TourService.GetTourAsync(u => u.Id == bill.TourId, "Participants");
+            if (resp.Data == null)
+            {
+                return new RepositoryResponse<bool> { Success = false, Message = $"Nie istnieje wyjazd o id = {bill.TourId}" };
             }
 
-
-            var resp = await _UserService.GetUserAsync(u => u.Id == userId);
-            if (resp.Data == null)
+            var resp3 = await _UserService.GetUserAsync(u => u.Id == userId);
+            if (resp3.Data == null)
             {
                 return new RepositoryResponse<bool> { Success = false, Message = $"Nie istnieje użytkownik o id = {userId}" };
             }
 
-            ParticipantTour? participant = resp2.Data.Participants.Where(p => p.UserId == resp.Data.Id).First();
-            if (participant == null || participant?.IsOrganizer == false)
+            //walidacja użytkownika
+            ParticipantTour? participant = resp.Data.Participants.FirstOrDefault(p => p.UserId == userId);
+            if (participant == null || (participant.IsOrganizer == false && (bill.CreatorId != participant.UserId
+                || bill.PayerId != participant.UserId)))
             {
                 return new RepositoryResponse<bool> { Success = false, Message = $"Odmowa dostępu!" };
             }
 
-            var response = await _TourService.DeleteTour(new Tour() { Id = tourId });
+            var response = await _BillService.DeleteBill(new Bill() { Id = billid });
             if (response.Success)
                 return Ok(new RepositoryResponse<bool> { Data = true, Message = "", Success = true });
             else
                 return BadRequest(new RepositoryResponse<bool> { Data = false, Message = response.Message, Success = false });
         }
 
-        // DELETE api/<ValuesController>/5
-        [HttpDelete("{tourId}/{userId}")]
-        public async Task<ActionResult<RepositoryResponse<bool>>> Delete(int userId, int tourId)
+        [HttpDelete("deleteTransfer/{transferId}/{userId}")]
+        public async Task<ActionResult<RepositoryResponse<bool>>> DeleteTransfer(int transferid, int userId)
         {
-            var resp2 = await _TourService.GetTourAsync(u => u.Id == tourId, "Participants");
-            if (resp2.Data == null)
+            var resp2 = await _BillService.GetTransferAsync(u => u.Id == transferid);
+            if (resp2.Success == false || resp2.Data == null)
             {
-                return new RepositoryResponse<bool> { Success = false, Message = $"Nie istnieje Wycieczka o id = {tourId}" };
+                return new RepositoryResponse<bool> { Success = false, Message = $"Nie istnieje rachunek o id = {transferid}" };
+            }
+            Transfer transfer = resp2.Data;
+
+            var resp = await _TourService.GetTourAsync(u => u.Id == transfer.TourId, "Participants");
+            if (resp.Data == null)
+            {
+                return new RepositoryResponse<bool> { Success = false, Message = $"Nie istnieje wyjazd o id = {transfer.TourId}" };
             }
 
-
-            var resp = await _UserService.GetUserAsync(u => u.Id == userId);
-            if (resp.Data == null)
+            var resp3 = await _UserService.GetUserAsync(u => u.Id == userId);
+            if (resp3.Data == null)
             {
                 return new RepositoryResponse<bool> { Success = false, Message = $"Nie istnieje użytkownik o id = {userId}" };
             }
 
-            ParticipantTour? participant = resp2.Data.Participants.Where(p => p.UserId == resp.Data.Id).First();
-            if (participant == null || participant?.IsOrganizer == false)
+            //walidacja użytkownika
+            ParticipantTour? participant = resp.Data.Participants.FirstOrDefault(p => p.UserId == userId);
+            if (participant == null || (participant.IsOrganizer == false && (transfer.CreatorId != participant.UserId
+                || transfer.SenderId != participant.UserId || transfer.RecipientId != participant.UserId)))
             {
                 return new RepositoryResponse<bool> { Success = false, Message = $"Odmowa dostępu!" };
             }
 
-            var response = await _TourService.DeleteTour(new Tour() { Id = tourId });
+            var response = await _BillService.DeleteTransfer(new Transfer() { Id = transferid });
             if (response.Success)
                 return Ok(new RepositoryResponse<bool> { Data = true, Message = "", Success = true });
             else

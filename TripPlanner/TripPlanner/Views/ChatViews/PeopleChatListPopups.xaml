@@ -2,9 +2,9 @@
 <toolkit:Popup xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
-            x:Class="TripPlanner.Views.ChatViews.PeopleChatListPopups"
-            xmlns:models="clr-namespace:TripPlanner.Models.DTO.TourDTOs;assembly=TripPlanner.Models"
-            Color="Transparent"
+             x:Class="TripPlanner.Views.ChatViews.PeopleChatListPopups"
+             xmlns:models="clr-namespace:TripPlanner.Models.DTO.TourDTOs;assembly=TripPlanner.Models"
+             Color="Transparent"
              CanBeDismissedByTappingOutsideOfPopup="True">
     <Border
         Padding="40,40,40,40"
@@ -34,7 +34,7 @@
             </CollectionView.Footer>
 
             <CollectionView.ItemTemplate>
-                <DataTemplate>
+                <DataTemplate x:DataType="models:ExtendParticipantDTO">
                     <Grid ColumnDefinitions="30,*"
                           ColumnSpacing="10">
                         <Image

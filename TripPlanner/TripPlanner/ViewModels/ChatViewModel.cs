@@ -104,7 +104,7 @@ namespace TripPlanner.ViewModels
             try
             {
                 //walidacja treści wiadomości pod wzgledem prób hackowania
-                Message = Message.TrimStart().TrimStart();
+                Message = Message.TrimStart().TrimEnd();
 
                 if (string.IsNullOrEmpty(Message))
                     return;

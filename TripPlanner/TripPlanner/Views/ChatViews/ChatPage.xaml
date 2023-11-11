@@ -222,6 +222,7 @@
         </Grid>
         
         <CollectionView
+            VerticalOptions="End"
             VerticalScrollBarVisibility="Never"
             HorizontalScrollBarVisibility="Never"
             ItemsUpdatingScrollMode="KeepLastItemInView"

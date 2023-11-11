@@ -18,20 +18,27 @@ do zrobienia
 -Zacząłem robic splitwise
 
 Do zrobienia
-Zaszłośc z 7.11 czyli: 1. dopiescic dodawanie ankiet
-Kontunuować splitwise (1. nowa baza danych 2. backend 3. frontend)
+1. DOKONCZYC poprawiac RESZTE KONTROLEROW
+2. Zaszłośc z 7.11 czyli: 1. dopiescic dodawanie ankiet
+3. Kontunuować splitwise (1. nowa baza danych 2. backend 3. frontend) OK
 
 9.11
-Kontunuacja splitwise, frontend w figmie, coś tam backend
+Kontunuacja splitwise, frontend w figmie, duzo zrobione backend
 
 
 10.11
-Kontunuacja splitwise, frontend w figmie, duzo zrobione backend
+Kontunuacja splitwise, dokonczono frontend w figmie, dokonczono backend
+zmiana w powiadomieniach
+wyswietlanie wszystkich info o uczestniku oraz zmiana ksywki
+anulowanie dziwnego bledu, nullreference, wszystko wina xamla! (jakis zlad w xamlu daje taki wynik)
+poprawa i dokonczenie ParticipantsList
 
 do zrobienia:
-1. Zaszłośc z 7.11 czyli: 1. dopiescic dodawanie ankiet
-2. dokonczyc backend dla splitwise
-
+0. zbudowac nowa baze danych - OK
+1. Zaszłośc z 7.11 czyli: Dopiescic dodawanie ankiet
+2. dokonczyc backend dla splitwise OK
+3. Zaszłośc z 8.11 czyli: DOKONCZYC poprawiac RESZTE KONTROLEROW
+4. wiadomosci na czacie (zeby nie zawesze sie wyswietlal czas dodania wiadomosci (na poźniej))
 
 
 

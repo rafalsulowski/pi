@@ -4,18 +4,15 @@ namespace TripPlanner.Models.DTO.MessageDTOs
 {
     public class TextMessageDTO : MessageDTO
     {
-        public static implicit operator TextMessage(TextMessageDTO data)
+        public override TextMessage MapFromDTO()
         {
-            if (data == null)
-                return null;
-
             return new TextMessage
             {
-                Id = data.Id,
-                UserId = data.UserId,
-                TourId = data.TourId,
-                Content = data.Content,
-                Date = data.Date,
+                Id = Id,
+                UserId = UserId,
+                TourId = TourId,
+                Content = Content,
+                Date = Date,
             };
         }
     }

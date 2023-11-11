@@ -3,9 +3,9 @@
   <PropertyGroup>
     <IsFirstTimeProjectOpen>False</IsFirstTimeProjectOpen>
     <ActiveDebugFramework>net7.0-android</ActiveDebugFramework>
-    <ActiveDebugProfile>5.85 M (Android 13.0 - API 33)</ActiveDebugProfile>
+    <ActiveDebugProfile>Pixel 5 - API 33 (Android 13.0 - API 33)</ActiveDebugProfile>
     <SelectedPlatformGroup>Emulator</SelectedPlatformGroup>
-    <DefaultDevice>5_85_m</DefaultDevice>
+    <DefaultDevice>pixel_5_-_api_33</DefaultDevice>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net7.0-android|AnyCPU'">
     <DebuggerFlavor>ProjectDebugger</DebuggerFlavor>
@@ -24,7 +24,10 @@
     <MauiXaml Update="Controls\QuestionnaireControls\QuestionnaireControl.xaml">
       <SubType>Designer</SubType>
     </MauiXaml>
-    <MauiXaml Update="Views\BudgetViews\BillPage.xaml">
+    <MauiXaml Update="Views\ParticipantViews\UserDetailsPopups.xaml">
+      <SubType>Designer</SubType>
+    </MauiXaml>
+    <MauiXaml Update="Views\ShareViews\SharesListPage.xaml">
       <SubType>Designer</SubType>
     </MauiXaml>
     <MauiXaml Update="Views\ChatViews\AddQuesionnaireAnswerPopups.xaml">
@@ -42,13 +45,13 @@
     <MauiXaml Update="Views\ChatViews\QuestionnairePopup.xaml">
       <SubType>Designer</SubType>
     </MauiXaml>
-    <MauiXaml Update="Views\ParticipantsListViews\AddParticipantPage.xaml">
+    <MauiXaml Update="Views\ParticipantViews\AddParticipantPage.xaml">
       <SubType>Designer</SubType>
     </MauiXaml>
-    <MauiXaml Update="Views\ParticipantsListViews\AddParticipantPopup.xaml">
+    <MauiXaml Update="Views\ParticipantViews\AddParticipantPopup.xaml">
       <SubType>Designer</SubType>
     </MauiXaml>
-    <MauiXaml Update="Views\ParticipantsListViews\ParticipantsListPage.xaml">
+    <MauiXaml Update="Views\ParticipantViews\ParticipantsListPage.xaml">
       <SubType>Designer</SubType>
     </MauiXaml>
   </ItemGroup>

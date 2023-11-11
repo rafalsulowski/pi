@@ -4,10 +4,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using TripPlanner.DataAccess.IRepository;
 using TripPlanner.Models.Models.RouteModels;
 using TripPlanner.Models.Models;
 using TripPlanner.Models.Models.ScheduleModels;
+using TripPlanner.DataAccess.IRepository;
 
 namespace TripPlanner.DataAccess.Repository
 {

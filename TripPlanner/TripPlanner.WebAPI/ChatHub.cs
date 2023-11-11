@@ -54,7 +54,7 @@ namespace TripPlanner.WebSocketServer
             if (resp2.Data == null)
                 throw new HubException($"Nie istnieje użytkownik o id {msg.UserId}");
 
-            TextMessage newMessage = msg;
+            TextMessage newMessage = msg.MapFromDTO();
             newMessage.Date = DateTime.Now;
             var response = await _ChatService.AddTextMessage(newMessage);
             if (response.Success == false)

@@ -1,17 +1,13 @@
-﻿using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Logging;
-using TripPlanner.Views.HomeViews;
+﻿using TripPlanner.Views.HomeViews;
 using TripPlanner.Views.StartViews;
 using TripPlanner.Views.TourViews;
 using TripPlanner.Services;
 using TripPlanner.ViewModels;
-using TripPlanner.Views;
 using TripPlanner.Views.ChatViews;
 using CommunityToolkit.Maui;
 using TripPlanner.DataTemplates;
-using HexInnovation;
-using TripPlanner.Views.ParticipantsListViews;
-using Microsoft.Maui.Controls.Hosting;
+using TripPlanner.Views.ParticipantViews;
+using TripPlanner.Views.ShareViews;
 
 namespace TripPlanner;
 
@@ -72,6 +68,7 @@ public static class MauiProgram
 		builder.Services.AddTransient<QuestionnaireViewModel>();
 		builder.Services.AddTransient<ParticipantsViewModel>();
 		builder.Services.AddTransient<AddParticipantsViewModel>();
+		builder.Services.AddTransient<SharesViewModel>();
 
 
         //Views
@@ -87,6 +84,7 @@ public static class MauiProgram
 		builder.Services.AddTransient<CreateNewQuestionnairePage>();
 		builder.Services.AddTransient<ParticipantsListPage>();
 		builder.Services.AddTransient<AddParticipantPage>();
+		builder.Services.AddTransient<SharesListPage>();
 
 
 		return builder.Build();

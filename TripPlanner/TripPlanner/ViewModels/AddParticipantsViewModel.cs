@@ -75,6 +75,28 @@ namespace TripPlanner.ViewModels
             }
         }
 
+        [RelayCommand]
+        async Task DeleteParticipantFromFriendList(ExtendFriendDTO participant)
+        {
+            ExtendParticipantDTO actualParticipant = m_TourService.GetTourExtendParticipantById(TourId, participant.UserId).Result;
+            if (actualParticipant == null)
+            {
+                await Shell.Current.CurrentPage.DisplayAlert("Uwaga", "Ten użytkownik nie jest już uczestnikiem tej wycieczki, odświerz listę", "Ok");
+            }
+            else
+            {
+                var response = await m_TourService.DeleteParticipant(TourId, participant.UserId);
+                if (response.Success)
+                {
+                    LoadData();
+                    string name = participant.FullName;
+                    var confirmCopyToast = Toast.Make($"Usunięto {name} z wyjazdu", ToastDuration.Long, 14);
+                    await confirmCopyToast.Show();
+                }
+                else
+                    await Shell.Current.CurrentPage.DisplayAlert("Błąd", response.Message, "Ok");
+            }
+        }
 
         [RelayCommand]
         public async Task ParticipantSearching(string query)

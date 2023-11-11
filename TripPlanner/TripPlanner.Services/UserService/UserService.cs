@@ -1,25 +1,12 @@
 ﻿using System.Linq.Expressions;
-using TripPlanner.DataAccess.IRepository;
-using TripPlanner.Models;
-using TripPlanner.Services.CheckListService;
-using TripPlanner.Services.QuestionnaireService;
-using TripPlanner.Services.RouteService;
-using TripPlanner.Services.ParticipantTourService;
 using TripPlanner.Services.TourService;
-using TripPlanner.Services.CultureAssistanceService;
 using TripPlanner.Services.QuestionnaireVoteService;
 using TripPlanner.Models.Models;
 using TripPlanner.Models.Models.UserModels;
-using TripPlanner.Models.Models.BillModels;
 using TripPlanner.Services.BillService;
-using TripPlanner.Services.FriendService;
-using TripPlanner.Services.ChatService;
-using TripPlanner.Models.Models.MessageModels;
-using TripPlanner.Models.Models.MessageModels.QuestionnaireModels;
-using TripPlanner.Models.DTO.TourDTOs;
-using TripPlanner.DataAccess.Repository;
 using TripPlanner.Models.Models.TourModels;
 using TripPlanner.Models.DTO.UserDTOs;
+using TripPlanner.DataAccess.IRepository;
 
 namespace TripPlanner.Services.UserService
 {
@@ -28,31 +15,15 @@ namespace TripPlanner.Services.UserService
         private readonly IUserRepository _UserRepository;
         private readonly IFriendRepository _FriendRepository;
         private readonly ITourService _TourService;
-        private readonly IParticipantTourService _ParticipantTourService;
-        private readonly ICultureAssistanceService _CultureAssistanceService;
-        private readonly IRouteService _RouteService;
-        private readonly IQuestionnaireService _QuestionnaireService;
+        //private readonly IBillService _IBillService;
         private readonly IQuestionnaireVoteService _QuestionnaireVoteService;
-        private readonly ICheckListService _CheckListService;
-        private readonly IBillService _IBillService;
-        private readonly IFriendService _FriendService;
-        private readonly IChatService _ChatService;
-        public UserService(IBillService __IBillService, IFriendService __FriendService, IUserRepository userRepository, ITourService __TourService, IParticipantTourService __ParticipantTourService,
-            ICultureAssistanceService __CultureAssistanceService,
-            IRouteService __RouteService, IChatService chatService,
-            IQuestionnaireService __QuestionnaireService, ICheckListService __CheckListService, IQuestionnaireVoteService __QuestionnaireVoteService, IFriendRepository friendRepository)
+        public UserService(IUserRepository userRepository, ITourService __TourService, /*IBillService __IBillService,*/
+            IQuestionnaireVoteService __QuestionnaireVoteService, IFriendRepository friendRepository)
         {
             _UserRepository = userRepository;
             _TourService = __TourService;
-            _ParticipantTourService = __ParticipantTourService;
-            _CultureAssistanceService = __CultureAssistanceService;
-            _RouteService = __RouteService;
-            _QuestionnaireService = __QuestionnaireService;
             _QuestionnaireVoteService = __QuestionnaireVoteService;
-            _CheckListService = __CheckListService;
-            _IBillService = __IBillService;
-            _FriendService = __FriendService;
-            _ChatService = chatService;
+            //_IBillService = __IBillService;
             _FriendRepository = friendRepository;
         }
 
@@ -65,50 +36,32 @@ namespace TripPlanner.Services.UserService
 
         public async Task<RepositoryResponse<bool>> DeleteUser(User user)
         {
-            var resp = await _UserRepository.GetFirstOrDefault(u => u.Id == user.Id, "Shares,BillContributors,CheckLists,ParticipantTours,Routes,QuestionnaireVotes,Messages");
+            var resp = await _UserRepository.GetFirstOrDefault(u => u.Id == user.Id, "BillContributors,QuestionnaireVotes");
+            var resp2 = await _FriendRepository.GetAll(u => u.Friend1Id == user.Id || u.Friend2Id == user.Id);
             if (resp.Data == null)
                 return new RepositoryResponse<bool> { Data = true, Message = "Uzytkownik zostal usuniety", Success = true };
 
+            List<Friend> friends = new List<Friend>();
+            if (resp2.Data != null)
+                friends = resp2.Data;
+
+            //removing Friends
+            foreach (var friend in friends)
+                _FriendRepository.Remove(friend);
+
             User UserDB = resp.Data;
-            //removing ParticipantTours
-            foreach (var Participants in UserDB.ParticipantTours)
-                await _ParticipantTourService.DeleteParticipantTour(Participants);
-
-            //removing Shares
-            foreach (var Shares in UserDB.Shares)
-            {
-                if(Shares is not null && Shares is Bill)
-                    await _IBillService.DeleteBill((Bill)Shares);
-                else if (Shares is not null && Shares is Transfer)
-                    await _IBillService.DeleteTransfer((Transfer)Shares);
-            }
-
-            //removing BillContributors
-            foreach (var BillContributors in UserDB.BillContributors)
-                await _IBillService.DeleteBillContributors(BillContributors);
-
-            //removing CheckLists
-            foreach (var CheckLists in UserDB.CheckLists)
-                await _CheckListService.DeleteCheckList(CheckLists);
 
             //removing QuestionnaireVotes
             foreach (var Questionnaires in UserDB.QuestionnaireVotes)
                 await _QuestionnaireVoteService.DeleteQuestionnaireVote(Questionnaires);
 
-            //removing Routes
-            foreach (var Routes in UserDB.Routes)
-                await _RouteService.DeleteRoute(Routes);
+            //problem z zapetlaniem sie serwisow
+            // UserService -> BillService -> UserService
+            //uzywam tych serwisow do usuwania oraz pobierania info o uzytkowniku
 
-            //removing Messages
-            foreach (var Messages in UserDB.Messages)
-            {
-                if(Messages is not null && Messages is TextMessage)
-                    await _ChatService.DeleteTextMessage((TextMessage)Messages);
-                else if (Messages is not null && Messages is NoticeMessage)
-                    await _ChatService.DeleteNoticeMessage((NoticeMessage)Messages);
-                else if (Messages is not null && Messages is Questionnaire)
-                    await _QuestionnaireService.DeleteQuestionnaire((Questionnaire)Messages);
-            }
+            ////removing BillContributors
+            //foreach (var BillContributors in UserDB.BillContributors)
+            //    await _IBillService.DeleteBillContributors(BillContributors);
 
             _UserRepository.Remove(UserDB);
             var response = await _UserRepository.SaveChangesAsync();

@@ -19,26 +19,6 @@ namespace TripPlanner.Models.Models.MessageModels
         public string Content { get; set; } = string.Empty;
         public DateTime Date { get; set; }
 
-
-        public static implicit operator MessageDTO(Message data)
-        {
-            if (data == null)
-                return null;
-
-            if (data is TextMessage)
-            {
-                return (TextMessageDTO)data;
-            }
-            else if (data is NoticeMessage)
-            {
-                return (NoticeMessageDTO)data;
-            }
-            else if (data is Questionnaire)
-            {
-                return (QuestionnaireDTO)data;
-            }
-            else
-                return null;
-        }
+        public abstract MessageDTO MapToDTO();
     }
 }

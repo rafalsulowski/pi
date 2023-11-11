@@ -117,10 +117,12 @@
 	  <None Remove="Resources\Images\organizer_dt.svg" />
 	  <None Remove="Resources\Images\organizer_gray.svg" />
 	  <None Remove="Resources\Images\organizer_sec.svg" />
+	  <None Remove="Resources\Images\pen_sec.svg" />
 	  <None Remove="Resources\Images\people_dt.svg" />
 	  <None Remove="Resources\Images\people_wt.svg" />
 	  <None Remove="Resources\Images\person_chat_dt.svg" />
 	  <None Remove="Resources\Images\person_chat_wt.svg" />
+	  <None Remove="Resources\Images\person_circle_sec.svg" />
 	  <None Remove="Resources\Images\person_wt.svg" />
 	  <None Remove="Resources\Images\plus_circle_pri.svg" />
 	  <None Remove="Resources\Images\plus_circle_sec.svg" />
@@ -137,6 +139,8 @@
 	  <None Remove="Resources\Images\tour_dt.svg" />
 	  <None Remove="Resources\Images\tour_wt.svg" />
 	  <None Remove="Resources\Images\trash_dt.svg" />
+	  <None Remove="Resources\Images\trash_pri.svg" />
+	  <None Remove="Resources\Images\trash_sec.svg" />
 	  <None Remove="Resources\Images\trash_wt.svg" />
 	  <None Remove="Resources\Images\x_dt.svg" />
 	  <None Remove="Resources\Images\x_sec.svg" />
@@ -162,7 +166,10 @@
 	  <MauiXaml Update="Controls\QuestionnaireControls\QuestionnaireControl.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Views\BudgetViews\BillPage.xaml">
+	  <MauiXaml Update="Views\ParticipantViews\UserDetailsPopups.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\ShareViews\SharesListPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\ChatViews\AddQuesionnaireAnswerPopups.xaml">
@@ -198,13 +205,13 @@
 	  <MauiXaml Update="Views\HomeViews\ProfilePage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Views\ParticipantsListViews\AddParticipantPage.xaml">
+	  <MauiXaml Update="Views\ParticipantViews\AddParticipantPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Views\ParticipantsListViews\AddParticipantPopup.xaml">
+	  <MauiXaml Update="Views\ParticipantViews\AddParticipantPopup.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Views\ParticipantsListViews\ParticipantsListPage.xaml">
+	  <MauiXaml Update="Views\ParticipantViews\ParticipantsListPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\StartViews\MainPage.xaml">
@@ -219,12 +226,22 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Folder Include="Views\CheckListViews\" />
+	  <Folder Include="Views\WeatherViews\" />
+	  <Folder Include="Views\RouteViews\" />
 	  <Folder Include="Views\HarmonogramViews\" />
+	  <Folder Include="Views\CultureViews\" />
 	</ItemGroup>
 
 	<ItemGroup>
 	  <Compile Update="Controls\QuestionnaireControls\QuestionnaireControl.xaml.cs">
 	    <DependentUpon>QuestionnaireControl.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Views\ParticipantViews\UserDetailsPopups.xaml.cs">
+	    <DependentUpon>UserDetailsPopups.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Views\ShareViews\SharesListPage.xaml.cs">
+	    <DependentUpon>SharesListPage.xaml</DependentUpon>
 	  </Compile>
 	  <Compile Update="Views\HomeViews\HomePage.xaml.cs">
 	    <DependentUpon>%(Filename)</DependentUpon>

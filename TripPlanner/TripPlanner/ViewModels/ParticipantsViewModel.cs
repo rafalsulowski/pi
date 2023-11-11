@@ -6,8 +6,9 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using System.Collections.ObjectModel;
 using TripPlanner.Models.DTO.TourDTOs;
+using TripPlanner.Models.DTO.UserDTOs;
 using TripPlanner.Services;
-using TripPlanner.Views.ParticipantsListViews;
+using TripPlanner.Views.ParticipantViews;
 
 namespace TripPlanner.ViewModels
 {
@@ -15,6 +16,7 @@ namespace TripPlanner.ViewModels
     {
         private readonly Configuration m_Configuration;
         private readonly TourService m_TourService;
+        private UserDetailsPopups m_DetailsPopups;
         private ObservableCollection<ExtendParticipantDTO> ParticipantsRef;        
         private int TourId;
         private string InviteLink;
@@ -26,12 +28,16 @@ namespace TripPlanner.ViewModels
         bool isOrganizer;
 
         [ObservableProperty]
+        ExtendParticipantDTO userDetailsParticipant;
+        
+        [ObservableProperty]
         ObservableCollection<ExtendParticipantDTO> participants;
 
         public ParticipantsViewModel(Configuration configuration, TourService tourService)
         {
             m_Configuration = configuration;
             m_TourService = tourService;
+            userDetailsParticipant = new ExtendParticipantDTO();
             Participants = new ObservableCollection<ExtendParticipantDTO>();
             ParticipantsRef = new ObservableCollection<ExtendParticipantDTO>();
             IsOrganizer = false;
@@ -90,12 +96,60 @@ namespace TripPlanner.ViewModels
             };
             await Shell.Current.GoToAsync($"AddParticipantFromFriends", navigationParameter);
         }
+        
+        [RelayCommand]
+        public async Task UserDetails(ExtendParticipantDTO extendParticipantDTO)
+        {
+            var res = await m_TourService.GetTourExtendParticipantById(TourId, extendParticipantDTO.UserId);
+            if(res == null)
+            {
+                await Shell.Current.CurrentPage.DisplayAlert("Błąd", "Nie udało się pobrać danych o użytkowniku, sprawdź swoje połączenie z internetem", "Ok");
+            }
+            else
+            {
+                UserDetailsParticipant = res;
+                m_DetailsPopups = new UserDetailsPopups(res, m_Configuration.User.Id, IsOrganizer);
+                await Shell.Current.CurrentPage.ShowPopupAsync(m_DetailsPopups);
+            }
+        }
+
+        [RelayCommand]
+        public async Task ChangeNickname()
+        {
+            string result = await Shell.Current.CurrentPage.DisplayPromptAsync("Wprowadź nową ksywkę", "", "Ok", "", UserDetailsParticipant.Nickname);
+
+            if(string.IsNullOrEmpty(result))
+            {
+                await Shell.Current.CurrentPage.DisplayAlert("Błąd","Wartość nie może być pusta", "Ok");
+            }
+            else
+            {
+                var res = await m_TourService.UpdateParticipantNickname(TourId, UserDetailsParticipant.UserId, result);
+                if (res.Success)
+                {
+                    await LoadData();
+                    var confirmCopyToast = Toast.Make("Zmieniono ksywkę", ToastDuration.Short, 14);
+                    await confirmCopyToast.Show();
+
+                    await m_DetailsPopups.CloseAsync();
+                    UserDetailsParticipant.Nickname = result;
+                }
+                else
+                {
+                    await Shell.Current.CurrentPage.DisplayAlert("Błąd", res.Message, "Ok");
+                }
+            }
+        }
 
         [RelayCommand]
         async Task LeftTour(ExtendParticipantDTO participant)
         {
-            int organizers = Participants.Select(u => u.IsOrganizer).Where(u => u == true).Count();
-            if (IsOrganizer && organizers <= 1)
+            int sum = 0;
+            foreach (var el in ParticipantsRef)
+                if (el.IsOrganizer)
+                    sum++;
+
+            if (IsOrganizer && sum <= 1)
             {
                 await Shell.Current.CurrentPage.DisplayAlert("Uwaga", "Jesteś jedynym organiazatorem wyjazdu, nie możesz wyjśc ponieważ wyjazd musi mieć minimalnie jednego organiazatora", "Ok");
             }
@@ -122,9 +176,20 @@ namespace TripPlanner.ViewModels
         }
 
         [RelayCommand]
+        async Task DeleteParticipantFromDetails()
+        {
+            await m_DetailsPopups.CloseAsync();
+            await DeleteParticipant(UserDetailsParticipant);
+        }
+
+        [RelayCommand]
         async Task DeleteParticipant(ExtendParticipantDTO participant)
         {
-            if (IsOrganizer)
+            if(UserDetailsParticipant.UserId == m_Configuration.User.Id)
+            {
+                await LeftTour(UserDetailsParticipant);
+            }
+            else if (IsOrganizer)
             {
                 ExtendParticipantDTO actualParticipant = m_TourService.GetTourExtendParticipantById(TourId, participant.UserId).Result;
                 if (actualParticipant == null)
@@ -220,7 +285,13 @@ namespace TripPlanner.ViewModels
                 }
                 else
                 {
-                    var res = await Shell.Current.CurrentPage.DisplayAlert("Uwaga", "Spowoduje to, że uczestnik nie będzie mieć dostępu do wszystkich czynności, takich jakie posiada organizator.", "Dalej", "Anuluj");
+                    string msg = "";
+                    if (participant.UserId == m_Configuration.User.Id)
+                        msg = "Spowoduje to, że utracisz możliwość wykonywania czynności organizatora";
+                    else
+                        msg = "Spowoduje to, że uczestnik utraci możliwość wykonywania czynności organizatora";
+
+                    var res = await Shell.Current.CurrentPage.DisplayAlert("Uwaga", msg, "Dalej", "Anuluj");
                     if (res)
                     {
                         Random rnd = new Random();
@@ -292,7 +363,7 @@ namespace TripPlanner.ViewModels
                 return;
             }
 
-            var val = res.Participants.First(u => u.UserId == m_Configuration.User.Id);
+            var val = res.Participants.FirstOrDefault(u => u.UserId == m_Configuration.User.Id);
             if (val is null)
             {
                 await Shell.Current.CurrentPage.DisplayAlert("Błąd", "Brak ciebie na liście uczestników wyjazdu", "Ok");

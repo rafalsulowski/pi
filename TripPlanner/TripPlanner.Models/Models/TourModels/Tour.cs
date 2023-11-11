@@ -20,7 +20,6 @@ namespace TripPlanner.Models.Models.TourModels
     {
         public int Id { get; set; }
 
-        public ICollection<Notification> Notifications { get; set; } = new List<Notification>();
         public ICollection<ParticipantTour> Participants { get; set; } = new List<ParticipantTour>();
         public ICollection<CheckList> CheckLists { get; set; } = new List<CheckList>();
         public ICollection<Message> Messages { get; set; } = new List<Message>();
@@ -50,10 +49,9 @@ namespace TripPlanner.Models.Models.TourModels
             return new TourDTO
             {
                 Id = data.Id,
-                Notifications = data.Notifications.Select(u => (NotificationDTO)u).ToList(),
                 Participants = data.Participants.Select(u => (ParticipantTourDTO)u).ToList(),
                 CheckLists = data.CheckLists.Select(u => (CheckListDTO)u).ToList(),
-                Messages = data.Messages.Select(u => (MessageDTO)u).ToList(),
+                Messages = data.Messages.Select(u => u.MapToDTO()).ToList(),
                 Routes = data.Routes.Select(u => (RouteDTO)u).ToList(),
                 Cultures = data.Cultures.Select(u => (CultureAssistanceDTO)u).ToList(),
                 Shares = data.Shares.Select(u => (ShareDTO)u).ToList(),

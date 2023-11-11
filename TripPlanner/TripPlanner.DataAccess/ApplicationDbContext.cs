@@ -51,14 +51,21 @@ namespace TripPlanner.DataAccess
             modelBuilder.Entity<User>()
                 .HasMany(sc => sc.ParticipantTours)
                 .WithOne(s => s.User)
-                .OnDelete(DeleteBehavior.NoAction)
+                .OnDelete(DeleteBehavior.Cascade)
                 .HasForeignKey(sc => sc.UserId)
+                .IsRequired();
+
+            modelBuilder.Entity<User>()
+                .HasMany(sc => sc.Notifications)
+                .WithOne(s => s.User)
+                .OnDelete(DeleteBehavior.Cascade)
+                .HasForeignKey(sc => sc.TourId)
                 .IsRequired();
 
             modelBuilder.Entity<User>()
                 .HasMany(sc => sc.Shares)
                 .WithOne(s => s.Creator)
-                .OnDelete(DeleteBehavior.NoAction)
+                .OnDelete(DeleteBehavior.Cascade)
                 .HasForeignKey(sc => sc.CreatorId)
                 .IsRequired();
 
@@ -98,24 +105,10 @@ namespace TripPlanner.DataAccess
                 .IsRequired();
 
             modelBuilder.Entity<User>()
-                .HasMany(u => u.CheckLists)
-                .WithOne()
-                .HasForeignKey(u => u.UserId)
-                .OnDelete(DeleteBehavior.NoAction)
-                .IsRequired();
-
-            modelBuilder.Entity<User>()
-                .HasMany(u => u.Routes)
-                .WithOne()
-                .HasForeignKey(u => u.UserId)
-                .OnDelete(DeleteBehavior.NoAction)
-                .IsRequired();
-
-            modelBuilder.Entity<User>()
                 .HasMany(u => u.Messages)
                 .WithOne( u => u.User)
                 .HasForeignKey(u => u.UserId)
-                .OnDelete(DeleteBehavior.NoAction)
+                .OnDelete(DeleteBehavior.Cascade)
                 .IsRequired();
             // koniec realcji
 
@@ -172,35 +165,28 @@ namespace TripPlanner.DataAccess
             modelBuilder.Entity<Tour>()
                 .HasMany(sc => sc.Messages)
                 .WithOne(s => s.Tour)
-                .OnDelete(DeleteBehavior.NoAction)
+                .OnDelete(DeleteBehavior.Cascade)
                 .HasForeignKey(sc => sc.TourId)
                 .IsRequired();
 
             modelBuilder.Entity<Tour>()
                 .HasMany(sc => sc.Schedule)
                 .WithOne(s => s.Tour)
-                .OnDelete(DeleteBehavior.NoAction)
-                .HasForeignKey(sc => sc.TourId)
-                .IsRequired();
-
-            modelBuilder.Entity<Tour>()
-                .HasMany(sc => sc.Notifications)
-                .WithOne(s => s.Tour)
-                .OnDelete(DeleteBehavior.NoAction)
+                .OnDelete(DeleteBehavior.Cascade)
                 .HasForeignKey(sc => sc.TourId)
                 .IsRequired();
 
             modelBuilder.Entity<Tour>()
                 .HasMany(sc => sc.Cultures)
                 .WithOne(s => s.Tour)
-                .OnDelete(DeleteBehavior.NoAction)
+                .OnDelete(DeleteBehavior.Cascade)
                 .HasForeignKey(sc => sc.TourId)
                 .IsRequired();
 
             modelBuilder.Entity<Tour>()
                 .HasMany(sc => sc.Shares)
                 .WithOne(s => s.Tour)
-                .OnDelete(DeleteBehavior.NoAction)
+                .OnDelete(DeleteBehavior.Cascade)
                 .HasForeignKey(sc => sc.TourId)
                 .IsRequired();
 
@@ -208,21 +194,7 @@ namespace TripPlanner.DataAccess
                 .HasMany(sc => sc.Participants)
                 .WithOne(s => s.Tour)
                 .HasForeignKey(sc => sc.TourId)
-                .OnDelete(DeleteBehavior.NoAction)
-                .IsRequired();
-
-            modelBuilder.Entity<Tour>()
-                .HasMany(u => u.CheckLists)
-                .WithOne()
-                .HasForeignKey(u => u.TourId)
-                .OnDelete(DeleteBehavior.NoAction)
-                .IsRequired();
-
-            modelBuilder.Entity<Tour>()
-                .HasMany(u => u.Routes)
-                .WithOne()
-                .HasForeignKey(u => u.TourId)
-                .OnDelete(DeleteBehavior.NoAction)
+                .OnDelete(DeleteBehavior.Cascade)
                 .IsRequired();
             // koniec realcji
 
@@ -282,7 +254,7 @@ namespace TripPlanner.DataAccess
             modelBuilder.Entity<Bill>()
                 .HasMany(sc => sc.Contributors)
                 .WithOne(s => s.Bill)
-                .OnDelete(DeleteBehavior.NoAction)
+                .OnDelete(DeleteBehavior.Cascade)
                 .HasForeignKey(sc => sc.BillId)
                 .IsRequired();
             // koniec realcji
@@ -334,6 +306,9 @@ namespace TripPlanner.DataAccess
             modelBuilder.Entity<Notification>()
                 .Property(s => s.Type)
                 .IsRequired();
+            modelBuilder.Entity<Notification>()
+                .Property(s => s.TourId)
+                .IsRequired();
             #endregion
 
             #region ScheduleDay
@@ -345,7 +320,7 @@ namespace TripPlanner.DataAccess
                 .HasMany(sc => sc.Events)
                 .WithOne(s => s.ScheduleDay)
                 .HasForeignKey(sc => sc.ScheduleDayId)
-                .OnDelete(DeleteBehavior.NoAction)
+                .OnDelete(DeleteBehavior.Cascade)
                 .IsRequired();
             // koniec realcji
 
@@ -386,7 +361,7 @@ namespace TripPlanner.DataAccess
             modelBuilder.Entity<CheckList>()
                 .HasMany(sc => sc.Fields)
                 .WithOne(s => s.CheckList)
-                .OnDelete(DeleteBehavior.NoAction)
+                .OnDelete(DeleteBehavior.Cascade)
                 .HasForeignKey(sc => sc.CheckListId)
                 .IsRequired();
 
@@ -395,7 +370,7 @@ namespace TripPlanner.DataAccess
                 .WithMany(u => u.CheckLists)
                 .HasForeignKey(u => u.UserId)
                 .OnDelete(DeleteBehavior.NoAction)
-                .IsRequired();
+                .IsRequired(false);
 
             modelBuilder.Entity<CheckList>()
                 .HasOne(u => u.Tour)
@@ -439,7 +414,7 @@ namespace TripPlanner.DataAccess
             modelBuilder.Entity<Culture>()
                 .HasMany(sc => sc.CultureAssistances)
                 .WithOne(s => s.Culture)
-                .OnDelete(DeleteBehavior.NoAction)
+                .OnDelete(DeleteBehavior.Cascade)
                 .HasForeignKey(sc => sc.CultureId)
                 .IsRequired();
             // koniec realcji
@@ -525,7 +500,7 @@ namespace TripPlanner.DataAccess
             modelBuilder.Entity<Questionnaire>()
                 .HasMany(sc => sc.Answers)
                 .WithOne(s => s.Questionnaire)
-                .OnDelete(DeleteBehavior.NoAction)
+                .OnDelete(DeleteBehavior.Cascade)
                 .HasForeignKey(sc => sc.QuestionnaireId)
                 .IsRequired();
             // koniec realcji
@@ -543,7 +518,7 @@ namespace TripPlanner.DataAccess
             modelBuilder.Entity<QuestionnaireAnswer>()
                 .HasMany(sc => sc.Votes)
                 .WithOne(s => s.QuestionnaireAnswer)
-                .OnDelete(DeleteBehavior.NoAction)
+                .OnDelete(DeleteBehavior.Cascade)
                 .HasForeignKey(sc => sc.QuestionnaireAnswerId)
                 .IsRequired();
             // koniec realcji
@@ -557,12 +532,6 @@ namespace TripPlanner.DataAccess
             modelBuilder.Entity<QuestionnaireVote>().HasKey(sc => new { sc.UserId, sc.QuestionnaireAnswerId });
 
             //relacje
-            //modelBuilder.Entity<QuestionnaireVote>()
-            //   .HasOne(u => u.User)
-            //   .WithMany(u => u.QuestionnaireVotes)
-            //   .HasForeignKey(u => u.UserId)
-            //   .OnDelete(DeleteBehavior.NoAction)
-            //   .IsRequired();
             //koniec relacji
             #endregion
 
@@ -574,7 +543,7 @@ namespace TripPlanner.DataAccess
             modelBuilder.Entity<Route>()
                 .HasMany(sc => sc.Stopovers)
                 .WithOne(s => s.Route)
-                .OnDelete(DeleteBehavior.NoAction)
+                .OnDelete(DeleteBehavior.Cascade)
                 .HasForeignKey(sc => sc.RouteId)
                 .IsRequired();
 
@@ -583,7 +552,7 @@ namespace TripPlanner.DataAccess
                .WithMany(u => u.Routes)
                .HasForeignKey(u => u.UserId)
                .OnDelete(DeleteBehavior.NoAction)
-               .IsRequired();
+               .IsRequired(false);
 
             modelBuilder.Entity<Route>()
                .HasOne(u => u.Tour)

@@ -518,3 +518,15 @@ C:\Users\01159502\Desktop\TripPlanner\TripPlanner\TripPlanner\obj\Debug\net7.0-m
 C:\Users\01159502\Desktop\TripPlanner\TripPlanner\TripPlanner\obj\Debug\net7.0-maccatalyst\maccatalyst-x64\TripPlanner.App.pdb
 C:\Users\01159502\Desktop\TripPlanner\TripPlanner\TripPlanner\obj\Debug\net7.0-maccatalyst\maccatalyst-x64\TripPlanner.App.genruntimeconfig.cache
 C:\Users\01159502\Desktop\TripPlanner\TripPlanner\TripPlanner\obj\Debug\net7.0-maccatalyst\maccatalyst-x64\ref\TripPlanner.App.dll
+C:\Users\01159502\Desktop\TripPlanner\TripPlanner\TripPlanner\obj\Debug\net7.0-maccatalyst\maccatalyst-x64\resizetizer\r\pen_sec.png
+C:\Users\01159502\Desktop\TripPlanner\TripPlanner\TripPlanner\obj\Debug\net7.0-maccatalyst\maccatalyst-x64\resizetizer\r\pen_sec@2x.png
+C:\Users\01159502\Desktop\TripPlanner\TripPlanner\TripPlanner\obj\Debug\net7.0-maccatalyst\maccatalyst-x64\resizetizer\r\pen_sec@3x.png
+C:\Users\01159502\Desktop\TripPlanner\TripPlanner\TripPlanner\obj\Debug\net7.0-maccatalyst\maccatalyst-x64\resizetizer\r\person_circle_sec.png
+C:\Users\01159502\Desktop\TripPlanner\TripPlanner\TripPlanner\obj\Debug\net7.0-maccatalyst\maccatalyst-x64\resizetizer\r\person_circle_sec@2x.png
+C:\Users\01159502\Desktop\TripPlanner\TripPlanner\TripPlanner\obj\Debug\net7.0-maccatalyst\maccatalyst-x64\resizetizer\r\person_circle_sec@3x.png
+C:\Users\01159502\Desktop\TripPlanner\TripPlanner\TripPlanner\obj\Debug\net7.0-maccatalyst\maccatalyst-x64\resizetizer\r\trash_pri.png
+C:\Users\01159502\Desktop\TripPlanner\TripPlanner\TripPlanner\obj\Debug\net7.0-maccatalyst\maccatalyst-x64\resizetizer\r\trash_pri@2x.png
+C:\Users\01159502\Desktop\TripPlanner\TripPlanner\TripPlanner\obj\Debug\net7.0-maccatalyst\maccatalyst-x64\resizetizer\r\trash_pri@3x.png
+C:\Users\01159502\Desktop\TripPlanner\TripPlanner\TripPlanner\obj\Debug\net7.0-maccatalyst\maccatalyst-x64\resizetizer\r\trash_sec.png
+C:\Users\01159502\Desktop\TripPlanner\TripPlanner\TripPlanner\obj\Debug\net7.0-maccatalyst\maccatalyst-x64\resizetizer\r\trash_sec@2x.png
+C:\Users\01159502\Desktop\TripPlanner\TripPlanner\TripPlanner\obj\Debug\net7.0-maccatalyst\maccatalyst-x64\resizetizer\r\trash_sec@3x.png

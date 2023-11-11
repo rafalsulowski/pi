@@ -44,12 +44,6 @@ build_metadata.AdditionalFiles.ManifestResourceName = TripPlanner.Resources.Styl
 build_metadata.AdditionalFiles.TargetPath = Resources\Styles\Styles.xaml
 build_metadata.AdditionalFiles.RelativePath = Resources\Styles\Styles.xaml
 
-[C:/Users/01159502/Desktop/TripPlanner/TripPlanner/TripPlanner/Views/BudgetViews/BillPage.xaml]
-build_metadata.AdditionalFiles.GenKind = Xaml
-build_metadata.AdditionalFiles.ManifestResourceName = TripPlanner.Views.BudgetViews.BillPage.xaml
-build_metadata.AdditionalFiles.TargetPath = Views\BudgetViews\BillPage.xaml
-build_metadata.AdditionalFiles.RelativePath = Views\BudgetViews\BillPage.xaml
-
 [C:/Users/01159502/Desktop/TripPlanner/TripPlanner/TripPlanner/Views/ChatViews/AddQuesionnaireAnswerPopups.xaml]
 build_metadata.AdditionalFiles.GenKind = Xaml
 build_metadata.AdditionalFiles.ManifestResourceName = TripPlanner.Views.ChatViews.AddQuesionnaireAnswerPopups.xaml
@@ -116,23 +110,35 @@ build_metadata.AdditionalFiles.ManifestResourceName = TripPlanner.Views.HomeView
 build_metadata.AdditionalFiles.TargetPath = Views\HomeViews\ProfilePage.xaml
 build_metadata.AdditionalFiles.RelativePath = Views\HomeViews\ProfilePage.xaml
 
-[C:/Users/01159502/Desktop/TripPlanner/TripPlanner/TripPlanner/Views/ParticipantsListViews/AddParticipantPage.xaml]
+[C:/Users/01159502/Desktop/TripPlanner/TripPlanner/TripPlanner/Views/ParticipantViews/AddParticipantPage.xaml]
 build_metadata.AdditionalFiles.GenKind = Xaml
-build_metadata.AdditionalFiles.ManifestResourceName = TripPlanner.Views.ParticipantsListViews.AddParticipantPage.xaml
-build_metadata.AdditionalFiles.TargetPath = Views\ParticipantsListViews\AddParticipantPage.xaml
-build_metadata.AdditionalFiles.RelativePath = Views\ParticipantsListViews\AddParticipantPage.xaml
+build_metadata.AdditionalFiles.ManifestResourceName = TripPlanner.Views.ParticipantViews.AddParticipantPage.xaml
+build_metadata.AdditionalFiles.TargetPath = Views\ParticipantViews\AddParticipantPage.xaml
+build_metadata.AdditionalFiles.RelativePath = Views\ParticipantViews\AddParticipantPage.xaml
 
-[C:/Users/01159502/Desktop/TripPlanner/TripPlanner/TripPlanner/Views/ParticipantsListViews/AddParticipantPopup.xaml]
+[C:/Users/01159502/Desktop/TripPlanner/TripPlanner/TripPlanner/Views/ParticipantViews/AddParticipantPopup.xaml]
 build_metadata.AdditionalFiles.GenKind = Xaml
-build_metadata.AdditionalFiles.ManifestResourceName = TripPlanner.Views.ParticipantsListViews.AddParticipantPopup.xaml
-build_metadata.AdditionalFiles.TargetPath = Views\ParticipantsListViews\AddParticipantPopup.xaml
-build_metadata.AdditionalFiles.RelativePath = Views\ParticipantsListViews\AddParticipantPopup.xaml
+build_metadata.AdditionalFiles.ManifestResourceName = TripPlanner.Views.ParticipantViews.AddParticipantPopup.xaml
+build_metadata.AdditionalFiles.TargetPath = Views\ParticipantViews\AddParticipantPopup.xaml
+build_metadata.AdditionalFiles.RelativePath = Views\ParticipantViews\AddParticipantPopup.xaml
 
-[C:/Users/01159502/Desktop/TripPlanner/TripPlanner/TripPlanner/Views/ParticipantsListViews/ParticipantsListPage.xaml]
+[C:/Users/01159502/Desktop/TripPlanner/TripPlanner/TripPlanner/Views/ParticipantViews/ParticipantsListPage.xaml]
 build_metadata.AdditionalFiles.GenKind = Xaml
-build_metadata.AdditionalFiles.ManifestResourceName = TripPlanner.Views.ParticipantsListViews.ParticipantsListPage.xaml
-build_metadata.AdditionalFiles.TargetPath = Views\ParticipantsListViews\ParticipantsListPage.xaml
-build_metadata.AdditionalFiles.RelativePath = Views\ParticipantsListViews\ParticipantsListPage.xaml
+build_metadata.AdditionalFiles.ManifestResourceName = TripPlanner.Views.ParticipantViews.ParticipantsListPage.xaml
+build_metadata.AdditionalFiles.TargetPath = Views\ParticipantViews\ParticipantsListPage.xaml
+build_metadata.AdditionalFiles.RelativePath = Views\ParticipantViews\ParticipantsListPage.xaml
+
+[C:/Users/01159502/Desktop/TripPlanner/TripPlanner/TripPlanner/Views/ParticipantViews/UserDetailsPopups.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = TripPlanner.Views.ParticipantViews.UserDetailsPopups.xaml
+build_metadata.AdditionalFiles.TargetPath = Views\ParticipantViews\UserDetailsPopups.xaml
+build_metadata.AdditionalFiles.RelativePath = Views\ParticipantViews\UserDetailsPopups.xaml
+
+[C:/Users/01159502/Desktop/TripPlanner/TripPlanner/TripPlanner/Views/ShareViews/SharesListPage.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = TripPlanner.Views.ShareViews.SharesListPage.xaml
+build_metadata.AdditionalFiles.TargetPath = Views\ShareViews\SharesListPage.xaml
+build_metadata.AdditionalFiles.RelativePath = Views\ShareViews\SharesListPage.xaml
 
 [C:/Users/01159502/Desktop/TripPlanner/TripPlanner/TripPlanner/Views/StartViews/MainPage.xaml]
 build_metadata.AdditionalFiles.GenKind = Xaml

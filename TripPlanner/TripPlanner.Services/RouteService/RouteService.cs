@@ -1,7 +1,5 @@
 ﻿using System.Linq.Expressions;
 using TripPlanner.DataAccess.IRepository;
-using TripPlanner.DataAccess.Repository;
-using TripPlanner.Models;
 using TripPlanner.Models.Models;
 using TripPlanner.Models.Models.RouteModels;
 
@@ -26,15 +24,6 @@ namespace TripPlanner.Services.RouteService
 
         public async Task<RepositoryResponse<bool>> DeleteRoute(Route Route)
         {
-            var resp = await GetStopoversAsync(u => u.RouteId == Route.Id);
-            if (resp.Data != null)
-            {
-                //removing Stopovers
-                List<Stopover> Stopovers = resp.Data;
-                foreach (var stopover in Stopovers)
-                    _StopoverRepository.Remove(stopover);
-            }
-
             _RouteRepository.Remove(Route);
             var response = await _RouteRepository.SaveChangesAsync();
             return response;

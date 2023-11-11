@@ -7,18 +7,15 @@ namespace TripPlanner.Models.Models.MessageModels
     /// </summary>
     public class NoticeMessage : Message
     {
-        public static implicit operator NoticeMessageDTO(NoticeMessage data)
+        public override NoticeMessageDTO MapToDTO()
         {
-            if (data == null)
-                return null;
-
             return new NoticeMessageDTO
             {
-                Id = data.Id,
-                UserId = data.UserId,
-                TourId = data.TourId,
-                Content = data.Content,
-                Date = data.Date,
+                Id = Id,
+                UserId = UserId,
+                TourId = TourId,
+                Content = Content,
+                Date = Date,
             };
         }
     }

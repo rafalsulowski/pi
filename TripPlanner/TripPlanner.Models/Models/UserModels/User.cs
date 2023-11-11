@@ -11,13 +11,15 @@ using TripPlanner.Models.Models.MessageModels;
 using TripPlanner.Models.Models.MessageModels.QuestionnaireModels;
 using TripPlanner.Models.Models.RouteModels;
 using TripPlanner.Models.Models.TourModels;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace TripPlanner.Models.Models.UserModels
 {
     public class User
     {
         public int Id { get; set; }
-        
+
+        public ICollection<Notification> Notifications { get; set; } = new List<Notification>();
         public ICollection<CheckList> CheckLists { get; set; } = new List<CheckList>();
         public ICollection<ParticipantTour> ParticipantTours { get; set; } = new List<ParticipantTour>();
         public ICollection<QuestionnaireVote> QuestionnaireVotes { get; set; } = new List<QuestionnaireVote>();
@@ -48,13 +50,13 @@ namespace TripPlanner.Models.Models.UserModels
             if (User == null)
                 return null;
 
-            return new UserDTO
+            UserDTO newUser = new UserDTO
             {
                 Id = User.Id,
+                Notifications = User.Notifications.Select(u => (NotificationDTO)u).ToList(),
                 CheckLists = User.CheckLists.Select(u => (CheckListDTO)u).ToList(),
                 ParticipantTours = User.ParticipantTours.Select(u => (ParticipantTourDTO)u).ToList(),
                 QuestionnaireVotes = User.QuestionnaireVotes.Select(u => (QuestionnaireVoteDTO)u).ToList(),
-                Messages = User.Messages.Select(u => (MessageDTO)u).ToList(),
                 Routes = User.Routes.Select(u => (RouteDTO)u).ToList(),
                 BillContributors = User.BillContributors.Select(u => (BillContributorDTO)u).ToList(),
                 BillsPayed = User.BillsPayed.Select(u => (BillDTO)u).ToList(),
@@ -67,6 +69,18 @@ namespace TripPlanner.Models.Models.UserModels
                 City = User.City,
                 DateOfBirth = User.DateOfBirth
             };
+
+            foreach(var message in User.Messages)
+            {
+                if(message is TextMessage)
+                    newUser.Messages.Add(((TextMessage)message).MapToDTO());
+                else if (message is NoticeMessage)
+                    newUser.Messages.Add(((NoticeMessage)message).MapToDTO());
+                else if (message is Questionnaire)
+                    newUser.Messages.Add(((Questionnaire)message).MapToDTO());
+            }
+
+            return newUser;
         }
     }
 }

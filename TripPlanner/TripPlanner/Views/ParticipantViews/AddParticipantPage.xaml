@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+            xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+            xmlns:localTemplates="clr-namespace:TripPlanner.DataTemplates"
+            x:Class="TripPlanner.Views.ParticipantViews.AddParticipantPage"
+            xmlns:model="clr-namespace:TripPlanner.Models.DTO.TourDTOs;assembly=TripPlanner.Models"
+            xmlns:viewmodel="clr-namespace:TripPlanner.ViewModels"
+            x:DataType="viewmodel:AddParticipantsViewModel"
+            Shell.NavBarIsVisible="False"
+            Shell.TabBarIsVisible="False">
+
+
+    <ContentPage.Resources>
+        <DataTemplate
+            x:Key="IsNotParticipant">
+            <VerticalStackLayout
+                HorizontalOptions="Center">
+                <HorizontalStackLayout
+                    Spacing="5">
+                    <Label
+                        FontAttributes="Bold"
+                        WidthRequest="230"
+                        FontSize="18"
+                        TextColor="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource Secondary}}">
+                        <Label.Text>
+                            <MultiBinding
+                                StringFormat="{}{0}. {1}">
+                                <Binding
+                                    Path="Order" />
+                                <Binding
+                                    Path="FullName" />
+                            </MultiBinding>
+                        </Label.Text>
+                    </Label>
+                    <Image
+                        HeightRequest="25"
+                        Source="{AppThemeBinding Light=plus_pri.png, Dark=plus_sec.png}">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer
+                                Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:AddParticipantsViewModel}}, Path=AddCommand}"
+                                CommandParameter="{Binding .}">
+                            </TapGestureRecognizer>
+                        </Image.GestureRecognizers>
+                    </Image>
+                </HorizontalStackLayout>
+                <Label
+                    FontSize="18"
+                    WidthRequest="260"
+                    TextColor="{AppThemeBinding Light=#939393, Dark=white}">
+                    <Label.Text>
+                        <MultiBinding
+                            StringFormat="{}{0}, wiek {1}, {2}">
+                            <Binding
+                                Path="Email" />
+                            <Binding
+                                Path="Age" />
+                            <Binding
+                                Path="City" />
+                        </MultiBinding>
+                    </Label.Text>
+                </Label>
+            </VerticalStackLayout>
+        </DataTemplate>
+
+        <DataTemplate
+            x:Key="IsParticipant">
+            <VerticalStackLayout
+                HorizontalOptions="Center">
+                <HorizontalStackLayout
+                    Spacing="5">
+                    <Label
+                        FontAttributes="Bold"
+                        WidthRequest="230"
+                        FontSize="18"
+                        TextColor="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource Secondary}}">
+                        <Label.Text>
+                            <MultiBinding
+                                StringFormat="{}{0}. {1}">
+                                <Binding
+                                    Path="Order" />
+                                <Binding
+                                    Path="FullName" />
+                            </MultiBinding>
+                        </Label.Text>
+                    </Label>
+                    <Image
+                        HeightRequest="25"
+                        Source="{AppThemeBinding Light=trash_pri.png, Dark=trash_sec.png}">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer
+                                Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:AddParticipantsViewModel}}, Path=DeleteParticipantFromFriendListCommand}"
+                                CommandParameter="{Binding .}">
+                            </TapGestureRecognizer>
+                        </Image.GestureRecognizers>
+                    </Image>
+                </HorizontalStackLayout>
+                <Label
+                    FontSize="16"
+                    WidthRequest="260"
+                    TextColor="{AppThemeBinding Light=#939393, Dark=white}">
+                    <Label.Text>
+                        <MultiBinding
+                            StringFormat="{}{0}, wiek {1}, {2}">
+                            <Binding
+                                Path="Email" />
+                            <Binding
+                                Path="Age" />
+                            <Binding
+                                Path="City" />
+                        </MultiBinding>
+                    </Label.Text>
+                </Label>
+            </VerticalStackLayout>
+        </DataTemplate>
+
+        <localTemplates:FriendDataTemplateSelector
+            x:Key="FriendSelector"
+            IsParticipant="{StaticResource IsParticipant}"
+            IsNotParticipant="{StaticResource IsNotParticipant}" />
+    </ContentPage.Resources>
+
+
+
+    <StackLayout
+        Orientation="Vertical"
+        Spacing="10">
+        <Grid
+            RowDefinitions="Auto"
+            ColumnDefinitions="30,*,30"
+            Margin="10,5,10,0">
+            <ImageButton
+                Grid.Column="0"
+                Source="{AppThemeBinding Light=arrow_back_wt.png, Dark=arrow_back_dt.png}"
+                Command="{Binding GoBackCommand}"
+                HeightRequest="30" />
+
+            <Label
+                Grid.Column="1"
+                HorizontalOptions="Center"
+                FontSize="18"
+                VerticalOptions="Center"
+                Text="Dodawanie uczestników">
+            </Label>
+        </Grid>
+
+        <Border
+            HorizontalOptions="Center"
+            Margin="10,0,10,0"
+            Stroke="{AppThemeBinding Light=#939393, Dark=transparent}"
+            BackgroundColor="{AppThemeBinding Light=white, Dark=#939393}"
+            StrokeShape="RoundRectangle 25,25,25,25">
+            <SearchBar
+                HorizontalOptions="Center"
+                FontSize="16"
+                x:Name="searchBar"
+                SearchCommand="{Binding ParticipantSearchingCommand}"
+                SearchCommandParameter="{Binding Text, Source={x:Reference searchBar}}"
+                CancelButtonColor="#939393"
+                Placeholder="Wyszukaj znajomego">
+            </SearchBar>
+        </Border>
+
+        <RefreshView
+            IsRefreshing="{Binding Refresh}"
+            Command="{Binding RefreshViewCommand}"
+            Margin="10,10,10,0">
+            <CollectionView
+                EmptyView="Brak znajomych do wyświetlenia"
+                ItemsSource="{Binding Friends}"
+                ItemTemplate="{StaticResource FriendSelector}"
+                SelectionMode="None">
+                <CollectionView.ItemsLayout>
+                    <LinearItemsLayout
+                        Orientation="Vertical"
+                        ItemSpacing="20" />
+                </CollectionView.ItemsLayout>
+                <CollectionView.Header>
+                    <Label
+                        HorizontalOptions="Center"
+                        TextColor="#939393"
+                        FontSize="15"
+                        Text="Znajomi w tripPlanner" />
+                </CollectionView.Header>
+            </CollectionView>
+        </RefreshView>
+    </StackLayout>
+</ContentPage>

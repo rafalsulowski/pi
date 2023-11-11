@@ -76,7 +76,10 @@ namespace TripPlanner.ViewModels
 
         private void LoadData()
         {
-            Tours = m_UserService.GetToursOfUser(m_Configuration.User.Id).Result.ToObservableCollection();
+            var res = m_UserService.GetToursOfUser(m_Configuration.User.Id).Result;
+            if(res != null)
+                Tours = res.ToObservableCollection<TourDTO>();
+
         }
     }
 }

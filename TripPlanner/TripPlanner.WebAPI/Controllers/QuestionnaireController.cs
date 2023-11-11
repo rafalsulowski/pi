@@ -32,7 +32,7 @@ namespace TripPlanner.WebAPI.Controllers
         public async Task<ActionResult<RepositoryResponse<List<QuestionnaireDTO>>>> Get()
         {
             var response = await _QuestionnaireService.GetQuestionnairesAsync();
-            List<QuestionnaireDTO> res = response.Data.Select(u => (QuestionnaireDTO)u).ToList();
+            List<QuestionnaireDTO> res = response.Data.Select(u => u.MapToDTO()).ToList();
             return Ok(res);
         }
 
@@ -40,7 +40,7 @@ namespace TripPlanner.WebAPI.Controllers
         public async Task<ActionResult<RepositoryResponse<QuestionnaireDTO>>> GetWithAnswer(int id)
         {
             var response = await _QuestionnaireService.GetQuestionnaireAsync(u => u.Id == id, "Answers");
-            QuestionnaireDTO res = response.Data;
+            QuestionnaireDTO? res = response.Data != null ? response.Data.MapToDTO() : null;
             return Ok(res);
         }
 
@@ -48,7 +48,7 @@ namespace TripPlanner.WebAPI.Controllers
         public async Task<ActionResult<RepositoryResponse<QuestionnaireDTO>>> GetWithAnswerAndVote(int id)
         {
             var response = await _QuestionnaireService.GetQuestionnaireAsync(u => u.Id == id, "Answers.Votes");
-            QuestionnaireDTO res = response.Data;
+            QuestionnaireDTO? res = response.Data != null ? response.Data.MapToDTO() : null;
             return Ok(res);
         }
 
@@ -56,14 +56,14 @@ namespace TripPlanner.WebAPI.Controllers
         public async Task<ActionResult<RepositoryResponse<QuestionnaireDTO>>> GetById(int id)
         {
             var response = await _QuestionnaireService.GetQuestionnaireAsync(u => u.Id == id);
-            QuestionnaireDTO res = response.Data;
+            QuestionnaireDTO? res = response.Data != null ? response.Data.MapToDTO() : null;
             return Ok(res);
         }
 
         [HttpPost]
         public async Task<ActionResult<RepositoryResponse<QuestionnaireDTO>>> Create([FromBody] CreateQuestionnaireDTO Questionnaire)
         {
-            var resp = await _TourService.GetTourAsync(u => u.Id == Questionnaire.TourId, "Questionnaires");
+            var resp = await _TourService.GetTourAsync(u => u.Id == Questionnaire.TourId);
             if (resp.Data == null)
             {
                 return new RepositoryResponse<QuestionnaireDTO> { Data = null, Success = false, Message = $"Nie istnieje wycieczka o id = {Questionnaire.TourId}" };
@@ -73,7 +73,7 @@ namespace TripPlanner.WebAPI.Controllers
             {
                 return new RepositoryResponse<QuestionnaireDTO> { Data = null, Success = false, Message = $"Nie istnieje użytkownik o id = {Questionnaire.UserId}" };
             }
-            
+
             Questionnaire newQuestionnaire = Questionnaire;
             newQuestionnaire.Date = DateTime.Now;
 
@@ -84,18 +84,18 @@ namespace TripPlanner.WebAPI.Controllers
             }
 
             //add answers
-            foreach (var answer in Questionnaire.Answers)
-            {
-                answer.QuestionnaireId = newQuestionnaire.Id;
-                var res2 = await _QuestionnaireService.AddAnswerToQuestionnaire(answer);
+            //foreach (var answer in Questionnaire.Answers)
+            //{
+            //    answer.QuestionnaireId = newQuestionnaire.Id;
+            //    var res2 = await _QuestionnaireService.AddAnswerToQuestionnaire(answer);
 
-                if (res2.Success == false)
-                {
-                    return new RepositoryResponse<QuestionnaireDTO> { Data = null, Success = false, Message = $"Nie udało się dodać odpowiedzi {answer.Answer} do ankiety o id = {newQuestionnaire.Id}!" };
-                }
-            }
+            //    if (res2.Success == false)
+            //    {
+            //        return new RepositoryResponse<QuestionnaireDTO> { Data = null, Success = false, Message = $"Nie udało się dodać odpowiedzi {answer.Answer} do ankiety o id = {newQuestionnaire.Id}!" };
+            //    }
+            //}
 
-            return Ok(newQuestionnaire);
+            return Ok(response.Data);
         }
 
         [HttpGet("{QuestionnaireId}/Answers")]

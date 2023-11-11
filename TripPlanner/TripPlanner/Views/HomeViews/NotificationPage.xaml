@@ -3,32 +3,9 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="TripPlanner.Views.HomeViews.NotificationPage"
              xmlns:viewmodel="clr-namespace:TripPlanner.ViewModels"
-             x:DataType="viewmodel:NotificationViewModel">
+             x:DataType="viewmodel:NotificationViewModel"
+             Shell.NavBarIsVisible="False">
 
-    <Shell.TitleView>
-        <AbsoluteLayout>
-            <ImageButton
-                HorizontalOptions="Start"
-                AbsoluteLayout.LayoutFlags="WidthProportional"
-                AbsoluteLayout.LayoutBounds="5,10,1,30"
-                Source="calendar3.png"
-                Command="{Binding OpenCalendarCommand}"/>
-
-            <Label
-                HorizontalOptions="Center"
-                FontSize="20"
-                AbsoluteLayout.LayoutBounds="0,0,1,38"
-                AbsoluteLayout.LayoutFlags="WidthProportional"
-                VerticalOptions="End" Text="TripPlanner"/>
-
-            <ImageButton
-                HorizontalOptions="End"
-                AbsoluteLayout.LayoutBounds="0,10,.98,30"
-                AbsoluteLayout.LayoutFlags="WidthProportional"
-                Source="plus_circle.png"
-                Command="{Binding CreateTripCommand}"/>
-        </AbsoluteLayout>
-    </Shell.TitleView>
     
     <VerticalStackLayout>
         <Label 

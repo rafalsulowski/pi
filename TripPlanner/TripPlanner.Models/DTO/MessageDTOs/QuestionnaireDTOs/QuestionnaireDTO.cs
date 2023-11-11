@@ -1,4 +1,6 @@
-﻿using TripPlanner.Models.Models.MessageModels.QuestionnaireModels;
+﻿using TripPlanner.Models.Models.MessageModels;
+using TripPlanner.Models.Models.MessageModels.QuestionnaireModels;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace TripPlanner.Models.DTO.MessageDTOs.QuestionnaireDTOs
 {
@@ -6,20 +8,16 @@ namespace TripPlanner.Models.DTO.MessageDTOs.QuestionnaireDTOs
     {
         public ICollection<QuestionnaireAnswerDTO> Answers { get; set; } = new List<QuestionnaireAnswerDTO>();
 
-
-        public static implicit operator Questionnaire(QuestionnaireDTO data)
+        public override Questionnaire MapFromDTO()
         {
-            if (data == null)
-                return null;
-
             return new Questionnaire
             {
-                Id = data.Id,
-                UserId = data.UserId,
-                TourId = data.TourId,
-                Answers = data.Answers.Select(u => (QuestionnaireAnswer)u).ToList(),
-                Content = data.Content,
-                Date = data.Date
+                Id = Id,
+                UserId = UserId,
+                TourId = TourId,
+                Content = Content,
+                Answers = Answers.Select(u => (QuestionnaireAnswer)u).ToList(),
+                Date = Date,
             };
         }
     }

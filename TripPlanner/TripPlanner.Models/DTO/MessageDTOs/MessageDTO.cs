@@ -15,25 +15,6 @@ namespace TripPlanner.Models.DTO.MessageDTOs
         public DateTime Date { get; set; }
 
 
-        public static implicit operator Message(MessageDTO data)
-        {
-            if (data == null)
-                return null;
-
-            if (data is TextMessageDTO)
-            {
-                return (TextMessage)data;
-            }
-            else if (data is NoticeMessageDTO)
-            {
-                return (NoticeMessage)data;
-            }
-            else if (data is QuestionnaireDTO)
-            {
-                return (Questionnaire)data;
-            }
-            else
-                return null;
-        }
+        public abstract Message MapFromDTO();
     }
 }

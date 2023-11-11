@@ -1,6 +1,5 @@
 
 using Microsoft.EntityFrameworkCore;
-using TripPlanner.DataAccess.IRepository;
 using TripPlanner.DataAccess.Repository;
 using TripPlanner.DataAccess;
 using TripPlanner.Services.UserService;
@@ -28,6 +27,7 @@ using TripPlanner.Services.Notificationservice;
 using TripPlanner.Services.NotificationService;
 using TripPlanner.WebSocketServer;
 using Microsoft.AspNetCore.SignalR;
+using TripPlanner.DataAccess.IRepository;
 
 namespace TripPlanner.WebAPI
 {
@@ -65,15 +65,15 @@ namespace TripPlanner.WebAPI
             builder.Services.AddSignalR();
             builder.Services.AddSingleton<IUserIdProvider, NameUserIdProvider>();
 
-            if (System.Environment.MachineName == "RMSULOWSKR")
+            if (Environment.MachineName == "RMSULOWSKR")
             {
                 builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(
-                builder.Configuration.GetConnectionString("SqlConnectionString")));
+                builder.Configuration.GetConnectionString("SqlConnectionString")).EnableSensitiveDataLogging(), ServiceLifetime.Scoped); //TODO wy³aczyc dla publikacji
             }
             else
             {
                 builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(
-                builder.Configuration.GetConnectionString("SqlConnectionStringACERRS")));
+                builder.Configuration.GetConnectionString("SqlConnectionStringACERRS")).EnableSensitiveDataLogging(), ServiceLifetime.Scoped);
             }
 
 
@@ -100,7 +100,6 @@ namespace TripPlanner.WebAPI
             builder.Services.AddScoped<INotificationRepository, NotificationRepository>();
 
 
-            builder.Services.AddScoped<IUserService, UserService>();
             builder.Services.AddScoped<IChatService, ChatService>();
             builder.Services.AddScoped<ICheckListService, CheckListService>();
             builder.Services.AddScoped<ICheckListFieldService, CheckListFieldService>();
@@ -117,6 +116,7 @@ namespace TripPlanner.WebAPI
             builder.Services.AddScoped<IScheduleService, ScheduleService>();
             builder.Services.AddScoped<IFriendService, FriendService>();
             builder.Services.AddScoped<INotificationService, NotificationService>();
+            builder.Services.AddScoped<IUserService, UserService>();
 
             builder.Services.AddScoped<IPasswordHasher<User>, PasswordHasher<User>>();
             

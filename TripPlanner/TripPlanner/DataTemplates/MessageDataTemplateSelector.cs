@@ -16,8 +16,7 @@ namespace TripPlanner.DataTemplates
         {
             try
             {
-                Configuration configuration = new Configuration();
-                //Configuration configuration = ServicesHelper.Current.GetService<Configuration>();
+                Configuration configuration = ServicesHelper.Current.GetService<Configuration>();
                 if (item is TextMessageDTO)
                 {
                     if (configuration.User.Id == ((TextMessageDTO)item).UserId)

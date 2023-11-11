@@ -27,7 +27,7 @@ namespace TripPlanner.Services
             string errMsg = "";
             try
             {
-                HttpResponseMessage response = m_HttpClient.GetAsync($"{m_Configuration.WebApiUrl}/Bill/GetSharesPresentation/{m_Configuration.User.Id}/{tourId}").Result;
+                HttpResponseMessage response = m_HttpClient.GetAsync($"{m_Configuration.WebApiUrl}/Bill/getSharesPresentation/{m_Configuration.User.Id}/{tourId}").Result;
                 if (response.IsSuccessStatusCode)
                 {
                     RepositoryResponse<List<SharePresentationDTO>> resp = await response.Content.ReadFromJsonAsync<RepositoryResponse<List<SharePresentationDTO>>>();
@@ -52,7 +52,7 @@ namespace TripPlanner.Services
             string errMsg = "";
             try
             {
-                HttpResponseMessage response = m_HttpClient.GetAsync($"{m_Configuration.WebApiUrl}/Bill/GetBillPresentation/{m_Configuration.User.Id}/{billId}/{tourId}").Result;
+                HttpResponseMessage response = m_HttpClient.GetAsync($"{m_Configuration.WebApiUrl}/Bill/getBillPresentation/{m_Configuration.User.Id}/{billId}/{tourId}").Result;
                 if (response.IsSuccessStatusCode)
                 {
                     RepositoryResponse<BillPresentationDTO> resp = await response.Content.ReadFromJsonAsync<RepositoryResponse<BillPresentationDTO>>();
@@ -77,7 +77,7 @@ namespace TripPlanner.Services
             string errMsg = "";
             try
             {
-                HttpResponseMessage response = m_HttpClient.GetAsync($"{m_Configuration.WebApiUrl}/Bill/GetTransferPresentation/{m_Configuration.User.Id}/{transferId}/{tourId}").Result;
+                HttpResponseMessage response = m_HttpClient.GetAsync($"{m_Configuration.WebApiUrl}/Bill/getTransferPresentation/{m_Configuration.User.Id}/{transferId}/{tourId}").Result;
                 if (response.IsSuccessStatusCode)
                 {
                     RepositoryResponse<TransferPresentationDTO> resp = await response.Content.ReadFromJsonAsync<RepositoryResponse<TransferPresentationDTO>>();
@@ -102,7 +102,7 @@ namespace TripPlanner.Services
             string errMsg = "";
             try
             {
-                HttpResponseMessage response = m_HttpClient.GetAsync($"{m_Configuration.WebApiUrl}/Bill/GetBalance/{tourId}").Result;
+                HttpResponseMessage response = m_HttpClient.GetAsync($"{m_Configuration.WebApiUrl}/Bill/getBalance/{tourId}").Result;
                 if (response.IsSuccessStatusCode)
                 {
                     RepositoryResponse<Balance> resp = await response.Content.ReadFromJsonAsync<RepositoryResponse<Balance>>();
@@ -118,7 +118,7 @@ namespace TripPlanner.Services
             {
                 errMsg = $"Wyjątek: {e.Message}";
             }
-            return new RepositoryResponse<Balance> { Data = new Balance(new List<ParticipantTour>()), Message = errMsg, Success = false };
+            return new RepositoryResponse<Balance> { Data = new Balance(), Message = errMsg, Success = false };
         }
 
 
@@ -130,7 +130,7 @@ namespace TripPlanner.Services
             {
                 string json = JsonConvert.SerializeObject(bill);
                 StringContent httpContent = new StringContent(json, Encoding.UTF8, "application/json");
-                HttpResponseMessage response = m_HttpClient.PostAsync($"{m_Configuration.WebApiUrl}/Bill/CreateBill", httpContent).Result;
+                HttpResponseMessage response = m_HttpClient.PostAsync($"{m_Configuration.WebApiUrl}/Bill/createBill", httpContent).Result;
                 if (response.IsSuccessStatusCode)
                 {
                     RepositoryResponse<int> resp = await response.Content.ReadFromJsonAsync<RepositoryResponse<int>>();
@@ -157,7 +157,7 @@ namespace TripPlanner.Services
             {
                 string json = JsonConvert.SerializeObject(bill);
                 StringContent httpContent = new StringContent(json, Encoding.UTF8, "application/json");
-                HttpResponseMessage response = m_HttpClient.PostAsync($"{m_Configuration.WebApiUrl}/Bill/CreateTransfer", httpContent).Result;
+                HttpResponseMessage response = m_HttpClient.PostAsync($"{m_Configuration.WebApiUrl}/Bill/createTransfer", httpContent).Result;
                 if (response.IsSuccessStatusCode)
                 {
                     RepositoryResponse<int> resp = await response.Content.ReadFromJsonAsync<RepositoryResponse<int>>();
@@ -184,7 +184,7 @@ namespace TripPlanner.Services
             {
                 string json = JsonConvert.SerializeObject(bill);
                 StringContent httpContent = new StringContent(json, Encoding.UTF8, "application/json");
-                HttpResponseMessage response = m_HttpClient.PutAsync($"{m_Configuration.WebApiUrl}/Bill/UpdateBill/", httpContent).Result;
+                HttpResponseMessage response = m_HttpClient.PutAsync($"{m_Configuration.WebApiUrl}/Bill/updateBill/", httpContent).Result;
                 if (response.IsSuccessStatusCode)
                 {
                     var resp = await response.Content.ReadFromJsonAsync<RepositoryResponse<bool>>();
@@ -211,7 +211,7 @@ namespace TripPlanner.Services
             {
                 string json = JsonConvert.SerializeObject(transfer);
                 StringContent httpContent = new StringContent(json, Encoding.UTF8, "application/json");
-                HttpResponseMessage response = m_HttpClient.PutAsync($"{m_Configuration.WebApiUrl}/Bill/UpdateTransfer/", httpContent).Result;
+                HttpResponseMessage response = m_HttpClient.PutAsync($"{m_Configuration.WebApiUrl}/Bill/updateTransfer/", httpContent).Result;
                 if (response.IsSuccessStatusCode)
                 {
                     var resp = await response.Content.ReadFromJsonAsync<RepositoryResponse<bool>>();
@@ -236,7 +236,7 @@ namespace TripPlanner.Services
             string errMsg = "";
             try
             {
-                HttpResponseMessage response = m_HttpClient.DeleteAsync($"{m_Configuration.WebApiUrl}/Bill/DeleteBill/{billId}").Result;
+                HttpResponseMessage response = m_HttpClient.DeleteAsync($"{m_Configuration.WebApiUrl}/Bill/deleteBill/{billId}").Result;
                 if (response.IsSuccessStatusCode)
                 {
                     var resp = await response.Content.ReadFromJsonAsync<RepositoryResponse<bool>>();
@@ -261,7 +261,7 @@ namespace TripPlanner.Services
             string errMsg = "";
             try
             {
-                HttpResponseMessage response = m_HttpClient.DeleteAsync($"{m_Configuration.WebApiUrl}/Bill/DeleteTransfer/{billId}").Result;
+                HttpResponseMessage response = m_HttpClient.DeleteAsync($"{m_Configuration.WebApiUrl}/Bill/deleteTransfer/{billId}").Result;
                 if (response.IsSuccessStatusCode)
                 {
                     var resp = await response.Content.ReadFromJsonAsync<RepositoryResponse<bool>>();

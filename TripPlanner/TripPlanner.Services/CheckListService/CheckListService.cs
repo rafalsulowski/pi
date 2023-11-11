@@ -1,6 +1,5 @@
 ﻿using System.Linq.Expressions;
 using TripPlanner.DataAccess.IRepository;
-using TripPlanner.Models;
 using TripPlanner.Models.Models;
 using TripPlanner.Models.Models.CheckListModels;
 
@@ -25,16 +24,7 @@ namespace TripPlanner.Services.CheckListService
 
         public async Task<RepositoryResponse<bool>> DeleteCheckList(CheckList CheckList)
         {
-            var resp = await _CheckListRepository.GetFirstOrDefault(u => u.Id == CheckList.Id, "Fields");
-            if (resp.Data == null)
-                return new RepositoryResponse<bool> { Data = true, Message = "Budzet zostal usuniety", Success = true };
-
-            //removing Fields
-            CheckList CheckListDB = resp.Data;
-            foreach (var Field in CheckListDB.Fields)
-                _CheckListFieldRepository.Remove(Field);
-
-            _CheckListRepository.Remove(CheckListDB);
+            _CheckListRepository.Remove(CheckList);
             var response = await _CheckListRepository.SaveChangesAsync();
             return response;
         }

@@ -3,6 +3,7 @@ using System.Linq.Expressions;
 using TripPlanner.DataAccess.IRepository;
 using TripPlanner.Models;
 using TripPlanner.Models.Models;
+using TripPlanner.Models.Models.TourModels;
 
 namespace TripPlanner.DataAccess.Repository
 {
@@ -35,7 +36,7 @@ namespace TripPlanner.DataAccess.Repository
                     query = query.Include(property);
                 }
             }
-            var data = await query.ToListAsync();
+            var data = await query.AsNoTracking().ToListAsync();
             return new RepositoryResponse<List<T>> { Data = data };
         }
 
@@ -50,30 +51,28 @@ namespace TripPlanner.DataAccess.Repository
                     query = query.Include(property);
                 }
             }
-            var data = await query.ToListAsync();
-            return new RepositoryResponse<T> { Data = data.FirstOrDefault() };
+            var data = await query.AsNoTracking().SingleOrDefaultAsync();
+            return new RepositoryResponse<T> { Data = data };
         }
 
         public void Remove(T entity)
         {
-            if (_db.Entry(entity).State == EntityState.Detached)
+            if(entity != null)
             {
-                dbSet.Attach(entity);
+                dbSet.Remove(entity);
             }
-            dbSet.Remove(entity);
         }
 
         public void RemoveRange(IEnumerable<T> entities)
         {
-            foreach(T entity in entities)
+            if (entities != null)
             {
-                if (_db.Entry(entity).State == EntityState.Detached)
+                foreach (T entity in entities)
                 {
                     dbSet.Attach(entity);
                 }
+                dbSet.RemoveRange(entities);
             }
-            
-            dbSet.RemoveRange(entities);
         }
 
         public async Task<RepositoryResponse<bool>> SaveChangesAsync()

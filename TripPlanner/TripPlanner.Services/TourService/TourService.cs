@@ -1,22 +1,12 @@
 ﻿using System.Linq.Expressions;
-using TripPlanner.DataAccess.IRepository;
-using TripPlanner.Models;
-using TripPlanner.Services.RouteService;
-using TripPlanner.Services.QuestionnaireService;
-using TripPlanner.Services.CheckListService;
 using TripPlanner.Models.Models;
 using TripPlanner.Models.Models.TourModels;
 using TripPlanner.Models.Models.CultureModels;
 using TripPlanner.Services.ScheduleService;
-using TripPlanner.Services.ChatService;
-using TripPlanner.Services.BillService;
-using TripPlanner.Models.Models.BillModels;
 using TripPlanner.Models.DTO.TourDTOs;
 using TripPlanner.Models.Models.ScheduleModels;
-using TripPlanner.Services.Notificationservice;
-using TripPlanner.Models.Models.MessageModels.QuestionnaireModels;
-using TripPlanner.Models.Models.MessageModels;
 using TripPlanner.Models.Models.UserModels;
+using TripPlanner.DataAccess.IRepository;
 
 namespace TripPlanner.Services.TourService
 {
@@ -26,28 +16,16 @@ namespace TripPlanner.Services.TourService
         private readonly IUserRepository _UserRepository;
         private readonly IParticipantTourRepository _ParticipantTourRepository;
         private readonly ICultureAssistanceRepository _CultureAssistanceRepository;
-        private readonly IRouteService _RouteService;
-        private readonly IQuestionnaireService _QuestionnaireService;
-        private readonly ICheckListService _CheckListService;
         private readonly IScheduleService _ScheduleService;
-        private readonly IBillService _BillService;
-        private readonly IChatService _ChatService;
-        private readonly INotificationService _NotificationService;
 
-        public TourService(IUserRepository userRepository, INotificationService notificationService, IChatService __ChatService, IScheduleService __ScheduleService, IBillService __BillService, ITourRepository TourRepository, IParticipantTourRepository participantTourRepository,
-            ICultureAssistanceRepository __CultureAssistanceRepository, IRouteService __RouteService, IQuestionnaireService __QuestionnaireService, ICheckListService __CheckListService)
+        public TourService(IUserRepository userRepository, ITourRepository TourRepository, IScheduleService scheduleService,
+            IParticipantTourRepository participantTourRepository, ICultureAssistanceRepository __CultureAssistanceRepository)
         {
             _TourRepository = TourRepository;
             _UserRepository = userRepository;
             _ParticipantTourRepository = participantTourRepository;
             _CultureAssistanceRepository = __CultureAssistanceRepository;
-            _RouteService = __RouteService;
-            _QuestionnaireService = __QuestionnaireService;
-            _CheckListService = __CheckListService;
-            _ScheduleService = __ScheduleService;
-            _BillService = __BillService;
-            _ChatService = __ChatService;
-            _NotificationService = notificationService;
+            _ScheduleService = scheduleService;
         }
 
         public async Task<RepositoryResponse<bool>> CreateTour(Tour Tour, int userId)
@@ -92,57 +70,7 @@ namespace TripPlanner.Services.TourService
 
         public async Task<RepositoryResponse<bool>> DeleteTour(Tour Tour)
         {
-            var resp = await _TourRepository.GetFirstOrDefault(u => u.Id == Tour.Id, "Participants,Notifications,CheckLists,Messages,Routes,Cultures,Shares,Schedule");
-            if (resp.Data == null)
-                return new RepositoryResponse<bool> { Data = true, Message = "Wycieczka zostala usunieta", Success = true };
-
-            Tour TourDB = resp.Data;
-            //removing Participants
-            foreach (var Participants in TourDB.Participants.ToList())
-                _ParticipantTourRepository.Remove(Participants);
-
-            //removing Cultures
-            foreach (var CultureAssistances in TourDB.Cultures.ToList())
-                _CultureAssistanceRepository.Remove(CultureAssistances);
-
-            //removing CheckLists
-            foreach (var CheckLists in TourDB.CheckLists.ToList())
-                await _CheckListService.DeleteCheckList(CheckLists);
-
-            //removing Messages
-            foreach (var Messages in TourDB.Messages.ToList())
-            {
-                if (Messages is not null && Messages is TextMessage)
-                    await _ChatService.DeleteTextMessage((TextMessage)Messages);
-                else if (Messages is not null && Messages is NoticeMessage)
-                    await _ChatService.DeleteNoticeMessage((NoticeMessage)Messages);
-                else if (Messages is not null && Messages is Questionnaire)
-                    await _QuestionnaireService.DeleteQuestionnaire((Questionnaire)Messages);
-            }
-
-            //removing Routes
-            foreach (var Routes in TourDB.Routes.ToList())
-                await _RouteService.DeleteRoute(Routes);
-
-            //removing Schedule
-            foreach (var Schedule in TourDB.Schedule.ToList())
-                await _ScheduleService.DeleteScheduleDay(Schedule);
-
-            //removing Shares
-            foreach (var Shares in TourDB.Shares.ToList())
-            {
-                if (Shares is not null && Shares is Bill)
-                    await _BillService.DeleteBill((Bill)Shares);
-                else if (Shares is not null && Shares is Transfer)
-                    await _BillService.DeleteTransfer((Transfer)Shares);
-            }
-
-            //removing Notification
-            foreach (var Notifications in TourDB.Notifications.ToList())
-                await _NotificationService.DeleteNotification(Notifications);
-
-
-            _TourRepository.Remove(TourDB);
+            _TourRepository.Remove(Tour);
             var response = await _TourRepository.SaveChangesAsync();
             return response;
         }
@@ -152,7 +80,6 @@ namespace TripPlanner.Services.TourService
             var response = await _TourRepository.GetFirstOrDefault(filter, includeProperties);
             return response;
         }
-
 
         public async Task<RepositoryResponse<List<Tour>>> GetToursAsync(Expression<Func<Tour, bool>>? filter = null, string? includeProperties = null)
         {
@@ -236,10 +163,10 @@ namespace TripPlanner.Services.TourService
                     participantDTO.Order = i + 1;
                     participantDTO.Email = user.Email;
                     participantDTO.City = user.City;
-                    participantDTO.Nickname = list[i].Nickname;
+                    participantDTO.FullName = string.IsNullOrEmpty(list[i].Nickname) ? user.FullName : list[i].Nickname;
+                    participantDTO.Nickname = "";
                     participantDTO.Age = CalculateAge(user.DateOfBirth, DateTime.Now);
                     participantDTO.DateOfBirth = user.DateOfBirth;
-                    participantDTO.FullName = user.FullName;
                     participantDTO.IsOrganizer = list[i].IsOrganizer;
 
                     listReturn.Add(participantDTO);

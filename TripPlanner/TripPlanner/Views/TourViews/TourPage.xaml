@@ -73,7 +73,7 @@
                     BackgroundColor="#52AB98">
                     <Border.GestureRecognizers>
                         <TapGestureRecognizer
-                            Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:TourViewModel}}, Path=GoBudgetCommand}" />
+                            Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:TourViewModel}}, Path=GoSharesCommand}" />
                     </Border.GestureRecognizers>
                     <VerticalStackLayout
                         VerticalOptions="Center"

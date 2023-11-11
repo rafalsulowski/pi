@@ -1,6 +1,5 @@
 ﻿using System.Linq.Expressions;
 using TripPlanner.DataAccess.IRepository;
-using TripPlanner.Models;
 using TripPlanner.Models.Models;
 using TripPlanner.Models.Models.MessageModels.QuestionnaireModels;
 
@@ -27,26 +26,7 @@ namespace TripPlanner.Services.QuestionnaireService
 
         public async Task<RepositoryResponse<bool>> DeleteQuestionnaire(Questionnaire Questionnaire)
         {
-            var resp = await _QuestionnaireRepository.GetFirstOrDefault(u => u.Id == Questionnaire.Id);
-            if (resp.Data == null)
-                return new RepositoryResponse<bool> { Data = true, Message = "Ankieta zostala usunieta", Success = true };
-
-            var aResp = _QuestionnaireAnswerRepository.GetAll(u => u.QuestionnaireId == Questionnaire.Id, "Votes").Result;
-            
-            if(aResp.Data != null)
-            {
-                //removing Answers
-                foreach (var answer in aResp.Data)
-                {
-                    //removing Votes
-                    foreach (var vote in answer.Votes)
-                        _QuestionnaireVoteRepository.Remove(vote);
-                
-                    _QuestionnaireAnswerRepository.Remove(answer);
-                }
-            }
-
-            _QuestionnaireRepository.Remove(resp.Data);
+            _QuestionnaireRepository.Remove(Questionnaire);
             var response = await _QuestionnaireRepository.SaveChangesAsync();
             return response;
         }

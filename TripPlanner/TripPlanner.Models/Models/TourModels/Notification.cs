@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using TripPlanner.Models.DTO.TourDTOs;
 using TripPlanner.Models.DTO.UserDTOs;
 using TripPlanner.Models.Models.UserModels;
 
@@ -30,9 +29,10 @@ namespace TripPlanner.Models.Models.TourModels
     {
         public int Id { get; set; }
 
-        public int TourId { get; set; }
-        public Tour Tour { get; set; } = null!;
+        public int UserId { get; set; }
+        public User User { get; set; } = null!;
 
+        public int TourId { get; set; }
         public NotificationType Type { get; set; }
         public string Name { get; set; } = string.Empty;
         public string Message { get; set; } = string.Empty;
@@ -47,6 +47,7 @@ namespace TripPlanner.Models.Models.TourModels
 
             return new NotificationDTO
             {
+                Id = data.Id,
                 TourId = data.TourId,
                 CreatedDate = data.CreatedDate,
                 IconPath = data.IconPath,

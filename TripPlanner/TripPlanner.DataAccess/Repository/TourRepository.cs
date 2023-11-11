@@ -1,11 +1,11 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
 using System.Linq;
-using TripPlanner.DataAccess.IRepository;
 using TripPlanner.Models;
 using TripPlanner.Models.Models;
 using TripPlanner.Models.Models.CultureModels;
 using TripPlanner.Models.Models.TourModels;
+using TripPlanner.DataAccess.IRepository;
 
 namespace TripPlanner.DataAccess.Repository
 {

@@ -1,7 +1,5 @@
 ﻿using System.Linq.Expressions;
 using TripPlanner.DataAccess.IRepository;
-using TripPlanner.DataAccess.Repository;
-using TripPlanner.Models;
 using TripPlanner.Models.Models;
 using TripPlanner.Models.Models.MessageModels;
 
@@ -16,7 +14,6 @@ namespace TripPlanner.Services.ChatService
             _TextMessageRepository = __TextMessageRepository;
             _NoticeMessageRepository = __NoticeMessageRepository;
         }
-
 
         public async Task<RepositoryResponse<TextMessage>> GetTextMessageAsync(Expression<Func<TextMessage, bool>> filter, string? includeProperties = null)
         {

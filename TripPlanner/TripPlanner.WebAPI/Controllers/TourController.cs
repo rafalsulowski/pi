@@ -89,7 +89,7 @@ namespace TripPlanner.WebAPI.Controllers
         [HttpGet("{tourId}/GetWithQuestionnaires")]
         public async Task<ActionResult<TourDTO>> GetWithQuestionnaires(int tourId)
         {
-            RepositoryResponse<Tour> response = await _TourService.GetTourAsync(u => u.Id == tourId, "Questionnaires");
+            RepositoryResponse<Tour> response = await _TourService.GetTourAsync(u => u.Id == tourId, "Messages");
             return Ok((TourDTO)response.Data);
         }
 
@@ -111,7 +111,7 @@ namespace TripPlanner.WebAPI.Controllers
         [HttpGet("{tourId}/GetWithCultureAssistance")]
         public async Task<ActionResult<TourDTO>> GetWithCultureAssistance(int tourId)
         {
-            RepositoryResponse<Tour> response = await _TourService.GetTourAsync(u => u.Id == tourId, "CultureAssistance");
+            RepositoryResponse<Tour> response = await _TourService.GetTourAsync(u => u.Id == tourId, "Cultures");
             return Ok((TourDTO)response.Data);
         }
 
@@ -190,6 +190,36 @@ namespace TripPlanner.WebAPI.Controllers
             return Ok((ParticipantTourDTO)response.Data);
         }
 
+        [HttpPut("{TourId}/updateParticipantNickname/{userId}")]
+        public async Task<ActionResult<RepositoryResponse<bool>>> Put(int TourId, int userId, [FromBody] string newNickname)
+        {
+            var resp2 = await _TourService.GetTourAsync(u => u.Id == TourId, "Participants");
+            if (resp2.Data == null)
+            {
+                return new RepositoryResponse<bool> { Success = false, Message = $"Nie istnieje wyjazd o id = {TourId}" };
+            }
+
+            var resp = await _UserService.GetUserAsync(u => u.Id == userId);
+            if (resp.Data == null)
+            {
+                return new RepositoryResponse<bool> { Success = false, Message = $"Nie istnieje użytkownik o id = {userId}" };
+            }
+
+            ParticipantTour? participant = resp2.Data.Participants.Where(p => p.UserId == userId).Single();
+            if (participant == null)
+            {
+                return new RepositoryResponse<bool> { Success = false, Message = $"Użytkownik nie jest uczestnikiem wycieczki" };
+            }
+
+            participant.Nickname = newNickname;
+
+            var response = await _ParticipantTourService.UpdateParticipantTour(participant);
+            if (response.Success)
+                return Ok(new RepositoryResponse<bool> { Data = true, Message = "", Success = true });
+            else
+                return BadRequest(new RepositoryResponse<bool> { Data = false, Message = response.Message, Success = false });
+        }
+
         [HttpDelete("{TourId}/deleteParticipant/{userId}")]
         public async Task<ActionResult<RepositoryResponse<bool>>> DeleteParticipant(int TourId, int userId)
         {
@@ -232,14 +262,15 @@ namespace TripPlanner.WebAPI.Controllers
                 return new RepositoryResponse<bool> { Success = false, Message = $"Nie istnieje użytkownik o id = {userId}" };
             }
 
-            ParticipantTour newParticipant = new ParticipantTour
+            ParticipantTour? participant = resp2.Data.Participants.Where(p => p.UserId == userId).Single();
+            if (participant == null)
             {
-                IsOrganizer = true,
-                UserId = userId,
-                TourId = id,
-            };
+                return new RepositoryResponse<bool> { Success = false, Message = $"Użytkownik nie jest uczestnikiem wycieczki" };
+            }
 
-            var response = await _ParticipantTourService.UpdateParticipantTour(newParticipant);
+            participant.IsOrganizer = true;
+
+            var response = await _ParticipantTourService.UpdateParticipantTour(participant);
             if (response.Success)
                 return Ok(new RepositoryResponse<bool> { Data = true, Message = "", Success = true });
             else
@@ -261,14 +292,15 @@ namespace TripPlanner.WebAPI.Controllers
                 return new RepositoryResponse<bool> { Success = false, Message = $"Nie istnieje użytkownik o id = {userId}" };
             }
 
-            ParticipantTour newParticipant = new ParticipantTour
+            ParticipantTour? participant = resp2.Data.Participants.Where(p => p.UserId == userId).Single();
+            if (participant == null)
             {
-                IsOrganizer = false,
-                UserId = userId,
-                TourId = id,
-            };
+                return new RepositoryResponse<bool> { Success = false, Message = $"Użytkownik nie jest uczestnikiem wycieczki" };
+            }
 
-            var response = await _ParticipantTourService.UpdateParticipantTour(newParticipant);
+            participant.IsOrganizer = false;
+
+            var response = await _ParticipantTourService.UpdateParticipantTour(participant);
             if (response.Success)
                 return Ok(new RepositoryResponse<bool> { Data = true, Message = "", Success = true });
             else

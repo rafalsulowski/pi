@@ -1,6 +1,7 @@
 ﻿using TripPlanner.Views.ChatViews;
 using TripPlanner.Views.HomeViews;
-using TripPlanner.Views.ParticipantsListViews;
+using TripPlanner.Views.ParticipantViews;
+using TripPlanner.Views.ShareViews;
 using TripPlanner.Views.TourViews;
 
 namespace TripPlanner;
@@ -21,6 +22,7 @@ public partial class AppShell : Shell
 		Routing.RegisterRoute("Tour/Chat/CreateQuestionnaire", typeof(CreateNewQuestionnairePage));
 		Routing.RegisterRoute("Tour/Participants", typeof(ParticipantsListPage));
 		Routing.RegisterRoute("Tour/Participants/AddParticipantFromFriends", typeof(AddParticipantPage));
+		Routing.RegisterRoute("Tour/Shares", typeof(SharesListPage));
 	
 	}
 }
