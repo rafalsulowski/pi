@@ -43,13 +43,14 @@ namespace TripPlanner.Models.DTO.UserDTOs
             if (User == null)
                 return null;
 
-            User NewUser = new User
+            return new User
             {
                 Id = User.Id,
                 Notifications = User.Notifications.Select(u => (Notification)u).ToList(),
                 CheckLists = User.CheckLists.Select(u => (CheckList)u).ToList(),
                 ParticipantTours = User.ParticipantTours.Select(u => (ParticipantTour)u).ToList(),
                 QuestionnaireVotes = User.QuestionnaireVotes.Select(u => (QuestionnaireVote)u).ToList(),
+                Messages = User.Messages.Select(u => u.MapFromDTO()).ToList(),
                 Routes = User.Routes.Select(u => (Route)u).ToList(),
                 BillContributors = User.BillContributors.Select(u => (BillContributor)u).ToList(),
                 BillsPayed = User.BillsPayed.Select(u => (Bill)u).ToList(),
@@ -62,10 +63,6 @@ namespace TripPlanner.Models.DTO.UserDTOs
                 City = User.City,
                 DateOfBirth = User.DateOfBirth,
             };
-
-            //ze wzgledu na zle automatyczne przepisywanie wartosci dziedziczacych wlasna konwersja
-            NewUser.Messages = new List<Message>();
-            return NewUser;
         }
     }
 }

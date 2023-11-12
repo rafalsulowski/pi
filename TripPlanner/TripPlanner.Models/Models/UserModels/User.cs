@@ -50,13 +50,14 @@ namespace TripPlanner.Models.Models.UserModels
             if (User == null)
                 return null;
 
-            UserDTO newUser = new UserDTO
+            return new UserDTO
             {
                 Id = User.Id,
                 Notifications = User.Notifications.Select(u => (NotificationDTO)u).ToList(),
                 CheckLists = User.CheckLists.Select(u => (CheckListDTO)u).ToList(),
                 ParticipantTours = User.ParticipantTours.Select(u => (ParticipantTourDTO)u).ToList(),
                 QuestionnaireVotes = User.QuestionnaireVotes.Select(u => (QuestionnaireVoteDTO)u).ToList(),
+                Messages = User.Messages.Select(u => u.MapToDTO()).ToList(),
                 Routes = User.Routes.Select(u => (RouteDTO)u).ToList(),
                 BillContributors = User.BillContributors.Select(u => (BillContributorDTO)u).ToList(),
                 BillsPayed = User.BillsPayed.Select(u => (BillDTO)u).ToList(),
@@ -69,18 +70,6 @@ namespace TripPlanner.Models.Models.UserModels
                 City = User.City,
                 DateOfBirth = User.DateOfBirth
             };
-
-            foreach(var message in User.Messages)
-            {
-                if(message is TextMessage)
-                    newUser.Messages.Add(((TextMessage)message).MapToDTO());
-                else if (message is NoticeMessage)
-                    newUser.Messages.Add(((NoticeMessage)message).MapToDTO());
-                else if (message is Questionnaire)
-                    newUser.Messages.Add(((Questionnaire)message).MapToDTO());
-            }
-
-            return newUser;
         }
     }
 }

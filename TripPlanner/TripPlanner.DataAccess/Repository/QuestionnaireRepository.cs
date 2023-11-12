@@ -77,38 +77,26 @@ namespace TripPlanner.DataAccess.Repository
 
         public async Task<RepositoryResponse<bool>> AddVoteToAnswer(QuestionnaireVote Vote)
         {
-            var VoteDB = _context.QuestionnaireVotes.AsNoTracking().FirstOrDefault(u => u.UserId == Vote.UserId && u.QuestionnaireAnswerId == Vote.QuestionnaireAnswerId);
+            //jesli jest juz taki glos to go pobierz, jesli nie to null
+            var VoteDB = _context.QuestionnaireVotes.AsNoTracking().FirstOrDefault(u => u.QuestionnaireAnswerId == Vote.QuestionnaireAnswerId && u.UserId == Vote.UserId);
 
             //sprawdzenie czy uzytkownik nie zaglosowal na inna odpowiedz w tej ankiecie
-            var answerDB = _context.QuestionnaireAnswers.FirstOrDefault(u => u.Id == Vote.QuestionnaireAnswerId);
+            var answerDB = _context.QuestionnaireAnswers.AsNoTracking().FirstOrDefault(u => u.Id == Vote.QuestionnaireAnswerId);
             if (answerDB is null)
-                return new RepositoryResponse<bool> { Data = false, Message = $"Nie udało się odnaleźć odpowiedzi o id= {Vote.QuestionnaireAnswerId}" };
+                return new RepositoryResponse<bool> { Data = false, Message = $"Nie udało się odnaleźć odpowiedzi o id = {Vote.QuestionnaireAnswerId}" };
 
-            var otherAnswers = await _context.QuestionnaireAnswers.Where(u => u.QuestionnaireId == answerDB.QuestionnaireId).ToListAsync();
+            var otherAnswers = await _context.QuestionnaireAnswers.Where(u => u.QuestionnaireId == answerDB.QuestionnaireId).Include("Votes").AsNoTracking().ToListAsync();
             foreach (var answser in otherAnswers)
             {
-                int e = 10;
-                //if (otherAnswerFromTheSameQuestionnaire is null)
-                //    continue;
-
-                //QuestionnaireVote otherVoteOfThisUser = otherAnswerFromTheSameQuestionnaire.Data.Votes.First(u => u.UserId == Vote.UserId);
-
-                //if(otherVoteOfThisUser is not null)
-                //{
-                //    VoteDB = otherVoteOfThisUser;
-                //    break;
-                //}
+                var similarVote = answser.Votes.FirstOrDefault(u => u.UserId == Vote.UserId);
+                if (similarVote != null)
+                {
+                    _context.QuestionnaireVotes.Remove(similarVote);
+                    _context.SaveChanges();
+                }
             }
+            _context.QuestionnaireVotes.Add(Vote);
 
-            if (VoteDB == null)
-            {
-                _context.QuestionnaireVotes.Add(Vote);
-            }
-            else
-            {
-                _context.QuestionnaireVotes.Attach(Vote);
-                _context.Entry(Vote).State = EntityState.Modified;
-            }
             return new RepositoryResponse<bool> { Data = true };
         }
 

@@ -1,4 +1,5 @@
 using CommunityToolkit.Maui.Views;
+using Microsoft.AspNetCore.SignalR.Client;
 using TripPlanner.Models.DTO.TourDTOs;
 using TripPlanner.Services;
 
@@ -17,18 +18,24 @@ public partial class ChatAdditionalMenuPopup : Popup
 
     async void AddQuestionnaire(object sender, EventArgs args)
     {
+        await CloseAsync();
         var navigationParameter = new Dictionary<string, object>
             {
                 { "passTourId",  TourId},
             };
-        await CloseAsync();
-        await Shell.Current.GoToAsync($"CreateQuestionnaire", navigationParameter);
+        await Shell.Current.GoToAsync($"/CreateQuestionnaire", navigationParameter);
     }
 
     async void ShowPeopleOnChat(object sender, EventArgs args)
     {
         List<ExtendParticipantDTO> list = await m_TourService.GetTourExtendParticipant(TourId);
+        List<string> list2 = new List<string>();
+        foreach (ExtendParticipantDTO extendParticipant in list)
+        {
+            list2.Add(string.IsNullOrEmpty(extendParticipant.Nickname) ? extendParticipant.FullName : extendParticipant.Nickname);
+        }
+
         await CloseAsync();
-        await Shell.Current.CurrentPage.ShowPopupAsync(new PeopleChatListPopups("Lista osób czatu", list));
+        await Shell.Current.CurrentPage.ShowPopupAsync(new PeopleChatListPopups("Lista osób czatu", list2));
     }
 }

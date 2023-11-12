@@ -13,7 +13,7 @@
         <VerticalStackLayout
                 Margin="25"
                 Spacing="10"
-                WidthRequest="250"
+                WidthRequest="300"
                 VerticalOptions="CenterAndExpand">
             <Border
                     Padding="10"
@@ -22,16 +22,16 @@
                     BackgroundColor="#F2F2F2"
                     StrokeShape="RoundRectangle 20,20,20,20">
                 <Editor
-                        x:Name="m_Answer"
-                        Keyboard="Chat"
-                        MinimumHeightRequest="35"
-                        MaximumHeightRequest="250"
-                        MaxLength="300"
-                        AutoSize="TextChanges"
-                        TextColor="#52AB98"
-                        Placeholder="tak"
-                        FontAttributes="Bold"
-                        FontSize="18"/>
+                    MaxLength="150"
+                    x:Name="m_Answer"
+                    Keyboard="Chat"
+                    MinimumHeightRequest="35"
+                    MaximumHeightRequest="250"
+                    AutoSize="TextChanges"
+                    TextColor="#52AB98"
+                    Placeholder="tak"
+                    FontAttributes="Bold"
+                    FontSize="18"/>
             </Border>
 
             <Button

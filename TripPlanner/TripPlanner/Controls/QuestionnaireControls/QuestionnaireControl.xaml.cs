@@ -21,27 +21,27 @@ namespace TripPlanner.Controls.QuestionnaireControls
 
 					int votesSum = control.Questionnaire.Answers.Sum(item => item.Votes.Count);
 					List<AnswerGDTO> list = new List<AnswerGDTO>();
+
+                    control.m_VoteFor.Text = $"Nie odda³eœ g³osu";
 					foreach (var answer in control.Questionnaire.Answers)
 					{
 						AnswerGDTO ans = new AnswerGDTO();
+						ans.QuestionnaireId = answer.QuestionnaireId;
+						ans.Id = answer.Id;
 						ans.Answer = answer.Answer;
-						ans.Votes = answer.Votes;
 						ans.AccurateIcon = "circle_sec.png";
-						ans.PercentageShare = (double)ans.Votes.Count / votesSum;
-						list.Add(ans);
-					}
+						ans.PercentageShare = (double)answer.Votes.Count / votesSum;
 
-					control.m_VoteFor.Text = $"Nie odda³eœ g³osu";
-					foreach (AnswerGDTO answer in list)
-					{
 						foreach (QuestionnaireVoteDTO vote in answer.Votes)
 						{
 							if (vote.UserId == control.m_Configuration.User.Id)
 							{
-								control.m_VoteFor.Text = $"Zag³osowa³eœ na \"{answer.Answer}\"";
-								answer.AccurateIcon = "circle_ok_sec.png";
+								control.m_VoteFor.Text = $"Zag³osowa³eœ na \"{ans.Answer}\"";
+								ans.AccurateIcon = "circle_ok_sec.png";
 							}
 						}
+
+                        list.Add(ans);
 					}
 					control.m_List.ItemsSource = list;
 				});
@@ -57,14 +57,11 @@ namespace TripPlanner.Controls.QuestionnaireControls
         public QuestionnaireControl()
 		{
 			InitializeComponent();
-			//do dodania kiedys w przyszlosci servicehelper jako statyczna klasa do omienicia wymaganych konstruktowrow bezparametrowych
-			//dodatkowo nie waidomo czy nie bedzie null exception z kodu ponizej !!!
-			//m_Configuration = Application.Current.MainPage.Handler.MauiContext.Services.GetService(typeof(Configuration)) as Configuration;
 			try
-			{
-				//m_Configuration = ServicesHelper.GetService<Configuration>();
+            {
+                m_Configuration = ServicesHelper.Current.GetService<Configuration>();
 			}
-			catch (Exception ex)
+			catch (Exception)
 			{
 				Shell.Current.CurrentPage.DisplayAlert("Awaria", "Z³y system operacyjny! Ankiety dzia³aj¹ tylko na: Windows, Android, Ios, MacCatalyst", "Ok :(");
 			}

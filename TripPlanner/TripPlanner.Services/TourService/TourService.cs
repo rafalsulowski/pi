@@ -17,15 +17,17 @@ namespace TripPlanner.Services.TourService
         private readonly IParticipantTourRepository _ParticipantTourRepository;
         private readonly ICultureAssistanceRepository _CultureAssistanceRepository;
         private readonly IScheduleService _ScheduleService;
+        private readonly IQuestionnaireRepository _QuestionnaireRepository;
 
         public TourService(IUserRepository userRepository, ITourRepository TourRepository, IScheduleService scheduleService,
-            IParticipantTourRepository participantTourRepository, ICultureAssistanceRepository __CultureAssistanceRepository)
+            IParticipantTourRepository participantTourRepository, ICultureAssistanceRepository __CultureAssistanceRepository, IQuestionnaireRepository questionnaireRepository)
         {
             _TourRepository = TourRepository;
             _UserRepository = userRepository;
             _ParticipantTourRepository = participantTourRepository;
             _CultureAssistanceRepository = __CultureAssistanceRepository;
             _ScheduleService = scheduleService;
+            _QuestionnaireRepository = questionnaireRepository;
         }
 
         public async Task<RepositoryResponse<bool>> CreateTour(Tour Tour, int userId)
@@ -78,6 +80,8 @@ namespace TripPlanner.Services.TourService
         public async Task<RepositoryResponse<Tour>> GetTourAsync(Expression<Func<Tour, bool>> filter, string? includeProperties = null)
         {
             var response = await _TourRepository.GetFirstOrDefault(filter, includeProperties);
+            if(response.Data != null)
+                response.Data.Messages = response.Data.Messages.OrderBy(u => u.Date).ToList();
             return response;
         }
 

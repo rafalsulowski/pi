@@ -15,6 +15,7 @@
 
             <CollectionView.Header>
                 <Label
+                    Margin="0,0,0,10"
                     HorizontalOptions="Center"
                     HorizontalTextAlignment="Center"
                     TextColor="#52AB98"
@@ -25,6 +26,7 @@
 
             <CollectionView.Footer>
                 <Label
+                    Margin="0,10,0,0"
                     HorizontalOptions="Center"
                     HorizontalTextAlignment="Center"
                     TextColor="#52AB98"
@@ -34,7 +36,7 @@
             </CollectionView.Footer>
 
             <CollectionView.ItemTemplate>
-                <DataTemplate x:DataType="models:ExtendParticipantDTO">
+                <DataTemplate>
                     <Grid ColumnDefinitions="30,*"
                           ColumnSpacing="10">
                         <Image
@@ -44,16 +46,8 @@
                             HeightRequest="30"/>
                         <Label
                             Grid.Column="1"
-                            MaximumWidthRequest="300">
-                            <Label.Text>
-                                <MultiBinding
-                                    StringFormat="{}{0} {1}">
-                                    <Binding
-                                        Source="{Binding FullName}" />
-                                    <Binding
-                                        Source="{Binding Nickname}" />
-                                </MultiBinding>
-                            </Label.Text>
+                            Text="{Binding .}"
+                            MaximumWidthRequest="200">
                         </Label>
                     </Grid>
                 </DataTemplate>

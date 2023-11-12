@@ -7,7 +7,6 @@ namespace TripPlanner.Models.DTO.MessageDTOs.QuestionnaireDTOs
         public int UserId { get; set; }
         public int TourId { get; set; }
         public string Content { get; set; } = string.Empty;
-        public DateTime Date { get; set; }
         public ICollection<CreateQuestionnaireAnswerDTO> Answers { get; set; } = new List<CreateQuestionnaireAnswerDTO>();
 
 
@@ -21,7 +20,6 @@ namespace TripPlanner.Models.DTO.MessageDTOs.QuestionnaireDTOs
                 UserId = data.UserId,
                 TourId = data.TourId,
                 Content = data.Content,
-                Date = data.Date,
                 Answers = data.Answers.Select(u => (QuestionnaireAnswer)u).ToList()
             };
         }

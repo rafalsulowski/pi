@@ -1,10 +1,13 @@
 ﻿using CommunityToolkit.Maui.Views;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using Microsoft.AspNetCore.SignalR.Client;
+using Microsoft.AspNetCore.SignalR;
 using System.Collections.ObjectModel;
 using TripPlanner.Models.DTO.MessageDTOs.QuestionnaireDTOs;
 using TripPlanner.Services;
 using TripPlanner.Views.ChatViews;
+using Newtonsoft.Json;
 
 namespace TripPlanner.ViewModels
 {
@@ -12,6 +15,7 @@ namespace TripPlanner.ViewModels
     {
         private readonly ChatService m_ChatService;
         private readonly Configuration m_Configuration;
+        private HubConnection m_Connection;
         private int TourId;
         
         [ObservableProperty]
@@ -24,14 +28,34 @@ namespace TripPlanner.ViewModels
         {
             m_Configuration = configuration;
             m_ChatService = chatService;
-            Answers = new ObservableCollection<string>();
+            Question = "Pytanie";
+            Answers = new ObservableCollection<string> { new string("asd"), new string("asd2"), new string("asd3"), };
         }
 
-        public void ApplyQueryAttributes(IDictionary<string, object> query)
+        public async void ApplyQueryAttributes(IDictionary<string, object> query)
         {
            TourId = (int)query["passTourId"];
+           await Connect();
         }
 
+        async Task Connect()
+        {
+            try
+            {
+                m_Connection = new HubConnectionBuilder()
+                .WithUrl(m_Configuration.WssUrl)
+                .Build();
+                await m_Connection.StartAsync();
+            }
+            catch (HubException ex)
+            {
+                await Shell.Current.CurrentPage.DisplayAlert("Błąd", $"{ex.Message}", "Ok");
+            }
+            catch (Exception)
+            {
+                await Shell.Current.CurrentPage.DisplayAlert("Błąd", $"Nieznany błąd", "Ok");
+            }
+        }
 
         [RelayCommand]
         async Task GoBack()
@@ -49,7 +73,8 @@ namespace TripPlanner.ViewModels
             var result = await Shell.Current.CurrentPage.ShowPopupAsync(new AddQuesionnaireAnswerPopups(Answers.ToList()));
             if(result is not null)
             {
-                Answers.Add((string)result);
+                string answer = result.ToString().TrimStart().TrimEnd();
+                Answers.Add(answer);
             }
         }
 
@@ -82,18 +107,25 @@ namespace TripPlanner.ViewModels
                     });
                 }
 
-                var result = await m_ChatService.CreateQuestionnaire(questionnaireDTO);
-                if(result.Success)
+
+                try
                 {
+                    string json = JsonConvert.SerializeObject(questionnaireDTO);
+                    await m_Connection.InvokeCoreAsync("SendQuestionnaireMessage", args: new[] { json });
                     var navigationParameter = new Dictionary<string, object>
                     {
                         { "passTourId",  TourId}
                     };
                     await Shell.Current.GoToAsync($"Tour/Chat", navigationParameter);
-
                 }
-                else
-                    await Shell.Current.CurrentPage.DisplayAlert("Błąd", result.Message, "Ok");
+                catch (HubException ex)
+                {
+                    await Shell.Current.CurrentPage.DisplayAlert("Błąd", $"{ex.Message}", "Ok");
+                }
+                catch (Exception)
+                {
+                    await Shell.Current.CurrentPage.DisplayAlert("Błąd", $"Nieznany błąd", "Ok");
+                }
             }
         }
     }

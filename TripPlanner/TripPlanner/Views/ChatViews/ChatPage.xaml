@@ -15,7 +15,7 @@
         <DataTemplate x:Key="NoticeMessage">
             <Grid
                 RowSpacing="1"
-                Margin="5,0,5,0"
+                Margin="5,10,5,0"
                 Padding="0,0,0,5"
                 ColumnSpacing="5"
                 RowDefinitions="20,20,*"
@@ -75,7 +75,7 @@
         <DataTemplate x:Key="TextOtherMessage">
             <Grid
                 RowSpacing="1"
-                Margin="5,0,5,0"
+                Margin="5,10,5,0"
                 Padding="0,0,0,5"
                 ColumnSpacing="5"
                 RowDefinitions="20,20,*"
@@ -134,7 +134,7 @@
 
         <DataTemplate x:Key="TextMyMessage">
             <Grid
-                Margin="5,0,5,0"
+                Margin="5,10,5,0"
                 Padding="0,0,0,5"
                 ColumnSpacing="5"
                 RowSpacing="3"
@@ -172,7 +172,7 @@
         <DataTemplate x:Key="QuestionnaireMessage"
             x:DataType="models:QuestionnaireDTO">
             <VerticalStackLayout
-                Margin="10,0,10,0">
+                Margin="10,10,10,0">
                 <controls:QuestionnaireControl
                     Questionnaire="{Binding .}" />
             </VerticalStackLayout>
@@ -222,10 +222,10 @@
         </Grid>
         
         <CollectionView
+            x:Name="MessagesList"
             VerticalOptions="End"
             VerticalScrollBarVisibility="Never"
             HorizontalScrollBarVisibility="Never"
-            ItemsUpdatingScrollMode="KeepLastItemInView"
             Grid.Row="1"
             EmptyView="Brak wiadomości"
             ItemsSource="{Binding Messages}"
@@ -234,7 +234,7 @@
             <CollectionView.ItemsLayout>
                 <LinearItemsLayout
                     Orientation="Vertical"
-                    ItemSpacing="5" />
+                    ItemSpacing="0" />
             </CollectionView.ItemsLayout>
         </CollectionView>
 
@@ -280,7 +280,7 @@
                 Grid.Row="0"
                 Margin="5,0,5,15"
                 VerticalOptions="End"
-                Command="{Binding SendMessageCommand}"
+                Command="{Binding SendTextMessageCommand}"
                 Source="{AppThemeBinding Light=send_wt.png, Dark=send_dt.png}"
                 HeightRequest="30"
                 WidthRequest="30" />

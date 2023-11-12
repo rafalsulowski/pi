@@ -5,6 +5,7 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using TripPlanner.Models;
+using TripPlanner.Models.DTO.MessageDTOs.QuestionnaireDTOs;
 using TripPlanner.Models.Models;
 using TripPlanner.Models.Models.MessageModels.QuestionnaireModels;
 
@@ -24,7 +25,7 @@ namespace TripPlanner.Services.QuestionnaireService
         Task<RepositoryResponse<bool>> AddAnswerToQuestionnaire(QuestionnaireAnswer Answer);
         Task<RepositoryResponse<bool>> UpdateAnswer(QuestionnaireAnswer Answer);
         Task<RepositoryResponse<bool>> DeleteAnswerFromQuestionnaire(QuestionnaireAnswer Answer);
-        Task<RepositoryResponse<bool>> AddVoteToAnswer(QuestionnaireVote Expenditure);
+        Task<RepositoryResponse<bool>> AddVoteToAnswer(CreateQuestionnaireVoteDTO Expenditure);
         Task<RepositoryResponse<bool>> DeleteVoteFromAnswer(QuestionnaireVote Expenditure);
     }
 }

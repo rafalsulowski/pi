@@ -35,10 +35,28 @@ poprawa i dokonczenie ParticipantsList
 
 do zrobienia:
 0. zbudowac nowa baze danych - OK
-1. Zaszłośc z 7.11 czyli: Dopiescic dodawanie ankiet
+1. Zaszłośc z 7.11 czyli: Dopiescic dodawanie ankiet - OK 
 2. dokonczyc backend dla splitwise OK
 3. Zaszłośc z 8.11 czyli: DOKONCZYC poprawiac RESZTE KONTROLEROW
 4. wiadomosci na czacie (zeby nie zawesze sie wyswietlal czas dodania wiadomosci (na poźniej))
+
+11.11
+walka nieudana z wysiwtlaniem odstanich wartosci na samym dole czatu 
+ankiety na czacie
+lista osob na czacie oraz lista osob ktore zaglosowalo
+glosowanie w ankietach
+
+Do zrobienia:
+1. Zaszłośc z 8.11 czyli: DOKONCZYC poprawiac RESZTE KONTROLEROW
+2. Zaszłośc z 10.11 czyli: wiadomosci na czacie (zeby nie zawesze sie wyswietlal czas dodania wiadomosci (na poźniej))
+3. Można jeszcze spróbować ogarnąć tak aby po dodaniu wiadomości czat przewijał się do dołu, lub jak się wchodzi na czat to żeby był zawesze na czasie
+4. No i już zaczynać splitwise jaknajszybiej!!!
+
+
+
+
+
+
 
 
 

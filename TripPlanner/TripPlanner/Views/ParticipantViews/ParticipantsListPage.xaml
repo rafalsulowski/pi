@@ -119,7 +119,7 @@
                     <Label
                         FontSize="16"
                         WidthRequest="260"
-                        TextColor="White">
+                        TextColor="{AppThemeBinding Light=#939393, Dark=white}">
                         <Label.Text>
                             <MultiBinding
                                 StringFormat="{}{0}, wiek {1}, {2}">
@@ -273,17 +273,8 @@
                 Grid.Column="1"
                 HorizontalOptions="Center"
                 FontSize="18"
-                VerticalOptions="Center">
-                <Label.Text>
-                    <MultiBinding
-                        StringFormat="{}{0} - {1}">
-                        <Binding
-                            Source="Uczestnicy wyjazdu" />
-                        <Binding
-                            Path="Tour.Title" />
-                    </MultiBinding>
-                </Label.Text>
-            </Label>
+                Text="Uczestnicy wyjazdu"
+                VerticalOptions="Center" />
         </Grid>
 
         <Border

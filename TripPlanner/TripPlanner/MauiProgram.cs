@@ -28,6 +28,7 @@ public static class MauiProgram
 
         //App Services
         builder.Services.AddSingleton<Configuration>();
+
 		builder.Services.AddHttpClient("httpClient")
 			.ConfigurePrimaryHttpMessageHandler(() => {
                 HttpClientHandler handler = new HttpClientHandler();

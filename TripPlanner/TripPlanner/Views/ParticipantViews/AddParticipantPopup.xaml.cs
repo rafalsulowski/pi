@@ -21,6 +21,6 @@ public partial class AddParticipantPopup : Popup
             {
                 { "passTourId",  TourId}
             };
-        await Shell.Current.GoToAsync($"AddParticipantFromFriends", navigationParameter);
+        await Shell.Current.GoToAsync($"/AddParticipantFromFriends", navigationParameter);
     }
 }

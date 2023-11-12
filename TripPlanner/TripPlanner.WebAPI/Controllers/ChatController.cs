@@ -31,7 +31,7 @@ namespace TripPlanner.WebAPI.Controllers
         }
 
         [HttpPost("addTextMessage")]
-        public async Task<ActionResult<RepositoryResponse<int>>> AddTextMessage([FromBody] CreateMessageDTO Message)
+        public async Task<ActionResult<RepositoryResponse<int>>> AddTextMessage([FromBody] CreateTextMessageDTO Message)
         {
             var resp = await _TourService.GetTourAsync(u => u.Id == Message.TourId);
             if (resp.Data == null)
@@ -55,7 +55,7 @@ namespace TripPlanner.WebAPI.Controllers
         }
 
         [HttpPost("addNoticeMessage")]
-        public async Task<ActionResult<RepositoryResponse<int>>> AddNoticeMessage([FromBody] CreateMessageDTO Message)
+        public async Task<ActionResult<RepositoryResponse<int>>> AddNoticeMessage([FromBody] CreateNoticeMessageDTO Message)
         {
             var resp = await _TourService.GetTourAsync(u => u.Id == Message.TourId);
             if (resp.Data == null)

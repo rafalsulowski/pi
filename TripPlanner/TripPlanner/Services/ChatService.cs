@@ -4,6 +4,7 @@ using System.Text;
 using TripPlanner.Models.DTO.MessageDTOs.QuestionnaireDTOs;
 using TripPlanner.Models.DTO.TourDTOs;
 using TripPlanner.Models.Models;
+using TripPlanner.Models.Models.MessageModels.QuestionnaireModels;
 
 namespace TripPlanner.Services
 {
@@ -19,14 +20,14 @@ namespace TripPlanner.Services
         }
 
         //Zwraca wszystkie oddane głosy na odpowiedź o danym id, ankiety o danym id
-        public async Task<List<ExtendParticipantDTO>> GetAnswerVoters(int answerId)
+        public async Task<List<string>> GetAnswerVoters(int answerId, int tourId)
         {
             try
             {
-                HttpResponseMessage response = m_HttpClient.GetAsync($"{m_Configuration.WebApiUrl}/Questionnaire/{answerId}/Votes").Result;
+                HttpResponseMessage response = m_HttpClient.GetAsync($"{m_Configuration.WebApiUrl}/Questionnaire/{answerId}/Votes/{tourId}").Result;
                 if (response.IsSuccessStatusCode)
                 {
-                    return await response.Content.ReadFromJsonAsync<List<ExtendParticipantDTO>>();
+                    return await response.Content.ReadFromJsonAsync<List<string>>();
                 }
             }
             catch (Exception) { }
@@ -41,8 +42,8 @@ namespace TripPlanner.Services
             try
             {
                 string json = JsonConvert.SerializeObject(questionnaire);
-                StringContent httpContent = new StringContent(json, System.Text.Encoding.UTF8, "application/json");
-                HttpResponseMessage response = m_HttpClient.PostAsync($"{m_Configuration.WebApiUrl}/Questionnaire/Create", httpContent).Result;
+                StringContent httpContent = new StringContent(json, Encoding.UTF8, "application/json");
+                HttpResponseMessage response = m_HttpClient.PostAsync($"{m_Configuration.WebApiUrl}/Questionnaire/create", httpContent).Result;
                 if (response.IsSuccessStatusCode)
                 {
                     var resp = await response.Content.ReadFromJsonAsync<RepositoryResponse<bool>>();

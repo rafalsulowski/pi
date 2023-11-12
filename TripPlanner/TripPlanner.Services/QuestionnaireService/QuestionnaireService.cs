@@ -1,26 +1,40 @@
 ﻿using System.Linq.Expressions;
 using TripPlanner.DataAccess.IRepository;
+using TripPlanner.Models.DTO.MessageDTOs.QuestionnaireDTOs;
 using TripPlanner.Models.Models;
 using TripPlanner.Models.Models.MessageModels.QuestionnaireModels;
+using TripPlanner.Services.QuestionnaireAnswerService;
 
 namespace TripPlanner.Services.QuestionnaireService
 {
     public class QuestionnaireService : IQuestionnaireService
     {
         private readonly IQuestionnaireRepository _QuestionnaireRepository;
+        private readonly IQuestionnaireAnswerService _QuestionnaireAnswerService;
         private readonly IQuestionnaireAnswerRepository _QuestionnaireAnswerRepository;
         private readonly IQuestionnaireVoteRepository _QuestionnaireVoteRepository;
-        public QuestionnaireService(IQuestionnaireRepository QuestionnaireRepository, IQuestionnaireAnswerRepository QuestionnaireAnswerRepository, IQuestionnaireVoteRepository QuestionnaireVoteRepository)
+        public QuestionnaireService(IQuestionnaireRepository QuestionnaireRepository, IQuestionnaireAnswerService questionnaireAnswerService, IQuestionnaireAnswerRepository QuestionnaireAnswerRepository, IQuestionnaireVoteRepository QuestionnaireVoteRepository)
         {
             _QuestionnaireRepository = QuestionnaireRepository;
             _QuestionnaireAnswerRepository = QuestionnaireAnswerRepository;
             _QuestionnaireVoteRepository = QuestionnaireVoteRepository;
+            _QuestionnaireAnswerService = questionnaireAnswerService;
         }
 
         public async Task<RepositoryResponse<bool>> CreateQuestionnaire(Questionnaire Questionnaire)
         {
             _QuestionnaireRepository.Add(Questionnaire);
             var response = await _QuestionnaireRepository.SaveChangesAsync();
+
+            //if(response.Success)
+            //{
+            //    foreach (var ans in Questionnaire.Answers)
+            //    {
+            //        ans.Id = 0;
+            //        ans.QuestionnaireId = Questionnaire.Id;
+            //        await _QuestionnaireAnswerService.CreateQuestionnaireAnswer(ans);
+            //    }
+            //}
             return response;
         }
 
@@ -101,9 +115,25 @@ namespace TripPlanner.Services.QuestionnaireService
             return await _QuestionnaireRepository.SaveChangesAsync();
         }
 
-        public async Task<RepositoryResponse<bool>> AddVoteToAnswer(QuestionnaireVote Contribute)
+        public async Task<RepositoryResponse<bool>> AddVoteToAnswer(CreateQuestionnaireVoteDTO Contribute)
         {
-            await _QuestionnaireRepository.AddVoteToAnswer(Contribute);
+            QuestionnaireVoteDTO vote = new QuestionnaireVoteDTO();
+            vote.QuestionnaireAnswerId = Contribute.AnswerId;
+            vote.UserId = Contribute.UserId;
+
+            var resp = await GetAnswerAsync(u => u.Id == Contribute.AnswerId, "Votes");
+            if (resp.Data == null)
+            {
+                return new RepositoryResponse<bool> { Success = false, Message = $"Nie istnieje odpowiedz o id = {Contribute.AnswerId}" };
+            }
+            var res = resp.Data.Votes.FirstOrDefault(u => u.QuestionnaireAnswerId == Contribute.AnswerId && u.UserId == Contribute.UserId);
+            if (res != null)
+            {
+                return new RepositoryResponse<bool> { Success = false, Message = $"Uzytkownik oddal juz glos na odpowiedz o id = {Contribute.AnswerId}" };
+            }
+
+
+            await _QuestionnaireRepository.AddVoteToAnswer(vote);
             return await _QuestionnaireRepository.SaveChangesAsync();
         }
 

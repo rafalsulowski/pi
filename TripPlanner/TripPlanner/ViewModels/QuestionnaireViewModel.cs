@@ -38,14 +38,6 @@ namespace TripPlanner.ViewModels
             }
             else
                 await Shell.Current.CurrentPage.DisplayAlert("Błąd", res.Message, "Ok");
-
-        }
-
-        [RelayCommand]
-        async Task ShowVoters(AnswerGDTO answer)
-        {
-            var res = m_ChatService.GetAnswerVoters(answer.Id);
-            await Shell.Current.CurrentPage.ShowPopupAsync(new PeopleChatListPopups($"Zagłosowali na \"{answer.Answer}\"", res.Result));
         }
     }
 }

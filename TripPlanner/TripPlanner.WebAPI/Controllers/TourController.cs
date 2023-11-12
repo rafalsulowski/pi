@@ -9,11 +9,6 @@ using TripPlanner.Models.Models.TourModels;
 using TripPlanner.Models.Models.CultureModels;
 using TripPlanner.Services.ChatService;
 using TripPlanner.Services.ParticipantTourService;
-using TripPlanner.Models.DTO.MessageDTOs;
-using static System.Runtime.InteropServices.JavaScript.JSType;
-using TripPlanner.Models.DTO.MessageDTOs.QuestionnaireDTOs;
-using TripPlanner.Models.Models.MessageModels.QuestionnaireModels;
-using TripPlanner.Models.Models.MessageModels;
 
 namespace TripPlanner.WebAPI.Controllers
 {
@@ -75,7 +70,7 @@ namespace TripPlanner.WebAPI.Controllers
         [HttpGet("{tourId}/GetWithMessages")]
         public async Task<ActionResult<TourDTO>> GetWithMessages(int tourId)
         {
-            RepositoryResponse<Tour> response = await _TourService.GetTourAsync(u => u.Id == tourId, "Messages");
+            RepositoryResponse<Tour> response = await _TourService.GetTourAsync(u => u.Id == tourId, "Messages.Answer");
             return Ok((TourDTO)response.Data);
         }
 

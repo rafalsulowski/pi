@@ -1,8 +1,10 @@
 ﻿using Newtonsoft.Json;
 using System.Net.Http.Json;
 using System.Text;
+using TripPlanner.Models.DTO.MessageDTOs.QuestionnaireDTOs;
 using TripPlanner.Models.DTO.TourDTOs;
 using TripPlanner.Models.Models;
+using TripPlanner.Models.Models.MessageModels.QuestionnaireModels;
 
 namespace TripPlanner.Services
 {

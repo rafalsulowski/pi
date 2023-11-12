@@ -13,5 +13,9 @@ namespace TripPlanner.Models.DTO.TourDTOs
         public DateTime DateOfBirth { get; set; }
         public int Age { get; set; }
 
+        public string ToString()
+        {
+            return "asd";
+        }
     }
 }

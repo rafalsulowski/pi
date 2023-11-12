@@ -7,12 +7,12 @@ using TripPlanner.Models.Models;
 using TripPlanner.Models.DTO.MessageDTOs.QuestionnaireDTOs;
 using TripPlanner.Models.Models.MessageModels.QuestionnaireModels;
 using TripPlanner.Services.ChatService;
+using TripPlanner.Models.DTO.TourDTOs;
 
 namespace TripPlanner.WebAPI.Controllers
 {
-    [Route("[controller]/")]
+    [Route("api/[controller]")]
     [ApiController]
-    //[ApiExplorerSettings(IgnoreApi = ProjectConfiguration.HideContorller)]
     public class QuestionnaireController : ControllerBase
     {
         private readonly IQuestionnaireService _QuestionnaireService;
@@ -60,42 +60,28 @@ namespace TripPlanner.WebAPI.Controllers
             return Ok(res);
         }
 
-        [HttpPost]
-        public async Task<ActionResult<RepositoryResponse<QuestionnaireDTO>>> Create([FromBody] CreateQuestionnaireDTO Questionnaire)
+        [HttpPost("create")]
+        public async Task<ActionResult<RepositoryResponse<bool>>> Create([FromBody] CreateQuestionnaireDTO Questionnaire)
         {
             var resp = await _TourService.GetTourAsync(u => u.Id == Questionnaire.TourId);
             if (resp.Data == null)
             {
-                return new RepositoryResponse<QuestionnaireDTO> { Data = null, Success = false, Message = $"Nie istnieje wycieczka o id = {Questionnaire.TourId}" };
+                return new RepositoryResponse<bool> { Data = false, Success = false, Message = $"Nie istnieje wycieczka o id = {Questionnaire.TourId}" };
             }
             var resp2 = await _UserService.GetUserAsync(u => u.Id == Questionnaire.UserId);
             if (resp2.Data == null)
             {
-                return new RepositoryResponse<QuestionnaireDTO> { Data = null, Success = false, Message = $"Nie istnieje użytkownik o id = {Questionnaire.UserId}" };
+                return new RepositoryResponse<bool> { Data = false, Success = false, Message = $"Nie istnieje użytkownik o id = {Questionnaire.UserId}" };
             }
 
             Questionnaire newQuestionnaire = Questionnaire;
             newQuestionnaire.Date = DateTime.Now;
 
             var response = await _QuestionnaireService.CreateQuestionnaire(newQuestionnaire);
-            if (response == null)
-            {
-                return new RepositoryResponse<QuestionnaireDTO> { Data = null, Success = false, Message = $"Nie udało się utworzyć ankiety!" };
-            }
-
-            //add answers
-            //foreach (var answer in Questionnaire.Answers)
-            //{
-            //    answer.QuestionnaireId = newQuestionnaire.Id;
-            //    var res2 = await _QuestionnaireService.AddAnswerToQuestionnaire(answer);
-
-            //    if (res2.Success == false)
-            //    {
-            //        return new RepositoryResponse<QuestionnaireDTO> { Data = null, Success = false, Message = $"Nie udało się dodać odpowiedzi {answer.Answer} do ankiety o id = {newQuestionnaire.Id}!" };
-            //    }
-            //}
-
-            return Ok(response.Data);
+            if(response.Success)
+                return new RepositoryResponse<bool> { Data = true, Success = true, Message = "" };
+            else
+                return new RepositoryResponse<bool> { Data = false, Success = false, Message = response.Message };
         }
 
         [HttpGet("{QuestionnaireId}/Answers")]
@@ -192,37 +178,55 @@ namespace TripPlanner.WebAPI.Controllers
         }
 
         [HttpPost("addVote")]
-        public async Task<ActionResult<RepositoryResponse<bool>>> AddVote([FromBody] QuestionnaireVoteDTO QuestionnaireVote)
+        public async Task<ActionResult<RepositoryResponse<bool>>> AddVote([FromBody] CreateQuestionnaireVoteDTO QuestionnaireVote)
         {
-            var resp = await _QuestionnaireService.GetAnswerAsync(u => u.Id == QuestionnaireVote.QuestionnaireAnswerId, "Votes");
-            if (resp.Data == null)
-            {
-                return new RepositoryResponse<bool> { Success = false, Message = $"Nie istnieje odpowiedz o id = {QuestionnaireVote.QuestionnaireAnswerId}" };
-            }
-            var resp2 = await _UserService.GetUserAsync(u => u.Id == QuestionnaireVote.UserId);
-            if (resp2.Data == null)
-            {
-                return new RepositoryResponse<bool> { Success = false, Message = $"Nie istnieje użytkownik o id = {QuestionnaireVote.UserId}" };
-            }
-            var res = resp.Data.Votes.FirstOrDefault(u => u.QuestionnaireAnswerId == QuestionnaireVote.QuestionnaireAnswerId && u.UserId == QuestionnaireVote.UserId);    
-            if (res != null)
-            {
-                return new RepositoryResponse<bool> { Success = false, Message = $"Uzytkownik oddal juz glos na odpowiedz o id = {QuestionnaireVote.QuestionnaireAnswerId}" };
-            }
+            //walidacja w serwisie
+            //var resp = await _QuestionnaireService.GetAnswerAsync(u => u.Id == QuestionnaireVote.AnswerId, "Votes");
+            //if (resp.Data == null)
+            //{
+            //    return new RepositoryResponse<bool> { Success = false, Message = $"Nie istnieje odpowiedz o id = {QuestionnaireVote.AnswerId}" };
+            //}
+            //var resp2 = await _UserService.GetUserAsync(u => u.Id == QuestionnaireVote.UserId);
+            //if (resp2.Data == null)
+            //{
+            //    return new RepositoryResponse<bool> { Success = false, Message = $"Nie istnieje użytkownik o id = {QuestionnaireVote.UserId}" };
+            //}
+            //var res = resp.Data.Votes.FirstOrDefault(u => u.QuestionnaireAnswerId == QuestionnaireVote.AnswerId && u.UserId == QuestionnaireVote.UserId);    
+            //if (res != null)
+            //{
+            //    return new RepositoryResponse<bool> { Success = false, Message = $"Uzytkownik oddal juz glos na odpowiedz o id = {QuestionnaireVote.AnswerId}" };
+            //}
 
-
-            QuestionnaireVote vote = QuestionnaireVote;
+            CreateQuestionnaireVoteDTO vote = QuestionnaireVote;
 
             var response = await _QuestionnaireService.AddVoteToAnswer(vote);
             return Ok(response.Data);
         }
 
-        [HttpGet("{QuestionnaireAnswerId}/Votes")]
-        public async Task<ActionResult<RepositoryResponse<List<QuestionnaireVoteDTO>>>> GetVote(int QuestionnaireAnswerId)
+        [HttpGet("{QuestionnaireAnswerId}/Votes/{tourId}")]
+        public async Task<ActionResult<List<string>>> GetVotes(int QuestionnaireAnswerId, int tourId)
         {
             var response = await _QuestionnaireService.GetVotesAsync(u => u.QuestionnaireAnswerId == QuestionnaireAnswerId);
             List<QuestionnaireVoteDTO> res = response.Data.Select(u => (QuestionnaireVoteDTO)u).ToList();
-            return Ok(res);
+
+            List<string> result = new List<string>();
+            var participants = await _TourService.GetTourExtendParticipants(tourId);
+            if (participants == null)
+            {
+                return new List<string>();
+            }
+
+            foreach (QuestionnaireVote vote in response.Data)
+            {
+                var participant = participants.Data.FirstOrDefault(u => u.UserId == vote.UserId);
+
+                if (participant != null)
+                {
+                    result.Add(string.IsNullOrEmpty(participant.Nickname) ? participant.FullName : participant.Nickname);
+                }
+            }
+
+            return Ok(result);
         }
 
         [HttpGet("{QuestionnaireAnswerId}/Vote/{UserId}")]
