@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "VmVCu2FfoM7/AnnkLd4FhSS7fwwzex81e7pOusUFeGPjzIELSQhYMehPssgacmF4FpdLJ4X2pbYSD5ObHAKA2A==",
+  "dgSpecHash": "iIPO5R9k6rJhw2MTHL0cS6KnTS+VwAs2xOpn/K5ZviKcPMModL84v0TnmF8Lo/sBtJmMkfP8BCj82uDEAfLYBQ==",
   "success": true,
   "projectFilePath": "C:\\Users\\01159502\\Desktop\\TripPlanner\\TripPlanner\\TripPlanner.Models\\TripPlanner.Models.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\01159502\\.nuget\\packages\\communitytoolkit.mvvm\\8.2.2\\communitytoolkit.mvvm.8.2.2.nupkg.sha512",
     "C:\\Users\\01159502\\.nuget\\packages\\microsoft.entityframeworkcore\\7.0.13\\microsoft.entityframeworkcore.7.0.13.nupkg.sha512",
     "C:\\Users\\01159502\\.nuget\\packages\\microsoft.entityframeworkcore.abstractions\\7.0.13\\microsoft.entityframeworkcore.abstractions.7.0.13.nupkg.sha512",
     "C:\\Users\\01159502\\.nuget\\packages\\microsoft.entityframeworkcore.analyzers\\7.0.13\\microsoft.entityframeworkcore.analyzers.7.0.13.nupkg.sha512",

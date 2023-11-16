@@ -1,4 +1,4 @@
-using TripPlanner.ViewModels;
+using TripPlanner.ViewModels.Shares;
 
 namespace TripPlanner.Views.ShareViews;
 

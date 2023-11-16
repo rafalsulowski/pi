@@ -11,7 +11,7 @@ using TripPlanner.Models.Models.TourModels;
 
 namespace TripPlanner.WebAPI.Controllers
 {
-    [Route("[controller]/")]
+    [Route("api/[controller]")]
     [ApiController]
     //[ApiExplorerSettings(IgnoreApi = ProjectConfiguration.HideContorller)]
     public class BillController : ControllerBase
@@ -26,7 +26,7 @@ namespace TripPlanner.WebAPI.Controllers
             _UserService = userService;
             _TourService = tourService;
         }
-
+        
 
         [HttpGet("getSharesPresentation/{userId}/{tourId}")]
         public async Task<ActionResult<RepositoryResponse<List<SharePresentationDTO>>>> GetSharesPresentation(int userId, int tourId)
@@ -38,7 +38,7 @@ namespace TripPlanner.WebAPI.Controllers
                 return BadRequest(new RepositoryResponse<List<SharePresentationDTO>> { Data = null, Message = response.Message, Success = false });
         }
 
-        [HttpGet("getBillPresentation/{userId}/{billId}")]
+        [HttpGet("getBillPresentation/{userId}/{billId}/{tourId}")]
         public async Task<ActionResult<RepositoryResponse<BillPresentationDTO>>> GetBillPresentation(int userId, int billId, int tourId)
         {
             var response = await _BillService.GetBillPresentation(userId, billId, tourId);
@@ -48,7 +48,7 @@ namespace TripPlanner.WebAPI.Controllers
                 return BadRequest(new RepositoryResponse<BillPresentationDTO> { Data = null, Message = response.Message, Success = false });
         }
 
-        [HttpGet("getTransferPresentation/{userId}/{transferId}")]
+        [HttpGet("getTransferPresentation/{userId}/{transferId}/{tourId}")]
         public async Task<ActionResult<RepositoryResponse<TransferPresentationDTO>>> GetTransferPresentation(int userId, int transferId, int tourId)
         {
             var response = await _BillService.GetTransferPresentation(userId, transferId, tourId);

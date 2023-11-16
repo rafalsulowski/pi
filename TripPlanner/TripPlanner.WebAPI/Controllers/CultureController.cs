@@ -6,7 +6,7 @@ using TripPlanner.Models.Models.CultureModels;
 
 namespace TripPlanner.WebAPI.Controllers
 {
-    [Route("[controller]/")]
+    [Route("api/[controller]")]
     [ApiController]
     //[ApiExplorerSettings(IgnoreApi = ProjectConfiguration.HideContorller)]
     public class CultureController : ControllerBase

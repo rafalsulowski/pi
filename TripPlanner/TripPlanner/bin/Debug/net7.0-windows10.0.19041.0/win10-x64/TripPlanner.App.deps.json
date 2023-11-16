@@ -1232,6 +1232,7 @@
       "System.Threading.Channels/7.0.0": {},
       "TripPlanner.Models/1.0.0": {
         "dependencies": {
+          "CommunityToolkit.Mvvm": "8.2.2",
           "Microsoft.EntityFrameworkCore.Relational": "7.0.13"
         },
         "runtime": {

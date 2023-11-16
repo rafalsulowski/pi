@@ -1,4 +1,5 @@
 using TripPlanner.ViewModels;
+using TripPlanner.ViewModels.Chat;
 
 namespace TripPlanner.Views.ChatViews;
 

@@ -1,4 +1,4 @@
-using TripPlanner.ViewModels;
+using TripPlanner.ViewModels.Tour;
 
 namespace TripPlanner.Views.TourViews;
 

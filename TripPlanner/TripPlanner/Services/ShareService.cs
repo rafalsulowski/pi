@@ -121,9 +121,33 @@ namespace TripPlanner.Services
             return new RepositoryResponse<Balance> { Data = new Balance(), Message = errMsg, Success = false };
         }
 
+        public async Task<RepositoryResponse<UserBalance>> GetBalanceOfUser(int userId, int tourId)
+        {
+            string errMsg = "";
+            try
+            {
+                HttpResponseMessage response = m_HttpClient.GetAsync($"{m_Configuration.WebApiUrl}/Bill/getBalanceOfUser/{userId}/{tourId}").Result;
+                if (response.IsSuccessStatusCode)
+                {
+                    RepositoryResponse<UserBalance> resp = await response.Content.ReadFromJsonAsync<RepositoryResponse<UserBalance>>();
+                    if (resp.Success)
+                        return new RepositoryResponse<UserBalance> { Data = resp.Data, Message = "", Success = true };
+                    else
+                        errMsg = resp.Message;
+                }
+                else
+                    errMsg = $"Kod błędu: {response.StatusCode}";
+            }
+            catch (Exception e)
+            {
+                errMsg = $"Wyjątek: {e.Message}";
+            }
+            return new RepositoryResponse<UserBalance> { Data = new UserBalance(), Message = errMsg, Success = false };
+        }
+
 
         // Tworzenie nowego rachunku
-        public async Task<RepositoryResponse<int>> CreateBill(CreateBillDTO bill)
+        public async Task<RepositoryResponse<bool>> CreateBill(CreateBillDTO bill)
         {
             string errMsg = "";
             try
@@ -133,9 +157,9 @@ namespace TripPlanner.Services
                 HttpResponseMessage response = m_HttpClient.PostAsync($"{m_Configuration.WebApiUrl}/Bill/createBill", httpContent).Result;
                 if (response.IsSuccessStatusCode)
                 {
-                    RepositoryResponse<int> resp = await response.Content.ReadFromJsonAsync<RepositoryResponse<int>>();
+                    RepositoryResponse<bool> resp = await response.Content.ReadFromJsonAsync<RepositoryResponse<bool>>();
                     if (resp.Success)
-                        return new RepositoryResponse<int> { Data = resp.Data, Message = "", Success = true };
+                        return new RepositoryResponse<bool> { Data = resp.Data, Message = "", Success = true };
                     else
                         errMsg = resp.Message;
                 }
@@ -146,11 +170,11 @@ namespace TripPlanner.Services
             {
                 errMsg = $"Wyjątek: {e.Message}";
             }
-            return new RepositoryResponse<int> { Data = -1, Message = errMsg, Success = false };
+            return new RepositoryResponse<bool> { Data = false, Message = errMsg, Success = false };
         }
 
         // Tworzenie nowej transakcji
-        public async Task<RepositoryResponse<int>> CreateTransfer(CreateTransferDTO bill)
+        public async Task<RepositoryResponse<bool>> CreateTransfer(CreateTransferDTO bill)
         {
             string errMsg = "";
             try
@@ -160,9 +184,9 @@ namespace TripPlanner.Services
                 HttpResponseMessage response = m_HttpClient.PostAsync($"{m_Configuration.WebApiUrl}/Bill/createTransfer", httpContent).Result;
                 if (response.IsSuccessStatusCode)
                 {
-                    RepositoryResponse<int> resp = await response.Content.ReadFromJsonAsync<RepositoryResponse<int>>();
+                    RepositoryResponse<bool> resp = await response.Content.ReadFromJsonAsync<RepositoryResponse<bool>>();
                     if (resp.Success)
-                        return new RepositoryResponse<int> { Data = resp.Data, Message = "", Success = true };
+                        return new RepositoryResponse<bool> { Data = resp.Data, Message = "", Success = true };
                     else
                         errMsg = resp.Message;
                 }
@@ -173,7 +197,7 @@ namespace TripPlanner.Services
             {
                 errMsg = $"Wyjątek: {e.Message}";
             }
-            return new RepositoryResponse<int> { Data = -1, Message = errMsg, Success = false };
+            return new RepositoryResponse<bool> { Data = false, Message = errMsg, Success = false };
         }
 
         // Modyfikuje rachunek

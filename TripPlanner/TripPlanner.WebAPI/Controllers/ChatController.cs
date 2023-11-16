@@ -12,7 +12,7 @@ using TripPlanner.Models.Models.MessageModels;
 
 namespace TripPlanner.WebAPI.Controllers
 {
-    [Route("[controller]/")]
+    [Route("api/[controller]")]
     [ApiController]
     //[ApiExplorerSettings(IgnoreApi = ProjectConfiguration.HideContorller)]
     public class ChatController : ControllerBase

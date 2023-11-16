@@ -1,4 +1,5 @@
 using TripPlanner.ViewModels;
+using TripPlanner.ViewModels.Participant;
 
 namespace TripPlanner.Views.ParticipantViews;
 

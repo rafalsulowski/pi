@@ -6,7 +6,12 @@ namespace TripPlanner.Models.DTO.MessageDTOs.QuestionnaireDTOs
 {
     public class QuestionnaireDTO : MessageDTO
     {
-        public ICollection<QuestionnaireAnswerDTO> Answers { get; set; } = new List<QuestionnaireAnswerDTO>();
+        public ICollection<QuestionnaireAnswerDTO> answers = new List<QuestionnaireAnswerDTO>();
+        public ICollection<QuestionnaireAnswerDTO> Answers
+        {
+            get => answers;
+            set => SetProperty(ref answers, value);
+        }
 
         public override Questionnaire MapFromDTO()
         {

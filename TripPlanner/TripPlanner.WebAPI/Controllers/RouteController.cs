@@ -9,7 +9,7 @@ using Route = TripPlanner.Models.Models.RouteModels.Route;
 
 namespace TripPlanner.WebAPI.Controllers
 {
-    [Route("[controller]/")]
+    [Route("api/[controller]")]
     [ApiController]
     //[ApiExplorerSettings(IgnoreApi = ProjectConfiguration.HideContorller)]
     public class RouteController : ControllerBase

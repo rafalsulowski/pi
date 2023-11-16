@@ -8,6 +8,10 @@ using CommunityToolkit.Maui;
 using TripPlanner.DataTemplates;
 using TripPlanner.Views.ParticipantViews;
 using TripPlanner.Views.ShareViews;
+using TripPlanner.ViewModels.Shares;
+using TripPlanner.ViewModels.Tour;
+using TripPlanner.ViewModels.Chat;
+using TripPlanner.ViewModels.Participant;
 
 namespace TripPlanner;
 
@@ -70,6 +74,13 @@ public static class MauiProgram
 		builder.Services.AddTransient<ParticipantsViewModel>();
 		builder.Services.AddTransient<AddParticipantsViewModel>();
 		builder.Services.AddTransient<SharesViewModel>();
+		builder.Services.AddTransient<CreateBillViewModel>();
+		builder.Services.AddTransient<DivisionTypeViewModel>();
+		builder.Services.AddTransient<BillViewModel>();
+		builder.Services.AddTransient<CreateTransferViewModel>();
+		builder.Services.AddTransient<CreateTransferSubmitViewModel>();
+		builder.Services.AddTransient<TransferViewModel>();
+		builder.Services.AddTransient<BalanceViewModel>();
 
 
         //Views
@@ -86,6 +97,14 @@ public static class MauiProgram
 		builder.Services.AddTransient<ParticipantsListPage>();
 		builder.Services.AddTransient<AddParticipantPage>();
 		builder.Services.AddTransient<SharesListPage>();
+		builder.Services.AddTransient<CreateBillPage>();
+		builder.Services.AddTransient<DivisionTypePage>();
+		builder.Services.AddTransient<BillPage>();
+		builder.Services.AddTransient<CreateTransferSelectPage>();
+		builder.Services.AddTransient<CreateTransferSubmitPage>();
+		builder.Services.AddTransient<TransferPage>();
+		builder.Services.AddTransient<BalancePage>();
+
 
 
 		return builder.Build();

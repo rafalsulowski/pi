@@ -11,7 +11,7 @@ using TripPlanner.Models.Models.TourModels;
 
 namespace TripPlanner.WebAPI.Controllers
 {
-    [Route("[controller]/")]
+    [Route("api/[controller]")]
     [ApiController]
     //[ApiExplorerSettings(IgnoreApi = ProjectConfiguration.HideContorller)]
     public class CheckListController : ControllerBase

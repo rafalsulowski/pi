@@ -1,11 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "AYbL5nsv5NCNmsWzyZ7bmpR/K+WS8DGDEeO8oYtjZy42BpX/y5L6ZEVoXyytiUUtxM8pjoW5HuV0jFMydh4PLg==",
+  "dgSpecHash": "c3bNh+P5gWdvGjCWJALY1HI1l5xxKA9euXPLDXwKvsfkdkGuUgcnO++4YrdpbBm3LOykcjeDcZKzcqkYMW0ZtA==",
   "success": true,
   "projectFilePath": "C:\\Users\\01159502\\Desktop\\TripPlanner\\TripPlanner\\TripPlanner.DataAccess\\TripPlanner.DataAccess.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\01159502\\.nuget\\packages\\azure.core\\1.25.0\\azure.core.1.25.0.nupkg.sha512",
     "C:\\Users\\01159502\\.nuget\\packages\\azure.identity\\1.7.0\\azure.identity.1.7.0.nupkg.sha512",
+    "C:\\Users\\01159502\\.nuget\\packages\\communitytoolkit.mvvm\\8.2.2\\communitytoolkit.mvvm.8.2.2.nupkg.sha512",
     "C:\\Users\\01159502\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
     "C:\\Users\\01159502\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\1.1.1\\microsoft.bcl.asyncinterfaces.1.1.1.nupkg.sha512",
     "C:\\Users\\01159502\\.nuget\\packages\\microsoft.csharp\\4.5.0\\microsoft.csharp.4.5.0.nupkg.sha512",

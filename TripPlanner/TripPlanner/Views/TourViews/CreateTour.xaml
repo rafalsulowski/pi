@@ -3,10 +3,10 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     x:Class="TripPlanner.Views.TourViews.CreateTour"
-    xmlns:viewmodel="clr-namespace:TripPlanner.ViewModels"
+    xmlns:viewmodel="clr-namespace:TripPlanner.ViewModels.Tour"
     x:DataType="viewmodel:CreateTourViewModel"
-    xmlns:ext="clr-namespace:TripPlanner.Extension"
-    Shell.NavBarIsVisible="False">
+    Shell.NavBarIsVisible="False"
+    xmlns:ext="clr-namespace:TripPlanner.Extension">
 
     <Shell.BackButtonBehavior>
         <BackButtonBehavior

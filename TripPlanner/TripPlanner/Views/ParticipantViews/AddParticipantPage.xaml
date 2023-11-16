@@ -4,7 +4,7 @@
             xmlns:localTemplates="clr-namespace:TripPlanner.DataTemplates"
             x:Class="TripPlanner.Views.ParticipantViews.AddParticipantPage"
             xmlns:model="clr-namespace:TripPlanner.Models.DTO.TourDTOs;assembly=TripPlanner.Models"
-            xmlns:viewmodel="clr-namespace:TripPlanner.ViewModels"
+            xmlns:viewmodel="clr-namespace:TripPlanner.ViewModels.Participant"
             x:DataType="viewmodel:AddParticipantsViewModel"
             Shell.NavBarIsVisible="False"
             Shell.TabBarIsVisible="False">

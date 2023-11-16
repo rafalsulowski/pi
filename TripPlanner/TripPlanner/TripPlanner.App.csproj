@@ -75,9 +75,12 @@
 	  <None Remove="Resources\Images\airplane_wt.svg" />
 	  <None Remove="Resources\Images\arrow_next_dt.svg" />
 	  <None Remove="Resources\Images\arrow_next_wt.svg" />
+	  <None Remove="Resources\Images\arrow_right_sec.svg" />
 	  <None Remove="Resources\Images\bell_dt.svg" />
 	  <None Remove="Resources\Images\bell_wt.svg" />
+	  <None Remove="Resources\Images\bill_sec.svg" />
 	  <None Remove="Resources\Images\calendar_dt.svg" />
+	  <None Remove="Resources\Images\calendar_sec.svg" />
 	  <None Remove="Resources\Images\calendar_wt.svg" />
 	  <None Remove="Resources\Images\cash_dt.svg" />
 	  <None Remove="Resources\Images\cash_wt.svg" />
@@ -108,12 +111,14 @@
 	  <None Remove="Resources\Images\download_sec.svg" />
 	  <None Remove="Resources\Images\globe_dt.svg" />
 	  <None Remove="Resources\Images\globe_wt.svg" />
+	  <None Remove="Resources\Images\image_sec.svg" />
 	  <None Remove="Resources\Images\list_check_dt.svg" />
 	  <None Remove="Resources\Images\list_check_wt.svg" />
 	  <None Remove="Resources\Images\list_dt.svg" />
 	  <None Remove="Resources\Images\list_stars_dt.svg" />
 	  <None Remove="Resources\Images\list_stars_wt.svg" />
 	  <None Remove="Resources\Images\list_wt.svg" />
+	  <None Remove="Resources\Images\money_coin_sec.svg" />
 	  <None Remove="Resources\Images\organizer_dt.svg" />
 	  <None Remove="Resources\Images\organizer_gray.svg" />
 	  <None Remove="Resources\Images\organizer_sec.svg" />
@@ -136,6 +141,8 @@
 	  <None Remove="Resources\Images\send_wt.svg" />
 	  <None Remove="Resources\Images\settings_chat_dt.svg" />
 	  <None Remove="Resources\Images\settings_chat_wt.svg" />
+	  <None Remove="Resources\Images\share_sec.svg" />
+	  <None Remove="Resources\Images\text_sec.svg" />
 	  <None Remove="Resources\Images\tour_dt.svg" />
 	  <None Remove="Resources\Images\tour_wt.svg" />
 	  <None Remove="Resources\Images\trash_dt.svg" />
@@ -167,6 +174,30 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\ParticipantViews\UserDetailsPopups.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\ShareViews\BalancePage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\ShareViews\TransferPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\ShareViews\BillPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\ShareViews\CreateBillPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\ShareViews\CreateTransferSelectPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\ShareViews\CreateTransferSubmitPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\ShareViews\DivisionTypePage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\ShareViews\SelectPayerPopups.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\ShareViews\SharesListPage.xaml">
@@ -239,6 +270,15 @@
 	  </Compile>
 	  <Compile Update="Views\ParticipantViews\UserDetailsPopups.xaml.cs">
 	    <DependentUpon>UserDetailsPopups.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Views\ShareViews\TransferPage.xaml.cs">
+	    <DependentUpon>TransferPage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Views\ShareViews\CreateTransferSelectPage.xaml.cs">
+	    <DependentUpon>CreateTransferSelectPage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Views\ShareViews\CreateTransferSubmitPage.xaml.cs">
+	    <DependentUpon>CreateTransferSubmitPage.xaml</DependentUpon>
 	  </Compile>
 	  <Compile Update="Views\ShareViews\SharesListPage.xaml.cs">
 	    <DependentUpon>SharesListPage.xaml</DependentUpon>

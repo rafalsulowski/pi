@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="TripPlanner.Views.ParticipantViews.ParticipantsListPage"
              xmlns:localTemplates="clr-namespace:TripPlanner.DataTemplates"
-             xmlns:viewmodel="clr-namespace:TripPlanner.ViewModels"
+             xmlns:viewmodel="clr-namespace:TripPlanner.ViewModels.Participant"
              x:DataType="viewmodel:ParticipantsViewModel"
              Shell.NavBarIsVisible="False"
              Shell.TabBarIsVisible="False">

@@ -48,14 +48,40 @@ glosowanie w ankietach
 
 Do zrobienia:
 1. Zaszłośc z 8.11 czyli: DOKONCZYC poprawiac RESZTE KONTROLEROW
-2. Zaszłośc z 10.11 czyli: wiadomosci na czacie (zeby nie zawesze sie wyswietlal czas dodania wiadomosci (na poźniej))
-3. Można jeszcze spróbować ogarnąć tak aby po dodaniu wiadomości czat przewijał się do dołu, lub jak się wchodzi na czat to żeby był zawesze na czasie
-4. No i już zaczynać splitwise jaknajszybiej!!!
+TODO 2. Zaszłośc z 10.11 czyli: wiadomosci na czacie (zeby nie zawesze sie wyswietlal czas dodania wiadomosci (na poźniej))
+TODO 3. Można jeszcze spróbować ogarnąć tak aby po dodaniu wiadomości czat przewijał się do dołu, lub jak się wchodzi na czat to żeby był zawesze na czasie
+4. No i już zaczynać splitwise jaknajszybiej!!! ok
+
+
+12.11
+zrobiona lista glowna splitwise
+zrobione praktycznie w 90% dodawanie nowego rachunku, jestem zadowolony jak to wyszlo
+
+do zrobienia
+1. dokonczyc dodawanie rachunkow
+2. przetestowac wyswietalnie na stornie glownej splitwise
+3. spobowac zastosowac ObservableObject do Chatu !!!
 
 
 
 
 
+
+16 - wyswietlanie transferów, poprawki w tworzeniu bilansu, wystiwtlanie bilansu (domknięcie SplitWise)
+17 - backend harmonogramu (+ mozliwe edycje w bazie danych dla harmonogramu)
+18 - strona główna harmonogramu, strona szczegółowa harmonogreamu, dodawanie akcji podczass dnia
+19 - kalendarz harmonogramu???
+20 - logowanie, widok ładowania aplikacji, widok po załadowaniu aplikacji, rejestracja
+21 - backend pogoda + widoki pogoda
+22 - pogoda
+23 - backend dla checklist i ankiet
+24 - strona glowan checklist i ankiet, jakies podstrony
+25 - powiadomienia
+26
+27
+28
+29
+DEADLINE 30
 
 
 

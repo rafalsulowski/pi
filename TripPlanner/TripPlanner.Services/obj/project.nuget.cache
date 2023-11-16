@@ -1,11 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "LW/k5wSlu3Bf1vV5wCqu0z+5GJI86Y5Pn0TM/9OkjmSH0RfY2hYxuOFYuILp2jxxSHyM9cekf/bBBglzlcxZFw==",
+  "dgSpecHash": "MHor+NaE0X2kzFT7yhsuA0N2uO0qkx63O7UpT4UVf8sXg3z6yep1NNWTsX5OnP5VxZ4jtUWq0j64V9X7zkDojw==",
   "success": true,
   "projectFilePath": "C:\\Users\\01159502\\Desktop\\TripPlanner\\TripPlanner\\TripPlanner.Services\\TripPlanner.Services.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\01159502\\.nuget\\packages\\azure.core\\1.25.0\\azure.core.1.25.0.nupkg.sha512",
     "C:\\Users\\01159502\\.nuget\\packages\\azure.identity\\1.7.0\\azure.identity.1.7.0.nupkg.sha512",
+    "C:\\Users\\01159502\\.nuget\\packages\\communitytoolkit.mvvm\\8.2.2\\communitytoolkit.mvvm.8.2.2.nupkg.sha512",
     "C:\\Users\\01159502\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\1.1.1\\microsoft.bcl.asyncinterfaces.1.1.1.nupkg.sha512",
     "C:\\Users\\01159502\\.nuget\\packages\\microsoft.csharp\\4.5.0\\microsoft.csharp.4.5.0.nupkg.sha512",
     "C:\\Users\\01159502\\.nuget\\packages\\microsoft.data.sqlclient\\5.1.1\\microsoft.data.sqlclient.5.1.1.nupkg.sha512",

@@ -66,17 +66,23 @@ namespace TripPlanner.Services.BillService
                     sharePresentationDTO.Description = share.Description;
 
                     if (userId == share.PayerId)
-                    {   //uzytkownik pozyczyl wiec jest "na minusie" bo ma teraz mniej pieniędzy
-                        sharePresentationDTO.Value = -share.Value;
+                    {
+                        //uzytkownik pozyczyl wiec jest "na minusie" bo ma teraz mniej pieniędzy
+                        decimal equal = 0;
+                        var userDue = share.Contributors.First(u => u.UserId == userId);
+                        if (userDue != null) //jesli jest składajacym sie to jest "na plusie" bo ktoś za niego założył
+                            equal = userDue.Due;
+                        sharePresentationDTO.Value = equal - share.Value; //to ile płatnik się składa pomniejszone o wartość rachunku (wyjdzie na minusie co oznacza ze platnik jest na minusie)
                     }
                     else
                     {   //uzytkownik zalega
                         var userDue = share.Contributors.First(u => u.UserId == userId);
                         if (userDue != null) //jesli jest składajacym sie to jest "na plusie" bo ktoś za niego założył
-                            sharePresentationDTO.Value = -userDue.Due;
+                            sharePresentationDTO.Value = userDue.Due;
                         else //uzytkownik nie bierze udzialu w rachunku
                             sharePresentationDTO.Value = 0;
                     }
+                    list.Add(sharePresentationDTO);
                 }
 
             }
@@ -98,8 +104,9 @@ namespace TripPlanner.Services.BillService
                     string senderName = await GetUserFullNameOrNickname(tourId, share.SenderId);
                     string receiverName = await GetUserFullNameOrNickname(tourId, share.RecipientId);
                     sharePresentationDTO.Name = $"{senderName} zapłacił(a) PLN {share.Value} do {receiverName}";
+                    
+                    list.Add(sharePresentationDTO);
                 }
-
             }
             else
                 return new RepositoryResponse<List<SharePresentationDTO>> { Data = null, Message = "Nie udało się pobrać transakcji", Success = false };
@@ -150,12 +157,14 @@ namespace TripPlanner.Services.BillService
                 foreach (var contributor in resp.Data.Contributors)
                 {
                     ExtendBillContributorDTO extendBillContributor = new ExtendBillContributorDTO();
+                    extendBillContributor.Due = contributor.Due;
                     if (contributor.UserId == userId)
                         extendBillContributor.Name = "Ty";
                     else
                         extendBillContributor.Name = await GetUserFullNameOrNickname(tourId, contributor.UserId);
                     
-                    extendBillContributor.Due = contributor.Due;
+
+                    billPresentationDTO.Contributors.Add(extendBillContributor);
                 }
 
                 return new RepositoryResponse<BillPresentationDTO> { Data = billPresentationDTO, Message = "", Success = true};
@@ -225,7 +234,8 @@ namespace TripPlanner.Services.BillService
                             UserId = userDB.Data.Id,
                             Name = string.IsNullOrEmpty(participant.Nickname) ? userDB.Data.FullName : participant.Nickname,
                             Saldo = 0,
-                            BalanceWithOtherUsers = new List<OtherUser>()
+                            BalanceWithOtherUsers = new List<OtherUser>(),
+                            IsExpand = false,
                         });
                     }
                     else
@@ -259,7 +269,8 @@ namespace TripPlanner.Services.BillService
                             UserId = bill.PayerId,
                             Name = await GetUserFullNameOrNickname(tourId, bill.PayerId),
                             Saldo = 0,
-                            BalanceWithOtherUsers = new List<OtherUser>()
+                            BalanceWithOtherUsers = new List<OtherUser>(),
+                            IsExpand = false,
                         });
 
                         userBalance = mainBalance.UserBalances.FirstOrDefault(u => u.UserId == bill.PayerId);
@@ -433,16 +444,16 @@ namespace TripPlanner.Services.BillService
             _BillRepository.Add(Bill);
             var response = await _BillRepository.SaveChangesAsync();
 
-            //dodanie billcontributors
-            foreach(var contributors in Bill.Contributors)
-            {
-                _BillContributorRepository.Add(new BillContributor
-                {
-                    BillId = Bill.Id,
-                    UserId = contributors.UserId,
-                    Due = contributors.Due,
-                });
-            }
+            ////dodanie billcontributors
+            //foreach(var contributors in Bill.Contributors)
+            //{
+            //    _BillContributorRepository.Add(new BillContributor
+            //    {
+            //        BillId = Bill.Id,
+            //        UserId = contributors.UserId,
+            //        Due = contributors.Due,
+            //    });
+            //}
             return response;
         }
         

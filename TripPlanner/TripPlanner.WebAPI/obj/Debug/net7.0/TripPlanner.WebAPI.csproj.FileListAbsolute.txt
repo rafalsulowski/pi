@@ -82,3 +82,4 @@ C:\Users\01159502\Desktop\TripPlanner\TripPlanner\TripPlanner.WebAPI\obj\Debug\n
 C:\Users\01159502\Desktop\TripPlanner\TripPlanner\TripPlanner.WebAPI\obj\Debug\net7.0\TripPlanner.WebAPI.pdb
 C:\Users\01159502\Desktop\TripPlanner\TripPlanner\TripPlanner.WebAPI\obj\Debug\net7.0\TripPlanner.WebAPI.genruntimeconfig.cache
 C:\Users\01159502\Desktop\TripPlanner\TripPlanner\TripPlanner.WebAPI\obj\Debug\net7.0\ref\TripPlanner.WebAPI.dll
+C:\Users\01159502\Desktop\TripPlanner\TripPlanner\TripPlanner.WebAPI\bin\Debug\net7.0\CommunityToolkit.Mvvm.dll

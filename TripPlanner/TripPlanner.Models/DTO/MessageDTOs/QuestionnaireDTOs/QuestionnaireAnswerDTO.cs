@@ -1,13 +1,21 @@
 ﻿using TripPlanner.Models.Models.MessageModels.QuestionnaireModels;
+using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace TripPlanner.Models.DTO.MessageDTOs.QuestionnaireDTOs
 {
-    public class QuestionnaireAnswerDTO
+    public class QuestionnaireAnswerDTO : ObservableObject
     {
         public int Id { get; set; }
 
         public int QuestionnaireId { get; set; }
-        public ICollection<QuestionnaireVoteDTO> Votes { get; set; } = new List<QuestionnaireVoteDTO>();
+
+
+        public ICollection<QuestionnaireVoteDTO> votes = new List<QuestionnaireVoteDTO>();
+        public ICollection<QuestionnaireVoteDTO> Votes
+        {
+            get => votes;
+            set => SetProperty(ref votes, value);
+        }
 
         public string Answer { get; set; } = string.Empty;
 
