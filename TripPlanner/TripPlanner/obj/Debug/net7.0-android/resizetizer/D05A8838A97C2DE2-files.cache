@@ -12,6 +12,8 @@ obj\Debug\net7.0-android\resizetizer\r\drawable-hdpi\bill_sec.png
 obj\Debug\net7.0-android\resizetizer\r\drawable-hdpi\calendar_dt.png
 obj\Debug\net7.0-android\resizetizer\r\drawable-hdpi\calendar_sec.png
 obj\Debug\net7.0-android\resizetizer\r\drawable-hdpi\calendar_wt.png
+obj\Debug\net7.0-android\resizetizer\r\drawable-hdpi\caret_down_sec.png
+obj\Debug\net7.0-android\resizetizer\r\drawable-hdpi\caret_up_sec.png
 obj\Debug\net7.0-android\resizetizer\r\drawable-hdpi\cash_dt.png
 obj\Debug\net7.0-android\resizetizer\r\drawable-hdpi\cash_wt.png
 obj\Debug\net7.0-android\resizetizer\r\drawable-hdpi\chat_dt.png
@@ -102,6 +104,8 @@ obj\Debug\net7.0-android\resizetizer\r\drawable-mdpi\bill_sec.png
 obj\Debug\net7.0-android\resizetizer\r\drawable-mdpi\calendar_dt.png
 obj\Debug\net7.0-android\resizetizer\r\drawable-mdpi\calendar_sec.png
 obj\Debug\net7.0-android\resizetizer\r\drawable-mdpi\calendar_wt.png
+obj\Debug\net7.0-android\resizetizer\r\drawable-mdpi\caret_down_sec.png
+obj\Debug\net7.0-android\resizetizer\r\drawable-mdpi\caret_up_sec.png
 obj\Debug\net7.0-android\resizetizer\r\drawable-mdpi\cash_dt.png
 obj\Debug\net7.0-android\resizetizer\r\drawable-mdpi\cash_wt.png
 obj\Debug\net7.0-android\resizetizer\r\drawable-mdpi\chat_dt.png
@@ -192,6 +196,8 @@ obj\Debug\net7.0-android\resizetizer\r\drawable-xhdpi\bill_sec.png
 obj\Debug\net7.0-android\resizetizer\r\drawable-xhdpi\calendar_dt.png
 obj\Debug\net7.0-android\resizetizer\r\drawable-xhdpi\calendar_sec.png
 obj\Debug\net7.0-android\resizetizer\r\drawable-xhdpi\calendar_wt.png
+obj\Debug\net7.0-android\resizetizer\r\drawable-xhdpi\caret_down_sec.png
+obj\Debug\net7.0-android\resizetizer\r\drawable-xhdpi\caret_up_sec.png
 obj\Debug\net7.0-android\resizetizer\r\drawable-xhdpi\cash_dt.png
 obj\Debug\net7.0-android\resizetizer\r\drawable-xhdpi\cash_wt.png
 obj\Debug\net7.0-android\resizetizer\r\drawable-xhdpi\chat_dt.png
@@ -282,6 +288,8 @@ obj\Debug\net7.0-android\resizetizer\r\drawable-xxhdpi\bill_sec.png
 obj\Debug\net7.0-android\resizetizer\r\drawable-xxhdpi\calendar_dt.png
 obj\Debug\net7.0-android\resizetizer\r\drawable-xxhdpi\calendar_sec.png
 obj\Debug\net7.0-android\resizetizer\r\drawable-xxhdpi\calendar_wt.png
+obj\Debug\net7.0-android\resizetizer\r\drawable-xxhdpi\caret_down_sec.png
+obj\Debug\net7.0-android\resizetizer\r\drawable-xxhdpi\caret_up_sec.png
 obj\Debug\net7.0-android\resizetizer\r\drawable-xxhdpi\cash_dt.png
 obj\Debug\net7.0-android\resizetizer\r\drawable-xxhdpi\cash_wt.png
 obj\Debug\net7.0-android\resizetizer\r\drawable-xxhdpi\chat_dt.png
@@ -372,6 +380,8 @@ obj\Debug\net7.0-android\resizetizer\r\drawable-xxxhdpi\bill_sec.png
 obj\Debug\net7.0-android\resizetizer\r\drawable-xxxhdpi\calendar_dt.png
 obj\Debug\net7.0-android\resizetizer\r\drawable-xxxhdpi\calendar_sec.png
 obj\Debug\net7.0-android\resizetizer\r\drawable-xxxhdpi\calendar_wt.png
+obj\Debug\net7.0-android\resizetizer\r\drawable-xxxhdpi\caret_down_sec.png
+obj\Debug\net7.0-android\resizetizer\r\drawable-xxxhdpi\caret_up_sec.png
 obj\Debug\net7.0-android\resizetizer\r\drawable-xxxhdpi\cash_dt.png
 obj\Debug\net7.0-android\resizetizer\r\drawable-xxxhdpi\cash_wt.png
 obj\Debug\net7.0-android\resizetizer\r\drawable-xxxhdpi\chat_dt.png

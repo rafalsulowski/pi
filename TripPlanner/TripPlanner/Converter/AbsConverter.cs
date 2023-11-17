@@ -12,7 +12,7 @@ namespace TripPlanner.Converter
         public object Convert(object values, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
             var val = (decimal)values;
-            return Math.Abs(val);
+            return $"{Math.Abs(val):N2}";
         }
 
         public object ConvertBack(object value, Type targetTypes, object parameter, System.Globalization.CultureInfo culture)

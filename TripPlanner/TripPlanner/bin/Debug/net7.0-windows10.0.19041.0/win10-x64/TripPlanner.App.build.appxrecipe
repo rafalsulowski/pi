@@ -1162,6 +1162,36 @@
     <AppxPackagedFile Include="C:\Users\01159502\Desktop\TripPlanner\TripPlanner\TripPlanner\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\calendar_wt.scale-400.png">
       <PackagePath>calendar_wt.scale-400.png</PackagePath>
     </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\01159502\Desktop\TripPlanner\TripPlanner\TripPlanner\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\caret_down_sec.scale-100.png">
+      <PackagePath>caret_down_sec.scale-100.png</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\01159502\Desktop\TripPlanner\TripPlanner\TripPlanner\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\caret_down_sec.scale-125.png">
+      <PackagePath>caret_down_sec.scale-125.png</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\01159502\Desktop\TripPlanner\TripPlanner\TripPlanner\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\caret_down_sec.scale-150.png">
+      <PackagePath>caret_down_sec.scale-150.png</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\01159502\Desktop\TripPlanner\TripPlanner\TripPlanner\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\caret_down_sec.scale-200.png">
+      <PackagePath>caret_down_sec.scale-200.png</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\01159502\Desktop\TripPlanner\TripPlanner\TripPlanner\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\caret_down_sec.scale-400.png">
+      <PackagePath>caret_down_sec.scale-400.png</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\01159502\Desktop\TripPlanner\TripPlanner\TripPlanner\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\caret_up_sec.scale-100.png">
+      <PackagePath>caret_up_sec.scale-100.png</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\01159502\Desktop\TripPlanner\TripPlanner\TripPlanner\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\caret_up_sec.scale-125.png">
+      <PackagePath>caret_up_sec.scale-125.png</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\01159502\Desktop\TripPlanner\TripPlanner\TripPlanner\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\caret_up_sec.scale-150.png">
+      <PackagePath>caret_up_sec.scale-150.png</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\01159502\Desktop\TripPlanner\TripPlanner\TripPlanner\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\caret_up_sec.scale-200.png">
+      <PackagePath>caret_up_sec.scale-200.png</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\01159502\Desktop\TripPlanner\TripPlanner\TripPlanner\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\caret_up_sec.scale-400.png">
+      <PackagePath>caret_up_sec.scale-400.png</PackagePath>
+    </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\01159502\Desktop\TripPlanner\TripPlanner\TripPlanner\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\cash_dt.scale-100.png">
       <PackagePath>cash_dt.scale-100.png</PackagePath>
     </AppxPackagedFile>

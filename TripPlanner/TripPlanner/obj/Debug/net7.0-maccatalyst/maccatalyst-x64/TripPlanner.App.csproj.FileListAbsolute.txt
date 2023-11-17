@@ -557,3 +557,9 @@ C:\Users\01159502\Desktop\TripPlanner\TripPlanner\TripPlanner\obj\Debug\net7.0-m
 C:\Users\01159502\Desktop\TripPlanner\TripPlanner\TripPlanner\obj\Debug\net7.0-maccatalyst\maccatalyst-x64\resizetizer\r\info_sec.png
 C:\Users\01159502\Desktop\TripPlanner\TripPlanner\TripPlanner\obj\Debug\net7.0-maccatalyst\maccatalyst-x64\resizetizer\r\info_sec@2x.png
 C:\Users\01159502\Desktop\TripPlanner\TripPlanner\TripPlanner\obj\Debug\net7.0-maccatalyst\maccatalyst-x64\resizetizer\r\info_sec@3x.png
+C:\Users\01159502\Desktop\TripPlanner\TripPlanner\TripPlanner\obj\Debug\net7.0-maccatalyst\maccatalyst-x64\resizetizer\r\caret_down_sec.png
+C:\Users\01159502\Desktop\TripPlanner\TripPlanner\TripPlanner\obj\Debug\net7.0-maccatalyst\maccatalyst-x64\resizetizer\r\caret_down_sec@2x.png
+C:\Users\01159502\Desktop\TripPlanner\TripPlanner\TripPlanner\obj\Debug\net7.0-maccatalyst\maccatalyst-x64\resizetizer\r\caret_down_sec@3x.png
+C:\Users\01159502\Desktop\TripPlanner\TripPlanner\TripPlanner\obj\Debug\net7.0-maccatalyst\maccatalyst-x64\resizetizer\r\caret_up_sec.png
+C:\Users\01159502\Desktop\TripPlanner\TripPlanner\TripPlanner\obj\Debug\net7.0-maccatalyst\maccatalyst-x64\resizetizer\r\caret_up_sec@2x.png
+C:\Users\01159502\Desktop\TripPlanner\TripPlanner\TripPlanner\obj\Debug\net7.0-maccatalyst\maccatalyst-x64\resizetizer\r\caret_up_sec@3x.png
