@@ -50,12 +50,11 @@ namespace TripPlanner.ViewModels.Shares
         [RelayCommand]
         async Task GoBalance()
         {
-
             var navigationParameter = new Dictionary<string, object>
             {
                 { "passTourId",  TourId}
             };
-            await Shell.Current.GoToAsync($"BalancePage", navigationParameter);
+            await Shell.Current.GoToAsync($"/Balance", navigationParameter);
         }
 
         [RelayCommand]

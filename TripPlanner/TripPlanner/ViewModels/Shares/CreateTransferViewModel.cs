@@ -152,7 +152,10 @@ namespace TripPlanner.ViewModels.Shares
         async Task GoNextOtherUser(OtherUser ot)
         {
             Transfer.Value = ot.Saldo;
-            Transfer.RecipientId = ot.UserId;
+            if(ot.Saldo < 0)
+                Transfer.RecipientId = ot.UserId;
+            else
+                Transfer.SenderId = ot.UserId;
             var navigationParameter = new Dictionary<string, object>
             {
                 { "passTourId",  TourId},

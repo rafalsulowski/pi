@@ -270,7 +270,8 @@ namespace TripPlanner.ViewModels.Shares
                 { "passTourId",  TourId},
                 { "passBill",  Bill},
                 { "passSplitBillView",  CurrentItem},
-                { "passSplitBillViewAccept",  true}
+                { "passSplitBillViewAccept",  true},
+                { "passIsEditing",  false}
             };
             await Shell.Current.GoToAsync($"/Tour/Shares/CreateBillPage", navigationParameter);
         }

@@ -4,6 +4,8 @@ using TripPlanner.Models.DTO.BillDTOs;
 using TripPlanner.Services.TourService;
 using System.Linq.Expressions;
 using TripPlanner.DataAccess.IRepository;
+using TripPlanner.Models.Models.UserModels;
+using TripPlanner.Models.Models.TourModels;
 
 namespace TripPlanner.Services.BillService
 {
@@ -103,7 +105,7 @@ namespace TripPlanner.Services.BillService
                     //tworzenie napisu transferu
                     string senderName = await GetUserFullNameOrNickname(tourId, share.SenderId);
                     string receiverName = await GetUserFullNameOrNickname(tourId, share.RecipientId);
-                    sharePresentationDTO.Name = $"{senderName} zapłacił(a) PLN {share.Value} do {receiverName}";
+                    sharePresentationDTO.Name = $"{senderName} zapłacił(a) {share.Value}zł do {receiverName}";
                     
                     list.Add(sharePresentationDTO);
                 }
@@ -189,7 +191,7 @@ namespace TripPlanner.Services.BillService
                 if (resp.Data.SenderId == userId)
                     transferPresentationDTO.PayerName = "Zapłaciłeś(aś)";
                 else
-                    transferPresentationDTO.PayerName = "Zapłacił(a) " + await GetUserFullNameOrNickname(tourId, resp.Data.CreatorId);
+                    transferPresentationDTO.PayerName = await GetUserFullNameOrNickname(tourId, resp.Data.SenderId) + " zapłacił(a)";
 
                 if (resp.Data.RecipientId == userId)
                     transferPresentationDTO.ReceiverName = "Ciebie";
@@ -209,233 +211,220 @@ namespace TripPlanner.Services.BillService
 
         public async Task<RepositoryResponse<Balance>> GetBalance(int tourId)
         {
-            //1. wyplenic liste balance wszystkimi uczestnikami
-            //2. pobrac liste rachunkow
-            //3. iterowac po rachunkach i dodawac zadluzenie do uczestnikow (uwzgledniac gdy ten co porzyczyl mial tez dodane skladanie sie do calej sumy)
-            //4. pobrac liste transakcji
-            //5. iterowac po transakcjach i dodawac wyrownanie wartosci dla uczestnikow (uwzgledniac gdy ze zrobienie transakcji ma 2 konce,
-            //6. wysylajacemu anuluje dlug a odbierajacemu pomniejsza wielkosc porzyczonej kwoty)
+            Balance Balance = new Balance();
 
+            var response = await _TourService.GetParticipantsAsync(u => u.TourId == tourId);
+            if(!response.Success || response.Data == null)
+                return new RepositoryResponse<Balance> { Data = Balance, Message = response.Message, Success = false };
 
-            Balance mainBalance = new Balance();
-
-            //1. Inicjalizacja obiektu mainBalance
-            mainBalance.TotalBalance = 0;
-            var tourDB = await _TourService.GetTourAsync(u => u.Id == tourId, "Participants"); //TODO sprawdzic czy dziala, chyba bedzie ok
-            if (tourDB.Success && tourDB.Data != null)
+            List<ParticipantTour> Participants = response.Data;
+            foreach (ParticipantTour participant in Participants)
             {
-                foreach(var participant in tourDB.Data.Participants)
+
+                //0. Incjalizacja akutalnego uczestnika
+                UserBalance userBalance = new UserBalance();
+                userBalance.UserId = participant.UserId;
+                userBalance.Name = await GetUserFullNameOrNickname(tourId, participant.UserId);
+                userBalance.Saldo = 0;
+                userBalance.BalanceWithOtherUsers = new List<OtherUser>();
+                foreach(var tourParticipant in Participants)
+                    if(tourParticipant.UserId != participant.UserId)
+                    userBalance.BalanceWithOtherUsers.Add(new OtherUser 
+                    {
+                        UserId = tourParticipant.UserId,
+                        Name = await GetUserFullNameOrNickname(tourId, tourParticipant.UserId),
+                        Saldo = 0
+                    });
+
+
+                //1. zaplacone rachunki przez aktualnego uczestnika
+                var responseBills = await _BillRepository.GetAll(u => u.PayerId == participant.UserId, "Contributors");
+                if (!responseBills.Success || responseBills.Data == null)
+                    return new RepositoryResponse<Balance> { Data = Balance, Message = responseBills.Message, Success = false };
+
+                List<Bill> PayedBillsOfUser = responseBills.Data;
+                foreach (var payedBill in PayedBillsOfUser)
                 {
-                    var userDB = await _UserRepository.GetFirstOrDefault(u => u.Id == participant.UserId);
-                    if(userDB.Success && userDB.Data != null)
+                    Balance.TotalBalance += payedBill.Value;
+                    userBalance.Saldo -= payedBill.Value;
+
+                    foreach(var billContributor in payedBill.Contributors)
                     {
-                        mainBalance.UserBalances.Add(new UserBalance
-                        {
-                            UserId = userDB.Data.Id,
-                            Name = string.IsNullOrEmpty(participant.Nickname) ? userDB.Data.FullName : participant.Nickname,
-                            Saldo = 0,
-                            BalanceWithOtherUsers = new List<OtherUser>(),
-                            IsExpand = false,
-                        });
-                    }
-                    else
-                        return new RepositoryResponse<Balance> { Data = null, Message = $"Nie udało się pobrać danych użytkownika id = {participant.UserId}", Success = false };
-                }
-            }
-            else
-                return new RepositoryResponse<Balance> { Data = null, Message = "Nie udało się pobrać rachunków", Success = false };
-
-
-            //2. Iterowac po rachunkach i dodawac zadluzenie do uczestnikow(uwzgledniac gdy ten co porzyczyl mial tez dodane skladanie sie do calej sumy)
-            var BillsDB = await _BillRepository.GetAll(u => u.TourId == tourId, "Contributors");
-            if (BillsDB.Success && BillsDB.Data != null)
-            {
-                foreach (var bill in BillsDB.Data)
-                {
-                    mainBalance.TotalBalance += bill.Value;
-
-                    // pobranie bilansu dla platnika
-                    UserBalance userBalance = mainBalance.UserBalances.FirstOrDefault(u => u.UserId == bill.PayerId);
-
-                    //w razie gdy uczestnik wyjazdu został z niego usunięty ale gdy bierze udział w jakiś rachunkach
-                    //lub transakcjach to jest dodawany z UserRepository
-
-                    if(userBalance is null)
-                    {
-                        var userDB = await _UserRepository.GetFirstOrDefault(u => u.Id == bill.PayerId);
-
-                        mainBalance.UserBalances.Add(new UserBalance
-                        {
-                            UserId = bill.PayerId,
-                            Name = await GetUserFullNameOrNickname(tourId, bill.PayerId),
-                            Saldo = 0,
-                            BalanceWithOtherUsers = new List<OtherUser>(),
-                            IsExpand = false,
-                        });
-
-                        userBalance = mainBalance.UserBalances.FirstOrDefault(u => u.UserId == bill.PayerId);
-                        
-                        if( userBalance is null )
-                            return new RepositoryResponse<Balance> { Data = null, Message = $"Problemy z uzupełnieniem usuniętego uczestnika o id = {bill.PayerId}", Success = false };
-                    }
-
-                    //modyfikacja Salda, płatnikowi odejmujemy od slada wartość rachunku
-                    //ewentualne pomiejszenie wartości składki płatnika nastąpi w następnej petli
-                    userBalance.Saldo -= bill.Value;
-
-
-                    //aktualizacja wartosci dla wszystkich składających się
-                    foreach(var contributor in bill.Contributors)
-                    {
-                        if (contributor.UserId == bill.PayerId) //pomniejszenie stawki platnika jako, że również się składa
-                            userBalance.Saldo += contributor.Due;
-                        else
-                        {
-                            OtherUser otherUser = userBalance.BalanceWithOtherUsers.FirstOrDefault(u => u.UserId == contributor.UserId);
-
-                            if (otherUser is null)
+                        var acturalBillContributor = userBalance.BalanceWithOtherUsers.FirstOrDefault(u => u.UserId == billContributor.UserId);
+                        if (acturalBillContributor == null && billContributor.UserId != participant.UserId)
+                            userBalance.BalanceWithOtherUsers.Add(new OtherUser
                             {
-                                userBalance.BalanceWithOtherUsers.Add(new OtherUser
-                                {
-                                    UserId = contributor.UserId,
-                                    Name = await GetUserFullNameOrNickname(tourId, contributor.UserId),
-                                    Saldo = contributor.Due,
-                                });
-                            }
-                            else
-                                otherUser.Saldo += contributor.Due;
+                                UserId = billContributor.UserId,
+                                Name = await GetUserFullNameOrNickname(tourId, billContributor.UserId),
+                                Saldo = billContributor.Due
+                            });
+                        else if(acturalBillContributor != null)
+                            acturalBillContributor.Saldo += billContributor.Due;
+                    }
+                }
+
+
+                //2. rachunki w ktorych aktualny uczestnik jest skladajacym sie
+                var responseBillContributors = await _BillContributorRepository.GetAll(u => u.UserId == participant.UserId);
+                if (!responseBillContributors.Success || responseBillContributors.Data == null)
+                    return new RepositoryResponse<Balance> { Data = Balance, Message = responseBillContributors.Message, Success = false };
+                
+                List<BillContributor> BillContributors = responseBillContributors.Data;
+                foreach (var billContributor in BillContributors)
+                {
+                    if (billContributor.UserId == participant.UserId)
+                    {
+                        userBalance.Saldo += billContributor.Due;
+
+                        //dodanie do BalanceWithOtherUsers, dlugu/pozyczki do płacącego za rachunek
+                        var bill = await _BillRepository.GetFirstOrDefault(u => u.Id == billContributor.BillId);
+                        if(bill.Success && bill.Data != null)
+                        {
+                            var otherUser = userBalance.BalanceWithOtherUsers.FirstOrDefault(u => u.UserId == bill.Data.PayerId);
+                            if(otherUser != null)
+                                otherUser.Saldo -= billContributor.Due;
                         }
                     }
                 }
 
-            }
-            else
-                return new RepositoryResponse<Balance> { Data = null, Message = "Nie udało się pobrać rachunków", Success = false };
+                //3. transakcje w ktorych aktualny uczestnik jest nadawcą
+                var responseTransferSender = await _TransferRepository.GetAll(u => u.SenderId == participant.UserId);
+                if (!responseTransferSender.Success || responseTransferSender.Data == null)
+                    return new RepositoryResponse<Balance> { Data = Balance, Message = responseTransferSender.Message, Success = false };
 
-            var transferDB = await _TransferRepository.GetAll(u => u.TourId == tourId);
-            if (transferDB.Success && transferDB.Data != null)
-            {
-                foreach (var transfer in transferDB.Data)
+                List<Transfer> TransferSenders = responseTransferSender.Data;
+                foreach (var transfer in TransferSenders)
                 {
-                    //1. pobranie userBalancow dla sender i recipient
-                    //2. modyfikacja salda ogolnego
-
-                    // pobranie bilansu dla wysyłającego
-                    UserBalance senderBalance = mainBalance.UserBalances.FirstOrDefault(u => u.UserId == transfer.SenderId);
-                    UserBalance reciepientBalance = mainBalance.UserBalances.FirstOrDefault(u => u.UserId == transfer.RecipientId);
-                    
-                    if(senderBalance is null || reciepientBalance is null)
-                        return new RepositoryResponse<Balance> { Data = null, Message = "Odbiorca lub nadawca transferu nie został odnaleziony", Success = false };
-
-                    //modyfikacja salda wysylajacego oraz odbierajacego w liscie balansow pomiedzy uzytkownikami
-                    senderBalance.Saldo -= transfer.Value;
-                    OtherUser receipientInOtherUsers = senderBalance.BalanceWithOtherUsers.FirstOrDefault(u => u.UserId == transfer.RecipientId);
-                    if(receipientInOtherUsers is not null)
-                    {
-                        receipientInOtherUsers.Saldo += transfer.Value; //dodajemy do salda odbiorcy bo u nas wartosci ujemne znacza zaporzyczenie
-                    }
-
-                    reciepientBalance.Saldo += transfer.Value; //jest ok
-                    OtherUser senderInOtherUsers = reciepientBalance.BalanceWithOtherUsers.FirstOrDefault(u => u.UserId == transfer.SenderId);
-                    if (senderInOtherUsers is not null)
-                    {
-                        senderInOtherUsers.Saldo -= transfer.Value; //dodajemy do salda odbiorcy bo u nas wartosci ujemne znacza zaporzyczenie
-                    }
+                    Balance.TotalBalance += transfer.Value;
+                    userBalance.Saldo -= transfer.Value; 
+                    var otherUser = userBalance.BalanceWithOtherUsers.FirstOrDefault(u => u.UserId == transfer.RecipientId);
+                    if (otherUser != null)
+                        otherUser.Saldo += transfer.Value;
                 }
-            }
-            else
-                return new RepositoryResponse<Balance> { Data = null, Message = "Nie udało się pobrać transkacji", Success = false };
 
-            return new RepositoryResponse<Balance> { Data = mainBalance, Message = "", Success = true };
+                //4. transakcje w ktorych aktualny uczestnik jest odbiorca
+                var responseTransferRecipient = await _TransferRepository.GetAll(u => u.RecipientId == participant.UserId);
+                if (!responseTransferRecipient.Success || responseTransferRecipient.Data == null)
+                    return new RepositoryResponse<Balance> { Data = Balance, Message = responseTransferRecipient.Message, Success = false };
+
+                List<Transfer> TransferRecipients = responseTransferRecipient.Data;
+                foreach (var transfer in TransferRecipients)
+                {
+                    userBalance.Saldo += transfer.Value;
+                    var otherUser = userBalance.BalanceWithOtherUsers.FirstOrDefault(u => u.UserId == transfer.SenderId);
+                    if (otherUser != null)
+                        otherUser.Saldo -= transfer.Value;
+                }
+
+                userBalance.BalanceWithOtherUsers.RemoveAll(u => u.Saldo == 0);
+                Balance.UserBalances.Add(userBalance);
+            }
+
+            return new RepositoryResponse<Balance> { Data = Balance, Message = "", Success = true };
         }
 
         public async Task<RepositoryResponse<UserBalance>> GetBalanceOfUser(int userId, int tourId)
         {
             UserBalance userBalance = new UserBalance();
-            
-            var userDB = await _UserRepository.GetFirstOrDefault(u => u.Id == userId);
-            if (userDB.Success && userDB.Data != null)
-            {
-                userBalance.UserId = userId;
-                userBalance.Name = await GetUserFullNameOrNickname(tourId, userId);
-                userBalance.Saldo = 0;
-                userBalance.BalanceWithOtherUsers = new List<OtherUser>();
-            }
-            else
-                return new RepositoryResponse<UserBalance> { Data = null, Message = $"Nie udało się pobrać danych użytkownika id = {userId}", Success = false };
 
+            var response = await _TourService.GetParticipantsAsync(u => u.TourId == tourId);
+            if (!response.Success || response.Data == null)
+                return new RepositoryResponse<UserBalance> { Data = userBalance, Message = response.Message, Success = false };
+            List<ParticipantTour> Participants = response.Data;
 
-            //2. Iterowac po rachunkach i dodawac zadluzenie do uczestnikow(uwzgledniac gdy ten co porzyczyl mial tez dodane skladanie sie do calej sumy)
-            var BillsDB = await _BillRepository.GetAll(u => u.TourId == tourId, "Contributors");
-            if (BillsDB.Success && BillsDB.Data != null)
-            {
-                foreach (var bill in BillsDB.Data)
-                {
-                    // pobranie bilansu dla platnika
-                    if(userBalance.UserId == bill.PayerId)
-                    {   //jezeli użytkownik jest płatnikiem to modyfikujemy jego saldo i zadłużenie innych uczestników dla naszego użytkownika z tego rachunku
-                        userBalance.Saldo -= bill.Value;
-
-                        foreach (var contributor in bill.Contributors)
-                        {
-                            if (contributor.UserId == bill.PayerId) //pomniejszenie stawki platnika jako, że płatnik również się składa
-                                userBalance.Saldo += contributor.Due;
-                            else
-                            {
-                                OtherUser otherUser = userBalance.BalanceWithOtherUsers.FirstOrDefault(u => u.UserId == contributor.UserId);
-
-                                if (otherUser is null)
-                                {
-                                    userBalance.BalanceWithOtherUsers.Add(new OtherUser
-                                    {
-                                        UserId = contributor.UserId,
-                                        Name = await GetUserFullNameOrNickname(tourId, contributor.UserId),
-                                        Saldo = contributor.Due,
-                                    });
-                                }
-                                else
-                                    otherUser.Saldo += contributor.Due;
-                            }
-                        } //foreach contributors
-                    }
-                } //foreach bills
-            }
-            else
-                return new RepositoryResponse<UserBalance> { Data = null, Message = "Nie udało się pobrać rachunków", Success = false };
-
-            var transferDB = await _TransferRepository.GetAll(u => u.TourId == tourId);
-            if (transferDB.Success && transferDB.Data != null)
-            {
-                foreach (var transfer in transferDB.Data)
-                {
-                    //1. pobranie userBalancow dla sender i recipient
-                    //2. modyfikacja salda ogolnego
-
-                    if(userBalance.UserId == transfer.SenderId)
+            //0. Incjalizacja akutalnego uczestnika
+            userBalance.UserId = userId;
+            userBalance.Name = await GetUserFullNameOrNickname(tourId, userId);
+            userBalance.Saldo = 0;
+            userBalance.BalanceWithOtherUsers = new List<OtherUser>();
+            foreach (var tourParticipant in Participants)
+                if (tourParticipant.UserId != userId)
+                    userBalance.BalanceWithOtherUsers.Add(new OtherUser
                     {
-                        //zwiekszamy wielkosc porzyczonych pieniedzy (np. zmiejsza sie dług gdy jest on dodatni lub zwiększa się gdy zakładamy za kogoś coraz więcej gotowkki)
-                        userBalance.Saldo -= transfer.Value;
-                        OtherUser receipientInOtherUsers = userBalance.BalanceWithOtherUsers.FirstOrDefault(u => u.UserId == transfer.RecipientId);
-                        if (receipientInOtherUsers is not null)
-                        {
-                            receipientInOtherUsers.Saldo += transfer.Value; //dodajemy do salda odbiorcy bo u nas wartosci ujemne znacza zaporzyczenie
-                        }
-                    }
-                    else if(userBalance.UserId == transfer.RecipientId)
-                    {
-                        //zmiejszamy wielkosc długu pieniedzy (np. zwiększa sie dług gdy jest on dodatni lub zmniejsza się gdy zakładamy za kogoś jakieś pieniądze)
-                        userBalance.Saldo += transfer.Value;
-                        OtherUser senderInOtherUsers = userBalance.BalanceWithOtherUsers.FirstOrDefault(u => u.UserId == transfer.SenderId);
-                        if (senderInOtherUsers is not null)
-                        {
-                            senderInOtherUsers.Saldo += transfer.Value; //dodajemy do salda odbiorcy bo u nas wartosci ujemne znacza zaporzyczenie
-                        }
-                    }
-                } //foreach transfers
-            }
-            else
-                return new RepositoryResponse<UserBalance> { Data = null, Message = "Nie udało się pobrać transkacji", Success = false };
+                        UserId = tourParticipant.UserId,
+                        Name = await GetUserFullNameOrNickname(tourId, tourParticipant.UserId),
+                        Saldo = 0
+                    });
 
+
+            //1. zaplacone rachunki przez aktualnego uczestnika
+            var responseBills = await _BillRepository.GetAll(u => u.PayerId == userId, "Contributors");
+            if (!responseBills.Success || responseBills.Data == null)
+                return new RepositoryResponse<UserBalance> { Data = userBalance, Message = responseBills.Message, Success = false };
+
+            List<Bill> PayedBillsOfUser = responseBills.Data;
+            foreach (var payedBill in PayedBillsOfUser)
+            {
+                userBalance.Saldo -= payedBill.Value;
+
+                foreach (var billContributor in payedBill.Contributors)
+                {
+                    var acturalBillContributor = userBalance.BalanceWithOtherUsers.FirstOrDefault(u => u.UserId == billContributor.UserId);
+                    if (acturalBillContributor == null && billContributor.UserId != userId)
+                        userBalance.BalanceWithOtherUsers.Add(new OtherUser
+                        {
+                            UserId = billContributor.UserId,
+                            Name = await GetUserFullNameOrNickname(tourId, billContributor.UserId),
+                            Saldo = billContributor.Due
+                        });
+                    else if (acturalBillContributor != null)
+                        acturalBillContributor.Saldo += billContributor.Due;
+                }
+            }
+
+
+            //2. rachunki w ktorych aktualny uczestnik jest skladajacym sie
+            var responseBillContributors = await _BillContributorRepository.GetAll(u => u.UserId == userId);
+            if (!responseBillContributors.Success || responseBillContributors.Data == null)
+                return new RepositoryResponse<UserBalance> { Data = userBalance, Message = responseBillContributors.Message, Success = false };
+
+            List<BillContributor> BillContributors = responseBillContributors.Data;
+            foreach (var billContributor in BillContributors)
+            {
+                if (billContributor.UserId == userId)
+                {
+                    userBalance.Saldo += billContributor.Due;
+
+                    //dodanie do BalanceWithOtherUsers, dlugu/pozyczki do płacącego za rachunek
+                    var bill = await _BillRepository.GetFirstOrDefault(u => u.Id == billContributor.BillId);
+                    if (bill.Success && bill.Data != null)
+                    {
+                        var otherUser = userBalance.BalanceWithOtherUsers.FirstOrDefault(u => u.UserId == bill.Data.PayerId);
+                        if (otherUser != null)
+                            otherUser.Saldo -= billContributor.Due;
+                    }
+                }
+            }
+
+            //3. transakcje w ktorych aktualny uczestnik jest nadawcą
+            var responseTransferSender = await _TransferRepository.GetAll(u => u.SenderId == userId);
+            if (!responseTransferSender.Success || responseTransferSender.Data == null)
+                return new RepositoryResponse<UserBalance> { Data = userBalance, Message = responseTransferSender.Message, Success = false };
+
+            List<Transfer> TransferSenders = responseTransferSender.Data;
+            foreach (var transfer in TransferSenders)
+            {
+                userBalance.Saldo -= transfer.Value;
+                var otherUser = userBalance.BalanceWithOtherUsers.FirstOrDefault(u => u.UserId == transfer.RecipientId);
+                if (otherUser != null)
+                    otherUser.Saldo += transfer.Value;
+            }
+
+            //4. transakcje w ktorych aktualny uczestnik jest odbiorca
+            var responseTransferRecipient = await _TransferRepository.GetAll(u => u.RecipientId == userId);
+            if (!responseTransferRecipient.Success || responseTransferRecipient.Data == null)
+                return new RepositoryResponse<UserBalance> { Data = userBalance, Message = responseTransferRecipient.Message, Success = false };
+
+            List<Transfer> TransferRecipients = responseTransferRecipient.Data;
+            foreach (var transfer in TransferRecipients)
+            {
+                userBalance.Saldo += transfer.Value;
+                var otherUser = userBalance.BalanceWithOtherUsers.FirstOrDefault(u => u.UserId == transfer.SenderId);
+                if (otherUser != null)
+                    otherUser.Saldo -= transfer.Value;
+            }
+
+            userBalance.BalanceWithOtherUsers.RemoveAll(u => u.Saldo == 0);
             return new RepositoryResponse<UserBalance> { Data = userBalance, Message = "", Success = true };
         }
 
@@ -443,17 +432,6 @@ namespace TripPlanner.Services.BillService
         {
             _BillRepository.Add(Bill);
             var response = await _BillRepository.SaveChangesAsync();
-
-            ////dodanie billcontributors
-            //foreach(var contributors in Bill.Contributors)
-            //{
-            //    _BillContributorRepository.Add(new BillContributor
-            //    {
-            //        BillId = Bill.Id,
-            //        UserId = contributors.UserId,
-            //        Due = contributors.Due,
-            //    });
-            //}
             return response;
         }
         

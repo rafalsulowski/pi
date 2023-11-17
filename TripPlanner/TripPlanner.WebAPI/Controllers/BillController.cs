@@ -221,12 +221,12 @@ namespace TripPlanner.WebAPI.Controllers
         }
 
         [HttpDelete("deleteBill/{billId}/{userId}")]
-        public async Task<ActionResult<RepositoryResponse<bool>>> DeleteBill(int billid, int userId)
+        public async Task<ActionResult<RepositoryResponse<bool>>> DeleteBill(int billId, int userId)
         {
-            var resp2 = await _BillService.GetBillAsync(u => u.Id == billid);
+            var resp2 = await _BillService.GetBillAsync(u => u.Id == billId);
             if (resp2.Success == false || resp2.Data == null)
             {
-                return new RepositoryResponse<bool> { Success = false, Message = $"Nie istnieje rachunek o id = {billid}" };
+                return new RepositoryResponse<bool> { Success = false, Message = $"Nie istnieje rachunek o id = {billId}" };
             }
             Bill bill = resp2.Data;
 
@@ -250,7 +250,7 @@ namespace TripPlanner.WebAPI.Controllers
                 return new RepositoryResponse<bool> { Success = false, Message = $"Odmowa dostępu!" };
             }
 
-            var response = await _BillService.DeleteBill(new Bill() { Id = billid });
+            var response = await _BillService.DeleteBill(new Bill() { Id = billId });
             if (response.Success)
                 return Ok(new RepositoryResponse<bool> { Data = true, Message = "", Success = true });
             else
@@ -258,12 +258,12 @@ namespace TripPlanner.WebAPI.Controllers
         }
 
         [HttpDelete("deleteTransfer/{transferId}/{userId}")]
-        public async Task<ActionResult<RepositoryResponse<bool>>> DeleteTransfer(int transferid, int userId)
+        public async Task<ActionResult<RepositoryResponse<bool>>> DeleteTransfer(int transferId, int userId)
         {
-            var resp2 = await _BillService.GetTransferAsync(u => u.Id == transferid);
+            var resp2 = await _BillService.GetTransferAsync(u => u.Id == transferId);
             if (resp2.Success == false || resp2.Data == null)
             {
-                return new RepositoryResponse<bool> { Success = false, Message = $"Nie istnieje rachunek o id = {transferid}" };
+                return new RepositoryResponse<bool> { Success = false, Message = $"Nie istnieje rachunek o id = {transferId}" };
             }
             Transfer transfer = resp2.Data;
 
@@ -287,7 +287,7 @@ namespace TripPlanner.WebAPI.Controllers
                 return new RepositoryResponse<bool> { Success = false, Message = $"Odmowa dostępu!" };
             }
 
-            var response = await _BillService.DeleteTransfer(new Transfer() { Id = transferid });
+            var response = await _BillService.DeleteTransfer(new Transfer() { Id = transferId });
             if (response.Success)
                 return Ok(new RepositoryResponse<bool> { Data = true, Message = "", Success = true });
             else

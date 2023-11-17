@@ -16,7 +16,8 @@
         <local:AbsConverter
             x:Key="AbsConverter" />
         
-        <DataTemplate x:Key="BillOwe" x:DataType="model:SharePresentationDTO"> <!--rachunek gdzie wisze komus pieniadze-->
+        <DataTemplate x:Key="BillOwe" 
+                      x:DataType="model:SharePresentationDTO"> <!--rachunek gdzie wisze komus pieniadze-->
             <HorizontalStackLayout
                 Spacing="5"
                 HorizontalOptions="Center">
@@ -27,7 +28,7 @@
                 </HorizontalStackLayout.GestureRecognizers>
                 <Label
                     VerticalOptions="Start"
-                    Text="{Binding CreatedDate, StringFormat='{}{0:MM/dd}'}"
+                    Text="{Binding CreatedDate, StringFormat='{}{0:dd.MM}'}"
                     FontSize="14"
                     MaxLines="2"
                     MaximumWidthRequest="50"
@@ -81,7 +82,8 @@
             </HorizontalStackLayout>
         </DataTemplate>
 
-        <DataTemplate x:Key="BillBorrowed"> <!--rachunek gdzie pozyczyelm pieniadze-->
+        <DataTemplate x:Key="BillBorrowed"
+            x:DataType="model:SharePresentationDTO"> <!--rachunek gdzie pozyczyelm pieniadze-->
             <HorizontalStackLayout
                 Spacing="5"
                 HorizontalOptions="Center">
@@ -92,7 +94,7 @@
                 </HorizontalStackLayout.GestureRecognizers>
                 <Label
                     VerticalOptions="Center"
-                    Text="{Binding CreatedDate, StringFormat='{}{0:dd/MM}'}"
+                    Text="{Binding CreatedDate, StringFormat='{}{0:dd.MM}'}"
                     TextColor="{AppThemeBinding Light={StaticResource #939393}, Dark={StaticResource white}}"
                     FontSize="14"
                     MaxLines="2"
@@ -145,7 +147,8 @@
             </HorizontalStackLayout>
         </DataTemplate>
 
-        <DataTemplate x:Key="BillNotInvolved"> <!--rachunek gdzie nie uczestnicze-->
+        <DataTemplate x:Key="BillNotInvolved"
+            x:DataType="model:SharePresentationDTO"> <!--rachunek gdzie nie uczestnicze-->
             <HorizontalStackLayout
                 Spacing="5"
                 HorizontalOptions="Center">
@@ -155,7 +158,7 @@
                         CommandParameter="{Binding .}" />
                 </HorizontalStackLayout.GestureRecognizers>
                 <Label
-                    Text="{Binding CreatedDate}"
+                    Text="{Binding CreatedDate, StringFormat='{}{0:dd.MM}'}"
                     FontSize="16"
                     MaxLines="2"
                     MaximumWidthRequest="40"
@@ -198,22 +201,24 @@
             </HorizontalStackLayout>
         </DataTemplate>
 
-        <DataTemplate x:Key="Transfer">
+        <DataTemplate x:Key="Transfer" x:DataType="model:SharePresentationDTO">
             <HorizontalStackLayout
                 Spacing="5"
-                HorizontalOptions="Center">
+                HorizontalOptions="Start">
                 <HorizontalStackLayout.GestureRecognizers>
                     <TapGestureRecognizer
                         Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:SharesViewModel}}, Path=GoShareCommand}"
                         CommandParameter="{Binding .}" />
                 </HorizontalStackLayout.GestureRecognizers>
                 <Label
-                    Text="{Binding CreatedDate, StringFormat='{}{0:dd/MM}'}"
+                    Text="{Binding CreatedDate, StringFormat='{}{0:dd.MM}'}"
                     FontSize="14"
                     MaxLines="2"
+                    VerticalOptions="Center"
                     MaximumWidthRequest="40"
                     TextColor="{AppThemeBinding Light={StaticResource #939393}, Dark={StaticResource white}}" />
                 <Image
+                    VerticalOptions="Center"
                     WidthRequest="25"
                     HeightRequest="25"
                     Source="money_coin_sec.png">
@@ -222,9 +227,10 @@
                     TextColor="{AppThemeBinding Light={StaticResource #939393}, Dark={StaticResource white}}"
                     Text="{Binding Name}"
                     FontSize="16"
+                    WidthRequest="300"
                     HorizontalTextAlignment="Start"
                     HorizontalOptions="Start"
-                    VerticalOptions="Start" />
+                    VerticalOptions="Center" />
             </HorizontalStackLayout>
         </DataTemplate>
 

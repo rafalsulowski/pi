@@ -12,7 +12,7 @@ namespace TripPlanner.Models.DTO.BillDTOs
     public class Balance
     {
         public decimal TotalBalance { get; set; }
-        public ICollection<UserBalance> UserBalances { get; set; } = new List<UserBalance>();
+        public List<UserBalance> UserBalances { get; set; } = new List<UserBalance>();
     }
 
     public class UserBalance : ObservableObject
@@ -20,7 +20,7 @@ namespace TripPlanner.Models.DTO.BillDTOs
         public int UserId { get; set; }
         public string Name { get; set; } = string.Empty;
         public decimal Saldo { get; set; } // wartosc na minusie oznacza ze ktos porzyczył pieniądze, na plusie że ktoś ma do oddania
-        public ICollection<OtherUser> BalanceWithOtherUsers { get; set; } = new List<OtherUser>(); //uczestnicy ktorzy wisią temu uczestnikowi lub na odwrót
+        public List<OtherUser> BalanceWithOtherUsers { get; set; } = new List<OtherUser>(); //uczestnicy ktorzy wisią temu uczestnikowi lub na odwrót
 
 
         public bool isExpand;
