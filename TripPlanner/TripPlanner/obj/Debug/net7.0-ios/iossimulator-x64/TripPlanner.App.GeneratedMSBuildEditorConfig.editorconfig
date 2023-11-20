@@ -28,6 +28,12 @@ build_metadata.AdditionalFiles.ManifestResourceName = TripPlanner.Controls.Quest
 build_metadata.AdditionalFiles.TargetPath = Controls\QuestionnaireControls\QuestionnaireControl.xaml
 build_metadata.AdditionalFiles.RelativePath = Controls\QuestionnaireControls\QuestionnaireControl.xaml
 
+[C:/Users/01159502/Desktop/TripPlanner/TripPlanner/TripPlanner/Controls/TimeDurationLabelControl.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = TripPlanner.Controls.TimeDurationLabelControl.xaml
+build_metadata.AdditionalFiles.TargetPath = Controls\TimeDurationLabelControl.xaml
+build_metadata.AdditionalFiles.RelativePath = Controls\TimeDurationLabelControl.xaml
+
 [C:/Users/01159502/Desktop/TripPlanner/TripPlanner/TripPlanner/Resources/Styles/Colors.xaml]
 build_metadata.AdditionalFiles.GenKind = Xaml
 build_metadata.AdditionalFiles.ManifestResourceName = TripPlanner.Resources.Styles.Colors.xaml
@@ -129,6 +135,36 @@ build_metadata.AdditionalFiles.GenKind = Xaml
 build_metadata.AdditionalFiles.ManifestResourceName = TripPlanner.Views.ParticipantViews.UserDetailsPopups.xaml
 build_metadata.AdditionalFiles.TargetPath = Views\ParticipantViews\UserDetailsPopups.xaml
 build_metadata.AdditionalFiles.RelativePath = Views\ParticipantViews\UserDetailsPopups.xaml
+
+[C:/Users/01159502/Desktop/TripPlanner/TripPlanner/TripPlanner/Views/ScheduleViews/EventPage.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = TripPlanner.Views.ScheduleViews.EventPage.xaml
+build_metadata.AdditionalFiles.TargetPath = Views\ScheduleViews\EventPage.xaml
+build_metadata.AdditionalFiles.RelativePath = Views\ScheduleViews\EventPage.xaml
+
+[C:/Users/01159502/Desktop/TripPlanner/TripPlanner/TripPlanner/Views/ScheduleViews/EventPopups.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = TripPlanner.Views.ScheduleViews.EventPopups.xaml
+build_metadata.AdditionalFiles.TargetPath = Views\ScheduleViews\EventPopups.xaml
+build_metadata.AdditionalFiles.RelativePath = Views\ScheduleViews\EventPopups.xaml
+
+[C:/Users/01159502/Desktop/TripPlanner/TripPlanner/TripPlanner/Views/ScheduleViews/ScheduleCalendarPage.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = TripPlanner.Views.ScheduleViews.ScheduleCalendarPage.xaml
+build_metadata.AdditionalFiles.TargetPath = Views\ScheduleViews\ScheduleCalendarPage.xaml
+build_metadata.AdditionalFiles.RelativePath = Views\ScheduleViews\ScheduleCalendarPage.xaml
+
+[C:/Users/01159502/Desktop/TripPlanner/TripPlanner/TripPlanner/Views/ScheduleViews/ScheduleDayPage.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = TripPlanner.Views.ScheduleViews.ScheduleDayPage.xaml
+build_metadata.AdditionalFiles.TargetPath = Views\ScheduleViews\ScheduleDayPage.xaml
+build_metadata.AdditionalFiles.RelativePath = Views\ScheduleViews\ScheduleDayPage.xaml
+
+[C:/Users/01159502/Desktop/TripPlanner/TripPlanner/TripPlanner/Views/ScheduleViews/ScheduleListPage.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = TripPlanner.Views.ScheduleViews.ScheduleListPage.xaml
+build_metadata.AdditionalFiles.TargetPath = Views\ScheduleViews\ScheduleListPage.xaml
+build_metadata.AdditionalFiles.RelativePath = Views\ScheduleViews\ScheduleListPage.xaml
 
 [C:/Users/01159502/Desktop/TripPlanner/TripPlanner/TripPlanner/Views/ShareViews/BalancePage.xaml]
 build_metadata.AdditionalFiles.GenKind = Xaml

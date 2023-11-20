@@ -1,16 +1,17 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-            x:Class="TripPlanner.Views.ShareViews.BalancePage"
+<ContentPage
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="TripPlanner.Views.ShareViews.BalancePage"
     xmlns:local="clr-namespace:TripPlanner.Converter"
     xmlns:localTemplates="clr-namespace:TripPlanner.DataTemplates"
     xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
-            xmlns:viewmodel="clr-namespace:TripPlanner.ViewModels.Shares"
-            xmlns:model="clr-namespace:TripPlanner.Models.DTO.TourDTOs;assembly=TripPlanner.Models"
-            xmlns:model2="clr-namespace:TripPlanner.Models.DTO.BillDTOs;assembly=TripPlanner.Models"
-            x:DataType="viewmodel:BalanceViewModel"
-            Shell.TabBarIsVisible="False"
-            Shell.NavBarIsVisible="False">
+    xmlns:viewmodel="clr-namespace:TripPlanner.ViewModels.Shares"
+    xmlns:model="clr-namespace:TripPlanner.Models.DTO.TourDTOs;assembly=TripPlanner.Models"
+    xmlns:model2="clr-namespace:TripPlanner.Models.DTO.BillDTOs;assembly=TripPlanner.Models"
+    x:DataType="viewmodel:BalanceViewModel"
+    Shell.TabBarIsVisible="False"
+    Shell.NavBarIsVisible="False">
 
 
     <ContentPage.Resources>
@@ -22,27 +23,34 @@
         <local:CaretConverter
             x:Key="CaretConverter" />
 
-        
+
         <DataTemplate
             x:Key="OweOtherUser"
             x:DataType="model2:OtherUser">
             <!--uczestnik ogółem jest dłużny pieniądze-->
-            <Grid ColumnSpacing="10" ColumnDefinitions="20, *">
+            <Grid
+                Margin="30,10,0,0"
+                ColumnSpacing="10"
+                ColumnDefinitions="20, *">
                 <Image
                     Grid.Column="0"
+                    WidthRequest="20"
+                    HeightRequest="20"
                     Source="person_circle_sec.png">
                 </Image>
                 <Label
+                    FontSize="14"
+                    FontAttributes="Bold"
                     Grid.Column="1"
                     TextType="Html">
                     <Label.Text>
                         <MultiBinding
-                            StringFormat="{}Dłużny(a) ogółem &lt;span style=&quot;color:#C96C45&quot;&gt;{1}&lt;/strong&gt;zł do {0}">
+                            StringFormat="{}Dłużny(a) ogółem &lt;span style=&quot;color:#C96C45&quot;&gt;{1}zł&lt;/span&gt; do {0}">
                             <Binding
                                 Path="Name" />
                             <Binding
                                 Path="Saldo"
-                                Converter="{StaticResource DecimalPrecision}" />
+                                Converter="{StaticResource AbsConverter}" />
                         </MultiBinding>
                     </Label.Text>
                 </Label>
@@ -53,21 +61,42 @@
             x:Key="BorrowedOtherUser"
             x:DataType="model2:OtherUser">
             <!--ogółem uczestnik pożyczył pieniądze-->
-            <Label
-                Text="{Binding Name}"></Label>
+            <Grid
+                Margin="30,10,0,0"
+                ColumnSpacing="10"
+                ColumnDefinitions="20, *">
+                <Image
+                    Grid.Column="0"
+                    WidthRequest="20"
+                    HeightRequest="20"
+                    Source="person_circle_sec.png">
+                </Image>
+                <Label
+                    FontSize="14"
+                    FontAttributes="Bold"
+                    Grid.Column="1"
+                    TextType="Html">
+                    <Label.Text>
+                        <MultiBinding
+                            StringFormat="{} Pożyczył(a) ogółem &lt;span style=&quot;color:#52AB98&quot;&gt;{1}zł&lt;/span&gt; do {0}">
+                            <Binding
+                                Path="Name" />
+                            <Binding
+                                Path="Saldo"
+                                Converter="{StaticResource AbsConverter}" />
+                        </MultiBinding>
+                    </Label.Text>
+                </Label>
+            </Grid>
         </DataTemplate>
 
         <localTemplates:OtherUserBalanceDataTemplateSelector
             x:Key="OtherUserBalanceDataTemplateSelector"
             OweOtherUser="{StaticResource OweOtherUser}"
-            BorrowedOtherUser="{StaticResource BorrowedOtherUser}"/>
+            BorrowedOtherUser="{StaticResource BorrowedOtherUser}" />
 
-
-
-
-
-
-        <DataTemplate x:Key="Owe"
+        <DataTemplate
+            x:Key="Owe"
             x:DataType="model2:UserBalance">
             <!--uczestnik ogółem jest dłużny pieniądze-->
             <VerticalStackLayout>
@@ -110,7 +139,7 @@
                     <Image
                         HorizontalOptions="End"
                         Grid.Column="2"
-                        VerticalOptions="Center"
+                        VerticalOptions="Start"
                         Source="{Binding IsExpand, Converter={StaticResource CaretConverter}}"
                         HeightRequest="25"
                         WidthRequest="25">
@@ -129,10 +158,11 @@
                     </CollectionView>
                 </toolkit:Expander>
             </VerticalStackLayout>
-            
+
         </DataTemplate>
 
-        <DataTemplate x:Key="Borrowed"
+        <DataTemplate
+            x:Key="Borrowed"
             x:DataType="model2:UserBalance">
             <!--ogółem uczestnik pożyczył pieniądze-->
             <VerticalStackLayout>
@@ -197,7 +227,8 @@
 
         </DataTemplate>
 
-        <DataTemplate x:Key="NotInvolved"
+        <DataTemplate
+            x:Key="NotInvolved"
             x:DataType="model2:UserBalance">
             <!--uczestnik jest już rozliczony-->
             <VerticalStackLayout>
@@ -228,7 +259,7 @@
                         FontSize="17">
                         <Label.Text>
                             <MultiBinding
-                                StringFormat="{}{0} dłużny(a) ogółem &lt;span style=&quot;color:#C96C45&quot;&gt;{1}&lt;/strong&gt;zł">
+                                StringFormat="{}{0} rozliczony(a)">
                                 <Binding
                                     Path="Name" />
                                 <Binding
@@ -237,27 +268,7 @@
                             </MultiBinding>
                         </Label.Text>
                     </Label>
-                    <Image
-                        HorizontalOptions="End"
-                        Grid.Column="2"
-                        VerticalOptions="Center"
-                        Source="{Binding IsExpand, Converter={StaticResource CaretConverter}}"
-                        HeightRequest="25"
-                        WidthRequest="25">
-                    </Image>
                 </Grid>
-                <toolkit:Expander
-                    IsExpanded="{Binding IsExpand}">
-                    <CollectionView
-                        ItemTemplate="{StaticResource OtherUserBalanceDataTemplateSelector}"
-                        ItemsSource="{Binding BalanceWithOtherUsers}">
-                        <CollectionView.ItemsLayout>
-                            <LinearItemsLayout
-                                Orientation="Vertical"
-                                ItemSpacing="10" />
-                        </CollectionView.ItemsLayout>
-                    </CollectionView>
-                </toolkit:Expander>
             </VerticalStackLayout>
 
         </DataTemplate>
@@ -269,10 +280,12 @@
             NotInvolved="{StaticResource NotInvolved}" />
     </ContentPage.Resources>
 
-
+    
+    
     <StackLayout
         Orientation="Vertical"
         Spacing="10">
+
         <Grid
             RowDefinitions="Auto"
             ColumnDefinitions="30,*,30"
@@ -313,7 +326,7 @@
                 </MultiBinding>
             </Label.Text>
         </Label>
-        
+
         <RefreshView
             IsRefreshing="{Binding Refresh}"
             Command="{Binding RefreshViewCommand}"

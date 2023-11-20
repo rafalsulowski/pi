@@ -573,3 +573,12 @@ C:\Users\01159502\Desktop\TripPlanner\TripPlanner\TripPlanner\obj\Debug\net7.0-i
 C:\Users\01159502\Desktop\TripPlanner\TripPlanner\TripPlanner\obj\Debug\net7.0-ios\iossimulator-x64\resizetizer\r\caret_up_sec.png
 C:\Users\01159502\Desktop\TripPlanner\TripPlanner\TripPlanner\obj\Debug\net7.0-ios\iossimulator-x64\resizetizer\r\caret_up_sec@2x.png
 C:\Users\01159502\Desktop\TripPlanner\TripPlanner\TripPlanner\obj\Debug\net7.0-ios\iossimulator-x64\resizetizer\r\caret_up_sec@3x.png
+C:\Users\01159502\Desktop\TripPlanner\TripPlanner\TripPlanner\obj\Debug\net7.0-ios\iossimulator-x64\resizetizer\r\next_day_sec.png
+C:\Users\01159502\Desktop\TripPlanner\TripPlanner\TripPlanner\obj\Debug\net7.0-ios\iossimulator-x64\resizetizer\r\next_day_sec@2x.png
+C:\Users\01159502\Desktop\TripPlanner\TripPlanner\TripPlanner\obj\Debug\net7.0-ios\iossimulator-x64\resizetizer\r\next_day_sec@3x.png
+C:\Users\01159502\Desktop\TripPlanner\TripPlanner\TripPlanner\obj\Debug\net7.0-ios\iossimulator-x64\resizetizer\r\previous_day_sec.png
+C:\Users\01159502\Desktop\TripPlanner\TripPlanner\TripPlanner\obj\Debug\net7.0-ios\iossimulator-x64\resizetizer\r\previous_day_sec@2x.png
+C:\Users\01159502\Desktop\TripPlanner\TripPlanner\TripPlanner\obj\Debug\net7.0-ios\iossimulator-x64\resizetizer\r\previous_day_sec@3x.png
+C:\Users\01159502\Desktop\TripPlanner\TripPlanner\TripPlanner\obj\Debug\net7.0-ios\iossimulator-x64\resizetizer\r\dots_vertical_sec.png
+C:\Users\01159502\Desktop\TripPlanner\TripPlanner\TripPlanner\obj\Debug\net7.0-ios\iossimulator-x64\resizetizer\r\dots_vertical_sec@2x.png
+C:\Users\01159502\Desktop\TripPlanner\TripPlanner\TripPlanner\obj\Debug\net7.0-ios\iossimulator-x64\resizetizer\r\dots_vertical_sec@3x.png

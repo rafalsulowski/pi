@@ -12,6 +12,8 @@ using TripPlanner.ViewModels.Shares;
 using TripPlanner.ViewModels.Tour;
 using TripPlanner.ViewModels.Chat;
 using TripPlanner.ViewModels.Participant;
+using TripPlanner.Views.ScheduleViews;
+using TripPlanner.ViewModels.Schedule;
 
 namespace TripPlanner;
 
@@ -81,6 +83,10 @@ public static class MauiProgram
 		builder.Services.AddTransient<CreateTransferSubmitViewModel>();
 		builder.Services.AddTransient<TransferViewModel>();
 		builder.Services.AddTransient<BalanceViewModel>();
+		builder.Services.AddTransient<ScheduleCalendarViewModel>();
+		builder.Services.AddTransient<ScheduleDayViewModel>();
+		builder.Services.AddTransient<ScheduleListViewModel>();
+		builder.Services.AddTransient<ScheduleEventViewModel>();
 
 
         //Views
@@ -104,6 +110,10 @@ public static class MauiProgram
 		builder.Services.AddTransient<CreateTransferSubmitPage>();
 		builder.Services.AddTransient<TransferPage>();
 		builder.Services.AddTransient<BalancePage>();
+		builder.Services.AddTransient<ScheduleListPage>();
+		builder.Services.AddTransient<ScheduleCalendarPage>();
+		builder.Services.AddTransient<ScheduleDayPage>();
+		builder.Services.AddTransient<EventPage>();
 
 
 

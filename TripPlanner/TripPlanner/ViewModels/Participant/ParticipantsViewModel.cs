@@ -94,7 +94,7 @@ namespace TripPlanner.ViewModels.Participant
             {
                 { "passTourId",  TourId}
             };
-            await Shell.Current.GoToAsync($"AddParticipantFromFriends", navigationParameter);
+            await Shell.Current.GoToAsync($"/AddParticipantFromFriends", navigationParameter);
         }
         
         [RelayCommand]

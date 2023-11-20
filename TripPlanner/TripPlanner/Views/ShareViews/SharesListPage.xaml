@@ -349,7 +349,7 @@
                 SearchCommandParameter="{Binding Text, Source={x:Reference searchBar}}"
                 CancelButtonColor="{AppThemeBinding Light=#939393, Dark=white}"
                 TextColor="{AppThemeBinding Light=#939393, Dark=white}"
-                Placeholder="Wyszukaj uczestnika">
+                Placeholder="Wyszukaj rozliczenie">
             </SearchBar>
         </Border>
 

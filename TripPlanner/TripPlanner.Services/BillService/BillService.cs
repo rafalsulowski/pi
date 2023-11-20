@@ -295,7 +295,6 @@ namespace TripPlanner.Services.BillService
                 List<Transfer> TransferSenders = responseTransferSender.Data;
                 foreach (var transfer in TransferSenders)
                 {
-                    Balance.TotalBalance += transfer.Value;
                     userBalance.Saldo -= transfer.Value; 
                     var otherUser = userBalance.BalanceWithOtherUsers.FirstOrDefault(u => u.UserId == transfer.RecipientId);
                     if (otherUser != null)

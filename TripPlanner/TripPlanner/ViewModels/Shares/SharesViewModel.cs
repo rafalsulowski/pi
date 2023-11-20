@@ -67,7 +67,7 @@ namespace TripPlanner.ViewModels.Shares
                 { "SelectRecipient",  false},
                 { "IsAllParticipantMode",  false},
             };
-            await Shell.Current.GoToAsync($"/CreateTransferSelectPage", navigationParameter);
+            await Shell.Current.GoToAsync($"/CreateTransferSelect", navigationParameter);
         }
 
         [RelayCommand]
@@ -81,7 +81,7 @@ namespace TripPlanner.ViewModels.Shares
                 { "passSplitBillViewAccept",  false},
                 { "passIsEditing",  false}
             };
-            await Shell.Current.GoToAsync($"/CreateBillPage", navigationParameter);
+            await Shell.Current.GoToAsync($"/CreateBill", navigationParameter);
         }
 
         [RelayCommand]
@@ -140,6 +140,7 @@ namespace TripPlanner.ViewModels.Shares
             }
             else
             {
+                result.Data.Reverse();
                 Shares = result.Data.ToObservableCollection();
                 SharesRef = result.Data.ToObservableCollection();
             }

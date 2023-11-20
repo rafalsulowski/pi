@@ -16,7 +16,7 @@ namespace TripPlanner.DataTemplates
         protected override DataTemplate OnSelectTemplate(object item, BindableObject container)
         {
             var elem = (OtherUser)item;
-            if (elem.Saldo < 0)
+            if (elem.Saldo > 0)
                 return BorrowedOtherUser;
             else
                 return OweOtherUser;

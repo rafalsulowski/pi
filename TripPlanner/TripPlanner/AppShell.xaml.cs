@@ -1,6 +1,7 @@
 ﻿using TripPlanner.Views.ChatViews;
 using TripPlanner.Views.HomeViews;
 using TripPlanner.Views.ParticipantViews;
+using TripPlanner.Views.ScheduleViews;
 using TripPlanner.Views.ShareViews;
 using TripPlanner.Views.TourViews;
 
@@ -23,12 +24,16 @@ public partial class AppShell : Shell
 		Routing.RegisterRoute("Tour/Participants", typeof(ParticipantsListPage));
 		Routing.RegisterRoute("Tour/Participants/AddParticipantFromFriends", typeof(AddParticipantPage));
 		Routing.RegisterRoute("Tour/Shares", typeof(SharesListPage));
-		Routing.RegisterRoute("Tour/Shares/CreateBillPage", typeof(CreateBillPage));
-		Routing.RegisterRoute("Tour/Shares/CreateBillPage/DivisionType", typeof(DivisionTypePage));
+		Routing.RegisterRoute("Tour/Shares/CreateBill", typeof(CreateBillPage));
+		Routing.RegisterRoute("Tour/Shares/CreateBill/DivisionType", typeof(DivisionTypePage));
 		Routing.RegisterRoute("Tour/Shares/Bill", typeof(BillPage));
-		Routing.RegisterRoute("Tour/Shares/CreateTransferSelectPage", typeof(CreateTransferSelectPage));
-		Routing.RegisterRoute("Tour/Shares/CreateTransferSelectPage/CreateTransferSubmitPage", typeof(CreateTransferSubmitPage));	
+		Routing.RegisterRoute("Tour/Shares/CreateTransferSelect", typeof(CreateTransferSelectPage));
+		Routing.RegisterRoute("Tour/Shares/CreateTransferSelect/CreateTransferSubmit", typeof(CreateTransferSubmitPage));	
 		Routing.RegisterRoute("Tour/Shares/Transfer", typeof(TransferPage));
 		Routing.RegisterRoute("Tour/Shares/Balance", typeof(BalancePage));
+		Routing.RegisterRoute("Tour/ScheduleList", typeof(ScheduleListPage));
+		Routing.RegisterRoute("Tour/ScheduleCalendar", typeof(ScheduleCalendarPage));
+		Routing.RegisterRoute("Tour/ScheduleDay", typeof(ScheduleDayPage));
+		Routing.RegisterRoute("Tour/ScheduleDay/Event", typeof(EventPage));
 	}
 }

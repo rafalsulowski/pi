@@ -134,7 +134,7 @@ namespace TripPlanner.ViewModels.Shares
                 { "SelectRecipient",  IsSelectRecipientMode},
                 { "IsAllParticipantMode",  IsSelectRecipientMode},
             };
-            await Shell.Current.GoToAsync($"Tour/Shares/CreateTransferSelectPage", navigationParameter);
+            await Shell.Current.GoToAsync($"Tour/Shares/CreateTransferSelect", navigationParameter);
         }
 
         [RelayCommand]

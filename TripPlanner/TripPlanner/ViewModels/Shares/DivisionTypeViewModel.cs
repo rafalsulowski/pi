@@ -207,7 +207,7 @@ namespace TripPlanner.ViewModels.Shares
                 { "passSplitBillViewAccept",  false},
                 { "passIsEditing",  false}
             };
-            await Shell.Current.GoToAsync($"/Tour/Shares/CreateBillPage", navigationParameter);
+            await Shell.Current.GoToAsync($"/Tour/Shares/CreateBill", navigationParameter);
         }
 
         [RelayCommand]
@@ -273,7 +273,7 @@ namespace TripPlanner.ViewModels.Shares
                 { "passSplitBillViewAccept",  true},
                 { "passIsEditing",  false}
             };
-            await Shell.Current.GoToAsync($"/Tour/Shares/CreateBillPage", navigationParameter);
+            await Shell.Current.GoToAsync($"/Tour/Shares/CreateBill", navigationParameter);
         }
         
         private async Task LoadData()

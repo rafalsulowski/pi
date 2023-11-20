@@ -123,7 +123,7 @@
                     BackgroundColor="#52AB98">
                     <Border.GestureRecognizers>
                         <TapGestureRecognizer
-                            Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:TourViewModel}}, Path=GoCalendarCommand}" />
+                            Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:TourViewModel}}, Path=GoScheduleCommand}" />
                     </Border.GestureRecognizers>
                     <VerticalStackLayout
                         VerticalOptions="Center"

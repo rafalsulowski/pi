@@ -36,18 +36,18 @@ namespace TripPlanner.ViewModels.Tour
         {
             m_TourService = tourService;
             m_Configuration = configuration;
-
-            startDate = DateTime.Now;
-            stopDate = DateTime.Now;
+            
+            StartDate = DateTime.Now;
+            StopDate = DateTime.Now;
 
             //dane testowe
-            startDate = new DateTime(2023, 12, 29);
-            stopDate = new DateTime(2024, 1, 4);
+            StartDate = new DateTime(2023, 12, 29);
+            StopDate = new DateTime(2024, 1, 4);
             ParticipantMax = 13;
-            title = "Wyjazd na narty 2024";
-            description = "Pierwszy wyajzd na słowację";
-            targetCountry = "Słowacja";
-            targetRegion = "Chopok";
+            Title = "Wyjazd na narty 2024";
+            Description = "Pierwszy wyajzd na słowację";
+            TargetCountry = "Słowacja";
+            TargetRegion = "Chopok";
         }
 
         [RelayCommand]

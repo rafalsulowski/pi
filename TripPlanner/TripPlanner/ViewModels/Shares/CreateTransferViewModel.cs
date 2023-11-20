@@ -136,7 +136,7 @@ namespace TripPlanner.ViewModels.Shares
                     { "SelectRecipient",  false},
                     { "IsAllParticipantMode",  true},
                 };
-                await Shell.Current.GoToAsync($"/CreateTransferSelectPage", navigationParameter);
+                await Shell.Current.GoToAsync($"/CreateTransferSelect", navigationParameter);
             }
             else
             {
@@ -162,7 +162,7 @@ namespace TripPlanner.ViewModels.Shares
                 { "passTransfer",  Transfer},
                 { "SelectRecipient",  false},
             };
-            await Shell.Current.GoToAsync($"Tour/Shares/CreateTransferSelectPage/CreateTransferSubmitPage", navigationParameter);
+            await Shell.Current.GoToAsync($"Tour/Shares/CreateTransferSelect/CreateTransferSubmit", navigationParameter);
         }
 
         [RelayCommand]
@@ -177,7 +177,7 @@ namespace TripPlanner.ViewModels.Shares
                     { "passTransfer",  Transfer},
                     { "SelectRecipient",  true},
                 };
-                await Shell.Current.GoToAsync($"Tour/Shares/CreateTransferSelectPage/CreateTransferSubmitPage", navigationParameter);
+                await Shell.Current.GoToAsync($"Tour/Shares/CreateTransferSelect/CreateTransferSubmit", navigationParameter);
             }
             else
             {
@@ -189,7 +189,7 @@ namespace TripPlanner.ViewModels.Shares
                     { "SelectRecipient",  true},
                     { "IsAllParticipantMode",  true},
                 };
-                await Shell.Current.GoToAsync($"Tour/Shares/CreateTransferSelectPage", navigationParameter);
+                await Shell.Current.GoToAsync($"Tour/Shares/CreateTransferSelect", navigationParameter);
             }            
         }
 

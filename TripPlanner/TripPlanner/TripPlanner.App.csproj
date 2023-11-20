@@ -107,6 +107,7 @@
 	  <None Remove="Resources\Images\cloud_sun_dt.svg" />
 	  <None Remove="Resources\Images\cloud_sun_wt.svg" />
 	  <None Remove="Resources\Images\copy_dt.svg" />
+	  <None Remove="Resources\Images\dots_vertical_sec.svg" />
 	  <None Remove="Resources\Images\dot_dt.svg" />
 	  <None Remove="Resources\Images\dot_sec.svg" />
 	  <None Remove="Resources\Images\dot_wt.svg" />
@@ -137,6 +138,7 @@
 	  <None Remove="Resources\Images\plus_pri.svg" />
 	  <None Remove="Resources\Images\plus_sec.svg" />
 	  <None Remove="Resources\Images\plus_wt.svg" />
+	  <None Remove="Resources\Images\previous_day_sec.svg" />
 	  <None Remove="Resources\Images\search_dt.svg" />
 	  <None Remove="Resources\Images\search_gray.svg" />
 	  <None Remove="Resources\Images\send_dt.svg" />
@@ -175,7 +177,25 @@
 	  <MauiXaml Update="Controls\QuestionnaireControls\QuestionnaireControl.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Controls\TimeDurationLabelControl.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Views\ParticipantViews\UserDetailsPopups.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\ScheduleViews\EventPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\ScheduleViews\EventPopups.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\ScheduleViews\ScheduleCalendarPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\ScheduleViews\ScheduleDayPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\ScheduleViews\ScheduleListPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\ShareViews\BalancePage.xaml">
@@ -262,7 +282,6 @@
 	  <Folder Include="Views\CheckListViews\" />
 	  <Folder Include="Views\WeatherViews\" />
 	  <Folder Include="Views\RouteViews\" />
-	  <Folder Include="Views\HarmonogramViews\" />
 	  <Folder Include="Views\CultureViews\" />
 	</ItemGroup>
 

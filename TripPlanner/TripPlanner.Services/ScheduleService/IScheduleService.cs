@@ -15,7 +15,7 @@ namespace TripPlanner.Services.ScheduleService
         Task<RepositoryResponse<bool>> CreateScheduleDay(ScheduleDay schedule);
         Task<RepositoryResponse<bool>> DeleteScheduleDay(ScheduleDay schedule);
         Task<RepositoryResponse<List<ScheduleDay>>> GetWholeSchedule(int tourId);
-        Task<RepositoryResponse<List<ScheduleEvent>>> GetAllEvents(int scheduleDayId);
+        Task<RepositoryResponse<ScheduleDay>> GetScheduleDay(int scheduleDayId);
         Task<RepositoryResponse<bool>> CreateScheduleEvent(ScheduleEvent newEvent);
         Task<RepositoryResponse<bool>> UpdateScheduleEvent(ScheduleEvent newEvent);
         Task<RepositoryResponse<bool>> DeleteScheduleEvent(ScheduleEvent e);

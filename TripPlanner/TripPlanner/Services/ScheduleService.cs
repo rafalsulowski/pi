@@ -1,8 +1,10 @@
 ﻿using Newtonsoft.Json;
 using System.Net.Http.Json;
 using System.Text;
+using TripPlanner.Models.DTO.ScheduleDTOs;
 using TripPlanner.Models.DTO.TourDTOs;
 using TripPlanner.Models.Models;
+using TripPlanner.Models.Models.ScheduleModels;
 
 namespace TripPlanner.Services
 {
@@ -18,93 +20,30 @@ namespace TripPlanner.Services
         }
 
 
-        // Zwraca wyjazd o danym id
-        public async Task<TourDTO> GetTourById(int tourId)
+        // Zwraca harmonogram
+        public async Task<List<ScheduleDayDTO>> GetSchedule(int tourId)
         {
             try
             {
-                HttpResponseMessage response = m_HttpClient.GetAsync($"{m_Configuration.WebApiUrl}/Tour/{tourId}").Result;
+                HttpResponseMessage response = m_HttpClient.GetAsync($"{m_Configuration.WebApiUrl}/Schedule/getSchedule/{tourId}").Result;
                 if (response.IsSuccessStatusCode)
                 {
-                    return await response.Content.ReadFromJsonAsync<TourDTO>();
+                    return await response.Content.ReadFromJsonAsync<List<ScheduleDayDTO>>();
                 }
             }
             catch (Exception) { }
             return null;
         }
 
-        // Zwraca wyjazd o danym id z wiadomościami z chatu
-        public async Task<TourDTO> GetTourWithMessages(int tourId)
+        // Zwraca caly obiekt dnia z harmonogramu
+        public async Task<ScheduleDayDTO> GetScheduleDay(int scheduleDayId)
         {
             try
             {
-                HttpResponseMessage response = m_HttpClient.GetAsync($"{m_Configuration.WebApiUrl}/Tour/{tourId}/GetWithMessages").Result;
+                HttpResponseMessage response = m_HttpClient.GetAsync($"{m_Configuration.WebApiUrl}/Schedule/getScheduleDay/{scheduleDayId}").Result;
                 if (response.IsSuccessStatusCode)
                 {
-                    return await response.Content.ReadFromJsonAsync<TourDTO>();
-                }
-            }
-            catch (Exception) { }
-            return null;
-        }
-
-        // Zwraca wyjazd o danym id z uczestnikami (podstawowe informacje)
-        public async Task<TourDTO> GetTourWithParticipants(int tourId)
-        {
-            try
-            {
-                HttpResponseMessage response = m_HttpClient.GetAsync($"{m_Configuration.WebApiUrl}/Tour/{tourId}/GetWithParticipants").Result;
-                if (response.IsSuccessStatusCode)
-                {
-                    return await response.Content.ReadFromJsonAsync<TourDTO>();
-                }
-            }
-            catch (Exception) { }
-            return null;
-        }
-
-        // Zwraca listę z wszelkimi potrzebnymi informacjami o wszystkich uczestnikach
-        // Zwraca listę ExtendParticipantDTO, uzupełniając wszystkie infromacje
-        public async Task<List<ExtendParticipantDTO>> GetTourExtendParticipant(int tourId)
-        {
-            try
-            {
-                HttpResponseMessage response = m_HttpClient.GetAsync($"{m_Configuration.WebApiUrl}/Tour/{tourId}/GetExtendParticipants").Result;
-                if (response.IsSuccessStatusCode)
-                {
-                    return await response.Content.ReadFromJsonAsync<List<ExtendParticipantDTO>>();
-                }
-            }
-            catch (Exception) { }
-            return null;
-        }
-
-        // Zwraca wszelkie potrzebne informacje o uczestniku o danym id
-        public async Task<ExtendParticipantDTO> GetTourExtendParticipantById(int tourId, int userId)
-        {
-            try
-            {
-                HttpResponseMessage response = m_HttpClient.GetAsync($"{m_Configuration.WebApiUrl}/Tour/{tourId}/GetExtendParticipantsById/{userId}").Result;
-                if (response.IsSuccessStatusCode)
-                {
-                    return await response.Content.ReadFromJsonAsync<ExtendParticipantDTO>();
-                }
-            }
-            catch (Exception) { }
-            return null;
-        }
-
-        // Zwraca listę imion, nazwisk oraz nikców, wszystkich uczestników
-        // Zwraca listę ExtendParticipantDTO, jednakże nie uzupełnia wszystkich
-        // informacji klasy tylko: Fullname oraz Nickname
-        public async Task<List<ExtendParticipantDTO>> GetTourParticipantsNames(int tourId)
-        {
-            try
-            {
-                HttpResponseMessage response = m_HttpClient.GetAsync($"{m_Configuration.WebApiUrl}/Tour/{tourId}/GetParticipantsNames").Result;
-                if (response.IsSuccessStatusCode)
-                {
-                    return await response.Content.ReadFromJsonAsync<List<ExtendParticipantDTO>>();
+                    return await response.Content.ReadFromJsonAsync<ScheduleDayDTO>();
                 }
             }
             catch (Exception) { }
@@ -112,20 +51,20 @@ namespace TripPlanner.Services
         }
 
 
-        // Tworzenie nowego wyjazdu
-        public async Task<RepositoryResponse<int>> CreateTour(CreateTourDTO tour)
+        // Tworzenie nowego wydarzenia podczas dnia
+        public async Task<RepositoryResponse<bool>> CreateScheduleEvent(CreateScheduleEventDTO newEvent)
         {
             string errMsg = "";
             try
             {
-                string json = JsonConvert.SerializeObject(tour);
+                string json = JsonConvert.SerializeObject(newEvent);
                 StringContent httpContent = new StringContent(json, Encoding.UTF8, "application/json");
-                HttpResponseMessage response = m_HttpClient.PostAsync($"{m_Configuration.WebApiUrl}/Tour", httpContent).Result;
+                HttpResponseMessage response = m_HttpClient.PostAsync($"{m_Configuration.WebApiUrl}/Schedule/scheduleEvent", httpContent).Result;
                 if (response.IsSuccessStatusCode)
                 {
-                    RepositoryResponse<int> resp = await response.Content.ReadFromJsonAsync<RepositoryResponse<int>>();
+                    RepositoryResponse<bool> resp = await response.Content.ReadFromJsonAsync<RepositoryResponse<bool>>();
                     if (resp.Success)
-                        return new RepositoryResponse<int> { Data = resp.Data, Message = "", Success = true };
+                        return new RepositoryResponse<bool> { Data = true, Message = "", Success = true };
                     else
                         errMsg = resp.Message;
                 }
@@ -136,27 +75,18 @@ namespace TripPlanner.Services
             {
                 errMsg = $"Wyjątek: {e.Message}";
             }
-            return new RepositoryResponse<int> { Data = -1, Message = errMsg, Success = false };
+            return new RepositoryResponse<bool> { Data = false, Message = errMsg, Success = false };
         }
 
-        // Dodaje uczestnika
-        public async Task<RepositoryResponse<bool>> AddParticipant(int tourId, int userId)
+        // Usuwa uczestnika
+        public async Task<RepositoryResponse<bool>> UpdateScheduleEvent(int ScheduleDayId, int ScheduleEventId, int userId, EditScheduleEventDTO editEvent)
         {
             string errMsg = "";
             try
             {
-                ParticipantTourDTO participant = new ParticipantTourDTO
-                {
-                    UserId = userId,
-                    TourId = tourId,
-                    IsOrganizer = false,
-                    AccessionDate = DateTime.Now,
-                    Nickname = ""
-                };
-
-                string json = JsonConvert.SerializeObject(participant);
+                string json = JsonConvert.SerializeObject(editEvent);
                 StringContent httpContent = new StringContent(json, Encoding.UTF8, "application/json");
-                HttpResponseMessage response = m_HttpClient.PostAsync($"{m_Configuration.WebApiUrl}/Tour/addParticipant", httpContent).Result;
+                HttpResponseMessage response = m_HttpClient.PutAsync($"{m_Configuration.WebApiUrl}/Schedule/{ScheduleDayId}/editEvent/{ScheduleEventId}/{userId}", httpContent).Result;
                 if (response.IsSuccessStatusCode)
                 {
                     var resp = await response.Content.ReadFromJsonAsync<RepositoryResponse<bool>>();
@@ -176,62 +106,12 @@ namespace TripPlanner.Services
         }
 
         // Usuwa uczestnika
-        public async Task<RepositoryResponse<bool>> DeleteParticipant(int tourId, int userId)
+        public async Task<RepositoryResponse<bool>> DeleteScheduleEvent(int ScheduleDayId, int ScheduleEventId, int userId)
         {
             string errMsg = "";
             try
             {
-                HttpResponseMessage response = m_HttpClient.DeleteAsync($"{m_Configuration.WebApiUrl}/Tour/{tourId}/deleteParticipant/{userId}").Result;
-                if (response.IsSuccessStatusCode)
-                {
-                    var resp = await response.Content.ReadFromJsonAsync<RepositoryResponse<bool>>();
-                    if (resp.Success)
-                        return new RepositoryResponse<bool> { Data = true, Message = "", Success = true };
-                    else
-                        errMsg = resp.Message;
-                }
-                else
-                    errMsg = $"Kod błędu: {response.StatusCode}";
-            }
-            catch (Exception e)
-            {
-                errMsg = $"Wyjątek: {e.Message}";
-            }
-            return new RepositoryResponse<bool> { Data = false, Message = errMsg, Success = false };
-        }
-
-        // Usuwa uczestnika
-        public async Task<RepositoryResponse<bool>> AddOrganizer(int tourId, int userId)
-        {
-            string errMsg = "";
-            try
-            {
-                HttpResponseMessage response = m_HttpClient.PutAsync($"{m_Configuration.WebApiUrl}/Tour/{tourId}/makeOrganizer/{userId}", null).Result;
-                if (response.IsSuccessStatusCode)
-                {
-                    var resp = await response.Content.ReadFromJsonAsync<RepositoryResponse<bool>>();
-                    if (resp.Success)
-                        return new RepositoryResponse<bool> { Data = true, Message = "", Success = true };
-                    else
-                        errMsg = resp.Message;
-                }
-                else
-                    errMsg = $"Kod błędu: {response.StatusCode}";
-            }
-            catch (Exception e)
-            {
-                errMsg = $"Wyjątek: {e.Message}";
-            }
-            return new RepositoryResponse<bool> { Data = false, Message = errMsg, Success = false };
-        }
-
-        // Usuwa organizatora
-        public async Task<RepositoryResponse<bool>> DeleteOrganizer(int tourId, int userId)
-        {
-            string errMsg = "";
-            try
-            {
-                HttpResponseMessage response = m_HttpClient.PutAsync($"{m_Configuration.WebApiUrl}/Tour/{tourId}/deleteOrganizer/{userId}", null).Result;
+                HttpResponseMessage response = m_HttpClient.DeleteAsync($"{m_Configuration.WebApiUrl}/Schedule/{ScheduleDayId}/deleteEvent/{ScheduleEventId}/{userId}").Result;
                 if (response.IsSuccessStatusCode)
                 {
                     var resp = await response.Content.ReadFromJsonAsync<RepositoryResponse<bool>>();

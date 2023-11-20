@@ -34,9 +34,9 @@ namespace TripPlanner.Services.ScheduleService
             return response;
         }
 
-        public async Task<RepositoryResponse<List<ScheduleEvent>>> GetAllEvents(int scheduleDayId)
+        public async Task<RepositoryResponse<ScheduleDay>> GetScheduleDay(int scheduleDayId)
         {
-            var response = await _ScheduleEventRepository.GetAll(u => u.ScheduleDayId == scheduleDayId);
+            var response = await _ScheduleDayRepository.GetFirstOrDefault(u => u.Id == scheduleDayId, "Events");
             return response;
         }
 

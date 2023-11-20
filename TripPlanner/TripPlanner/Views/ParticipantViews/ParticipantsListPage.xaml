@@ -332,7 +332,7 @@
             <Label
                  FontSize="16"
                  TextColor="{AppThemeBinding Light=#939393, Dark=white}"
-                 Text="Eksportuj listę"/>
+                 Text="Eksportuj listę do pdf"/>
             <Image
                  WidthRequest="25"
                  Source="download_sec.png"/>
