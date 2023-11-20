@@ -258,8 +258,14 @@
             </Image>
         </HorizontalStackLayout>
 
+        <Label
+            Margin="0,20,0,10"
+            HorizontalOptions="Center"
+            IsVisible="{Binding EmptyLabel}"
+            Text="Brak wydarzeń w harmonogramie">
+        </Label>
+        
         <CollectionView
-            EmptyView="Brak zaplanowanych punktów w harmonogramie"
             ItemTemplate="{StaticResource ScheduleEventDataTemplateSelector}"
             ItemsSource="{Binding Schedule.Events}">
             <CollectionView.Footer>

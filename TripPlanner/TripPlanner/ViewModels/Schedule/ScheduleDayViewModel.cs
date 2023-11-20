@@ -27,6 +27,9 @@ namespace TripPlanner.ViewModels.Schedule
         [ObservableProperty]
         ScheduleDayDTO schedule;
 
+        [ObservableProperty]
+        bool emptyLabel;
+
         public ScheduleDayViewModel(Configuration configuration, ScheduleService scheduleService)
         {
             m_Configuration = configuration;
@@ -138,6 +141,11 @@ namespace TripPlanner.ViewModels.Schedule
             var result = await m_ScheduleService.GetScheduleDay(ScheduleDayId);
             Schedule = result;
             Schedule.Events.OrderBy(u => u.StartTime);
+
+            if (Schedule.Events.Count == 0)
+                EmptyLabel = true;
+            else
+                EmptyLabel = false;
         }
     }
 }

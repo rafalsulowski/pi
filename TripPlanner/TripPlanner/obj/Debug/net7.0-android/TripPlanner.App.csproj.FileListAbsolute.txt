@@ -1467,6 +1467,8 @@ C:\Users\01159502\Desktop\TripPlanner\TripPlanner\TripPlanner\obj\Debug\net7.0-a
 C:\Users\01159502\Desktop\TripPlanner\TripPlanner\TripPlanner\obj\Debug\net7.0-android\resizetizer\r\drawable-xhdpi\dots_vertical_sec.png
 C:\Users\01159502\Desktop\TripPlanner\TripPlanner\TripPlanner\obj\Debug\net7.0-android\resizetizer\r\drawable-xxhdpi\dots_vertical_sec.png
 C:\Users\01159502\Desktop\TripPlanner\TripPlanner\TripPlanner\obj\Debug\net7.0-android\resizetizer\r\drawable-xxxhdpi\dots_vertical_sec.png
+C:\Users\01159502\Desktop\TripPlanner\TripPlanner\TripPlanner\obj\Debug\net7.0-android\libraryprojectimports.cache
+C:\Users\01159502\Desktop\TripPlanner\TripPlanner\TripPlanner\obj\Debug\net7.0-android\android\src\crc64338477404e88479c\GenericGlobalLayoutListenerImproved.java
 C:\Users\01159502\Desktop\TripPlanner\TripPlanner\TripPlanner\obj\Debug\net7.0-android\android\assets\mscorlib.dll
 C:\Users\01159502\Desktop\TripPlanner\TripPlanner\TripPlanner\obj\Debug\net7.0-android\android\assets\System.Collections.Concurrent.dll
 C:\Users\01159502\Desktop\TripPlanner\TripPlanner\TripPlanner\obj\Debug\net7.0-android\android\assets\System.Data.Common.dll

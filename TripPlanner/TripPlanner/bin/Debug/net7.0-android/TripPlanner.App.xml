@@ -431,6 +431,9 @@
         <member name="P:TripPlanner.ViewModels.Schedule.ScheduleDayViewModel.Schedule">
             <inheritdoc cref="F:TripPlanner.ViewModels.Schedule.ScheduleDayViewModel.schedule"/>
         </member>
+        <member name="P:TripPlanner.ViewModels.Schedule.ScheduleDayViewModel.EmptyLabel">
+            <inheritdoc cref="F:TripPlanner.ViewModels.Schedule.ScheduleDayViewModel.emptyLabel"/>
+        </member>
         <member name="F:TripPlanner.ViewModels.Schedule.ScheduleDayViewModel.goBackCommand">
             <summary>The backing field for <see cref="P:TripPlanner.ViewModels.Schedule.ScheduleDayViewModel.GoBackCommand"/>.</summary>
         </member>
@@ -1226,6 +1229,9 @@
         <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.Schedule">
             <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "Schedule" generated properties.</summary>
         </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.EmptyLabel">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "EmptyLabel" generated properties.</summary>
+        </member>
         <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.EventDto">
             <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "EventDto" generated properties.</summary>
         </member>
@@ -1396,6 +1402,9 @@
         </member>
         <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.Schedule">
             <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "Schedule" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.EmptyLabel">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "EmptyLabel" generated properties.</summary>
         </member>
         <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.EventDto">
             <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "EventDto" generated properties.</summary>

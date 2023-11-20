@@ -118,34 +118,51 @@ namespace TripPlanner.ViewModels.Schedule
                 return;
             }
 
-            if(IsStopTimeActive)
+            if (IsStopTimeActive)
             {
-                if(StopTime < StartTime)
+                if (StopTime < StartTime)
                 {
                     await Shell.Current.CurrentPage.DisplayAlert("Błąd", "Data zakończenia jest ustawiona przed datą zakończenia", "Popraw");
                     return;
                 }
-            }
 
-            foreach(var eve in Schedule.Events)
-            {
-                if (EventDto != null && EventDto.Id == eve.Id)
-                    continue;
-
-                int eveMinuteStartTime = eve.StartTime.Hour * 60 + eve.StartTime.Minute;
-                int eveMinuteStopTime = eve.StopTime.Hour * 60 + eve.StopTime.Minute;
-                int userMinuteStartTime = StartTime.Hours * 60 + StartTime.Minutes;
-                int userMinuteStopTime = StopTime.Hours * 60 + StopTime.Minutes;
-
-                if(!(userMinuteStartTime <= eveMinuteStartTime && userMinuteStopTime <= eveMinuteStartTime))
+                foreach (var eve in Schedule.Events)
                 {
-                    await Shell.Current.CurrentPage.DisplayAlert("Błąd", $"Wybrane godziny pokrywają się z innym punktem w harmonogramie: \"{eve.Name}\"", "Popraw");
-                    return;
+                    if (EventDto != null && EventDto.Id == eve.Id)
+                        continue;
+
+                    int eveMinuteStartTime = eve.StartTime.Hour * 60 + eve.StartTime.Minute;
+                    int eveMinuteStopTime = eve.StopTime.Hour * 60 + eve.StopTime.Minute;
+                    int userMinuteStartTime = StartTime.Hours * 60 + StartTime.Minutes;
+                    int userMinuteStopTime = StopTime.Hours * 60 + StopTime.Minutes;
+
+                    if (!((userMinuteStartTime <= eveMinuteStartTime && userMinuteStopTime <= eveMinuteStartTime)
+                        || (userMinuteStartTime >= eveMinuteStopTime && userMinuteStopTime >= eveMinuteStopTime)))
+                    {
+                        await Shell.Current.CurrentPage.DisplayAlert("Błąd", $"Wybrane godziny pokrywają się z innym punketm w harmonogramie: \"{eve.Name}\"", "Popraw");
+                        return;
+                    }
                 }
-                else if (!(userMinuteStartTime >= eveMinuteStopTime))
+            }
+            else
+            {
+                foreach (var eve in Schedule.Events)
                 {
-                    await Shell.Current.CurrentPage.DisplayAlert("Błąd", $"Wybrane godziny pokrywają się z innym punketm w harmonogramie: \"{eve.Name}\"", "Popraw");
-                    return;
+                    if (EventDto != null && EventDto.Id == eve.Id)
+                        continue;
+
+                    int eveMinuteStartTime = eve.StartTime.Hour * 60 + eve.StartTime.Minute;
+                    int eveMinuteStopTime = eve.StopTime.Hour * 60 + eve.StopTime.Minute;
+                    int userMinuteStartTime = StartTime.Hours * 60 + StartTime.Minutes;
+                    int userMinuteStopTime = StopTime.Hours * 60 + StopTime.Minutes;
+
+                    if (!((userMinuteStartTime <= eveMinuteStartTime && userMinuteStopTime <= eveMinuteStartTime)
+                        || (userMinuteStartTime >= eveMinuteStopTime && userMinuteStopTime >= eveMinuteStopTime)))
+                    {
+                        var rews = await Shell.Current.CurrentPage.DisplayAlert("Uwaga", $"Wybrany czas wydarzenia pokrywaja się z innym wydarzeniem w harmonogramie: \"{eve.Name}\"", "Popraw", "Ignoruj");
+                        if(rews)
+                            return;
+                    }
                 }
             }
 
