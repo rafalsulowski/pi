@@ -65,20 +65,26 @@ namespace TripPlanner.Services
         }
 
 
-        //Tworzenie nowego użytkownika
-        public async Task<RepositoryResponse<int>> Register(CreateUserDTO user)
+        // Logowanie
+        public async Task<RepositoryResponse<UserDTO>> Login(string emial, string password)
         {
             string errMsg = "";
             try
             {
-                string json = JsonConvert.SerializeObject(user);
+                LoginDTO loginDto = new LoginDTO
+                {
+                    Email = emial,
+                    PasswordHash = password
+                };
+
+                string json = JsonConvert.SerializeObject(loginDto);
                 StringContent httpContent = new StringContent(json, Encoding.UTF8, "application/json");
-                HttpResponseMessage response = m_HttpClient.PostAsync($"{m_Configuration.WebApiUrl}/User", httpContent).Result;
+                HttpResponseMessage response = m_HttpClient.PostAsync($"{m_Configuration.WebApiUrl}/User/login", httpContent).Result;
                 if (response.IsSuccessStatusCode)
                 {
-                    RepositoryResponse<int> resp = await response.Content.ReadFromJsonAsync<RepositoryResponse<int>>();
+                    RepositoryResponse<UserDTO> resp = await response.Content.ReadFromJsonAsync<RepositoryResponse<UserDTO>>();
                     if (resp.Success)
-                        return new RepositoryResponse<int> { Data = resp.Data, Message = "", Success = true };
+                        return new RepositoryResponse<UserDTO> { Data = resp.Data, Message = "", Success = true };
                     else
                         errMsg = resp.Message;
                 }
@@ -89,7 +95,34 @@ namespace TripPlanner.Services
             {
                 errMsg = $"Wyjątek: {e.Message}";
             }
-            return new RepositoryResponse<int> { Data = -1, Message = errMsg, Success = false };
+            return new RepositoryResponse<UserDTO> { Data = null, Message = errMsg, Success = false };
+        }
+
+        //Tworzenie nowego użytkownika
+        public async Task<RepositoryResponse<UserDTO>> Register(CreateUserDTO user)
+        {
+            string errMsg = "";
+            try
+            {
+                string json = JsonConvert.SerializeObject(user);
+                StringContent httpContent = new StringContent(json, Encoding.UTF8, "application/json");
+                HttpResponseMessage response = m_HttpClient.PostAsync($"{m_Configuration.WebApiUrl}/User", httpContent).Result;
+                if (response.IsSuccessStatusCode)
+                {
+                    RepositoryResponse<UserDTO> resp = await response.Content.ReadFromJsonAsync<RepositoryResponse<UserDTO>>();
+                    if (resp.Success)
+                        return new RepositoryResponse<UserDTO> { Data = resp.Data, Message = "", Success = true };
+                    else
+                        errMsg = resp.Message;
+                }
+                else
+                    errMsg = $"Kod błędu: {response.StatusCode}";
+            }
+            catch (Exception e)
+            {
+                errMsg = $"Wyjątek: {e.Message}";
+            }
+            return new RepositoryResponse<UserDTO> { Data = null, Message = errMsg, Success = false };
         }
     }
 }

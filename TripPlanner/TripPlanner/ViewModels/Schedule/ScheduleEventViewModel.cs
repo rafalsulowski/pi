@@ -139,7 +139,13 @@ namespace TripPlanner.ViewModels.Schedule
                     if (!((userMinuteStartTime <= eveMinuteStartTime && userMinuteStopTime <= eveMinuteStartTime)
                         || (userMinuteStartTime >= eveMinuteStopTime && userMinuteStopTime >= eveMinuteStopTime)))
                     {
-                        await Shell.Current.CurrentPage.DisplayAlert("Błąd", $"Wybrane godziny pokrywają się z innym punketm w harmonogramie: \"{eve.Name}\"", "Popraw");
+                        string duration = "";
+                        if (eveMinuteStartTime == eveMinuteStopTime)
+                            duration = $"{eve.StartTime.Hour}:{eve.StartTime.Minute}";
+                        else
+                            duration = $"{eve.StartTime.Hour}:{eve.StartTime.Minute} - {eve.StopTime.Hour}:{eve.StopTime.Minute}";
+
+                        var rews = await Shell.Current.CurrentPage.DisplayAlert("Uwaga", $"Wybrany czas wydarzenia pokrywaja się z innym wydarzeniem w harmonogramie: \"{eve.Name}\" odbywajacym się w czasie: {duration}", "Popraw", "Ignoruj");
                         return;
                     }
                 }
@@ -159,7 +165,13 @@ namespace TripPlanner.ViewModels.Schedule
                     if (!((userMinuteStartTime <= eveMinuteStartTime && userMinuteStopTime <= eveMinuteStartTime)
                         || (userMinuteStartTime >= eveMinuteStopTime && userMinuteStopTime >= eveMinuteStopTime)))
                     {
-                        var rews = await Shell.Current.CurrentPage.DisplayAlert("Uwaga", $"Wybrany czas wydarzenia pokrywaja się z innym wydarzeniem w harmonogramie: \"{eve.Name}\"", "Popraw", "Ignoruj");
+                        string duration = "";
+                        if (eveMinuteStartTime == eveMinuteStopTime)
+                            duration = $"{eve.StartTime.Hour}:{eve.StartTime.Minute}";
+                        else
+                            duration = $"{eve.StartTime.Hour}:{eve.StartTime.Minute} - {eve.StopTime.Hour}:{eve.StopTime.Minute}";
+
+                        var rews = await Shell.Current.CurrentPage.DisplayAlert("Uwaga", $"Wybrany czas wydarzenia pokrywaja się z innym wydarzeniem w harmonogramie: \"{eve.Name}\" odbywajacym się w czasie: {duration}", "Popraw", "Ignoruj");
                         if(rews)
                             return;
                     }

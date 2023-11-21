@@ -2,15 +2,15 @@ Listopad 2023:
 16 - wyswietlanie transferów, poprawki w tworzeniu bilansu, wystiwtlanie bilansu (domknięcie SplitWise) OK
 17 - backend harmonogramu (+ mozliwe edycje w bazie danych dla harmonogramu) OK
 18 - strona główna harmonogramu OK, strona szczegółowa harmonogreamu, dodawanie akcji podczass dnia OK
-19 - walidacja godzin dodawaania punktu harmonogramu (na alercie dodać opis godzin punktu ktory przeszkadza), automatyczne przeliczanie dlugosic trwania punkut w harmonogramie
+19 - walidacja godzin dodawaania punktu harmonogramu (na alercie dodać opis godzin punktu ktory przeszkadza), automatyczne przeliczanie dlugosic trwania punkut w harmonogramie !!!!
 20 - logowanie, widok ładowania aplikacji, widok po załadowaniu aplikacji, rejestracja
 21 - backend pogoda + widoki pogoda
 22 - pogoda
 23 - backend dla checklist i ankiet
 24 - strona glowan checklist i ankiet, jakies podstrony
-25 - powiadomienia
-26
-27
+25 - powiadomienia 'push'
+26 - eksporty do pdf
+27 - google maps???!
 28
 29
 DEADLINE 30 listopada
