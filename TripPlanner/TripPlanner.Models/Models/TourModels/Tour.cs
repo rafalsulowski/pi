@@ -38,7 +38,7 @@ namespace TripPlanner.Models.Models.TourModels
         public DateTime CreateDate { get; set; }
         public string InviteLink { get; set; } = string.Empty;
         public string ImagePath { get; set; } = string.Empty;
-        public string WeatherCords { get; set; } = string.Empty; //wspolzedne geograficzne dla map np. latitude=52.52&longitude=13.41
+        public string WeatherCords { get; set; } = string.Empty; //wspolzedne geograficzne dla map np. latitude=52.52&longitude=13.41, lub: "Białka Tatrzanska, Polska"
 
 
         public static implicit operator TourDTO(Tour data)

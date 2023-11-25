@@ -294,5 +294,32 @@ namespace TripPlanner.Services
             }
             return new RepositoryResponse<bool> { Data = false, Message = errMsg, Success = false };
         }
+
+        // Zmiana lokalziacji dla pogody
+        public async Task<RepositoryResponse<bool>> UpdateWeatherCords(int tourId, string loc)
+        {
+            string errMsg = "";
+            try
+            {
+                string json = JsonConvert.SerializeObject(loc);
+                StringContent httpContent = new StringContent(json, Encoding.UTF8, "application/json");
+                HttpResponseMessage response = m_HttpClient.PutAsync($"{m_Configuration.WebApiUrl}/Tour/{tourId}/updateWeatherCords", httpContent).Result;
+                if (response.IsSuccessStatusCode)
+                {
+                    var resp = await response.Content.ReadFromJsonAsync<RepositoryResponse<bool>>();
+                    if (resp.Success)
+                        return new RepositoryResponse<bool> { Data = true, Message = "", Success = true };
+                    else
+                        errMsg = resp.Message;
+                }
+                else
+                    errMsg = $"Kod błędu: {response.StatusCode}";
+            }
+            catch (Exception e)
+            {
+                errMsg = $"Wyjątek: {e.Message}";
+            }
+            return new RepositoryResponse<bool> { Data = false, Message = errMsg, Success = false };
+        }
     }
 }

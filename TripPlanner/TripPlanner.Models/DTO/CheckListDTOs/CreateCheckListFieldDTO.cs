@@ -6,8 +6,7 @@ namespace TripPlanner.Models.DTO.CheckListDTOs
     {
         public int CheckListId { get; set; }
         public string Name { get; set; } = string.Empty;
-        public int Multiplicity { get; set; }
-        public bool IsChecked { get; set; }
+        public string Multiplicity { get; set; } = string.Empty;
 
 
         public static implicit operator CheckListField(CreateCheckListFieldDTO data)
@@ -19,8 +18,7 @@ namespace TripPlanner.Models.DTO.CheckListDTOs
             {
                 CheckListId = data.CheckListId,
                 Name = data.Name,
-                Multiplicity = data.Multiplicity,
-                IsChecked = data.IsChecked
+                Multiplicity = data.Multiplicity
             };
         }
 

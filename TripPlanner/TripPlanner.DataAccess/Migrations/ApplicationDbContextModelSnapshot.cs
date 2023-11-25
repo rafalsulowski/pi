@@ -105,7 +105,7 @@ namespace TripPlanner.DataAccess.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("TourId")
+                    b.Property<int?>("TourId")
                         .HasColumnType("int");
 
                     b.Property<int>("UserId")
@@ -134,8 +134,9 @@ namespace TripPlanner.DataAccess.Migrations
                     b.Property<bool>("IsChecked")
                         .HasColumnType("bit");
 
-                    b.Property<int>("Multiplicity")
-                        .HasColumnType("int");
+                    b.Property<string>("Multiplicity")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -311,7 +312,7 @@ namespace TripPlanner.DataAccess.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("TourId")
+                    b.Property<int?>("TourId")
                         .HasColumnType("int");
 
                     b.Property<int>("UserId")
@@ -676,13 +677,13 @@ namespace TripPlanner.DataAccess.Migrations
                     b.HasOne("TripPlanner.Models.Models.TourModels.Tour", "Tour")
                         .WithMany("CheckLists")
                         .HasForeignKey("TourId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.SetNull);
 
                     b.HasOne("TripPlanner.Models.Models.UserModels.User", "User")
                         .WithMany("CheckLists")
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.NoAction);
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
 
                     b.Navigation("Tour");
 
@@ -773,13 +774,13 @@ namespace TripPlanner.DataAccess.Migrations
                     b.HasOne("TripPlanner.Models.Models.TourModels.Tour", "Tour")
                         .WithMany("Routes")
                         .HasForeignKey("TourId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.SetNull);
 
                     b.HasOne("TripPlanner.Models.Models.UserModels.User", "User")
                         .WithMany("Routes")
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.NoAction);
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
 
                     b.Navigation("Tour");
 

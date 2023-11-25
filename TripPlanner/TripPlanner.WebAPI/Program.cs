@@ -25,9 +25,9 @@ using TripPlanner.Models.Models.UserModels;
 using TripPlanner.Services.FriendService;
 using TripPlanner.Services.Notificationservice;
 using TripPlanner.Services.NotificationService;
-using TripPlanner.WebSocketServer;
 using Microsoft.AspNetCore.SignalR;
 using TripPlanner.DataAccess.IRepository;
+using TripPlanner.WebAPI.Hubs;
 
 namespace TripPlanner.WebAPI
 {
@@ -68,12 +68,12 @@ namespace TripPlanner.WebAPI
             if (Environment.MachineName == "RMSULOWSKR")
             {
                 builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(
-                builder.Configuration.GetConnectionString("SqlConnectionString")).EnableSensitiveDataLogging(), ServiceLifetime.Scoped); //TODO wy³aczyc dla publikacji
+                builder.Configuration.GetConnectionString("SqlConnectionString")), ServiceLifetime.Scoped); //TODO wy³aczyc dla publikacji
             }
             else
             {
                 builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(
-                builder.Configuration.GetConnectionString("SqlConnectionStringACERRS")).EnableSensitiveDataLogging(), ServiceLifetime.Scoped);
+                builder.Configuration.GetConnectionString("SqlConnectionStringACERRS")), ServiceLifetime.Scoped);
             }
 
 
@@ -130,6 +130,7 @@ namespace TripPlanner.WebAPI
             }
 
             app.MapHub<ChatHub>("/chat");
+            app.MapHub<ChatHub2>("/chat2");
 
             app.UseHttpsRedirection();
 

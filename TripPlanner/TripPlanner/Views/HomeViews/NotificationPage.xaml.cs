@@ -1,4 +1,5 @@
 using TripPlanner.ViewModels;
+using TripPlanner.ViewModels.Home;
 
 namespace TripPlanner.Views.HomeViews;
 

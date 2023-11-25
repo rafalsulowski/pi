@@ -18,5 +18,8 @@ public partial class App : Application
 
         InitializeComponent();
         MainPage = new AppShell();
+
+        //Shell.Current.GoToAsync("Start");
+        Shell.Current.GoToAsync("Home");
 	}
 }

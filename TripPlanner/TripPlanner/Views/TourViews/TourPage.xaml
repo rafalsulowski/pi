@@ -140,30 +140,6 @@
                     </VerticalStackLayout>
                 </Border>
 
-                <Border
-                    Grid.Row="2"
-                    Grid.Column="0"
-                    Stroke="{AppThemeBinding Light=#2B6777, Dark=White}"
-                    StrokeShape="RoundRectangle 15,15,15,15"
-                    BackgroundColor="#52AB98">
-                    <Border.GestureRecognizers>
-                        <TapGestureRecognizer
-                            Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:TourViewModel}}, Path=GoCultureCommand}" />
-                    </Border.GestureRecognizers>
-                    <VerticalStackLayout
-                        VerticalOptions="Center"
-                        Spacing="5">
-                        <Image
-                            Source="globe_dt.png"
-                            HeightRequest="30" />
-                        <Label
-                            FontSize="15"
-                            FontAttributes="Bold"
-                            HorizontalOptions="Center"
-                            Text="Zwyczaje miejsca"
-                            TextColor="White" />
-                    </VerticalStackLayout>
-                </Border>
 
                 <Border
                     Grid.Row="2"
@@ -191,33 +167,8 @@
                 </Border>
 
                 <Border
-                    Grid.Row="3"
+                    Grid.Row="2"
                     Grid.Column="0"
-                    Stroke="{AppThemeBinding Light=#2B6777, Dark=White}"
-                    StrokeShape="RoundRectangle 15,15,15,15"
-                    BackgroundColor="#52AB98">
-                    <Border.GestureRecognizers>
-                        <TapGestureRecognizer
-                            Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:TourViewModel}}, Path=GoRoutesCommand}" />
-                    </Border.GestureRecognizers>
-                    <VerticalStackLayout
-                        VerticalOptions="Center"
-                        Spacing="5">
-                        <Image
-                            Source="tour_dt.png"
-                            HeightRequest="30" />
-                        <Label
-                            FontSize="15"
-                            FontAttributes="Bold"
-                            HorizontalOptions="Center"
-                            Text="Trasy"
-                            TextColor="White" />
-                    </VerticalStackLayout>
-                </Border>
-
-                <Border
-                    Grid.Row="3"
-                    Grid.Column="1"
                     Stroke="{AppThemeBinding Light=#2B6777, Dark=White}"
                     StrokeShape="RoundRectangle 15,15,15,15"
                     BackgroundColor="#52AB98">

@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using Microsoft.Maui.Graphics.Text;
+using Newtonsoft.Json;
 using System.Net.Http.Json;
 using System.Text;
 using TripPlanner.Models.DTO.TourDTOs;
@@ -18,6 +19,21 @@ namespace TripPlanner.Services
             m_Configuration = configuration;
         }
 
+        
+        // Zwraca uczestnika po danym emailu
+        public async Task<UserDTO> GetUserByEmial(string email)
+        {
+            try
+            {
+                HttpResponseMessage response = m_HttpClient.GetAsync($"{m_Configuration.WebApiUrl}/User/email/{email}").Result;
+                if (response.IsSuccessStatusCode)
+                {
+                    return await response.Content.ReadFromJsonAsync<UserDTO>();
+                }
+            }
+            catch (Exception) { }
+            return null;
+        }
 
         // Zwraca liste znajomych
         public async Task<List<ExtendFriendDTO>> GetFriends(int userId)
@@ -64,9 +80,26 @@ namespace TripPlanner.Services
             return null;
         }
 
-
+        // Zwraca bool czy taki email jest juz zarejestrowany
+        public async Task<bool> EmailIsFree(string emial)
+        {
+            try
+            {
+                string json = JsonConvert.SerializeObject(emial);
+                StringContent httpContent = new StringContent(json, Encoding.UTF8, "application/json");
+                HttpResponseMessage response = m_HttpClient.PostAsync($"{m_Configuration.WebApiUrl}/User/emailIsFree", httpContent).Result;
+                if (response.IsSuccessStatusCode)
+                {
+                    return await response.Content.ReadFromJsonAsync<bool>();
+                }
+            }
+            catch (Exception) { }
+            return false;
+        }
+        
+        
         // Logowanie
-        public async Task<RepositoryResponse<UserDTO>> Login(string emial, string password)
+        public async Task<RepositoryResponse<string>> Login(string emial, string password)
         {
             string errMsg = "";
             try
@@ -82,9 +115,9 @@ namespace TripPlanner.Services
                 HttpResponseMessage response = m_HttpClient.PostAsync($"{m_Configuration.WebApiUrl}/User/login", httpContent).Result;
                 if (response.IsSuccessStatusCode)
                 {
-                    RepositoryResponse<UserDTO> resp = await response.Content.ReadFromJsonAsync<RepositoryResponse<UserDTO>>();
+                    RepositoryResponse<string> resp = await response.Content.ReadFromJsonAsync<RepositoryResponse<string>>();
                     if (resp.Success)
-                        return new RepositoryResponse<UserDTO> { Data = resp.Data, Message = "", Success = true };
+                        return new RepositoryResponse<string> { Data = resp.Data, Message = "", Success = true };
                     else
                         errMsg = resp.Message;
                 }
@@ -95,11 +128,11 @@ namespace TripPlanner.Services
             {
                 errMsg = $"Wyjątek: {e.Message}";
             }
-            return new RepositoryResponse<UserDTO> { Data = null, Message = errMsg, Success = false };
+            return new RepositoryResponse<string> { Data = "", Message = errMsg, Success = false };
         }
 
         //Tworzenie nowego użytkownika
-        public async Task<RepositoryResponse<UserDTO>> Register(CreateUserDTO user)
+        public async Task<RepositoryResponse<bool>> Register(CreateUserDTO user)
         {
             string errMsg = "";
             try
@@ -109,9 +142,9 @@ namespace TripPlanner.Services
                 HttpResponseMessage response = m_HttpClient.PostAsync($"{m_Configuration.WebApiUrl}/User", httpContent).Result;
                 if (response.IsSuccessStatusCode)
                 {
-                    RepositoryResponse<UserDTO> resp = await response.Content.ReadFromJsonAsync<RepositoryResponse<UserDTO>>();
+                    RepositoryResponse<bool> resp = await response.Content.ReadFromJsonAsync<RepositoryResponse<bool>>();
                     if (resp.Success)
-                        return new RepositoryResponse<UserDTO> { Data = resp.Data, Message = "", Success = true };
+                        return new RepositoryResponse<bool> { Data = resp.Data, Message = "", Success = true };
                     else
                         errMsg = resp.Message;
                 }
@@ -122,7 +155,7 @@ namespace TripPlanner.Services
             {
                 errMsg = $"Wyjątek: {e.Message}";
             }
-            return new RepositoryResponse<UserDTO> { Data = null, Message = errMsg, Success = false };
+            return new RepositoryResponse<bool> { Data = false, Message = errMsg, Success = false };
         }
     }
 }

@@ -58,6 +58,31 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <MauiImage Remove="Resources\Images\Weather\clear_day.svg" />
+	  <MauiImage Remove="Resources\Images\Weather\clear_night.svg" />
+	  <MauiImage Remove="Resources\Images\Weather\cloudy.svg" />
+	  <MauiImage Remove="Resources\Images\Weather\fog.svg" />
+	  <MauiImage Remove="Resources\Images\Weather\hail.svg" />
+	  <MauiImage Remove="Resources\Images\Weather\partly_cloudy_day.svg" />
+	  <MauiImage Remove="Resources\Images\Weather\partly_cloudy_night.svg" />
+	  <MauiImage Remove="Resources\Images\Weather\rain.svg" />
+	  <MauiImage Remove="Resources\Images\Weather\rain_snow.svg" />
+	  <MauiImage Remove="Resources\Images\Weather\rain_snow_showers_day.svg" />
+	  <MauiImage Remove="Resources\Images\Weather\rain_snow_showers_night.svg" />
+	  <MauiImage Remove="Resources\Images\Weather\showers_day.svg" />
+	  <MauiImage Remove="Resources\Images\Weather\showers_night.svg" />
+	  <MauiImage Remove="Resources\Images\Weather\sleet.svg" />
+	  <MauiImage Remove="Resources\Images\Weather\snow.svg" />
+	  <MauiImage Remove="Resources\Images\Weather\snow_showers_day.svg" />
+	  <MauiImage Remove="Resources\Images\Weather\snow_showers_night.svg" />
+	  <MauiImage Remove="Resources\Images\Weather\thunder.svg" />
+	  <MauiImage Remove="Resources\Images\Weather\thunder_rain.svg" />
+	  <MauiImage Remove="Resources\Images\Weather\thunder_showers_day.svg" />
+	  <MauiImage Remove="Resources\Images\Weather\thunder_showers_night.svg" />
+	  <MauiImage Remove="Resources\Images\Weather\wind.svg" />
+	</ItemGroup>
+
+	<ItemGroup>
 	  <None Remove="Platforms\Android\Resources\xml\network_security_config.xml" />
 	  <None Remove="Resources\Fonts\LICENSE.txt" />
 	  <None Remove="Resources\Fonts\Roboto-Black.ttf" />
@@ -82,13 +107,16 @@
 	  <None Remove="Resources\Images\calendar_dt.svg" />
 	  <None Remove="Resources\Images\calendar_sec.svg" />
 	  <None Remove="Resources\Images\calendar_wt.svg" />
+	  <None Remove="Resources\Images\caret_down_dt.svg" />
 	  <None Remove="Resources\Images\caret_down_sec.svg" />
+	  <None Remove="Resources\Images\caret_up_dt.svg" />
 	  <None Remove="Resources\Images\caret_up_sec.svg" />
 	  <None Remove="Resources\Images\cash_dt.svg" />
 	  <None Remove="Resources\Images\cash_wt.svg" />
 	  <None Remove="Resources\Images\chat_dt.svg" />
 	  <None Remove="Resources\Images\chat_wt.svg" />
 	  <None Remove="Resources\Images\checklist_dt.svg" />
+	  <None Remove="Resources\Images\checklist_sec.svg" />
 	  <None Remove="Resources\Images\checklist_wt.svg" />
 	  <None Remove="Resources\Images\check_ok_dt.svg" />
 	  <None Remove="Resources\Images\check_ok_pri.svg" />
@@ -121,6 +149,8 @@
 	  <None Remove="Resources\Images\list_stars_dt.svg" />
 	  <None Remove="Resources\Images\list_stars_wt.svg" />
 	  <None Remove="Resources\Images\list_wt.svg" />
+	  <None Remove="Resources\Images\lock_dt.svg" />
+	  <None Remove="Resources\Images\logout_red.svg" />
 	  <None Remove="Resources\Images\money_coin_sec.svg" />
 	  <None Remove="Resources\Images\organizer_dt.svg" />
 	  <None Remove="Resources\Images\organizer_gray.svg" />
@@ -132,9 +162,11 @@
 	  <None Remove="Resources\Images\person_chat_wt.svg" />
 	  <None Remove="Resources\Images\person_circle_sec.svg" />
 	  <None Remove="Resources\Images\person_wt.svg" />
+	  <None Remove="Resources\Images\plus_circle_dt.svg" />
 	  <None Remove="Resources\Images\plus_circle_pri.svg" />
 	  <None Remove="Resources\Images\plus_circle_sec.svg" />
 	  <None Remove="Resources\Images\plus_dt.svg" />
+	  <None Remove="Resources\Images\plus_grey.svg" />
 	  <None Remove="Resources\Images\plus_pri.svg" />
 	  <None Remove="Resources\Images\plus_sec.svg" />
 	  <None Remove="Resources\Images\plus_wt.svg" />
@@ -145,15 +177,21 @@
 	  <None Remove="Resources\Images\send_wt.svg" />
 	  <None Remove="Resources\Images\settings_chat_dt.svg" />
 	  <None Remove="Resources\Images\settings_chat_wt.svg" />
+	  <None Remove="Resources\Images\settings_slider_dt.svg" />
 	  <None Remove="Resources\Images\share_sec.svg" />
+	  <None Remove="Resources\Images\sunrise_sec.svg" />
+	  <None Remove="Resources\Images\sunset_sec.svg" />
 	  <None Remove="Resources\Images\text_sec.svg" />
 	  <None Remove="Resources\Images\tour_dt.svg" />
+	  <None Remove="Resources\Images\tour_sec.svg" />
 	  <None Remove="Resources\Images\tour_wt.svg" />
 	  <None Remove="Resources\Images\trash_dt.svg" />
 	  <None Remove="Resources\Images\trash_pri.svg" />
 	  <None Remove="Resources\Images\trash_sec.svg" />
 	  <None Remove="Resources\Images\trash_wt.svg" />
+	  <None Remove="Resources\Images\water_sec.svg" />
 	  <None Remove="Resources\Images\x_dt.svg" />
+	  <None Remove="Resources\Images\x_grey.svg" />
 	  <None Remove="Resources\Images\x_sec.svg" />
 	  <None Remove="Resources\Images\x_wt.svg" />
 	</ItemGroup>
@@ -167,6 +205,7 @@
 		<PackageReference Include="Microsoft.AspNetCore.SignalR.Client" Version="7.0.13" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="7.0.1" />
 		<PackageReference Include="OnScreenSizeMarkup.Maui" Version="2.0.8" />
+		<PackageReference Include="Refractored.MvvmHelpers" Version="1.6.2" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -178,6 +217,21 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Controls\TimeDurationLabelControl.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\CheckListViews\AddCheckListFieldPopups.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\CheckListViews\CheckListPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\CheckListViews\CheckListsPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\CheckListViews\CreateCheckListPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\CheckListViews\QuestionnairePage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\ParticipantViews\UserDetailsPopups.xaml">
@@ -267,7 +321,13 @@
 	  <MauiXaml Update="Views\ParticipantViews\ParticipantsListPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Views\StartViews\MainPage.xaml">
+	  <MauiXaml Update="Views\StartViews\LoginPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\StartViews\RegisterPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\StartViews\StartPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\TourViews\CreateTour.xaml">
@@ -276,11 +336,12 @@
 	  <MauiXaml Update="Views\TourViews\TourPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Views\WeatherViews\WeatherPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Folder Include="Views\CheckListViews\" />
-	  <Folder Include="Views\WeatherViews\" />
 	  <Folder Include="Views\RouteViews\" />
 	  <Folder Include="Views\CultureViews\" />
 	</ItemGroup>
@@ -288,6 +349,9 @@
 	<ItemGroup>
 	  <Compile Update="Controls\QuestionnaireControls\QuestionnaireControl.xaml.cs">
 	    <DependentUpon>QuestionnaireControl.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Views\CheckListViews\AddCheckListFieldPopups.xaml.cs">
+	    <DependentUpon>AddCheckListFieldPopups.xaml</DependentUpon>
 	  </Compile>
 	  <Compile Update="Views\ParticipantViews\UserDetailsPopups.xaml.cs">
 	    <DependentUpon>UserDetailsPopups.xaml</DependentUpon>
@@ -307,8 +371,8 @@
 	  <Compile Update="Views\HomeViews\HomePage.xaml.cs">
 	    <DependentUpon>%(Filename)</DependentUpon>
 	  </Compile>
-	  <Compile Update="Views\StartViews\MainPage.xaml.cs">
-	    <DependentUpon>%(Filename)</DependentUpon>
+	  <Compile Update="Views\StartViews\StartPage.xaml.cs">
+	    <DependentUpon>StartPage.xaml</DependentUpon>
 	  </Compile>
 	  <Compile Update="Views\TourViews\CreateTour.xaml.cs">
 	    <DependentUpon>CreateTour.xaml</DependentUpon>

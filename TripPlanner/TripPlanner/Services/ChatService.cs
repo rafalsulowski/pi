@@ -24,10 +24,26 @@ namespace TripPlanner.Services
         {
             try
             {
-                HttpResponseMessage response = m_HttpClient.GetAsync($"{m_Configuration.WebApiUrl}/Questionnaire/{answerId}/Votes/{tourId}").Result;
+                HttpResponseMessage response = m_HttpClient.GetAsync($"{m_Configuration.WebApiUrl}/Questionnaire/{answerId}/votes/{tourId}").Result;
                 if (response.IsSuccessStatusCode)
                 {
                     return await response.Content.ReadFromJsonAsync<List<string>>();
+                }
+            }
+            catch (Exception) { }
+            return null;
+        }
+
+        //Zwraca wszystkie oddane głosy na odpowiedź o danym id, ankiety o danym id
+        public async Task<List<QuestionnaireDTO>> GetQuestionnairesFromTour(int tourId)
+        {
+            try
+            {
+                HttpResponseMessage response = m_HttpClient.GetAsync($"{m_Configuration.WebApiUrl}/Questionnaire/getFromTour/{tourId}").Result;
+                if (response.IsSuccessStatusCode)
+                {
+                    var r = await response.Content.ReadFromJsonAsync<List<QuestionnaireDTO>>();
+                    return r;
                 }
             }
             catch (Exception) { }

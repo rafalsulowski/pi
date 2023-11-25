@@ -86,6 +86,36 @@ build_metadata.AdditionalFiles.ManifestResourceName = TripPlanner.Views.ChatView
 build_metadata.AdditionalFiles.TargetPath = Views\ChatViews\QuestionnairePopup.xaml
 build_metadata.AdditionalFiles.RelativePath = Views\ChatViews\QuestionnairePopup.xaml
 
+[C:/Users/01159502/Desktop/TripPlanner/TripPlanner/TripPlanner/Views/CheckListViews/AddCheckListFieldPopups.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = TripPlanner.Views.CheckListViews.AddCheckListFieldPopups.xaml
+build_metadata.AdditionalFiles.TargetPath = Views\CheckListViews\AddCheckListFieldPopups.xaml
+build_metadata.AdditionalFiles.RelativePath = Views\CheckListViews\AddCheckListFieldPopups.xaml
+
+[C:/Users/01159502/Desktop/TripPlanner/TripPlanner/TripPlanner/Views/CheckListViews/CheckListPage.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = TripPlanner.Views.CheckListViews.CheckListPage.xaml
+build_metadata.AdditionalFiles.TargetPath = Views\CheckListViews\CheckListPage.xaml
+build_metadata.AdditionalFiles.RelativePath = Views\CheckListViews\CheckListPage.xaml
+
+[C:/Users/01159502/Desktop/TripPlanner/TripPlanner/TripPlanner/Views/CheckListViews/CheckListsPage.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = TripPlanner.Views.CheckListViews.CheckListsPage.xaml
+build_metadata.AdditionalFiles.TargetPath = Views\CheckListViews\CheckListsPage.xaml
+build_metadata.AdditionalFiles.RelativePath = Views\CheckListViews\CheckListsPage.xaml
+
+[C:/Users/01159502/Desktop/TripPlanner/TripPlanner/TripPlanner/Views/CheckListViews/CreateCheckListPage.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = TripPlanner.Views.CheckListViews.CreateCheckListPage.xaml
+build_metadata.AdditionalFiles.TargetPath = Views\CheckListViews\CreateCheckListPage.xaml
+build_metadata.AdditionalFiles.RelativePath = Views\CheckListViews\CreateCheckListPage.xaml
+
+[C:/Users/01159502/Desktop/TripPlanner/TripPlanner/TripPlanner/Views/CheckListViews/QuestionnairePage.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = TripPlanner.Views.CheckListViews.QuestionnairePage.xaml
+build_metadata.AdditionalFiles.TargetPath = Views\CheckListViews\QuestionnairePage.xaml
+build_metadata.AdditionalFiles.RelativePath = Views\CheckListViews\QuestionnairePage.xaml
+
 [C:/Users/01159502/Desktop/TripPlanner/TripPlanner/TripPlanner/Views/HomeViews/CalendarPage.xaml]
 build_metadata.AdditionalFiles.GenKind = Xaml
 build_metadata.AdditionalFiles.ManifestResourceName = TripPlanner.Views.HomeViews.CalendarPage.xaml
@@ -224,11 +254,23 @@ build_metadata.AdditionalFiles.ManifestResourceName = TripPlanner.Views.ShareVie
 build_metadata.AdditionalFiles.TargetPath = Views\ShareViews\TransferPage.xaml
 build_metadata.AdditionalFiles.RelativePath = Views\ShareViews\TransferPage.xaml
 
-[C:/Users/01159502/Desktop/TripPlanner/TripPlanner/TripPlanner/Views/StartViews/MainPage.xaml]
+[C:/Users/01159502/Desktop/TripPlanner/TripPlanner/TripPlanner/Views/StartViews/LoginPage.xaml]
 build_metadata.AdditionalFiles.GenKind = Xaml
-build_metadata.AdditionalFiles.ManifestResourceName = TripPlanner.Views.StartViews.MainPage.xaml
-build_metadata.AdditionalFiles.TargetPath = Views\StartViews\MainPage.xaml
-build_metadata.AdditionalFiles.RelativePath = Views\StartViews\MainPage.xaml
+build_metadata.AdditionalFiles.ManifestResourceName = TripPlanner.Views.StartViews.LoginPage.xaml
+build_metadata.AdditionalFiles.TargetPath = Views\StartViews\LoginPage.xaml
+build_metadata.AdditionalFiles.RelativePath = Views\StartViews\LoginPage.xaml
+
+[C:/Users/01159502/Desktop/TripPlanner/TripPlanner/TripPlanner/Views/StartViews/RegisterPage.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = TripPlanner.Views.StartViews.RegisterPage.xaml
+build_metadata.AdditionalFiles.TargetPath = Views\StartViews\RegisterPage.xaml
+build_metadata.AdditionalFiles.RelativePath = Views\StartViews\RegisterPage.xaml
+
+[C:/Users/01159502/Desktop/TripPlanner/TripPlanner/TripPlanner/Views/StartViews/StartPage.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = TripPlanner.Views.StartViews.StartPage.xaml
+build_metadata.AdditionalFiles.TargetPath = Views\StartViews\StartPage.xaml
+build_metadata.AdditionalFiles.RelativePath = Views\StartViews\StartPage.xaml
 
 [C:/Users/01159502/Desktop/TripPlanner/TripPlanner/TripPlanner/Views/TourViews/CreateTour.xaml]
 build_metadata.AdditionalFiles.GenKind = Xaml
@@ -241,3 +283,9 @@ build_metadata.AdditionalFiles.GenKind = Xaml
 build_metadata.AdditionalFiles.ManifestResourceName = TripPlanner.Views.TourViews.TourPage.xaml
 build_metadata.AdditionalFiles.TargetPath = Views\TourViews\TourPage.xaml
 build_metadata.AdditionalFiles.RelativePath = Views\TourViews\TourPage.xaml
+
+[C:/Users/01159502/Desktop/TripPlanner/TripPlanner/TripPlanner/Views/WeatherViews/WeatherPage.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = TripPlanner.Views.WeatherViews.WeatherPage.xaml
+build_metadata.AdditionalFiles.TargetPath = Views\WeatherViews\WeatherPage.xaml
+build_metadata.AdditionalFiles.RelativePath = Views\WeatherViews\WeatherPage.xaml

@@ -1,9 +1,12 @@
 ﻿using TripPlanner.Views.ChatViews;
+using TripPlanner.Views.CheckListViews;
 using TripPlanner.Views.HomeViews;
 using TripPlanner.Views.ParticipantViews;
 using TripPlanner.Views.ScheduleViews;
 using TripPlanner.Views.ShareViews;
+using TripPlanner.Views.StartViews;
 using TripPlanner.Views.TourViews;
+using TripPlanner.Views.WeatherViews;
 
 namespace TripPlanner;
 
@@ -12,6 +15,11 @@ public partial class AppShell : Shell
 	public AppShell()
 	{
 		InitializeComponent();
+
+
+        Routing.RegisterRoute("Start", typeof(StartPage));
+        Routing.RegisterRoute("Start/Login", typeof(LoginPage));
+        Routing.RegisterRoute("Start/Register", typeof(RegisterPage));
         Routing.RegisterRoute("Home", typeof(HomePage));
 		Routing.RegisterRoute("CreateTour", typeof(CreateTour));
 		Routing.RegisterRoute("Calendar", typeof(CalendarPage));
@@ -35,5 +43,10 @@ public partial class AppShell : Shell
 		Routing.RegisterRoute("Tour/ScheduleCalendar", typeof(ScheduleCalendarPage));
 		Routing.RegisterRoute("Tour/ScheduleDay", typeof(ScheduleDayPage));
 		Routing.RegisterRoute("Tour/ScheduleDay/Event", typeof(EventPage));
+		Routing.RegisterRoute("Tour/Weather", typeof(WeatherPage));
+		Routing.RegisterRoute("Tour/CheckLists", typeof(CheckListsPage));
+		Routing.RegisterRoute("Tour/CheckLists/CreateCheckList", typeof(CreateCheckListPage));
+		Routing.RegisterRoute("Tour/CheckLists/CheckList", typeof(CheckListPage));
+		Routing.RegisterRoute("Tour/CheckLists/Questionnaire", typeof(QuestionnairePage));
 	}
 }

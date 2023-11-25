@@ -1,10 +1,13 @@
-﻿using CommunityToolkit.Maui.Alerts;
+﻿
+using CommunityToolkit.Maui.Alerts;
 using CommunityToolkit.Maui.Core;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using TripPlanner.Models.DTO.ScheduleDTOs;
@@ -45,16 +48,15 @@ namespace TripPlanner.ViewModels.Schedule
         [ObservableProperty]
         bool isEditing;
 
-        [ObservableProperty]
-        string duration;
-
         public ScheduleEventViewModel(Configuration configuration, ScheduleService scheduleService)
         {
             m_Configuration = configuration;
             m_ScheduleService = scheduleService;
             IsStopTimeActive = false;
             IsEditing = false;
-            Duration = "()";
+            StartTime = new TimeSpan(12, 0, 0);
+            StopTime = new TimeSpan(12, 0, 0);
+            HeaderLabel = "";
         }
 
         public async void ApplyQueryAttributes(IDictionary<string, object> query)
@@ -80,11 +82,6 @@ namespace TripPlanner.ViewModels.Schedule
 
                 int hour = (StopTime - StartTime).Hours;
                 int Minute = (StopTime - StartTime).Minutes;
-
-                if (hour == 0)
-                    Duration = $"({Minute}m)";
-                else
-                    Duration = $"({hour}h {Minute}m)";
             }
         }
 
@@ -106,7 +103,6 @@ namespace TripPlanner.ViewModels.Schedule
         {
             IsStopTimeActive = !IsStopTimeActive;
         }
-        
 
 
         [RelayCommand]
@@ -125,56 +121,33 @@ namespace TripPlanner.ViewModels.Schedule
                     await Shell.Current.CurrentPage.DisplayAlert("Błąd", "Data zakończenia jest ustawiona przed datą zakończenia", "Popraw");
                     return;
                 }
-
-                foreach (var eve in Schedule.Events)
-                {
-                    if (EventDto != null && EventDto.Id == eve.Id)
-                        continue;
-
-                    int eveMinuteStartTime = eve.StartTime.Hour * 60 + eve.StartTime.Minute;
-                    int eveMinuteStopTime = eve.StopTime.Hour * 60 + eve.StopTime.Minute;
-                    int userMinuteStartTime = StartTime.Hours * 60 + StartTime.Minutes;
-                    int userMinuteStopTime = StopTime.Hours * 60 + StopTime.Minutes;
-
-                    if (!((userMinuteStartTime <= eveMinuteStartTime && userMinuteStopTime <= eveMinuteStartTime)
-                        || (userMinuteStartTime >= eveMinuteStopTime && userMinuteStopTime >= eveMinuteStopTime)))
-                    {
-                        string duration = "";
-                        if (eveMinuteStartTime == eveMinuteStopTime)
-                            duration = $"{eve.StartTime.Hour}:{eve.StartTime.Minute}";
-                        else
-                            duration = $"{eve.StartTime.Hour}:{eve.StartTime.Minute} - {eve.StopTime.Hour}:{eve.StopTime.Minute}";
-
-                        var rews = await Shell.Current.CurrentPage.DisplayAlert("Uwaga", $"Wybrany czas wydarzenia pokrywaja się z innym wydarzeniem w harmonogramie: \"{eve.Name}\" odbywajacym się w czasie: {duration}", "Popraw", "Ignoruj");
-                        return;
-                    }
-                }
             }
-            else
+
+
+            foreach (var eve in Schedule.Events)
             {
-                foreach (var eve in Schedule.Events)
+                if (EventDto != null && EventDto.Id == eve.Id)
+                    continue;
+
+                int eveMinuteStartTime = eve.StartTime.Hour * 60 + eve.StartTime.Minute;
+                int eveMinuteStopTime = eve.StopTime.Hour * 60 + eve.StopTime.Minute;
+                int userMinuteStartTime = StartTime.Hours * 60 + StartTime.Minutes;
+                int userMinuteStopTime = StopTime.Hours * 60 + StopTime.Minutes;
+
+                if (!((userMinuteStartTime < eveMinuteStartTime && userMinuteStopTime < eveMinuteStartTime)
+                    || (userMinuteStartTime > eveMinuteStopTime && userMinuteStopTime > eveMinuteStopTime)))
                 {
-                    if (EventDto != null && EventDto.Id == eve.Id)
-                        continue;
+                    string duration = "";
+                    if (eveMinuteStartTime == eveMinuteStopTime)
+                        duration = eve.StartTime.ToString("HH:mm");
+                    else
+                        duration = $"{eve.StartTime:HH:mm} - {eve.StopTime:HH:mm}";
 
-                    int eveMinuteStartTime = eve.StartTime.Hour * 60 + eve.StartTime.Minute;
-                    int eveMinuteStopTime = eve.StopTime.Hour * 60 + eve.StopTime.Minute;
-                    int userMinuteStartTime = StartTime.Hours * 60 + StartTime.Minutes;
-                    int userMinuteStopTime = StopTime.Hours * 60 + StopTime.Minutes;
-
-                    if (!((userMinuteStartTime <= eveMinuteStartTime && userMinuteStopTime <= eveMinuteStartTime)
-                        || (userMinuteStartTime >= eveMinuteStopTime && userMinuteStopTime >= eveMinuteStopTime)))
-                    {
-                        string duration = "";
-                        if (eveMinuteStartTime == eveMinuteStopTime)
-                            duration = $"{eve.StartTime.Hour}:{eve.StartTime.Minute}";
-                        else
-                            duration = $"{eve.StartTime.Hour}:{eve.StartTime.Minute} - {eve.StopTime.Hour}:{eve.StopTime.Minute}";
-
-                        var rews = await Shell.Current.CurrentPage.DisplayAlert("Uwaga", $"Wybrany czas wydarzenia pokrywaja się z innym wydarzeniem w harmonogramie: \"{eve.Name}\" odbywajacym się w czasie: {duration}", "Popraw", "Ignoruj");
-                        if(rews)
-                            return;
-                    }
+                    var rews = await Shell.Current.CurrentPage.DisplayAlert("Uwaga", $"Wybrany czas wydarzenia pokrywaja się z innym wydarzeniem w harmonogramie: \"{eve.Name}\" odbywajacym się w czasie: {duration}", "Popraw", "Ignoruj");
+                    if (rews)
+                        return;
+                    else
+                        break;
                 }
             }
 

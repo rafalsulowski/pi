@@ -84,7 +84,7 @@
                         <TimePicker
                             WidthRequest="300"
                             Margin="10,0,10,0"
-                            Format="hh:mm"
+                            Format="HH:mm"
                             Time="{Binding StartTime}"
                             TextColor="#52AB98"
                             FontAttributes="Bold"
@@ -102,7 +102,6 @@
                         <CheckBox
                             VerticalOptions="Center"
                             IsChecked="{Binding IsStopTimeActive}"
-                            x:Name="CheckBoxStopTime"
                             HorizontalOptions="Start">
                         </CheckBox>
                         <Label
@@ -131,21 +130,13 @@
                         <HorizontalStackLayout
                             Margin="0,0,10,0">
                             <TimePicker
-                                WidthRequest="200"
+                                WidthRequest="300"
                                 Margin="10,0,10,0"
-                                Format="hh:mm"
+                                Format="HH:mm"
                                 Time="{Binding StopTime}"
                                 TextColor="#52AB98"
                                 FontAttributes="Bold"
                                 FontSize="17" />
-                            <Label
-                                VerticalOptions="Center"
-                                Text="{Binding Duration}"
-                                HorizontalOptions="Start"
-                                FontAttributes="Bold"
-                                FontSize="17"
-                                TextColor="#939393">
-                            </Label>
                         </HorizontalStackLayout>
                     </Border>
                 </VerticalStackLayout>

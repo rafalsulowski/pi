@@ -10,44 +10,44 @@ namespace TripPlanner.Converter
             switch(dt.Month)
             {
                 case 1:
-                    mName = "sty";
+                    mName = "Sty";
                     break;
                 case 2:
-                    mName = "lut";
+                    mName = "Lut";
                     break;
                 case 3:
-                    mName = "mar";
+                    mName = "Mar";
                     break;
                 case 4:
-                    mName = "kwi";
+                    mName = "Kwi";
                     break;
                 case 5:
-                    mName = "maj";
+                    mName = "Maj";
                     break;
                 case 6:
-                    mName = "cze";
+                    mName = "Cze";
                     break;
                 case 7:
-                    mName = "lip";
+                    mName = "Lip";
                     break;
                 case 8:
-                    mName = "sie";
+                    mName = "Sie";
                     break;
                 case 9:
-                    mName = "wrz";
+                    mName = "Wrz";
                     break;
                 case 10:
-                    mName = "paź";
+                    mName = "Paź";
                     break;
                 case 11:
-                    mName = "lis";
+                    mName = "Lis";
                     break;
                 case 12:
-                    mName = "gru";
+                    mName = "Gru";
                     break;
 
                 default:
-                    mName = "sty";
+                    mName = "Sty";
                     break;
             }
 

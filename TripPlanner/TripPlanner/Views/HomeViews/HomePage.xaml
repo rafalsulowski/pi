@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:viewmodel="clr-namespace:TripPlanner.ViewModels"
+             xmlns:viewmodel="clr-namespace:TripPlanner.ViewModels.Home"
              xmlns:models="clr-namespace:TripPlanner.Models.DTO.TourDTOs;assembly=TripPlanner.Models"
              x:Class="TripPlanner.Views.HomeViews.HomePage"
              x:DataType="viewmodel:HomeViewModel"

@@ -22,6 +22,7 @@ public partial class ChatAdditionalMenuPopup : Popup
         var navigationParameter = new Dictionary<string, object>
             {
                 { "passTourId",  TourId},
+                { "IsFromChat",  true},
             };
         await Shell.Current.GoToAsync($"/CreateQuestionnaire", navigationParameter);
     }

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
-    x:Class="TripPlanner.Views.ShareViews.DivisionTypePage"
+            xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+            xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+            x:Class="TripPlanner.Views.ShareViews.DivisionTypePage"
             xmlns:localTemplates="clr-namespace:TripPlanner.DataTemplates"
             xmlns:local="clr-namespace:TripPlanner.Converter"
             xmlns:viewmodel="clr-namespace:TripPlanner.ViewModels.Shares"

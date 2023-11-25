@@ -1,10 +1,14 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
+﻿using CommunityToolkit.Maui.Alerts;
+using CommunityToolkit.Maui.Core;
+using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TripPlanner.Models.DTO.UserDTOs;
+using TripPlanner.Models.Models;
 using TripPlanner.Services;
 
 namespace TripPlanner.ViewModels.User
@@ -22,6 +26,9 @@ namespace TripPlanner.ViewModels.User
 
         [ObservableProperty]
         string password;
+
+        [ObservableProperty]
+        string password2;
 
         [ObservableProperty]
         DateTime dateOfBirth;
@@ -57,7 +64,7 @@ namespace TripPlanner.ViewModels.User
             //walidacja
             if (string.IsNullOrEmpty(Email))
             {
-                await Shell.Current.CurrentPage.DisplayAlert("Błąd", "Pole e-mail nie może być puste", "Ok");
+                await Shell.Current.CurrentPage.DisplayAlert("Błąd", "E-mail nie może być pusty", "Ok");
                 return;
             }
 
@@ -69,7 +76,7 @@ namespace TripPlanner.ViewModels.User
 
             if (string.IsNullOrEmpty(Address))
             {
-                await Shell.Current.CurrentPage.DisplayAlert("Błąd", "Musisz podać adress", "Ok");
+                await Shell.Current.CurrentPage.DisplayAlert("Błąd", "Musisz podać adress do korespondencji", "Ok");
                 return;
             }
 
@@ -79,33 +86,68 @@ namespace TripPlanner.ViewModels.User
                 return;
             }
 
-            if (string.IsNullOrEmpty(password))
+            if (string.IsNullOrEmpty(Password))
             {
-                await Shell.Current.CurrentPage.DisplayAlert("Błąd", "Pole hasła nie może być puste", "Ok");
+                await Shell.Current.CurrentPage.DisplayAlert("Błąd", "Hasło powinno posiadać co najmniej 8 znaków, jedną literę dużą, jedną małą, jedną cyfrę oraz znak specjalny", "Ok");
                 return;
             }
 
-
-            //hasher do zakodowania hasla 
-            RepositoryResponse<UserDTO> response = await m_UserService.Login(Email, Password);
-
-            if (response.Success && response.Data != null)
+            if (string.IsNullOrEmpty(Password2))
             {
-                m_Configuration.User = response.Data;
-                //ustawienie auth w httpClient na zwrocony JWT
+                await Shell.Current.CurrentPage.DisplayAlert("Błąd", "Hasło powinno posiadać co najmniej 8 znaków, jedną literę dużą, jedną małą, jedną cyfrę oraz znak specjalny", "Ok");
+                return;
+            }
+
+            if(Password != Password2)
+            {
+                await Shell.Current.CurrentPage.DisplayAlert("Błąd", "Hasła są różne", "Ok");
+                return;
+            }
+
+            if(Password.Length < 8)
+            {
+                await Shell.Current.CurrentPage.DisplayAlert("Błąd", "Hasło powinno posiadać co najmniej 8 znaków, jedną literę dużą, jedną małą, jedną cyfrę oraz znak specjalny", "Ok");
+                return;
+            }
+
+            if (Password != Password2)
+            {
+                await Shell.Current.CurrentPage.DisplayAlert("Błąd", "Hasła są różne", "Ok");
+                return;
+            }
+
+            bool emailFree = await m_UserService.EmailIsFree(Email);
+
+            if(!emailFree)
+            {
+                await Shell.Current.CurrentPage.DisplayAlert("Błąd", "E-mail jest już przypisany do innego konta", "Ok");
+                return;
+            }
+
+            CreateUserDTO createUserDTO = new CreateUserDTO
+            {
+                City = City,
+                DateOfBirth = DateOfBirth,
+                Email = Email,
+                FullAddress = Address,
+                FullName = FullName,
+                PasswordHash = Password,
+            };
+
+            RepositoryResponse<bool> response = await m_UserService.Register(createUserDTO);
+
+            if (response.Success && response.Data)
+            {
+                var confirmCopyToast = Toast.Make("Popranie zajerestrowano", ToastDuration.Long, 14);
+                await confirmCopyToast.Show();
+
+                await Shell.Current.GoToAsync($"/Start/Login");
             }
             else
             {
-                await Shell.Current.CurrentPage.DisplayAlert("Błąd", "Błędne dane logowania", "Ok");
+                await Shell.Current.CurrentPage.DisplayAlert("Błąd", response.Message, "Ok");
                 return;
             }
-
-
-            var navigationParameter = new Dictionary<string, object>
-            {
-                { "Reload",  false}
-            };
-            await Shell.Current.GoToAsync($"/Home", navigationParameter);
         }
     }
 }

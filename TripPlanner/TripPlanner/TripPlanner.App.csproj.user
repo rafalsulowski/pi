@@ -27,6 +27,21 @@
     <MauiXaml Update="Controls\TimeDurationLabelControl.xaml">
       <SubType>Designer</SubType>
     </MauiXaml>
+    <MauiXaml Update="Views\CheckListViews\AddCheckListFieldPopups.xaml">
+      <SubType>Designer</SubType>
+    </MauiXaml>
+    <MauiXaml Update="Views\CheckListViews\CheckListPage.xaml">
+      <SubType>Designer</SubType>
+    </MauiXaml>
+    <MauiXaml Update="Views\CheckListViews\CheckListsPage.xaml">
+      <SubType>Designer</SubType>
+    </MauiXaml>
+    <MauiXaml Update="Views\CheckListViews\CreateCheckListPage.xaml">
+      <SubType>Designer</SubType>
+    </MauiXaml>
+    <MauiXaml Update="Views\CheckListViews\QuestionnairePage.xaml">
+      <SubType>Designer</SubType>
+    </MauiXaml>
     <MauiXaml Update="Views\ParticipantViews\UserDetailsPopups.xaml">
       <SubType>Designer</SubType>
     </MauiXaml>
@@ -94,6 +109,15 @@
       <SubType>Designer</SubType>
     </MauiXaml>
     <MauiXaml Update="Views\ParticipantViews\ParticipantsListPage.xaml">
+      <SubType>Designer</SubType>
+    </MauiXaml>
+    <MauiXaml Update="Views\StartViews\LoginPage.xaml">
+      <SubType>Designer</SubType>
+    </MauiXaml>
+    <MauiXaml Update="Views\StartViews\RegisterPage.xaml">
+      <SubType>Designer</SubType>
+    </MauiXaml>
+    <MauiXaml Update="Views\WeatherViews\WeatherPage.xaml">
       <SubType>Designer</SubType>
     </MauiXaml>
   </ItemGroup>

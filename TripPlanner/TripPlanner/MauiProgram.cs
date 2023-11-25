@@ -14,6 +14,12 @@ using TripPlanner.ViewModels.Chat;
 using TripPlanner.ViewModels.Participant;
 using TripPlanner.Views.ScheduleViews;
 using TripPlanner.ViewModels.Schedule;
+using TripPlanner.ViewModels.Home;
+using TripPlanner.ViewModels.User;
+using TripPlanner.Views.WeatherViews;
+using TripPlanner.ViewModels.Weather;
+using TripPlanner.ViewModels.CheckList;
+using TripPlanner.Views.CheckListViews;
 
 namespace TripPlanner;
 
@@ -38,11 +44,14 @@ public static class MauiProgram
 		builder.Services.AddHttpClient("httpClient")
 			.ConfigurePrimaryHttpMessageHandler(() => {
                 HttpClientHandler handler = new HttpClientHandler();
+				handler.AllowAutoRedirect = false;
 				handler.ServerCertificateCustomValidationCallback = (message, cert, chain, errors) =>
 				{
 					if (cert.Issuer.Equals("CN=localhost"))
 						return true;
-					return errors == System.Net.Security.SslPolicyErrors.None;
+
+                    return true;
+                    //return errors == System.Net.Security.SslPolicyErrors.None;
 				};
 				return handler;
 			});
@@ -60,6 +69,8 @@ public static class MauiProgram
         builder.Services.AddSingleton<UserService>();
         builder.Services.AddSingleton<ShareService>();
         builder.Services.AddSingleton<ScheduleService>();
+        builder.Services.AddSingleton<WeatherFastService>();
+        builder.Services.AddSingleton<CheckListService>();
         
 
 		//ViewModels Services
@@ -87,10 +98,17 @@ public static class MauiProgram
 		builder.Services.AddTransient<ScheduleDayViewModel>();
 		builder.Services.AddTransient<ScheduleListViewModel>();
 		builder.Services.AddTransient<ScheduleEventViewModel>();
+		builder.Services.AddTransient<LoginViewModel>();
+		builder.Services.AddTransient<RegisterViewModel>();
+		builder.Services.AddTransient<WeatherViewModel>();
+		builder.Services.AddTransient<CheckListsViewModel>();
+		builder.Services.AddTransient<CreateCheckListViewModels>();
+		builder.Services.AddTransient<CheckListViewModel>();
+		builder.Services.AddTransient<QuestionnaireStandAloneViewModel>();
 
 
         //Views
-        builder.Services.AddTransient<MainPage>();
+        builder.Services.AddTransient<StartPage>();
 		builder.Services.AddTransient<HomePage>();
 		builder.Services.AddTransient<CreateTour>();
 		builder.Services.AddTransient<CalendarPage>();
@@ -114,7 +132,13 @@ public static class MauiProgram
 		builder.Services.AddTransient<ScheduleCalendarPage>();
 		builder.Services.AddTransient<ScheduleDayPage>();
 		builder.Services.AddTransient<EventPage>();
-
+		builder.Services.AddTransient<LoginPage>();
+		builder.Services.AddTransient<RegisterPage>();
+		builder.Services.AddTransient<WeatherPage>();
+		builder.Services.AddTransient<CheckListsPage>();
+		builder.Services.AddTransient<CheckListPage>();
+		builder.Services.AddTransient<CreateCheckListPage>();
+		builder.Services.AddTransient<QuestionnairePage>();
 
 
 		return builder.Build();

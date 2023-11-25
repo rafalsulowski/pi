@@ -9,6 +9,7 @@ using TripPlanner.Models.Models.TourModels;
 using TripPlanner.Models.Models.CultureModels;
 using TripPlanner.Services.ChatService;
 using TripPlanner.Services.ParticipantTourService;
+using System;
 
 namespace TripPlanner.WebAPI.Controllers
 {
@@ -135,13 +136,18 @@ namespace TripPlanner.WebAPI.Controllers
             }
 
             Tour newTour = Tour;
+
+            Random random = new Random();
+            const string chars = "abcdefghijklmnoprstuwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+            newTour.InviteLink = new string(Enumerable.Repeat(chars, 20)
+                .Select(s => s[random.Next(s.Length)]).ToArray());
+
             var response = await _TourService.CreateTour(newTour, Tour.UserId);
             if (response.Success)
                 return Ok(new RepositoryResponse<int> { Data = newTour.Id, Success = true, Message = "" });
             else
                 return NotFound(new RepositoryResponse<int> { Data = -1, Success = false, Message = response.Message });
         }
-
 
         [HttpPost("addParticipant")]
         public async Task<ActionResult<RepositoryResponse<bool>>> AddParticipant([FromBody] ParticipantTourDTO Tour)
@@ -186,7 +192,7 @@ namespace TripPlanner.WebAPI.Controllers
         }
 
         [HttpPut("{TourId}/updateParticipantNickname/{userId}")]
-        public async Task<ActionResult<RepositoryResponse<bool>>> Put(int TourId, int userId, [FromBody] string newNickname)
+        public async Task<ActionResult<RepositoryResponse<bool>>> UpdateParticipantNickname(int TourId, int userId, [FromBody] string newNickname)
         {
             var resp2 = await _TourService.GetTourAsync(u => u.Id == TourId, "Participants");
             if (resp2.Data == null)
@@ -371,9 +377,27 @@ namespace TripPlanner.WebAPI.Controllers
                 return BadRequest(new RepositoryResponse<bool> { Data = false, Message = response.Message, Success = false });
         }
 
+        [HttpPut("{TourId}/updateWeatherCords")]
+        public async Task<ActionResult<RepositoryResponse<bool>>> UpdateWeatherCords(int TourId, [FromBody] string newLoc)
+        {
+            var resp2 = await _TourService.GetTourAsync(u => u.Id == TourId);
+            if (resp2.Data == null)
+            {
+                return new RepositoryResponse<bool> { Success = false, Message = $"Nie istnieje wyjazd o id = {TourId}" };
+            }
+
+            resp2.Data.WeatherCords = newLoc;
+            
+            var response = await _TourService.UpdateTour(resp2.Data);
+            if (response.Success)
+                return Ok(new RepositoryResponse<bool> { Data = true, Message = "", Success = true });
+            else
+                return BadRequest(new RepositoryResponse<bool> { Data = false, Message = response.Message, Success = false });
+        }
+
         // PUT api/<ValuesController>/5
         [HttpPut("{id}/{userId}")]
-        public async Task<ActionResult<RepositoryResponse<bool>>> Put(int id, int userId, [FromBody] EditTourDTO Tour)
+        public async Task<ActionResult<RepositoryResponse<bool>>> Edit(int id, int userId, [FromBody] EditTourDTO Tour)
         {
             var resp2 = await _TourService.GetTourAsync(u => u.Id == id, "Participants");
             if (resp2.Data == null)
@@ -385,12 +409,6 @@ namespace TripPlanner.WebAPI.Controllers
             if (resp.Data == null)
             {
                 return new RepositoryResponse<bool> { Success = false, Message = $"Nie istnieje użytkownik o id = {userId}" };
-            }
-
-            ParticipantTour? participant = resp2.Data.Participants.Where(p => p.UserId == resp.Data.Id).First();
-            if (participant == null || participant?.IsOrganizer == false)
-            {
-                return new RepositoryResponse<bool> { Success = false, Message = $"Odmowa dostępu!" };
             }
 
             Tour tour = resp2.Data;

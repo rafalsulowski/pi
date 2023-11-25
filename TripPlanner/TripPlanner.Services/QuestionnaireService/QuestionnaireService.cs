@@ -25,16 +25,6 @@ namespace TripPlanner.Services.QuestionnaireService
         {
             _QuestionnaireRepository.Add(Questionnaire);
             var response = await _QuestionnaireRepository.SaveChangesAsync();
-
-            //if(response.Success)
-            //{
-            //    foreach (var ans in Questionnaire.Answers)
-            //    {
-            //        ans.Id = 0;
-            //        ans.QuestionnaireId = Questionnaire.Id;
-            //        await _QuestionnaireAnswerService.CreateQuestionnaireAnswer(ans);
-            //    }
-            //}
             return response;
         }
 
@@ -120,18 +110,6 @@ namespace TripPlanner.Services.QuestionnaireService
             QuestionnaireVoteDTO vote = new QuestionnaireVoteDTO();
             vote.QuestionnaireAnswerId = Contribute.AnswerId;
             vote.UserId = Contribute.UserId;
-
-            var resp = await GetAnswerAsync(u => u.Id == Contribute.AnswerId, "Votes");
-            if (resp.Data == null)
-            {
-                return new RepositoryResponse<bool> { Success = false, Message = $"Nie istnieje odpowiedz o id = {Contribute.AnswerId}" };
-            }
-            var res = resp.Data.Votes.FirstOrDefault(u => u.QuestionnaireAnswerId == Contribute.AnswerId && u.UserId == Contribute.UserId);
-            if (res != null)
-            {
-                return new RepositoryResponse<bool> { Success = false, Message = $"Uzytkownik oddal juz glos na odpowiedz o id = {Contribute.AnswerId}" };
-            }
-
 
             await _QuestionnaireRepository.AddVoteToAnswer(vote);
             return await _QuestionnaireRepository.SaveChangesAsync();

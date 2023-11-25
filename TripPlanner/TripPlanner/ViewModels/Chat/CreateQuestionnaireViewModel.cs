@@ -17,6 +17,7 @@ namespace TripPlanner.ViewModels.Chat
         private readonly Configuration m_Configuration;
         private HubConnection m_Connection;
         private int TourId;
+        private bool IsFromChat;
         
         [ObservableProperty]
         ObservableCollection<string> answers;
@@ -29,12 +30,14 @@ namespace TripPlanner.ViewModels.Chat
             m_Configuration = configuration;
             m_ChatService = chatService;
             Question = "Pytanie";
-            Answers = new ObservableCollection<string> { new string("asd"), new string("asd2"), new string("asd3"), };
+            IsFromChat = true;
+            Answers = new ObservableCollection<string> { new string("odpowiedź 1"), new string("odpowiedź 2"), new string("odpowiedź 3"), };
         }
 
         public async void ApplyQueryAttributes(IDictionary<string, object> query)
         {
            TourId = (int)query["passTourId"];
+           IsFromChat = (bool)query["IsFromChat"];
            await Connect();
         }
 
@@ -43,7 +46,7 @@ namespace TripPlanner.ViewModels.Chat
             try
             {
                 m_Connection = new HubConnectionBuilder()
-                .WithUrl(m_Configuration.WssUrl)
+                .WithUrl(m_Configuration.WssChatUrl)
                 .Build();
                 await m_Connection.StartAsync();
             }
@@ -64,7 +67,11 @@ namespace TripPlanner.ViewModels.Chat
             {
                 { "passTourId",  TourId}
             };
-            await Shell.Current.GoToAsync($"Tour/Chat", navigationParameter);
+            
+            if (IsFromChat)
+                await Shell.Current.GoToAsync($"Tour/Chat", navigationParameter);
+            else
+                await Shell.Current.GoToAsync($"Tour/CheckLists", navigationParameter);
         }
 
         [RelayCommand]
@@ -107,16 +114,20 @@ namespace TripPlanner.ViewModels.Chat
                     });
                 }
 
-
                 try
                 {
                     string json = JsonConvert.SerializeObject(questionnaireDTO);
                     await m_Connection.InvokeCoreAsync("SendQuestionnaireMessage", args: new[] { json });
+                    
                     var navigationParameter = new Dictionary<string, object>
                     {
                         { "passTourId",  TourId}
                     };
-                    await Shell.Current.GoToAsync($"Tour/Chat", navigationParameter);
+
+                    if (IsFromChat)
+                        await Shell.Current.GoToAsync($"Tour/Chat", navigationParameter);
+                    else
+                        await Shell.Current.GoToAsync($"Tour/CheckLists", navigationParameter);
                 }
                 catch (HubException ex)
                 {

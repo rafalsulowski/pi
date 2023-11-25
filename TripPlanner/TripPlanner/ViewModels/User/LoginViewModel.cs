@@ -1,4 +1,6 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
+﻿using CommunityToolkit.Maui.Alerts;
+using CommunityToolkit.Maui.Core;
+using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using System;
 using System.Collections.Generic;
@@ -15,6 +17,7 @@ namespace TripPlanner.ViewModels.User
     {
         private Configuration m_Configuration;
         private readonly UserService m_UserService;
+        private HttpClient m_HttpClient;
 
         [ObservableProperty]
         string email;
@@ -22,10 +25,17 @@ namespace TripPlanner.ViewModels.User
         [ObservableProperty]
         string password;
 
-        public LoginViewModel(Configuration configuration, UserService userService)
+        public LoginViewModel(Configuration configuration, UserService userService, IHttpClientFactory httpClient)
         {
             m_Configuration = configuration;
+            if(m_Configuration.IsLoggedIn) //jesli jestwesmy zalogowaniu ale wlacza sie storna profile
+                Shell.Current.GoToAsync("Profile");
+
+            m_HttpClient = httpClient.CreateClient("httpClient");
             m_UserService = userService;
+
+            Email = "rmsulowski@gmail.com";
+            Password = "12345678*";
         }
 
         [RelayCommand]
@@ -55,13 +65,18 @@ namespace TripPlanner.ViewModels.User
                 await Shell.Current.CurrentPage.DisplayAlert("Błąd", "Pole hasła nie może być puste", "Ok");
                 return;
             }
-            //hasher do zakodowania hasla 
-            RepositoryResponse<UserDTO> response = await m_UserService.Login(Email, Password);
+            
+            RepositoryResponse<string> response = await m_UserService.Login(Email, Password);
+            UserDTO response2 = await m_UserService.GetUserByEmial(Email);
 
-            if(response.Success && response.Data != null)
+            if(response.Success && response.Data != null && response2 != null)
             {
-                m_Configuration.User = response.Data;
-                //ustawienie auth w httpClient na zwrocony JWT
+                m_Configuration.IsLoggedIn = true;
+                m_Configuration.User = response2;
+                m_HttpClient.DefaultRequestHeaders.Add("Authorization", "Bearer " + response.Data);
+
+                var confirmCopyToast = Toast.Make("Zalogowano", ToastDuration.Long, 14);
+                await confirmCopyToast.Show();
             }
             else
             {
@@ -74,7 +89,7 @@ namespace TripPlanner.ViewModels.User
             {
                 { "Reload",  false}
             };
-            await Shell.Current.GoToAsync($"/Home", navigationParameter);
+            await Shell.Current.GoToAsync($"///Home", navigationParameter);
         }
     }
 }

@@ -8,8 +8,8 @@ namespace TripPlanner.Models.Models.RouteModels
     {
         public int Id { get; set; }
 
-        public Tour Tour { get; set; } = null!;
-        public int TourId { get; set; }
+        public Tour? Tour { get; set; }
+        public int? TourId { get; set; }
         public User User { get; set; } = null!;
         public int UserId { get; set; }
         public ICollection<Stopover> Stopovers { get; set; } = new List<Stopover>();

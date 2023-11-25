@@ -64,7 +64,7 @@ namespace TripPlanner.ViewModels.Chat
             try
             {
                 m_Connection = new HubConnectionBuilder()
-                .WithUrl(m_Configuration.WssUrl)
+                .WithUrl(m_Configuration.WssChatUrl)
                 .Build();
 
                 m_Connection.On<string>("TextMessageReceived", (message) =>
@@ -119,7 +119,7 @@ namespace TripPlanner.ViewModels.Chat
                 await m_Connection.StartAsync();
                 await m_Connection.InvokeCoreAsync("SetConnection", args: new[] { TourId.ToString() });
             }
-            catch (HubException ex)
+            catch (HubException)
             {
                 await Shell.Current.CurrentPage.DisplayAlert("Błąd", $"Nie udało wykonać operacji", "Ok");
             }
@@ -163,9 +163,9 @@ namespace TripPlanner.ViewModels.Chat
                 await m_Connection.InvokeCoreAsync("SendTextMessage", args: new[] { json });
                 Message = String.Empty;
             }
-            catch (HubException ex)
+            catch (HubException)
             {
-                await Shell.Current.CurrentPage.DisplayAlert("Błąd", "Nie udało się oddać głosu", "Ok");
+                await Shell.Current.CurrentPage.DisplayAlert("Błąd", "Nie udało się wysłać wiadomości", "Ok");
             }
             catch (Exception)
             {
@@ -227,7 +227,7 @@ namespace TripPlanner.ViewModels.Chat
 
                 string json = JsonConvert.SerializeObject(msg);
                 await m_Connection.InvokeCoreAsync("SendQuestionnaireVote", args: new[] { json });
-                var confirmCopyToast = Toast.Make($"Oddano swój głos", ToastDuration.Long, 14);
+                var confirmCopyToast = Toast.Make($"Oddano głos", ToastDuration.Long, 14);
                 await confirmCopyToast.Show();
             }
             catch (HubException ex)
@@ -243,8 +243,8 @@ namespace TripPlanner.ViewModels.Chat
         [RelayCommand]
         async Task ShowVoters(AnswerGDTO answer)
         {
-            var res = m_ChatService.GetAnswerVoters(answer.Id, TourId);
-            await Shell.Current.CurrentPage.ShowPopupAsync(new PeopleChatListPopups($"Zagłosowali na \"{answer.Answer}\"", res.Result));
+            var res = await m_ChatService.GetAnswerVoters(answer.Id, TourId);
+            await Shell.Current.CurrentPage.ShowPopupAsync(new PeopleChatListPopups($"Zagłosowali na \"{answer.Answer}\"", res));
         }
     }
 }

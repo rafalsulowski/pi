@@ -10,7 +10,7 @@ namespace TripPlanner.Models.Models.CheckListModels
         public int CheckListId { get; set; }
 
         public string Name { get; set; } = string.Empty;
-        public int Multiplicity { get; set; }
+        public string Multiplicity { get; set; } = string.Empty;
         public bool IsChecked { get; set; }
 
 

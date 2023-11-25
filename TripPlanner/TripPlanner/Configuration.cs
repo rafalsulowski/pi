@@ -6,9 +6,19 @@ namespace TripPlanner
     public class Configuration
     {
         public readonly int AddChatMessagesWhileReload = 200; //ile wiadomosci dodatkowo wyswietlic na czacie przy odswierzeniu okna
+        public readonly int WeatherDaysForecast = 14; //ile dni do przodu pobierac pogodę
 
+        public bool IsLoggedIn = true;
+        
+        public readonly string WeatherApiKey = "T7L3SQPQFTS43N9C5GWD2Z4U2";
+        public readonly string WeatherApiUrl = "https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline";
+        
         public readonly string WebApiUrl = DeviceInfo.Platform == DevicePlatform.Android ? "http://10.0.2.2:5119/api" : "http://localhost:5119/api";
-        public readonly string WssUrl = DeviceInfo.Platform == DevicePlatform.Android ? "http://10.0.2.2:5119/chat" : "http://localhost:5119/chat";
+        
+        public readonly string WssChatUrl = DeviceInfo.Platform == DevicePlatform.Android ? "http://10.0.2.2:5119/chat" : "http://localhost:5119/chat";
+        public readonly string WssQuestionnaireStandAloneUrl = DeviceInfo.Platform == DevicePlatform.Android ? "http://10.0.2.2:5119/questionnaireStandAlone" : "http://localhost:5119/questionnaireStandAlone";
+        public readonly string WssCheckListUrl = DeviceInfo.Platform == DevicePlatform.Android ? "http://10.0.2.2:5119/checklist" : "http://localhost:5119/checklist";
+        
         public UserDTO User { get; set; } = new UserDTO
         {
             Id = 1,

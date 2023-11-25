@@ -65,7 +65,7 @@
                                 BackgroundColor="white"
                                 Grid.Row="0"
                                 Grid.Column="0"
-                                Text="{Binding StartTime, StringFormat='{}{0:hh:mm}'}"
+                                Text="{Binding StartTime, StringFormat='{}{0:HH:mm}'}"
                                 HorizontalOptions="Start"
                                 VerticalOptions="Center" />
 
@@ -94,7 +94,7 @@
                                 BackgroundColor="white"
                                 Grid.Row="0"
                                 Grid.Column="0"
-                                Text="{Binding StopTime, StringFormat='{}{0:hh:mm}'}"
+                                Text="{Binding StopTime, StringFormat='{}{0:HH:mm}'}"
                                 HorizontalOptions="Start"
                                 VerticalOptions="Start" />
                         </VerticalStackLayout>
@@ -162,7 +162,7 @@
                             BackgroundColor="white"
                             Grid.Row="0"
                             Grid.Column="0"
-                            Text="{Binding StartTime, StringFormat='{}{0:hh:mm}'}"
+                            Text="{Binding StartTime, StringFormat='{}{0:HH:mm}'}"
                             HorizontalOptions="Start"
                             VerticalOptions="Center" />
                     </Border>
@@ -267,7 +267,7 @@
         
         <CollectionView
             ItemTemplate="{StaticResource ScheduleEventDataTemplateSelector}"
-            ItemsSource="{Binding Schedule.Events}">
+            ItemsSource="{Binding Events}">
             <CollectionView.Footer>
                 <ImageButton
                     Command="{Binding AddEventCommand}"

@@ -8,6 +8,7 @@ namespace TripPlanner.Models.DTO.CheckListDTOs
         public int TourId { get; set; }
         public string Name { get; set; } = string.Empty;
         public bool IsPublic { get; set; }
+        public ICollection<CreateCheckListFieldDTO> Fields { get; set; } = new List<CreateCheckListFieldDTO>();
 
 
         public static implicit operator CheckList(CreateCheckListDTO data)

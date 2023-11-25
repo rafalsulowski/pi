@@ -15,7 +15,7 @@
 
             <CollectionView.Header>
                 <Label
-                    Margin="0,0,0,10"
+                    Margin="0,0,0,20"
                     HorizontalOptions="Center"
                     HorizontalTextAlignment="Center"
                     TextColor="#52AB98"
@@ -30,21 +30,24 @@
                     HorizontalOptions="Center"
                     HorizontalTextAlignment="Center"
                     TextColor="#52AB98"
-                    FontSize="13"
+                    FontSize="16"
                     FontAttributes="Bold"
                     x:Name="m_Footer"/>
             </CollectionView.Footer>
 
             <CollectionView.ItemTemplate>
                 <DataTemplate>
-                    <Grid ColumnDefinitions="30,*"
-                          ColumnSpacing="10">
+                    <Grid ColumnDefinitions="30,*">
                         <Image
+                            VerticalOptions="Center"
                             Grid.Column="0"
                             Source="dot_sec.png"
                             WidthRequest="30"
                             HeightRequest="30"/>
                         <Label
+                            HorizontalOptions="Start"
+                            VerticalOptions="Center"
+                            FontSize="16"
                             Grid.Column="1"
                             Text="{Binding .}"
                             MaximumWidthRequest="200">

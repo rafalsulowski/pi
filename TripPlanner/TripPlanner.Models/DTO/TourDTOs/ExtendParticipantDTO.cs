@@ -12,10 +12,5 @@ namespace TripPlanner.Models.DTO.TourDTOs
         public bool IsOrganizer { get; set; }
         public DateTime DateOfBirth { get; set; }
         public int Age { get; set; }
-
-        public string ToString()
-        {
-            return "asd";
-        }
     }
 }

@@ -10,8 +10,8 @@ namespace TripPlanner.Models.Models.CheckListModels
 
         public User User { get; set; } = null!;
         public int UserId { get; set; }
-        public Tour Tour { get; set; } = null!;
-        public int TourId { get; set; }
+        public Tour? Tour { get; set; }
+        public int? TourId { get; set; }
         public ICollection<CheckListField> Fields { get; set; } = new List<CheckListField>();
 
         public string Name { get; set; } = string.Empty;

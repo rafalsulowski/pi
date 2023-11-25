@@ -156,20 +156,32 @@ namespace TripPlanner.WebAPI.Controllers
         }
 
         // GET api/<ValuesController>/xyz@wp.pl
-        [HttpGet("email")]
-        public async Task<ActionResult<UserDTO>> Get(string email)
+        [HttpGet("email/{email}")]
+        public async Task<ActionResult<UserDTO>> GetByEmail(string email)
         {
             var response = await _UserService.GetUserAsync(u => u.Email == email);
             return Ok((UserDTO)response.Data);
         }
 
+
+        [HttpPost("emailIsFree")]
+        public async Task<ActionResult<bool>> EmailIsFree([FromBody] string email)
+        {
+            var userResponse = await _UserService.GetUserAsync(u => u.Email == email);
+
+            if (userResponse.Data != null)
+                return false;
+            else
+                return true;
+        }
+
         [HttpPost]
-        public async Task<ActionResult<RepositoryResponse<int>>> Create([FromBody] CreateUserDTO user)
+        public async Task<ActionResult<RepositoryResponse<bool>>> Create([FromBody] CreateUserDTO user)
         {
             var userResponse = await _UserService.GetUserAsync(u => u.Email == user.Email);
             if (userResponse.Data != null)
             {
-                return new RepositoryResponse<int> { Data = -1, Success = false, Message = "Użytkownik z tym e-mail'em istnieje" };
+                return new RepositoryResponse<bool> { Data = false, Success = false, Message = "Użytkownik z tym e-mail'em istnieje" };
             }
 
             User newUser = user;
@@ -178,9 +190,9 @@ namespace TripPlanner.WebAPI.Controllers
             newUser.PasswordHash = hashed;
             var response = await _UserService.CreateUser(newUser); 
             if (response.Success)
-                return Ok(new RepositoryResponse<int> { Data = newUser.Id, Success = true, Message = "" });
+                return Ok(new RepositoryResponse<bool> { Data = true, Success = true, Message = "" });
             else
-                return NotFound(new RepositoryResponse<int> { Data = -1, Success = false, Message = response.Message });
+                return NotFound(new RepositoryResponse<bool> { Data = false, Success = false, Message = response.Message });
         }
 
         [HttpPost("addFriend")]
@@ -276,18 +288,18 @@ namespace TripPlanner.WebAPI.Controllers
         }
 
         [HttpPost("login")]
-        public async Task<ActionResult> Login([FromBody] LoginDTO loginUser)
+        public async Task<ActionResult<RepositoryResponse<string>>> Login([FromBody] LoginDTO loginUser)
         {
             var userResponse = await _UserService.GetUserAsync(u => u.Email == loginUser.Email);
 
             if (userResponse.Data == null)
-                return Forbid("Invalid credentials");
+                return new RepositoryResponse<string> { Message = "Invalid credentials", Data = "", Success = false };
 
             var user = userResponse.Data;
 
             var result = _passwordHasher.VerifyHashedPassword(user, user.PasswordHash, loginUser.PasswordHash);
             if (result == PasswordVerificationResult.Failed)
-                return Forbid("Invalid credentials");
+                return new RepositoryResponse<string> { Message = "Invalid credentials", Data = "", Success = false };
 
             var claims = new List<Claim>()
             {
@@ -309,7 +321,7 @@ namespace TripPlanner.WebAPI.Controllers
                 signingCredentials: cred);
             var tokenHandler = new JwtSecurityTokenHandler();
             string tokenString = tokenHandler.WriteToken(token);
-            return Ok(tokenString);
+            return new RepositoryResponse<string> { Message = "", Data = tokenString, Success = true };
         }
     }
 }

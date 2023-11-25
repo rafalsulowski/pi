@@ -742,6 +742,9 @@
     <AppxPackagedFile Include="C:\Users\01159502\.nuget\packages\onscreensizemarkup.maui\2.0.8\lib\net6.0\OnScreenSizeMarkup.Maui.dll">
       <PackagePath>OnScreenSizeMarkup.Maui.dll</PackagePath>
     </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\01159502\.nuget\packages\refractored.mvvmhelpers\1.6.2\lib\netstandard2.0\MvvmHelpers.dll">
+      <PackagePath>MvvmHelpers.dll</PackagePath>
+    </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\01159502\.nuget\packages\system.io.pipelines\7.0.0\lib\net7.0\System.IO.Pipelines.dll">
       <PackagePath>System.IO.Pipelines.dll</PackagePath>
     </AppxPackagedFile>
@@ -1162,6 +1165,21 @@
     <AppxPackagedFile Include="C:\Users\01159502\Desktop\TripPlanner\TripPlanner\TripPlanner\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\calendar_wt.scale-400.png">
       <PackagePath>calendar_wt.scale-400.png</PackagePath>
     </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\01159502\Desktop\TripPlanner\TripPlanner\TripPlanner\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\caret_down_dt.scale-100.png">
+      <PackagePath>caret_down_dt.scale-100.png</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\01159502\Desktop\TripPlanner\TripPlanner\TripPlanner\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\caret_down_dt.scale-125.png">
+      <PackagePath>caret_down_dt.scale-125.png</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\01159502\Desktop\TripPlanner\TripPlanner\TripPlanner\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\caret_down_dt.scale-150.png">
+      <PackagePath>caret_down_dt.scale-150.png</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\01159502\Desktop\TripPlanner\TripPlanner\TripPlanner\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\caret_down_dt.scale-200.png">
+      <PackagePath>caret_down_dt.scale-200.png</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\01159502\Desktop\TripPlanner\TripPlanner\TripPlanner\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\caret_down_dt.scale-400.png">
+      <PackagePath>caret_down_dt.scale-400.png</PackagePath>
+    </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\01159502\Desktop\TripPlanner\TripPlanner\TripPlanner\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\caret_down_sec.scale-100.png">
       <PackagePath>caret_down_sec.scale-100.png</PackagePath>
     </AppxPackagedFile>
@@ -1176,6 +1194,21 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\01159502\Desktop\TripPlanner\TripPlanner\TripPlanner\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\caret_down_sec.scale-400.png">
       <PackagePath>caret_down_sec.scale-400.png</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\01159502\Desktop\TripPlanner\TripPlanner\TripPlanner\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\caret_up_dt.scale-100.png">
+      <PackagePath>caret_up_dt.scale-100.png</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\01159502\Desktop\TripPlanner\TripPlanner\TripPlanner\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\caret_up_dt.scale-125.png">
+      <PackagePath>caret_up_dt.scale-125.png</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\01159502\Desktop\TripPlanner\TripPlanner\TripPlanner\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\caret_up_dt.scale-150.png">
+      <PackagePath>caret_up_dt.scale-150.png</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\01159502\Desktop\TripPlanner\TripPlanner\TripPlanner\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\caret_up_dt.scale-200.png">
+      <PackagePath>caret_up_dt.scale-200.png</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\01159502\Desktop\TripPlanner\TripPlanner\TripPlanner\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\caret_up_dt.scale-400.png">
+      <PackagePath>caret_up_dt.scale-400.png</PackagePath>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\01159502\Desktop\TripPlanner\TripPlanner\TripPlanner\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\caret_up_sec.scale-100.png">
       <PackagePath>caret_up_sec.scale-100.png</PackagePath>
@@ -1252,21 +1285,6 @@
     <AppxPackagedFile Include="C:\Users\01159502\Desktop\TripPlanner\TripPlanner\TripPlanner\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\chat_wt.scale-400.png">
       <PackagePath>chat_wt.scale-400.png</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\01159502\Desktop\TripPlanner\TripPlanner\TripPlanner\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\check.scale-100.png">
-      <PackagePath>check.scale-100.png</PackagePath>
-    </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\01159502\Desktop\TripPlanner\TripPlanner\TripPlanner\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\check.scale-125.png">
-      <PackagePath>check.scale-125.png</PackagePath>
-    </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\01159502\Desktop\TripPlanner\TripPlanner\TripPlanner\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\check.scale-150.png">
-      <PackagePath>check.scale-150.png</PackagePath>
-    </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\01159502\Desktop\TripPlanner\TripPlanner\TripPlanner\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\check.scale-200.png">
-      <PackagePath>check.scale-200.png</PackagePath>
-    </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\01159502\Desktop\TripPlanner\TripPlanner\TripPlanner\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\check.scale-400.png">
-      <PackagePath>check.scale-400.png</PackagePath>
-    </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\01159502\Desktop\TripPlanner\TripPlanner\TripPlanner\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\checklist_dt.scale-100.png">
       <PackagePath>checklist_dt.scale-100.png</PackagePath>
     </AppxPackagedFile>
@@ -1281,6 +1299,21 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\01159502\Desktop\TripPlanner\TripPlanner\TripPlanner\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\checklist_dt.scale-400.png">
       <PackagePath>checklist_dt.scale-400.png</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\01159502\Desktop\TripPlanner\TripPlanner\TripPlanner\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\checklist_sec.scale-100.png">
+      <PackagePath>checklist_sec.scale-100.png</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\01159502\Desktop\TripPlanner\TripPlanner\TripPlanner\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\checklist_sec.scale-125.png">
+      <PackagePath>checklist_sec.scale-125.png</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\01159502\Desktop\TripPlanner\TripPlanner\TripPlanner\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\checklist_sec.scale-150.png">
+      <PackagePath>checklist_sec.scale-150.png</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\01159502\Desktop\TripPlanner\TripPlanner\TripPlanner\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\checklist_sec.scale-200.png">
+      <PackagePath>checklist_sec.scale-200.png</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\01159502\Desktop\TripPlanner\TripPlanner\TripPlanner\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\checklist_sec.scale-400.png">
+      <PackagePath>checklist_sec.scale-400.png</PackagePath>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\01159502\Desktop\TripPlanner\TripPlanner\TripPlanner\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\checklist_wt.scale-100.png">
       <PackagePath>checklist_wt.scale-100.png</PackagePath>
@@ -1702,21 +1735,6 @@
     <AppxPackagedFile Include="C:\Users\01159502\Desktop\TripPlanner\TripPlanner\TripPlanner\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\image_sec.scale-400.png">
       <PackagePath>image_sec.scale-400.png</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\01159502\Desktop\TripPlanner\TripPlanner\TripPlanner\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\info_circle_sec.scale-100.png">
-      <PackagePath>info_circle_sec.scale-100.png</PackagePath>
-    </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\01159502\Desktop\TripPlanner\TripPlanner\TripPlanner\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\info_circle_sec.scale-125.png">
-      <PackagePath>info_circle_sec.scale-125.png</PackagePath>
-    </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\01159502\Desktop\TripPlanner\TripPlanner\TripPlanner\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\info_circle_sec.scale-150.png">
-      <PackagePath>info_circle_sec.scale-150.png</PackagePath>
-    </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\01159502\Desktop\TripPlanner\TripPlanner\TripPlanner\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\info_circle_sec.scale-200.png">
-      <PackagePath>info_circle_sec.scale-200.png</PackagePath>
-    </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\01159502\Desktop\TripPlanner\TripPlanner\TripPlanner\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\info_circle_sec.scale-400.png">
-      <PackagePath>info_circle_sec.scale-400.png</PackagePath>
-    </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\01159502\Desktop\TripPlanner\TripPlanner\TripPlanner\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\info_sec.scale-100.png">
       <PackagePath>info_sec.scale-100.png</PackagePath>
     </AppxPackagedFile>
@@ -1822,6 +1840,51 @@
     <AppxPackagedFile Include="C:\Users\01159502\Desktop\TripPlanner\TripPlanner\TripPlanner\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\list_wt.scale-400.png">
       <PackagePath>list_wt.scale-400.png</PackagePath>
     </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\01159502\Desktop\TripPlanner\TripPlanner\TripPlanner\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\lock_dt.scale-100.png">
+      <PackagePath>lock_dt.scale-100.png</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\01159502\Desktop\TripPlanner\TripPlanner\TripPlanner\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\lock_dt.scale-125.png">
+      <PackagePath>lock_dt.scale-125.png</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\01159502\Desktop\TripPlanner\TripPlanner\TripPlanner\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\lock_dt.scale-150.png">
+      <PackagePath>lock_dt.scale-150.png</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\01159502\Desktop\TripPlanner\TripPlanner\TripPlanner\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\lock_dt.scale-200.png">
+      <PackagePath>lock_dt.scale-200.png</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\01159502\Desktop\TripPlanner\TripPlanner\TripPlanner\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\lock_dt.scale-400.png">
+      <PackagePath>lock_dt.scale-400.png</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\01159502\Desktop\TripPlanner\TripPlanner\TripPlanner\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\logout_red.scale-100.png">
+      <PackagePath>logout_red.scale-100.png</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\01159502\Desktop\TripPlanner\TripPlanner\TripPlanner\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\logout_red.scale-125.png">
+      <PackagePath>logout_red.scale-125.png</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\01159502\Desktop\TripPlanner\TripPlanner\TripPlanner\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\logout_red.scale-150.png">
+      <PackagePath>logout_red.scale-150.png</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\01159502\Desktop\TripPlanner\TripPlanner\TripPlanner\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\logout_red.scale-200.png">
+      <PackagePath>logout_red.scale-200.png</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\01159502\Desktop\TripPlanner\TripPlanner\TripPlanner\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\logout_red.scale-400.png">
+      <PackagePath>logout_red.scale-400.png</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\01159502\Desktop\TripPlanner\TripPlanner\TripPlanner\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\logout_sec.scale-100.png">
+      <PackagePath>logout_sec.scale-100.png</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\01159502\Desktop\TripPlanner\TripPlanner\TripPlanner\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\logout_sec.scale-125.png">
+      <PackagePath>logout_sec.scale-125.png</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\01159502\Desktop\TripPlanner\TripPlanner\TripPlanner\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\logout_sec.scale-150.png">
+      <PackagePath>logout_sec.scale-150.png</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\01159502\Desktop\TripPlanner\TripPlanner\TripPlanner\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\logout_sec.scale-200.png">
+      <PackagePath>logout_sec.scale-200.png</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\01159502\Desktop\TripPlanner\TripPlanner\TripPlanner\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\logout_sec.scale-400.png">
+      <PackagePath>logout_sec.scale-400.png</PackagePath>
+    </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\01159502\Desktop\TripPlanner\TripPlanner\TripPlanner\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\money_coin_sec.scale-100.png">
       <PackagePath>money_coin_sec.scale-100.png</PackagePath>
     </AppxPackagedFile>
@@ -1896,21 +1959,6 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\01159502\Desktop\TripPlanner\TripPlanner\TripPlanner\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\organizer_sec.scale-400.png">
       <PackagePath>organizer_sec.scale-400.png</PackagePath>
-    </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\01159502\Desktop\TripPlanner\TripPlanner\TripPlanner\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\pen.scale-100.png">
-      <PackagePath>pen.scale-100.png</PackagePath>
-    </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\01159502\Desktop\TripPlanner\TripPlanner\TripPlanner\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\pen.scale-125.png">
-      <PackagePath>pen.scale-125.png</PackagePath>
-    </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\01159502\Desktop\TripPlanner\TripPlanner\TripPlanner\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\pen.scale-150.png">
-      <PackagePath>pen.scale-150.png</PackagePath>
-    </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\01159502\Desktop\TripPlanner\TripPlanner\TripPlanner\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\pen.scale-200.png">
-      <PackagePath>pen.scale-200.png</PackagePath>
-    </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\01159502\Desktop\TripPlanner\TripPlanner\TripPlanner\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\pen.scale-400.png">
-      <PackagePath>pen.scale-400.png</PackagePath>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\01159502\Desktop\TripPlanner\TripPlanner\TripPlanner\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\pen_sec.scale-100.png">
       <PackagePath>pen_sec.scale-100.png</PackagePath>
@@ -2035,6 +2083,21 @@
     <AppxPackagedFile Include="C:\Users\01159502\Desktop\TripPlanner\TripPlanner\TripPlanner\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\pic1.scale-100.jpg">
       <PackagePath>pic1.scale-100.jpg</PackagePath>
     </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\01159502\Desktop\TripPlanner\TripPlanner\TripPlanner\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\plus_circle_dt.scale-100.png">
+      <PackagePath>plus_circle_dt.scale-100.png</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\01159502\Desktop\TripPlanner\TripPlanner\TripPlanner\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\plus_circle_dt.scale-125.png">
+      <PackagePath>plus_circle_dt.scale-125.png</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\01159502\Desktop\TripPlanner\TripPlanner\TripPlanner\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\plus_circle_dt.scale-150.png">
+      <PackagePath>plus_circle_dt.scale-150.png</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\01159502\Desktop\TripPlanner\TripPlanner\TripPlanner\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\plus_circle_dt.scale-200.png">
+      <PackagePath>plus_circle_dt.scale-200.png</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\01159502\Desktop\TripPlanner\TripPlanner\TripPlanner\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\plus_circle_dt.scale-400.png">
+      <PackagePath>plus_circle_dt.scale-400.png</PackagePath>
+    </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\01159502\Desktop\TripPlanner\TripPlanner\TripPlanner\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\plus_circle_pri.scale-100.png">
       <PackagePath>plus_circle_pri.scale-100.png</PackagePath>
     </AppxPackagedFile>
@@ -2079,6 +2142,21 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\01159502\Desktop\TripPlanner\TripPlanner\TripPlanner\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\plus_dt.scale-400.png">
       <PackagePath>plus_dt.scale-400.png</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\01159502\Desktop\TripPlanner\TripPlanner\TripPlanner\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\plus_grey.scale-100.png">
+      <PackagePath>plus_grey.scale-100.png</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\01159502\Desktop\TripPlanner\TripPlanner\TripPlanner\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\plus_grey.scale-125.png">
+      <PackagePath>plus_grey.scale-125.png</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\01159502\Desktop\TripPlanner\TripPlanner\TripPlanner\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\plus_grey.scale-150.png">
+      <PackagePath>plus_grey.scale-150.png</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\01159502\Desktop\TripPlanner\TripPlanner\TripPlanner\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\plus_grey.scale-200.png">
+      <PackagePath>plus_grey.scale-200.png</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\01159502\Desktop\TripPlanner\TripPlanner\TripPlanner\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\plus_grey.scale-400.png">
+      <PackagePath>plus_grey.scale-400.png</PackagePath>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\01159502\Desktop\TripPlanner\TripPlanner\TripPlanner\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\plus_pri.scale-100.png">
       <PackagePath>plus_pri.scale-100.png</PackagePath>
@@ -2230,6 +2308,21 @@
     <AppxPackagedFile Include="C:\Users\01159502\Desktop\TripPlanner\TripPlanner\TripPlanner\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\settings_chat_wt.scale-400.png">
       <PackagePath>settings_chat_wt.scale-400.png</PackagePath>
     </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\01159502\Desktop\TripPlanner\TripPlanner\TripPlanner\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\settings_slider_dt.scale-100.png">
+      <PackagePath>settings_slider_dt.scale-100.png</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\01159502\Desktop\TripPlanner\TripPlanner\TripPlanner\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\settings_slider_dt.scale-125.png">
+      <PackagePath>settings_slider_dt.scale-125.png</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\01159502\Desktop\TripPlanner\TripPlanner\TripPlanner\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\settings_slider_dt.scale-150.png">
+      <PackagePath>settings_slider_dt.scale-150.png</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\01159502\Desktop\TripPlanner\TripPlanner\TripPlanner\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\settings_slider_dt.scale-200.png">
+      <PackagePath>settings_slider_dt.scale-200.png</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\01159502\Desktop\TripPlanner\TripPlanner\TripPlanner\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\settings_slider_dt.scale-400.png">
+      <PackagePath>settings_slider_dt.scale-400.png</PackagePath>
+    </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\01159502\Desktop\TripPlanner\TripPlanner\TripPlanner\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\setting_dt.scale-100.png">
       <PackagePath>setting_dt.scale-100.png</PackagePath>
     </AppxPackagedFile>
@@ -2275,6 +2368,36 @@
     <AppxPackagedFile Include="C:\Users\01159502\Desktop\TripPlanner\TripPlanner\TripPlanner\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\share_sec.scale-400.png">
       <PackagePath>share_sec.scale-400.png</PackagePath>
     </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\01159502\Desktop\TripPlanner\TripPlanner\TripPlanner\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\sunrise_sec.scale-100.png">
+      <PackagePath>sunrise_sec.scale-100.png</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\01159502\Desktop\TripPlanner\TripPlanner\TripPlanner\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\sunrise_sec.scale-125.png">
+      <PackagePath>sunrise_sec.scale-125.png</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\01159502\Desktop\TripPlanner\TripPlanner\TripPlanner\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\sunrise_sec.scale-150.png">
+      <PackagePath>sunrise_sec.scale-150.png</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\01159502\Desktop\TripPlanner\TripPlanner\TripPlanner\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\sunrise_sec.scale-200.png">
+      <PackagePath>sunrise_sec.scale-200.png</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\01159502\Desktop\TripPlanner\TripPlanner\TripPlanner\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\sunrise_sec.scale-400.png">
+      <PackagePath>sunrise_sec.scale-400.png</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\01159502\Desktop\TripPlanner\TripPlanner\TripPlanner\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\sunset_sec.scale-100.png">
+      <PackagePath>sunset_sec.scale-100.png</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\01159502\Desktop\TripPlanner\TripPlanner\TripPlanner\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\sunset_sec.scale-125.png">
+      <PackagePath>sunset_sec.scale-125.png</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\01159502\Desktop\TripPlanner\TripPlanner\TripPlanner\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\sunset_sec.scale-150.png">
+      <PackagePath>sunset_sec.scale-150.png</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\01159502\Desktop\TripPlanner\TripPlanner\TripPlanner\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\sunset_sec.scale-200.png">
+      <PackagePath>sunset_sec.scale-200.png</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\01159502\Desktop\TripPlanner\TripPlanner\TripPlanner\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\sunset_sec.scale-400.png">
+      <PackagePath>sunset_sec.scale-400.png</PackagePath>
+    </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\01159502\Desktop\TripPlanner\TripPlanner\TripPlanner\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\text_sec.scale-100.png">
       <PackagePath>text_sec.scale-100.png</PackagePath>
     </AppxPackagedFile>
@@ -2304,6 +2427,21 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\01159502\Desktop\TripPlanner\TripPlanner\TripPlanner\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\tour_dt.scale-400.png">
       <PackagePath>tour_dt.scale-400.png</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\01159502\Desktop\TripPlanner\TripPlanner\TripPlanner\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\tour_sec.scale-100.png">
+      <PackagePath>tour_sec.scale-100.png</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\01159502\Desktop\TripPlanner\TripPlanner\TripPlanner\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\tour_sec.scale-125.png">
+      <PackagePath>tour_sec.scale-125.png</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\01159502\Desktop\TripPlanner\TripPlanner\TripPlanner\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\tour_sec.scale-150.png">
+      <PackagePath>tour_sec.scale-150.png</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\01159502\Desktop\TripPlanner\TripPlanner\TripPlanner\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\tour_sec.scale-200.png">
+      <PackagePath>tour_sec.scale-200.png</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\01159502\Desktop\TripPlanner\TripPlanner\TripPlanner\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\tour_sec.scale-400.png">
+      <PackagePath>tour_sec.scale-400.png</PackagePath>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\01159502\Desktop\TripPlanner\TripPlanner\TripPlanner\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\tour_wt.scale-100.png">
       <PackagePath>tour_wt.scale-100.png</PackagePath>
@@ -2380,6 +2518,36 @@
     <AppxPackagedFile Include="C:\Users\01159502\Desktop\TripPlanner\TripPlanner\TripPlanner\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\trash_wt.scale-400.png">
       <PackagePath>trash_wt.scale-400.png</PackagePath>
     </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\01159502\Desktop\TripPlanner\TripPlanner\TripPlanner\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\water_sec.scale-100.png">
+      <PackagePath>water_sec.scale-100.png</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\01159502\Desktop\TripPlanner\TripPlanner\TripPlanner\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\water_sec.scale-125.png">
+      <PackagePath>water_sec.scale-125.png</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\01159502\Desktop\TripPlanner\TripPlanner\TripPlanner\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\water_sec.scale-150.png">
+      <PackagePath>water_sec.scale-150.png</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\01159502\Desktop\TripPlanner\TripPlanner\TripPlanner\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\water_sec.scale-200.png">
+      <PackagePath>water_sec.scale-200.png</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\01159502\Desktop\TripPlanner\TripPlanner\TripPlanner\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\water_sec.scale-400.png">
+      <PackagePath>water_sec.scale-400.png</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\01159502\Desktop\TripPlanner\TripPlanner\TripPlanner\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\wind.scale-100.png">
+      <PackagePath>wind.scale-100.png</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\01159502\Desktop\TripPlanner\TripPlanner\TripPlanner\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\wind.scale-125.png">
+      <PackagePath>wind.scale-125.png</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\01159502\Desktop\TripPlanner\TripPlanner\TripPlanner\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\wind.scale-150.png">
+      <PackagePath>wind.scale-150.png</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\01159502\Desktop\TripPlanner\TripPlanner\TripPlanner\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\wind.scale-200.png">
+      <PackagePath>wind.scale-200.png</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\01159502\Desktop\TripPlanner\TripPlanner\TripPlanner\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\wind.scale-400.png">
+      <PackagePath>wind.scale-400.png</PackagePath>
+    </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\01159502\Desktop\TripPlanner\TripPlanner\TripPlanner\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\x_dt.scale-100.png">
       <PackagePath>x_dt.scale-100.png</PackagePath>
     </AppxPackagedFile>
@@ -2394,6 +2562,21 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\01159502\Desktop\TripPlanner\TripPlanner\TripPlanner\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\x_dt.scale-400.png">
       <PackagePath>x_dt.scale-400.png</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\01159502\Desktop\TripPlanner\TripPlanner\TripPlanner\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\x_grey.scale-100.png">
+      <PackagePath>x_grey.scale-100.png</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\01159502\Desktop\TripPlanner\TripPlanner\TripPlanner\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\x_grey.scale-125.png">
+      <PackagePath>x_grey.scale-125.png</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\01159502\Desktop\TripPlanner\TripPlanner\TripPlanner\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\x_grey.scale-150.png">
+      <PackagePath>x_grey.scale-150.png</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\01159502\Desktop\TripPlanner\TripPlanner\TripPlanner\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\x_grey.scale-200.png">
+      <PackagePath>x_grey.scale-200.png</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\01159502\Desktop\TripPlanner\TripPlanner\TripPlanner\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\x_grey.scale-400.png">
+      <PackagePath>x_grey.scale-400.png</PackagePath>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\01159502\Desktop\TripPlanner\TripPlanner\TripPlanner\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\x_sec.scale-100.png">
       <PackagePath>x_sec.scale-100.png</PackagePath>

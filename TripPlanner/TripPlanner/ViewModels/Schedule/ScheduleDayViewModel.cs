@@ -1,5 +1,6 @@
 ﻿using CommunityToolkit.Maui.Alerts;
 using CommunityToolkit.Maui.Core;
+using CommunityToolkit.Maui.Core.Extensions;
 using CommunityToolkit.Maui.Views;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
@@ -28,6 +29,9 @@ namespace TripPlanner.ViewModels.Schedule
         ScheduleDayDTO schedule;
 
         [ObservableProperty]
+        ObservableCollection<ScheduleEventDTO> events;
+
+        [ObservableProperty]
         bool emptyLabel;
 
         public ScheduleDayViewModel(Configuration configuration, ScheduleService scheduleService)
@@ -35,6 +39,7 @@ namespace TripPlanner.ViewModels.Schedule
             m_Configuration = configuration;
             m_ScheduleService = scheduleService;
             IsFromCalendarPage = false;
+            Events = new ObservableCollection<ScheduleEventDTO>();
         }
 
         public async void ApplyQueryAttributes(IDictionary<string, object> query)
@@ -140,9 +145,11 @@ namespace TripPlanner.ViewModels.Schedule
         {
             var result = await m_ScheduleService.GetScheduleDay(ScheduleDayId);
             Schedule = result;
-            Schedule.Events.OrderBy(u => u.StartTime);
+            Events = (from p in Schedule.Events
+                     orderby p.StartTime
+                     select p).ToObservableCollection();
 
-            if (Schedule.Events.Count == 0)
+            if (Events.Count == 0)
                 EmptyLabel = true;
             else
                 EmptyLabel = false;

@@ -38,6 +38,7 @@ public class MonoPackageManager_Resources {
 		"Microsoft.Maui.Graphics.dll",
 		"Newtonsoft.Json.dll",
 		"OnScreenSizeMarkup.Maui.dll",
+		"MvvmHelpers.dll",
 		"System.IO.Pipelines.dll",
 		"Xamarin.Android.Glide.dll",
 		"Xamarin.Android.Glide.Annotations.dll",
