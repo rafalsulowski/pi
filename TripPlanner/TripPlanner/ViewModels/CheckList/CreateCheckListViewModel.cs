@@ -15,6 +15,12 @@ using TripPlanner.Views.ChatViews;
 
 namespace TripPlanner.ViewModels.CheckList
 {
+    public class Tuple2String
+    {
+        public string Name { get; set; } = string.Empty;
+        public string Multiplicity { get; set; } = string.Empty;
+    }
+
     public partial class CreateCheckListViewModels : ObservableObject, IQueryAttributable
     {
         private readonly CheckListService m_CheckListService;
@@ -22,7 +28,7 @@ namespace TripPlanner.ViewModels.CheckList
         private int TourId;
 
         [ObservableProperty]
-        ObservableCollection<Tuple<string, string>> fields;
+        ObservableCollection<Tuple2String> fields;
 
         [ObservableProperty]
         string name;
@@ -36,6 +42,7 @@ namespace TripPlanner.ViewModels.CheckList
             m_Configuration = configuration;
             m_CheckListService = checkListService;
             IsPublic = false;
+            Fields = new ObservableCollection<Tuple2String>();
         }
 
         public async void ApplyQueryAttributes(IDictionary<string, object> query)
@@ -57,7 +64,7 @@ namespace TripPlanner.ViewModels.CheckList
         [RelayCommand]
         async Task AddAnswer()
         {
-            Tuple<string, string> result = (Tuple<string, string>)await Shell.Current.CurrentPage.ShowPopupAsync(new AddCheckListFieldPopups(Fields.ToList()));
+            Tuple2String result = (Tuple2String)await Shell.Current.CurrentPage.ShowPopupAsync(new AddCheckListFieldPopups(Fields.ToList()));
             if (result is not null)
             {
                 Fields.Add(result);
@@ -65,7 +72,7 @@ namespace TripPlanner.ViewModels.CheckList
         }
 
         [RelayCommand]
-        async Task DeleteAnswer(Tuple<string, string> answer)
+        async Task DeleteAnswer(Tuple2String answer)
         {
             Fields.Remove(answer);
         }
@@ -87,8 +94,8 @@ namespace TripPlanner.ViewModels.CheckList
                 {
                     checkListDTO.Fields.Add(new CreateCheckListFieldDTO
                     {
-                        Name = field.Item1,
-                        Multiplicity = field.Item2,
+                        Name = field.Name,
+                        Multiplicity = field.Multiplicity,
                         CheckListId = 0
                     });
                 }

@@ -75,6 +75,8 @@
                                 Text="{Binding CheckList.IsPublic, Converter={StaticResource CheckListPublicLabelConverter}}"
                                 FontSize="14"
                                 FontAttributes="Bold"
+                                HorizontalOptions="Center"
+                                HorizontalTextAlignment="Center"
                                 VerticalOptions="Center">
                                 <Label.GestureRecognizers>
                                     <TapGestureRecognizer
@@ -96,6 +98,8 @@
                                 TextColor="White"
                                 Text="Usuń"
                                 FontSize="14"
+                                HorizontalOptions="Center"
+                                HorizontalTextAlignment="Center"
                                 FontAttributes="Bold"
                                 VerticalOptions="Center">
                                 <Label.GestureRecognizers>
@@ -119,6 +123,8 @@
                                 Text="Zmień nazwę"
                                 FontSize="14"
                                 FontAttributes="Bold"
+                                HorizontalOptions="Center"
+                                HorizontalTextAlignment="Center"
                                 VerticalOptions="Center">
                                 <Label.GestureRecognizers>
                                     <TapGestureRecognizer
@@ -192,7 +198,7 @@
                 HorizontalOptions="Start"
                 WidthRequest="30"
                 HeightRequest="30"
-                Source="plus_grey.png">
+                Source="plus_sec.png">
                 <Image.GestureRecognizers>
                     <TapGestureRecognizer
                         Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:CheckListViewModel}}, Path=AddFieldCommand}"

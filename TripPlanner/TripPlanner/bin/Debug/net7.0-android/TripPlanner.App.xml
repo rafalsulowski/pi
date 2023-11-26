@@ -229,7 +229,7 @@
             <summary>The backing field for <see cref="P:TripPlanner.ViewModels.CheckList.CreateCheckListViewModels.DeleteAnswerCommand"/>.</summary>
         </member>
         <member name="P:TripPlanner.ViewModels.CheckList.CreateCheckListViewModels.DeleteAnswerCommand">
-            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand`1"/> instance wrapping <see cref="M:TripPlanner.ViewModels.CheckList.CreateCheckListViewModels.DeleteAnswer(System.Tuple{System.String,System.String})"/>.</summary>
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand`1"/> instance wrapping <see cref="M:TripPlanner.ViewModels.CheckList.CreateCheckListViewModels.DeleteAnswer(TripPlanner.ViewModels.CheckList.Tuple2String)"/>.</summary>
         </member>
         <member name="F:TripPlanner.ViewModels.CheckList.CreateCheckListViewModels.createCommand">
             <summary>The backing field for <see cref="P:TripPlanner.ViewModels.CheckList.CreateCheckListViewModels.CreateCommand"/>.</summary>

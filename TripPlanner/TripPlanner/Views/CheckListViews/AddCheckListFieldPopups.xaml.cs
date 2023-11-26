@@ -1,12 +1,13 @@
 using CommunityToolkit.Maui.Views;
+using TripPlanner.ViewModels.CheckList;
 
 namespace TripPlanner.Views.ChatViews;
 
 public partial class AddCheckListFieldPopups : Popup
 {
-	private readonly List<Tuple<string, string>> Fields;
+	private readonly List<Tuple2String> Fields;
 
-    public AddCheckListFieldPopups(List<Tuple<string,string>> fields)
+    public AddCheckListFieldPopups(List<Tuple2String> fields)
 	{
 		InitializeComponent();
         Fields = fields;
@@ -27,15 +28,15 @@ public partial class AddCheckListFieldPopups : Popup
 				return;
         }
         
-		if (Fields.FirstOrDefault(u => u.Item1 == m_Answer.Text) != null)
+		if (Fields.FirstOrDefault(u => u.Name == m_Answer.Text) != null)
 		{
 			var res = await Shell.Current.CurrentPage.DisplayAlert("Uwaga", "Istnieje pozycja o takiej nazwie, czy chcesz kontunuowaæ?", "Tak", "Nie");
 			if(res)
-				await CloseAsync(new Tuple<string, string>(m_Answer.Text, m_Multiplicity.Text));
+                await CloseAsync(new Tuple2String { Name = m_Answer.Text, Multiplicity = m_Multiplicity.Text });
             else
                 return;
         }
         else
-            await CloseAsync(new Tuple<string, string>(m_Answer.Text, m_Multiplicity.Text));
+            await CloseAsync(new Tuple2String { Name = m_Answer.Text, Multiplicity = m_Multiplicity.Text });
     }
 }

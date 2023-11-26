@@ -152,18 +152,18 @@ namespace TripPlanner.ViewModels.CheckList
         [RelayCommand]
         async Task AddField()
         {
-            List<Tuple<string,string>> list = new List<Tuple<string, string>>();
+            List<Tuple2String> list = new List<Tuple2String>();
             foreach (var item in CheckList.Fields)
-                list.Add(new Tuple<string, string>(item.Name, item.Multiplicity));
+                list.Add(new Tuple2String { Name = item.Name, Multiplicity = item.Multiplicity });
 
-            Tuple<string, string> result = (Tuple<string, string>)await Shell.Current.CurrentPage.ShowPopupAsync(new AddCheckListFieldPopups(list));
+            Tuple2String result = (Tuple2String)await Shell.Current.CurrentPage.ShowPopupAsync(new AddCheckListFieldPopups(list));
             if (result is null)
                 return;
 
             CreateCheckListFieldDTO field = new CreateCheckListFieldDTO();
             field.CheckListId = CheckListId;
-            field.Name = result.Item1;
-            field.Multiplicity = result.Item2;
+            field.Name = result.Name;
+            field.Multiplicity = result.Multiplicity;
 
             var resp = await m_CheckListService.AddCheckListField(field, m_Configuration.User.Id);
 

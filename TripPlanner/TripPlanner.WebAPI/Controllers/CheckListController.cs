@@ -61,22 +61,22 @@ namespace TripPlanner.WebAPI.Controllers
         }
 
         [HttpPost("createCheckList")]
-        public async Task<ActionResult<RepositoryResponse<bool>>> CreateCheckList([FromBody] CreateCheckListDTO CheckList)
+        public async Task<ActionResult<RepositoryResponse<int>>> CreateCheckList([FromBody] CreateCheckListDTO CheckList)
         {
             var resp3 = await _TourService.GetTourAsync(u => u.Id == CheckList.TourId, "CheckLists");
             if (resp3.Data == null)
-                return new RepositoryResponse<bool> { Data = false, Success = false, Message = $"Nie istnieje wycieczka o id = {CheckList.TourId}" };
+                return new RepositoryResponse<int> { Data = -1, Success = false, Message = $"Nie istnieje wycieczka o id = {CheckList.TourId}" };
             
             if (resp3.Data.CheckLists.FirstOrDefault(u => u.Name == CheckList.Name) != null)
-                return new RepositoryResponse<bool> { Data = false, Success = false, Message = $"W tej wycieczce istnieje checklista o takiej nazwie = {CheckList.Name}" };
+                return new RepositoryResponse<int> { Data = -1, Success = false, Message = $"W tej wycieczce istnieje checklista o takiej nazwie = {CheckList.Name}" };
             
             CheckList newCheckList = CheckList;
 
             var response = await _CheckListService.CreateCheckList(newCheckList);
             if (response.Success)
-                return Ok(new RepositoryResponse<bool> { Success = true, Message = "", Data = true });
+                return Ok(new RepositoryResponse<int> { Success = true, Message = "", Data = newCheckList.Id });
             else
-                return NotFound(new RepositoryResponse<bool> { Success = false, Message = response.Message, Data = false });
+                return NotFound(new RepositoryResponse<int> { Success = false, Message = response.Message, Data = -1 });
         }
 
         [HttpGet("{checkListId}/checkListFields")]

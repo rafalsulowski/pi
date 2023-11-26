@@ -9,11 +9,12 @@ Listopad 2023:
 22 - widoki pogoda OK
 23 - backend dla checklist i ankiet OK
 24 - strona glowna checklist i ankiet, jakies podstrony OK
-25 - powiadomienia 'push', edycja danych użytkownika, ustawienia aplikacji
-26 - eksporty do pdf oraz wysyłanie e-mail
-27 - 
-28 -
-29 - 
+25 - poprawa checklists
+26 - powiadomienia 'push', edycja danych użytkownika, ustawienia aplikacji
+27 - eksporty do pdf oraz wysyłanie e-mail
+28 - 
+29 -
+30 - 
 DEADLINE 30 listopada
 
 

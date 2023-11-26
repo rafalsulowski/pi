@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
             x:Class="TripPlanner.Views.CheckListViews.CreateCheckListPage"
             xmlns:viewmodel="clr-namespace:TripPlanner.ViewModels.CheckList"
+            xmlns:model="clr-namespace:TripPlanner.Models.DTO.CheckListDTOs;assembly=TripPlanner.Models"
             x:DataType="viewmodel:CreateCheckListViewModels"
             Shell.NavBarIsVisible="False"
             Shell.TabBarIsVisible="False">
@@ -62,7 +63,6 @@
             <CollectionView
                 EmptyView="Brak elementów"
                 Grid.Row="2"
-                MaximumWidthRequest="300"
                 Margin="10,10,10,10"
                 ItemsSource="{Binding Fields}"
                 SelectionMode="None">
@@ -74,24 +74,33 @@
                 </CollectionView.ItemsLayout>
 
                 <CollectionView.ItemTemplate>
-                    <DataTemplate>
+                    <DataTemplate x:DataType="viewmodel:Tuple2String">
                         <Grid
-                            ColumnDefinitions="25,*,25">
+                            ColumnSpacing="10"
+                            ColumnDefinitions="25,*,Auto,25">
                             <Image
                                 Grid.Column="0"
                                 VerticalOptions="Start"
-                                Source="dot_sec.png"
+                                Source="circle_sec.png"
                                 WidthRequest="25"
                                 HeightRequest="25" />
                             <Label
                                 Grid.Column="1"
-                                VerticalOptions="Center"
+                                VerticalOptions="Start"
                                 TextColor="#52AB98"
                                 FontAttributes="Bold"
                                 FontSize="16"
-                                Text="{Binding .}" />
-                            <ImageButton
+                                Text="{Binding Name}" />
+                            <Label
                                 Grid.Column="2"
+                                VerticalOptions="Start"
+                                TextColor="#52AB98"
+                                FontAttributes="Bold"
+                                FontSize="16"
+                                MaximumWidthRequest="100"
+                                Text="{Binding Multiplicity}" />
+                            <ImageButton
+                                Grid.Column="3"
                                 VerticalOptions="End"
                                 WidthRequest="25"
                                 HeightRequest="25"

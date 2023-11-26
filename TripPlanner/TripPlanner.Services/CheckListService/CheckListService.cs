@@ -19,6 +19,13 @@ namespace TripPlanner.Services.CheckListService
         {
             _CheckListRepository.Add(CheckList);
             var response = await _CheckListRepository.SaveChangesAsync();
+
+            foreach(var item in CheckList.Fields)
+            {
+                _CheckListFieldRepository.Add(item);
+            }
+            await _CheckListFieldRepository.SaveChangesAsync();
+
             return response;
         }
 
